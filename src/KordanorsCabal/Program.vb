@@ -2,6 +2,7 @@ Imports System
 
 Module Program
     Sub Main(args As String())
-        Console.WriteLine("Hello World!")
+        Dim root As New Root()
+        root.Run()
     End Sub
 End Module
