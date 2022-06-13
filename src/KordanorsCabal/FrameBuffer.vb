@@ -100,6 +100,26 @@ Module FrameBuffer
         PutCellPattern(Characters(character), xy, colors)
     End Sub
 
+    Friend Sub WriteString(text As String, xy As (Integer, Integer), colors As (Color, Color))
+        For Each character In text
+            PutCellCharacter(character, xy, colors)
+            xy = AdvanceXY(xy)
+        Next
+    End Sub
+
+    Private Function AdvanceXY(xy As (Integer, Integer)) As (Integer, Integer)
+        Dim nextX = xy.Item1 + 1
+        Dim nextY = xy.Item2
+        If nextX >= CellColumns Then
+            nextY += 1
+            nextX = 0
+            If nextY >= CellRows Then
+                nextY = 0
+            End If
+        End If
+        Return (nextX, nextY)
+    End Function
+
     Sub ClearBorder(color As Color)
         For x = 0 To ViewWidth - 1
             For y = 0 To ViewHeight - 1
@@ -121,7 +141,7 @@ Module FrameBuffer
         FrameData(x + y * ViewWidth) = color
     End Sub
 
-    Friend Sub PutPattern(pattern As (Byte, Byte, Byte, Byte, Byte, Byte, Byte, Byte), xy As (Integer, Integer), colors As (Color, Color))
+    Private Sub PutPattern(pattern As (Byte, Byte, Byte, Byte, Byte, Byte, Byte, Byte), xy As (Integer, Integer), colors As (Color, Color))
         PutPatternLine(pattern.Item1, (xy.Item1, xy.Item2), colors)
         PutPatternLine(pattern.Item2, (xy.Item1, xy.Item2 + 1), colors)
         PutPatternLine(pattern.Item3, (xy.Item1, xy.Item2 + 2), colors)

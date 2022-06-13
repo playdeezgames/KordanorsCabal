@@ -95,11 +95,9 @@ Public Class Root
         FrameBuffer.PutCellPattern(PETSCII(&H4D), (20, 16), (BlueHue, WhiteHue))
         FrameBuffer.PutCellPattern(PETSCII(&H4D), (21, 17), (BlueHue, WhiteHue))
 
-        FrameBuffer.PutCellCharacter("H"c, (0, 18), (BlueHue, WhiteHue))
-        FrameBuffer.PutCellCharacter("E"c, (1, 18), (BlueHue, WhiteHue))
-        FrameBuffer.PutCellCharacter("L"c, (2, 18), (BlueHue, WhiteHue))
-        FrameBuffer.PutCellCharacter("L"c, (3, 18), (BlueHue, WhiteHue))
-        FrameBuffer.PutCellCharacter("O"c, (4, 18), (BlueHue, WhiteHue))
+        FrameBuffer.WriteString("HELLO, WORLD! I AM SHOUTING BECAUSE REASONS!", (0, 18), (BlackHue, WhiteHue))
+
+        FrameBuffer.PutCellPattern(PETSCII(&H53), (0, 20), (RedHue, WhiteHue))
 
         screenTexture.SetData(FrameData)
         MyBase.Update(gameTime)
