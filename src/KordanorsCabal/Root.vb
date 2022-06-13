@@ -94,6 +94,13 @@ Public Class Root
         FrameBuffer.PutCellPattern(PETSCII(&H4D), (19, 15), (BlueHue, WhiteHue))
         FrameBuffer.PutCellPattern(PETSCII(&H4D), (20, 16), (BlueHue, WhiteHue))
         FrameBuffer.PutCellPattern(PETSCII(&H4D), (21, 17), (BlueHue, WhiteHue))
+
+        FrameBuffer.PutCellCharacter("H"c, (0, 18), (BlueHue, WhiteHue))
+        FrameBuffer.PutCellCharacter("E"c, (1, 18), (BlueHue, WhiteHue))
+        FrameBuffer.PutCellCharacter("L"c, (2, 18), (BlueHue, WhiteHue))
+        FrameBuffer.PutCellCharacter("L"c, (3, 18), (BlueHue, WhiteHue))
+        FrameBuffer.PutCellCharacter("O"c, (4, 18), (BlueHue, WhiteHue))
+
         screenTexture.SetData(FrameData)
         MyBase.Update(gameTime)
     End Sub

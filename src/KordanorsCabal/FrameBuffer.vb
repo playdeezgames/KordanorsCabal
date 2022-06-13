@@ -96,8 +96,8 @@ Module FrameBuffer
         PutPattern(pattern, (cellXY.Item1 * CellWidth + BorderWidth, cellXY.Item2 * CellHeight + BorderHeight), colors)
     End Sub
 
-    Friend Sub PutCharacter(character As Char, xy As (Integer, Integer), colors As (Color, Color))
-        PutPattern(Characters(character), xy, colors)
+    Friend Sub PutCellCharacter(character As Char, xy As (Integer, Integer), colors As (Color, Color))
+        PutCellPattern(Characters(character), xy, colors)
     End Sub
 
     Sub ClearBorder(color As Color)

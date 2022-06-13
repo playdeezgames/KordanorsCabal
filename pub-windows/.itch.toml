@@ -1,0 +1,7 @@
+[[actions]]
+name = "play"
+path = "KordanorsCabal.exe"
+console = false
+
+[[prereqs]]
+name = "net-runtime-5-x64"
