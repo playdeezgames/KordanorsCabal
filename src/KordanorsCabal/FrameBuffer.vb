@@ -10,79 +10,12 @@ Module FrameBuffer
     Public Const ViewHeight = CellHeight * CellRows + BorderHeight * 2
     Public FrameData(ViewWidth * ViewHeight - 1) As Color
 
-    Public ReadOnly Characters As IReadOnlyDictionary(Of Char, (Byte, Byte, Byte, Byte, Byte, Byte, Byte, Byte)) =
-        New Dictionary(Of Char, (Byte, Byte, Byte, Byte, Byte, Byte, Byte, Byte)) From
-        {
-            {"@"c, PETSCII(0)},
-            {"A"c, PETSCII(1)},
-            {"B"c, PETSCII(2)},
-            {"C"c, PETSCII(3)},
-            {"D"c, PETSCII(4)},
-            {"E"c, PETSCII(5)},
-            {"F"c, PETSCII(6)},
-            {"G"c, PETSCII(7)},
-            {"H"c, PETSCII(8)},
-            {"I"c, PETSCII(9)},
-            {"J"c, PETSCII(10)},
-            {"K"c, PETSCII(11)},
-            {"L"c, PETSCII(12)},
-            {"M"c, PETSCII(13)},
-            {"N"c, PETSCII(14)},
-            {"O"c, PETSCII(15)},
-            {"P"c, PETSCII(16)},
-            {"Q"c, PETSCII(17)},
-            {"R"c, PETSCII(18)},
-            {"S"c, PETSCII(19)},
-            {"T"c, PETSCII(20)},
-            {"U"c, PETSCII(21)},
-            {"V"c, PETSCII(22)},
-            {"W"c, PETSCII(23)},
-            {"X"c, PETSCII(24)},
-            {"Y"c, PETSCII(25)},
-            {"Z"c, PETSCII(26)},
-            {"["c, PETSCII(27)}, '{"?"c, PETSCII(28)},(GBP sign)
-            {"]"c, PETSCII(29)},
-            {"^"c, PETSCII(30)}, '{"O"c, PETSCII(31)}, (<-)
-            {" "c, PETSCII(32)},
-            {"!"c, PETSCII(33)},
-            {""""c, PETSCII(34)},
-            {"#"c, PETSCII(35)},
-            {"$"c, PETSCII(36)},
-            {"%"c, PETSCII(37)},
-            {"&"c, PETSCII(38)},
-            {"'"c, PETSCII(39)},
-            {"("c, PETSCII(40)},
-            {")"c, PETSCII(41)},
-            {"*"c, PETSCII(42)},
-            {"+"c, PETSCII(43)},
-            {","c, PETSCII(44)},
-            {"-"c, PETSCII(45)},
-            {"."c, PETSCII(46)},
-            {"/"c, PETSCII(47)},
-            {"0"c, PETSCII(48)},
-            {"1"c, PETSCII(49)},
-            {"2"c, PETSCII(50)},
-            {"3"c, PETSCII(51)},
-            {"4"c, PETSCII(52)},
-            {"5"c, PETSCII(53)},
-            {"6"c, PETSCII(54)},
-            {"7"c, PETSCII(55)},
-            {"8"c, PETSCII(56)},
-            {"9"c, PETSCII(57)},
-            {":"c, PETSCII(58)},
-            {";"c, PETSCII(59)},
-            {"<"c, PETSCII(60)},
-            {"="c, PETSCII(61)},
-            {">"c, PETSCII(62)},
-            {"?"c, PETSCII(63)}
-        }
-
-    Friend Sub PutCellPattern(pattern As (Byte, Byte, Byte, Byte, Byte, Byte, Byte, Byte), cellXY As (Integer, Integer), colors As (Color, Color))
-        PutPattern(pattern, (cellXY.Item1 * CellWidth + BorderWidth, cellXY.Item2 * CellHeight + BorderHeight), colors)
+    Friend Sub PutCellPattern(pattern As Pattern, cellXY As (Integer, Integer), colors As (Color, Color))
+        PutPattern(PETSCII(pattern), (cellXY.Item1 * CellWidth + BorderWidth, cellXY.Item2 * CellHeight + BorderHeight), colors)
     End Sub
 
     Friend Sub PutCellCharacter(character As Char, xy As (Integer, Integer), colors As (Color, Color))
-        PutCellPattern(Characters(character), xy, colors)
+        PutCellPattern(CharacterPattern(character), xy, colors)
     End Sub
 
     Friend Sub WriteString(text As String, xy As (Integer, Integer), colors As (Color, Color))

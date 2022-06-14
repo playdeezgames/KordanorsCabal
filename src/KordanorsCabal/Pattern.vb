@@ -72,19 +72,19 @@
     Horizontal6
     Vertical3
     Vertical6
-    UpperRightCurve
-    LowerLeftCurve
-    LowerRightCurve
+    TopRightCurve
+    BottomLeftCurve
+    BottomRightCurve
     BottomLeftCorner
     DownwardDiagonal
     UpwardDiagonal
-    UpperLeftCorner
-    UpperRightCorner
+    TopLeftCorner
+    TopRightCorner
     FilledCircle
     Horizontal7
     Heart
     Vertical2
-    UpperLeftCurve
+    TopLeftCurve
     CrossDiagonals
     EmptyCircle
     Club
@@ -94,7 +94,7 @@
     LeftDither
     Vertical5
     Pi
-    UpperRightSolid
+    TopRightSolid
     Blank
     Vertical1234
     Horizontal5678
@@ -107,7 +107,7 @@
     UpperLeftSolid
     Vertical78
     TUpRightDown
-    LowerRightBlock
+    BottomRightBlock
     ElbowUpRight
     ElbowDownLeft
     Horizontal78
@@ -224,14 +224,14 @@ Module PatternUtility
             {"?"c, Pattern.Question},
             {"│"c, Pattern.Horizontal5},
             {"♠"c, Pattern.Spade},'{" "c, Pattern.Vertical4},{" "c, Pattern.Horizontal4},{" "c, Pattern.Horizontal3},{" "c, Pattern.Horizontal2},{" "c, Pattern.Horizontal6},{" "c, Pattern.Vertical3},{" "c, Pattern.Vertical6},
-            {"╮"c, Pattern.UpperRightCurve},
-            {"╰"c, Pattern.LowerLeftCurve},
-            {"╯"c, Pattern.LowerRightCurve},'{" "c, Pattern.BottomLeftCorner},
+            {"╮"c, Pattern.TopRightCurve},
+            {"╰"c, Pattern.BottomLeftCurve},
+            {"╯"c, Pattern.BottomRightCurve},'{" "c, Pattern.BottomLeftCorner},
             {"╲"c, Pattern.DownwardDiagonal},
             {"╱"c, Pattern.UpwardDiagonal},'{" "c, Pattern.UpperLeftCorner},{" "c, Pattern.UpperRightCorner},
             {"●"c, Pattern.FilledCircle},'{" "c, Pattern.Horizontal7},
             {"♥"c, Pattern.Heart},'{" "c, Pattern.Vertical2},
-            {"╭"c, Pattern.UpperLeftCurve},
+            {"╭"c, Pattern.TopLeftCurve},
             {"╳"c, Pattern.CrossDiagonals},
             {"○"c, Pattern.EmptyCircle},
             {"♣"c, Pattern.Club},'{" "c, Pattern.Vertical7},
