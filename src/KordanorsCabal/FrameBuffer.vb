@@ -9,6 +9,7 @@ Module FrameBuffer
     Public Const ViewWidth = CellWidth * CellColumns + BorderWidth * 2
     Public Const ViewHeight = CellHeight * CellRows + BorderHeight * 2
     Public FrameData(ViewWidth * ViewHeight - 1) As Color
+
     Public ReadOnly BlackHue As New Color(0, 0, 0)
     Public ReadOnly WhiteHue As New Color(255, 255, 255)
     Public ReadOnly RedHue As New Color(&H77, &H2D, &H26)
