@@ -19,7 +19,7 @@ Public Enum Hue
     LightYellow
 End Enum
 Module HueUtility
-    ReadOnly HueColors As IReadOnlyDictionary(Of Hue, Color) =
+    Friend ReadOnly HueColors As IReadOnlyDictionary(Of Hue, Color) =
         New Dictionary(Of Hue, Color) From
         {
             {Hue.Black, New Color(0, 0, 0)},

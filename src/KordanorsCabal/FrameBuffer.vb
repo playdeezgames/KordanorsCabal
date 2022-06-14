@@ -10,22 +10,6 @@ Module FrameBuffer
     Public Const ViewHeight = CellHeight * CellRows + BorderHeight * 2
     Public FrameData(ViewWidth * ViewHeight - 1) As Color
 
-    Public ReadOnly BlackHue As New Color(0, 0, 0)
-    Public ReadOnly WhiteHue As New Color(255, 255, 255)
-    Public ReadOnly RedHue As New Color(&H77, &H2D, &H26)
-    Public ReadOnly CyanHue As New Color(&H85, &HD4, &HDC)
-    Public ReadOnly PurpleHue As New Color(&HA8, &H5F, &HB4)
-    Public ReadOnly GreenHue As New Color(&H55, &H9E, &H4A)
-    Public ReadOnly BlueHue As New Color(&H42, &H34, &H8B)
-    Public ReadOnly YellowHue As New Color(&HBD, &HCC, &H71)
-    Public ReadOnly OrangeHue As New Color(&HA8, &H73, &H4A)
-    Public ReadOnly LightOrangeHue As New Color(&HE9, &HB2, &H87)
-    Public ReadOnly PinkHue As New Color(&HB6, &H68, &H62)
-    Public ReadOnly LightCyanHue As New Color(&HC5, &HFF, &HFF)
-    Public ReadOnly LightPurpleHue As New Color(&HE9, &H9D, &HF5)
-    Public ReadOnly LightGreenHue As New Color(&H92, &HDF, &H87)
-    Public ReadOnly LightBlueHue As New Color(&H7E, &H70, &HCA)
-    Public ReadOnly LightYellowHue As New Color(&HFF, &HFF, &HB0)
     Public ReadOnly Characters As IReadOnlyDictionary(Of Char, (Byte, Byte, Byte, Byte, Byte, Byte, Byte, Byte)) =
         New Dictionary(Of Char, (Byte, Byte, Byte, Byte, Byte, Byte, Byte, Byte)) From
         {
