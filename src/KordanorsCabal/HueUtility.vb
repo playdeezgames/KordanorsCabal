@@ -1,23 +1,5 @@
 ﻿Imports Microsoft.Xna.Framework
 
-Public Enum Hue
-    Black
-    White
-    Red
-    Cyan
-    Purple
-    Green
-    Blue
-    Yellow
-    Orange
-    LightOrange
-    Pink
-    LightCyan
-    LightPurple
-    LightGreen
-    LightBlue
-    LightYellow
-End Enum
 Module HueUtility
     Friend ReadOnly HueColors As IReadOnlyDictionary(Of Hue, Color) =
         New Dictionary(Of Hue, Color) From

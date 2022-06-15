@@ -28,7 +28,7 @@
         Next
     End Sub
     Sub Fill(pattern As Pattern, inverted As Boolean, hue As Hue)
-        FillCells((0, 0), (CellColumns, CellRows), pattern, inverted, hue)
+        FillCells((0, 0), (Columns, Rows), pattern, inverted, hue)
     End Sub
     Sub WriteText(xy As (Integer, Integer), text As String, inverted As Boolean, hue As Hue)
         For Each character In text

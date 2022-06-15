@@ -130,8 +130,8 @@ Public Enum Pattern
     TopLeftBlock
     TopLeftBottomRightBlocks
 End Enum
-Module PatternUtility
-    Friend ReadOnly CharacterPattern As IReadOnlyDictionary(Of Char, Pattern) =
+Public Module PatternUtility
+    Public ReadOnly CharacterPattern As IReadOnlyDictionary(Of Char, Pattern) =
         New Dictionary(Of Char, Pattern) From
         {
             {"@"c, Pattern.At},
