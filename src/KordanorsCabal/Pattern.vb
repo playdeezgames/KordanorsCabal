@@ -228,9 +228,12 @@ Module PatternUtility
             {"♠"c, Pattern.Spade},'{" "c, Pattern.Vertical4},{" "c, Pattern.Horizontal4},{" "c, Pattern.Horizontal3},{" "c, Pattern.Horizontal2},{" "c, Pattern.Horizontal6},{" "c, Pattern.Vertical3},{" "c, Pattern.Vertical6},
             {"╮"c, Pattern.TopRightCurve},
             {"╰"c, Pattern.BottomLeftCurve},
-            {"╯"c, Pattern.BottomRightCurve},'{" "c, Pattern.BottomLeftCorner},
+            {"╯"c, Pattern.BottomRightCurve},
+            {"╚"c, Pattern.BottomLeftCorner},
             {"╲"c, Pattern.DownwardDiagonal},
-            {"╱"c, Pattern.UpwardDiagonal},'{" "c, Pattern.UpperLeftCorner},{" "c, Pattern.UpperRightCorner},
+            {"╱"c, Pattern.UpwardDiagonal},
+            {"╔"c, Pattern.TopLeftCorner},
+            {"╗"c, Pattern.TopRightCorner},
             {"●"c, Pattern.FilledCircle},'{" "c, Pattern.Horizontal7},
             {"♥"c, Pattern.Heart},'{" "c, Pattern.Vertical2},
             {"╭"c, Pattern.TopLeftCurve},
@@ -245,7 +248,8 @@ Module PatternUtility
             {"┌"c, Pattern.ElbowRightDown},
             {"┴"c, Pattern.TUpRightLeft},
             {"┬"c, Pattern.TRightDownLeft},
-            {"┤"c, Pattern.TUpDownLeft},'{" "c, Pattern.Vertical12},{" "c, Pattern.Vertical123},{" "c, Pattern.Vertical678},{" "c, Pattern.Horizontal12},{" "c, Pattern.Horizontal123},{" "c, Pattern.Horizontal678},{" "c, Pattern.BottomRightCorner},{" "c, Pattern.BottomLeftBlock},{" "c, Pattern.TopRightBlock},
+            {"┤"c, Pattern.TUpDownLeft},'{" "c, Pattern.Vertical12},{" "c, Pattern.Vertical123},{" "c, Pattern.Vertical678},{" "c, Pattern.Horizontal12},{" "c, Pattern.Horizontal123},{" "c, Pattern.Horizontal678},
+            {"╝"c, Pattern.BottomRightCorner},'{" "c, Pattern.BottomLeftBlock},{" "c, Pattern.TopRightBlock},
             {"┘"c, Pattern.ElbowUpLeft}',{" "c, Pattern.TopLeftBlock},{" "c, Pattern.TopLeftBottomRightBlocks}
         }
 End Module
