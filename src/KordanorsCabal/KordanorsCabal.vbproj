@@ -34,12 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KordanorsCabal.Game\KordanorsCabal.Game.vbproj" />
-    <ProjectReference Include="..\SPLORR.UI\SPLORR.UI.vbproj" />
+    <Import Include="KordanorsCabal.UI" />
+    <Import Include="SPLORR.UI" />
   </ItemGroup>
 
   <ItemGroup>
-    <Import Include="SPLORR.UI" />
+    <ProjectReference Include="..\KordanorsCabal.UI\KordanorsCabal.UI.vbproj" />
   </ItemGroup>
 
 </Project>

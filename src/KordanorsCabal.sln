@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KordanorsCabal", "KordanorsCabal\KordanorsCabal.vbproj", "{69DB3EF8-8352-4BFD-9E42-A6548CB8C21E}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "KordanorsCabal", "KordanorsCabal\KordanorsCabal.vbproj", "{69DB3EF8-8352-4BFD-9E42-A6548CB8C21E}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KordanorsCabal.Game", "KordanorsCabal.Game\KordanorsCabal.Game.vbproj", "{6222EEEF-A7A9-4C4A-9C19-0E3A5567CAC9}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "KordanorsCabal.Game", "KordanorsCabal.Game\KordanorsCabal.Game.vbproj", "{6222EEEF-A7A9-4C4A-9C19-0E3A5567CAC9}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KordanorsCabal.Data", "KordanorsCabal.Data\KordanorsCabal.Data.vbproj", "{C7EF2110-809D-4A9B-BF51-CB00D8ECD645}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "KordanorsCabal.Data", "KordanorsCabal.Data\KordanorsCabal.Data.vbproj", "{C7EF2110-809D-4A9B-BF51-CB00D8ECD645}"
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "SPLORR.Data", "SPLORR.Data\SPLORR.Data.vbproj", "{CBCCBA1F-C0C1-4D5C-85AC-E32DBA7010B4}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "SPLORR.UI", "SPLORR.UI\SPLORR.UI.vbproj", "{E9FA3BA7-C4C2-4E97-B796-122B55D85FA4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{73A8B05A-0657-49EA-982D-9D80F071DE33}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KordanorsCabal.UI", "KordanorsCabal.UI\KordanorsCabal.UI.vbproj", "{A76752E6-9CF2-4614-BB9D-0B5AE7A16894}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{E9FA3BA7-C4C2-4E97-B796-122B55D85FA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9FA3BA7-C4C2-4E97-B796-122B55D85FA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9FA3BA7-C4C2-4E97-B796-122B55D85FA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A76752E6-9CF2-4614-BB9D-0B5AE7A16894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A76752E6-9CF2-4614-BB9D-0B5AE7A16894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A76752E6-9CF2-4614-BB9D-0B5AE7A16894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A76752E6-9CF2-4614-BB9D-0B5AE7A16894}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
