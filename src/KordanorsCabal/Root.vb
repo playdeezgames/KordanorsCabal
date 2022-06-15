@@ -7,6 +7,7 @@ Public Class Root
     Private graphics As GraphicsDeviceManager
     Private spriteBatch As SpriteBatch
     Private screenTexture As Texture2D
+    Private Renderer As Renderer
     Const WindowWidth = ViewWidth * 8
     Const WindowHeight = ViewHeight * 4
     Sub New()
@@ -24,82 +25,46 @@ Public Class Root
     Protected Overrides Sub LoadContent()
         spriteBatch = New SpriteBatch(GraphicsDevice)
         screenTexture = New Texture2D(GraphicsDevice, ViewWidth, ViewHeight)
+        Renderer = New Renderer((16, 28), (22, 23), (8, 8))
     End Sub
     Protected Overrides Sub Update(gameTime As GameTime)
         If Keyboard.GetState().IsKeyDown(Keys.Escape) Then
             [Exit]()
         End If
-        SingletonFrameBuffer.ClearBorder(HueColors(Hue.Cyan))
-        SingletonFrameBuffer.ClearScreen(HueColors(Hue.White))
-        SingletonFrameBuffer.PutCellPattern(Pattern.DownwardDiagonal, (0, 0), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.DownwardDiagonal, (1, 1), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.DownwardDiagonal, (2, 2), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.DownwardDiagonal, (3, 3), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.TopLeftCorner, (4, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (5, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (6, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (7, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (8, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (9, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (10, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (11, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (12, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (13, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (14, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (15, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal1, (16, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.TopRightCorner, (17, 4), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.UpwardDiagonal, (18, 3), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.UpwardDiagonal, (19, 2), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.UpwardDiagonal, (20, 1), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.UpwardDiagonal, (21, 0), (HueColors(Hue.Blue), HueColors(Hue.White)))
+        Renderer.PatternBuffer.Fill(Pattern.Space, False, Hue.Blue)
+        Renderer.PatternBuffer.Cell(0, 0).Pattern = Pattern.DownwardDiagonal
+        Renderer.PatternBuffer.Cell(1, 1).Pattern = Pattern.DownwardDiagonal
+        Renderer.PatternBuffer.Cell(2, 2).Pattern = Pattern.DownwardDiagonal
+        Renderer.PatternBuffer.Cell(3, 3).Pattern = Pattern.DownwardDiagonal
+        Renderer.PatternBuffer.Cell(4, 4).Pattern = Pattern.TopLeftCorner
+        Renderer.PatternBuffer.FillCells((5, 4), (12, 1), Pattern.Horizontal1, False, Hue.Blue)
+        Renderer.PatternBuffer.Cell(17, 4).Pattern = Pattern.TopRightCorner
+        Renderer.PatternBuffer.Cell(18, 3).Pattern = Pattern.UpwardDiagonal
+        Renderer.PatternBuffer.Cell(19, 2).Pattern = Pattern.UpwardDiagonal
+        Renderer.PatternBuffer.Cell(20, 1).Pattern = Pattern.UpwardDiagonal
+        Renderer.PatternBuffer.Cell(21, 0).Pattern = Pattern.UpwardDiagonal
 
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical1, (4, 5), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical1, (4, 6), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical1, (4, 7), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical1, (4, 8), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical1, (4, 9), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical1, (4, 10), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical1, (4, 11), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical1, (4, 12), (HueColors(Hue.Blue), HueColors(Hue.White)))
+        Renderer.PatternBuffer.FillCells((4, 5), (1, 8), Pattern.Vertical1, False, Hue.Blue)
 
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical8, (17, 5), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical8, (17, 6), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical8, (17, 7), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical8, (17, 8), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical8, (17, 9), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical8, (17, 10), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical8, (17, 11), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Vertical8, (17, 12), (HueColors(Hue.Blue), HueColors(Hue.White)))
+        Renderer.PatternBuffer.FillCells((17, 5), (1, 8), Pattern.Vertical8, False, Hue.Blue)
 
-        SingletonFrameBuffer.PutCellPattern(Pattern.UpwardDiagonal, (0, 17), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.UpwardDiagonal, (1, 16), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.UpwardDiagonal, (2, 15), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.UpwardDiagonal, (3, 14), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.BottomLeftCorner, (4, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (5, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (6, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (7, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (8, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (9, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (10, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (11, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (12, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (13, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (14, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (15, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.Horizontal8, (16, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.BottomRightCorner, (17, 13), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.DownwardDiagonal, (18, 14), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.DownwardDiagonal, (19, 15), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.DownwardDiagonal, (20, 16), (HueColors(Hue.Blue), HueColors(Hue.White)))
-        SingletonFrameBuffer.PutCellPattern(Pattern.DownwardDiagonal, (21, 17), (HueColors(Hue.Blue), HueColors(Hue.White)))
+        Renderer.PatternBuffer.Cell(0, 17).Pattern = Pattern.UpwardDiagonal
+        Renderer.PatternBuffer.Cell(1, 16).Pattern = Pattern.UpwardDiagonal
+        Renderer.PatternBuffer.Cell(2, 15).Pattern = Pattern.UpwardDiagonal
+        Renderer.PatternBuffer.Cell(3, 14).Pattern = Pattern.UpwardDiagonal
+        Renderer.PatternBuffer.Cell(4, 13).Pattern = Pattern.BottomLeftCorner
+        Renderer.PatternBuffer.FillCells((5, 13), (12, 1), Pattern.Horizontal8, False, Hue.Blue)
+        Renderer.PatternBuffer.Cell(17, 13).Pattern = Pattern.BottomRightCorner
+        Renderer.PatternBuffer.Cell(18, 14).Pattern = Pattern.DownwardDiagonal
+        Renderer.PatternBuffer.Cell(19, 15).Pattern = Pattern.DownwardDiagonal
+        Renderer.PatternBuffer.Cell(20, 16).Pattern = Pattern.DownwardDiagonal
+        Renderer.PatternBuffer.Cell(21, 17).Pattern = Pattern.DownwardDiagonal
 
-        SingletonFrameBuffer.WriteString("HELLO, WORLD! I AM SHOUTING BECAUSE REASONS!", (0, 18), (HueColors(Hue.Black), HueColors(Hue.White)))
+        Renderer.PatternBuffer.WriteText((0, 18), "HELLO, WORLD! I AM SHOUTING BECAUSE REASONS!", False, Hue.Black)
+        Renderer.PatternBuffer.PutCell((0, 20), Pattern.Heart, False, Hue.Red)
 
-        SingletonFrameBuffer.PutCellPattern(Pattern.Heart, (0, 20), (HueColors(Hue.Red), HueColors(Hue.White)))
-
-        SingletonFrameBuffer.FrameBuffer.UpdateTexture(screenTexture)
+        Renderer.Update()
+        Renderer.FrameBuffer.UpdateTexture(screenTexture)
         MyBase.Update(gameTime)
     End Sub
     Protected Overrides Sub Draw(gameTime As GameTime)

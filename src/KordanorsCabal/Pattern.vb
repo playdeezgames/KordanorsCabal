@@ -1,4 +1,6 @@
-﻿Public Enum Pattern
+﻿Imports System.Runtime.CompilerServices
+
+Public Enum Pattern
     At
     A
     B

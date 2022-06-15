@@ -59,15 +59,15 @@ Module SingletonFrameBuffer
         FrameBuffer.Pixel(x, y) = color
     End Sub
 
-    Private Sub PutPattern(pattern As (Byte, Byte, Byte, Byte, Byte, Byte, Byte, Byte), xy As (Integer, Integer), colors As (Color, Color))
-        PutPatternLine(pattern.Item1, (xy.Item1, xy.Item2), colors)
-        PutPatternLine(pattern.Item2, (xy.Item1, xy.Item2 + 1), colors)
-        PutPatternLine(pattern.Item3, (xy.Item1, xy.Item2 + 2), colors)
-        PutPatternLine(pattern.Item4, (xy.Item1, xy.Item2 + 3), colors)
-        PutPatternLine(pattern.Item5, (xy.Item1, xy.Item2 + 4), colors)
-        PutPatternLine(pattern.Item6, (xy.Item1, xy.Item2 + 5), colors)
-        PutPatternLine(pattern.Item7, (xy.Item1, xy.Item2 + 6), colors)
-        PutPatternLine(pattern.Item8, (xy.Item1, xy.Item2 + 7), colors)
+    Private Sub PutPattern(pattern As PatternBitmap, xy As (Integer, Integer), colors As (Color, Color))
+        'PutPatternLine(pattern.Item1, (xy.Item1, xy.Item2), colors)
+        'PutPatternLine(pattern.Item2, (xy.Item1, xy.Item2 + 1), colors)
+        'PutPatternLine(pattern.Item3, (xy.Item1, xy.Item2 + 2), colors)
+        'PutPatternLine(pattern.Item4, (xy.Item1, xy.Item2 + 3), colors)
+        'PutPatternLine(pattern.Item5, (xy.Item1, xy.Item2 + 4), colors)
+        'PutPatternLine(pattern.Item6, (xy.Item1, xy.Item2 + 5), colors)
+        'PutPatternLine(pattern.Item7, (xy.Item1, xy.Item2 + 6), colors)
+        'PutPatternLine(pattern.Rest, (xy.Item1, xy.Item2 + 7), colors)
     End Sub
 
     Private Sub PutPatternLine(characterLine As Byte, xy As (Integer, Integer), colors As (Color, Color))
