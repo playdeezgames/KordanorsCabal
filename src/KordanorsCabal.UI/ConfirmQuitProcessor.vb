@@ -4,11 +4,11 @@
     Const NoMenuItem = "No"
     Const YesMenuItem = "Yes"
 
-    ReadOnly MenuItems As IReadOnlyList(Of String) =
-        New List(Of String) From
+    ReadOnly MenuItems As IReadOnlyList(Of (String, UIState)) =
+        New List(Of (String, UIState)) From
         {
-            NoMenuItem,
-            YesMenuItem
+            (NoMenuItem, UIState.TitleScreen),
+            (YesMenuItem, UIState.None)
         }
     Const MenuRow = 14
     Private currentItem As Integer = 0
@@ -18,7 +18,7 @@
         buffer.WriteText((0, 10), "Are you sure you want to quit?", False, Hue.Red)
         Dim index As Integer = 0
         For Each menuItem In MenuItems
-            buffer.WriteText(((buffer.Columns - menuItem.Length) \ 2, MenuRow + index), menuItem, index = currentItem, Hue.Orange)
+            buffer.WriteText(((buffer.Columns - menuItem.Item1.Length) \ 2, MenuRow + index), menuItem.Item1, index = currentItem, Hue.Orange)
             index += 1
         Next
     End Sub
@@ -30,12 +30,7 @@
             Case Command.Down
                 NextMenuItem()
             Case Command.Green, Command.Blue
-                Select Case MenuItems(currentItem)
-                    Case YesMenuItem
-                        Return UIState.None
-                    Case NoMenuItem
-                        Return UIState.TitleScreen
-                End Select
+                Return MenuItems(currentItem).Item2
         End Select
         Return UIState.ConfirmQuit
     End Function
