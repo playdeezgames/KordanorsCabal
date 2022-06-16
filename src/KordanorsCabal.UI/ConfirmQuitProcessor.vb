@@ -4,11 +4,11 @@
     Const NoMenuItem = "No"
     Const YesMenuItem = "Yes"
 
-    ReadOnly MenuItems As IReadOnlyList(Of (String, UIState)) =
-        New List(Of (String, UIState)) From
+    ReadOnly MenuItems As IReadOnlyList(Of (String, Func(Of UIState))) =
+        New List(Of (String, Func(Of UIState))) From
         {
-            (NoMenuItem, UIState.TitleScreen),
-            (YesMenuItem, UIState.None)
+            (NoMenuItem, Function() UIState.TitleScreen),
+            (YesMenuItem, Function() UIState.None)
         }
     Const MenuRow = 14
     Private currentItem As Integer = 0
@@ -30,7 +30,7 @@
             Case Command.Down
                 NextMenuItem()
             Case Command.Green, Command.Blue
-                Return MenuItems(currentItem).Item2
+                Return MenuItems(currentItem).Item2.Invoke()
         End Select
         Return UIState.ConfirmQuit
     End Function

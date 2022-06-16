@@ -7,15 +7,15 @@
     Const AboutMenuItem = "About"
     Const QuitMenuItem = "Quit"
 
-    ReadOnly MenuItems As IReadOnlyList(Of (String, UIState)) =
-        New List(Of (String, UIState)) From
+    ReadOnly MenuItems As IReadOnlyList(Of (String, Func(Of UIState))) =
+        New List(Of (String, Func(Of UIState))) From
         {
-            (StartMenuItem, UIState.TitleScreen),
-            (ContinueMenuItem, UIState.TitleScreen),
-            (InstructionsMenuItem, UIState.TitleScreen),
-            (OptionsMenuItem, UIState.TitleScreen),
-            (AboutMenuItem, UIState.AboutScreen),
-            (QuitMenuItem, UIState.ConfirmQuit)
+            (StartMenuItem, Function() UIState.TitleScreen),
+            (ContinueMenuItem, Function() UIState.TitleScreen),
+            (InstructionsMenuItem, Function() UIState.TitleScreen),
+            (OptionsMenuItem, Function() UIState.TitleScreen),
+            (AboutMenuItem, Function() UIState.AboutScreen),
+            (QuitMenuItem, Function() UIState.ConfirmQuit)
         }
     Const MenuRow = 14
 
@@ -47,7 +47,7 @@
             Case Command.Down
                 NextMenuItem()
             Case Command.Green, Command.Blue
-                Return MenuItems(currentItem).Item2
+                Return MenuItems(currentItem).Item2.Invoke
         End Select
         Return UIState.TitleScreen
     End Function
