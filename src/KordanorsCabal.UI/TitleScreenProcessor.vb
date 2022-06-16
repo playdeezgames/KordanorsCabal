@@ -7,15 +7,15 @@
     Const AboutMenuItem = "About"
     Const QuitMenuItem = "Quit"
 
-    ReadOnly MenuItems As IReadOnlyList(Of String) =
-        New List(Of String) From
+    ReadOnly MenuItems As IReadOnlyList(Of (String, UIState)) =
+        New List(Of (String, UIState)) From
         {
-            StartMenuItem,
-            ContinueMenuItem,
-            InstructionsMenuItem,
-            OptionsMenuItem,
-            AboutMenuItem,
-            QuitMenuItem
+            (StartMenuItem, UIState.TitleScreen),
+            (ContinueMenuItem, UIState.TitleScreen),
+            (InstructionsMenuItem, UIState.TitleScreen),
+            (OptionsMenuItem, UIState.TitleScreen),
+            (AboutMenuItem, UIState.AboutScreen),
+            (QuitMenuItem, UIState.ConfirmQuit)
         }
     Const MenuRow = 14
 
@@ -35,7 +35,7 @@
         buffer.WriteText((0, buffer.Rows - 1), "Controls: Arrows/Space", False, Hue.Blue)
         Dim index As Integer = 0
         For Each menuItem In MenuItems
-            buffer.WriteText(((buffer.Columns - menuItem.Length) \ 2, MenuRow + index), menuItem, index = currentItem, Hue.Orange)
+            buffer.WriteText(((buffer.Columns - menuItem.Item1.Length) \ 2, MenuRow + index), menuItem.Item1, index = currentItem, Hue.Orange)
             index += 1
         Next
     End Sub
@@ -47,15 +47,7 @@
             Case Command.Down
                 NextMenuItem()
             Case Command.Green, Command.Blue
-                Select Case MenuItems(currentItem)
-                    Case AboutMenuItem
-                        Return UIState.AboutScreen
-                    Case ContinueMenuItem
-                    Case InstructionsMenuItem
-                    Case OptionsMenuItem
-                    Case QuitMenuItem
-                    Case StartMenuItem
-                End Select
+                Return MenuItems(currentItem).Item2
         End Select
         Return UIState.TitleScreen
     End Function
