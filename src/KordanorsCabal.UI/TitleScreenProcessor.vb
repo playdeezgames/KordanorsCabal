@@ -4,8 +4,12 @@
     ReadOnly MenuItems As IReadOnlyList(Of String) =
         New List(Of String) From
         {
-            "New Game",
-            "  Quit  "
+            "Start",
+            "Continue",
+            "Instructions",
+            "Options",
+            "About",
+            "Quit"
         }
     Const MenuColumn = 0
     Const MenuRow = 14
@@ -17,9 +21,13 @@
         buffer.FillCells((0, 0), (buffer.Columns, 5), Pattern.Asterisk, True, Hue.Blue)
         buffer.FillCells((1, 1), (buffer.Columns - 2, 3), Pattern.Space, True, Hue.Blue)
         buffer.WriteText((0, 2), "*  Kordanor's Cabal  *", True, Hue.Blue)
-        buffer.WriteText((0, 6), "A Game in VB.NET AboutLooking Like a DungeonCrawler Written   for the VIC-20", False, Hue.Black)
+        buffer.WriteText((0, 6), "A Game in VB.NET About", False, Hue.Black)
+        buffer.WriteText((0, 7), "Looking Like a Dungeon", False, Hue.Black)
+        buffer.WriteText((0, 8), " Crawler Written  for ", False, Hue.Black)
+        buffer.WriteText((0, 9), "      the VIC-20      ", False, Hue.Black)
         buffer.WriteText((0, 11), "   A Production  of   ", False, Hue.Black)
         buffer.WriteText((0, 12), "   TheGrumpyGameDev   ", False, Hue.Black)
+        buffer.WriteText((0, buffer.Rows - 1), "Controls: Arrows/Space", False, Hue.Blue)
         Dim index As Integer = 0
         For Each menuItem In MenuItems
             buffer.WriteText(((buffer.Columns - menuItem.Length) \ 2, MenuRow + index), menuItem, index = currentItem, Hue.Orange)
