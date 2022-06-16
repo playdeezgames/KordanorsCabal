@@ -30,7 +30,6 @@ Public Class Root
         graphics.PreferredBackBufferHeight = WindowHeight
         graphics.ApplyChanges()
         Content.RootDirectory = "Content"
-        IsMouseVisible = True
     End Sub
     Protected Overrides Sub LoadContent()
         spriteBatch = New SpriteBatch(GraphicsDevice)

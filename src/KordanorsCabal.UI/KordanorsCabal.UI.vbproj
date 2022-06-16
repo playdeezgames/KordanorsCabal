@@ -23,4 +23,8 @@
     <ProjectReference Include="..\SPLORR.UI\SPLORR.UI.vbproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Import Include="SPLORR.UI" />
+  </ItemGroup>
+
 </Project>

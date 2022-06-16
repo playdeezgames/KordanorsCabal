@@ -1,12 +1,16 @@
 Imports SPLORR.UI
 
 Public Module MainProcessor
+    ReadOnly processors As IReadOnlyDictionary(Of UIState, IProcessor) =
+        New Dictionary(Of UIState, IProcessor) From
+        {
+            {UIState.TitleScreen, New TitleScreenProcessor}
+        }
     Public Function ProcessCommand(uiState As UIState, command As Command) As UIState
-        Return uiState
+        Return processors(uiState).ProcessCommand(command)
     End Function
 
     Public Sub UpdateBuffer(uiState As UIState, buffer As PatternBuffer)
-        buffer.Fill(Pattern.Space, False, Hue.Blue)
-        buffer.WriteText((0, 0), "OHAI!", False, Hue.Blue)
+        processors(uiState).UpdateBuffer(buffer)
     End Sub
 End Module
