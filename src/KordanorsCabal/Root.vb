@@ -8,7 +8,8 @@ Public Class Root
     Private spriteBatch As SpriteBatch
     Private screenTexture As Texture2D
     Private renderer As Renderer(Of Color)
-    Private pressedKeys As New HashSet(Of Keys)
+    Private pressedCommands As New HashSet(Of Command)
+    Private uiState As UIState = UIState.TitleScreen
     Const BorderWidth = 16
     Const BorderHeight = 28
     Const CellWidth = 8
@@ -39,54 +40,57 @@ Public Class Root
     End Sub
     Protected Overrides Sub Update(gameTime As GameTime)
         ProcessInput()
-        'TODO: build frame
-        renderer.PatternBuffer.Fill(Pattern.Space, False, Hue.Blue)
-        renderer.PatternBuffer.Cell(0, 0).Pattern = Pattern.DownwardDiagonal
-        renderer.PatternBuffer.Cell(1, 1).Pattern = Pattern.DownwardDiagonal
-        renderer.PatternBuffer.Cell(2, 2).Pattern = Pattern.DownwardDiagonal
-        renderer.PatternBuffer.Cell(3, 3).Pattern = Pattern.DownwardDiagonal
-        renderer.PatternBuffer.Cell(4, 4).Pattern = Pattern.TopLeftCorner
-        renderer.PatternBuffer.FillCells((5, 4), (12, 1), Pattern.Horizontal1, False, Hue.Blue)
-        renderer.PatternBuffer.Cell(17, 4).Pattern = Pattern.TopRightCorner
-        renderer.PatternBuffer.Cell(18, 3).Pattern = Pattern.UpwardDiagonal
-        renderer.PatternBuffer.Cell(19, 2).Pattern = Pattern.UpwardDiagonal
-        renderer.PatternBuffer.Cell(20, 1).Pattern = Pattern.UpwardDiagonal
-        renderer.PatternBuffer.Cell(21, 0).Pattern = Pattern.UpwardDiagonal
+        If uiState = UIState.None Then
+            [Exit]()
+        End If
+        UpdateOutput()
+        'renderer.PatternBuffer.Fill(Pattern.Space, False, Hue.Blue)
+        'renderer.PatternBuffer.Cell(0, 0).Pattern = Pattern.DownwardDiagonal
+        'renderer.PatternBuffer.Cell(1, 1).Pattern = Pattern.DownwardDiagonal
+        'renderer.PatternBuffer.Cell(2, 2).Pattern = Pattern.DownwardDiagonal
+        'renderer.PatternBuffer.Cell(3, 3).Pattern = Pattern.DownwardDiagonal
+        'renderer.PatternBuffer.Cell(4, 4).Pattern = Pattern.TopLeftCorner
+        'renderer.PatternBuffer.FillCells((5, 4), (12, 1), Pattern.Horizontal1, False, Hue.Blue)
+        'renderer.PatternBuffer.Cell(17, 4).Pattern = Pattern.TopRightCorner
+        'renderer.PatternBuffer.Cell(18, 3).Pattern = Pattern.UpwardDiagonal
+        'renderer.PatternBuffer.Cell(19, 2).Pattern = Pattern.UpwardDiagonal
+        'renderer.PatternBuffer.Cell(20, 1).Pattern = Pattern.UpwardDiagonal
+        'renderer.PatternBuffer.Cell(21, 0).Pattern = Pattern.UpwardDiagonal
 
-        renderer.PatternBuffer.FillCells((4, 5), (1, 8), Pattern.Vertical1, False, Hue.Blue)
+        'renderer.PatternBuffer.FillCells((4, 5), (1, 8), Pattern.Vertical1, False, Hue.Blue)
 
-        renderer.PatternBuffer.FillCells((17, 5), (1, 8), Pattern.Vertical8, False, Hue.Blue)
+        'renderer.PatternBuffer.FillCells((17, 5), (1, 8), Pattern.Vertical8, False, Hue.Blue)
 
-        renderer.PatternBuffer.Cell(0, 17).Pattern = Pattern.UpwardDiagonal
-        renderer.PatternBuffer.Cell(1, 16).Pattern = Pattern.UpwardDiagonal
-        renderer.PatternBuffer.Cell(2, 15).Pattern = Pattern.UpwardDiagonal
-        renderer.PatternBuffer.Cell(3, 14).Pattern = Pattern.UpwardDiagonal
-        renderer.PatternBuffer.Cell(4, 13).Pattern = Pattern.BottomLeftCorner
-        renderer.PatternBuffer.FillCells((5, 13), (12, 1), Pattern.Horizontal8, False, Hue.Blue)
-        renderer.PatternBuffer.Cell(17, 13).Pattern = Pattern.BottomRightCorner
-        renderer.PatternBuffer.Cell(18, 14).Pattern = Pattern.DownwardDiagonal
-        renderer.PatternBuffer.Cell(19, 15).Pattern = Pattern.DownwardDiagonal
-        renderer.PatternBuffer.Cell(20, 16).Pattern = Pattern.DownwardDiagonal
-        renderer.PatternBuffer.Cell(21, 17).Pattern = Pattern.DownwardDiagonal
+        'renderer.PatternBuffer.Cell(0, 17).Pattern = Pattern.UpwardDiagonal
+        'renderer.PatternBuffer.Cell(1, 16).Pattern = Pattern.UpwardDiagonal
+        'renderer.PatternBuffer.Cell(2, 15).Pattern = Pattern.UpwardDiagonal
+        'renderer.PatternBuffer.Cell(3, 14).Pattern = Pattern.UpwardDiagonal
+        'renderer.PatternBuffer.Cell(4, 13).Pattern = Pattern.BottomLeftCorner
+        'renderer.PatternBuffer.FillCells((5, 13), (12, 1), Pattern.Horizontal8, False, Hue.Blue)
+        'renderer.PatternBuffer.Cell(17, 13).Pattern = Pattern.BottomRightCorner
+        'renderer.PatternBuffer.Cell(18, 14).Pattern = Pattern.DownwardDiagonal
+        'renderer.PatternBuffer.Cell(19, 15).Pattern = Pattern.DownwardDiagonal
+        'renderer.PatternBuffer.Cell(20, 16).Pattern = Pattern.DownwardDiagonal
+        'renderer.PatternBuffer.Cell(21, 17).Pattern = Pattern.DownwardDiagonal
 
-        renderer.PatternBuffer.WriteText((0, 18), "HELLO, WORLD! I AM SHOUTING BECAUSE REASONS!", False, Hue.Black)
-        renderer.PatternBuffer.PutCell((0, 20), Pattern.Heart, False, Hue.Red)
+        'renderer.PatternBuffer.WriteText((0, 18), "HELLO, WORLD! I AM SHOUTING BECAUSE REASONS!", False, Hue.Black)
+        'renderer.PatternBuffer.PutCell((0, 20), Pattern.Heart, False, Hue.Red)
 
         renderer.Update()
         renderer.FrameBuffer.UpdateTexture(screenTexture)
         MyBase.Update(gameTime)
     End Sub
 
-    Private Sub ProcessInput()
-        Dim newPressedKeys = New HashSet(Of Keys)(Keyboard.GetState().GetPressedKeys())
-        For Each pressedKey In newPressedKeys.Where(Function(x) Not pressedKeys.Contains(x))
-            HandleKeyPress(pressedKey)
-        Next
-        pressedKeys = newPressedKeys
+    Private Sub UpdateOutput()
+        MainProcessor.UpdateBuffer(uiState, renderer.PatternBuffer)
     End Sub
 
-    Private Sub HandleKeyPress(pressedKey As Keys)
-        Throw New NotImplementedException()
+    Private Sub ProcessInput()
+        Dim newPressedCommands = New HashSet(Of Command)(Keyboard.GetState().GetPressedKeys().Where(AddressOf KeyCommands.ContainsKey).Select(Function(x) KeyCommands(x)))
+        For Each command In newPressedCommands.Where(Function(x) Not pressedCommands.Contains(x))
+            uiState = MainProcessor.ProcessCommand(uiState, command)
+        Next
+        pressedCommands = newPressedCommands
     End Sub
 
     Protected Overrides Sub Draw(gameTime As GameTime)
