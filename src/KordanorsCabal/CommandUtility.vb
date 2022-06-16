@@ -15,6 +15,11 @@ Module CommandUtility
             {Keys.Back, Command.Back},
             {Keys.F10, Command.Start},
             {Keys.OemComma, Command.PreviousItem},
-            {Keys.OemPeriod, Command.NextItem}
+            {Keys.OemPeriod, Command.NextItem},
+            {Keys.NumPad8, Command.Up},
+            {Keys.NumPad4, Command.Left},
+            {Keys.NumPad6, Command.Right},
+            {Keys.NumPad2, Command.Down},
+            {Keys.NumPad5, Command.Green}
         }
 End Module

@@ -1,17 +1,22 @@
 ﻿Friend Class TitleScreenProcessor
     Implements IProcessor
+    Const StartMenuItem = "Start"
+    Const ContinueMenuItem = "Continue"
+    Const InstructionsMenuItem = "Instructions"
+    Const OptionsMenuItem = "Options"
+    Const AboutMenuItem = "About"
+    Const QuitMenuItem = "Quit"
 
     ReadOnly MenuItems As IReadOnlyList(Of String) =
         New List(Of String) From
         {
-            "Start",
-            "Continue",
-            "Instructions",
-            "Options",
-            "About",
-            "Quit"
+            StartMenuItem,
+            ContinueMenuItem,
+            InstructionsMenuItem,
+            OptionsMenuItem,
+            AboutMenuItem,
+            QuitMenuItem
         }
-    Const MenuColumn = 0
     Const MenuRow = 14
 
     Private currentItem As Integer = 0
@@ -41,6 +46,16 @@
                 PreviousMenuItem()
             Case Command.Down
                 NextMenuItem()
+            Case Command.Green, Command.Blue
+                Select Case MenuItems(currentItem)
+                    Case AboutMenuItem
+                        Return UIState.AboutScreen
+                    Case ContinueMenuItem
+                    Case InstructionsMenuItem
+                    Case OptionsMenuItem
+                    Case QuitMenuItem
+                    Case StartMenuItem
+                End Select
         End Select
         Return UIState.TitleScreen
     End Function

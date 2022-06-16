@@ -4,6 +4,7 @@ Public Module MainProcessor
     ReadOnly processors As IReadOnlyDictionary(Of UIState, IProcessor) =
         New Dictionary(Of UIState, IProcessor) From
         {
+            {UIState.AboutScreen, New AboutScreenProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}
         }
     Public Function ProcessCommand(uiState As UIState, command As Command) As UIState
