@@ -6,6 +6,7 @@ Public Module MainProcessor
         {
             {UIState.AboutScreen, New AboutScreenProcessor},
             {UIState.ConfirmQuit, New ConfirmQuitProcessor},
+            {UIState.OptionsScreen, New OptionsScreenProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}
         }
     Public Function ProcessCommand(uiState As UIState, command As Command) As UIState

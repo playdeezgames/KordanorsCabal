@@ -3,4 +3,5 @@
     TitleScreen
     AboutScreen
     ConfirmQuit
+    OptionsScreen
 End Enum
