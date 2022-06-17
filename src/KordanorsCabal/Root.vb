@@ -55,7 +55,7 @@ Public Class Root
         'TODO: load in config for saved off screen size and master volume
         UpdateWindowSize()
         SoundEffect.MasterVolume = 0.5
-        MediaPlayer.Volume = 0.5
+        MediaPlayer.Volume = 0.1
         Content.RootDirectory = "Content"
         ScreenSizerProcessor.GetCurrentScreenSize = AddressOf GetScreenSize
         ScreenSizerProcessor.SetCurrentScreenSize = AddressOf SetScreenSize
