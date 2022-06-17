@@ -11,7 +11,7 @@
         MyBase.New(
             New List(Of (String, Func(Of UIState))) From
             {
-                (StartMenuItem, Function() UIState.TitleScreen),
+                (StartMenuItem, AddressOf StartGame),
                 (ContinueMenuItem, Function() UIState.TitleScreen),
                 (InstructionsMenuItem, Function() UIState.InstructionsScreen),
                 (OptionsMenuItem, Function() UIState.OptionsScreen),
@@ -21,6 +21,14 @@
             14,
             UIState.TitleScreen)
     End Sub
+
+    Private Function StartGame() As UIState
+        World.Start()
+        If Not World.PlayerCharacter.IsFullyBaked Then
+            Return UIState.FinalizeCharacter
+        End If
+        Return UIState.Prolog
+    End Function
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.FillCells((0, 0), (buffer.Columns, 5), Pattern.Asterisk, True, Hue.Blue)

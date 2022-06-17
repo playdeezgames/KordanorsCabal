@@ -6,8 +6,10 @@ Public Module MainProcessor
         {
             {UIState.AboutScreen, New AboutScreenProcessor},
             {UIState.ConfirmQuit, New ConfirmQuitProcessor},
+            {UIState.FinalizeCharacter, New FinalizeCharacterProcessor},
             {UIState.InstructionsScreen, New InstructionsScreenProcessor},
             {UIState.OptionsScreen, New OptionsScreenProcessor},
+            {UIState.Prolog, New PrologProcessor},
             {UIState.ScreenSizer, New ScreenSizerProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}
         }

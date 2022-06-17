@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Import Include="KordanorsCabal.Game" />
     <Import Include="SPLORR.UI" />
   </ItemGroup>
 

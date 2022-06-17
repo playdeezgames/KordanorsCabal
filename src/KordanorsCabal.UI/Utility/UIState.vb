@@ -6,4 +6,6 @@
     OptionsScreen
     ScreenSizer
     InstructionsScreen
+    FinalizeCharacter
+    Prolog
 End Enum
