@@ -6,6 +6,7 @@ Public Module MainProcessor
         {
             {UIState.AboutScreen, New AboutScreenProcessor},
             {UIState.ConfirmQuit, New ConfirmQuitProcessor},
+            {UIState.InstructionsScreen, New InstructionsScreenProcessor},
             {UIState.OptionsScreen, New OptionsScreenProcessor},
             {UIState.ScreenSizer, New ScreenSizerProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}

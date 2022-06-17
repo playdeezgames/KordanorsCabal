@@ -13,7 +13,7 @@
             {
                 (StartMenuItem, Function() UIState.TitleScreen),
                 (ContinueMenuItem, Function() UIState.TitleScreen),
-                (InstructionsMenuItem, Function() UIState.TitleScreen),
+                (InstructionsMenuItem, Function() UIState.InstructionsScreen),
                 (OptionsMenuItem, Function() UIState.OptionsScreen),
                 (AboutMenuItem, Function() UIState.AboutScreen),
                 (QuitMenuItem, Function() UIState.ConfirmQuit)

@@ -5,4 +5,5 @@
     ConfirmQuit
     OptionsScreen
     ScreenSizer
+    InstructionsScreen
 End Enum
