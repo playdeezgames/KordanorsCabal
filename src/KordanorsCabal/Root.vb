@@ -18,18 +18,42 @@ Public Class Root
     Const CellRows = 23
     Const ViewWidth = CellWidth * CellColumns + BorderWidth * 2
     Const ViewHeight = CellHeight * CellRows + BorderHeight * 2
-    Const WindowWidth = ViewWidth * 8
-    Const WindowHeight = ViewHeight * 4
+    Private ScreenSize As Integer = 4
+    Private ReadOnly Property WindowWidth As Integer
+        Get
+            Return ViewWidth * ScreenSize * 2
+        End Get
+    End Property
+    Private ReadOnly Property WindowHeight As Integer
+        Get
+            Return ViewHeight * ScreenSize
+        End Get
+    End Property
+    Private Function GetScreenSize() As Integer
+        Return ScreenSize
+    End Function
+    Private Sub SetScreenSize(size As Integer)
+        ScreenSize = size
+        UpdateWindowSize()
+    End Sub
+
+    Private Sub UpdateWindowSize()
+        graphics.PreferredBackBufferWidth = WindowWidth
+        graphics.PreferredBackBufferHeight = WindowHeight
+        graphics.ApplyChanges()
+    End Sub
+
     Sub New()
         graphics = New GraphicsDeviceManager(Me)
     End Sub
     Protected Overrides Sub Initialize()
         MyBase.Initialize()
         Window.Title = "Kordanor's Cabal"
-        graphics.PreferredBackBufferWidth = WindowWidth
-        graphics.PreferredBackBufferHeight = WindowHeight
-        graphics.ApplyChanges()
+        'TODO: load in config for saved off screen size
+        UpdateWindowSize()
         Content.RootDirectory = "Content"
+        ScreenSizerProcessor.GetCurrentScreenSize = AddressOf GetScreenSize
+        ScreenSizerProcessor.SetCurrentScreenSize = AddressOf SetScreenSize
     End Sub
     Protected Overrides Sub LoadContent()
         spriteBatch = New SpriteBatch(GraphicsDevice)

@@ -7,10 +7,15 @@ Public Module MainProcessor
             {UIState.AboutScreen, New AboutScreenProcessor},
             {UIState.ConfirmQuit, New ConfirmQuitProcessor},
             {UIState.OptionsScreen, New OptionsScreenProcessor},
+            {UIState.ScreenSizer, New ScreenSizerProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}
         }
     Public Function ProcessCommand(uiState As UIState, command As Command) As UIState
-        Return processors(uiState).ProcessCommand(command)
+        Dim newState = processors(uiState).ProcessCommand(command)
+        If newState <> UIState.None AndAlso newState <> uiState Then
+            processors(newState).Initialize()
+        End If
+        Return newState
     End Function
 
     Public Sub UpdateBuffer(uiState As UIState, buffer As PatternBuffer)

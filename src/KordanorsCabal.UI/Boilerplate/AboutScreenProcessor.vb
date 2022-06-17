@@ -6,6 +6,9 @@
         buffer.WriteText((0, 0), "About", False, Hue.Blue)
     End Sub
 
+    Public Sub Initialize() Implements IProcessor.Initialize
+    End Sub
+
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
         Select Case command
             Case Command.Green, Command.Blue

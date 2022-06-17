@@ -3,7 +3,7 @@
 
     Private ReadOnly MenuItems As IReadOnlyList(Of (String, Func(Of UIState)))
     Private ReadOnly MenuRow As Integer
-    Private currentItem As Integer = 0
+    Protected currentItem As Integer = 0
     Private ReadOnly uiState As UIState
 
     Sub New(menuItems As IReadOnlyList(Of (String, Func(Of UIState))), menuRow As Integer, uiState As UIState)
@@ -41,5 +41,8 @@
 
     Private Sub PreviousMenuItem()
         currentItem = (currentItem + MenuItems.Count - 1) Mod MenuItems.Count
+    End Sub
+
+    Public Overridable Sub Initialize() Implements IProcessor.Initialize
     End Sub
 End Class

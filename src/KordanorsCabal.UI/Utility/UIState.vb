@@ -4,4 +4,5 @@
     AboutScreen
     ConfirmQuit
     OptionsScreen
+    ScreenSizer
 End Enum
