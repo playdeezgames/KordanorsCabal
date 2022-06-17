@@ -23,4 +23,9 @@
     <ProjectReference Include="..\SPLORR.Game\SPLORR.Game.vbproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Import Include="KordanorsCabal.Data" />
+    <Import Include="SPLORR.Data" />
+  </ItemGroup>
+
 </Project>
