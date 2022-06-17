@@ -1,45 +1,20 @@
 ﻿Friend Class ConfirmQuitProcessor
-    Implements IProcessor
+    Inherits MenuProcessor
 
     Const NoMenuItem = "No"
     Const YesMenuItem = "Yes"
+    Public Sub New()
+        MyBase.New(
+            New List(Of (String, Func(Of UIState))) From
+            {
+                (NoMenuItem, Function() UIState.TitleScreen),
+                (YesMenuItem, Function() UIState.None)
+            },
+            14,
+            UIState.ConfirmQuit)
+    End Sub
 
-    ReadOnly MenuItems As IReadOnlyList(Of (String, Func(Of UIState))) =
-        New List(Of (String, Func(Of UIState))) From
-        {
-            (NoMenuItem, Function() UIState.TitleScreen),
-            (YesMenuItem, Function() UIState.None)
-        }
-    Const MenuRow = 14
-    Private currentItem As Integer = 0
-
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
-        buffer.Fill(Pattern.Space, False, Hue.Blue)
+    Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteText((0, 10), "Are you sure you want to quit?", False, Hue.Red)
-        Dim index As Integer = 0
-        For Each menuItem In MenuItems
-            buffer.WriteText(((buffer.Columns - menuItem.Item1.Length) \ 2, MenuRow + index), menuItem.Item1, index = currentItem, Hue.Orange)
-            index += 1
-        Next
-    End Sub
-
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
-        Select Case command
-            Case Command.Up
-                PreviousMenuItem()
-            Case Command.Down
-                NextMenuItem()
-            Case Command.Green, Command.Blue
-                Return MenuItems(currentItem).Item2.Invoke()
-        End Select
-        Return UIState.ConfirmQuit
-    End Function
-
-    Private Sub NextMenuItem()
-        currentItem = (currentItem + 1) Mod MenuItems.Count
-    End Sub
-
-    Private Sub PreviousMenuItem()
-        currentItem = (currentItem + MenuItems.Count - 1) Mod MenuItems.Count
     End Sub
 End Class
