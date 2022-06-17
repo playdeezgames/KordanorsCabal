@@ -22,7 +22,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Content\MinorTheme.ogg" />
+    <None Remove="Content\MinorTheme.wav" />
+    <None Remove="Content\RollDice.wav" />
     <None Remove="Icon.bmp" />
+    <None Remove="MinorTheme.mid" />
+    <None Remove="MinorTheme.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Content\MinorTheme.ogg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\MinorTheme.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\RollDice.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +57,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KordanorsCabal.UI\KordanorsCabal.UI.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Program.vb">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>

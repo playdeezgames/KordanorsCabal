@@ -22,7 +22,7 @@
             UIState.TitleScreen)
     End Sub
 
-    Private Function StartGame() As UIState
+    Private Shared Function StartGame() As UIState
         World.Start()
         If Not World.PlayerCharacter.IsFullyBaked Then
             Return UIState.FinalizeCharacter

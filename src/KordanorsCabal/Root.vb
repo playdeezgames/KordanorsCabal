@@ -1,6 +1,8 @@
 ﻿Imports Microsoft.Xna.Framework
+Imports Microsoft.Xna.Framework.Audio
 Imports Microsoft.Xna.Framework.Graphics
 Imports Microsoft.Xna.Framework.Input
+Imports Microsoft.Xna.Framework.Media
 
 Public Class Root
     Inherits Microsoft.Xna.Framework.Game
@@ -19,6 +21,7 @@ Public Class Root
     Const ViewWidth = CellWidth * CellColumns + BorderWidth * 2
     Const ViewHeight = CellHeight * CellRows + BorderHeight * 2
     Private ScreenSize As Integer = 4
+    Private minorTheme As Song
     Private ReadOnly Property WindowWidth As Integer
         Get
             Return ViewWidth * ScreenSize * 2
@@ -49,8 +52,10 @@ Public Class Root
     Protected Overrides Sub Initialize()
         MyBase.Initialize()
         Window.Title = "Kordanor's Cabal"
-        'TODO: load in config for saved off screen size
+        'TODO: load in config for saved off screen size and master volume
         UpdateWindowSize()
+        SoundEffect.MasterVolume = 0.5
+        MediaPlayer.Volume = 0.5
         Content.RootDirectory = "Content"
         ScreenSizerProcessor.GetCurrentScreenSize = AddressOf GetScreenSize
         ScreenSizerProcessor.SetCurrentScreenSize = AddressOf SetScreenSize
@@ -59,7 +64,9 @@ Public Class Root
         spriteBatch = New SpriteBatch(GraphicsDevice)
         screenTexture = New Texture2D(GraphicsDevice, ViewWidth, ViewHeight)
         renderer = New Renderer(Of Color)((BorderWidth, BorderHeight), (CellColumns, CellRows), (CellWidth, CellHeight), HueColors)
-
+        minorTheme = Song.FromUri("MinorTheme", New Uri("Content/MinorTheme.ogg", UriKind.Relative))
+        MediaPlayer.IsRepeating = True
+        MediaPlayer.Play(minorTheme)
     End Sub
     Protected Overrides Sub Update(gameTime As GameTime)
         ProcessInput()
