@@ -17,7 +17,12 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "SPLORR.UI", "SPLORR.UI\SPLO
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{73A8B05A-0657-49EA-982D-9D80F071DE33}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KordanorsCabal.UI", "KordanorsCabal.UI\KordanorsCabal.UI.vbproj", "{A76752E6-9CF2-4614-BB9D-0B5AE7A16894}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "KordanorsCabal.UI", "KordanorsCabal.UI\KordanorsCabal.UI.vbproj", "{A76752E6-9CF2-4614-BB9D-0B5AE7A16894}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stuff", "Stuff", "{D804FB32-97D0-4FA1-88C7-EA3D4D3AA11E}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
