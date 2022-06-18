@@ -38,6 +38,9 @@ Public Class Root
     Private Sub SetScreenSize(size As Integer)
         ScreenSize = size
         UpdateWindowSize()
+        Dim config = UIConfig.Load
+        config.ScreenSize = size
+        UIConfig.Save(config)
     End Sub
 
     Private Sub UpdateWindowSize()
@@ -53,20 +56,22 @@ Public Class Root
         MyBase.Initialize()
         Window.Title = "Kordanor's Cabal"
         'TODO: load in config for saved off screen size and master volume
+        Dim config = UIConfig.Load()
+        ScreenSize = config.ScreenSize
         UpdateWindowSize()
-        SoundEffect.MasterVolume = 0.5
-        MediaPlayer.Volume = 0.1
+        SoundEffect.MasterVolume = config.SfxVolume
+        MediaPlayer.Volume = config.MuxVolume
         Content.RootDirectory = "Content"
         ScreenSizerProcessor.GetCurrentScreenSize = AddressOf GetScreenSize
         ScreenSizerProcessor.SetCurrentScreenSize = AddressOf SetScreenSize
+        MediaPlayer.IsRepeating = True
+        MediaPlayer.Play(minorTheme)
     End Sub
     Protected Overrides Sub LoadContent()
         spriteBatch = New SpriteBatch(GraphicsDevice)
         screenTexture = New Texture2D(GraphicsDevice, ViewWidth, ViewHeight)
         renderer = New Renderer(Of Color)((BorderWidth, BorderHeight), (CellColumns, CellRows), (CellWidth, CellHeight), HueColors)
         minorTheme = Song.FromUri("MinorTheme", New Uri("Content/MinorTheme.ogg", UriKind.Relative))
-        MediaPlayer.IsRepeating = True
-        MediaPlayer.Play(minorTheme)
     End Sub
     Protected Overrides Sub Update(gameTime As GameTime)
         ProcessInput()
