@@ -6,7 +6,9 @@
             New List(Of (String, Func(Of UIState))) From
             {
                 ("Go Back", Function() UIState.TitleScreen),
-                ("Screen Size...", Function() UIState.ScreenSizer)
+                ("Screen Size...", Function() UIState.ScreenSizer),
+                ("SFX Volume...", Function() UIState.SfxVolumizer),
+                ("MUX Volume...", Function() UIState.MuxVolumizer)
             },
             5,
             UIState.OptionsScreen)

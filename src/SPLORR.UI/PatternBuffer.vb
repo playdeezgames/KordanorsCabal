@@ -45,4 +45,7 @@
             xy = (nextX, nextY)
         Next
     End Sub
+    Sub WriteTextCentered(y As Integer, text As String, inverted As Boolean, hue As Hue)
+        WriteText(((Columns - text.Length) \ 2, y), text, inverted, hue)
+    End Sub
 End Class

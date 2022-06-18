@@ -64,9 +64,37 @@ Public Class Root
         Content.RootDirectory = "Content"
         ScreenSizerProcessor.GetCurrentScreenSize = AddressOf GetScreenSize
         ScreenSizerProcessor.SetCurrentScreenSize = AddressOf SetScreenSize
+        MuxVolumizerProcessor.GetCurrentMuxVolume = AddressOf GetMuxVolume
+        MuxVolumizerProcessor.SetCurrentMuxVolume = AddressOf SetMuxVolume
+        SfxVolumizerProcessor.GetCurrentSfxVolume = AddressOf GetSfxVolume
+        SfxVolumizerProcessor.SetCurrentSfxVolume = AddressOf SetSfxVolume
         MediaPlayer.IsRepeating = True
         MediaPlayer.Play(minorTheme)
     End Sub
+
+    Private Sub SetSfxVolume(volume As Single)
+        SoundEffect.MasterVolume = volume
+        'TODO: play a sound
+        Dim config = UIConfig.Load
+        config.SfxVolume = volume
+        UIConfig.Save(config)
+    End Sub
+
+    Private Function GetSfxVolume() As Single
+        Return SoundEffect.MasterVolume
+    End Function
+
+    Private Sub SetMuxVolume(volume As Single)
+        MediaPlayer.Volume = volume
+        Dim config = UIConfig.Load
+        config.MuxVolume = volume
+        UIConfig.Save(config)
+    End Sub
+
+    Private Function GetMuxVolume() As Single
+        Return MediaPlayer.Volume
+    End Function
+
     Protected Overrides Sub LoadContent()
         spriteBatch = New SpriteBatch(GraphicsDevice)
         screenTexture = New Texture2D(GraphicsDevice, ViewWidth, ViewHeight)

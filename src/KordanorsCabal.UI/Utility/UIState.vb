@@ -8,4 +8,6 @@
     InstructionsScreen
     FinalizeCharacter
     Prolog
+    SfxVolumizer
+    MuxVolumizer
 End Enum

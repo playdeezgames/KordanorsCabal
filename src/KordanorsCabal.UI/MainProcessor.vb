@@ -8,9 +8,11 @@ Public Module MainProcessor
             {UIState.ConfirmQuit, New ConfirmQuitProcessor},
             {UIState.FinalizeCharacter, New FinalizeCharacterProcessor},
             {UIState.InstructionsScreen, New InstructionsScreenProcessor},
+            {UIState.MuxVolumizer, New MuxVolumizerProcessor},
             {UIState.OptionsScreen, New OptionsScreenProcessor},
             {UIState.Prolog, New PrologProcessor},
             {UIState.ScreenSizer, New ScreenSizerProcessor},
+            {UIState.SfxVolumizer, New SfxVolumizerProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}
         }
     Public Function ProcessCommand(uiState As UIState, command As Command) As UIState
