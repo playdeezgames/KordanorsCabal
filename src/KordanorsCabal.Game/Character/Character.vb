@@ -11,9 +11,19 @@
 
     Friend Shared Function Create(characterType As CharacterType, location As Location) As Character
         Dim character = FromId(CharacterData.Create(characterType, location.Id))
-        'TODO: statistics
+        For Each entry In characterType.InitialStatistics
+            character.SetStatistic(entry.Key, entry.Value)
+        Next
         Return character
     End Function
+
+    Friend Sub SetStatistic(statisticType As StatisticType, statisticValue As Long)
+        CharacterStatisticData.Write(Id, statisticType, statisticValue)
+    End Sub
+
+    Friend Sub ChangeStatistic(statisticType As StatisticType, delta As Long)
+        SetStatistic(statisticType, GetStatistic(statisticType) + delta)
+    End Sub
 
     ReadOnly Property Location As Location
         Get
@@ -22,5 +32,9 @@
     End Property
     Shared Function FromId(characterId As Long) As Character
         Return New Character(characterId)
+    End Function
+
+    Friend Function GetStatistic(statisticType As StatisticType) As Long
+        Return If(CharacterStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
 End Class
