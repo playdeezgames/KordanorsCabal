@@ -18,7 +18,18 @@ Public Module World
         Dim southWestTown = Location.Create(LocationType.Town)
         Dim westTown = Location.Create(LocationType.Town)
         Dim northWestTown = Location.Create(LocationType.Town)
+
+        StitchTown(centerTown, Direction.North, northTown)
+        StitchTown(centerTown, Direction.East, eastTown)
+        StitchTown(centerTown, Direction.South, southTown)
+        StitchTown(centerTown, Direction.West, westTown)
+
         'TODO: church entrance
+    End Sub
+
+    Private Sub StitchTown(fromLocation As Location, direction As Direction, toLocation As Location)
+        Route.Create(fromLocation, direction, RouteType.Road, toLocation)
+        Route.Create(fromLocation, direction.Opposite, RouteType.Road, toLocation)
     End Sub
 
     Private Sub RollUpPlayerCharacter()
