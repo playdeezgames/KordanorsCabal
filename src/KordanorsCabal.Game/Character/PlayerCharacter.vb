@@ -10,4 +10,10 @@
             Return GetStatistic(StatisticType.Unassigned) = 0
         End Get
     End Property
+    Public Sub AssignPoint(statisticType As StatisticType)
+        If Not IsFullyBaked Then
+            ChangeStatistic(statisticType, 1)
+            ChangeStatistic(StatisticType.Unassigned, -1)
+        End If
+    End Sub
 End Class

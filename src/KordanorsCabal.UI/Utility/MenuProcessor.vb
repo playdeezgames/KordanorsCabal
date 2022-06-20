@@ -1,13 +1,13 @@
 ﻿Public MustInherit Class MenuProcessor
     Implements IProcessor
 
-    Private ReadOnly MenuItems As IReadOnlyList(Of (String, Func(Of UIState)))
+    Private ReadOnly MenuItems As List(Of (String, Func(Of UIState)))
     Private ReadOnly MenuRow As Integer
     Protected currentItem As Integer = 0
     Private ReadOnly uiState As UIState
 
     Sub New(menuItems As IReadOnlyList(Of (String, Func(Of UIState))), menuRow As Integer, uiState As UIState)
-        Me.MenuItems = menuItems
+        Me.MenuItems = New List(Of (String, Func(Of UIState)))(menuItems)
         Me.MenuRow = menuRow
         Me.uiState = uiState
     End Sub
@@ -20,6 +20,10 @@
             buffer.WriteText(((buffer.Columns - menuItem.Item1.Length) \ 2, MenuRow + index), menuItem.Item1, index = currentItem, Hue.Orange)
             index += 1
         Next
+    End Sub
+
+    Protected Sub UpdateMenuItemText(index As Integer, text As String)
+        MenuItems(index) = (text, MenuItems(index).Item2)
     End Sub
 
     Protected MustOverride Sub ShowPrompt(buffer As PatternBuffer)

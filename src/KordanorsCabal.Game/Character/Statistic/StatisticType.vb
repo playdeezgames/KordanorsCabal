@@ -12,9 +12,13 @@ Public Enum StatisticType
     Mana
     Unassigned
 End Enum
-Friend Module StatisticTypeExtensions
+Public Module StatisticTypeExtensions
     <Extension>
-    Function DefaultValue(statisticType As StatisticType) As Long
+    Friend Function DefaultValue(statisticType As StatisticType) As Long
         Return StatisticTypeDescriptors(statisticType).DefaultValue
+    End Function
+    <Extension>
+    Function Name(statisticType As StatisticType) As String
+        Return StatisticTypeDescriptors(statisticType).Name
     End Function
 End Module

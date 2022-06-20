@@ -34,7 +34,7 @@
         Return New Character(characterId)
     End Function
 
-    Friend Function GetStatistic(statisticType As StatisticType) As Long
+    Public Function GetStatistic(statisticType As StatisticType) As Long
         Return If(CharacterStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
 End Class
