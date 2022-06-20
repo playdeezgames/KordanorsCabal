@@ -24,6 +24,18 @@ Public Module World
         StitchTown(centerTown, Direction.South, southTown)
         StitchTown(centerTown, Direction.West, westTown)
 
+        StitchTown(northWestTown, Direction.East, northTown)
+        StitchTown(northWestTown, Direction.South, westTown)
+
+        StitchTown(southWestTown, Direction.East, southTown)
+        StitchTown(southWestTown, Direction.North, westTown)
+
+        StitchTown(northEastTown, Direction.West, northTown)
+        StitchTown(northEastTown, Direction.South, eastTown)
+
+        StitchTown(southEastTown, Direction.North, eastTown)
+        StitchTown(southEastTown, Direction.West, southTown)
+
         'TODO: church entrance
     End Sub
 
