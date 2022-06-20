@@ -39,7 +39,7 @@
         }
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
-        buffer.WriteTextCentered(0, "Finalize", False, Hue.Blue)
+        buffer.WriteTextCentered(0, "  Finalize Character  ", True, Hue.Blue)
         Dim player = World.PlayerCharacter
         buffer.WriteTextCentered(2, $"{StatisticType.Unassigned.Name}: {player.GetStatistic(StatisticType.Unassigned)}", False, Hue.Purple)
         buffer.WriteText((0, 4), "Choose where to assignpoint(s):", False, Hue.Black)
