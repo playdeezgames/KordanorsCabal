@@ -3,7 +3,12 @@
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Blue)
-        buffer.WriteText((0, 0), "Instructions", False, Hue.Blue)
+        buffer.WriteText((0, 0), "     Instructions     ", True, Hue.Blue)
+
+        buffer.WriteLines((0, 2), New List(Of String) From
+                          {
+                            "TODO: Instructions"
+                          }, False, Hue.Black)
     End Sub
 
     Public Sub Initialize() Implements IProcessor.Initialize
