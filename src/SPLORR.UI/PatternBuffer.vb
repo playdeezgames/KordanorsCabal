@@ -20,6 +20,16 @@
         Cell(xy.Item1, xy.Item2).Inverted = inverted
         Cell(xy.Item1, xy.Item2).Hue = hue
     End Sub
+
+    Public Sub WriteLines(xy As (Integer, Integer), lines As List(Of String), inverted As Boolean, hue As Hue)
+        Dim x = xy.Item1
+        Dim y = xy.Item2
+        For Each line In lines
+            WriteText((x, y), line, inverted, hue)
+            y += 1
+        Next
+    End Sub
+
     Sub FillCells(xy As (Integer, Integer), wh As (Integer, Integer), pattern As Pattern, inverted As Boolean, hue As Hue)
         For x = xy.Item1 To xy.Item1 + wh.Item1 - 1
             For y = xy.Item2 To xy.Item2 + wh.Item2 - 1
