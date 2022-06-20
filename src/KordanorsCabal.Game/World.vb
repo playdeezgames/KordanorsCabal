@@ -1,10 +1,24 @@
 Public Module World
     Public Sub Start()
         Store.Reset()
-        Dim startingLocation = Location.Create()
+        CreateTown()
+        Dim startingLocation = Location.FromLocationType(LocationType.TownSquare).First
         Dim playerCharacter = Character.Create(CharacterType.N00b, startingLocation)
         PlayerData.Write(playerCharacter.Id)
         RollUpPlayerCharacter()
+    End Sub
+
+    Private Sub CreateTown()
+        Dim centerTown = Location.Create(LocationType.TownSquare)
+        Dim northTown = Location.Create(LocationType.Town)
+        Dim northEastTown = Location.Create(LocationType.Town)
+        Dim eastTown = Location.Create(LocationType.Town)
+        Dim southEastTown = Location.Create(LocationType.Town)
+        Dim southTown = Location.Create(LocationType.Town)
+        Dim southWestTown = Location.Create(LocationType.Town)
+        Dim westTown = Location.Create(LocationType.Town)
+        Dim northWestTown = Location.Create(LocationType.Town)
+        'TODO: church entrance
     End Sub
 
     Private Sub RollUpPlayerCharacter()
