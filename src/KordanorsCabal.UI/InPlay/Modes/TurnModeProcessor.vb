@@ -15,25 +15,29 @@
         buffer.WriteText((0, 3), $"Turn which way?", False, Hue.Purple)
     End Sub
 
-    Friend Overrides Sub UpdateButtons(buttons As IReadOnlyList(Of Button))
-        buttons(CancelButtonIndex).Title = "Cancel"
-        buttons(LeftButtonIndex).Title = "Left"
-        buttons(RightButtonIndex).Title = "Right"
-        buttons(AroundButtonIndex).Title = "Around"
+    Friend Overrides Sub UpdateButtons()
+        Buttons(CancelButtonIndex).Title = "Cancel"
+        Buttons(LeftButtonIndex).Title = "Left"
+        Buttons(RightButtonIndex).Title = "Right"
+        Buttons(AroundButtonIndex).Title = "Around"
     End Sub
 
     Friend Overrides Sub HandleButton(button As Button)
         Dim player = World.PlayerCharacter
         Select Case button.Index
             Case CancelButtonIndex
+                PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case AroundButtonIndex
+                PopButtonIndex()
                 player.Direction = player.Direction.Opposite
                 player.Mode = PlayerMode.Neutral
             Case LeftButtonIndex
+                PopButtonIndex()
                 player.Direction = player.Direction.PreviousDirection.Value
                 player.Mode = PlayerMode.Neutral
             Case RightButtonIndex
+                PopButtonIndex()
                 player.Direction = player.Direction.NextDirection.Value
                 player.Mode = PlayerMode.Neutral
         End Select

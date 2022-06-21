@@ -13,13 +13,14 @@
         buffer.WriteText((0, 2), $"Exits: {exits}", False, Hue.Black)
     End Sub
 
-    Friend Overrides Sub UpdateButtons(buttons As IReadOnlyList(Of Button))
-        buttons(TurnButtonIndex).Title = "Turn..."
+    Friend Overrides Sub UpdateButtons()
+        Buttons(TurnButtonIndex).Title = "Turn..."
     End Sub
 
     Friend Overrides Sub HandleButton(button As Button)
         Select Case button.Index
             Case TurnButtonIndex
+                PushButtonIndex()
                 World.PlayerCharacter.Mode = PlayerMode.Turn
         End Select
     End Sub
