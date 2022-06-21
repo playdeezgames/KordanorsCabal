@@ -7,6 +7,18 @@
         End Get
     End Property
     MustOverride ReadOnly Property Abbreviation As String
+
+    Overridable ReadOnly Property NextDirection As Direction?
+        Get
+            Return Nothing
+        End Get
+    End Property
+
+    Overridable ReadOnly Property PreviousDirection() As Direction?
+        Get
+            Return Nothing
+        End Get
+    End Property
 End Class
 Friend Module DirectionDescriptorUtility
     Friend DirectionDescriptors As IReadOnlyDictionary(Of Direction, DirectionDescriptor) =

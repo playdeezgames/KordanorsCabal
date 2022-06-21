@@ -16,10 +16,13 @@
             ChangeStatistic(StatisticType.Unassigned, -1)
         End If
     End Sub
-    Public ReadOnly Property Direction As Direction
+    Public Property Direction As Direction
         Get
             Return CType(PlayerData.ReadDirection().Value, Direction)
         End Get
+        Set(value As Direction)
+            PlayerData.WriteDirection(value)
+        End Set
     End Property
     Public Property Mode As PlayerMode
         Get

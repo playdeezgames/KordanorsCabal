@@ -23,9 +23,19 @@
     End Sub
 
     Friend Overrides Sub HandleButton(button As Button)
+        Dim player = World.PlayerCharacter
         Select Case button.Index
             Case CancelButtonIndex
-                World.PlayerCharacter.Mode = PlayerMode.Neutral
+                player.Mode = PlayerMode.Neutral
+            Case AroundButtonIndex
+                player.Direction = player.Direction.Opposite
+                player.Mode = PlayerMode.Neutral
+            Case LeftButtonIndex
+                player.Direction = player.Direction.PreviousDirection.Value
+                player.Mode = PlayerMode.Neutral
+            Case RightButtonIndex
+                player.Direction = player.Direction.NextDirection.Value
+                player.Mode = PlayerMode.Neutral
         End Select
     End Sub
 End Class

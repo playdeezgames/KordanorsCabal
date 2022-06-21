@@ -23,4 +23,16 @@
             Return "W"
         End Get
     End Property
+
+    Public Overrides ReadOnly Property NextDirection As Direction?
+        Get
+            Return Direction.North
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property PreviousDirection As Direction?
+        Get
+            Return Direction.South
+        End Get
+    End Property
 End Class
