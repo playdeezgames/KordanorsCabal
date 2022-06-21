@@ -3,6 +3,7 @@ Public Module PlayerData
     Friend Const PlayerIdColumn = "PlayerId"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const DirectionColumn = "Direction"
+    Friend Const ModeColumn = "Mode"
     Const FixedPlayerId = 1
     Friend Sub Initialize()
         CharacterData.Initialize()
@@ -12,9 +13,14 @@ Public Module PlayerData
                 [{PlayerIdColumn}] INT NOT NULL UNIQUE CHECK([{PlayerIdColumn}]={FixedPlayerId}),
                 [{CharacterIdColumn}] INT NOT NULL,
                 [{DirectionColumn}] INT NOT NULL,
+                [{ModeColumn}] INT NOT NULL,
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
+
+    Public Function ReadMode() As Long?
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ModeColumn, (PlayerIdColumn, FixedPlayerId))
+    End Function
 
     Public Function ReadDirection() As Long?
         Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, DirectionColumn, (PlayerIdColumn, FixedPlayerId))
@@ -24,7 +30,7 @@ Public Module PlayerData
         Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (PlayerIdColumn, FixedPlayerId))
     End Function
 
-    Public Sub Write(characterId As Long, direction As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, (PlayerIdColumn, FixedPlayerId), (CharacterIdColumn, characterId), (DirectionColumn, direction))
+    Public Sub Write(characterId As Long, direction As Long, mode As Long)
+        ReplaceRecord(AddressOf Initialize, TableName, (PlayerIdColumn, FixedPlayerId), (CharacterIdColumn, characterId), (DirectionColumn, direction), (ModeColumn, mode))
     End Sub
 End Module

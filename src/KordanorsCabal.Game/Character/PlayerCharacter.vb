@@ -21,4 +21,10 @@
             Return CType(PlayerData.ReadDirection().Value, Direction)
         End Get
     End Property
+    Public ReadOnly Property Mode As PlayerMode
+        Get
+            Return CType(PlayerData.ReadMode().Value, PlayerMode)
+        End Get
+    End Property
+
 End Class

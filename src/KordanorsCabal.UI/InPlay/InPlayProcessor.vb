@@ -3,21 +3,30 @@
 
     Private _buttons As New List(Of Button) From
         {
-            New Button(0, "Turn...", (0, 18), 11)
+            New Button(0, "0", (0, 18), 11),
+            New Button(1, "1", (0, 19), 11),
+            New Button(2, "2", (0, 20), 11),
+            New Button(3, "3", (0, 21), 11),
+            New Button(4, "4", (0, 22), 11),
+            New Button(5, "5", (11, 18), 11),
+            New Button(6, "6", (11, 19), 11),
+            New Button(7, "7", (11, 20), 11),
+            New Button(8, "8", (11, 21), 11),
+            New Button(9, "9", (11, 22), 11)
         }
     Private _currentButton As Integer = 0
+    Private _modeProcessors As IReadOnlyDictionary(Of PlayerMode, ModeProcessor) =
+        New Dictionary(Of PlayerMode, ModeProcessor) From
+        {
+            {PlayerMode.Neutral, New NeutralModeProcessor}
+        }
 
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Blue)
-        buffer.WriteText((0, 0), "                      ", True, Hue.Blue)
-        Dim player = World.PlayerCharacter
-        Dim location = player.Location
-        buffer.WriteTextCentered(0, location.Name, True, Hue.Blue)
-        buffer.WriteText((0, 1), $"Facing: {player.Direction.Name}", False, Hue.Black)
-        Dim exits = String.Join(",", location.Routes.Select(Function(x) x.Key.Abbreviation))
-        buffer.WriteText((0, 2), $"Exits: {exits}", False, Hue.Black)
-
+        Dim modeProcessor = _modeProcessors(World.PlayerCharacter.Mode)
+        modeProcessor.UpdateBuffer(buffer)
+        modeProcessor.UpdateButtons(_buttons)
         DrawButtons(buffer)
     End Sub
 
@@ -33,9 +42,14 @@
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
         Select Case command
             Case Command.Green, Command.Blue
-                Return UIState.InPlay
-            Case Else
-                Return UIState.InPlay
+                _modeProcessors(World.PlayerCharacter.Mode).HandleButton(_buttons(_currentButton))
+            Case Command.Down
+                _currentButton = (_currentButton + 1) Mod _buttons.Count
+            Case Command.Up
+                _currentButton = (_currentButton + _buttons.Count - 1) Mod _buttons.Count
+            Case Command.Left, Command.Right
+                _currentButton = (_currentButton + _buttons.Count \ 2) Mod _buttons.Count
         End Select
+        Return UIState.InPlay
     End Function
 End Class
