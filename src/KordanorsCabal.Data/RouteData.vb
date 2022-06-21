@@ -20,6 +20,11 @@
                 FOREIGN KEY([{ToLocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
     End Sub
+
+    Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long))
+        Return ReadRecordsWithColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, (DirectionColumn, RouteIdColumn), (LocationIdColumn, locationId))
+    End Function
+
     Public Function Create(locationId As Long, direction As Long, routeType As Long, toLocationId As Long) As Long
         Return CreateRecord(
             AddressOf Initialize,

@@ -6,6 +6,7 @@
             Return False
         End Get
     End Property
+    MustOverride ReadOnly Property Abbreviation As String
 End Class
 Friend Module DirectionDescriptorUtility
     Friend DirectionDescriptors As IReadOnlyDictionary(Of Direction, DirectionDescriptor) =

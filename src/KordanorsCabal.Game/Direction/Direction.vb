@@ -24,4 +24,8 @@ Public Module DirectionExtensions
     Public Function IsCardinal(direction As Direction) As Boolean
         Return DirectionDescriptors(direction).IsCardinal
     End Function
+    <Extension>
+    Public Function Abbreviation(direction As Direction) As String
+        Return DirectionDescriptors(direction).Abbreviation
+    End Function
 End Module

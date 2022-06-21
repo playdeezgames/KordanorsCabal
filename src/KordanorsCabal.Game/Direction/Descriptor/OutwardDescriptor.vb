@@ -12,4 +12,10 @@
             Return "out"
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Abbreviation As String
+        Get
+            Return "OUT"
+        End Get
+    End Property
 End Class

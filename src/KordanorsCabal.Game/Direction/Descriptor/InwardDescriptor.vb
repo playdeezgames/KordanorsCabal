@@ -12,4 +12,10 @@
             Return "in"
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Abbreviation As String
+        Get
+            Return "IN"
+        End Get
+    End Property
 End Class

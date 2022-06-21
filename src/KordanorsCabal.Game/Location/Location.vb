@@ -25,4 +25,10 @@
             Return LocationType.Name
         End Get
     End Property
+    ReadOnly Property Routes As IReadOnlyDictionary(Of Direction, Route)
+        Get
+            Return RouteData.ReadForLocation(Id).
+                ToDictionary(Function(x) CType(x.Item1, Direction), Function(x) Route.FromId(x.Item2))
+        End Get
+    End Property
 End Class
