@@ -18,7 +18,8 @@
     Private _modeProcessors As IReadOnlyDictionary(Of PlayerMode, ModeProcessor) =
         New Dictionary(Of PlayerMode, ModeProcessor) From
         {
-            {PlayerMode.Neutral, New NeutralModeProcessor}
+            {PlayerMode.Neutral, New NeutralModeProcessor},
+            {PlayerMode.Turn, New TurnModeProcessor}
         }
 
 
@@ -26,6 +27,9 @@
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         Dim modeProcessor = _modeProcessors(World.PlayerCharacter.Mode)
         modeProcessor.UpdateBuffer(buffer)
+        For Each button In _buttons
+            button.Clear()
+        Next
         modeProcessor.UpdateButtons(_buttons)
         DrawButtons(buffer)
     End Sub

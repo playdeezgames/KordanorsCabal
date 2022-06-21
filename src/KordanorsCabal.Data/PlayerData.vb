@@ -22,6 +22,10 @@ Public Module PlayerData
         Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ModeColumn, (PlayerIdColumn, FixedPlayerId))
     End Function
 
+    Public Sub WriteMode(mode As Long)
+        WriteColumnValue(AddressOf Initialize, TableName, (ModeColumn, mode), (PlayerIdColumn, FixedPlayerId))
+    End Sub
+
     Public Function ReadDirection() As Long?
         Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, DirectionColumn, (PlayerIdColumn, FixedPlayerId))
     End Function

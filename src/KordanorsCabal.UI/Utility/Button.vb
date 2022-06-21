@@ -16,4 +16,8 @@
         buffer.FillCells(Position, (Size, 1), Pattern.Space, inverted, drawHue)
         buffer.WriteText(Position, Title, inverted, drawHue)
     End Sub
+
+    Friend Sub Clear()
+        Title = ""
+    End Sub
 End Class
