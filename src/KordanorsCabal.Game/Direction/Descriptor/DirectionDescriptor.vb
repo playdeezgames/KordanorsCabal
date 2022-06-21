@@ -1,5 +1,6 @@
 ﻿Friend MustInherit Class DirectionDescriptor
     MustOverride ReadOnly Property Opposite As Direction
+    MustOverride ReadOnly Property Name As String
 End Class
 Friend Module DirectionDescriptorUtility
     Friend DirectionDescriptors As IReadOnlyDictionary(Of Direction, DirectionDescriptor) =

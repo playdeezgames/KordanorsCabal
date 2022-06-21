@@ -15,6 +15,11 @@ Public Module PlayerData
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
+
+    Public Function ReadDirection() As Long?
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, DirectionColumn, (PlayerIdColumn, FixedPlayerId))
+    End Function
+
     Public Function Read() As Long?
         Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (PlayerIdColumn, FixedPlayerId))
     End Function

@@ -6,4 +6,10 @@
             Return Direction.Outward
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "in"
+        End Get
+    End Property
 End Class

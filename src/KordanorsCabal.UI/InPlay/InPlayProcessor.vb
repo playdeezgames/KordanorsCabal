@@ -6,6 +6,7 @@
         buffer.WriteText((0, 0), "                      ", True, Hue.Blue)
         Dim player = World.PlayerCharacter
         buffer.WriteTextCentered(0, player.Location.Name, True, Hue.Blue)
+        buffer.WriteText((0, 1), $"Facing: {player.Direction.Name}", True, Hue.Black)
     End Sub
 
     Public Sub Initialize() Implements IProcessor.Initialize

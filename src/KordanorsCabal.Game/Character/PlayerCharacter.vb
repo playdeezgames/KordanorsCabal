@@ -16,4 +16,9 @@
             ChangeStatistic(StatisticType.Unassigned, -1)
         End If
     End Sub
+    Public ReadOnly Property Direction As Direction
+        Get
+            Return CType(PlayerData.ReadDirection().Value, Direction)
+        End Get
+    End Property
 End Class

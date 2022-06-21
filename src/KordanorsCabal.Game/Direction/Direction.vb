@@ -11,9 +11,13 @@ Public Enum Direction
     Inward
     Outward
 End Enum
-Module DirectionExtensions
+Public Module DirectionExtensions
     <Extension>
-    Function Opposite(direction As Direction) As Direction
+    Friend Function Opposite(direction As Direction) As Direction
         Return DirectionDescriptors(direction).Opposite
+    End Function
+    <Extension>
+    Public Function Name(direction As Direction) As String
+        Return DirectionDescriptors(direction).Name
     End Function
 End Module

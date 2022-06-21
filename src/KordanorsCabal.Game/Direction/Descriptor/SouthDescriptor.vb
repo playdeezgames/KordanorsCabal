@@ -6,4 +6,10 @@
             Return Direction.North
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "south"
+        End Get
+    End Property
 End Class

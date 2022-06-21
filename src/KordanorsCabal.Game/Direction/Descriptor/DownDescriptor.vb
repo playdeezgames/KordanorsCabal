@@ -6,4 +6,10 @@
             Return Direction.Up
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "down"
+        End Get
+    End Property
 End Class
