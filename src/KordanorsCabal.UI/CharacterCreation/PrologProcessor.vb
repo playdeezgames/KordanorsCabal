@@ -33,6 +33,9 @@
     End Sub
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
-        Return UIState.TitleScreen
+        If command = Command.Green OrElse command = Command.Blue Then
+            Return UIState.InPlay
+        End If
+        Return UIState.Prolog
     End Function
 End Class

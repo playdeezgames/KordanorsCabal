@@ -26,6 +26,6 @@
     End Function
 
     Public Function ReadLocation(characterId As Long) As Long?
-        Throw New NotImplementedException()
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, LocationIdColumn, (CharacterIdColumn, characterId))
     End Function
 End Module

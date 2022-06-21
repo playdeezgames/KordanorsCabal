@@ -10,4 +10,5 @@
     Prolog
     SfxVolumizer
     MuxVolumizer
+    InPlay
 End Enum

@@ -14,4 +14,9 @@ Friend Module DirectionDescriptorUtility
             {Direction.Up, New UpDescriptor},
             {Direction.West, New WestDescriptor}
         }
+    Friend ReadOnly Property AllDirections As IEnumerable(Of Direction)
+        Get
+            Return DirectionDescriptors.Keys
+        End Get
+    End Property
 End Module

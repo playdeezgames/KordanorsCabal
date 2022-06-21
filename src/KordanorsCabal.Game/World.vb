@@ -4,7 +4,7 @@ Public Module World
         CreateTown()
         Dim startingLocation = Location.FromLocationType(LocationType.TownSquare).First
         Dim playerCharacter = Character.Create(CharacterType.N00b, startingLocation)
-        PlayerData.Write(playerCharacter.Id)
+        PlayerData.Write(playerCharacter.Id, RNG.FromEnumerable(AllDirections))
         RollUpPlayerCharacter()
     End Sub
 
@@ -41,7 +41,7 @@ Public Module World
 
     Private Sub StitchTown(fromLocation As Location, direction As Direction, toLocation As Location)
         Route.Create(fromLocation, direction, RouteType.Road, toLocation)
-        Route.Create(fromLocation, direction.Opposite, RouteType.Road, toLocation)
+        Route.Create(toLocation, direction.Opposite, RouteType.Road, fromLocation)
     End Sub
 
     Private Sub RollUpPlayerCharacter()

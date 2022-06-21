@@ -19,4 +19,10 @@
     Shared Function FromId(locationId As Long) As Location
         Return New Location(locationId)
     End Function
+
+    ReadOnly Property Name As String
+        Get
+            Return LocationType.Name
+        End Get
+    End Property
 End Class
