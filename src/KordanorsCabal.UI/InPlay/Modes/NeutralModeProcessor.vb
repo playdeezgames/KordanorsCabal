@@ -2,6 +2,7 @@
     Inherits ModeProcessor
 
     Const TurnButtonIndex = 0
+    Const MoveButtonIndex = 5
 
     Friend Overrides Sub UpdateBuffer(buffer As PatternBuffer)
         buffer.WriteText((0, 0), "                      ", True, Hue.Blue)
@@ -15,6 +16,7 @@
 
     Friend Overrides Sub UpdateButtons()
         Buttons(TurnButtonIndex).Title = "Turn..."
+        Buttons(MoveButtonIndex).Title = "Move..."
     End Sub
 
     Friend Overrides Sub HandleButton(button As Button)
