@@ -2,9 +2,13 @@ Public Module World
     Public Sub Start()
         Store.Reset()
         CreateTown()
+        CreatePlayer()
+    End Sub
+
+    Private Sub CreatePlayer()
         Dim startingLocation = Location.FromLocationType(LocationType.TownSquare).First
         Dim playerCharacter = Character.Create(CharacterType.N00b, startingLocation)
-        PlayerData.Write(playerCharacter.Id, RNG.FromEnumerable(AllDirections))
+        PlayerData.Write(playerCharacter.Id, RNG.FromEnumerable(AllDirections.Where(Function(x) x.IsCardinal)))
         RollUpPlayerCharacter()
     End Sub
 
