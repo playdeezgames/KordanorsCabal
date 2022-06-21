@@ -2,4 +2,5 @@
     None
     Neutral
     Turn
+    Move
 End Enum

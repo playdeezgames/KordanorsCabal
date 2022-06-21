@@ -5,15 +5,11 @@
     Const MoveButtonIndex = 5
 
     Friend Overrides Sub UpdateBuffer(buffer As PatternBuffer)
-        buffer.WriteText((0, 0), "                      ", True, Hue.Blue)
         Dim player = World.PlayerCharacter
-        Dim location = player.Location
-        buffer.WriteTextCentered(0, location.Name, True, Hue.Blue)
-        buffer.WriteText((0, 1), $"Facing: {player.Direction.Name}", False, Hue.Black)
-        Dim exits = String.Join(",", location.Routes.Select(Function(x) x.Key.Abbreviation))
-        buffer.WriteText((0, 2), $"Exits: {exits}", False, Hue.Black)
+        ShowHeader(buffer, player.Location.Name)
+        ShowFacing(buffer, (0, 1), player)
+        ShowExits(buffer, (0, 2), player)
     End Sub
-
     Friend Overrides Sub UpdateButtons()
         Buttons(TurnButtonIndex).Title = "Turn..."
         Buttons(MoveButtonIndex).Title = "Move..."

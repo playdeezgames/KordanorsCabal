@@ -7,12 +7,12 @@
     Const AroundButtonIndex = 1
 
     Friend Overrides Sub UpdateBuffer(buffer As PatternBuffer)
-        buffer.WriteText((0, 0), "                      ", True, Hue.Blue)
         Dim player = World.PlayerCharacter
-        Dim location = player.Location
-        buffer.WriteTextCentered(0, location.Name, True, Hue.Blue)
-        buffer.WriteText((0, 1), $"Facing: {player.Direction.Name}", False, Hue.Black)
-        buffer.WriteText((0, 3), $"Turn which way?", False, Hue.Purple)
+        ShowHeader(buffer, player.Location.Name)
+        ShowFacing(buffer, (0, 1), player)
+        ShowExits(buffer, (0, 2), player)
+
+        buffer.WriteText((0, 4), $"Turn which way?", False, Hue.Purple)
     End Sub
 
     Friend Overrides Sub UpdateButtons()

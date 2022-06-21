@@ -1,4 +1,15 @@
 ﻿Public MustInherit Class ModeProcessor
+    Protected Shared Sub ShowHeader(buffer As PatternBuffer, title As String)
+        buffer.WriteText((0, 0), "                      ", True, Hue.Blue)
+        buffer.WriteTextCentered(0, title, True, Hue.Blue)
+    End Sub
+    Protected Shared Sub ShowFacing(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
+        buffer.WriteText(xy, $"Facing: {player.Direction.Name}", False, Hue.Black)
+    End Sub
+    Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
+        Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) x.Key.Abbreviation))
+        buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
+    End Sub
     Friend MustOverride Sub UpdateBuffer(buffer As PatternBuffer)
     Friend MustOverride Sub UpdateButtons()
     Friend MustOverride Sub HandleButton(button As Button)
