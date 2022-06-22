@@ -25,10 +25,13 @@
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub
 
-    ReadOnly Property Location As Location
+    Property Location As Location
         Get
             Return Location.FromId(CharacterData.ReadLocation(Id).Value)
         End Get
+        Set(value As Location)
+            CharacterData.WriteLocation(Id, value.Id)
+        End Set
     End Property
     Shared Function FromId(characterId As Long) As Character
         Return New Character(characterId)

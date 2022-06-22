@@ -21,6 +21,10 @@
             );")
     End Sub
 
+    Public Function ReadToLocation(routeId As Long) As Long?
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ToLocationIdColumn, (RouteIdColumn, routeId))
+    End Function
+
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long))
         Return ReadRecordsWithColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, (DirectionColumn, RouteIdColumn), (LocationIdColumn, locationId))
     End Function

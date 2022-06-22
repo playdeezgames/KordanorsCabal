@@ -100,6 +100,7 @@ Public Class Root
         screenTexture = New Texture2D(GraphicsDevice, ViewWidth, ViewHeight)
         renderer = New Renderer(Of Color)((BorderWidth, BorderHeight), (CellColumns, CellRows), (CellWidth, CellHeight), HueColors)
         minorTheme = Song.FromUri("MinorTheme", New Uri("Content/MinorTheme.ogg", UriKind.Relative))
+        'minorTheme = Song.FromUri("Music", New Uri("Content/Music.ogg", UriKind.Relative))
     End Sub
     Protected Overrides Sub Update(gameTime As GameTime)
         ProcessInput()

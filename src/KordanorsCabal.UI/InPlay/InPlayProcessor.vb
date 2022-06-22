@@ -13,11 +13,12 @@
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         Dim modeProcessor = _modeProcessors(World.PlayerCharacter.Mode)
-        modeProcessor.UpdateBuffer(buffer)
+        Dim player = World.PlayerCharacter
+        modeProcessor.UpdateBuffer(player, buffer)
         For Each button In ModeProcessor.Buttons
             button.Clear()
         Next
-        modeProcessor.UpdateButtons()
+        modeProcessor.UpdateButtons(player)
         DrawButtons(buffer)
     End Sub
 
@@ -33,7 +34,7 @@
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
         Select Case command
             Case Command.Green, Command.Blue
-                _modeProcessors(World.PlayerCharacter.Mode).HandleButton(ModeProcessor.Buttons(ModeProcessor.CurrentButtonIndex))
+                _modeProcessors(World.PlayerCharacter.Mode).HandleButton(World.PlayerCharacter, ModeProcessor.Buttons(ModeProcessor.CurrentButtonIndex))
             Case Command.Down
                 ModeProcessor.CurrentButtonIndex = (ModeProcessor.CurrentButtonIndex + 1) Mod ModeProcessor.Buttons.Count
             Case Command.Up

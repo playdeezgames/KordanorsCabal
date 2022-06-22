@@ -16,8 +16,8 @@
             Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
         End Get
     End Property
-    Shared Function FromId(locationId As Long) As Location
-        Return New Location(locationId)
+    Shared Function FromId(locationId As Long?) As Location
+        Return If(locationId.HasValue, New Location(locationId.Value), Nothing)
     End Function
 
     ReadOnly Property Name As String
@@ -31,4 +31,8 @@
                 ToDictionary(Function(x) CType(x.Item1, Direction), Function(x) Route.FromId(x.Item2))
         End Get
     End Property
+
+    Friend Function HasRoute(direction As Direction) As Boolean
+        Return Routes.ContainsKey(direction)
+    End Function
 End Class

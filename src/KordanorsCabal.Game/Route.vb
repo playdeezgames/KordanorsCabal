@@ -9,4 +9,8 @@
     Public Shared Function Create(location As Location, direction As Direction, routeType As RouteType, toLocation As Location) As Route
         Return FromId(RouteData.Create(location.Id, direction, routeType, toLocation.Id))
     End Function
+
+    Friend Function ToLocation() As Location
+        Return Location.FromId(RouteData.ReadToLocation(Id))
+    End Function
 End Class

@@ -6,8 +6,7 @@
     Const RightButtonIndex = 5
     Const AroundButtonIndex = 1
 
-    Friend Overrides Sub UpdateBuffer(buffer As PatternBuffer)
-        Dim player = World.PlayerCharacter
+    Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
         ShowHeader(buffer, player.Location.Name)
         ShowFacing(buffer, (0, 1), player)
         ShowExits(buffer, (0, 2), player)
@@ -15,15 +14,14 @@
         buffer.WriteText((0, 4), $"Turn which way?", False, Hue.Purple)
     End Sub
 
-    Friend Overrides Sub UpdateButtons()
+    Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
         Buttons(CancelButtonIndex).Title = "Cancel"
         Buttons(LeftButtonIndex).Title = "Left"
         Buttons(RightButtonIndex).Title = "Right"
         Buttons(AroundButtonIndex).Title = "Around"
     End Sub
 
-    Friend Overrides Sub HandleButton(button As Button)
-        Dim player = World.PlayerCharacter
+    Friend Overrides Sub HandleButton(player As PlayerCharacter, button As Button)
         Select Case button.Index
             Case CancelButtonIndex
                 PopButtonIndex()

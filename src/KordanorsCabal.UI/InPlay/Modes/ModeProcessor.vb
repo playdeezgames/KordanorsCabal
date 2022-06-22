@@ -10,9 +10,9 @@
         Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) x.Key.Abbreviation))
         buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
     End Sub
-    Friend MustOverride Sub UpdateBuffer(buffer As PatternBuffer)
-    Friend MustOverride Sub UpdateButtons()
-    Friend MustOverride Sub HandleButton(button As Button)
+    Friend MustOverride Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
+    Friend MustOverride Sub UpdateButtons(player As PlayerCharacter)
+    Friend MustOverride Sub HandleButton(player As PlayerCharacter, button As Button)
     Friend Shared Buttons As IReadOnlyList(Of Button) =
         New List(Of Button) From
         {

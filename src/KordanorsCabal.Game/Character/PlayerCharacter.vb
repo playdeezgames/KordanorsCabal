@@ -33,4 +33,31 @@
         End Set
     End Property
 
+    Public Function CanMoveLeft() As Boolean
+        Return CanMove(Direction.PreviousDirection.Value)
+    End Function
+
+    Public Function CanMoveRight() As Boolean
+        Return CanMove(Direction.NextDirection.Value)
+    End Function
+
+    Public Function CanMoveForward() As Boolean
+        Return CanMove(Direction)
+    End Function
+
+    Public Function CanMoveBackward() As Boolean
+        Return CanMove(Direction.Opposite)
+    End Function
+
+    Public Function CanMove(direction As Direction) As Boolean
+        Return Location.HasRoute(direction)
+    End Function
+
+    Public Sub Move(direction As Direction)
+        If CanMove(direction) Then
+            Dim route = Location.Routes(direction)
+            Dim toLocation = route.ToLocation
+            Location = toLocation
+        End If
+    End Sub
 End Class
