@@ -37,13 +37,13 @@
             Buttons(UpButtonIndex).Title = "Up"
         End If
         If player.CanMove(Direction.Down) Then
-            Buttons(BackwardButtonIndex).Title = "Down"
+            Buttons(DownButtonIndex).Title = "Down"
         End If
         If player.CanMove(Direction.Inward) Then
-            Buttons(BackwardButtonIndex).Title = "In"
+            Buttons(InButtonIndex).Title = "In"
         End If
         If player.CanMove(Direction.Outward) Then
-            Buttons(BackwardButtonIndex).Title = "Out"
+            Buttons(OutButtonIndex).Title = "Out"
         End If
     End Sub
 

@@ -4,6 +4,7 @@ Public Enum LocationType
     None
     TownSquare
     Town
+    ChurchEntrance
 End Enum
 Module LocationTypeExtensions
     <Extension>

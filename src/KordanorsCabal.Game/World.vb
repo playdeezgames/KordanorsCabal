@@ -40,7 +40,14 @@ Public Module World
         StitchTown(southEastTown, Direction.North, eastTown)
         StitchTown(southEastTown, Direction.West, southTown)
 
-        'TODO: church entrance
+        CreateChurchEntrance()
+    End Sub
+
+    Private Sub CreateChurchEntrance()
+        Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(LocationType.Town))
+        Dim entrance = Location.Create(LocationType.ChurchEntrance)
+        Dim direction = RNG.FromEnumerable(AllDirections.Where(Function(x) x.IsCardinal AndAlso Not townLocation.HasRoute(x)))
+        StitchTown(townLocation, direction, entrance)
     End Sub
 
     Private Sub StitchTown(fromLocation As Location, direction As Direction, toLocation As Location)
