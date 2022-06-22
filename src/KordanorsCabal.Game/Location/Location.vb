@@ -35,4 +35,16 @@
     Friend Function HasRoute(direction As Direction) As Boolean
         Return Routes.ContainsKey(direction)
     End Function
+
+    Friend ReadOnly Property HasFeature As Boolean
+        Get
+            Return Feature IsNot Nothing
+        End Get
+    End Property
+
+    Friend ReadOnly Property Feature As Feature
+        Get
+            Return Feature.FromId(FeatureData.ReadForLocation(Id))
+        End Get
+    End Property
 End Class

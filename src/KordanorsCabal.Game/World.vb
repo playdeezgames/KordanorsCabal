@@ -2,7 +2,19 @@ Public Module World
     Public Sub Start()
         Store.Reset()
         CreateTown()
+        CreateFeatures()
         CreatePlayer()
+    End Sub
+
+    Private Sub CreateFeatures()
+        For Each featureType In AllFeatureTypes
+            CreateFeature(featureType)
+        Next
+    End Sub
+
+    Private Sub CreateFeature(featureType As FeatureType)
+        Dim featureLocation = RNG.FromEnumerable(Location.FromLocationType(featureType.LocationType).Where(Function(x) Not x.HasFeature))
+        Feature.Create(featureType, featureLocation)
     End Sub
 
     Private Sub CreatePlayer()
