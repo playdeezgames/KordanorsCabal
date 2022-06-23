@@ -5,6 +5,7 @@
         New Dictionary(Of PlayerMode, ModeProcessor) From
         {
             {PlayerMode.Elder, New ElderModeProcessor},
+            {PlayerMode.InnKeeper, New InnKeeperModeProcessor},
             {PlayerMode.Move, New MoveModeProcessor},
             {PlayerMode.Neutral, New NeutralModeProcessor},
             {PlayerMode.Turn, New TurnModeProcessor}

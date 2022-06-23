@@ -4,4 +4,5 @@
     Turn
     Move
     Elder
+    InnKeeper
 End Enum

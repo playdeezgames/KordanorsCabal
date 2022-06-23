@@ -35,7 +35,7 @@
 
     Public ReadOnly Property CanInteract As Boolean
         Get
-            Return If(Location?.Feature.CanInteract(Me), False)
+            Return If(Location?.Feature?.CanInteract(Me), False)
         End Get
     End Property
 

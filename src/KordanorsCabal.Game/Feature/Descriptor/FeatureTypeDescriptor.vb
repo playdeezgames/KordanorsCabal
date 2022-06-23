@@ -8,7 +8,8 @@ Public Module FeatureTypeDescriptorUtility
     Friend FeatureTypeDescriptors As IReadOnlyDictionary(Of FeatureType, FeatureTypeDescriptor) =
         New Dictionary(Of FeatureType, FeatureTypeDescriptor) From
         {
-            {FeatureType.Elder, New ElderDescriptor}
+            {FeatureType.Elder, New ElderDescriptor},
+            {FeatureType.InnKeeper, New InnKeeperDescriptor}
         }
     Public ReadOnly Property AllFeatureTypes As IEnumerable(Of FeatureType)
         Get

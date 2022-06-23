@@ -3,6 +3,7 @@
 Public Enum FeatureType
     None
     Elder
+    InnKeeper
 End Enum
 Public Module FeatureTypeExtensions
     <Extension>
