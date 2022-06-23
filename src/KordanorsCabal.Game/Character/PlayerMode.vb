@@ -7,4 +7,5 @@
     InnKeeper
     TownDrunk
     Chicken
+    BlackMarket
 End Enum

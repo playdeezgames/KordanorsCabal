@@ -6,6 +6,7 @@ Public Enum FeatureType
     InnKeeper
     TownDrunk
     Chicken
+    BlackMarketeer
 End Enum
 Public Module FeatureTypeExtensions
     <Extension>
