@@ -1,6 +1,7 @@
 ﻿Public MustInherit Class FeatureTypeDescriptor
     MustOverride ReadOnly Property Name As String
     MustOverride ReadOnly Property LocationType As LocationType
+    MustOverride Function CanInteract(player As PlayerCharacter) As Boolean
 End Class
 Public Module FeatureTypeDescriptorUtility
     Friend FeatureTypeDescriptors As IReadOnlyDictionary(Of FeatureType, FeatureTypeDescriptor) =

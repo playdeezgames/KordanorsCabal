@@ -33,6 +33,12 @@
         End Set
     End Property
 
+    Public ReadOnly Property CanInteract As Boolean
+        Get
+            Return If(Location?.Feature.CanInteract(Me), False)
+        End Get
+    End Property
+
     Public Function CanMoveLeft() As Boolean
         Return CanMove(Direction.PreviousDirection.Value)
     End Function

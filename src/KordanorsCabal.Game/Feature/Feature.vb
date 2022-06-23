@@ -10,4 +10,20 @@
     Friend Shared Function Create(featureType As FeatureType, location As Location) As Feature
         Return FromId(FeatureData.Create(featureType, location.Id))
     End Function
+
+    ReadOnly Property FeatureType As FeatureType
+        Get
+            Return CType(FeatureData.ReadFeatureType(Id).Value, FeatureType)
+        End Get
+    End Property
+
+    ReadOnly Property Name As String
+        Get
+            Return FeatureType.Name
+        End Get
+    End Property
+
+    Friend Function CanInteract(player As PlayerCharacter) As Boolean
+        Return FeatureType.CanInteract(player)
+    End Function
 End Class
