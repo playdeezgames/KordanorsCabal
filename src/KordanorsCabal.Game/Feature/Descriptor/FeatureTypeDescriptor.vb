@@ -12,7 +12,9 @@ Public Module FeatureTypeDescriptorUtility
             {FeatureType.BlackMarketeer, New BlackMarketeerDescriptor},
             {FeatureType.Blacksmith, New BlacksmithDescriptor},
             {FeatureType.Chicken, New ChickenDescriptor},
+            {FeatureType.Constable, New ConstableDescriptor},
             {FeatureType.Elder, New ElderDescriptor},
+            {FeatureType.Healer, New HealerDescriptor},
             {FeatureType.InnKeeper, New InnKeeperDescriptor},
             {FeatureType.TownDrunk, New TownDrunkDescriptor}
         }

@@ -10,4 +10,6 @@
     BlackMarket
     BlackMage
     Blacksmith
+    Constable
+    Healer
 End Enum

@@ -9,6 +9,8 @@ Public Enum FeatureType
     BlackMarketeer
     BlackMage
     Blacksmith
+    Healer
+    Constable
 End Enum
 Public Module FeatureTypeExtensions
     <Extension>
