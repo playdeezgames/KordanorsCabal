@@ -6,4 +6,5 @@
     Elder
     InnKeeper
     TownDrunk
+    Chicken
 End Enum

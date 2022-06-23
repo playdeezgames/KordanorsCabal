@@ -8,6 +8,7 @@ Public Module FeatureTypeDescriptorUtility
     Friend FeatureTypeDescriptors As IReadOnlyDictionary(Of FeatureType, FeatureTypeDescriptor) =
         New Dictionary(Of FeatureType, FeatureTypeDescriptor) From
         {
+            {FeatureType.Chicken, New ChickenDescriptor},
             {FeatureType.Elder, New ElderDescriptor},
             {FeatureType.InnKeeper, New InnKeeperDescriptor},
             {FeatureType.TownDrunk, New TownDrunkDescriptor}

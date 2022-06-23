@@ -5,6 +5,7 @@ Public Enum FeatureType
     Elder
     InnKeeper
     TownDrunk
+    Chicken
 End Enum
 Public Module FeatureTypeExtensions
     <Extension>
