@@ -4,6 +4,7 @@ Public Enum FeatureType
     None
     Elder
     InnKeeper
+    TownDrunk
 End Enum
 Public Module FeatureTypeExtensions
     <Extension>

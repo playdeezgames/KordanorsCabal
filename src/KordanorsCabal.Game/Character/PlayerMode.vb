@@ -5,4 +5,5 @@
     Move
     Elder
     InnKeeper
+    TownDrunk
 End Enum

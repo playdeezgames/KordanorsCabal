@@ -9,7 +9,8 @@ Public Module FeatureTypeDescriptorUtility
         New Dictionary(Of FeatureType, FeatureTypeDescriptor) From
         {
             {FeatureType.Elder, New ElderDescriptor},
-            {FeatureType.InnKeeper, New InnKeeperDescriptor}
+            {FeatureType.InnKeeper, New InnKeeperDescriptor},
+            {FeatureType.TownDrunk, New TownDrunkDescriptor}
         }
     Public ReadOnly Property AllFeatureTypes As IEnumerable(Of FeatureType)
         Get

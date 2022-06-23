@@ -8,6 +8,7 @@
             {PlayerMode.InnKeeper, New InnKeeperModeProcessor},
             {PlayerMode.Move, New MoveModeProcessor},
             {PlayerMode.Neutral, New NeutralModeProcessor},
+            {PlayerMode.TownDrunk, New TownDrunkModeProcessor},
             {PlayerMode.Turn, New TurnModeProcessor}
         }
 
