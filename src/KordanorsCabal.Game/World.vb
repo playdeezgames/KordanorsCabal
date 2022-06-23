@@ -2,8 +2,17 @@ Public Module World
     Public Sub Start()
         Store.Reset()
         CreateTown()
+        CreateDungeon()
         CreateFeatures()
         CreatePlayer()
+    End Sub
+
+    Private Sub CreateDungeon()
+        'TODO: create all locations for the dungeon level
+        'TODO: generate maze for level
+        'TODO: apply maze to locations
+        'TODO: determine starting point for level
+        'TODO: make stairs to enter level
     End Sub
 
     Private Sub CreateFeatures()
