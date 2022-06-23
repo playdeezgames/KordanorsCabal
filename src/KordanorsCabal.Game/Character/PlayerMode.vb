@@ -8,4 +8,5 @@
     TownDrunk
     Chicken
     BlackMarket
+    BlackMage
 End Enum

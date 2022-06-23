@@ -225,6 +225,7 @@ Public Module PatternUtility
             {">"c, Pattern.GreaterThan},
             {"?"c, Pattern.Question},
             {"│"c, Pattern.Horizontal5},
+            {"^"c, Pattern.UpArrow},
             {"♠"c, Pattern.Spade},'{" "c, Pattern.Vertical4},{" "c, Pattern.Horizontal4},{" "c, Pattern.Horizontal3},{" "c, Pattern.Horizontal2},{" "c, Pattern.Horizontal6},{" "c, Pattern.Vertical3},{" "c, Pattern.Vertical6},
             {"╮"c, Pattern.TopRightCurve},
             {"╰"c, Pattern.BottomLeftCurve},

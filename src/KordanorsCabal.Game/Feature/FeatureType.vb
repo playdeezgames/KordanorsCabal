@@ -7,6 +7,7 @@ Public Enum FeatureType
     TownDrunk
     Chicken
     BlackMarketeer
+    BlackMage
 End Enum
 Public Module FeatureTypeExtensions
     <Extension>

@@ -4,6 +4,7 @@
     Private ReadOnly _modeProcessors As IReadOnlyDictionary(Of PlayerMode, ModeProcessor) =
         New Dictionary(Of PlayerMode, ModeProcessor) From
         {
+            {PlayerMode.BlackMage, New BlackMageModeProcessor},
             {PlayerMode.BlackMarket, New BlackMarketModeProcessor},
             {PlayerMode.Chicken, New ChickenModeProcessor},
             {PlayerMode.Elder, New ElderModeProcessor},

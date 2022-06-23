@@ -1,4 +1,4 @@
-﻿Friend Class InnKeeperModeProcessor
+﻿Friend Class BlackMageModeProcessor
     Inherits ModeProcessor
 
     Const WelcomeButtonIndex = 0
@@ -9,9 +9,9 @@
         ShowHeader(buffer, player.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
-                buffer.WriteText((0, 1), "@#$% off, you %$#^!", False, Hue.Black)
+                buffer.WriteText((0, 1), "Fare well!", False, Hue.Black)
             Case Else
-                buffer.WriteText((0, 1), "@#$% You!", False, Hue.Black)
+                buffer.WriteText((0, 1), "Big Black Mage Blessings To You!", False, Hue.Black)
         End Select
     End Sub
 
