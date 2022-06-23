@@ -32,12 +32,16 @@ Friend Class NeutralModeProcessor
     Friend Overrides Sub HandleButton(player As PlayerCharacter, button As Button)
         Select Case button.Index
             Case TurnButtonIndex
-                PushButtonIndex()
-                World.PlayerCharacter.Mode = PlayerMode.Turn
+                PushButtonIndex(0)
+                player.Mode = PlayerMode.Turn
             Case MoveButtonIndex
-                PushButtonIndex()
-                World.PlayerCharacter.Mode = PlayerMode.Move
-                CurrentButtonIndex = 0
+                PushButtonIndex(0)
+                player.Mode = PlayerMode.Move
+            Case InteractButtonIndex
+                If player.CanInteract Then
+                    PushButtonIndex(0)
+                    player.Interact()
+                End If
             Case 9
                 Store.Save("temp.db")
         End Select

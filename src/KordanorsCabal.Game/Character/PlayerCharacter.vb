@@ -55,6 +55,12 @@
         Return CanMove(Direction.Opposite)
     End Function
 
+    Public Sub Interact()
+        If CanInteract Then
+            Mode = Location.Feature.InteractionMode(Me)
+        End If
+    End Sub
+
     Public Function CanMove(direction As Direction) As Boolean
         Return Location.HasRoute(direction)
     End Function

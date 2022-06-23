@@ -3,4 +3,5 @@
     Neutral
     Turn
     Move
+    Elder
 End Enum

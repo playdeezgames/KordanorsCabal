@@ -17,4 +17,8 @@ Public Module FeatureTypeExtensions
     Public Function CanInteract(featureType As FeatureType, player As PlayerCharacter) As Boolean
         Return FeatureTypeDescriptors(featureType).CanInteract(player)
     End Function
+    <Extension>
+    Public Function InteractionMode(featureType As FeatureType, player As PlayerCharacter) As PlayerMode
+        Return FeatureTypeDescriptors(featureType).InteractionMode(player)
+    End Function
 End Module

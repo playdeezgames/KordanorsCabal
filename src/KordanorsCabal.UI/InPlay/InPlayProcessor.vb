@@ -4,6 +4,7 @@
     Private ReadOnly _modeProcessors As IReadOnlyDictionary(Of PlayerMode, ModeProcessor) =
         New Dictionary(Of PlayerMode, ModeProcessor) From
         {
+            {PlayerMode.Elder, New ElderModeProcessor},
             {PlayerMode.Move, New MoveModeProcessor},
             {PlayerMode.Neutral, New NeutralModeProcessor},
             {PlayerMode.Turn, New TurnModeProcessor}

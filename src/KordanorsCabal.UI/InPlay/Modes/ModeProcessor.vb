@@ -29,8 +29,9 @@
         }
     Private Shared currentButtonStack As New Stack(Of Integer)
     Friend Shared Property CurrentButtonIndex As Integer = 0
-    Friend Shared Sub PushButtonIndex()
+    Friend Shared Sub PushButtonIndex(newButtonIndex As Integer)
         currentButtonStack.Push(CurrentButtonIndex)
+        CurrentButtonIndex = newButtonIndex
     End Sub
     Friend Shared Sub PopButtonIndex()
         If currentButtonStack.Any() Then

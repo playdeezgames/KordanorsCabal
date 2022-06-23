@@ -2,6 +2,7 @@
     MustOverride ReadOnly Property Name As String
     MustOverride ReadOnly Property LocationType As LocationType
     MustOverride Function CanInteract(player As PlayerCharacter) As Boolean
+    MustOverride Function InteractionMode(player As PlayerCharacter) As PlayerMode
 End Class
 Public Module FeatureTypeDescriptorUtility
     Friend FeatureTypeDescriptors As IReadOnlyDictionary(Of FeatureType, FeatureTypeDescriptor) =

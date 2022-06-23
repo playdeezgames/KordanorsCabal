@@ -16,4 +16,8 @@
     Public Overrides Function CanInteract(player As PlayerCharacter) As Boolean
         Return True
     End Function
+
+    Public Overrides Function InteractionMode(player As PlayerCharacter) As PlayerMode
+        Return PlayerMode.Elder
+    End Function
 End Class
