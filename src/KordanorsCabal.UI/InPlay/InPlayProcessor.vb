@@ -6,6 +6,7 @@
         {
             {PlayerMode.BlackMage, New BlackMageModeProcessor},
             {PlayerMode.BlackMarket, New BlackMarketModeProcessor},
+            {PlayerMode.Blacksmith, New BlacksmithModeProcessor},
             {PlayerMode.Chicken, New ChickenModeProcessor},
             {PlayerMode.Elder, New ElderModeProcessor},
             {PlayerMode.InnKeeper, New InnKeeperModeProcessor},

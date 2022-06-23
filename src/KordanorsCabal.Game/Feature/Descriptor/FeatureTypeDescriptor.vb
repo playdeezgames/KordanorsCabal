@@ -10,6 +10,7 @@ Public Module FeatureTypeDescriptorUtility
         {
             {FeatureType.BlackMage, New BlackMageDescriptor},
             {FeatureType.BlackMarketeer, New BlackMarketeerDescriptor},
+            {FeatureType.Blacksmith, New BlacksmithDescriptor},
             {FeatureType.Chicken, New ChickenDescriptor},
             {FeatureType.Elder, New ElderDescriptor},
             {FeatureType.InnKeeper, New InnKeeperDescriptor},

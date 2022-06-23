@@ -9,4 +9,5 @@
     Chicken
     BlackMarket
     BlackMage
+    Blacksmith
 End Enum

@@ -8,6 +8,7 @@ Public Enum FeatureType
     Chicken
     BlackMarketeer
     BlackMage
+    Blacksmith
 End Enum
 Public Module FeatureTypeExtensions
     <Extension>
