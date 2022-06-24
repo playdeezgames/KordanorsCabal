@@ -32,7 +32,7 @@
         End Get
     End Property
 
-    Friend Function HasRoute(direction As Direction) As Boolean
+    Public Function HasRoute(direction As Direction) As Boolean
         Return Routes.ContainsKey(direction)
     End Function
 
