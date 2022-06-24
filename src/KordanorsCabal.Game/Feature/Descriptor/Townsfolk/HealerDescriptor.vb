@@ -3,7 +3,7 @@
 
     Public Overrides ReadOnly Property Name As String
         Get
-            Return "Marten the Healer"
+            Return "Nihilist Healer Marten"
         End Get
     End Property
 

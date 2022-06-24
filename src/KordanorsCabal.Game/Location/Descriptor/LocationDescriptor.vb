@@ -6,6 +6,7 @@ Friend Module LocationDescriptorUtility
         New Dictionary(Of LocationType, LocationDescriptor) From
         {
             {LocationType.ChurchEntrance, New ChurchEntranceDescriptor},
+            {LocationType.Dungeon, New DungeonLocationTypeDescriptor},
             {LocationType.Town, New TownDescriptor},
             {LocationType.TownSquare, New TownSquareDescriptor}
         }

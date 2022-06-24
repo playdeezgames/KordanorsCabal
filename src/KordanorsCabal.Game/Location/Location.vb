@@ -36,6 +36,10 @@
         Return Routes.ContainsKey(direction)
     End Function
 
+    Friend Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
+        LocationStatisticData.Write(Id, statisticType, statisticValue)
+    End Sub
+
     Friend ReadOnly Property HasFeature As Boolean
         Get
             Return Feature IsNot Nothing

@@ -20,23 +20,36 @@ Public Module World
 
     Private Sub CreateDungeon()
         Dim fromLocation = Location.FromLocationType(LocationType.ChurchEntrance).First
-        Dim dungeonLevel = 1
+        Dim dungeonLevel As Long = 1
         Dim maze = New Maze(Of Direction)(MazeColumns, MazeRows, MazeDirections)
-        maze.Generate()
         Dim locations As New List(Of Location)
-        For row = 0 To maze.Rows - 1
-            For column = 0 To maze.Columns - 1
-                locations.Add(Location.Create(LocationType.Dungeon))
-
-                'TODO: make location
+        For row As Long = 0 To maze.Rows - 1
+            For column As Long = 0 To maze.Columns - 1
+                Dim dungeonLocation = Location.Create(LocationType.Dungeon)
+                dungeonLocation.SetStatistic(LocationStatisticType.DungeonLevel, dungeonLevel)
+                dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
+                dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
+                locations.Add(dungeonLocation)
             Next
         Next
-
-        'TODO: create all locations for the dungeon level
-        'TODO: generate maze for level
-        'TODO: apply maze to locations
-        'TODO: determine starting point for level
-        'TODO: make stairs to enter level
+        maze.Generate()
+        For row As Long = 0 To maze.Rows - 1
+            For column As Long = 0 To maze.Columns - 1
+                Dim cell = maze.GetCell(column, row)
+                Dim dungeonLocation = locations(CInt(column + row * maze.Columns))
+                For Each direction In MazeDirections.Keys
+                    If If(cell.GetDoor(direction)?.Open, False) Then
+                        Dim nextColumn = MazeDirections(direction).DeltaX + column
+                        Dim nextRow = MazeDirections(direction).DeltaY + row
+                        Dim nextLocation = locations(CInt(nextColumn + nextRow * maze.Columns))
+                        Route.Create(dungeonLocation, direction, RouteType.Passageway, nextLocation)
+                    End If
+                Next
+            Next
+        Next
+        Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.Routes.Count > 1))
+        Route.Create(fromLocation, Direction.Down, RouteType.Stairs, startingLocation)
+        Route.Create(startingLocation, Direction.Up, RouteType.Stairs, fromLocation)
     End Sub
 
     Private Sub CreateFeatures()
