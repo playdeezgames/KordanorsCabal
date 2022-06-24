@@ -8,10 +8,33 @@ Friend Class NeutralModeProcessor
     Const InteractButtonIndex = 1
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
-        ShowHeader(buffer, player.Location.Name)
-        ShowFacing(buffer, (0, 1), player)
-        ShowExits(buffer, (0, 2), player)
-        ShowFeatures(buffer, (0, 3), player)
+        Dim location = player.Location
+        Select Case location.LocationType
+            Case LocationType.Dungeon
+                ShowDungeon(buffer, player)
+            Case Else
+                ShowHeader(buffer, location.Name)
+                ShowFacing(buffer, (0, 1), player)
+                ShowExits(buffer, (0, 2), player)
+                ShowFeatures(buffer, (0, 3), player)
+        End Select
+    End Sub
+
+    Private Sub ShowDungeon(buffer As PatternBuffer, player As PlayerCharacter)
+        buffer.WriteText((0, 0), "╲                    ╱", False, Hue.Black)
+        buffer.WriteText((0, 1), " ╲                  ╱ ", False, Hue.Black)
+        buffer.WriteText((0, 2), "  ╲                ╱  ", False, Hue.Black)
+        buffer.WriteText((0, 15), "  ╱                ╲  ", False, Hue.Black)
+        buffer.WriteText((0, 16), " ╱                  ╲ ", False, Hue.Black)
+        buffer.WriteText((0, 17), "╱                    ╲", False, Hue.Black)
+        buffer.FillCells((4, 3), (14, 1), Pattern.Horizontal1, False, Hue.Black)
+        buffer.FillCells((4, 14), (14, 1), Pattern.Horizontal8, False, Hue.Black)
+        buffer.FillCells((3, 4), (1, 10), Pattern.Vertical1, False, Hue.Black)
+        buffer.FillCells((18, 4), (1, 10), Pattern.Vertical8, False, Hue.Black)
+        buffer.PutCell((3, 3), Pattern.TopLeftCorner, False, Hue.Black)
+        buffer.PutCell((18, 3), Pattern.TopRightCorner, False, Hue.Black)
+        buffer.PutCell((3, 14), Pattern.BottomLeftCorner, False, Hue.Black)
+        buffer.PutCell((18, 14), Pattern.BottomRightCorner, False, Hue.Black)
     End Sub
 
     Private Sub ShowFeatures(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
