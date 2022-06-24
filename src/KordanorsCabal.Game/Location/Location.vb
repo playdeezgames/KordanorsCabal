@@ -51,4 +51,15 @@
             Return Feature.FromId(FeatureData.ReadForLocation(Id))
         End Get
     End Property
+
+    ReadOnly Property Inventory As Inventory
+        Get
+            Dim inventoryId As Long? = LocationInventoryData.Read(Id)
+            If Not inventoryId.hasValue Then
+                inventoryId = InventoryData.Create()
+                LocationInventoryData.Write(Id, inventoryId.Value)
+            End If
+            Return New Inventory(inventoryId.Value)
+        End Get
+    End Property
 End Class
