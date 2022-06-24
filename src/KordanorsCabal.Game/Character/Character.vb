@@ -40,4 +40,14 @@
     Public Function GetStatistic(statisticType As CharacterStatisticType) As Long
         Return If(CharacterStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
+    ReadOnly Property Inventory As Inventory
+        Get
+            Dim inventoryId As Long? = CharacterInventoryData.Read(Id)
+            If Not inventoryId.HasValue Then
+                inventoryId = InventoryData.Create()
+                CharacterInventoryData.Write(Id, inventoryId.Value)
+            End If
+            Return New Inventory(inventoryId.Value)
+        End Get
+    End Property
 End Class

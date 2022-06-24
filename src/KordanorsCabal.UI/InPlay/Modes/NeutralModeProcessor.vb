@@ -4,9 +4,11 @@ Friend Class NeutralModeProcessor
     Inherits ModeProcessor
 
     Const TurnButtonIndex = 0
-    Const MoveButtonIndex = 5
     Const InteractButtonIndex = 1
     Const GroundButtonIndex = 2
+
+    Const MoveButtonIndex = 5
+    Const InventoryButtonIndex = 6
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
         Dim location = player.Location
@@ -74,6 +76,9 @@ Friend Class NeutralModeProcessor
         End If
         If Not player.Location.Inventory.IsEmpty Then
             Buttons(GroundButtonIndex).Title = "Ground..."
+        End If
+        If Not player.Inventory.IsEmpty Then
+            Buttons(InventoryButtonIndex).Title = "Inventory"
         End If
     End Sub
 
