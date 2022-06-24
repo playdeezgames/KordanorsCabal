@@ -1,7 +1,7 @@
 ﻿Friend Class FinalizeCharacterProcessor
     Inherits MenuProcessor
 
-    Private Shared Function ApplyPoint(statisticType As StatisticType) As UIState
+    Private Shared Function ApplyPoint(statisticType As CharacterStatisticType) As UIState
         Dim player = World.PlayerCharacter
         player.AssignPoint(statisticType)
         Return If(player.IsFullyBaked, UIState.Prolog, UIState.FinalizeCharacter)
@@ -12,36 +12,36 @@
             New List(Of (String, Func(Of UIState))) From
             {
                 ("Cancel", Function() UIState.TitleScreen),
-                ($"{StatisticType.Strength.Name}: ?", Function() ApplyPoint(StatisticType.Strength)),
-                ($"{StatisticType.Dexterity.Name}: ?", Function() ApplyPoint(StatisticType.Dexterity)),
-                ($"{StatisticType.Influence.Name}: ?", Function() ApplyPoint(StatisticType.Influence)),
-                ($"{StatisticType.Willpower.Name}: ?", Function() ApplyPoint(StatisticType.Willpower)),
-                ($"{StatisticType.Power.Name}: ?", Function() ApplyPoint(StatisticType.Power)),
-                ($"{StatisticType.HP.Name}: ?", Function() ApplyPoint(StatisticType.HP)),
-                ($"{StatisticType.MP.Name}: ?", Function() ApplyPoint(StatisticType.MP)),
-                ($"{StatisticType.Mana.Name}: ?", Function() ApplyPoint(StatisticType.Mana))
+                ($"{CharacterStatisticType.Strength.Name}: ?", Function() ApplyPoint(CharacterStatisticType.Strength)),
+                ($"{CharacterStatisticType.Dexterity.Name}: ?", Function() ApplyPoint(CharacterStatisticType.Dexterity)),
+                ($"{CharacterStatisticType.Influence.Name}: ?", Function() ApplyPoint(CharacterStatisticType.Influence)),
+                ($"{CharacterStatisticType.Willpower.Name}: ?", Function() ApplyPoint(CharacterStatisticType.Willpower)),
+                ($"{CharacterStatisticType.Power.Name}: ?", Function() ApplyPoint(CharacterStatisticType.Power)),
+                ($"{CharacterStatisticType.HP.Name}: ?", Function() ApplyPoint(CharacterStatisticType.HP)),
+                ($"{CharacterStatisticType.MP.Name}: ?", Function() ApplyPoint(CharacterStatisticType.MP)),
+                ($"{CharacterStatisticType.Mana.Name}: ?", Function() ApplyPoint(CharacterStatisticType.Mana))
             },
             7,
             UIState.FinalizeCharacter)
     End Sub
 
-    Private ReadOnly table As IReadOnlyDictionary(Of StatisticType, Integer) =
-        New Dictionary(Of StatisticType, Integer) From
+    Private ReadOnly table As IReadOnlyDictionary(Of CharacterStatisticType, Integer) =
+        New Dictionary(Of CharacterStatisticType, Integer) From
         {
-            {StatisticType.Strength, 1},
-            {StatisticType.Dexterity, 2},
-            {StatisticType.Influence, 3},
-            {StatisticType.Willpower, 4},
-            {StatisticType.Power, 5},
-            {StatisticType.HP, 6},
-            {StatisticType.MP, 7},
-            {StatisticType.Mana, 8}
+            {CharacterStatisticType.Strength, 1},
+            {CharacterStatisticType.Dexterity, 2},
+            {CharacterStatisticType.Influence, 3},
+            {CharacterStatisticType.Willpower, 4},
+            {CharacterStatisticType.Power, 5},
+            {CharacterStatisticType.HP, 6},
+            {CharacterStatisticType.MP, 7},
+            {CharacterStatisticType.Mana, 8}
         }
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteTextCentered(0, "  Finalize Character  ", True, Hue.Blue)
         Dim player = World.PlayerCharacter
-        buffer.WriteTextCentered(2, $"{StatisticType.Unassigned.Name}: {player.GetStatistic(StatisticType.Unassigned)}", False, Hue.Purple)
+        buffer.WriteTextCentered(2, $"{CharacterStatisticType.Unassigned.Name}: {player.GetStatistic(CharacterStatisticType.Unassigned)}", False, Hue.Purple)
         buffer.WriteText((0, 4), "Choose where to assignpoint(s):", False, Hue.Black)
         For Each entry In table
             UpdateMenuItemText(entry.Value, $"{entry.Key.Name}: {player.GetStatistic(entry.Key)}")

@@ -7,13 +7,13 @@
 
     ReadOnly Property IsFullyBaked As Boolean
         Get
-            Return GetStatistic(StatisticType.Unassigned) = 0
+            Return GetStatistic(CharacterStatisticType.Unassigned) = 0
         End Get
     End Property
-    Public Sub AssignPoint(statisticType As StatisticType)
+    Public Sub AssignPoint(statisticType As CharacterStatisticType)
         If Not IsFullyBaked Then
             ChangeStatistic(statisticType, 1)
-            ChangeStatistic(StatisticType.Unassigned, -1)
+            ChangeStatistic(CharacterStatisticType.Unassigned, -1)
         End If
     End Sub
     Public Property Direction As Direction

@@ -17,11 +17,11 @@
         Return character
     End Function
 
-    Friend Sub SetStatistic(statisticType As StatisticType, statisticValue As Long)
+    Friend Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
         CharacterStatisticData.Write(Id, statisticType, statisticValue)
     End Sub
 
-    Friend Sub ChangeStatistic(statisticType As StatisticType, delta As Long)
+    Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub
 
@@ -37,7 +37,7 @@
         Return New Character(characterId)
     End Function
 
-    Public Function GetStatistic(statisticType As StatisticType) As Long
+    Public Function GetStatistic(statisticType As CharacterStatisticType) As Long
         Return If(CharacterStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
 End Class

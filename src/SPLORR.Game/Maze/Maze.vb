@@ -2,7 +2,7 @@
     ReadOnly Property Columns As Long
     ReadOnly Property Rows As Long
     Private _cells As New List(Of MazeCell(Of TDirection))
-    Sub New(columns As Long, rows As Long, directions As Dictionary(Of TDirection, MazeDirection(Of TDirection)))
+    Sub New(columns As Long, rows As Long, directions As IReadOnlyDictionary(Of TDirection, MazeDirection(Of TDirection)))
         Me.Columns = columns
         Me.Rows = rows
         While _cells.Count < columns * rows

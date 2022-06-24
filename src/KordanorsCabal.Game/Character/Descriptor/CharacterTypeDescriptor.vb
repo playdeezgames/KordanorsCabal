@@ -1,5 +1,5 @@
 ﻿Friend MustInherit Class CharacterTypeDescriptor
-    MustOverride ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of StatisticType, Long)
+    MustOverride ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
 End Class
 Friend Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of CharacterType, CharacterTypeDescriptor) =

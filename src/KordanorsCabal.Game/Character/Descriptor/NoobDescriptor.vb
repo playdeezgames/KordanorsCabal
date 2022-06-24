@@ -1,19 +1,19 @@
 ﻿Friend Class NoobDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of StatisticType, Long)
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
         Get
-            Return New Dictionary(Of StatisticType, Long) From
+            Return New Dictionary(Of CharacterStatisticType, Long) From
                 {
-                    {StatisticType.Dexterity, 1},
-                    {StatisticType.HP, 3},
-                    {StatisticType.Influence, 1},
-                    {StatisticType.Mana, 1},
-                    {StatisticType.MP, 3},
-                    {StatisticType.Power, 1},
-                    {StatisticType.Strength, 1},
-                    {StatisticType.Unassigned, 8},
-                    {StatisticType.Willpower, 1}
+                    {CharacterStatisticType.Dexterity, 1},
+                    {CharacterStatisticType.HP, 3},
+                    {CharacterStatisticType.Influence, 1},
+                    {CharacterStatisticType.Mana, 1},
+                    {CharacterStatisticType.MP, 3},
+                    {CharacterStatisticType.Power, 1},
+                    {CharacterStatisticType.Strength, 1},
+                    {CharacterStatisticType.Unassigned, 8},
+                    {CharacterStatisticType.Willpower, 1}
                 }
         End Get
     End Property

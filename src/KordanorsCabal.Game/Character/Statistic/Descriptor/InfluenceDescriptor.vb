@@ -1,5 +1,5 @@
 ﻿Friend Class InfluenceDescriptor
-    Inherits StatisticTypeDescriptor
+    Inherits CharacterStatisticTypeDescriptor
 
     Public Overrides ReadOnly Property Name As String
         Get
