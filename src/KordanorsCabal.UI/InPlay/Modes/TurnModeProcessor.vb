@@ -7,11 +7,17 @@
     Const AroundButtonIndex = 1
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
-        ShowHeader(buffer, player.Location.Name)
-        ShowFacing(buffer, (0, 1), player)
-        ShowExits(buffer, (0, 2), player)
+        Dim location = player.Location
+        Select Case location.LocationType
+            Case LocationType.Dungeon, LocationType.DungeonDeadEnd, LocationType.DungeonBoss
+                ShowDungeon(buffer, player)
+            Case Else
+                ShowHeader(buffer, player.Location.Name)
+                ShowFacing(buffer, (0, 1), player)
+                ShowExits(buffer, (0, 2), player)
 
-        buffer.WriteText((0, 4), $"Turn which way?", False, Hue.Purple)
+                buffer.WriteText((0, 4), $"Turn which way?", False, Hue.Purple)
+        End Select
     End Sub
 
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)

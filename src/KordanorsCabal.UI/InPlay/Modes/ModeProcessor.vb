@@ -40,4 +40,41 @@
         End If
         CurrentButtonIndex = 0
     End Sub
+    Protected Sub ShowDungeon(buffer As PatternBuffer, player As PlayerCharacter)
+        buffer.WriteText((0, 0), " ╲                  ╱", False, Hue.Black)
+        buffer.WriteText((0, 1), "  ╲                ╱ ", False, Hue.Black)
+        buffer.WriteText((0, 2), "   ╲              ╱  ", False, Hue.Black)
+        buffer.WriteText((0, 15), "   ╱              ╲  ", False, Hue.Black)
+        buffer.WriteText((0, 16), "  ╱                ╲ ", False, Hue.Black)
+        buffer.WriteText((0, 17), " ╱                  ╲", False, Hue.Black)
+        buffer.FillCells((5, 3), (12, 1), Pattern.Horizontal1, False, Hue.Black)
+        buffer.FillCells((5, 14), (12, 1), Pattern.Horizontal8, False, Hue.Black)
+        buffer.FillCells((4, 4), (1, 10), Pattern.Vertical1, False, Hue.Black)
+        buffer.FillCells((17, 4), (1, 10), Pattern.Vertical8, False, Hue.Black)
+        buffer.PutCell((4, 3), Pattern.TopLeftCorner, False, Hue.Black)
+        buffer.PutCell((17, 3), Pattern.TopRightCorner, False, Hue.Black)
+        buffer.PutCell((4, 14), Pattern.BottomLeftCorner, False, Hue.Black)
+        buffer.PutCell((17, 14), Pattern.BottomRightCorner, False, Hue.Black)
+
+        Dim location = player.Location
+        If location.HasRoute(player.Direction) Then
+            buffer.FillCells((9, 6), (4, 1), Pattern.Horizontal1, False, Hue.Black)
+            buffer.FillCells((8, 6), (1, 8), Pattern.Vertical8, False, Hue.Black)
+            buffer.FillCells((13, 6), (1, 8), Pattern.Vertical1, False, Hue.Black)
+            buffer.PutCell((13, 14), Pattern.BottomLeftCorner, False, Hue.Black)
+            buffer.PutCell((8, 14), Pattern.BottomRightCorner, False, Hue.Black)
+        End If
+
+        If location.HasRoute(player.Direction.PreviousDirection.Value) Then
+            buffer.PutCell((0, 3), Pattern.DownwardDiagonal, False, Hue.Black)
+            buffer.PutCell((1, 4), Pattern.DownwardDiagonal, False, Hue.Black)
+            buffer.FillCells((1, 5), (1, 12), Pattern.Vertical8, False, Hue.Black)
+        End If
+
+        If location.HasRoute(player.Direction.NextDirection.Value) Then
+            buffer.PutCell((21, 3), Pattern.UpwardDiagonal, False, Hue.Black)
+            buffer.PutCell((20, 4), Pattern.UpwardDiagonal, False, Hue.Black)
+            buffer.FillCells((20, 5), (1, 12), Pattern.Vertical1, False, Hue.Black)
+        End If
+    End Sub
 End Class
