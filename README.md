@@ -8,6 +8,8 @@ Seed: 2645320710
 
 ## Stream Log
 
+XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Written for the VIC-20) #Niche4LIFE
+
 * 001 - 20220617
 * 002 - 20220618
 * 003 - 20220620
