@@ -43,4 +43,8 @@
             door.Value.Open = False
         Next
     End Sub
+
+    Public Function OpenDoorCount() As Integer
+        Return _doors.Where(Function(x) x.Value.Open).Count
+    End Function
 End Class

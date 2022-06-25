@@ -11,10 +11,13 @@
     Shared Function Create(locationType As LocationType) As Location
         Return FromId(LocationData.Create(locationType))
     End Function
-    ReadOnly Property LocationType As LocationType
+    Property LocationType As LocationType
         Get
             Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
         End Get
+        Set(value As LocationType)
+            LocationData.WriteLocationType(Id, value)
+        End Set
     End Property
     Shared Function FromId(locationId As Long?) As Location
         Return If(locationId.HasValue, New Location(locationId.Value), Nothing)
@@ -62,4 +65,8 @@
             Return New Inventory(inventoryId.Value)
         End Get
     End Property
+
+    Friend Function RouteCount() As Integer
+        Return Routes.Count
+    End Function
 End Class

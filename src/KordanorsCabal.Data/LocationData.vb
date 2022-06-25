@@ -15,8 +15,20 @@
         Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, LocationIdColumn, (LocationTypeColumn, locationType))
     End Function
 
+    Public Sub WriteLocationType(locationId As Long, locationType As Long)
+        WriteColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (LocationTypeColumn, locationType),
+            (LocationIdColumn, locationId))
+    End Sub
+
     Public Function ReadLocationType(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, LocationTypeColumn, (LocationIdColumn, locationId))
+        Return ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            LocationTypeColumn,
+            (LocationIdColumn, locationId))
     End Function
 
     Public Function Create(locationType As Long) As Long

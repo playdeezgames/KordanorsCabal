@@ -7,6 +7,8 @@ Friend Module LocationDescriptorUtility
         {
             {LocationType.ChurchEntrance, New ChurchEntranceDescriptor},
             {LocationType.Dungeon, New DungeonLocationTypeDescriptor},
+            {LocationType.DungeonBoss, New DungeonBossLocationTypeDescriptor},
+            {LocationType.DungeonDeadEnd, New DungeonDeadEndLocationTypeDescriptor},
             {LocationType.Town, New TownDescriptor},
             {LocationType.TownSquare, New TownSquareDescriptor}
         }

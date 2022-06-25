@@ -6,6 +6,8 @@ Public Enum LocationType
     Town
     ChurchEntrance
     Dungeon
+    DungeonDeadEnd
+    DungeonBoss
 End Enum
 Module LocationTypeExtensions
     <Extension>

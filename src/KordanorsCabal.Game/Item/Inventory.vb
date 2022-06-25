@@ -8,7 +8,17 @@
     End Function
     ReadOnly Property IsEmpty As Boolean
         Get
-            Return True
+            Return Not Items.Any
         End Get
     End Property
+
+    ReadOnly Property Items As IReadOnlyList(Of Item)
+        Get
+            Return InventoryItemData.ReadItems(Id).Select(AddressOf Item.FromId).ToList
+        End Get
+    End Property
+
+    Friend Sub Add(item As Item)
+        InventoryItemData.Write(Id, item.Id)
+    End Sub
 End Class
