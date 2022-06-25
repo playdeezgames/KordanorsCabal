@@ -12,4 +12,5 @@
     MuxVolumizer
     InPlay
     LoadGameScreen
+    GameMenuScreen
 End Enum

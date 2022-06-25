@@ -27,7 +27,7 @@
         Buttons(AroundButtonIndex).Title = "Around"
     End Sub
 
-    Friend Overrides Sub HandleButton(player As PlayerCharacter, button As Button)
+    Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
         Select Case button.Index
             Case CancelButtonIndex
                 PopButtonIndex()
@@ -45,5 +45,6 @@
                 player.Direction = player.Direction.NextDirection.Value
                 player.Mode = PlayerMode.Neutral
         End Select
-    End Sub
+        Return UIState.InPlay
+    End Function
 End Class

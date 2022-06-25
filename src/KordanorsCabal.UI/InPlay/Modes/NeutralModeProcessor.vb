@@ -10,6 +10,8 @@ Friend Class NeutralModeProcessor
     Const MoveButtonIndex = 5
     Const InventoryButtonIndex = 6
 
+    Const MenuButtonIndex = 9
+
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
         Dim location = player.Location
         Select Case location.LocationType
@@ -31,6 +33,7 @@ Friend Class NeutralModeProcessor
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
         Buttons(TurnButtonIndex).Title = "Turn..."
         Buttons(MoveButtonIndex).Title = "Move..."
+        Buttons(MenuButtonIndex).Title = "Game Menu"
         If player.CanInteract Then
             Buttons(InteractButtonIndex).Title = "Interact..."
         End If
@@ -42,7 +45,7 @@ Friend Class NeutralModeProcessor
         End If
     End Sub
 
-    Friend Overrides Sub HandleButton(player As PlayerCharacter, button As Button)
+    Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
         Select Case button.Index
             Case TurnButtonIndex
                 PushButtonIndex(0)
@@ -55,8 +58,9 @@ Friend Class NeutralModeProcessor
                     PushButtonIndex(0)
                     player.Interact()
                 End If
-            Case 9
-                Store.Save("temp.db")
+            Case MenuButtonIndex
+                Return UIState.GameMenuScreen
         End Select
-    End Sub
+        Return UIState.InPlay
+    End Function
 End Class

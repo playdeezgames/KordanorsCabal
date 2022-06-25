@@ -21,11 +21,12 @@
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
     End Sub
 
-    Friend Overrides Sub HandleButton(player As PlayerCharacter, button As Button)
+    Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
         End Select
-    End Sub
+        Return UIState.InPlay
+    End Function
 End Class

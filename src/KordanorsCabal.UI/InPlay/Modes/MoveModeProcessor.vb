@@ -53,7 +53,7 @@
         End If
     End Sub
 
-    Friend Overrides Sub HandleButton(player As PlayerCharacter, button As Button)
+    Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
         Select Case button.Index
             Case CancelButtonIndex
                 PopButtonIndex()
@@ -75,7 +75,8 @@
             Case RightButtonIndex
                 HandleMove(player, player.Direction.NextDirection.Value)
         End Select
-    End Sub
+        Return UIState.InPlay
+    End Function
 
     Private Sub HandleMove(player As PlayerCharacter, direction As Direction)
         If player.CanMove(direction) Then

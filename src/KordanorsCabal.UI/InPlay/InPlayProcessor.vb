@@ -41,9 +41,10 @@
     End Sub
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+        Dim nextState = UIState.InPlay
         Select Case command
             Case Command.Green, Command.Blue
-                _modeProcessors(World.PlayerCharacter.Mode).HandleButton(World.PlayerCharacter, ModeProcessor.Buttons(ModeProcessor.CurrentButtonIndex))
+                nextState = _modeProcessors(World.PlayerCharacter.Mode).HandleButton(World.PlayerCharacter, ModeProcessor.Buttons(ModeProcessor.CurrentButtonIndex))
             Case Command.Down
                 ModeProcessor.CurrentButtonIndex = (ModeProcessor.CurrentButtonIndex + 1) Mod ModeProcessor.Buttons.Count
             Case Command.Up
@@ -51,6 +52,6 @@
             Case Command.Left, Command.Right
                 ModeProcessor.CurrentButtonIndex = (ModeProcessor.CurrentButtonIndex + ModeProcessor.Buttons.Count \ 2) Mod ModeProcessor.Buttons.Count
         End Select
-        Return UIState.InPlay
+        Return nextState
     End Function
 End Class
