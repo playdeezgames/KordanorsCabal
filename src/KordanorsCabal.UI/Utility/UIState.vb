@@ -11,4 +11,5 @@
     SfxVolumizer
     MuxVolumizer
     InPlay
+    LoadGameScreen
 End Enum

@@ -9,6 +9,7 @@ Public Module MainProcessor
             {UIState.FinalizeCharacter, New FinalizeCharacterProcessor},
             {UIState.InPlay, New InPlayProcessor},
             {UIState.InstructionsScreen, New InstructionsScreenProcessor},
+            {UIState.LoadGameScreen, New LoadGameScreenProcessor},
             {UIState.MuxVolumizer, New MuxVolumizerProcessor},
             {UIState.OptionsScreen, New OptionsScreenProcessor},
             {UIState.Prolog, New PrologProcessor},

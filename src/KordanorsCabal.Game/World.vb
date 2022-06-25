@@ -26,6 +26,12 @@ Public Module World
             {Direction.West, New MazeDirection(Of Direction)(Direction.East, -1, 0)}
         }
 
+    Public ReadOnly Property IsValid As Boolean
+        Get
+            Return PlayerData.Read.HasValue
+        End Get
+    End Property
+
     Private Function CreateLocations(maze As Maze(Of Direction), dungeonLevel As Long) As IReadOnlyList(Of Location)
         Dim locations As New List(Of Location)
         For row As Long = 0 To maze.Rows - 1

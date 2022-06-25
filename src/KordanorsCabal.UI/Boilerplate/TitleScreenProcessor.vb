@@ -12,7 +12,7 @@
             New List(Of (String, Func(Of UIState))) From
             {
                 (StartMenuItem, AddressOf StartGame),
-                (ContinueMenuItem, Function() UIState.TitleScreen),
+                (ContinueMenuItem, Function() UIState.LoadGameScreen),
                 (InstructionsMenuItem, Function() UIState.InstructionsScreen),
                 (OptionsMenuItem, Function() UIState.OptionsScreen),
                 (AboutMenuItem, Function() UIState.AboutScreen),
@@ -22,7 +22,7 @@
             UIState.TitleScreen)
     End Sub
 
-    Private Shared Function StartGame() As UIState
+    Friend Shared Function StartGame() As UIState
         World.Start()
         If Not World.PlayerCharacter.IsFullyBaked Then
             Return UIState.FinalizeCharacter
