@@ -8,7 +8,7 @@ Public Module World
     End Sub
 
     Private Sub CreateDungeon(location As Location)
-        location = CreateDungeonLevel(location, 1, ItemType.CopperKey)
+        location = CreateDungeonLevel(location, 1, ItemType.CopperKey) 'TODO: add "reward item type" and "boss character type"
         location = CreateDungeonLevel(location, 2, ItemType.SilverKey)
         location = CreateDungeonLevel(location, 3, ItemType.GoldKey)
         location = CreateDungeonLevel(location, 4, ItemType.PlatinumKey)
