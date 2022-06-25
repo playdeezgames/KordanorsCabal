@@ -2,9 +2,17 @@ Public Module World
     Public Sub Start()
         Store.Reset()
         CreateTown()
-        CreateDungeon()
+        CreateDungeon(Location.FromLocationType(LocationType.ChurchEntrance).First)
         CreateFeatures()
         CreatePlayer()
+    End Sub
+
+    Private Sub CreateDungeon(location As Location)
+        location = CreateDungeonLevel(location, 1, ItemType.CopperKey)
+        location = CreateDungeonLevel(location, 2, ItemType.SilverKey)
+        location = CreateDungeonLevel(location, 3, ItemType.GoldKey)
+        location = CreateDungeonLevel(location, 4, ItemType.PlatinumKey)
+        location = CreateDungeonLevel(location, 5, ItemType.ElementalOrb)
     End Sub
 
     Const MazeColumns = 11
@@ -49,17 +57,16 @@ Public Module World
         Return locations
     End Function
 
-    Private Sub CreateDungeon()
-        Dim fromLocation = Location.FromLocationType(LocationType.ChurchEntrance).First
-        Dim dungeonLevel As Long = 1
+    Private Function CreateDungeonLevel(fromLocation As Location, dungeonLevel As Long, bossKeyType As ItemType) As Location
         Dim maze = New Maze(Of Direction)(MazeColumns, MazeRows, MazeDirections)
         maze.Generate()
         Dim locations = CreateLocations(maze, dungeonLevel)
-        PopulateLocations(locations, ItemType.CopperKey)
+        PopulateLocations(locations, bossKeyType)
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.Routes.Count > 1))
         Route.Create(fromLocation, Direction.Down, RouteType.Stairs, startingLocation)
         Route.Create(startingLocation, Direction.Up, RouteType.Stairs, fromLocation)
-    End Sub
+        Return locations.Single(Function(x) x.LocationType = LocationType.DungeonBoss)
+    End Function
 
     Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType)
         Dim partitions =
@@ -84,8 +91,10 @@ Public Module World
         partitions.Add(LocationType.DungeonBoss, New List(Of Location) From {bossLocation})
         For Each itemType In itemTypes
             Dim locationTypes = itemType.SpawnLocationTypes
-            Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Contains(x.LocationType)))
-            spawnLocation.Inventory.Add(Item.Create(itemType))
+            If locationTypes.Any Then
+                Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Contains(x.LocationType)))
+                spawnLocation.Inventory.Add(Item.Create(itemType))
+            End If
         Next
     End Sub
 

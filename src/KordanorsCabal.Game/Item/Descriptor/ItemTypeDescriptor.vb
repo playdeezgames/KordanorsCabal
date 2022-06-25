@@ -6,6 +6,7 @@ Module ItemTypeDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {ItemType.CopperKey, New CopperKeyDescriptor},
+            {ItemType.ElementalOrb, New ElementalOrbDescriptor},
             {ItemType.GoldKey, New GoldKeyDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
