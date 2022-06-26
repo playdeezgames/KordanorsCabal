@@ -32,8 +32,11 @@
         Select Case command
             Case Command.Red
                 Return UIState.InPlay
-            Case Else
-                Return UIState.GroundInventory
+            Case Command.Up
+                currentItemIndex = (currentItemIndex + 1) Mod groundItems.Count
+            Case Command.Down
+                currentItemIndex = (currentItemIndex + groundItems.Count - 1) Mod groundItems.Count
         End Select
+        Return UIState.GroundInventory
     End Function
 End Class
