@@ -63,18 +63,24 @@
             buffer.FillCells((13, 6), (1, 8), Pattern.Vertical1, False, Hue.Black)
             buffer.PutCell((13, 14), Pattern.BottomLeftCorner, False, Hue.Black)
             buffer.PutCell((8, 14), Pattern.BottomRightCorner, False, Hue.Black)
+            Dim routeType = location.Routes(player.Direction).RouteType
+            buffer.WriteText((10, 9), routeType.Abbreviation, False, Hue.Blue)
         End If
 
         If location.HasRoute(player.Direction.PreviousDirection.Value) Then
             buffer.PutCell((0, 3), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.PutCell((1, 4), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((1, 5), (1, 12), Pattern.Vertical8, False, Hue.Black)
+            Dim routeType = location.Routes(player.Direction.PreviousDirection.Value).RouteType
+            buffer.WriteText((0, 9), routeType.Abbreviation.Substring(1, 1), False, Hue.Blue)
         End If
 
         If location.HasRoute(player.Direction.NextDirection.Value) Then
             buffer.PutCell((21, 3), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.PutCell((20, 4), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((20, 5), (1, 12), Pattern.Vertical1, False, Hue.Black)
+            Dim routeType = location.Routes(player.Direction.NextDirection.Value).RouteType
+            buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, Hue.Blue)
         End If
     End Sub
 End Class
