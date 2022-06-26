@@ -36,7 +36,19 @@
                 currentItemIndex = (currentItemIndex + 1) Mod groundItems.Count
             Case Command.Down
                 currentItemIndex = (currentItemIndex + groundItems.Count - 1) Mod groundItems.Count
+            Case Command.Green, Command.Blue
+                Return PickUpItem()
         End Select
+        Return UIState.GroundInventory
+    End Function
+
+    Private Function PickUpItem() As UIState
+        World.PlayerCharacter.Inventory.Add(groundItems(currentItemIndex))
+        groundItems = World.PlayerCharacter.Location.Inventory.Items.ToList
+        If Not groundItems.Any Then
+            Return UIState.InPlay
+        End If
+        currentItemIndex = currentItemIndex Mod groundItems.Count
         Return UIState.GroundInventory
     End Function
 End Class

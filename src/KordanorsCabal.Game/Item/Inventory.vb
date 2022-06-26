@@ -18,7 +18,7 @@
         End Get
     End Property
 
-    Friend Sub Add(item As Item)
+    Public Sub Add(item As Item)
         InventoryItemData.Write(Id, item.Id)
     End Sub
 End Class
