@@ -5,6 +5,7 @@ Public Module MainProcessor
         New Dictionary(Of UIState, IProcessor) From
         {
             {UIState.AboutScreen, New AboutScreenProcessor},
+            {UIState.ConfirmAbandonGame, New ConfirmAbandonGameProcessor},
             {UIState.ConfirmQuit, New ConfirmQuitProcessor},
             {UIState.FinalizeCharacter, New FinalizeCharacterProcessor},
             {UIState.GameMenuScreen, New GameMenuScreenProcessor},

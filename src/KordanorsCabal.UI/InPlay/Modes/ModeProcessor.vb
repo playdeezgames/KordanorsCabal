@@ -10,6 +10,12 @@
         Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) x.Key.Abbreviation))
         buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
     End Sub
+
+    Friend Shared Sub ResetButtonIndexStack()
+        currentButtonStack.Clear()
+        CurrentButtonIndex = 0
+    End Sub
+
     Friend MustOverride Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
     Friend MustOverride Sub UpdateButtons(player As PlayerCharacter)
     Friend MustOverride Function HandleButton(player As PlayerCharacter, button As Button) As UIState

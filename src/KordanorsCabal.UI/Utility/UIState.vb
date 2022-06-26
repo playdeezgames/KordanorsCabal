@@ -14,4 +14,5 @@
     LoadGameScreen
     GameMenuScreen
     SaveGameScreen
+    ConfirmAbandonGame
 End Enum

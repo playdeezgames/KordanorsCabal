@@ -6,7 +6,8 @@
             New List(Of (String, Func(Of UIState))) From
             {
                 ("Go Back", Function() UIState.InPlay),
-                ("Save Game", AddressOf SaveGame)
+                ("Save Game", AddressOf SaveGame),
+                ("Abandon Game", Function() UIState.ConfirmAbandonGame)
             },
             5,
             UIState.GameMenuScreen)
@@ -18,5 +19,9 @@
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteTextCentered(0, "Game Menu", False, Hue.Blue)
+    End Sub
+
+    Public Overrides Sub Initialize()
+        currentItem = 0
     End Sub
 End Class
