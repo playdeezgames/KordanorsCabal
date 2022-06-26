@@ -14,6 +14,7 @@ Public Module MainProcessor
             {UIState.MuxVolumizer, New MuxVolumizerProcessor},
             {UIState.OptionsScreen, New OptionsScreenProcessor},
             {UIState.Prolog, New PrologProcessor},
+            {UIState.SaveGameScreen, New SaveGameScreenProcessor},
             {UIState.ScreenSizer, New ScreenSizerProcessor},
             {UIState.SfxVolumizer, New SfxVolumizerProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}

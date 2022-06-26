@@ -13,4 +13,5 @@
     InPlay
     LoadGameScreen
     GameMenuScreen
+    SaveGameScreen
 End Enum

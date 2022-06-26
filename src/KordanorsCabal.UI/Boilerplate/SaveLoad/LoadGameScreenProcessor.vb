@@ -2,7 +2,7 @@
 
 Friend Class LoadGameScreenProcessor
     Inherits MenuProcessor
-
+    Public Shared Property Validated As Boolean = False
     Public Sub New()
         MyBase.New(
             New List(Of (String, Func(Of UIState))) From
@@ -28,11 +28,18 @@ Friend Class LoadGameScreenProcessor
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteTextCentered(0, "Continue Game", False, Hue.Blue)
-        ValidateSlot(1)
-        ValidateSlot(2)
-        ValidateSlot(3)
-        ValidateSlot(4)
-        ValidateSlot(5)
+        ValidateSlots()
+    End Sub
+
+    Friend Sub ValidateSlots()
+        If Not Validated Then
+            ValidateSlot(1)
+            ValidateSlot(2)
+            ValidateSlot(3)
+            ValidateSlot(4)
+            ValidateSlot(5)
+            Validated = True
+        End If
     End Sub
 
     Private Sub ValidateSlot(slotNumber As Integer)

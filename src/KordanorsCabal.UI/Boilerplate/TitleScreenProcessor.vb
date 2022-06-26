@@ -7,12 +7,14 @@
     Const AboutMenuItem = "About"
     Const QuitMenuItem = "Quit"
 
+
+
     Public Sub New()
         MyBase.New(
             New List(Of (String, Func(Of UIState))) From
             {
                 (StartMenuItem, AddressOf StartGame),
-                (ContinueMenuItem, Function() UIState.LoadGameScreen),
+                (ContinueMenuItem, AddressOf LoadGame),
                 (InstructionsMenuItem, Function() UIState.InstructionsScreen),
                 (OptionsMenuItem, Function() UIState.OptionsScreen),
                 (AboutMenuItem, Function() UIState.AboutScreen),
@@ -21,6 +23,11 @@
             14,
             UIState.TitleScreen)
     End Sub
+
+    Private Shared Function LoadGame() As UIState
+        LoadGameScreenProcessor.Validated = False
+        Return UIState.LoadGameScreen
+    End Function
 
     Friend Shared Function StartGame() As UIState
         World.Start()
