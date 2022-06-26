@@ -14,4 +14,9 @@ Module ItemTypeExtensions
     Function SpawnLocationTypes(itemType As ItemType) As HashSet(Of LocationType)
         Return ItemTypeDescriptors(itemType).SpawnLocationTypes
     End Function
+
+    <Extension>
+    Function Name(itemType As ItemType) As String
+        Return ItemTypeDescriptors(itemType).Name
+    End Function
 End Module

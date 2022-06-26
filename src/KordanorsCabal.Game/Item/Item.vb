@@ -15,4 +15,10 @@
             Return CType(ItemData.ReadItemType(Id).Value, ItemType)
         End Get
     End Property
+
+    Public ReadOnly Property Name As String
+        Get
+            Return ItemType.Name
+        End Get
+    End Property
 End Class

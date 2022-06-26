@@ -58,6 +58,10 @@ Friend Class NeutralModeProcessor
                     PushButtonIndex(0)
                     player.Interact()
                 End If
+            Case GroundButtonIndex
+                If Not player.Location.Inventory.IsEmpty Then
+                    Return UIState.GroundInventory
+                End If
             Case MenuButtonIndex
                 Return UIState.GameMenuScreen
         End Select
