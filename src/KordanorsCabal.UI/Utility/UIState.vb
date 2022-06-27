@@ -17,4 +17,5 @@
     ConfirmAbandonGame
     GroundInventory
     Inventory
+    InteractItem
 End Enum

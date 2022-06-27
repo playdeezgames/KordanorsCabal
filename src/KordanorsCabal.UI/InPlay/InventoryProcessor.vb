@@ -37,12 +37,13 @@
             Case Command.Down
                 currentItemIndex = (currentItemIndex + items.Count - 1) Mod items.Count
             Case Command.Green, Command.Blue
-                Return PickUpItem()
+                Return InteractItem()
         End Select
         Return UIState.Inventory
     End Function
 
-    Private Function PickUpItem() As UIState
-        Throw New NotImplementedException
+    Private Function InteractItem() As UIState
+        InteractItemProcessor.InteractItem = items(currentItemIndex)
+        Return UIState.InteractItem
     End Function
 End Class
