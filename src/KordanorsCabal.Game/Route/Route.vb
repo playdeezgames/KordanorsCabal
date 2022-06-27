@@ -9,9 +9,11 @@
     Public Shared Function Create(location As Location, direction As Direction, routeType As RouteType, toLocation As Location) As Route
         Return FromId(RouteData.Create(location.Id, direction, routeType, toLocation.Id))
     End Function
-    Friend Function ToLocation() As Location
-        Return Location.FromId(RouteData.ReadToLocation(Id))
-    End Function
+    Friend ReadOnly Property ToLocation As Location
+        Get
+            Return Location.FromId(RouteData.ReadToLocation(Id))
+        End Get
+    End Property
     Property RouteType As RouteType
         Get
             Return CType(RouteData.ReadRouteType(Id), RouteType)
@@ -34,5 +36,16 @@
             Return False
         End If
         Return True
+    End Function
+
+    Friend Function Move(player As PlayerCharacter) As Location
+        If CanMove(player) Then
+            If IsLocked Then
+                player.Inventory.ItemsOfType(RouteType.UnlockItem.Value).First.Destroy()
+                RouteType = If(RouteType.UnlockedRouteType, RouteType)
+            End If
+            Return ToLocation
+        End If
+        Return player.Location
     End Function
 End Class

@@ -21,4 +21,9 @@
     Public Sub Add(item As Item)
         InventoryItemData.Write(Id, item.Id)
     End Sub
+    ReadOnly Property ItemsOfType(itemType As ItemType) As IEnumerable(Of Item)
+        Get
+            Return Items.Where(Function(x) x.ItemType = itemType)
+        End Get
+    End Property
 End Class

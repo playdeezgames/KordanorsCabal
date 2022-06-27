@@ -74,14 +74,7 @@
 
     Public Sub Move(direction As Direction)
         If CanMove(direction) Then
-            Dim route = Location.Routes(direction)
-            If route.IsLocked Then
-                Dim item = Inventory.Items.First(Function(x) x.ItemType = route.RouteType.UnlockItem.Value)
-                item.Destroy()
-                route.RouteType = If(route.RouteType.UnlockedRouteType, route.RouteType)
-            End If
-            Dim toLocation = route.ToLocation
-            Location = toLocation
+            Location = Location.Routes(direction).Move(Me)
         End If
     End Sub
 End Class
