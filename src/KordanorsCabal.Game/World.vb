@@ -168,6 +168,7 @@ Public Module World
     Private Sub RollUpPlayerCharacter()
         FirstRoll()
         SecondRoll()
+        Play(Sfx.CharacterCreation)
     End Sub
 
     Private Sub SecondRoll()

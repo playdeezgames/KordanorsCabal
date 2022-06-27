@@ -43,6 +43,7 @@
             If IsLocked Then
                 player.Inventory.ItemsOfType(RouteType.UnlockItem.Value).First.Destroy()
                 RouteType = If(RouteType.UnlockedRouteType, RouteType)
+                Play(Sfx.UnlockDoor)
             End If
             Return ToLocation
         End If

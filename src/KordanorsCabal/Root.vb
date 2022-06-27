@@ -1,4 +1,5 @@
-﻿Imports Microsoft.Xna.Framework
+﻿Imports KordanorsCabal.Game
+Imports Microsoft.Xna.Framework
 Imports Microsoft.Xna.Framework.Audio
 Imports Microsoft.Xna.Framework.Graphics
 Imports Microsoft.Xna.Framework.Input
@@ -70,11 +71,16 @@ Public Class Root
         SfxVolumizerProcessor.SetCurrentSfxVolume = AddressOf SetSfxVolume
         MediaPlayer.IsRepeating = True
         MediaPlayer.Play(minorTheme)
+        AddHandler Game.SfxPlayer.PlaySfx, AddressOf HandleSfx
+    End Sub
+
+    Private Sub HandleSfx(sfx As Sfx)
+        'TODO: play sounds!
     End Sub
 
     Private Sub SetSfxVolume(volume As Single)
         SoundEffect.MasterVolume = volume
-        'TODO: play a sound
+        Game.SfxPlayer.Play(Sfx.CharacterCreation)
         Dim config = UIConfig.Load
         config.SfxVolume = volume
         UIConfig.Save(config)
