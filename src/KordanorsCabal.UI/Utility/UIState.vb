@@ -16,4 +16,5 @@
     SaveGameScreen
     ConfirmAbandonGame
     GroundInventory
+    Inventory
 End Enum

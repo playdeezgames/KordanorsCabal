@@ -12,6 +12,7 @@ Public Module MainProcessor
             {UIState.GroundInventory, New GroundInventoryProcessor},
             {UIState.InPlay, New InPlayProcessor},
             {UIState.InstructionsScreen, New InstructionsScreenProcessor},
+            {UIState.Inventory, New InventoryProcessor},
             {UIState.LoadGameScreen, New LoadGameScreenProcessor},
             {UIState.MuxVolumizer, New MuxVolumizerProcessor},
             {UIState.OptionsScreen, New OptionsScreenProcessor},

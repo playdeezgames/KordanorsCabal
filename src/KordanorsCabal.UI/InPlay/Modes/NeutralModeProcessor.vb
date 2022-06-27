@@ -1,6 +1,4 @@
-﻿Imports SPLORR.Data
-
-Friend Class NeutralModeProcessor
+﻿Friend Class NeutralModeProcessor
     Inherits ModeProcessor
 
     Const TurnButtonIndex = 0
@@ -64,6 +62,10 @@ Friend Class NeutralModeProcessor
                 End If
             Case MenuButtonIndex
                 Return UIState.GameMenuScreen
+            Case InventoryButtonIndex
+                If Not player.Inventory.IsEmpty Then
+                    Return UIState.Inventory
+                End If
         End Select
         Return UIState.InPlay
     End Function
