@@ -20,4 +20,10 @@
             RouteData.WriteRouteType(Id, value)
         End Set
     End Property
+    ReadOnly Property IsLocked As Boolean
+        Get
+            Return RouteType.UnlockItem.HasValue
+        End Get
+    End Property
+
 End Class

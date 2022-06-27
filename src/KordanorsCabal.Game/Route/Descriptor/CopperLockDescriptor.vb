@@ -6,4 +6,9 @@
             Return "CU"
         End Get
     End Property
+    Public Overrides ReadOnly Property UnlockItem As ItemType?
+        Get
+            Return ItemType.CopperKey
+        End Get
+    End Property
 End Class

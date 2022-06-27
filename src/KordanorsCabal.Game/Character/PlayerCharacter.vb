@@ -62,12 +62,32 @@
     End Sub
 
     Public Function CanMove(direction As Direction) As Boolean
-        Return Location.HasRoute(direction)
+        If Not Location.HasRoute(direction) Then
+            Return False
+        End If
+        Dim route = Location.Routes(direction)
+        If Not route.IsLocked Then
+            Return True
+        End If
+        Dim itemType = route.RouteType.UnlockItem.Value
+        If Not HasItemType(itemType) Then
+            Return False
+        End If
+        Return True
+    End Function
+
+    Private Function HasItemType(itemType As ItemType) As Boolean
+        Return Inventory.Items.Any(Function(x) x.ItemType = itemType)
     End Function
 
     Public Sub Move(direction As Direction)
         If CanMove(direction) Then
             Dim route = Location.Routes(direction)
+            If route.IsLocked Then
+                Dim item = Inventory.Items.First(Function(x) x.ItemType = route.RouteType.UnlockItem.Value)
+                item.Destroy()
+                route.RouteType = If(route.RouteType.UnlockedRouteType, route.RouteType)
+            End If
             Dim toLocation = route.ToLocation
             Location = toLocation
         End If

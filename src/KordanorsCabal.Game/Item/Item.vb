@@ -21,4 +21,8 @@
             Return ItemType.Name
         End Get
     End Property
+
+    Friend Sub Destroy()
+        ItemData.Clear(Id)
+    End Sub
 End Class

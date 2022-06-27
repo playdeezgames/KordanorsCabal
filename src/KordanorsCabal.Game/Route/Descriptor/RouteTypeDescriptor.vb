@@ -4,6 +4,18 @@
             Return "  "
         End Get
     End Property
+
+    Overridable ReadOnly Property UnlockItem As ItemType?
+        Get
+            Return Nothing
+        End Get
+    End Property
+
+    Overridable ReadOnly Property UnlockedRouteType As RouteType?
+        Get
+            Return Nothing
+        End Get
+    End Property
 End Class
 Friend Module RouteTypeDescriptorUtility
     Friend ReadOnly RouteTypeDescriptors As IReadOnlyDictionary(Of RouteType, RouteTypeDescriptor) =

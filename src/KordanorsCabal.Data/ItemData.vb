@@ -17,4 +17,9 @@
     Public Function ReadItemType(itemId As Long) As Long?
         Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ItemTypeColumn, (ItemIdColumn, itemId))
     End Function
+
+    Public Sub Clear(itemId As Long)
+        InventoryItemData.ClearForItem(itemId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (ItemIdColumn, itemId))
+    End Sub
 End Module
