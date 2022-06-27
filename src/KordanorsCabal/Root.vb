@@ -60,7 +60,6 @@ Public Class Root
         Dim config = UIConfig.Load()
         ScreenSize = config.ScreenSize
         UpdateWindowSize()
-        SoundEffect.MasterVolume = config.SfxVolume
         MediaPlayer.Volume = config.MuxVolume
         Content.RootDirectory = "Content"
         ScreenSizerProcessor.GetCurrentScreenSize = AddressOf GetScreenSize
@@ -75,19 +74,21 @@ Public Class Root
     End Sub
 
     Private Sub HandleSfx(sfx As Sfx)
-        'TODO: play sounds!
+        If soundEffects.ContainsKey(sfx) Then
+            Dim volume = GetSfxVolume()
+            soundEffects(sfx).Play(volume, 0.0, 0.0)
+        End If
     End Sub
 
     Private Sub SetSfxVolume(volume As Single)
-        SoundEffect.MasterVolume = volume
-        Game.SfxPlayer.Play(Sfx.CharacterCreation)
         Dim config = UIConfig.Load
         config.SfxVolume = volume
         UIConfig.Save(config)
+        Game.SfxPlayer.Play(Sfx.CharacterCreation)
     End Sub
 
     Private Function GetSfxVolume() As Single
-        Return SoundEffect.MasterVolume
+        Return UIConfig.Load.SfxVolume
     End Function
 
     Private Sub SetMuxVolume(volume As Single)
@@ -101,12 +102,21 @@ Public Class Root
         Return MediaPlayer.Volume
     End Function
 
+    Private Shared soundEffectFiles As IReadOnlyDictionary(Of Sfx, String) =
+        New Dictionary(Of Sfx, String) From
+        {
+            {Sfx.CharacterCreation, "Content/RollDice.wav"}
+        }
+
+    Private soundEffects As IReadOnlyDictionary(Of Sfx, SoundEffect)
+
     Protected Overrides Sub LoadContent()
         spriteBatch = New SpriteBatch(GraphicsDevice)
         screenTexture = New Texture2D(GraphicsDevice, ViewWidth, ViewHeight)
         renderer = New Renderer(Of Color)((BorderWidth, BorderHeight), (CellColumns, CellRows), (CellWidth, CellHeight), HueColors)
         minorTheme = Song.FromUri("MinorTheme", New Uri("Content/MinorTheme.ogg", UriKind.Relative))
         'minorTheme = Song.FromUri("Music", New Uri("Content/Music.ogg", UriKind.Relative))
+        soundEffects = soundEffectFiles.ToDictionary(Function(x) x.Key, Function(x) SoundEffect.FromFile(x.Value))
     End Sub
     Protected Overrides Sub Update(gameTime As GameTime)
         ProcessInput()
@@ -114,38 +124,6 @@ Public Class Root
             [Exit]()
         End If
         UpdateOutput()
-        'renderer.PatternBuffer.Fill(Pattern.Space, False, Hue.Blue)
-        'renderer.PatternBuffer.Cell(0, 0).Pattern = Pattern.DownwardDiagonal
-        'renderer.PatternBuffer.Cell(1, 1).Pattern = Pattern.DownwardDiagonal
-        'renderer.PatternBuffer.Cell(2, 2).Pattern = Pattern.DownwardDiagonal
-        'renderer.PatternBuffer.Cell(3, 3).Pattern = Pattern.DownwardDiagonal
-        'renderer.PatternBuffer.Cell(4, 4).Pattern = Pattern.TopLeftCorner
-        'renderer.PatternBuffer.FillCells((5, 4), (12, 1), Pattern.Horizontal1, False, Hue.Blue)
-        'renderer.PatternBuffer.Cell(17, 4).Pattern = Pattern.TopRightCorner
-        'renderer.PatternBuffer.Cell(18, 3).Pattern = Pattern.UpwardDiagonal
-        'renderer.PatternBuffer.Cell(19, 2).Pattern = Pattern.UpwardDiagonal
-        'renderer.PatternBuffer.Cell(20, 1).Pattern = Pattern.UpwardDiagonal
-        'renderer.PatternBuffer.Cell(21, 0).Pattern = Pattern.UpwardDiagonal
-
-        'renderer.PatternBuffer.FillCells((4, 5), (1, 8), Pattern.Vertical1, False, Hue.Blue)
-
-        'renderer.PatternBuffer.FillCells((17, 5), (1, 8), Pattern.Vertical8, False, Hue.Blue)
-
-        'renderer.PatternBuffer.Cell(0, 17).Pattern = Pattern.UpwardDiagonal
-        'renderer.PatternBuffer.Cell(1, 16).Pattern = Pattern.UpwardDiagonal
-        'renderer.PatternBuffer.Cell(2, 15).Pattern = Pattern.UpwardDiagonal
-        'renderer.PatternBuffer.Cell(3, 14).Pattern = Pattern.UpwardDiagonal
-        'renderer.PatternBuffer.Cell(4, 13).Pattern = Pattern.BottomLeftCorner
-        'renderer.PatternBuffer.FillCells((5, 13), (12, 1), Pattern.Horizontal8, False, Hue.Blue)
-        'renderer.PatternBuffer.Cell(17, 13).Pattern = Pattern.BottomRightCorner
-        'renderer.PatternBuffer.Cell(18, 14).Pattern = Pattern.DownwardDiagonal
-        'renderer.PatternBuffer.Cell(19, 15).Pattern = Pattern.DownwardDiagonal
-        'renderer.PatternBuffer.Cell(20, 16).Pattern = Pattern.DownwardDiagonal
-        'renderer.PatternBuffer.Cell(21, 17).Pattern = Pattern.DownwardDiagonal
-
-        'renderer.PatternBuffer.WriteText((0, 18), "HELLO, WORLD! I AM SHOUTING BECAUSE REASONS!", False, Hue.Black)
-        'renderer.PatternBuffer.PutCell((0, 20), Pattern.Heart, False, Hue.Red)
-
         renderer.Update()
         renderer.FrameBuffer.UpdateTexture(screenTexture)
         MyBase.Update(gameTime)
