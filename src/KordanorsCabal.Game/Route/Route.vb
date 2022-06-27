@@ -26,4 +26,13 @@
         End Get
     End Property
 
+    Friend Function CanMove(player As PlayerCharacter) As Boolean
+        If Not IsLocked Then
+            Return True
+        End If
+        If Not player.HasItemType(RouteType.UnlockItem.Value) Then
+            Return False
+        End If
+        Return True
+    End Function
 End Class

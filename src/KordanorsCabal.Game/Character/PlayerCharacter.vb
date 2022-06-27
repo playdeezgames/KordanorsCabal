@@ -65,18 +65,10 @@
         If Not Location.HasRoute(direction) Then
             Return False
         End If
-        Dim route = Location.Routes(direction)
-        If Not route.IsLocked Then
-            Return True
-        End If
-        Dim itemType = route.RouteType.UnlockItem.Value
-        If Not HasItemType(itemType) Then
-            Return False
-        End If
-        Return True
+        Return Location.Routes(direction).CanMove(Me)
     End Function
 
-    Private Function HasItemType(itemType As ItemType) As Boolean
+    Friend Function HasItemType(itemType As ItemType) As Boolean
         Return Inventory.Items.Any(Function(x) x.ItemType = itemType)
     End Function
 
