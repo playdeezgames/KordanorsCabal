@@ -25,6 +25,7 @@
     <None Remove="Content\MinorTheme.ogg" />
     <None Remove="Content\MinorTheme.wav" />
     <None Remove="Content\RollDice.wav" />
+    <None Remove="Content\UnlockDoor.wav" />
     <None Remove="Icon.bmp" />
     <None Remove="MinorTheme.mid" />
     <None Remove="MinorTheme.wav" />
@@ -38,6 +39,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\RollDice.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\UnlockDoor.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

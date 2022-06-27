@@ -105,7 +105,8 @@ Public Class Root
     Private Shared soundEffectFiles As IReadOnlyDictionary(Of Sfx, String) =
         New Dictionary(Of Sfx, String) From
         {
-            {Sfx.CharacterCreation, "Content/RollDice.wav"}
+            {Sfx.CharacterCreation, "Content/RollDice.wav"},
+            {Sfx.UnlockDoor, "Content/UnlockDoor.wav"}
         }
 
     Private soundEffects As IReadOnlyDictionary(Of Sfx, SoundEffect)
