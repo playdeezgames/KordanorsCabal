@@ -62,6 +62,9 @@
     End Sub
 
     Public Function CanMove(direction As Direction) As Boolean
+        If IsEncumbered Then
+            Return False
+        End If
         If Not Location.HasRoute(direction) Then
             Return False
         End If

@@ -1,6 +1,11 @@
 ﻿Public MustInherit Class ItemTypeDescriptor
     MustOverride ReadOnly Property SpawnLocationTypes As HashSet(Of LocationType)
-    MustOverride ReadOnly Property Name() As String
+    MustOverride ReadOnly Property Name As String
+    Overridable ReadOnly Property Encumbrance As Single
+        Get
+            Return 0!
+        End Get
+    End Property
 End Class
 Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =

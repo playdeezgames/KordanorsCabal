@@ -26,4 +26,10 @@
             Return Items.Where(Function(x) x.ItemType = itemType)
         End Get
     End Property
+
+    ReadOnly Property TotalEncumbrance As Single
+        Get
+            Return Items.Sum(Function(x) x.Encumbrance)
+        End Get
+    End Property
 End Class

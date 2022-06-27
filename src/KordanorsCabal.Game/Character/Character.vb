@@ -5,7 +5,7 @@
     End Sub
     ReadOnly Property CharacterType As CharacterType
         Get
-            Return CType(CharacterData.ReadCharacterType(Id), CharacterType)
+            Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
         End Get
     End Property
 
@@ -48,6 +48,22 @@
                 CharacterInventoryData.Write(Id, inventoryId.Value)
             End If
             Return New Inventory(inventoryId.Value)
+        End Get
+    End Property
+
+    ReadOnly Property IsEncumbered As Boolean
+        Get
+            Return Encumbrance > MaximumEncumbrance
+        End Get
+    End Property
+    ReadOnly Property Encumbrance As Single
+        Get
+            Return Inventory.TotalEncumbrance
+        End Get
+    End Property
+    ReadOnly Property MaximumEncumbrance As Single
+        Get
+            Return CharacterType.MaximumEncumbrance(Me)
         End Get
     End Property
 End Class

@@ -13,8 +13,8 @@
             FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
         );")
     End Sub
-    Public Function ReadCharacterType(characterId As Long) As Long
-        Throw New NotImplementedException()
+    Public Function ReadCharacterType(characterId As Long) As Long?
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterTypeColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Function Create(characterType As Long, locationId As Long) As Long

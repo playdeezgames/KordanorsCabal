@@ -19,4 +19,8 @@ Module ItemTypeExtensions
     Function Name(itemType As ItemType) As String
         Return ItemTypeDescriptors(itemType).Name
     End Function
+    <Extension>
+    Function Encumbrance(itemType As ItemType) As Single
+        Return ItemTypeDescriptors(itemType).Encumbrance
+    End Function
 End Module

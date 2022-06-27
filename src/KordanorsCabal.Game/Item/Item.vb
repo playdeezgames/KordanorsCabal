@@ -25,4 +25,8 @@
     Friend Sub Destroy()
         ItemData.Clear(Id)
     End Sub
+
+    Friend Function Encumbrance() As Single
+        Return ItemType.Encumbrance
+    End Function
 End Class
