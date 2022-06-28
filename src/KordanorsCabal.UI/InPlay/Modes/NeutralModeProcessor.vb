@@ -37,6 +37,9 @@
         If player.CanInteract Then
             Buttons(InteractButtonIndex).Title = "Interact..."
         End If
+        If player.CanFight Then
+            Buttons(InteractButtonIndex).Title = "FIGHT!"
+        End If
         If Not player.Location.Inventory.IsEmpty Then
             Buttons(GroundButtonIndex).Title = "Ground..."
         End If

@@ -52,6 +52,7 @@
         Return CanMove(Direction)
     End Function
 
+
     Public Function CanMoveBackward() As Boolean
         Return CanMove(Direction.Opposite)
     End Function
