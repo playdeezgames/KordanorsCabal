@@ -3,7 +3,6 @@
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Blue)
-        buffer.WriteTextCentered(buffer.Rows - 1, "Esc", False, Hue.Black)
         Dim player = World.PlayerCharacter
         Dim playerLocation = player.Location
         Dim level = playerLocation.GetStatistic(LocationStatisticType.DungeonLevel)
@@ -13,12 +12,13 @@
                 Dim inverted = (location = playerLocation)
                 Dim dungeonColumn = location.GetStatistic(LocationStatisticType.DungeonColumn).Value
                 Dim dungeonRow = location.GetStatistic(LocationStatisticType.DungeonRow).Value
-                DrawLocation(buffer, (CInt(dungeonColumn * 2), CInt(dungeonRow * 2)), location, inverted)
+                Dim displayHue = If(location.Enemies(player).Any, Hue.Red, Hue.Black)
+                DrawLocation(buffer, (CInt(dungeonColumn * 2), CInt(dungeonRow * 2)), location, inverted, displayHue)
             Next
         End If
     End Sub
 
-    Private Sub DrawLocation(buffer As PatternBuffer, xy As (Integer, Integer), location As Location, inverted As Boolean)
+    Private Sub DrawLocation(buffer As PatternBuffer, xy As (Integer, Integer), location As Location, inverted As Boolean, displayHue As Hue)
         Dim northExit = location.HasRoute(Direction.North)
         Dim eastExit = location.HasRoute(Direction.East)
         Dim southExit = location.HasRoute(Direction.South)
@@ -27,33 +27,28 @@
         buffer.PutCell(xy,
                        If(northExit AndAlso westExit, Pattern.ElbowUpLeft,
                        If(northExit, Pattern.Vertical5,
-                       If(westExit, Pattern.Horizontal5, Pattern.ElbowDownRight))), inverted, Hue.Black)
+                       If(westExit, Pattern.Horizontal5, Pattern.ElbowDownRight))), inverted, displayHue)
         'upper right
         buffer.PutCell((xy.Item1 + 1, xy.Item2),
                        If(northExit AndAlso eastExit, Pattern.ElbowUpRight,
                        If(northExit, Pattern.Vertical5,
-                       If(eastExit, Pattern.Horizontal5, Pattern.ElbowDownLeft))), inverted, Hue.Black)
+                       If(eastExit, Pattern.Horizontal5, Pattern.ElbowDownLeft))), inverted, displayHue)
         'lower left
         buffer.PutCell((xy.Item1, xy.Item2 + 1),
                        If(southExit AndAlso westExit, Pattern.ElbowDownLeft,
                        If(southExit, Pattern.Vertical5,
-                       If(westExit, Pattern.Horizontal5, Pattern.ElbowUpRight))), inverted, Hue.Black)
+                       If(westExit, Pattern.Horizontal5, Pattern.ElbowUpRight))), inverted, displayHue)
         'lower right
         buffer.PutCell((xy.Item1 + 1, xy.Item2 + 1),
                        If(southExit AndAlso eastExit, Pattern.ElbowDownRight,
                        If(southExit, Pattern.Vertical5,
-                       If(eastExit, Pattern.Horizontal5, Pattern.ElbowUpLeft))), inverted, Hue.Black)
+                       If(eastExit, Pattern.Horizontal5, Pattern.ElbowUpLeft))), inverted, displayHue)
     End Sub
 
     Public Sub Initialize() Implements IProcessor.Initialize
     End Sub
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
-        Select Case command
-            Case Command.Red
-                Return UIState.InPlay
-            Case Else
-                Return UIState.Map
-        End Select
+        Return UIState.InPlay
     End Function
 End Class

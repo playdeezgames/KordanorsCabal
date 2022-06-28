@@ -13,4 +13,8 @@ Module CharacterTypeExtensions
     Function MaximumEncumbrance(characterType As CharacterType, character As Character) As Single
         Return CharacterTypeDescriptors(characterType).MaximumEncumbrance(character)
     End Function
+    <Extension>
+    Function IsEnemy(characterType As CharacterType, character As Character) As Boolean
+        Return CharacterTypeDescriptors(characterType).IsEnemy(character)
+    End Function
 End Module

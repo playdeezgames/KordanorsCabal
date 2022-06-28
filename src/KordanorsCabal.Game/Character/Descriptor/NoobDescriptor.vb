@@ -23,4 +23,8 @@
             Return 50.0! + character.GetStatistic(CharacterStatisticType.Strength) * 10.0!
         End Get
     End Property
+
+    Public Overrides Function IsEnemy(character As Character) As Boolean
+        Return character.CharacterType <> CharacterType.N00b
+    End Function
 End Class

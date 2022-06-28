@@ -107,5 +107,10 @@
                 buffer.PutCell(itemType.DisplayXY.Value, itemType.DisplayPattern.Value, False, itemType.DisplayHue.Value)
             End If
         Next
+
+        Dim enemy = player.Location.Enemies(player).FirstOrDefault
+        If enemy IsNot Nothing Then
+            'TODO: draw enemy
+        End If
     End Sub
 End Class

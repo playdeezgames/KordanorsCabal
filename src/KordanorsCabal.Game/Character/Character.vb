@@ -71,4 +71,7 @@
         Return CharacterLocationData.Read(Id, location.Id)
     End Function
 
+    Friend Function IsEnemy(character As Character) As Boolean
+        Return CharacterType.IsEnemy(character)
+    End Function
 End Class
