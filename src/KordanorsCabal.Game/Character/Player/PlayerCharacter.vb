@@ -24,6 +24,7 @@
             PlayerData.WriteDirection(value)
         End Set
     End Property
+
     Public Property Mode As PlayerMode
         Get
             Return CType(PlayerData.ReadMode().Value, PlayerMode)

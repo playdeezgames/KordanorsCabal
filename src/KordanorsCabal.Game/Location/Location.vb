@@ -11,6 +11,15 @@
     Shared Function Create(locationType As LocationType) As Location
         Return FromId(LocationData.Create(locationType))
     End Function
+
+    Public Shared Function ByStatisticValue(statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)
+        Return LocationStatisticData.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
+    End Function
+
+    Public Function GetStatistic(statisticType As LocationStatisticType) As Long?
+        Return LocationStatisticData.Read(Id, statisticType)
+    End Function
+
     Property LocationType As LocationType
         Get
             Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
@@ -69,4 +78,10 @@
     Friend Function RouteCount() As Integer
         Return Routes.Count
     End Function
+    Public Shared Operator =(first As Location, second As Location) As Boolean
+        Return first.Id = second.Id
+    End Operator
+    Public Shared Operator <>(first As Location, second As Location) As Boolean
+        Return first.Id <> second.Id
+    End Operator
 End Class

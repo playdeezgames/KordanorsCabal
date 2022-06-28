@@ -113,7 +113,7 @@ Public Enum Pattern
     ElbowUpRight
     ElbowDownLeft
     Horizontal78
-    ElbowRightDown
+    ElbowDownRight
     TUpRightLeft
     TRightDownLeft
     TUpDownLeft
@@ -246,7 +246,7 @@ Public Module PatternUtility
             {"├"c, Pattern.TUpRightDown},'{" "c, Pattern.LowerRightBlock},
             {"└"c, Pattern.ElbowUpRight},
             {"┐"c, Pattern.ElbowDownLeft},'{" "c, Pattern.Horizontal78},
-            {"┌"c, Pattern.ElbowRightDown},
+            {"┌"c, Pattern.ElbowDownRight},
             {"┴"c, Pattern.TUpRightLeft},
             {"┬"c, Pattern.TRightDownLeft},
             {"┤"c, Pattern.TUpDownLeft},'{" "c, Pattern.Vertical12},{" "c, Pattern.Vertical123},{" "c, Pattern.Vertical678},{" "c, Pattern.Horizontal12},{" "c, Pattern.Horizontal123},{" "c, Pattern.Horizontal678},

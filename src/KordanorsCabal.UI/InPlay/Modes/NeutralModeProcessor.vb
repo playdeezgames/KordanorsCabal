@@ -5,6 +5,7 @@
     Const InteractButtonIndex = 1
     Const GroundButtonIndex = 2
 
+    Const MapButtonIndex = 4
     Const MoveButtonIndex = 5
     Const InventoryButtonIndex = 6
 
@@ -32,6 +33,7 @@
         Buttons(TurnButtonIndex).Title = "Turn..."
         Buttons(MoveButtonIndex).Title = "Move..."
         Buttons(MenuButtonIndex).Title = "Game Menu"
+        Buttons(MapButtonIndex).Title = "Map"
         If player.CanInteract Then
             Buttons(InteractButtonIndex).Title = "Interact..."
         End If
@@ -66,6 +68,8 @@
                 If Not player.Inventory.IsEmpty Then
                     Return UIState.Inventory
                 End If
+            Case MapButtonIndex
+                Return UIState.Map
         End Select
         Return UIState.InPlay
     End Function

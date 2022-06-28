@@ -120,6 +120,19 @@ Public Module Store
             $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
             MakeParameter($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
+    Public Function ReadRecordsWithColumnValues(Of TFirstInputColumn, TSecondInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, firstColumnValue As (String, TFirstInputColumn), secondColumnValue As (String, TSecondInputColumn)) As List(Of TOutputColumn)
+        initializer()
+        Return ExecuteReader(
+            Function(reader) CType(reader(outputColumnName), TOutputColumn),
+            $"SELECT 
+                [{outputColumnName}] 
+            FROM [{tableName}] 
+            WHERE 
+                [{firstColumnValue.Item1}]=@{firstColumnValue.Item1} 
+                AND [{secondColumnValue.Item1}]=@{secondColumnValue.Item1};",
+            MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
+            MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
+    End Function
     Public Function ReadRecordsWithColumnValue(
             Of TInputColumn,
                 TFirstOutputColumn,

@@ -15,6 +15,7 @@ Public Module MainProcessor
             {UIState.InteractItem, New InteractItemProcessor},
             {UIState.Inventory, New InventoryProcessor},
             {UIState.LoadGameScreen, New LoadGameScreenProcessor},
+            {UIState.Map, New MapProcessor},
             {UIState.MuxVolumizer, New MuxVolumizerProcessor},
             {UIState.OptionsScreen, New OptionsScreenProcessor},
             {UIState.Prolog, New PrologProcessor},

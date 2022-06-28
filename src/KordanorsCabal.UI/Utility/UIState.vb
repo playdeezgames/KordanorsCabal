@@ -18,4 +18,5 @@
     GroundInventory
     Inventory
     InteractItem
+    Map
 End Enum

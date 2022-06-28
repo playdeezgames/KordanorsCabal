@@ -67,4 +67,8 @@
             Return CharacterType.MaximumEncumbrance(Me)
         End Get
     End Property
+    Public Function HasVisited(location As Location) As Boolean
+        Return CharacterLocationData.Read(Id, location.Id)
+    End Function
+
 End Class
