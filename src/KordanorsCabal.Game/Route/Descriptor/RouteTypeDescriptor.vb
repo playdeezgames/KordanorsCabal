@@ -22,6 +22,7 @@ Friend Module RouteTypeDescriptorUtility
         New Dictionary(Of RouteType, RouteTypeDescriptor) From
         {
             {RouteType.CopperLock, New CopperLockDescriptor},
+            {RouteType.FinalLock, New FinalLockDescriptor},
             {RouteType.GoldLock, New GoldLockDescriptor},
             {RouteType.IronLock, New IronLockDescriptor},
             {RouteType.Passageway, New PassagewayDescriptor},

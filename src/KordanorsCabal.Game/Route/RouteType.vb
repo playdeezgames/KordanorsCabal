@@ -10,6 +10,7 @@ Public Enum RouteType
     SilverLock
     GoldLock
     PlatinumLock
+    FinalLock
 End Enum
 Public Module RouteTypeExtensions
     <Extension>

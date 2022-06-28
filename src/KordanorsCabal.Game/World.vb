@@ -8,11 +8,11 @@ Public Module World
     End Sub
 
     Private Sub CreateDungeon(location As Location)
-        location = CreateDungeonLevel(location, 1, ItemType.CopperKey) 'TODO: add "reward item type" and "boss character type"
-        location = CreateDungeonLevel(location, 2, ItemType.SilverKey)
-        location = CreateDungeonLevel(location, 3, ItemType.GoldKey)
-        location = CreateDungeonLevel(location, 4, ItemType.PlatinumKey)
-        location = CreateDungeonLevel(location, 5, ItemType.ElementalOrb)
+        location = CreateDungeonLevel(location, 1, ItemType.CopperKey, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
+        location = CreateDungeonLevel(location, 2, ItemType.SilverKey, RouteType.SilverLock)
+        location = CreateDungeonLevel(location, 3, ItemType.GoldKey, RouteType.GoldLock)
+        location = CreateDungeonLevel(location, 4, ItemType.PlatinumKey, RouteType.PlatinumLock)
+        location = CreateDungeonLevel(location, 5, ItemType.ElementalOrb, RouteType.FinalLock)
     End Sub
 
     Const MazeColumns = 11
@@ -63,18 +63,18 @@ Public Module World
         Return locations
     End Function
 
-    Private Function CreateDungeonLevel(fromLocation As Location, dungeonLevel As Long, bossKeyType As ItemType) As Location
+    Private Function CreateDungeonLevel(fromLocation As Location, dungeonLevel As Long, bossKeyType As ItemType, bossRouteType As RouteType) As Location
         Dim maze = New Maze(Of Direction)(MazeColumns, MazeRows, MazeDirections)
         maze.Generate()
         Dim locations = CreateLocations(maze, dungeonLevel)
-        PopulateLocations(locations, bossKeyType)
+        PopulateLocations(locations, bossKeyType, bossRouteType)
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.Routes.Count > 1))
         Route.Create(fromLocation, Direction.Down, RouteType.Stairs, startingLocation)
         Route.Create(startingLocation, Direction.Up, RouteType.Stairs, fromLocation)
         Return locations.Single(Function(x) x.LocationType = LocationType.DungeonBoss)
     End Function
 
-    Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType)
+    Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType)
         Dim partitions =
             locations.GroupBy(
                 Function(x) x.RouteCount = 1).
@@ -92,8 +92,8 @@ Public Module World
             itemTypes.Add(ItemType.IronKey)
         Next
         itemTypes(0) = bossKeyType
-        Dim bossLocation = RNG.FromEnumerable(deadEnds)
-        bossLocation.LocationType = LocationType.DungeonBoss
+        Dim bossLocation = PlaceBossLocation(deadEnds, bossRouteType)
+        partitions(LocationType.DungeonDeadEnd).Remove(bossLocation)
         partitions.Add(LocationType.DungeonBoss, New List(Of Location) From {bossLocation})
         For Each itemType In itemTypes
             Dim locationTypes = itemType.SpawnLocationTypes
@@ -103,6 +103,15 @@ Public Module World
             End If
         Next
     End Sub
+
+    Private Function PlaceBossLocation(deadEnds As IEnumerable(Of Location), routeType As RouteType) As Location
+        Dim bossLocation = RNG.FromEnumerable(deadEnds)
+        bossLocation.LocationType = LocationType.DungeonBoss
+        Dim direction = bossLocation.Routes.First.Key
+        Dim nextLocation = bossLocation.Routes(direction).ToLocation
+        nextLocation.Routes(direction.Opposite).RouteType = routeType
+        Return bossLocation
+    End Function
 
     Private Sub CreateFeatures()
         For Each featureType In AllFeatureTypes
