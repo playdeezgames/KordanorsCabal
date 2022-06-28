@@ -11,4 +11,9 @@
             Return ItemType.CopperKey
         End Get
     End Property
+    Public Overrides ReadOnly Property UnlockedRouteType As RouteType?
+        Get
+            Return RouteType.Passageway
+        End Get
+    End Property
 End Class
