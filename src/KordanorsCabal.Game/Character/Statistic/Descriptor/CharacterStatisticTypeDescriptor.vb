@@ -1,7 +1,7 @@
 ﻿Public MustInherit Class CharacterStatisticTypeDescriptor
-    Overridable ReadOnly Property DefaultValue As Long
+    Overridable ReadOnly Property DefaultValue As Long?
         Get
-            Return 0
+            Return Nothing
         End Get
     End Property
 

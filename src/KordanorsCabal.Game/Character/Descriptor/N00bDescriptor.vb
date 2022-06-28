@@ -1,4 +1,4 @@
-﻿Friend Class NoobDescriptor
+﻿Friend Class N00bDescriptor
     Inherits CharacterTypeDescriptor
 
     Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
@@ -20,7 +20,13 @@
 
     Public Overrides ReadOnly Property MaximumEncumbrance(character As Character) As Single
         Get
-            Return 50.0! + character.GetStatistic(CharacterStatisticType.Strength) * 10.0!
+            Return 50.0! + If(character.GetStatistic(CharacterStatisticType.Strength), 0) * 10.0!
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property SpawnCount(level As Long) As Long
+        Get
+            Return 0
         End Get
     End Property
 

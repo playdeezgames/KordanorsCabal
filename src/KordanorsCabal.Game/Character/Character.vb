@@ -22,7 +22,7 @@
     End Sub
 
     Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
-        SetStatistic(statisticType, GetStatistic(statisticType) + delta)
+        SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
     End Sub
 
     Property Location As Location
@@ -38,7 +38,7 @@
         Return New Character(characterId)
     End Function
 
-    Public Function GetStatistic(statisticType As CharacterStatisticType) As Long
+    Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
         Return If(CharacterStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
     ReadOnly Property Inventory As Inventory

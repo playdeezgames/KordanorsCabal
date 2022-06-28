@@ -7,7 +7,7 @@
 
     ReadOnly Property IsFullyBaked As Boolean
         Get
-            Return GetStatistic(CharacterStatisticType.Unassigned) = 0
+            Return If(GetStatistic(CharacterStatisticType.Unassigned), 0) = 0
         End Get
     End Property
     Public Sub AssignPoint(statisticType As CharacterStatisticType)

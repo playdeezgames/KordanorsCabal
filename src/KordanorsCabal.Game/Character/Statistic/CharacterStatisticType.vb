@@ -14,7 +14,7 @@ Public Enum CharacterStatisticType
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>
-    Friend Function DefaultValue(statisticType As CharacterStatisticType) As Long
+    Friend Function DefaultValue(statisticType As CharacterStatisticType) As Long?
         Return CharacterStatisticTypeDescriptors(statisticType).DefaultValue
     End Function
     <Extension>

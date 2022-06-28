@@ -71,8 +71,19 @@ Public Module World
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.Routes.Count > 1))
         Route.Create(fromLocation, Direction.Down, RouteType.Stairs, startingLocation)
         Route.Create(startingLocation, Direction.Up, RouteType.Stairs, fromLocation)
+        PopulateCharacters(locations, dungeonLevel)
         Return locations.Single(Function(x) x.LocationType = LocationType.DungeonBoss)
     End Function
+
+    Private Sub PopulateCharacters(locations As IEnumerable(Of Location), dungeonLevel As Long)
+        For Each characterType In AllCharacterTypes
+            Dim characterCount = characterType.SpawnCount(dungeonLevel)
+            While characterCount > 0
+                Dim location = RNG.FromEnumerable(locations.Where(Function(x) characterType.CanSpawn(x)))
+                characterCount -= 1
+            End While
+        Next
+    End Sub
 
     Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType)
         Dim partitions =

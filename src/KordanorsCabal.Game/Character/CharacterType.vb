@@ -3,6 +3,7 @@
 Public Enum CharacterType
     None
     N00b
+    Skeleton
 End Enum
 Module CharacterTypeExtensions
     <Extension>
@@ -16,5 +17,13 @@ Module CharacterTypeExtensions
     <Extension>
     Function IsEnemy(characterType As CharacterType, character As Character) As Boolean
         Return CharacterTypeDescriptors(characterType).IsEnemy(character)
+    End Function
+    <Extension>
+    Function SpawnCount(characterType As CharacterType, level As Long) As Long
+        Return CharacterTypeDescriptors(characterType).SpawnCount(level)
+    End Function
+    <Extension>
+    Function CanSpawn(characterType As CharacterType, location As Location) As Boolean
+        Return CharacterTypeDescriptors(characterType).CanSpawn(location)
     End Function
 End Module
