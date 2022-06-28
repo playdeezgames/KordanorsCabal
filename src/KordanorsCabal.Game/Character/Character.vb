@@ -31,6 +31,7 @@
         End Get
         Set(value As Location)
             CharacterData.WriteLocation(Id, value.Id)
+            CharacterLocationData.Write(Id, value.Id)
         End Set
     End Property
     Shared Function FromId(characterId As Long) As Character
