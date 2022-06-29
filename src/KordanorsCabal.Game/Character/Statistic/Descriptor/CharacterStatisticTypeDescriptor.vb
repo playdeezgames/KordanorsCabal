@@ -11,6 +11,7 @@ Friend Module CharacterStatisticTypeDescriptorUtility
     Friend ReadOnly CharacterStatisticTypeDescriptors As IReadOnlyDictionary(Of CharacterStatisticType, CharacterStatisticTypeDescriptor) =
         New Dictionary(Of CharacterStatisticType, CharacterStatisticTypeDescriptor) From
         {
+            {CharacterStatisticType.BaseMaximumDefend, New BaseMaximumDefendDescriptor},
             {CharacterStatisticType.Dexterity, New DexterityDescriptor},
             {CharacterStatisticType.HP, New HpDescriptor},
             {CharacterStatisticType.Influence, New InfluenceDescriptor},
@@ -18,6 +19,7 @@ Friend Module CharacterStatisticTypeDescriptorUtility
             {CharacterStatisticType.MP, New MpDescriptor},
             {CharacterStatisticType.Power, New PowerDescriptor},
             {CharacterStatisticType.Strength, New StrengthDescriptor},
+            {CharacterStatisticType.UnarmedMaximumDamage, New UnarmedMaximumDamageDescriptor},
             {CharacterStatisticType.Unassigned, New UnassignedDescriptor},
             {CharacterStatisticType.Willpower, New WillpowerDescriptor}
         }

@@ -11,6 +11,8 @@ Public Enum CharacterStatisticType
     MP
     Mana
     Unassigned
+    UnarmedMaximumDamage
+    BaseMaximumDefend
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>

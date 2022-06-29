@@ -5,9 +5,11 @@
         Get
             Return New Dictionary(Of CharacterStatisticType, Long) From
                 {
+                    {CharacterStatisticType.BaseMaximumDefend, 2},
                     {CharacterStatisticType.Strength, 4},
                     {CharacterStatisticType.Dexterity, 2},
-                    {CharacterStatisticType.HP, 1}
+                    {CharacterStatisticType.HP, 1},
+                    {CharacterStatisticType.UnarmedMaximumDamage, 2}
                 }
         End Get
     End Property
