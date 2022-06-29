@@ -21,3 +21,10 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 009 - 20220626
 * 010 - 20220627
 * 011 - 20220628
+* 012 - 20220629
+
+## Credit Due
+
+* Kordanor
+* Zooperdan
+* Urizen
