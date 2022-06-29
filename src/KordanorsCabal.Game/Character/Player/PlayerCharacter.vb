@@ -1,6 +1,6 @@
 ﻿Public Class PlayerCharacter
     Inherits Character
-
+    Shared ReadOnly Property Messages As New Queue(Of Message)
     Sub New()
         MyBase.New(PlayerData.Read().Value)
     End Sub
@@ -81,5 +81,41 @@
         If CanMove(direction) Then
             Location = Location.Routes(direction).Move(Me)
         End If
+    End Sub
+
+    Public Sub Fight()
+        If CanFight Then
+            DoAttack()
+            DoCounterAttacks()
+        End If
+    End Sub
+
+    Private Sub DoCounterAttacks()
+        'TODO: 
+    End Sub
+
+    Private Sub DoAttack()
+        Dim lines As New List(Of String)
+        Dim attackRoll = RollAttack()
+        Dim enemy = Location.Enemies(Me).First
+        lines.Add($"You roll an attack of {attackRoll}.")
+        Dim defendRoll = enemy.RollDefend()
+        lines.Add($"{enemy.Name} rolls a defend of {defendRoll}.")
+        Dim result = attackRoll - defendRoll
+        Select Case result
+            Case Is <= 0
+                lines.Add("You miss!")
+            Case Else
+                Dim damage = DetermineDamage(result)
+                lines.Add($"You do {damage} damage!")
+                enemy.DoDamage(damage)
+                If enemy.IsDead Then
+                    lines.Add($"You kill {enemy.Name}!")
+                    enemy.Destroy()
+                    Exit Select
+                End If
+                lines.Add($"{enemy.Name} has {enemy.GetStatistic(CharacterStatisticType.HP).Value} HP left.")
+        End Select
+        Messages.Enqueue(New Message(lines))
     End Sub
 End Class

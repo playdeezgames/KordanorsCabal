@@ -16,6 +16,7 @@ Public Module MainProcessor
             {UIState.Inventory, New InventoryProcessor},
             {UIState.LoadGameScreen, New LoadGameScreenProcessor},
             {UIState.Map, New MapProcessor},
+            {UIState.Message, New MessageProcessor},
             {UIState.MuxVolumizer, New MuxVolumizerProcessor},
             {UIState.OptionsScreen, New OptionsScreenProcessor},
             {UIState.Prolog, New PrologProcessor},

@@ -36,4 +36,12 @@
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)
         Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (LocationIdColumn, locationId))
     End Function
+
+    Public Sub Clear(characterId As Long)
+        CharacterInventoryData.ClearForCharacter(characterId)
+        CharacterLocationData.ClearForCharacter(characterId)
+        CharacterStatisticData.ClearForCharacter(characterId)
+        PlayerData.ClearForCharacter(characterId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
+    End Sub
 End Module

@@ -81,4 +81,50 @@
     Friend Function IsEnemy(character As Character) As Boolean
         Return CharacterType.IsEnemy(character)
     End Function
+
+    Friend Function RollDefend() As Long
+        Dim dice = GetStatistic(CharacterStatisticType.Dexterity)
+        Dim result As Long = 0
+        While dice > 0
+            result += RNG.RollDice("1d6/6")
+            dice -= 1
+        End While
+        Dim maximumDefend = GetStatistic(CharacterStatisticType.BaseMaximumDefend).Value
+        Return Math.Min(result, maximumDefend)
+    End Function
+
+    Friend Function RollAttack() As Long
+        Dim dice = GetStatistic(CharacterStatisticType.Strength)
+        Dim result As Long = 0
+        While dice > 0
+            result += RNG.RollDice("1d6/6")
+            dice -= 1
+        End While
+        Return result
+    End Function
+
+    ReadOnly Property Name As String
+        Get
+            Return CharacterType.Name
+        End Get
+    End Property
+
+    Friend Sub DoDamage(damage As Long)
+        ChangeStatistic(CharacterStatisticType.HP, -damage)
+    End Sub
+
+    Friend Sub Destroy()
+        CharacterData.Clear(Id)
+    End Sub
+
+    ReadOnly Property IsDead As Boolean
+        Get
+            Return GetStatistic(CharacterStatisticType.HP).Value <= 0
+        End Get
+    End Property
+
+    Function DetermineDamage(value As Long) As Long
+        Dim maximumDamage = GetStatistic(CharacterStatisticType.UnarmedMaximumDamage).Value
+        Return If(value < 0, 0, If(value > maximumDamage, maximumDamage, value))
+    End Function
 End Class

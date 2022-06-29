@@ -26,4 +26,8 @@ Module CharacterTypeExtensions
     Function CanSpawn(characterType As CharacterType, location As Location) As Boolean
         Return CharacterTypeDescriptors(characterType).CanSpawn(location)
     End Function
+    <Extension>
+    Function Name(characterType As CharacterType) As String
+        Return CharacterTypeDescriptors(characterType).Name
+    End Function
 End Module

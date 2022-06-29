@@ -22,4 +22,8 @@
     Public Function Read(characterId As Long, locationId As Long) As Boolean
         Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (CharacterIdColumn, characterId), (LocationIdColumn, locationId)).HasValue
     End Function
+
+    Friend Sub ClearForCharacter(characterId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
+    End Sub
 End Module

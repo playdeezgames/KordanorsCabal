@@ -57,9 +57,14 @@
                 PushButtonIndex(0)
                 player.Mode = PlayerMode.Move
             Case InteractButtonIndex
+                If player.CanFight Then
+                    player.Fight()
+                    Return UIState.Message
+                End If
                 If player.CanInteract Then
                     PushButtonIndex(0)
                     player.Interact()
+                    Return UIState.InPlay
                 End If
             Case GroundButtonIndex
                 If Not player.Location.Inventory.IsEmpty Then

@@ -41,4 +41,8 @@ Public Module PlayerData
     Public Sub Write(characterId As Long, direction As Long, mode As Long)
         ReplaceRecord(AddressOf Initialize, TableName, (PlayerIdColumn, FixedPlayerId), (CharacterIdColumn, characterId), (DirectionColumn, direction), (ModeColumn, mode))
     End Sub
+
+    Friend Sub ClearForCharacter(characterId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
+    End Sub
 End Module

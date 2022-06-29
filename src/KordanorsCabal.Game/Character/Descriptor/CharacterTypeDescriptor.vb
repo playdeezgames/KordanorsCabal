@@ -6,6 +6,7 @@
     Overridable Function CanSpawn(location As Location) As Boolean
         Return False
     End Function
+    MustOverride ReadOnly Property Name As String
 End Class
 Friend Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of CharacterType, CharacterTypeDescriptor) =

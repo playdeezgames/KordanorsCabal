@@ -31,6 +31,12 @@
         End Get
     End Property
 
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "skeleton"
+        End Get
+    End Property
+
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return character.CharacterType = CharacterType.N00b
     End Function

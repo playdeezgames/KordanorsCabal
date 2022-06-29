@@ -19,4 +19,5 @@
     Inventory
     InteractItem
     Map
+    Message
 End Enum
