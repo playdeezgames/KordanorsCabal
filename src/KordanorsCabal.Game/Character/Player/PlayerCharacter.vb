@@ -148,18 +148,26 @@
                 enemy.DoDamage(damage)
                 If enemy.IsDead Then
                     lines.Add($"You kill {enemy.Name}!")
-                    'money!
                     Dim money As Long = enemy.RollLoot
                     If money > 0 Then
                         lines.Add($"You get {money} money!")
                         ChangeStatistic(CharacterStatisticType.Money, money)
                     End If
-                    'xp!
+                    Dim xp As Long = enemy.XPValue
+                    If xp > 0 Then
+                        lines.Add($"You get {xp} XP!")
+                        AddXP(xp)
+                    End If
                     enemy.Destroy()
                     Exit Select
                 End If
                 lines.Add($"{enemy.Name} has {enemy.CurrentHP} HP left.")
         End Select
         Messages.Enqueue(New Message(lines))
+    End Sub
+
+    Private Sub AddXP(xp As Long)
+        ChangeStatistic(CharacterStatisticType.XP, xp)
+        'TODO: level up
     End Sub
 End Class

@@ -39,4 +39,8 @@ Module CharacterTypeExtensions
     Function PartingShot(characterType As CharacterType) As String
         Return CharacterTypeDescriptors(characterType).PartingShot
     End Function
+    <Extension>
+    Function XPValue(characterType As CharacterType) As Long
+        Return CharacterTypeDescriptors(characterType).XPValue
+    End Function
 End Module

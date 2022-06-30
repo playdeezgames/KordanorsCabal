@@ -18,6 +18,8 @@
         buffer.WriteText((0, 5), $"POW {player.GetStatistic(CharacterStatisticType.Power)}", False, Hue.Black)
         buffer.WriteText((0, 6), $"Mana {player.CurrentMana}/{player.GetStatistic(CharacterStatisticType.Mana)}", False, Hue.Black)
 
+        buffer.WriteText((11, 5), $"XP {player.GetStatistic(CharacterStatisticType.XP)}/{player.GetStatistic(CharacterStatisticType.XPGoal)}", False, Hue.Black)
+
         buffer.WriteText((0, 8), $"Money {player.GetStatistic(CharacterStatisticType.Money)}", False, Hue.Black)
     End Sub
 

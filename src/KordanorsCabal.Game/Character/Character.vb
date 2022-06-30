@@ -159,6 +159,11 @@
         End Get
     End Property
 
+    ReadOnly Property XPValue As Long
+        Get
+            Return CharacterType.XPValue
+        End Get
+    End Property
 
     ReadOnly Property NeedsHealing As Boolean
         Get

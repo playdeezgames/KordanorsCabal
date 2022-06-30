@@ -42,6 +42,12 @@
         End Get
     End Property
 
+    Public Overrides ReadOnly Property XPValue As Long
+        Get
+            Return 1
+        End Get
+    End Property
+
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return character.CharacterType = CharacterType.N00b
     End Function

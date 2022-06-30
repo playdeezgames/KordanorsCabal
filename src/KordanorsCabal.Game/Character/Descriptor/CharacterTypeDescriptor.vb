@@ -15,6 +15,8 @@
     Overridable Function PartingShot() As String
         Return ""
     End Function
+
+    MustOverride ReadOnly Property XPValue As Long
 End Class
 Friend Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of CharacterType, CharacterTypeDescriptor) =

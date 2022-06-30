@@ -19,7 +19,9 @@
                     {CharacterStatisticType.UnarmedMaximumDamage, 1},
                     {CharacterStatisticType.Unassigned, 8},
                     {CharacterStatisticType.Willpower, 1},
-                    {CharacterStatisticType.Wounds, 0}
+                    {CharacterStatisticType.Wounds, 0},
+                    {CharacterStatisticType.XP, 0},
+                    {CharacterStatisticType.XPGoal, 10}
                 }
         End Get
     End Property
@@ -39,6 +41,12 @@
     Public Overrides ReadOnly Property Name As String
         Get
             Return "n00b"
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property XPValue As Long
+        Get
+            Return 0
         End Get
     End Property
 

@@ -17,6 +17,8 @@ Public Enum CharacterStatisticType
     Stress
     Money
     Fatigue
+    XP
+    XPGoal
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>
