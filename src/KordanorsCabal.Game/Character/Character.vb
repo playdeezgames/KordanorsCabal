@@ -115,6 +115,12 @@
         End Get
     End Property
 
+    ReadOnly Property CurrentMP As Long
+        Get
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.MP).Value - GetStatistic(CharacterStatisticType.Stress).Value)
+        End Get
+    End Property
+
 
     Friend Sub DoDamage(damage As Long)
         ChangeStatistic(CharacterStatisticType.Wounds, damage)

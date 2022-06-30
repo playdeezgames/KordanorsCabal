@@ -19,6 +19,7 @@ Friend Module CharacterStatisticTypeDescriptorUtility
             {CharacterStatisticType.MP, New MpDescriptor},
             {CharacterStatisticType.Power, New PowerDescriptor},
             {CharacterStatisticType.Strength, New StrengthDescriptor},
+            {CharacterStatisticType.Stress, New StressDescriptor},
             {CharacterStatisticType.UnarmedMaximumDamage, New UnarmedMaximumDamageDescriptor},
             {CharacterStatisticType.Unassigned, New UnassignedDescriptor},
             {CharacterStatisticType.Willpower, New WillpowerDescriptor},
