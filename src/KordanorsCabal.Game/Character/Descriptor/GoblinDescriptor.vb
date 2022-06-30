@@ -51,4 +51,13 @@
     Public Overrides Function RollLoot() As Long
         Return RNG.RollDice("2d6")
     End Function
+    Private ReadOnly partingShots As IReadOnlyList(Of String) =
+        New List(Of String) From
+        {
+            "@#$% you!"
+        }
+    Public Overrides Function PartingShot() As String
+
+        Return RNG.FromEnumerable(partingShots)
+    End Function
 End Class

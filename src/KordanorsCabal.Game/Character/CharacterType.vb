@@ -35,4 +35,8 @@ Module CharacterTypeExtensions
     Function RollLoot(characterType As CharacterType) As Long
         Return CharacterTypeDescriptors(characterType).RollLoot
     End Function
+    <Extension>
+    Function PartingShot(characterType As CharacterType) As String
+        Return CharacterTypeDescriptors(characterType).PartingShot
+    End Function
 End Module

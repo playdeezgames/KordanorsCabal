@@ -11,6 +11,10 @@
     Overridable Function RollLoot() As Long
         Return 0
     End Function
+
+    Overridable Function PartingShot() As String
+        Return ""
+    End Function
 End Class
 Friend Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of CharacterType, CharacterTypeDescriptor) =

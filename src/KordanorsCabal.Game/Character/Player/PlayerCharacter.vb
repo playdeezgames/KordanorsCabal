@@ -120,6 +120,10 @@
                 DoDamage(damage)
                 If IsDead Then
                     lines.Add($"{enemy.Name} kills you!")
+                    Dim partingShot = enemy.PartingShot
+                    If Not String.IsNullOrEmpty(partingShot) Then
+                        lines.Add($"{enemy.Name} says ""{partingShot}""")
+                    End If
                     Exit Select
                 End If
                 lines.Add($"You have {CurrentHP} HP left.")
