@@ -24,7 +24,7 @@
         Return character
     End Function
 
-    Friend Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
+    Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
         CharacterStatisticData.Write(Id, statisticType, statisticValue)
     End Sub
 
@@ -152,4 +152,12 @@
             Return CharacterType.RollLoot
         End Get
     End Property
+
+
+    ReadOnly Property NeedsHealing As Boolean
+        Get
+            Return GetStatistic(CharacterStatisticType.Wounds).Value > 0
+        End Get
+    End Property
+
 End Class
