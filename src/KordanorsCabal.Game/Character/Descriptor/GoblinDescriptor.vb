@@ -1,15 +1,19 @@
-﻿Friend Class SkeletonDescriptor
+﻿Friend Class GoblinDescriptor
     Inherits CharacterTypeDescriptor
 
     Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
         Get
             Return New Dictionary(Of CharacterStatisticType, Long) From
                 {
-                    {CharacterStatisticType.BaseMaximumDefend, 2},
+                    {CharacterStatisticType.BaseMaximumDefend, 1},
                     {CharacterStatisticType.Strength, 4},
-                    {CharacterStatisticType.Dexterity, 2},
+                    {CharacterStatisticType.Dexterity, 1},
                     {CharacterStatisticType.HP, 1},
+                    {CharacterStatisticType.Influence, 0},
+                    {CharacterStatisticType.MP, 1},
+                    {CharacterStatisticType.Stress, 1},
                     {CharacterStatisticType.UnarmedMaximumDamage, 2},
+                    {CharacterStatisticType.Willpower, 1},
                     {CharacterStatisticType.Wounds, 0}
                 }
         End Get
@@ -34,7 +38,7 @@
 
     Public Overrides ReadOnly Property Name As String
         Get
-            Return "skeleton"
+            Return "goblin"
         End Get
     End Property
 
