@@ -11,6 +11,7 @@
                     {CharacterStatisticType.HP, 3},
                     {CharacterStatisticType.Influence, 1},
                     {CharacterStatisticType.Mana, 1},
+                    {CharacterStatisticType.Money, 0},
                     {CharacterStatisticType.MP, 3},
                     {CharacterStatisticType.Power, 1},
                     {CharacterStatisticType.Strength, 1},
