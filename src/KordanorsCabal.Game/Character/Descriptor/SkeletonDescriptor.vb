@@ -44,4 +44,7 @@
     Public Overrides Function CanSpawn(location As Location) As Boolean
         Return location.LocationType = LocationType.Dungeon
     End Function
+    Public Overrides Function RollLoot() As Long
+        Return RNG.RollDice("2d3")
+    End Function
 End Class

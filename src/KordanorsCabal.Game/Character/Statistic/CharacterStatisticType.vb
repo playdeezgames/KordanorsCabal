@@ -15,6 +15,8 @@ Public Enum CharacterStatisticType
     BaseMaximumDefend
     Wounds
     Stress
+    Money
+    Fatigue
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>

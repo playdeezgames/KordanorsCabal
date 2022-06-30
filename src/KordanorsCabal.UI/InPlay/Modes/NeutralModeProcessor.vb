@@ -4,7 +4,7 @@
     Const TurnFightButtonIndex = 0
     Const InteractIntimidateButtonIndex = 1
     Const GroundButtonIndex = 2 'enemies!
-    Const StatusButtonIndex = 3
+    Const StatusButtonIndex = 3 'level up!
     Const MapButtonIndex = 4
     Const MoveButtonIndex = 5
     Const InventoryButtonIndex = 6

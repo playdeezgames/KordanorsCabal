@@ -7,6 +7,7 @@
                 {
                     {CharacterStatisticType.BaseMaximumDefend, 1},
                     {CharacterStatisticType.Dexterity, 1},
+                    {CharacterStatisticType.Fatigue, 0},
                     {CharacterStatisticType.HP, 3},
                     {CharacterStatisticType.Influence, 1},
                     {CharacterStatisticType.Mana, 1},

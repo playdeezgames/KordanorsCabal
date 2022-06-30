@@ -31,4 +31,8 @@ Module CharacterTypeExtensions
     Function Name(characterType As CharacterType) As String
         Return CharacterTypeDescriptors(characterType).Name
     End Function
+    <Extension>
+    Function RollLoot(characterType As CharacterType) As Long
+        Return CharacterTypeDescriptors(characterType).RollLoot
+    End Function
 End Module

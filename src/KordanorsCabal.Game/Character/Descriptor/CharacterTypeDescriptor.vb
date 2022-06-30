@@ -7,6 +7,10 @@
         Return False
     End Function
     MustOverride ReadOnly Property Name As String
+
+    Overridable Function RollLoot() As Long
+        Return 0
+    End Function
 End Class
 Friend Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of CharacterType, CharacterTypeDescriptor) =

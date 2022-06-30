@@ -121,6 +121,12 @@
         End Get
     End Property
 
+    ReadOnly Property CurrentMana As Long
+        Get
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.Mana).Value - GetStatistic(CharacterStatisticType.Fatigue).Value)
+        End Get
+    End Property
+
 
     Friend Sub DoDamage(damage As Long)
         ChangeStatistic(CharacterStatisticType.Wounds, damage)
@@ -140,4 +146,10 @@
         Dim maximumDamage = GetStatistic(CharacterStatisticType.UnarmedMaximumDamage).Value
         Return If(value < 0, 0, If(value > maximumDamage, maximumDamage, value))
     End Function
+
+    ReadOnly Property RollLoot As Long
+        Get
+            Return CharacterType.RollLoot
+        End Get
+    End Property
 End Class

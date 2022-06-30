@@ -6,12 +6,17 @@
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Status", True, Hue.Blue)
         Dim player = World.PlayerCharacter
+
         buffer.WriteText((0, 1), $"STR {player.GetStatistic(CharacterStatisticType.Strength)}", False, Hue.Black)
         buffer.WriteText((0, 2), $"DEX {player.GetStatistic(CharacterStatisticType.Dexterity)}", False, Hue.Black)
         buffer.WriteText((0, 3), $"HP {player.CurrentHP}/{player.GetStatistic(CharacterStatisticType.HP)}", False, Hue.Black)
+
         buffer.WriteText((11, 1), $"INF {player.GetStatistic(CharacterStatisticType.Influence)}", False, Hue.Black)
         buffer.WriteText((11, 2), $"WIL {player.GetStatistic(CharacterStatisticType.Willpower)}", False, Hue.Black)
         buffer.WriteText((11, 3), $"MP {player.CurrentMP}/{player.GetStatistic(CharacterStatisticType.MP)}", False, Hue.Black)
+
+        buffer.WriteText((0, 5), $"POW {player.GetStatistic(CharacterStatisticType.Power)}", False, Hue.Black)
+        buffer.WriteText((0, 6), $"Mana {player.CurrentMana}/{player.GetStatistic(CharacterStatisticType.Mana)}", False, Hue.Black)
     End Sub
 
     Public Sub Initialize() Implements IProcessor.Initialize

@@ -144,6 +144,13 @@
                 enemy.DoDamage(damage)
                 If enemy.IsDead Then
                     lines.Add($"You kill {enemy.Name}!")
+                    'money!
+                    Dim money As Long = enemy.RollLoot
+                    If money > 0 Then
+                        lines.Add($"You get {money} money!")
+                        ChangeStatistic(CharacterStatisticType.Money, money)
+                    End If
+                    'xp!
                     enemy.Destroy()
                     Exit Select
                 End If
