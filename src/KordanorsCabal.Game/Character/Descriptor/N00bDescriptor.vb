@@ -15,7 +15,8 @@
                     {CharacterStatisticType.Strength, 1},
                     {CharacterStatisticType.UnarmedMaximumDamage, 1},
                     {CharacterStatisticType.Unassigned, 8},
-                    {CharacterStatisticType.Willpower, 1}
+                    {CharacterStatisticType.Willpower, 1},
+                    {CharacterStatisticType.Wounds, 0}
                 }
         End Get
     End Property

@@ -21,4 +21,5 @@
     Map
     Message
     Dead
+    Status
 End Enum

@@ -21,6 +21,7 @@ Friend Module CharacterStatisticTypeDescriptorUtility
             {CharacterStatisticType.Strength, New StrengthDescriptor},
             {CharacterStatisticType.UnarmedMaximumDamage, New UnarmedMaximumDamageDescriptor},
             {CharacterStatisticType.Unassigned, New UnassignedDescriptor},
-            {CharacterStatisticType.Willpower, New WillpowerDescriptor}
+            {CharacterStatisticType.Willpower, New WillpowerDescriptor},
+            {CharacterStatisticType.Wounds, New WoundsDescriptor}
         }
 End Module

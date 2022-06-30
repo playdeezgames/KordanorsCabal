@@ -13,6 +13,7 @@ Public Enum CharacterStatisticType
     Unassigned
     UnarmedMaximumDamage
     BaseMaximumDefend
+    Wounds
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>

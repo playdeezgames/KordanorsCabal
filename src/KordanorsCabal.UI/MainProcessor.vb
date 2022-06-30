@@ -24,6 +24,7 @@ Public Module MainProcessor
             {UIState.SaveGameScreen, New SaveGameScreenProcessor},
             {UIState.ScreenSizer, New ScreenSizerProcessor},
             {UIState.SfxVolumizer, New SfxVolumizerProcessor},
+            {UIState.Status, New StatusProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}
         }
     Public Function ProcessCommand(uiState As UIState, command As Command) As UIState

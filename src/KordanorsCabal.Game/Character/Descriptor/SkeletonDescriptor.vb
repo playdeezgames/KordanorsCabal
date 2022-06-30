@@ -9,7 +9,8 @@
                     {CharacterStatisticType.Strength, 4},
                     {CharacterStatisticType.Dexterity, 2},
                     {CharacterStatisticType.HP, 1},
-                    {CharacterStatisticType.UnarmedMaximumDamage, 2}
+                    {CharacterStatisticType.UnarmedMaximumDamage, 2},
+                    {CharacterStatisticType.Wounds, 0}
                 }
         End Get
     End Property

@@ -122,7 +122,7 @@
                     lines.Add($"{enemy.Name} kills you!")
                     Exit Select
                 End If
-                lines.Add($"You have {GetStatistic(CharacterStatisticType.HP).Value} HP left.")
+                lines.Add($"You have {CurrentHP} HP left.")
         End Select
         Messages.Enqueue(New Message(lines))
     End Sub
@@ -147,7 +147,7 @@
                     enemy.Destroy()
                     Exit Select
                 End If
-                lines.Add($"{enemy.Name} has {enemy.GetStatistic(CharacterStatisticType.HP).Value} HP left.")
+                lines.Add($"{enemy.Name} has {enemy.CurrentHP} HP left.")
         End Select
         Messages.Enqueue(New Message(lines))
     End Sub

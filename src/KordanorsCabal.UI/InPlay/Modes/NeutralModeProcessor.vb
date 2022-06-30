@@ -1,14 +1,15 @@
 ﻿Friend Class NeutralModeProcessor
     Inherits ModeProcessor
 
-    Const TurnButtonIndex = 0
-    Const InteractButtonIndex = 1
+    Const TurnFightButtonIndex = 0
+    Const InteractIntimidateButtonIndex = 1
     Const GroundButtonIndex = 2
-
+    Const StatusButtonIndex = 3
     Const MapButtonIndex = 4
     Const MoveButtonIndex = 5
     Const InventoryButtonIndex = 6
-
+    '7 Equipment?
+    '8
     Const MenuButtonIndex = 9
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
@@ -30,12 +31,13 @@
         End If
     End Sub
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
-        Buttons(TurnButtonIndex).Title = If(player.CanFight, "FIGHT!", "Turn...")
+        Buttons(TurnFightButtonIndex).Title = If(player.CanFight, "FIGHT!", "Turn...")
         Buttons(MoveButtonIndex).Title = "Move..."
         Buttons(MenuButtonIndex).Title = "Game Menu"
         Buttons(MapButtonIndex).Title = "Map"
+        Buttons(StatusButtonIndex).Title = "Status"
         If player.CanInteract Then
-            Buttons(InteractButtonIndex).Title = "Interact..."
+            Buttons(InteractIntimidateButtonIndex).Title = "Interact..."
         End If
         If Not player.Location.Inventory.IsEmpty Then
             Buttons(GroundButtonIndex).Title = "Ground..."
@@ -47,7 +49,7 @@
 
     Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
         Select Case button.Index
-            Case TurnButtonIndex 'also the fight button!
+            Case TurnFightButtonIndex 'also the fight button!
                 If player.CanFight Then
                     player.Fight()
                     Return UIState.Message
@@ -57,7 +59,7 @@
             Case MoveButtonIndex
                 PushButtonIndex(0)
                 player.Mode = PlayerMode.Move
-            Case InteractButtonIndex
+            Case InteractIntimidateButtonIndex
                 If player.CanInteract Then
                     PushButtonIndex(0)
                     player.Interact()
@@ -75,6 +77,8 @@
                 End If
             Case MapButtonIndex
                 Return UIState.Map
+            Case StatusButtonIndex
+                Return UIState.Status
         End Select
         Return UIState.InPlay
     End Function

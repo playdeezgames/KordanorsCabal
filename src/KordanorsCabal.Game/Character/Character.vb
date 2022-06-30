@@ -109,8 +109,15 @@
         End Get
     End Property
 
+    ReadOnly Property CurrentHP As Long
+        Get
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.HP).Value - GetStatistic(CharacterStatisticType.Wounds).Value)
+        End Get
+    End Property
+
+
     Friend Sub DoDamage(damage As Long)
-        ChangeStatistic(CharacterStatisticType.HP, -damage)
+        ChangeStatistic(CharacterStatisticType.Wounds, damage)
     End Sub
 
     Friend Sub Destroy()
@@ -119,7 +126,7 @@
 
     ReadOnly Property IsDead As Boolean
         Get
-            Return GetStatistic(CharacterStatisticType.HP).Value <= 0
+            Return GetStatistic(CharacterStatisticType.Wounds).Value >= GetStatistic(CharacterStatisticType.HP).Value
         End Get
     End Property
 
