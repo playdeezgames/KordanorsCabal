@@ -7,6 +7,7 @@ Public Module MainProcessor
             {UIState.AboutScreen, New AboutScreenProcessor},
             {UIState.ConfirmAbandonGame, New ConfirmAbandonGameProcessor},
             {UIState.ConfirmQuit, New ConfirmQuitProcessor},
+            {UIState.Dead, New DeadProcessor},
             {UIState.FinalizeCharacter, New FinalizeCharacterProcessor},
             {UIState.GameMenuScreen, New GameMenuScreenProcessor},
             {UIState.GroundInventory, New GroundInventoryProcessor},

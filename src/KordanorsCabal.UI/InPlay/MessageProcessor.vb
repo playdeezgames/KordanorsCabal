@@ -22,6 +22,9 @@
                 If messages.Any Then
                     Return UIState.Message
                 End If
+                If World.PlayerCharacter.IsDead Then
+                    Return UIState.Dead
+                End If
                 Return UIState.InPlay
         End Select
         Return UIState.Message

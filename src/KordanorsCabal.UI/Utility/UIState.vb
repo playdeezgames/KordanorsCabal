@@ -20,4 +20,5 @@
     InteractItem
     Map
     Message
+    Dead
 End Enum

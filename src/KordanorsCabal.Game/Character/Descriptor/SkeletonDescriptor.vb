@@ -24,7 +24,7 @@
         Get
             Select Case level
                 Case 1
-                    Return 12
+                    Return 50
                 Case Else
                     Return 0
             End Select

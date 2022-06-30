@@ -91,7 +91,40 @@
     End Sub
 
     Private Sub DoCounterAttacks()
-        'TODO: 
+        Dim enemies = Location.Enemies(Me)
+        Dim enemyCount = enemies.Count
+        Dim enemyIndex = 1
+        For Each enemy In enemies
+            DoCounterAttack(enemy, enemyIndex, enemyCount)
+            enemyIndex += 1
+        Next
+    End Sub
+
+    Private Sub DoCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
+        If IsDead Then
+            Return
+        End If
+        Dim lines As New List(Of String)
+        lines.Add($"Counter-atttack {enemyIndex}/{enemyCount}:")
+        Dim attackRoll = enemy.RollAttack()
+        lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
+        Dim defendRoll = RollDefend()
+        lines.Add($"You roll a defend of {defendRoll}.")
+        Dim result = attackRoll - defendRoll
+        Select Case result
+            Case Is <= 0
+                lines.Add($"{enemy.Name} misses!")
+            Case Else
+                Dim damage = enemy.DetermineDamage(result)
+                lines.Add($"{enemy.Name} does {damage} damage!")
+                DoDamage(damage)
+                If IsDead Then
+                    lines.Add($"{enemy.Name} kills you!")
+                    Exit Select
+                End If
+                lines.Add($"You have {GetStatistic(CharacterStatisticType.HP).Value} HP left.")
+        End Select
+        Messages.Enqueue(New Message(lines))
     End Sub
 
     Private Sub DoAttack()

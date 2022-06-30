@@ -30,15 +30,12 @@
         End If
     End Sub
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
-        Buttons(TurnButtonIndex).Title = "Turn..."
+        Buttons(TurnButtonIndex).Title = If(player.CanFight, "FIGHT!", "Turn...")
         Buttons(MoveButtonIndex).Title = "Move..."
         Buttons(MenuButtonIndex).Title = "Game Menu"
         Buttons(MapButtonIndex).Title = "Map"
         If player.CanInteract Then
             Buttons(InteractButtonIndex).Title = "Interact..."
-        End If
-        If player.CanFight Then
-            Buttons(InteractButtonIndex).Title = "FIGHT!"
         End If
         If Not player.Location.Inventory.IsEmpty Then
             Buttons(GroundButtonIndex).Title = "Ground..."
@@ -50,17 +47,17 @@
 
     Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
         Select Case button.Index
-            Case TurnButtonIndex
+            Case TurnButtonIndex 'also the fight button!
+                If player.CanFight Then
+                    player.Fight()
+                    Return UIState.Message
+                End If
                 PushButtonIndex(0)
                 player.Mode = PlayerMode.Turn
             Case MoveButtonIndex
                 PushButtonIndex(0)
                 player.Mode = PlayerMode.Move
             Case InteractButtonIndex
-                If player.CanFight Then
-                    player.Fight()
-                    Return UIState.Message
-                End If
                 If player.CanInteract Then
                     PushButtonIndex(0)
                     player.Interact()
