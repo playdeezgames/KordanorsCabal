@@ -32,9 +32,9 @@
         Select Case command
             Case Command.Red
                 Return UIState.InPlay
-            Case Command.Up
-                currentItemIndex = (currentItemIndex + 1) Mod groundItems.Count
             Case Command.Down
+                currentItemIndex = (currentItemIndex + 1) Mod groundItems.Count
+            Case Command.Up
                 currentItemIndex = (currentItemIndex + groundItems.Count - 1) Mod groundItems.Count
             Case Command.Green, Command.Blue
                 Return PickUpItem()

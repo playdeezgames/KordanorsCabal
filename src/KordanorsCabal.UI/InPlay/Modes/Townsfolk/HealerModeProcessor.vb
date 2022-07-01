@@ -3,6 +3,9 @@
 
     Const WelcomeButtonIndex = 0
     Const HealButtonIndex = 1
+
+    Const BuyPotionIndex = 5
+
     Const GoodByeButtonIndex = 9
 
 
@@ -18,6 +21,10 @@
                 Else
                     buffer.WriteText((0, 1), defaultResponse, False, Hue.Black)
                 End If
+            Case BuyPotionIndex
+                buffer.WriteText((0, 1), $"I sell potions for {ItemType.Potion.PurchasePrice.Value} money.", False, Hue.Black)
+                buffer.WriteText((0, 3), $"You have {player.Money} money.", False, Hue.Black)
+                buffer.WriteText((0, 4), $"You have {player.GetItemTypeCount(ItemType.Potion)} potions.", False, Hue.Black)
             Case Else
                 buffer.WriteText((0, 1), defaultResponse, False, Hue.Black)
         End Select
@@ -28,6 +35,7 @@
         If player.NeedsHealing Then
             Buttons(HealButtonIndex).Title = "Heal me!"
         End If
+        Buttons(BuyPotionIndex).Title = "Buy Potion"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
     End Sub
 
@@ -37,7 +45,9 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case HealButtonIndex
-                player.SetStatistic(CharacterStatisticType.Wounds, 0)
+                player.Heal()
+            Case BuyPotionIndex
+                player.Buy(ItemType.Potion)
         End Select
         Return UIState.InPlay
     End Function

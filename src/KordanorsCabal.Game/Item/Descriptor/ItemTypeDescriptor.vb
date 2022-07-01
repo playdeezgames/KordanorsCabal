@@ -6,6 +6,11 @@
             Return 0!
         End Get
     End Property
+    Overridable ReadOnly Property PurchasePrice() As Long?
+        Get
+            Return Nothing
+        End Get
+    End Property
 End Class
 Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =
@@ -16,6 +21,7 @@ Module ItemTypeDescriptorUtility
             {ItemType.GoldKey, New GoldKeyDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
+            {ItemType.Potion, New PotionDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor}
         }
 End Module

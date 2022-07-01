@@ -12,6 +12,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.GoldKey, New GoldKeyUIDescriptor},
             {ItemType.IronKey, New IronKeyUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
+            {ItemType.Potion, New PotionUIDescriptor},
             {ItemType.SilverKey, New SilverKeyUIDescriptor}
         }
 End Module

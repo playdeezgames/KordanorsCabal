@@ -40,6 +40,10 @@
         End Get
     End Property
 
+    Public Function GetItemTypeCount(itemType As ItemType) As Integer
+        Return Inventory.Items.Where(Function(x) x.ItemType = itemType).Count
+    End Function
+
     Public Function CanMoveLeft() As Boolean
         Return CanMove(Direction.PreviousDirection.Value)
     End Function
@@ -52,6 +56,9 @@
         Return CanMove(Direction)
     End Function
 
+    Public Sub Heal()
+        SetStatistic(CharacterStatisticType.Wounds, 0)
+    End Sub
 
     Public Function CanMoveBackward() As Boolean
         Return CanMove(Direction.Opposite)
@@ -62,6 +69,21 @@
             Mode = Location.Feature.InteractionMode(Me)
         End If
     End Sub
+
+    Public Sub Buy(itemType As ItemType)
+        If CanBuy(itemType) Then
+            Dim price = itemType.PurchasePrice.Value
+            Money -= price
+            Inventory.Add(Item.Create(itemType))
+        End If
+    End Sub
+
+    Private Function CanBuy(itemType As ItemType) As Boolean
+        If itemType.PurchasePrice Is Nothing Then
+            Return False
+        End If
+        Return Money >= itemType.PurchasePrice.Value
+    End Function
 
     Public Function CanMove(direction As Direction) As Boolean
         If IsEncumbered Then
@@ -170,4 +192,13 @@
         ChangeStatistic(CharacterStatisticType.XP, xp)
         'TODO: level up
     End Sub
+
+    Property Money As Long
+        Get
+            Return GetStatistic(CharacterStatisticType.Money).Value
+        End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.Money, value)
+        End Set
+    End Property
 End Class

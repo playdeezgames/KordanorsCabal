@@ -8,8 +8,9 @@ Public Enum ItemType
     GoldKey
     PlatinumKey
     ElementalOrb
+    Potion
 End Enum
-Module ItemTypeExtensions
+Public Module ItemTypeExtensions
     <Extension>
     Function SpawnLocationTypes(itemType As ItemType) As HashSet(Of LocationType)
         Return ItemTypeDescriptors(itemType).SpawnLocationTypes
@@ -22,5 +23,9 @@ Module ItemTypeExtensions
     <Extension>
     Function Encumbrance(itemType As ItemType) As Single
         Return ItemTypeDescriptors(itemType).Encumbrance
+    End Function
+    <Extension>
+    Public Function PurchasePrice(itemType As ItemType) As Long?
+        Return ItemTypeDescriptors(itemType).PurchasePrice
     End Function
 End Module
