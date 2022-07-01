@@ -40,4 +40,8 @@ Public Module MainProcessor
             processors(uiState).UpdateBuffer(buffer)
         End If
     End Sub
+
+    Public PushUIState As Action(Of UIState)
+    Public PopUIState As Func(Of UIState)
+
 End Module

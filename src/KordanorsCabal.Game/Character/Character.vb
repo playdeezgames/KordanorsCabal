@@ -15,7 +15,6 @@
         End Get
     End Property
 
-
     Friend Shared Function Create(characterType As CharacterType, location As Location) As Character
         Dim character = FromId(CharacterData.Create(characterType, location.Id))
         For Each entry In characterType.InitialStatistics

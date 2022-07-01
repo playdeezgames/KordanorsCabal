@@ -21,9 +21,12 @@
     Private Shared Function UseItem() As UIState
         If InteractItem.CanUse Then
             World.PlayerCharacter.UseItem(InteractItem)
-            Return UIState.Inventory
+            MainProcessor.PushUIState(UIState.Inventory)
+            Return UIState.Message
         End If
-        Return UIState.InteractItem
+        PlayerCharacter.Messages.Enqueue(New Message(New List(Of String) From {"You cannot use that now!"}))
+        MainProcessor.PushUIState(UIState.InteractItem)
+        Return UIState.Message
     End Function
 
     Private Shared Function DropItem() As UIState

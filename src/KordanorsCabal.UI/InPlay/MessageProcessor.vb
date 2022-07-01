@@ -25,7 +25,7 @@
                 If World.PlayerCharacter.IsDead Then
                     Return UIState.Dead
                 End If
-                Return UIState.InPlay
+                Return PopUIState()
         End Select
         Return UIState.Message
     End Function

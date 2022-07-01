@@ -52,6 +52,7 @@
             Case TurnFightButtonIndex 'also the fight button!
                 If player.CanFight Then
                     player.Fight()
+                    MainProcessor.PushUIState(UIState.InPlay)
                     Return UIState.Message
                 End If
                 PushButtonIndex(0)

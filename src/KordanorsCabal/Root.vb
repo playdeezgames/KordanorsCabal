@@ -71,6 +71,8 @@ Public Class Root
         MediaPlayer.IsRepeating = True
         MediaPlayer.Play(minorTheme)
         AddHandler Game.SfxPlayer.PlaySfx, AddressOf HandleSfx
+        MainProcessor.PopUIState = AddressOf PopUIState
+        MainProcessor.PushUIState = AddressOf PushUIState
     End Sub
 
     Private Sub HandleSfx(sfx As Sfx)
@@ -148,4 +150,14 @@ Public Class Root
         spriteBatch.Draw(screenTexture, New Rectangle(0, 0, WindowWidth, WindowHeight), Color.White)
         spriteBatch.End()
     End Sub
+
+    Private ReadOnly uiStack As New Stack(Of UIState)
+
+    Private Sub PushUIState(pushedState As UIState)
+        uiStack.Push(pushedState)
+    End Sub
+    Private Function PopUIState() As UIState
+        uiState = uiStack.Pop
+        Return uiState
+    End Function
 End Class
