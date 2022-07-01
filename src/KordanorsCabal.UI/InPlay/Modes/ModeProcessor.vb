@@ -112,6 +112,8 @@
         If enemy IsNot Nothing Then
             ShowEnemy(buffer, (5, 5), enemy)
         End If
+
+        buffer.WriteTextCentered(1, player.Direction.Abbreviation, False, Hue.Purple)
     End Sub
 
     Private Sub ShowEnemy(buffer As PatternBuffer, spriteXY As (Integer, Integer), enemy As Character)
