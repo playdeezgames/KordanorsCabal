@@ -22,6 +22,12 @@
         End Get
     End Property
 
+    ReadOnly Property CanUse As Boolean
+        Get
+            Return ItemType.CanUse
+        End Get
+    End Property
+
     Friend Sub Destroy()
         ItemData.Clear(Id)
     End Sub
@@ -29,4 +35,8 @@
     Friend Function Encumbrance() As Single
         Return ItemType.Encumbrance
     End Function
+
+    Friend Sub Use(character As Character)
+        ItemType.Use(character)
+    End Sub
 End Class

@@ -6,6 +6,18 @@
     End Property
 
     MustOverride ReadOnly Property Name() As String
+
+    Overridable ReadOnly Property MinimumValue() As Long
+        Get
+            Return 0
+        End Get
+    End Property
+
+    Overridable ReadOnly Property MaximumValue() As Long
+        Get
+            Return Long.MaxValue
+        End Get
+    End Property
 End Class
 Friend Module CharacterStatisticTypeDescriptorUtility
     Friend ReadOnly CharacterStatisticTypeDescriptors As IReadOnlyDictionary(Of CharacterStatisticType, CharacterStatisticTypeDescriptor) =

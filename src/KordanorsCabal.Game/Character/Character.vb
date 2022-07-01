@@ -25,7 +25,7 @@
     End Function
 
     Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
-        CharacterStatisticData.Write(Id, statisticType, statisticValue)
+        CharacterStatisticData.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
 
     Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)

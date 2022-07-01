@@ -15,10 +15,13 @@ Public Module ItemTypeExtensions
     Function SpawnLocationTypes(itemType As ItemType) As HashSet(Of LocationType)
         Return ItemTypeDescriptors(itemType).SpawnLocationTypes
     End Function
-
     <Extension>
     Function Name(itemType As ItemType) As String
         Return ItemTypeDescriptors(itemType).Name
+    End Function
+    <Extension>
+    Function CanUse(itemType As ItemType) As Boolean
+        Return ItemTypeDescriptors(itemType).CanUse
     End Function
     <Extension>
     Function Encumbrance(itemType As ItemType) As Single
@@ -28,4 +31,8 @@ Public Module ItemTypeExtensions
     Public Function PurchasePrice(itemType As ItemType) As Long?
         Return ItemTypeDescriptors(itemType).PurchasePrice
     End Function
+    <Extension>
+    Public Sub Use(itemType As ItemType, character As Character)
+        ItemTypeDescriptors(itemType).Use(character)
+    End Sub
 End Module

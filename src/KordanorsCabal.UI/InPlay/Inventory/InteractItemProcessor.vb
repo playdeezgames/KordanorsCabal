@@ -3,6 +3,7 @@
 
     Const CancelMenuItem = "Cancel"
     Const DropMenuItem = "Drop"
+    Const UseMenuItem = "Use"
 
 
     Public Sub New()
@@ -10,11 +11,20 @@
             New List(Of (String, Func(Of UIState))) From
             {
                 (CancelMenuItem, Function() UIState.Inventory),
-                (DropMenuItem, AddressOf DropItem)
+                (DropMenuItem, AddressOf DropItem),
+                (UseMenuItem, AddressOf UseItem)
             },
             5,
             UIState.InteractItem)
     End Sub
+
+    Private Shared Function UseItem() As UIState
+        If InteractItem.CanUse Then
+            World.PlayerCharacter.UseItem(InteractItem)
+            Return UIState.Inventory
+        End If
+        Return UIState.InteractItem
+    End Function
 
     Private Shared Function DropItem() As UIState
         World.PlayerCharacter.Location.Inventory.Add(InteractItem)

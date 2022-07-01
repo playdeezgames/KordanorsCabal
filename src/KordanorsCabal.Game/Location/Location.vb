@@ -28,6 +28,11 @@
             LocationData.WriteLocationType(Id, value)
         End Set
     End Property
+
+    Public Function HasStairs() As Boolean
+        Return Routes.Any(Function(x) x.Value.RouteType = RouteType.Stairs)
+    End Function
+
     Shared Function FromId(locationId As Long?) As Location
         Return If(locationId.HasValue, New Location(locationId.Value), Nothing)
     End Function

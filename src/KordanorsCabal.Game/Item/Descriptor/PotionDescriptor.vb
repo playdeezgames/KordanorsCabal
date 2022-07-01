@@ -27,4 +27,14 @@
             Return 25
         End Get
     End Property
+
+    Public Overrides ReadOnly Property CanUse As Boolean
+        Get
+            Return True
+        End Get
+    End Property
+
+    Public Overrides Sub Use(character As Character)
+        character.ChangeStatistic(CharacterStatisticType.Wounds, RNG.RollDice("-2d4"))
+    End Sub
 End Class

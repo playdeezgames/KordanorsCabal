@@ -25,6 +25,13 @@
         End Set
     End Property
 
+    Public Sub UseItem(item As Item)
+        If item.CanUse Then
+            item.Use(Me)
+            item.Destroy()
+        End If
+    End Sub
+
     Public Property Mode As PlayerMode
         Get
             Return CType(PlayerData.ReadMode().Value, PlayerMode)

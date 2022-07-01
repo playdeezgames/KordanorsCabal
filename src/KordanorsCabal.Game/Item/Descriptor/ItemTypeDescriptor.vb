@@ -11,6 +11,16 @@
             Return Nothing
         End Get
     End Property
+
+    Overridable ReadOnly Property CanUse As Boolean
+        Get
+            Return False
+        End Get
+    End Property
+
+    Overridable Sub Use(character As Character)
+        'nothing, by default
+    End Sub
 End Class
 Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =
