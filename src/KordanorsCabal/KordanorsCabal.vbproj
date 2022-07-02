@@ -26,7 +26,6 @@
     <None Remove="Content\EnemyHit.wav" />
     <None Remove="Content\LevelUp.wav" />
     <None Remove="Content\MinorTheme.ogg" />
-    <None Remove="Content\MinorTheme.wav" />
     <None Remove="Content\Miss.wav" />
     <None Remove="Content\PlayerDeath.wav" />
     <None Remove="Content\PlayerHit.wav" />
@@ -48,9 +47,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MinorTheme.ogg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\MinorTheme.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Miss.wav">
