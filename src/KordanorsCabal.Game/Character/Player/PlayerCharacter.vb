@@ -102,6 +102,28 @@
         Return Location.Routes(direction).CanMove(Me)
     End Function
 
+    Private Shared ReadOnly RunDirections As IReadOnlyList(Of Direction) =
+        New List(Of Direction) From
+        {
+            Direction.North,
+            Direction.East,
+            Direction.South,
+            Direction.West
+        }
+
+    Public Sub Run()
+        If CanFight Then
+            Direction = RNG.FromEnumerable(RunDirections)
+            If CanMove(Direction) Then
+                Move(Direction)
+                Messages.Enqueue(New Message(New List(Of String) From {"You successfully ran!"}))
+                Exit Sub
+            End If
+            Messages.Enqueue(New Message(New List(Of String) From {"You fail to run!"}))
+            DoCounterAttacks()
+        End If
+    End Sub
+
     Friend Function HasItemType(itemType As ItemType) As Boolean
         Return Inventory.Items.Any(Function(x) x.ItemType = itemType)
     End Function

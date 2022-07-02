@@ -3,10 +3,10 @@
 
     Const TurnFightButtonIndex = 0
     Const InteractIntimidateButtonIndex = 1
-    Const GroundButtonIndex = 2 'enemies!
-    Const StatusLevelUpButtonIndex = 3 'level up!
+    Const GroundEnemiesButtonIndex = 2
+    Const StatusLevelUpButtonIndex = 3
     Const MapButtonIndex = 4
-    Const MoveButtonIndex = 5
+    Const MoveRunButtonIndex = 5
     Const InventoryButtonIndex = 6
     '7 Equipment?
     '8
@@ -32,16 +32,20 @@
     End Sub
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
         Buttons(TurnFightButtonIndex).Title = If(player.CanFight, "FIGHT!", "Turn...")
-        Buttons(MoveButtonIndex).Title = "Move..."
+        Buttons(MoveRunButtonIndex).Title = If(player.CanFight, "RUN!", "Move...")
         Buttons(MenuButtonIndex).Title = "Game Menu"
         Buttons(MapButtonIndex).Title = "Map"
         Buttons(StatusLevelUpButtonIndex).Title = If(player.IsFullyAssigned, "Status", "Level up!")
         If player.CanInteract Then
             Buttons(InteractIntimidateButtonIndex).Title = "Interact..."
         End If
-        If Not player.Location.Inventory.IsEmpty Then
-            Buttons(GroundButtonIndex).Title = "Ground..."
-        End If
+        Dim enemyCount = player.Location.Enemies(player).Count
+        Buttons(GroundEnemiesButtonIndex).Title =
+            If(player.CanFight,
+                $"Enemies({enemyCount})",
+                If(Not player.Location.Inventory.IsEmpty,
+                    "Ground...",
+                    ""))
         If Not player.Inventory.IsEmpty Then
             Buttons(InventoryButtonIndex).Title = "Inventory"
         End If
@@ -57,7 +61,12 @@
                 End If
                 PushButtonIndex(0)
                 player.Mode = PlayerMode.Turn
-            Case MoveButtonIndex
+            Case MoveRunButtonIndex
+                If player.CanFight Then
+                    player.Run()
+                    MainProcessor.PushUIState(UIState.InPlay)
+                    Return UIState.Message
+                End If
                 PushButtonIndex(0)
                 player.Mode = PlayerMode.Move
             Case InteractIntimidateButtonIndex
@@ -66,7 +75,10 @@
                     player.Interact()
                     Return UIState.InPlay
                 End If
-            Case GroundButtonIndex
+            Case GroundEnemiesButtonIndex
+                If player.CanFight Then
+                    Return UIState.Enemies
+                End If
                 If Not player.Location.Inventory.IsEmpty Then
                     Return UIState.GroundInventory
                 End If

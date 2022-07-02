@@ -23,4 +23,5 @@
     Dead
     Status
     LevelUp
+    Enemies
 End Enum
