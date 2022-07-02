@@ -79,7 +79,7 @@ Public Module World
         For Each characterType In AllCharacterTypes
             Dim characterCount = characterType.SpawnCount(dungeonLevel)
             While characterCount > 0
-                Dim location = RNG.FromEnumerable(locations.Where(Function(x) characterType.CanSpawn(x)))
+                Dim location = RNG.FromEnumerable(locations.Where(Function(x) characterType.CanSpawn(x, dungeonLevel)))
                 Character.Create(characterType, location)
                 characterCount -= 1
             End While

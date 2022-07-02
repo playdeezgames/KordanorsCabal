@@ -3,12 +3,12 @@
     MustOverride ReadOnly Property MaximumEncumbrance(character As Character) As Single
     MustOverride Function IsEnemy(character As Character) As Boolean
     MustOverride ReadOnly Property SpawnCount(level As Long) As Long
-    Overridable Function CanSpawn(location As Location) As Boolean
+    Overridable Function CanSpawn(location As Location, level As Long) As Boolean
         Return False
     End Function
     MustOverride ReadOnly Property Name As String
 
-    Overridable Function RollLoot() As Long
+    Overridable Function RollMoneyDrop() As Long
         Return 0
     End Function
 

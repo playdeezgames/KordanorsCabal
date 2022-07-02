@@ -24,8 +24,8 @@ Module CharacterTypeExtensions
         Return CharacterTypeDescriptors(characterType).SpawnCount(level)
     End Function
     <Extension>
-    Function CanSpawn(characterType As CharacterType, location As Location) As Boolean
-        Return CharacterTypeDescriptors(characterType).CanSpawn(location)
+    Function CanSpawn(characterType As CharacterType, location As Location, level As Long) As Boolean
+        Return CharacterTypeDescriptors(characterType).CanSpawn(location, level)
     End Function
     <Extension>
     Function Name(characterType As CharacterType) As String
@@ -33,7 +33,7 @@ Module CharacterTypeExtensions
     End Function
     <Extension>
     Function RollMoneyDrop(characterType As CharacterType) As Long
-        Return CharacterTypeDescriptors(characterType).RollLoot
+        Return CharacterTypeDescriptors(characterType).RollMoneyDrop
     End Function
     <Extension>
     Function PartingShot(characterType As CharacterType) As String
