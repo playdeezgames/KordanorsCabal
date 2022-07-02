@@ -22,8 +22,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Content\EnemyDeath.wav" />
+    <None Remove="Content\EnemyHit.wav" />
+    <None Remove="Content\LevelUp.wav" />
     <None Remove="Content\MinorTheme.ogg" />
     <None Remove="Content\MinorTheme.wav" />
+    <None Remove="Content\Miss.wav" />
+    <None Remove="Content\PlayerDeath.wav" />
+    <None Remove="Content\PlayerHit.wav" />
     <None Remove="Content\RollDice.wav" />
     <None Remove="Content\UnlockDoor.wav" />
     <None Remove="Icon.bmp" />
@@ -32,10 +38,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Content\EnemyDeath.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\EnemyHit.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\LevelUp.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\MinorTheme.ogg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MinorTheme.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Miss.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\PlayerDeath.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\PlayerHit.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\RollDice.wav">

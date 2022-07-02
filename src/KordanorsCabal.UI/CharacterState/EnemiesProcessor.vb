@@ -10,6 +10,7 @@
         Dim row = 1
         For Each enemy In enemies
             buffer.WriteText((0, row), $"{enemy.Name}({enemy.CurrentHP}/{enemy.MaximumHP})", False, Hue.Black)
+            row += 1
         Next
     End Sub
 

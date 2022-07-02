@@ -116,10 +116,10 @@
             Direction = RNG.FromEnumerable(RunDirections)
             If CanMove(Direction) Then
                 Move(Direction)
-                Messages.Enqueue(New Message(New List(Of String) From {"You successfully ran!"}))
+                Messages.Enqueue(New Message(New List(Of String) From {"You successfully ran!"})) 'TODO: sfx
                 Exit Sub
             End If
-            Messages.Enqueue(New Message(New List(Of String) From {"You fail to run!"}))
+            Messages.Enqueue(New Message(New List(Of String) From {"You fail to run!"})) 'TODO: shucks!
             DoCounterAttacks()
         End If
     End Sub
@@ -156,6 +156,7 @@
             Return
         End If
         Dim lines As New List(Of String)
+        Dim sfx As Sfx? = Nothing
         lines.Add($"Counter-atttack {enemyIndex}/{enemyCount}:")
         Dim attackRoll = enemy.RollAttack()
         lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
@@ -165,11 +166,13 @@
         Select Case result
             Case Is <= 0
                 lines.Add($"{enemy.Name} misses!")
+                sfx = Game.Sfx.Miss
             Case Else
                 Dim damage = enemy.DetermineDamage(result)
                 lines.Add($"{enemy.Name} does {damage} damage!")
                 DoDamage(damage)
                 If IsDead Then
+                    sfx = Game.Sfx.PlayerDeath
                     lines.Add($"{enemy.Name} kills you!")
                     Dim partingShot = enemy.PartingShot
                     If Not String.IsNullOrEmpty(partingShot) Then
@@ -177,13 +180,15 @@
                     End If
                     Exit Select
                 End If
+                sfx = Game.Sfx.PlayerHit
                 lines.Add($"You have {CurrentHP} HP left.")
         End Select
-        Messages.Enqueue(New Message(lines))
+        Messages.Enqueue(New Message(lines, sfx))
     End Sub
 
     Private Sub DoAttack()
         Dim lines As New List(Of String)
+        Dim sfx As Sfx? = Nothing
         Dim attackRoll = RollAttack()
         Dim enemy = Location.Enemies(Me).First
         lines.Add($"You roll an attack of {attackRoll}.")
@@ -193,12 +198,14 @@
         Select Case result
             Case Is <= 0
                 lines.Add("You miss!")
+                sfx = Game.Sfx.Miss
             Case Else
                 Dim damage = DetermineDamage(result)
                 lines.Add($"You do {damage} damage!")
                 enemy.DoDamage(damage)
                 If enemy.IsDead Then
                     lines.Add($"You kill {enemy.Name}!")
+                    sfx = Game.Sfx.EnemyDeath
                     Dim money As Long = enemy.RollMoneyDrop
                     If money > 0 Then
                         lines.Add($"You get {money} money!")
@@ -215,9 +222,10 @@
                     enemy.Destroy()
                     Exit Select
                 End If
+                sfx = Game.Sfx.EnemyHit
                 lines.Add($"{enemy.Name} has {enemy.CurrentHP} HP left.")
         End Select
-        Messages.Enqueue(New Message(lines))
+        Messages.Enqueue(New Message(lines, Sfx))
     End Sub
 
     Private Function AddXP(xp As Long) As Boolean

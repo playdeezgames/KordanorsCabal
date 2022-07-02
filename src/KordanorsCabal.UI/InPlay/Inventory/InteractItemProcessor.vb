@@ -24,7 +24,7 @@
             MainProcessor.PushUIState(UIState.Inventory)
             Return UIState.Message
         End If
-        PlayerCharacter.Messages.Enqueue(New Message(New List(Of String) From {"You cannot use that now!"}))
+        PlayerCharacter.Messages.Enqueue(New Message(New List(Of String) From {"You cannot use that now!"})) 'TODO: shucks!
         MainProcessor.PushUIState(UIState.InteractItem)
         Return UIState.Message
     End Function

@@ -3,6 +3,10 @@
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         Dim message = PlayerCharacter.Messages.First
+        If message.Sfx.HasValue Then
+            SfxPlayer.Play(message.Sfx.Value)
+            message.Sfx = Nothing
+        End If
         Dim row = 0
         buffer.Fill(Pattern.Space, False, Hue.Black)
         For Each line In message.Lines

@@ -107,6 +107,12 @@ Public Class Root
         New Dictionary(Of Sfx, String) From
         {
             {Sfx.CharacterCreation, "Content/RollDice.wav"},
+            {Sfx.EnemyDeath, "Content/EnemyDeath.wav"},
+            {Sfx.EnemyHit, "Content/EnemyHit.wav"},
+            {Sfx.LevelUp, "Content/LevelUp.wav"},
+            {Sfx.Miss, "Content/Miss.wav"},
+            {Sfx.PlayerDeath, "Content/PlayerDeath.wav"},
+            {Sfx.PlayerHit, "Content/PlayerHit.wav"},
             {Sfx.UnlockDoor, "Content/UnlockDoor.wav"}
         }
 
