@@ -31,7 +31,7 @@
 
     Friend Shared Function StartGame() As UIState
         World.Start()
-        If Not World.PlayerCharacter.IsFullyBaked Then
+        If Not World.PlayerCharacter.IsFullyAssigned Then
             Return UIState.FinalizeCharacter
         End If
         Return UIState.Prolog

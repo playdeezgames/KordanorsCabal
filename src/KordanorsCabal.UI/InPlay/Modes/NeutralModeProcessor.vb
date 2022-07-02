@@ -4,7 +4,7 @@
     Const TurnFightButtonIndex = 0
     Const InteractIntimidateButtonIndex = 1
     Const GroundButtonIndex = 2 'enemies!
-    Const StatusButtonIndex = 3 'level up!
+    Const StatusLevelUpButtonIndex = 3 'level up!
     Const MapButtonIndex = 4
     Const MoveButtonIndex = 5
     Const InventoryButtonIndex = 6
@@ -35,7 +35,7 @@
         Buttons(MoveButtonIndex).Title = "Move..."
         Buttons(MenuButtonIndex).Title = "Game Menu"
         Buttons(MapButtonIndex).Title = "Map"
-        Buttons(StatusButtonIndex).Title = "Status"
+        Buttons(StatusLevelUpButtonIndex).Title = If(player.IsFullyAssigned, "Status", "Level up!")
         If player.CanInteract Then
             Buttons(InteractIntimidateButtonIndex).Title = "Interact..."
         End If
@@ -78,7 +78,10 @@
                 End If
             Case MapButtonIndex
                 Return UIState.Map
-            Case StatusButtonIndex
+            Case StatusLevelUpButtonIndex
+                If Not player.IsFullyAssigned Then
+                    Return UIState.LevelUp
+                End If
                 Return UIState.Status
         End Select
         Return UIState.InPlay

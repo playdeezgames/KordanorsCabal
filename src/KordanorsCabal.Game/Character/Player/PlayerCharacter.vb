@@ -5,13 +5,13 @@
         MyBase.New(PlayerData.Read().Value)
     End Sub
 
-    ReadOnly Property IsFullyBaked As Boolean
+    ReadOnly Property IsFullyAssigned As Boolean
         Get
             Return If(GetStatistic(CharacterStatisticType.Unassigned), 0) = 0
         End Get
     End Property
     Public Sub AssignPoint(statisticType As CharacterStatisticType)
-        If Not IsFullyBaked Then
+        If Not IsFullyAssigned Then
             ChangeStatistic(statisticType, 1)
             ChangeStatistic(CharacterStatisticType.Unassigned, -1)
         End If
@@ -185,7 +185,9 @@
                     Dim xp As Long = enemy.XPValue
                     If xp > 0 Then
                         lines.Add($"You get {xp} XP!")
-                        AddXP(xp)
+                        If AddXP(xp) Then
+                            lines.Add($"You level up!")
+                        End If
                     End If
                     enemy.Destroy()
                     Exit Select
@@ -195,10 +197,20 @@
         Messages.Enqueue(New Message(lines))
     End Sub
 
-    Private Sub AddXP(xp As Long)
+    Private Function AddXP(xp As Long) As Boolean
         ChangeStatistic(CharacterStatisticType.XP, xp)
-        'TODO: level up
-    End Sub
+        Dim xpGoal = GetStatistic(CharacterStatisticType.XPGoal).Value
+        If GetStatistic(CharacterStatisticType.XP).Value >= xpGoal Then
+            ChangeStatistic(CharacterStatisticType.XP, -xpGoal)
+            ChangeStatistic(CharacterStatisticType.XPGoal, xpGoal)
+            ChangeStatistic(CharacterStatisticType.Unassigned, 1)
+            SetStatistic(CharacterStatisticType.Wounds, 0)
+            SetStatistic(CharacterStatisticType.Stress, 0)
+            SetStatistic(CharacterStatisticType.Fatigue, 0)
+            Return True
+        End If
+        Return False
+    End Function
 
     Property Money As Long
         Get

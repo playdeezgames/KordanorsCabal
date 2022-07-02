@@ -22,4 +22,5 @@
     Message
     Dead
     Status
+    LevelUp
 End Enum
