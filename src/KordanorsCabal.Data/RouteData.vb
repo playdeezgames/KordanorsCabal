@@ -22,19 +22,35 @@
     End Sub
 
     Public Sub WriteRouteType(routeId As Long, routeType As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (RouteTypeColumn, routeType), (RouteIdColumn, routeId))
+        WriteColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (RouteTypeColumn, routeType),
+            (RouteIdColumn, routeId))
     End Sub
 
     Public Function ReadRouteType(routeId As Long) As Long?
-        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, RouteTypeColumn, (RouteIdColumn, routeId))
+        Return ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            RouteTypeColumn,
+            (RouteIdColumn, routeId))
     End Function
 
     Public Function ReadToLocation(routeId As Long) As Long?
-        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ToLocationIdColumn, (RouteIdColumn, routeId))
+        Return ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            ToLocationIdColumn,
+            (RouteIdColumn, routeId))
     End Function
 
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long))
-        Return ReadRecordsWithColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, (DirectionColumn, RouteIdColumn), (LocationIdColumn, locationId))
+        Return ReadRecordsWithColumnValue(Of Long, Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            (DirectionColumn, RouteIdColumn),
+            (LocationIdColumn, locationId))
     End Function
 
     Public Function Create(locationId As Long, direction As Long, routeType As Long, toLocationId As Long) As Long

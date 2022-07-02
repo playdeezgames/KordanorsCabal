@@ -9,6 +9,8 @@
             );")
     End Sub
     Public Function Create() As Long
-        Return CreateRecord(AddressOf Initialize, TableName)
+        Return CreateRecord(
+            AddressOf Initialize,
+            TableName)
     End Function
 End Module

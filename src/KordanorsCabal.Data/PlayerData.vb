@@ -19,30 +19,58 @@ Public Module PlayerData
     End Sub
 
     Public Sub WriteDirection(direction As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (DirectionColumn, direction), (PlayerIdColumn, FixedPlayerId))
+        WriteColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (DirectionColumn, direction),
+            (PlayerIdColumn, FixedPlayerId))
     End Sub
 
     Public Function ReadMode() As Long?
-        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ModeColumn, (PlayerIdColumn, FixedPlayerId))
+        Return ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName, ModeColumn,
+            (PlayerIdColumn, FixedPlayerId))
     End Function
 
     Public Sub WriteMode(mode As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (ModeColumn, mode), (PlayerIdColumn, FixedPlayerId))
+        WriteColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (ModeColumn, mode),
+            (PlayerIdColumn, FixedPlayerId))
     End Sub
 
     Public Function ReadDirection() As Long?
-        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, DirectionColumn, (PlayerIdColumn, FixedPlayerId))
+        Return ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            DirectionColumn,
+            (PlayerIdColumn, FixedPlayerId))
     End Function
 
     Public Function Read() As Long?
-        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (PlayerIdColumn, FixedPlayerId))
+        Return ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            CharacterIdColumn,
+            (PlayerIdColumn, FixedPlayerId))
     End Function
 
     Public Sub Write(characterId As Long, direction As Long, mode As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, (PlayerIdColumn, FixedPlayerId), (CharacterIdColumn, characterId), (DirectionColumn, direction), (ModeColumn, mode))
+        ReplaceRecord(
+            AddressOf Initialize,
+            TableName,
+            (PlayerIdColumn, FixedPlayerId),
+            (CharacterIdColumn, characterId),
+            (DirectionColumn, direction),
+            (ModeColumn, mode))
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
+        ClearForColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (CharacterIdColumn, characterId))
     End Sub
 End Module

@@ -16,14 +16,27 @@
             );")
     End Sub
     Public Sub Write(characterId As Long, statisticType As Long, statisticValue As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (StatisticTypeColumn, statisticType), (StatisticValueColumn, statisticValue))
+        ReplaceRecord(
+            AddressOf Initialize,
+            TableName,
+            (CharacterIdColumn, characterId),
+            (StatisticTypeColumn, statisticType),
+            (StatisticValueColumn, statisticValue))
     End Sub
 
     Public Function Read(characterId As Long, statisticType As Long) As Long?
-        Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, StatisticValueColumn, (CharacterIdColumn, characterId), (StatisticTypeColumn, statisticType))
+        Return ReadColumnValue(Of Long, Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            StatisticValueColumn,
+            (CharacterIdColumn, characterId),
+            (StatisticTypeColumn, statisticType))
     End Function
 
     Friend Sub ClearForCharacter(characterId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
+        ClearForColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (CharacterIdColumn, characterId))
     End Sub
 End Module

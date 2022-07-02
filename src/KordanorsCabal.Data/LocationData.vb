@@ -12,7 +12,11 @@
     End Sub
 
     Public Function ReadForLocationType(locationType As Long) As IEnumerable(Of Long)
-        Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, LocationIdColumn, (LocationTypeColumn, locationType))
+        Return ReadRecordsWithColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            LocationIdColumn,
+            (LocationTypeColumn, locationType))
     End Function
 
     Public Sub WriteLocationType(locationId As Long, locationType As Long)
@@ -32,6 +36,9 @@
     End Function
 
     Public Function Create(locationType As Long) As Long
-        Return CreateRecord(AddressOf Initialize, TableName, (LocationTypeColumn, locationType))
+        Return CreateRecord(
+            AddressOf Initialize,
+            TableName,
+            (LocationTypeColumn, locationType))
     End Function
 End Module
