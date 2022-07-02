@@ -158,9 +158,9 @@
         Return If(value < 0, 0, If(value > maximumDamage, maximumDamage, value))
     End Function
 
-    ReadOnly Property RollLoot As Long
+    ReadOnly Property RollMoneyDrop As Long
         Get
-            Return CharacterType.RollLoot
+            Return CharacterType.RollMoneyDrop
         End Get
     End Property
 
@@ -176,4 +176,11 @@
         End Get
     End Property
 
+    Friend Sub DropLoot()
+        'TODO: unequip everything
+        For Each item In Inventory.Items
+            Location.Inventory.Add(item)
+        Next
+        CharacterType.DropLoot(Location)
+    End Sub
 End Class

@@ -50,6 +50,10 @@
         End Get
     End Property
 
+    Public Overrides Sub DropLoot(location As Location)
+        'drop nothing
+    End Sub
+
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return character.CharacterType <> CharacterType.N00b
     End Function

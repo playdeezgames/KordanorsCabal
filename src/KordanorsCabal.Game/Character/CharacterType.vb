@@ -32,7 +32,7 @@ Module CharacterTypeExtensions
         Return CharacterTypeDescriptors(characterType).Name
     End Function
     <Extension>
-    Function RollLoot(characterType As CharacterType) As Long
+    Function RollMoneyDrop(characterType As CharacterType) As Long
         Return CharacterTypeDescriptors(characterType).RollLoot
     End Function
     <Extension>
@@ -43,4 +43,8 @@ Module CharacterTypeExtensions
     Function XPValue(characterType As CharacterType) As Long
         Return CharacterTypeDescriptors(characterType).XPValue
     End Function
+    <Extension>
+    Sub DropLoot(characterType As CharacterType, location As Location)
+        CharacterTypeDescriptors(characterType).DropLoot(location)
+    End Sub
 End Module

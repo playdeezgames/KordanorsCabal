@@ -17,6 +17,8 @@
     End Function
 
     MustOverride ReadOnly Property XPValue As Long
+
+    MustOverride Sub DropLoot(location As Location)
 End Class
 Friend Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of CharacterType, CharacterTypeDescriptor) =

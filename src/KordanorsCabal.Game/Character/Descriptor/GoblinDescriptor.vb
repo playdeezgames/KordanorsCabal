@@ -66,4 +66,10 @@
 
         Return RNG.FromEnumerable(partingShots)
     End Function
+
+    Public Overrides Sub DropLoot(location As Location)
+        If RNG.RollDice("1d2") > 1 Then
+            location.Inventory.Add(Item.Create(ItemType.GoblinEar))
+        End If
+    End Sub
 End Class
