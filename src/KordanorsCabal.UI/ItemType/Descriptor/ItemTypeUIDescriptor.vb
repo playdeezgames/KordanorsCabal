@@ -9,10 +9,12 @@ Module ItemTypeUIDescriptorUtility
         {
             {ItemType.CopperKey, New CopperKeyUIDescriptor},
             {ItemType.ElementalOrb, New ElementalOrbUIDescriptor},
+            {ItemType.GoblinEar, New GoblinEarUIDescriptor},
             {ItemType.GoldKey, New GoldKeyUIDescriptor},
             {ItemType.IronKey, New IronKeyUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
             {ItemType.Potion, New PotionUIDescriptor},
-            {ItemType.SilverKey, New SilverKeyUIDescriptor}
+            {ItemType.SilverKey, New SilverKeyUIDescriptor},
+            {ItemType.SkullFragment, New SkullFragmentUIDescriptor}
         }
 End Module

@@ -28,10 +28,12 @@ Module ItemTypeDescriptorUtility
         {
             {ItemType.CopperKey, New CopperKeyDescriptor},
             {ItemType.ElementalOrb, New ElementalOrbDescriptor},
+            {ItemType.GoblinEar, New GoblinEarDescriptor},
             {ItemType.GoldKey, New GoldKeyDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},
-            {ItemType.SilverKey, New SilverKeyDescriptor}
+            {ItemType.SilverKey, New SilverKeyDescriptor},
+            {ItemType.SkullFragment, New SkullFragmentDescriptor}
         }
 End Module

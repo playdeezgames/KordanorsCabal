@@ -9,6 +9,8 @@ Public Enum ItemType
     PlatinumKey
     ElementalOrb
     Potion
+    GoblinEar
+    SkullFragment
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
