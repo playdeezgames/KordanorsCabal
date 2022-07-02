@@ -7,7 +7,7 @@ Imports Microsoft.Xna.Framework.Media
 
 Public Class Root
     Inherits Microsoft.Xna.Framework.Game
-    Private graphics As GraphicsDeviceManager
+    Private ReadOnly graphics As GraphicsDeviceManager
     Private spriteBatch As SpriteBatch
     Private screenTexture As Texture2D
     Private renderer As Renderer(Of Color)
@@ -56,7 +56,6 @@ Public Class Root
     Protected Overrides Sub Initialize()
         MyBase.Initialize()
         Window.Title = "Kordanor's Cabal"
-        'TODO: load in config for saved off screen size and master volume
         Dim config = UIConfig.Load()
         ScreenSize = config.ScreenSize
         UpdateWindowSize()
@@ -118,7 +117,6 @@ Public Class Root
         screenTexture = New Texture2D(GraphicsDevice, ViewWidth, ViewHeight)
         renderer = New Renderer(Of Color)((BorderWidth, BorderHeight), (CellColumns, CellRows), (CellWidth, CellHeight), HueColors)
         minorTheme = Song.FromUri("MinorTheme", New Uri("Content/MinorTheme.ogg", UriKind.Relative))
-        'minorTheme = Song.FromUri("Music", New Uri("Content/Music.ogg", UriKind.Relative))
         soundEffects = soundEffectFiles.ToDictionary(Function(x) x.Key, Function(x) SoundEffect.FromFile(x.Value))
     End Sub
     Protected Overrides Sub Update(gameTime As GameTime)
