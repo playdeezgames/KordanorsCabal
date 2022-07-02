@@ -25,6 +25,7 @@ Friend Module CharacterTypeDescriptorUtility
         New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
         {
             {CharacterType.Goblin, New GoblinDescriptor},
+            {CharacterType.GoblinElite, New GoblinEliteDescriptor},
             {CharacterType.N00b, New N00bDescriptor},
             {CharacterType.Skeleton, New SkeletonDescriptor}
         }

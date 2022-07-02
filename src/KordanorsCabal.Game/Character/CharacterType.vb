@@ -5,6 +5,7 @@ Public Enum CharacterType
     N00b
     Skeleton
     Goblin
+    GoblinElite
 End Enum
 Module CharacterTypeExtensions
     <Extension>
