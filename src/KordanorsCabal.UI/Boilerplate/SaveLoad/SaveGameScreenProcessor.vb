@@ -28,6 +28,10 @@ Friend Class SaveGameScreenProcessor
         ValidateSlots()
     End Sub
 
+    Public Overrides Sub Initialize()
+        Validated = False
+    End Sub
+
     Friend Sub ValidateSlots()
         If Not Validated Then
             Dim tempFilename = $"{Guid.NewGuid}.db"
