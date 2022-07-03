@@ -42,4 +42,8 @@ Public Module ItemTypeExtensions
     Public Function RollSpawnCount(itemType As ItemType, level As Long) As Long
         Return ItemTypeDescriptors(itemType).RollSpawnCount(level)
     End Function
+    <Extension>
+    Public Function EquipSlot(itemType As ItemType) As EquipSlot?
+        Return ItemTypeDescriptors(itemType).EquipSlot
+    End Function
 End Module

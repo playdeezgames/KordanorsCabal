@@ -29,4 +29,10 @@
                 Return 0
         End Select
     End Function
+
+    Public Overrides ReadOnly Property EquipSlot As EquipSlot?
+        Get
+            Return Game.EquipSlot.Weapon
+        End Get
+    End Property
 End Class

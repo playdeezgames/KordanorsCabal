@@ -4,6 +4,7 @@
     Const CancelMenuItem = "Cancel"
     Const DropMenuItem = "Drop"
     Const UseMenuItem = "Use"
+    Const EquipMenuItem = "Equip"
 
 
     Public Sub New()
@@ -12,11 +13,18 @@
             {
                 (CancelMenuItem, Function() UIState.Inventory),
                 (DropMenuItem, AddressOf DropItem),
-                (UseMenuItem, AddressOf UseItem)
+                (UseMenuItem, AddressOf UseItem),
+                (EquipMenuItem, AddressOf EquipItem)
             },
             5,
             UIState.InteractItem)
     End Sub
+
+    Private Shared Function EquipItem() As UIState
+        World.PlayerCharacter.Equip(InteractItem)
+        MainProcessor.PushUIState(UIState.Inventory)
+        Return UIState.Message
+    End Function
 
     Private Shared Function UseItem() As UIState
         If InteractItem.CanUse Then

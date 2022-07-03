@@ -28,7 +28,7 @@
             (InventoryIdColumn, inventoryId))
     End Function
 
-    Friend Sub ClearForItem(itemId As Long)
+    Public Sub ClearForItem(itemId As Long)
         ClearForColumnValue(
             AddressOf Initialize,
             TableName,

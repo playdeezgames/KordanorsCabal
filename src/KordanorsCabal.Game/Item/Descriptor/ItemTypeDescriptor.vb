@@ -25,6 +25,12 @@
     Overridable Function RollSpawnCount(level As Long) As Long
         Return 0
     End Function
+
+    Overridable ReadOnly Property EquipSlot As EquipSlot?
+        Get
+            Return Nothing
+        End Get
+    End Property
 End Class
 Public Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =

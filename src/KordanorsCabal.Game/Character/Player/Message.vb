@@ -5,4 +5,10 @@
         Me.Lines = lines
         Me.Sfx = sfx
     End Sub
+    Shared Function Create(sfx As Sfx, ParamArray lines() As String) As Message
+        Return New Message(lines, sfx)
+    End Function
+    Shared Function Create(ParamArray lines() As String) As Message
+        Return New Message(lines, Nothing)
+    End Function
 End Class

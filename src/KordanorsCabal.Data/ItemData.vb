@@ -26,6 +26,7 @@
     End Function
 
     Public Sub Clear(itemId As Long)
+        CharacterEquipSlotData.ClearForItem(itemId)
         InventoryItemData.ClearForItem(itemId)
         ClearForColumnValue(
             AddressOf Initialize,

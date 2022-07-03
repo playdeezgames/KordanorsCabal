@@ -28,6 +28,12 @@
         End Get
     End Property
 
+    ReadOnly Property CanEquip As Boolean
+        Get
+            Return ItemType.EquipSlot.HasValue
+        End Get
+    End Property
+
     Friend Sub Destroy()
         ItemData.Clear(Id)
     End Sub
@@ -39,4 +45,10 @@
     Friend Sub Use(character As Character)
         ItemType.Use(character)
     End Sub
+
+    Friend ReadOnly Property EquipSlot() As EquipSlot?
+        Get
+            Return ItemType.EquipSlot
+        End Get
+    End Property
 End Class

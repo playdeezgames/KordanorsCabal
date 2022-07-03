@@ -25,6 +25,30 @@
         End Set
     End Property
 
+    ReadOnly Property Equipment As IReadOnlyDictionary(Of EquipSlot, Item)
+        Get
+            Return CharacterEquipSlotData.Read(Id).
+                ToDictionary(
+                    Function(x) CType(x.Item1, EquipSlot),
+                    Function(x) Item.FromId(x.Item2))
+        End Get
+    End Property
+
+    Public Sub Equip(item As Item)
+        If item.CanEquip Then
+            InventoryItemData.ClearForItem(item.Id)
+            Dim equipSlot = item.EquipSlot.Value
+            If Equipment.ContainsKey(equipSlot) Then
+                Dim oldItem = Equipment(equipSlot)
+                Inventory.Add(oldItem)
+            End If
+            CharacterEquipSlotData.Write(Id, equipSlot, item.Id)
+            Messages.Enqueue(Message.Create($"You equip {item.Name} to {equipSlot.Name}."))
+            Return
+        End If
+        Messages.Enqueue(Message.Create($"You cannot equip {item.Name}!"))
+    End Sub
+
     Public Sub UseItem(item As Item)
         If item.CanUse Then
             item.Use(Me)
