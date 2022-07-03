@@ -4,9 +4,9 @@ Public Enum EquipSlot
     None
     Weapon
 End Enum
-Module EquipSlotExtensions
+Public Module EquipSlotExtensions
     <Extension>
-    Function Name(equipSlot As EquipSlot) As String
+    Public Function Name(equipSlot As EquipSlot) As String
         Return EquipSlotDescriptors(equipSlot).Name
     End Function
 End Module

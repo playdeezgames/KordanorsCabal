@@ -9,6 +9,7 @@ Public Module MainProcessor
             {UIState.ConfirmQuit, New ConfirmQuitProcessor},
             {UIState.Dead, New DeadProcessor},
             {UIState.Enemies, New EnemiesProcessor},
+            {UIState.Equipment, New EquipmentProcessor},
             {UIState.FinalizeCharacter, New FinalizeCharacterProcessor(UIState.FinalizeCharacter, UIState.Prolog, UIState.TitleScreen, "  Finalize Character  ")},
             {UIState.GameMenuScreen, New GameMenuScreenProcessor},
             {UIState.GroundInventory, New GroundInventoryProcessor},

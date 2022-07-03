@@ -8,7 +8,7 @@
     Const MapButtonIndex = 4
     Const MoveRunButtonIndex = 5
     Const InventoryButtonIndex = 6
-    '7 Equipment?
+    Const EquipmentButtonIndex = 7
     '8
     Const MenuButtonIndex = 9
 
@@ -35,6 +35,7 @@
         Buttons(MoveRunButtonIndex).Title = If(player.CanFight, "RUN!", "Move...")
         Buttons(MenuButtonIndex).Title = "Game Menu"
         Buttons(MapButtonIndex).Title = "Map"
+        Buttons(EquipmentButtonIndex).Title = "Equipment"
         Buttons(StatusLevelUpButtonIndex).Title = If(player.IsFullyAssigned, "Status", "Level up!")
         If player.CanInteract Then
             Buttons(InteractIntimidateButtonIndex).Title = "Interact..."
@@ -90,6 +91,8 @@
                 End If
             Case MapButtonIndex
                 Return UIState.Map
+            Case EquipmentButtonIndex
+                Return UIState.Equipment
             Case StatusLevelUpButtonIndex
                 If Not player.IsFullyAssigned Then
                     Return UIState.LevelUp

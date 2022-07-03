@@ -24,4 +24,5 @@
     Status
     LevelUp
     Enemies
+    Equipment
 End Enum
