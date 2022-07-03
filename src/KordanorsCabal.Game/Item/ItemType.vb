@@ -11,11 +11,12 @@ Public Enum ItemType
     Potion
     GoblinEar
     SkullFragment
+    Dagger
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
-    Function SpawnLocationTypes(itemType As ItemType) As HashSet(Of LocationType)
-        Return ItemTypeDescriptors(itemType).SpawnLocationTypes
+    Function SpawnLocationTypes(itemType As ItemType, level As Long) As HashSet(Of LocationType)
+        Return ItemTypeDescriptors(itemType).SpawnLocationTypes(level)
     End Function
     <Extension>
     Function Name(itemType As ItemType) As String
@@ -37,4 +38,8 @@ Public Module ItemTypeExtensions
     Public Sub Use(itemType As ItemType, character As Character)
         ItemTypeDescriptors(itemType).Use(character)
     End Sub
+    <Extension>
+    Public Function RollSpawnCount(itemType As ItemType, level As Long) As Long
+        Return ItemTypeDescriptors(itemType).RollSpawnCount(level)
+    End Function
 End Module

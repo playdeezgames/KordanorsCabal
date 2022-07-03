@@ -1,7 +1,7 @@
 ﻿Friend Class PotionDescriptor
     Inherits ItemTypeDescriptor
 
-    Public Overrides ReadOnly Property SpawnLocationTypes As HashSet(Of LocationType)
+    Public Overrides ReadOnly Property SpawnLocationTypes(level As Long) As HashSet(Of LocationType)
         Get
             Return New HashSet(Of LocationType) From
                 {
@@ -47,4 +47,8 @@
                 }))
         End If
     End Sub
+
+    Public Overrides Function RollSpawnCount(level As Long) As Long
+        Return RNG.RollDice("3d6")
+    End Function
 End Class

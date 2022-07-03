@@ -67,7 +67,7 @@ Public Module World
         Dim maze = New Maze(Of Direction)(MazeColumns, MazeRows, MazeDirections)
         maze.Generate()
         Dim locations = CreateLocations(maze, dungeonLevel)
-        PopulateLocations(locations, bossKeyType, bossRouteType)
+        PopulateLocations(locations, bossKeyType, bossRouteType, dungeonLevel)
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.Routes.Count > 1))
         Route.Create(fromLocation, Direction.Down, RouteType.Stairs, startingLocation)
         Route.Create(startingLocation, Direction.Up, RouteType.Stairs, fromLocation)
@@ -86,7 +86,7 @@ Public Module World
         Next
     End Sub
 
-    Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType)
+    Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType, dungeonLevel As Long)
         Dim partitions =
             locations.GroupBy(
                 Function(x) x.RouteCount = 1).
@@ -108,11 +108,26 @@ Public Module World
         partitions(LocationType.DungeonDeadEnd).Remove(bossLocation)
         partitions.Add(LocationType.DungeonBoss, New List(Of Location) From {bossLocation})
         For Each itemType In itemTypes
-            Dim locationTypes = itemType.SpawnLocationTypes
-            If locationTypes.Any Then
-                Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Contains(x.LocationType)))
-                spawnLocation.Inventory.Add(Item.Create(itemType))
-            End If
+            SpawnItem(locations, dungeonLevel, itemType)
+        Next
+        PopulateItems(locations, dungeonLevel)
+    End Sub
+
+    Private Sub SpawnItem(locations As IReadOnlyList(Of Location), dungeonLevel As Long, itemType As ItemType)
+        Dim locationTypes = itemType.SpawnLocationTypes(dungeonLevel)
+        If locationTypes.Any Then
+            Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Contains(x.LocationType)))
+            spawnLocation.Inventory.Add(Item.Create(itemType))
+        End If
+    End Sub
+
+    Private Sub PopulateItems(locations As IReadOnlyList(Of Location), dungeonLevel As Long)
+        For Each itemType In AllItemTypes
+            Dim itemCount As Long = itemType.RollSpawnCount(dungeonLevel)
+            While itemCount > 0
+                itemCount -= 1
+                SpawnItem(locations, dungeonLevel, itemType)
+            End While
         Next
     End Sub
 

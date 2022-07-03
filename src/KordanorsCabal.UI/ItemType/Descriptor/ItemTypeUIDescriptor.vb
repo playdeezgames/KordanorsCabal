@@ -8,6 +8,7 @@ Module ItemTypeUIDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeUIDescriptor) From
         {
             {ItemType.CopperKey, New CopperKeyUIDescriptor},
+            {ItemType.Dagger, New DaggerUIDescriptor},
             {ItemType.ElementalOrb, New ElementalOrbUIDescriptor},
             {ItemType.GoblinEar, New GoblinEarUIDescriptor},
             {ItemType.GoldKey, New GoldKeyUIDescriptor},
