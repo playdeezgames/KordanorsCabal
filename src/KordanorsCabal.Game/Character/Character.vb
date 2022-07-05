@@ -202,6 +202,9 @@
     Private Sub DoOneWeaponWear()
         Dim item = RNG.FromEnumerable(Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing))
         item.ReduceDurability(1)
+        If item.IsBroken Then
+            item.Destroy()
+        End If
     End Sub
 
     Friend Sub DropLoot()

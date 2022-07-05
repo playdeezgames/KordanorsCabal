@@ -64,7 +64,7 @@
         End Get
     End Property
 
-    Friend ReadOnly Property MaximumDurability As Long?
+    Public ReadOnly Property MaximumDurability As Long?
         Get
             Return ItemType.MaximumDurability
         End Get
@@ -87,4 +87,19 @@
     Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
         ItemStatisticData.Write(Id, statisticType, value)
     End Sub
+
+    ReadOnly Property IsBroken As Boolean
+        Get
+            Return MaximumDurability.HasValue AndAlso Durability.Value > MaximumDurability.Value
+        End Get
+    End Property
+
+    ReadOnly Property Durability As Long?
+        Get
+            If MaximumDurability.HasValue Then
+                Return MaximumDurability.Value - GetStatistic(ItemStatisticType.Wear)
+            End If
+            Return Nothing
+        End Get
+    End Property
 End Class

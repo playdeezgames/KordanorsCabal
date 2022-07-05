@@ -47,4 +47,9 @@
             Return 1
         End Get
     End Property
+    Public Overrides ReadOnly Property MaximumDurability As Long?
+        Get
+            Return 10
+        End Get
+    End Property
 End Class
