@@ -227,7 +227,9 @@
                 Dim damage = DetermineDamage(result)
                 lines.Add($"You do {damage} damage!")
                 enemy.DoDamage(damage)
-                DoWeaponWear(damage)
+                For Each brokenItemType In DoWeaponWear(damage)
+                    lines.Add($"Yer {brokenItemType.Name} breaks!")
+                Next
                 If enemy.IsDead Then
                     lines.Add($"You kill {enemy.Name}!")
                     sfx = Game.Sfx.EnemyDeath

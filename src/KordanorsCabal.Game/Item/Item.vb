@@ -90,7 +90,7 @@
 
     ReadOnly Property IsBroken As Boolean
         Get
-            Return MaximumDurability.HasValue AndAlso Durability.Value > MaximumDurability.Value
+            Return MaximumDurability.HasValue AndAlso Durability.Value <= 0
         End Get
     End Property
 

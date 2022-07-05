@@ -192,20 +192,29 @@
         End Get
     End Property
 
-    Friend Sub DoWeaponWear(wear As Long)
+    Friend Function DoWeaponWear(wear As Long) As IEnumerable(Of ItemType)
+        Dim result As New List(Of ItemType)
         While wear > 0
-            DoOneWeaponWear()
+            Dim brokenItemType = DoOneWeaponWear()
+            If brokenItemType.HasValue Then
+                result.Add(brokenItemType.Value)
+            End If
             wear -= 1
         End While
-    End Sub
+        Return result
+    End Function
 
-    Private Sub DoOneWeaponWear()
-        Dim item = RNG.FromEnumerable(Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing))
-        item.ReduceDurability(1)
-        If item.IsBroken Then
-            item.Destroy()
+    Private Function DoOneWeaponWear() As ItemType?
+        Dim items = Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing)
+        If items.Any Then
+            Dim item = RNG.FromEnumerable(items)
+            item.ReduceDurability(1)
+            If item.IsBroken Then
+                DoOneWeaponWear = item.ItemType
+                item.Destroy()
+            End If
         End If
-    End Sub
+    End Function
 
     Friend Sub DropLoot()
         'TODO: unequip everything
