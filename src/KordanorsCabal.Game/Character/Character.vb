@@ -192,6 +192,18 @@
         End Get
     End Property
 
+    Friend Sub DoWeaponWear(wear As Long)
+        While wear > 0
+            DoOneWeaponWear()
+            wear -= 1
+        End While
+    End Sub
+
+    Private Sub DoOneWeaponWear()
+        Dim item = RNG.FromEnumerable(Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing))
+        item.ReduceDurability(1)
+    End Sub
+
     Friend Sub DropLoot()
         'TODO: unequip everything
         For Each item In Inventory.Items

@@ -194,6 +194,7 @@
                 Dim damage = enemy.DetermineDamage(result)
                 lines.Add($"{enemy.Name} does {damage} damage!")
                 DoDamage(damage)
+                enemy.DoWeaponWear(damage)
                 If IsDead Then
                     sfx = Game.Sfx.PlayerDeath
                     lines.Add($"{enemy.Name} kills you!")
@@ -211,13 +212,13 @@
 
     Private Sub DoAttack()
         Dim lines As New List(Of String)
-        Dim sfx As Sfx? = Nothing
         Dim attackRoll = RollAttack()
         Dim enemy = Location.Enemies(Me).First
         lines.Add($"You roll an attack of {attackRoll}.")
         Dim defendRoll = enemy.RollDefend()
         lines.Add($"{enemy.Name} rolls a defend of {defendRoll}.")
         Dim result = attackRoll - defendRoll
+        Dim sfx As Sfx?
         Select Case result
             Case Is <= 0
                 lines.Add("You miss!")
@@ -226,6 +227,7 @@
                 Dim damage = DetermineDamage(result)
                 lines.Add($"You do {damage} damage!")
                 enemy.DoDamage(damage)
+                DoWeaponWear(damage)
                 If enemy.IsDead Then
                     lines.Add($"You kill {enemy.Name}!")
                     sfx = Game.Sfx.EnemyDeath

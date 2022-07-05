@@ -63,4 +63,28 @@
             Return ItemType.AttackDice
         End Get
     End Property
+
+    Friend ReadOnly Property MaximumDurability As Long?
+        Get
+            Return ItemType.MaximumDurability
+        End Get
+    End Property
+
+    Friend Sub ReduceDurability(amount As Long)
+        If MaximumDurability.HasValue Then
+            ChangeStatistic(ItemStatisticType.Wear, amount)
+        End If
+    End Sub
+
+    Private Sub ChangeStatistic(statisticType As ItemStatisticType, delta As Long)
+        SetStatistic(statisticType, GetStatistic(statisticType) + delta)
+    End Sub
+
+    Private Function GetStatistic(statisticType As ItemStatisticType) As Long
+        Return If(ItemStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
+    End Function
+
+    Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
+        ItemStatisticData.Write(Id, statisticType, value)
+    End Sub
 End Class

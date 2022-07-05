@@ -54,4 +54,8 @@ Public Module ItemTypeExtensions
     Public Function MaximumDamage(itemType As ItemType) As Long?
         Return ItemTypeDescriptors(itemType).MaximumDamage
     End Function
+    <Extension>
+    Public Function MaximumDurability(itemType As ItemType) As Long?
+        Return ItemTypeDescriptors(itemType).MaximumDurability
+    End Function
 End Module

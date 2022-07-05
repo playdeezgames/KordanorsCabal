@@ -43,6 +43,12 @@
             Return Nothing
         End Get
     End Property
+
+    Overridable ReadOnly Property MaximumDurability As Long?
+        Get
+            Return Nothing
+        End Get
+    End Property
 End Class
 Public Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =
