@@ -25,4 +25,5 @@
     LevelUp
     Enemies
     Equipment
+    EquipmentDetail
 End Enum

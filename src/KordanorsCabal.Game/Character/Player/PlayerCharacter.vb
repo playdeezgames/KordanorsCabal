@@ -25,6 +25,14 @@
         End Set
     End Property
 
+    Public Sub Unequip(equipSlot As EquipSlot)
+        If Equipment.ContainsKey(equipSlot) Then
+            Dim item = Equipment(equipSlot)
+            Inventory.Add(item)
+            CharacterEquipSlotData.Clear(Id, equipSlot)
+        End If
+    End Sub
+
     ReadOnly Property Equipment As IReadOnlyDictionary(Of EquipSlot, Item)
         Get
             Return CharacterEquipSlotData.Read(Id).
@@ -274,5 +282,11 @@
         Set(value As Long)
             SetStatistic(CharacterStatisticType.Money, value)
         End Set
+    End Property
+
+    Public ReadOnly Property HasEquipment As Boolean
+        Get
+            Return Equipment.Any
+        End Get
     End Property
 End Class

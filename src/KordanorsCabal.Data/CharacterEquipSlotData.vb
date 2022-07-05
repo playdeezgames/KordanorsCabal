@@ -25,6 +25,14 @@
             (CharacterIdColumn, characterId))
     End Function
 
+    Public Sub Clear(characterId As Long, equipSlot As Long)
+        ClearForColumnValues(
+            AddressOf Initialize,
+            TableName,
+            (CharacterIdColumn, characterId),
+            (EquipSlotColumn, equipSlot))
+    End Sub
+
     Public Sub Write(characterId As Long, equipSlot As Long, itemId As Long)
         ReplaceRecord(
             AddressOf Initialize,

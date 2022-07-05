@@ -47,6 +47,7 @@
         If equipSlot = EquipSlot.None Then
             Return UIState.InPlay
         End If
-        Return UIState.Equipment
+        EquipmentDetailProcessor.EquipSlot = equipSlot
+        Return UIState.EquipmentDetail
     End Function
 End Class
