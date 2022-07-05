@@ -195,7 +195,7 @@
     Friend Function DoWeaponWear(wear As Long) As IEnumerable(Of ItemType)
         Dim result As New List(Of ItemType)
         While wear > 0
-            Dim brokenItemType = DoOneWeaponWear()
+            Dim brokenItemType = WearOneWeapon()
             If brokenItemType.HasValue Then
                 result.Add(brokenItemType.Value)
             End If
@@ -204,13 +204,13 @@
         Return result
     End Function
 
-    Private Function DoOneWeaponWear() As ItemType?
+    Private Function WearOneWeapon() As ItemType?
         Dim items = Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing)
         If items.Any Then
             Dim item = RNG.FromEnumerable(items)
             item.ReduceDurability(1)
             If item.IsBroken Then
-                DoOneWeaponWear = item.ItemType
+                WearOneWeapon = item.ItemType
                 item.Destroy()
             End If
         End If
