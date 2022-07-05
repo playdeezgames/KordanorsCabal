@@ -35,4 +35,16 @@
             Return Game.EquipSlot.Weapon
         End Get
     End Property
+
+    Public Overrides ReadOnly Property AttackDice As Long
+        Get
+            Return 2
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property MaximumDamage As Long?
+        Get
+            Return 1
+        End Get
+    End Property
 End Class

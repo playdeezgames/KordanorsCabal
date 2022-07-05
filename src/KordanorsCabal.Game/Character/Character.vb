@@ -93,13 +93,21 @@
     End Function
 
     Friend Function RollAttack() As Long
-        Dim dice = GetStatistic(CharacterStatisticType.Strength)
+        Dim dice = GetAttackDice()
         Dim result As Long = 0
         While dice > 0
             result += RNG.RollDice("1d6/6")
             dice -= 1
         End While
         Return result
+    End Function
+
+    Private Function GetAttackDice() As Long
+        Dim dice = GetStatistic(CharacterStatisticType.Strength).Value
+        For Each entry In Equipment
+            dice += entry.Value.AttackDice
+        Next
+        Return dice
     End Function
 
     ReadOnly Property Name As String
@@ -154,8 +162,16 @@
     End Property
 
     Function DetermineDamage(value As Long) As Long
-        Dim maximumDamage = GetStatistic(CharacterStatisticType.UnarmedMaximumDamage).Value
-        Return If(value < 0, 0, If(value > maximumDamage, maximumDamage, value))
+        Dim maximumDamage As Long? = Nothing
+        For Each entry In Equipment
+            Dim item = entry.Value
+            Dim itemMaximumDamage = item.MaximumDamage
+            If itemMaximumDamage.HasValue Then
+                maximumDamage = If(maximumDamage, 0) + itemMaximumDamage.Value
+            End If
+        Next
+        maximumDamage = If(maximumDamage, GetStatistic(CharacterStatisticType.UnarmedMaximumDamage).Value)
+        Return If(value < 0, 0, If(value > maximumDamage.Value, maximumDamage.Value, value))
     End Function
 
     ReadOnly Property RollMoneyDrop As Long
@@ -183,4 +199,13 @@
         Next
         CharacterType.DropLoot(Location)
     End Sub
+
+    ReadOnly Property Equipment As IReadOnlyDictionary(Of EquipSlot, Item)
+        Get
+            Return CharacterEquipSlotData.Read(Id).
+                ToDictionary(
+                    Function(x) CType(x.Item1, EquipSlot),
+                    Function(x) Item.FromId(x.Item2))
+        End Get
+    End Property
 End Class

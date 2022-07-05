@@ -33,15 +33,6 @@
         End If
     End Sub
 
-    ReadOnly Property Equipment As IReadOnlyDictionary(Of EquipSlot, Item)
-        Get
-            Return CharacterEquipSlotData.Read(Id).
-                ToDictionary(
-                    Function(x) CType(x.Item1, EquipSlot),
-                    Function(x) Item.FromId(x.Item2))
-        End Get
-    End Property
-
     Public Sub Equip(item As Item)
         If item.CanEquip Then
             InventoryItemData.ClearForItem(item.Id)

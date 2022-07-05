@@ -46,4 +46,12 @@ Public Module ItemTypeExtensions
     Public Function EquipSlot(itemType As ItemType) As EquipSlot?
         Return ItemTypeDescriptors(itemType).EquipSlot
     End Function
+    <Extension>
+    Public Function AttackDice(itemType As ItemType) As Long
+        Return ItemTypeDescriptors(itemType).AttackDice
+    End Function
+    <Extension>
+    Public Function MaximumDamage(itemType As ItemType) As Long?
+        Return ItemTypeDescriptors(itemType).MaximumDamage
+    End Function
 End Module

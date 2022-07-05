@@ -51,4 +51,16 @@
             Return ItemType.EquipSlot
         End Get
     End Property
+
+    Friend ReadOnly Property MaximumDamage As Long?
+        Get
+            Return ItemType.MaximumDamage
+        End Get
+    End Property
+
+    Friend ReadOnly Property AttackDice As Long
+        Get
+            Return ItemType.AttackDice
+        End Get
+    End Property
 End Class
