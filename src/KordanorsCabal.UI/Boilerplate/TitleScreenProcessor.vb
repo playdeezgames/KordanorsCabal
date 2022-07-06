@@ -42,7 +42,7 @@
         buffer.FillCells((1, 1), (buffer.Columns - 2, 3), Pattern.Space, True, Hue.Blue)
         buffer.WriteText((0, 2), "*  Kordanor's Cabal  *", True, Hue.Blue)
         buffer.WriteText((0, 6), "A Game in VB.NET About", False, Hue.Black)
-        buffer.WriteText((0, 7), "Looking Like a Dungeon", False, Hue.Black)
+        buffer.WriteText((0, 7), "Lookin' Like a Dungeon", False, Hue.Black)
         buffer.WriteText((0, 8), " Crawler Written  for ", False, Hue.Black)
         buffer.WriteText((0, 9), "      the VIC-20      ", False, Hue.Black)
         buffer.WriteText((0, 11), "   A Production  of   ", False, Hue.Black)
