@@ -6,6 +6,11 @@ Public Enum CharacterType
     Skeleton
     Goblin
     GoblinElite
+    Acolyte
+    Priest
+    Bishop
+    CabalLeader
+    Kordanor
 End Enum
 Module CharacterTypeExtensions
     <Extension>
