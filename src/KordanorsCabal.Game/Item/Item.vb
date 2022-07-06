@@ -34,7 +34,7 @@
         End Get
     End Property
 
-    Friend Sub Destroy()
+    Public Sub Destroy()
         ItemData.Clear(Id)
     End Sub
 

@@ -30,10 +30,10 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case OffersButtonIndex
-                ShoppeProcessor.ShoppeType = Game.ShoppeType.Trophy
+                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.Trophy
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor.ShoppeType = Game.ShoppeType.Trophy
+                ShoppeProcessor(Of Item).ShoppeType = Game.ShoppeType.Trophy
                 Return UIState.ShoppeSell
         End Select
         Return UIState.InPlay

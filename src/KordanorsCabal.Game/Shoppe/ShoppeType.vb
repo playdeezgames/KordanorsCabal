@@ -9,4 +9,8 @@ Public Module ShoppeTypeExtensions
     Function Name(shoppeType As ShoppeType) As String
         Return ShoppeTypeDescriptors(shoppeType).Name
     End Function
+    <Extension>
+    Function Offers(shoppeType As ShoppeType) As IReadOnlyDictionary(Of ItemType, Long)
+        Return ShoppeTypeDescriptors(shoppeType).Offers
+    End Function
 End Module
