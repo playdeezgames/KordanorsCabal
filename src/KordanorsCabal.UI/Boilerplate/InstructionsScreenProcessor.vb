@@ -7,7 +7,10 @@
 
         buffer.WriteLines((0, 2), New List(Of String) From
                           {
-                            "TODO: Instructions"
+                            "The game is pretty",
+                            "much menu driven. Use",
+                            "arrow keys, space, ",
+                            "enter, and rarely esc."
                           }, False, Hue.Black)
     End Sub
 
