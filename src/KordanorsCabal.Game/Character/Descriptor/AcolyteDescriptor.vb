@@ -5,15 +5,15 @@
         Get
             Return New Dictionary(Of CharacterStatisticType, Long) From
                 {
-                    {CharacterStatisticType.BaseMaximumDefend, 1},
-                    {CharacterStatisticType.Strength, 4},
-                    {CharacterStatisticType.Dexterity, 1},
+                    {CharacterStatisticType.BaseMaximumDefend, 2},
+                    {CharacterStatisticType.Strength, 6},
+                    {CharacterStatisticType.Dexterity, 2},
                     {CharacterStatisticType.HP, 1},
                     {CharacterStatisticType.Influence, 0},
-                    {CharacterStatisticType.MP, 1},
+                    {CharacterStatisticType.MP, 2},
                     {CharacterStatisticType.Stress, 0},
-                    {CharacterStatisticType.UnarmedMaximumDamage, 2},
-                    {CharacterStatisticType.Willpower, 1},
+                    {CharacterStatisticType.UnarmedMaximumDamage, 3},
+                    {CharacterStatisticType.Willpower, 2},
                     {CharacterStatisticType.Wounds, 0}
                 }
         End Get
