@@ -2,6 +2,8 @@
     Inherits ModeProcessor
 
     Const WelcomeButtonIndex = 0
+    Const OffersButtonIndex = 1
+    Const SellButtonIndex = 2
     Const GoodByeButtonIndex = 9
 
 
@@ -17,6 +19,8 @@
 
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
+        Buttons(OffersButtonIndex).Title = "Offers"
+        Buttons(SellButtonIndex).Title = "Sell"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
     End Sub
 
@@ -25,6 +29,12 @@
             Case GoodByeButtonIndex
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
+            Case OffersButtonIndex
+                ShoppeProcessor.ShoppeType = Game.ShoppeType.Trophy
+                Return UIState.ShoppeOffers
+            Case SellButtonIndex
+                ShoppeProcessor.ShoppeType = Game.ShoppeType.Trophy
+                Return UIState.ShoppeSell
         End Select
         Return UIState.InPlay
     End Function

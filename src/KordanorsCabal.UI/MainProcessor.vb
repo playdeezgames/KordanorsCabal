@@ -28,6 +28,8 @@ Public Module MainProcessor
             {UIState.SaveGameScreen, New SaveGameScreenProcessor},
             {UIState.ScreenSizer, New ScreenSizerProcessor},
             {UIState.SfxVolumizer, New SfxVolumizerProcessor},
+            {UIState.ShoppeOffers, New ShoppeOffersProcessor},
+            {UIState.ShoppeSell, New ShoppeSellProcessor},
             {UIState.Status, New StatusProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}
         }

@@ -26,4 +26,6 @@
     Enemies
     Equipment
     EquipmentDetail
+    ShoppeOffers
+    ShoppeSell
 End Enum
