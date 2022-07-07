@@ -56,6 +56,18 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).AttackDice
     End Function
     <Extension>
+    Public Function IsWeapon(itemType As ItemType) As Boolean
+        Return ItemTypeDescriptors(itemType).AttackDice > 0
+    End Function
+    <Extension>
+    Public Function DefendDice(itemType As ItemType) As Long
+        Return ItemTypeDescriptors(itemType).DefendDice
+    End Function
+    <Extension>
+    Public Function IsArmor(itemType As ItemType) As Boolean
+        Return ItemTypeDescriptors(itemType).DefendDice > 0
+    End Function
+    <Extension>
     Public Function MaximumDamage(itemType As ItemType) As Long?
         Return ItemTypeDescriptors(itemType).MaximumDamage
     End Function

@@ -49,6 +49,12 @@
             Return Nothing
         End Get
     End Property
+
+    Overridable ReadOnly Property DefendDice As Long
+        Get
+            Return 0
+        End Get
+    End Property
 End Class
 Public Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =

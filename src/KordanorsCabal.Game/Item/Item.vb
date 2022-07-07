@@ -102,4 +102,23 @@
             Return Nothing
         End Get
     End Property
+
+    ReadOnly Property DefendDice As Long
+        Get
+            Return ItemType.DefendDice
+        End Get
+    End Property
+
+    ReadOnly Property IsWeapon() As Boolean
+        Get
+            Return ItemType.IsWeapon
+        End Get
+    End Property
+
+
+    ReadOnly Property IsArmor() As Boolean
+        Get
+            Return ItemType.IsArmor
+        End Get
+    End Property
 End Class

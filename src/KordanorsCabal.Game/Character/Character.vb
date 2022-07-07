@@ -82,7 +82,7 @@
     End Function
 
     Friend Function RollDefend() As Long
-        Dim dice = GetStatistic(CharacterStatisticType.Dexterity)
+        Dim dice = GetDefendDice()
         Dim result As Long = 0
         While dice > 0
             result += RNG.RollDice("1d6/6")
@@ -90,6 +90,14 @@
         End While
         Dim maximumDefend = GetStatistic(CharacterStatisticType.BaseMaximumDefend).Value
         Return Math.Min(result, maximumDefend)
+    End Function
+
+    Private Function GetDefendDice() As Long
+        Dim dice = GetStatistic(CharacterStatisticType.Dexterity).Value
+        For Each entry In Equipment
+            dice += entry.Value.DefendDice
+        Next
+        Return dice
     End Function
 
     Friend Function RollAttack() As Long
@@ -244,13 +252,37 @@
         Return result
     End Function
 
+    Friend Function DoArmorWear(wear As Long) As IEnumerable(Of ItemType)
+        Dim result As New List(Of ItemType)
+        While wear > 0
+            Dim brokenItemType = WearOneArmor()
+            If brokenItemType.HasValue Then
+                result.Add(brokenItemType.Value)
+            End If
+            wear -= 1
+        End While
+        Return result
+    End Function
+
     Private Function WearOneWeapon() As ItemType?
-        Dim items = Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing)
+        Dim items = Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsWeapon)
         If items.Any Then
             Dim item = RNG.FromEnumerable(items)
             item.ReduceDurability(1)
             If item.IsBroken Then
                 WearOneWeapon = item.ItemType
+                item.Destroy()
+            End If
+        End If
+    End Function
+
+    Private Function WearOneArmor() As ItemType?
+        Dim items = Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsArmor)
+        If items.Any Then
+            Dim item = RNG.FromEnumerable(items)
+            item.ReduceDurability(1)
+            If item.IsBroken Then
+                WearOneArmor = item.ItemType
                 item.Destroy()
             End If
         End If

@@ -221,6 +221,9 @@
         lines.Add($"Counter-atttack {enemyIndex}/{enemyCount}:")
         Dim attackRoll = enemy.RollAttack()
         lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
+        For Each brokenItemType In DoArmorWear(attackRoll)
+            lines.Add($"Yer {brokenItemType.Name} breaks!")
+        Next
         Dim defendRoll = RollDefend()
         lines.Add($"You roll a defend of {defendRoll}.")
         Dim result = attackRoll - defendRoll
@@ -257,6 +260,7 @@
         lines.Add($"{enemy.Name} rolls a defend of {defendRoll}.")
         Dim result = attackRoll - defendRoll
         Dim sfx As Sfx?
+        enemy.DoArmorWear(attackRoll)
         Select Case result
             Case Is <= 0
                 lines.Add("You miss!")

@@ -39,4 +39,10 @@
             Return 10
         End Get
     End Property
+
+    Public Overrides ReadOnly Property DefendDice As Long
+        Get
+            Return 2
+        End Get
+    End Property
 End Class
