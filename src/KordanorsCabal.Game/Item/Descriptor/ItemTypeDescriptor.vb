@@ -66,6 +66,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor},
+            {ItemType.Shield, New ShieldDescriptor},
             {ItemType.SkullFragment, New SkullFragmentDescriptor},
             {ItemType.WaterShard, New WaterShardDescriptor}
         }

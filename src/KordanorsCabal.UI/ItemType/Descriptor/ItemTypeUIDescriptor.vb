@@ -18,6 +18,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.IronKey, New IronKeyUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
             {ItemType.Potion, New PotionUIDescriptor},
+            {ItemType.Shield, New ShieldUIDescriptor},
             {ItemType.SilverKey, New SilverKeyUIDescriptor},
             {ItemType.SkullFragment, New SkullFragmentUIDescriptor},
             {ItemType.WaterShard, New WaterShardUIDescriptor}

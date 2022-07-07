@@ -3,6 +3,7 @@
 Public Enum EquipSlot
     None
     Weapon
+    Shield
 End Enum
 Public Module EquipSlotExtensions
     <Extension>

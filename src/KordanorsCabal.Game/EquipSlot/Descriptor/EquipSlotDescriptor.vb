@@ -5,6 +5,7 @@ Public Module EquipSlotDescriptorUtility
     Friend EquipSlotDescriptors As IReadOnlyDictionary(Of EquipSlot, EquipSlotDescriptor) =
         New Dictionary(Of EquipSlot, EquipSlotDescriptor) From
         {
+            {EquipSlot.Shield, New ShieldEquipSlotDescriptor},
             {EquipSlot.Weapon, New WeaponEquipSlotDescriptor}
         }
 End Module

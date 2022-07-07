@@ -16,6 +16,7 @@ Public Enum ItemType
     WaterShard
     FireShard
     AirShard
+    Shield
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
