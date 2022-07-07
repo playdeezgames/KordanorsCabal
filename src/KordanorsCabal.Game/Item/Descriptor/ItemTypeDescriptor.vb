@@ -54,16 +54,20 @@ Public Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
+            {ItemType.AirShard, New AirShardDescriptor},
             {ItemType.CopperKey, New CopperKeyDescriptor},
             {ItemType.Dagger, New DaggerDescriptor},
+            {ItemType.EarthShard, New EarthShardDescriptor},
             {ItemType.ElementalOrb, New ElementalOrbDescriptor},
+            {ItemType.FireShard, New FireShardDescriptor},
             {ItemType.GoblinEar, New GoblinEarDescriptor},
             {ItemType.GoldKey, New GoldKeyDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor},
-            {ItemType.SkullFragment, New SkullFragmentDescriptor}
+            {ItemType.SkullFragment, New SkullFragmentDescriptor},
+            {ItemType.WaterShard, New WaterShardDescriptor}
         }
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)
         Get

@@ -28,9 +28,17 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 016 - 20220703
 * 017 - 20220705
 * 018 - 20220706
+* 019 - 20220707
 
 ## Credit Due
 
 * Kordanor
 * Zooperdan
 * Urizen
+
+## Shards
+
+* Air   = Teleport  , Level 1
+* Earth = Immobilize, Level 2
+* Fire  = Damage    , Level 3
+* Water = Heal      , Level 4

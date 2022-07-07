@@ -12,6 +12,10 @@ Public Enum ItemType
     GoblinEar
     SkullFragment
     Dagger
+    EarthShard
+    WaterShard
+    FireShard
+    AirShard
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
