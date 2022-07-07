@@ -39,7 +39,9 @@
             Buttons(EquipmentButtonIndex).Title = "Equipment"
         End If
         Buttons(StatusLevelUpButtonIndex).Title = If(player.IsFullyAssigned, "Status", "Level up!")
-        If player.CanInteract Then
+        If player.CanDoIntimidation Then
+            Buttons(InteractIntimidateButtonIndex).Title = "Intimidate!"
+        ElseIf player.CanInteract Then
             Buttons(InteractIntimidateButtonIndex).Title = "Interact..."
         End If
         Dim enemyCount = player.Location.Enemies(player).Count
@@ -73,7 +75,11 @@
                 PushButtonIndex(0)
                 player.Mode = PlayerMode.Move
             Case InteractIntimidateButtonIndex
-                If player.CanInteract Then
+                If player.CanDoIntimidation Then
+                    player.DoIntimidation()
+                    MainProcessor.PushUIState(UIState.InPlay)
+                    Return UIState.Message
+                ElseIf player.CanInteract Then
                     PushButtonIndex(0)
                     player.Interact()
                     Return UIState.InPlay

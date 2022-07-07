@@ -102,6 +102,26 @@
         Return result
     End Function
 
+    Friend Function RollInfluence() As Long
+        Dim dice = If(GetStatistic(CharacterStatisticType.Influence), 0)
+        Dim result As Long = 0
+        While dice > 0
+            result += RNG.RollDice("1d6/6")
+            dice -= 1
+        End While
+        Return result
+    End Function
+
+    Friend Function RollWillpower() As Long
+        Dim dice = If(GetStatistic(CharacterStatisticType.Willpower), 0)
+        Dim result As Long = 0
+        While dice > 0
+            result += RNG.RollDice("1d6/6")
+            dice -= 1
+        End While
+        Return result
+    End Function
+
     Private Function GetAttackDice() As Long
         Dim dice = GetStatistic(CharacterStatisticType.Strength).Value
         For Each entry In Equipment
@@ -109,6 +129,26 @@
         Next
         Return dice
     End Function
+
+    Friend Function IsDemoralized() As Boolean
+        If CanIntimidate Then
+            Return CurrentMP <= 0
+        End If
+        Return False
+    End Function
+
+    Friend Sub AddStress(delta As Long)
+        ChangeStatistic(CharacterStatisticType.Stress, delta)
+    End Sub
+
+    ReadOnly Property CanIntimidate As Boolean
+        Get
+            If Not GetStatistic(CharacterStatisticType.Willpower).HasValue Then
+                Return False
+            End If
+            Return Location.Friends(Me).Count <= Location.Enemies(Me).Count
+        End Get
+    End Property
 
     ReadOnly Property Name As String
         Get

@@ -108,6 +108,44 @@
         End If
     End Sub
 
+    ReadOnly Property CanDoIntimidation() As Boolean
+        Get
+            If If(GetStatistic(CharacterStatisticType.Influence), 0) <= 0 Then
+                Return False
+            End If
+            Dim enemy = Location.Enemies(Me).FirstOrDefault
+            If enemy Is Nothing Then
+                Return False
+            End If
+            Return enemy.CanIntimidate
+        End Get
+    End Property
+
+    Public Sub DoIntimidation()
+        If CanDoIntimidation Then
+            Dim lines As New List(Of String)
+            Dim enemy = Location.Enemies(Me).First
+            Dim influenceRoll = RollInfluence()
+            lines.Add($"You roll {influenceRoll} influence.")
+            Dim willpowerRoll = enemy.RollWillpower()
+            lines.Add($"{enemy.Name} rolls {willpowerRoll} willpower.")
+            If influenceRoll > willpowerRoll Then
+                enemy.AddStress(1)
+                lines.Add($"{enemy.Name} loses 1 MP!")
+                If enemy.IsDemoralized Then
+                    lines.Add($"{enemy.Name} runs away!")
+                    enemy.Destroy()
+                End If
+            Else
+                lines.Add($"{enemy.Name} is not intimidated.")
+            End If
+            Messages.Enqueue(New Message(lines))
+            DoCounterAttacks()
+            Return
+        End If
+        Messages.Enqueue(Message.Create("You cannot intimidate at this time!"))
+    End Sub
+
     Private Function CanBuy(itemType As ItemType) As Boolean
         If itemType.PurchasePrice Is Nothing Then
             Return False
