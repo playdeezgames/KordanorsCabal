@@ -8,6 +8,7 @@ Module ItemTypeUIDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeUIDescriptor) From
         {
             {ItemType.AirShard, New AirShardUIDescriptor},
+            {ItemType.ChainMail, New ChainMainUIDescriptor},
             {ItemType.CopperKey, New CopperKeyUIDescriptor},
             {ItemType.Dagger, New DaggerUIDescriptor},
             {ItemType.EarthShard, New EarthShardUIDescriptor},
@@ -15,6 +16,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.FireShard, New FireShardUIDescriptor},
             {ItemType.GoblinEar, New GoblinEarUIDescriptor},
             {ItemType.GoldKey, New GoldKeyUIDescriptor},
+            {ItemType.Helmet, New HelmetUIDescriptor},
             {ItemType.IronKey, New IronKeyUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
             {ItemType.Potion, New PotionUIDescriptor},

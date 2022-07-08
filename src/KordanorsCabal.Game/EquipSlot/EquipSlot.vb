@@ -4,6 +4,8 @@ Public Enum EquipSlot
     None
     Weapon
     Shield
+    Head
+    Torso
 End Enum
 Public Module EquipSlotExtensions
     <Extension>
