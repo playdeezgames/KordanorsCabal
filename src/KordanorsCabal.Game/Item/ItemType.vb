@@ -19,6 +19,9 @@ Public Enum ItemType
     Shield
     Helmet
     ChainMail
+    Shortsword
+    BrodeSode
+    PlateMail
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

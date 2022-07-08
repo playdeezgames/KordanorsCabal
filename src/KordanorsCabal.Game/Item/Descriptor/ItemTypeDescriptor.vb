@@ -61,6 +61,7 @@ Public Module ItemTypeDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {ItemType.AirShard, New AirShardDescriptor},
+            {ItemType.BrodeSode, New BrodeSodeDescriptor},
             {ItemType.ChainMail, New ChainMailDescriptor},
             {ItemType.CopperKey, New CopperKeyDescriptor},
             {ItemType.Dagger, New DaggerDescriptor},
@@ -71,10 +72,12 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.GoldKey, New GoldKeyDescriptor},
             {ItemType.Helmet, New HelmetDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
+            {ItemType.PlateMail, New PlateMailDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor},
             {ItemType.Shield, New ShieldDescriptor},
+            {ItemType.Shortsword, New ShortswordDescriptor},
             {ItemType.SkullFragment, New SkullFragmentDescriptor},
             {ItemType.WaterShard, New WaterShardDescriptor}
         }
