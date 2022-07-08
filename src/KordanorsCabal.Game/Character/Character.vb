@@ -65,7 +65,11 @@
     End Property
     ReadOnly Property Encumbrance As Single
         Get
-            Return Inventory.TotalEncumbrance
+            Dim result = Inventory.TotalEncumbrance
+            For Each item In Equipment.Values
+                result += item.Encumbrance
+            Next
+            Return result
         End Get
     End Property
     ReadOnly Property MaximumEncumbrance As Single

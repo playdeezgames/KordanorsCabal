@@ -3,7 +3,7 @@
 
     Private items As List(Of Item)
     Private currentItemIndex As Integer = 0
-    Const ListStartRow = 1
+    Const ListStartRow = 2
     Const ListHiliteRow = 10
     Const ListEndRow = 21
 
@@ -11,7 +11,8 @@
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Inventory", True, Hue.Blue)
-
+        Dim player = World.PlayerCharacter
+        buffer.WriteTextCentered(1, $"Encumbrance: {player.Encumbrance}/{player.MaximumEncumbrance}", False, Hue.Red)
         For row = ListStartRow To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
             If itemIndex >= 0 AndAlso itemIndex < items.Count Then
