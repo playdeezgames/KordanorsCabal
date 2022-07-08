@@ -4,6 +4,8 @@
     Const WelcomeButtonIndex = 0
     Const OffersButtonIndex = 1
     Const SellButtonIndex = 2
+    Const PricesButtonIndex = 6
+    Const BuyButtonIndex = 7
     Const GoodByeButtonIndex = 9
 
 
@@ -22,6 +24,8 @@
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         Buttons(OffersButtonIndex).Title = "Offers"
         Buttons(SellButtonIndex).Title = "Sell"
+        Buttons(PricesButtonIndex).Title = "Prices"
+        Buttons(BuyButtonIndex).Title = "Buy"
     End Sub
 
     Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
@@ -30,11 +34,17 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case OffersButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.UsedMetal
+                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.Blacksmith
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor(Of Item).ShoppeType = Game.ShoppeType.UsedMetal
+                ShoppeProcessor(Of Item).ShoppeType = Game.ShoppeType.Blacksmith
                 Return UIState.ShoppeSell
+            Case PricesButtonIndex
+                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.Blacksmith
+                Return UIState.ShoppePrices
+            Case BuyButtonIndex
+                ShoppeProcessor(Of (ItemType, Long)).ShoppeType = Game.ShoppeType.Blacksmith
+                Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay
     End Function

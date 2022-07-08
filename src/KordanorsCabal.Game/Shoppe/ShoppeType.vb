@@ -3,7 +3,7 @@
 Public Enum ShoppeType
     None
     Trophy
-    UsedMetal
+    Blacksmith
 End Enum
 Public Module ShoppeTypeExtensions
     <Extension>
@@ -13,5 +13,9 @@ Public Module ShoppeTypeExtensions
     <Extension>
     Function Offers(shoppeType As ShoppeType) As IReadOnlyDictionary(Of ItemType, Long)
         Return ShoppeTypeDescriptors(shoppeType).Offers
+    End Function
+    <Extension>
+    Function Prices(shoppeType As ShoppeType) As IReadOnlyDictionary(Of ItemType, Long)
+        Return ShoppeTypeDescriptors(shoppeType).Prices
     End Function
 End Module

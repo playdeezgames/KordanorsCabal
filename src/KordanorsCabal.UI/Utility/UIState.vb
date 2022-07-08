@@ -28,4 +28,6 @@
     EquipmentDetail
     ShoppeOffers
     ShoppeSell
+    ShoppePrices
+    ShoppeBuy
 End Enum
