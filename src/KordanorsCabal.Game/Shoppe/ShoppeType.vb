@@ -3,6 +3,7 @@
 Public Enum ShoppeType
     None
     Trophy
+    UsedMetal
 End Enum
 Public Module ShoppeTypeExtensions
     <Extension>
