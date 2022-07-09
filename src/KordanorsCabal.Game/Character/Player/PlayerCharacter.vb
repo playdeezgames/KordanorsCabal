@@ -27,10 +27,6 @@
         End If
     End Sub
 
-    Public Function HasQuest(quest As Quest) As Boolean
-        Return CharacterQuestData.Exists(Id, quest)
-    End Function
-
     Public Property Direction As Direction
         Get
             Return CType(PlayerData.ReadDirection().Value, Direction)

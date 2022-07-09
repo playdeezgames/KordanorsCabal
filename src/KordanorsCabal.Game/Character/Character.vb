@@ -9,6 +9,10 @@
         End Get
     End Property
 
+    Public Function HasQuest(quest As Quest) As Boolean
+        Return CharacterQuestData.Exists(Id, quest)
+    End Function
+
     Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
         'do nothing!
     End Sub
