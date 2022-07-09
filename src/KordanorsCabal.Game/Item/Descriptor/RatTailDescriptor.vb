@@ -13,7 +13,4 @@
         End Get
     End Property
 
-    Public Shared Widening Operator CType(v As RatTailDescriptor) As RatTailDescriptor
-        Throw New NotImplementedException()
-    End Operator
 End Class

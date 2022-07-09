@@ -8,6 +8,7 @@ Public Enum LocationType
     Dungeon
     DungeonDeadEnd
     DungeonBoss
+    Cellar
 End Enum
 Module LocationTypeExtensions
     <Extension>

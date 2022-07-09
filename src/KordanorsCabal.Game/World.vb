@@ -149,6 +149,15 @@ Public Module World
     Private Sub CreateFeature(featureType As FeatureType)
         Dim featureLocation = RNG.FromEnumerable(Location.FromLocationType(featureType.LocationType).Where(Function(x) Not x.HasFeature))
         Feature.Create(featureType, featureLocation)
+        If featureType = FeatureType.InnKeeper Then
+            CreateCellar(featureLocation)
+        End If
+    End Sub
+
+    Private Sub CreateCellar(fromLocation As Location)
+        Dim cellar = Location.Create(LocationType.Cellar)
+        Route.Create(fromLocation, Direction.Down, RouteType.Stairs, cellar)
+        Route.Create(cellar, Direction.Up, RouteType.Stairs, fromLocation)
     End Sub
 
     Private Sub CreatePlayer()

@@ -5,6 +5,7 @@ Friend Module LocationDescriptorUtility
     Friend ReadOnly LocationDescriptors As IReadOnlyDictionary(Of LocationType, LocationDescriptor) =
         New Dictionary(Of LocationType, LocationDescriptor) From
         {
+            {LocationType.Cellar, New CellarDescriptor},
             {LocationType.ChurchEntrance, New ChurchEntranceDescriptor},
             {LocationType.Dungeon, New DungeonLocationTypeDescriptor},
             {LocationType.DungeonBoss, New DungeonBossLocationTypeDescriptor},
