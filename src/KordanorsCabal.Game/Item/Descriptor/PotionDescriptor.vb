@@ -38,13 +38,9 @@
         Dim healRoll = RNG.RollDice("2d4")
         character.ChangeStatistic(CharacterStatisticType.Wounds, -healRoll)
         If character.Id = World.PlayerCharacter.Id Then
-            PlayerCharacter.Messages.Enqueue(
-                New Message(
-                New List(Of String) From
-                {
+            World.PlayerCharacter.EnqueueMessage(
                     $"Potion heals up to {healRoll} HP!",
-                    $"You now have {character.CurrentHP} HP!"
-                }))
+                    $"You now have {character.CurrentHP} HP!")
         End If
     End Sub
 

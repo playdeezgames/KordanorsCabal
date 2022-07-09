@@ -53,8 +53,9 @@
 
     Private Function HandleQuestButton(player As PlayerCharacter) As UIState
         If player.HasQuest(Quest.CellarRats) Then
-            'TODO: complete quest, or at least attempt to
-            Return UIState.InPlay
+            player.CompleteQuest(Quest.CellarRats)
+            PushUIState(UIState.InPlay)
+            Return UIState.Message
         End If
         If player.CanAcceptQuest(Quest.CellarRats) Then
             player.AcceptQuest(Quest.CellarRats)

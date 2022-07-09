@@ -1,6 +1,16 @@
 ﻿Public Class PlayerCharacter
     Inherits Character
     Shared ReadOnly Property Messages As New Queue(Of Message)
+    Public Overrides Sub EnqueueMessage(ParamArray lines() As String)
+        EnqueueMessage(Nothing, lines)
+    End Sub
+    Public Overrides Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
+        If sfx.HasValue Then
+            Messages.Enqueue(Message.Create(sfx.Value, lines))
+            Return
+        End If
+        Messages.Enqueue(Message.Create(lines))
+    End Sub
     Sub New()
         MyBase.New(PlayerData.Read().Value)
     End Sub
@@ -47,14 +57,14 @@
                 Inventory.Add(oldItem)
             End If
             CharacterEquipSlotData.Write(Id, equipSlot, item.Id)
-            Messages.Enqueue(Message.Create($"You equip {item.Name} to {equipSlot.Name}."))
+            EnqueueMessage($"You equip {item.Name} to {equipSlot.Name}.")
             Return
         End If
-        Messages.Enqueue(Message.Create($"You cannot equip {item.Name}!"))
+        EnqueueMessage($"You cannot equip {item.Name}!")
     End Sub
 
     Public Function CanAcceptQuest(quest As Quest) As Boolean
-        Return Not HasQuest(quest)
+        Return Not HasQuest(quest) AndAlso quest.CanAccept(Me)
     End Function
 
     Public Sub UseItem(item As Item)
@@ -73,13 +83,24 @@
         End Set
     End Property
 
+    Public Sub CompleteQuest(quest As Quest)
+        If HasQuest(quest) Then
+            If quest.CanComplete(Me) Then
+                quest.Complete(Me)
+                Return
+            End If
+            EnqueueMessage("You cannot complete this quest at this time!")
+        End If
+        EnqueueMessage("You do not currently have this quest!")
+    End Sub
+
     Public Sub AcceptQuest(quest As Quest)
         If Not HasQuest(quest) Then
             CharacterQuestData.Write(Id, quest)
-            Messages.Enqueue(Message.Create("You accept the quest!"))
+            EnqueueMessage("You accept the quest!")
             Return
         End If
-        Messages.Enqueue(Message.Create("You cannot accept this quest at this time."))
+        EnqueueMessage("You cannot accept this quest at this time.")
     End Sub
 
     Public ReadOnly Property CanInteract As Boolean
@@ -157,11 +178,11 @@
             Else
                 lines.Add($"{enemy.Name} is not intimidated.")
             End If
-            Messages.Enqueue(New Message(lines))
+            EnqueueMessage(lines.ToArray)
             DoCounterAttacks()
             Return
         End If
-        Messages.Enqueue(Message.Create("You cannot intimidate at this time!"))
+        EnqueueMessage("You cannot intimidate at this time!")
     End Sub
 
     Private Function CanBuy(itemType As ItemType) As Boolean
@@ -195,10 +216,10 @@
             Direction = RNG.FromEnumerable(RunDirections)
             If CanMove(Direction) Then
                 Move(Direction)
-                Messages.Enqueue(New Message(New List(Of String) From {"You successfully ran!"})) 'TODO: sfx
+                EnqueueMessage("You successfully ran!") 'TODO: sfx
                 Exit Sub
             End If
-            Messages.Enqueue(New Message(New List(Of String) From {"You fail to run!"})) 'TODO: shucks!
+            EnqueueMessage("You fail to run!") 'TODO: shucks!
             DoCounterAttacks()
         End If
     End Sub
@@ -266,7 +287,7 @@
                 sfx = Game.Sfx.PlayerHit
                 lines.Add($"You have {CurrentHP} HP left.")
         End Select
-        Messages.Enqueue(New Message(lines, sfx))
+        EnqueueMessage(sfx, lines.ToArray)
     End Sub
 
     Private Sub DoAttack()
@@ -312,7 +333,7 @@
                 sfx = Game.Sfx.EnemyHit
                 lines.Add($"{enemy.Name} has {enemy.CurrentHP} HP left.")
         End Select
-        Messages.Enqueue(New Message(lines, Sfx))
+        EnqueueMessage(sfx, lines.ToArray)
     End Sub
 
     Private Function AddXP(xp As Long) As Boolean

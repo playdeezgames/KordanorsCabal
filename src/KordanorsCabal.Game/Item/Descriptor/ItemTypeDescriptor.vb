@@ -75,6 +75,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.PlateMail, New PlateMailDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},
+            {ItemType.RatTail, New RatTailDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor},
             {ItemType.Shield, New ShieldDescriptor},
             {ItemType.Shortsword, New ShortswordDescriptor},

@@ -9,6 +9,14 @@
         End Get
     End Property
 
+    Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
+        'do nothing!
+    End Sub
+
+    Overridable Sub EnqueueMessage(ParamArray lines() As String)
+        'do nothing!
+    End Sub
+
     ReadOnly Property CanFight As Boolean
         Get
             Return Location.Enemies(Me).Any

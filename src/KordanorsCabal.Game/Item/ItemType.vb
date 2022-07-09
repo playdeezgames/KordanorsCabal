@@ -22,6 +22,7 @@ Public Enum ItemType
     Shortsword
     BrodeSode
     PlateMail
+    RatTail
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
