@@ -13,6 +13,15 @@
                 FOREIGN KEY([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
+
+    Public Sub Clear(characterId As Long, quest As Long)
+        ClearForColumnValues(
+            AddressOf Initialize,
+            TableName,
+            (CharacterIdColumn, characterId),
+            (QuestColumn, quest))
+    End Sub
+
     Public Function Exists(characterId As Long, quest As Long) As Boolean
         Return ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
@@ -28,5 +37,12 @@
             TableName,
             (CharacterIdColumn, characterId),
             (QuestColumn, quest))
+    End Sub
+
+    Friend Sub ClearForCharacter(characterId As Long)
+        ClearForColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (CharacterIdColumn, characterId))
     End Sub
 End Module

@@ -9,8 +9,15 @@
 
     Public Overrides Sub Complete(character As Character)
         If CanComplete(character) Then
+            character.EnqueueMessage("You complete the quest!")
+            CharacterQuestData.Clear(character.Id, Quest.CellarRats)
+            CharacterQuestCompletionData.Write(
+                character.Id,
+                Quest.CellarRats,
+                If(CharacterQuestCompletionData.Read(character.Id, Quest.CellarRats), 0) + 1)
             Return
         End If
+        character.EnqueueMessage("You cannot completel this quest at this time.")
     End Sub
 
     Public Overrides Function CanAccept(character As Character) As Boolean
