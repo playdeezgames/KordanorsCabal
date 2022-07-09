@@ -16,6 +16,11 @@
             ChangeStatistic(CharacterStatisticType.Unassigned, -1)
         End If
     End Sub
+
+    Public Function HasQuest(quest As Quest) As Boolean
+        Return CharacterQuestData.Exists(Id, quest)
+    End Function
+
     Public Property Direction As Direction
         Get
             Return CType(PlayerData.ReadDirection().Value, Direction)
@@ -48,6 +53,10 @@
         Messages.Enqueue(Message.Create($"You cannot equip {item.Name}!"))
     End Sub
 
+    Public Function CanAcceptQuest(quest As Quest) As Boolean
+        Return Not HasQuest(quest)
+    End Function
+
     Public Sub UseItem(item As Item)
         If item.CanUse Then
             item.Use(Me)
@@ -63,6 +72,15 @@
             PlayerData.WriteMode(value)
         End Set
     End Property
+
+    Public Sub AcceptQuest(quest As Quest)
+        If Not HasQuest(quest) Then
+            CharacterQuestData.Write(Id, quest)
+            Messages.Enqueue(Message.Create("You accept the quest!"))
+            Return
+        End If
+        Messages.Enqueue(Message.Create("You cannot accept this quest at this time."))
+    End Sub
 
     Public ReadOnly Property CanInteract As Boolean
         Get
