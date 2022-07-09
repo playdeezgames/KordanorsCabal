@@ -22,6 +22,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.PlateMail, New PlateMailUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
             {ItemType.Potion, New PotionUIDescriptor},
+            {ItemType.RatTail, New RatTailUIDescriptor},
             {ItemType.Shield, New ShieldUIDescriptor},
             {ItemType.Shortsword, New ShortswordUIDescriptor},
             {ItemType.SilverKey, New SilverKeyUIDescriptor},

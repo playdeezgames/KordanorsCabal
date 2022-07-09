@@ -32,6 +32,7 @@ Friend Module CharacterTypeDescriptorUtility
             {CharacterType.Kordanor, New KordanorDescriptor},
             {CharacterType.N00b, New N00bDescriptor},
             {CharacterType.Priest, New PriestDescriptor},
+            {CharacterType.Rat, New RatDescriptor},
             {CharacterType.Skeleton, New SkeletonDescriptor}
         }
     ReadOnly Property AllCharacterTypes As IEnumerable(Of CharacterType)

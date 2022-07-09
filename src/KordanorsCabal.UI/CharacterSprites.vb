@@ -165,6 +165,25 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
+                CharacterType.Rat,
+                New Sprite(
+                    Hue.Black,
+                    LoadPixels(
+                        AddressOf PixelConvertor,
+                        "............",
+                        "............",
+                        "...##.......",
+                        "..#  ##...#.",
+                        "..#  # ###..",
+                        "...######...",
+                        ".....###....",
+                        "....###.....",
+                        ".#.#####....",
+                        "#..####.#...",
+                        "#..# ##.....",
+                        ".##.#####..."))
+            },
+            {
                 CharacterType.Skeleton,
                 New Sprite(
                     Hue.Blue,

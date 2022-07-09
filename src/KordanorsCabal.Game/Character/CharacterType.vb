@@ -11,6 +11,7 @@ Public Enum CharacterType
     Bishop
     CabalLeader
     Kordanor
+    Rat
 End Enum
 Module CharacterTypeExtensions
     <Extension>
