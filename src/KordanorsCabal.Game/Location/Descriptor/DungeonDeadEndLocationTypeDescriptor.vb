@@ -9,7 +9,7 @@
 
     Public Overrides ReadOnly Property IsDungeon As Boolean
         Get
-            Return False
+            Return True
         End Get
     End Property
 End Class

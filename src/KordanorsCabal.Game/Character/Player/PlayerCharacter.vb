@@ -80,23 +80,11 @@
     End Property
 
     Public Sub CompleteQuest(quest As Quest)
-        If HasQuest(quest) Then
-            If quest.CanComplete(Me) Then
-                quest.Complete(Me)
-                Return
-            End If
-            EnqueueMessage("You cannot complete this quest at this time!")
-        End If
-        EnqueueMessage("You do not currently have this quest!")
+        quest.Complete(Me)
     End Sub
 
     Public Sub AcceptQuest(quest As Quest)
-        If Not HasQuest(quest) Then
-            CharacterQuestData.Write(Id, quest)
-            EnqueueMessage("You accept the quest!")
-            Return
-        End If
-        EnqueueMessage("You cannot accept this quest at this time.")
+        quest.Accept(Me)
     End Sub
 
     Public ReadOnly Property CanInteract As Boolean
