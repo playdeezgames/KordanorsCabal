@@ -10,9 +10,13 @@ Public Enum LocationType
     DungeonBoss
     Cellar
 End Enum
-Module LocationTypeExtensions
+Public Module LocationTypeExtensions
     <Extension>
     Function Name(locationType As LocationType) As String
         Return LocationDescriptors(locationType).Name
+    End Function
+    <Extension>
+    Public Function IsDungeon(locationType As LocationType) As Boolean
+        Return LocationDescriptors(locationType).IsDungeon
     End Function
 End Module

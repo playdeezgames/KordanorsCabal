@@ -14,15 +14,14 @@
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
         Dim location = player.Location
-        Select Case location.LocationType
-            Case LocationType.Dungeon, LocationType.DungeonDeadEnd, LocationType.DungeonBoss
-                ShowDungeon(buffer, player)
-            Case Else
-                ShowHeader(buffer, location.Name)
-                ShowFacing(buffer, (0, 1), player)
-                ShowExits(buffer, (0, 2), player)
-                ShowFeatures(buffer, (0, 3), player)
-        End Select
+        If location.LocationType.IsDungeon Then
+            ShowDungeon(buffer, player)
+        Else
+            ShowHeader(buffer, location.Name)
+            ShowFacing(buffer, (0, 1), player)
+            ShowExits(buffer, (0, 2), player)
+            ShowFeatures(buffer, (0, 3), player)
+        End If
     End Sub
     Private Sub ShowFeatures(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
         Dim feature = player.Location.Feature

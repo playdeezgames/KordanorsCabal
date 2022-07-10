@@ -13,16 +13,15 @@
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
         Dim location = player.Location
-        Select Case location.LocationType
-            Case LocationType.Dungeon, LocationType.DungeonDeadEnd, LocationType.DungeonBoss
-                ShowDungeon(buffer, player)
-            Case Else
-                ShowHeader(buffer, player.Location.Name)
-                ShowFacing(buffer, (0, 1), player)
-                ShowExits(buffer, (0, 2), player)
+        If location.LocationType.IsDungeon Then
+            ShowDungeon(buffer, player)
+        Else
+            ShowHeader(buffer, player.Location.Name)
+            ShowFacing(buffer, (0, 1), player)
+            ShowExits(buffer, (0, 2), player)
 
-                buffer.WriteText((0, 4), $"mOVE which way?", False, Hue.Purple)
-        End Select
+            buffer.WriteText((0, 4), $"Move which way?", False, Hue.Purple)
+        End If
     End Sub
 
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)

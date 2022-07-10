@@ -6,4 +6,10 @@
             Return "Town Square"
         End Get
     End Property
+
+    Public Overrides ReadOnly Property IsDungeon As Boolean
+        Get
+            Return False
+        End Get
+    End Property
 End Class
