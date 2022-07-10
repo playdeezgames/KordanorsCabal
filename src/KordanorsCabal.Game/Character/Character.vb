@@ -13,6 +13,15 @@
         Return CharacterQuestData.Exists(Id, quest)
     End Function
 
+    Property Money As Long
+        Get
+            Return GetStatistic(CharacterStatisticType.Money).Value
+        End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.Money, value)
+        End Set
+    End Property
+
     Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
         'do nothing!
     End Sub

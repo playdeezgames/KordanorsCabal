@@ -10,6 +10,11 @@
     Public Overrides Sub Complete(character As Character)
         If character.HasQuest(Quest.CellarRats) AndAlso CanComplete(character) Then
             character.EnqueueMessage("You complete the quest!")
+            Dim ratTails = character.Inventory.ItemsOfType(ItemType.RatTail).Take(10)
+            For Each ratTail In ratTails
+                character.Money += 1
+                ratTail.Destroy()
+            Next
             CharacterQuestData.Clear(character.Id, Quest.CellarRats)
             CharacterQuestCompletionData.Write(
                 character.Id,
@@ -24,7 +29,7 @@
         If CanAccept(character) Then
             character.EnqueueMessage("You accept the quest!")
             CharacterQuestData.Write(character.Id, Quest.CellarRats)
-            Dim ratCount = RNG.RollDice("2d3")
+            Dim ratCount = If(CharacterQuestCompletionData.Read(character.Id, Quest.CellarRats), 0) + 1
             Dim location = Game.Location.FromLocationType(LocationType.Cellar).Single
             While ratCount > 0
                 Game.Character.Create(CharacterType.Rat, location)

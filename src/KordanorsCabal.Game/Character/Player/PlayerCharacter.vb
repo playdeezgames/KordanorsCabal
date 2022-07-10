@@ -335,15 +335,6 @@
         Return False
     End Function
 
-    Property Money As Long
-        Get
-            Return GetStatistic(CharacterStatisticType.Money).Value
-        End Get
-        Set(value As Long)
-            SetStatistic(CharacterStatisticType.Money, value)
-        End Set
-    End Property
-
     Public ReadOnly Property HasEquipment As Boolean
         Get
             Return Equipment.Any
