@@ -61,6 +61,7 @@ Public Module ItemTypeDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {ItemType.AirShard, New AirShardDescriptor},
+            {ItemType.Beer, New BeerDescriptor},
             {ItemType.BrodeSode, New BrodeSodeDescriptor},
             {ItemType.ChainMail, New ChainMailDescriptor},
             {ItemType.CopperKey, New CopperKeyDescriptor},
@@ -68,10 +69,13 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.EarthShard, New EarthShardDescriptor},
             {ItemType.ElementalOrb, New ElementalOrbDescriptor},
             {ItemType.FireShard, New FireShardDescriptor},
+            {ItemType.Food, New FoodDescriptor},
             {ItemType.GoblinEar, New GoblinEarDescriptor},
             {ItemType.GoldKey, New GoldKeyDescriptor},
             {ItemType.Helmet, New HelmetDescriptor},
+            {ItemType.HolyWater, New HolyWaterDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
+            {ItemType.MagicEgg, New MagicEggDescriptor},
             {ItemType.PlateMail, New PlateMailDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},
@@ -80,6 +84,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Shield, New ShieldDescriptor},
             {ItemType.Shortsword, New ShortswordDescriptor},
             {ItemType.SkullFragment, New SkullFragmentDescriptor},
+            {ItemType.TownPortal, New TownPortalDescriptor},
             {ItemType.WaterShard, New WaterShardDescriptor}
         }
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

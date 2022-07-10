@@ -23,6 +23,11 @@ Public Enum ItemType
     BrodeSode
     PlateMail
     RatTail
+    HolyWater
+    TownPortal
+    Food
+    MagicEgg
+    Beer
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

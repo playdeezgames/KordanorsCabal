@@ -8,6 +8,7 @@ Module ItemTypeUIDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeUIDescriptor) From
         {
             {ItemType.AirShard, New AirShardUIDescriptor},
+            {ItemType.Beer, New BeerUIDescriptor},
             {ItemType.BrodeSode, New BrodeSodeUIDescriptor},
             {ItemType.ChainMail, New ChainMainUIDescriptor},
             {ItemType.CopperKey, New CopperKeyUIDescriptor},
@@ -15,10 +16,13 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.EarthShard, New EarthShardUIDescriptor},
             {ItemType.ElementalOrb, New ElementalOrbUIDescriptor},
             {ItemType.FireShard, New FireShardUIDescriptor},
+            {ItemType.Food, New FoodUIDescriptor},
             {ItemType.GoblinEar, New GoblinEarUIDescriptor},
             {ItemType.GoldKey, New GoldKeyUIDescriptor},
             {ItemType.Helmet, New HelmetUIDescriptor},
+            {ItemType.HolyWater, New HolyWaterUIDescriptor},
             {ItemType.IronKey, New IronKeyUIDescriptor},
+            {ItemType.MagicEgg, New MagicEggUIDescriptor},
             {ItemType.PlateMail, New PlateMailUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
             {ItemType.Potion, New PotionUIDescriptor},
@@ -27,6 +31,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.Shortsword, New ShortswordUIDescriptor},
             {ItemType.SilverKey, New SilverKeyUIDescriptor},
             {ItemType.SkullFragment, New SkullFragmentUIDescriptor},
+            {ItemType.TownPortal, New TownPortalUIDescriptor},
             {ItemType.WaterShard, New WaterShardUIDescriptor}
         }
 End Module
