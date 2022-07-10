@@ -241,7 +241,7 @@
         End If
         Dim lines As New List(Of String)
         Dim sfx As Sfx? = Nothing
-        lines.Add($"Counter-atttack {enemyIndex}/{enemyCount}:")
+        lines.Add($"Counter-attack {enemyIndex}/{enemyCount}:")
         Dim attackRoll = enemy.RollAttack()
         lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
         For Each brokenItemType In DoArmorWear(attackRoll)
