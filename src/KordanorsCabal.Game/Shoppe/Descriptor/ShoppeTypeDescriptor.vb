@@ -9,6 +9,7 @@ Module ShopeTypeDescriptorUtility
         New Dictionary(Of ShoppeType, ShoppeTypeDescriptor) From
         {
             {ShoppeType.BlackMage, New BlackMageShoppeDescriptor},
-            {ShoppeType.Blacksmith, New BlacksmithShoppeDescriptor}
+            {ShoppeType.Blacksmith, New BlacksmithShoppeDescriptor},
+            {ShoppeType.InnKeeper, New InnkeeperShoppeDescriptor}
         }
 End Module

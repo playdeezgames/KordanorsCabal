@@ -4,6 +4,8 @@
     Const WelcomeButtonIndex = 0
     Const QuestButtonIndex = 1
     Const GoodByeButtonIndex = 9
+    Const PricesButtonIndex = 6
+    Const BuyButtonIndex = 7
 
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
@@ -25,6 +27,8 @@
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
+        Buttons(PricesButtonIndex).Title = "Prices"
+        Buttons(BuyButtonIndex).Title = "Buy"
         UpdateQuestButton(player)
     End Sub
 
@@ -47,6 +51,12 @@
                 player.Mode = PlayerMode.Neutral
             Case QuestButtonIndex
                 Return HandleQuestButton(player)
+            Case PricesButtonIndex
+                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.InnKeeper
+                Return UIState.ShoppePrices
+            Case BuyButtonIndex
+                ShoppeProcessor(Of (ItemType, Long)).ShoppeType = Game.ShoppeType.InnKeeper
+                Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay
     End Function

@@ -9,7 +9,7 @@
 
     Public Overrides ReadOnly Property Name As String
         Get
-            Return "Dagger"
+            Return "BrodeSode"
         End Get
     End Property
 
