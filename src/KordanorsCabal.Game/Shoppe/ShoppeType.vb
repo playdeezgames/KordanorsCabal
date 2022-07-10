@@ -2,7 +2,7 @@
 
 Public Enum ShoppeType
     None
-    Trophy
+    BlackMage
     Blacksmith
 End Enum
 Public Module ShoppeTypeExtensions

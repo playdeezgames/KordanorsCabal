@@ -1,9 +1,9 @@
-﻿Friend Class TrophyShoppeDescriptor
+﻿Friend Class BlackMageShoppeDescriptor
     Inherits ShoppeTypeDescriptor
 
     Public Overrides ReadOnly Property Name As String
         Get
-            Return "Trophies"
+            Return "Magic"
         End Get
     End Property
 
@@ -12,6 +12,8 @@
             Return New Dictionary(Of ItemType, Long) From
                 {
                     {ItemType.GoblinEar, 5},
+                    {ItemType.MagicEgg, 5},
+                    {ItemType.RatTail, 1},
                     {ItemType.SkullFragment, 5}
                 }
         End Get
@@ -19,7 +21,10 @@
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of ItemType, Long)
         Get
-            Return New Dictionary(Of ItemType, Long)
+            Return New Dictionary(Of ItemType, Long) From
+                {
+                    {ItemType.TownPortal, 50}
+                }
         End Get
     End Property
 End Class
