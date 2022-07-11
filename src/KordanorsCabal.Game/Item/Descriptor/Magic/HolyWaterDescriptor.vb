@@ -33,6 +33,6 @@
             lines.AddRange(result.Item2)
         End If
         character.EnqueueMessage(sfx, lines.ToArray)
-        'TODO: do counter attacks!
+        character.DoCounterAttacks()
     End Sub
 End Class

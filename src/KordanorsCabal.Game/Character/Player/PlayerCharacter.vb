@@ -225,54 +225,6 @@
         End If
     End Sub
 
-    Private Sub DoCounterAttacks()
-        Dim enemies = Location.Enemies(Me)
-        Dim enemyCount = enemies.Count
-        Dim enemyIndex = 1
-        For Each enemy In enemies
-            DoCounterAttack(enemy, enemyIndex, enemyCount)
-            enemyIndex += 1
-        Next
-    End Sub
-
-    Private Sub DoCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
-        If IsDead Then
-            Return
-        End If
-        Dim lines As New List(Of String)
-        Dim sfx As Sfx? = Nothing
-        lines.Add($"Counter-attack {enemyIndex}/{enemyCount}:")
-        Dim attackRoll = enemy.RollAttack()
-        lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
-        For Each brokenItemType In DoArmorWear(attackRoll)
-            lines.Add($"Yer {brokenItemType.Name} breaks!")
-        Next
-        Dim defendRoll = RollDefend()
-        lines.Add($"You roll a defend of {defendRoll}.")
-        Dim result = attackRoll - defendRoll
-        Select Case result
-            Case Is <= 0
-                lines.Add($"{enemy.Name} misses!")
-                sfx = Game.Sfx.Miss
-            Case Else
-                Dim damage = enemy.DetermineDamage(result)
-                lines.Add($"{enemy.Name} does {damage} damage!")
-                DoDamage(damage)
-                enemy.DoWeaponWear(damage)
-                If IsDead Then
-                    sfx = Game.Sfx.PlayerDeath
-                    lines.Add($"{enemy.Name} kills you!")
-                    Dim partingShot = enemy.PartingShot
-                    If Not String.IsNullOrEmpty(partingShot) Then
-                        lines.Add($"{enemy.Name} says ""{partingShot}""")
-                    End If
-                    Exit Select
-                End If
-                sfx = Game.Sfx.PlayerHit
-                lines.Add($"You have {CurrentHP} HP left.")
-        End Select
-        EnqueueMessage(sfx, lines.ToArray)
-    End Sub
 
     Private Sub DoAttack()
         Dim lines As New List(Of String)
@@ -296,7 +248,9 @@
                     lines.Add($"Yer {brokenItemType.Name} breaks!")
                 Next
                 If enemy.IsDead Then
-                    sfx = KillEnemy(Me, lines, enemy, sfx)
+                    Dim killResult = enemy.Kill(Me)
+                    sfx = If(killResult.Item1, sfx)
+                    lines.AddRange(killResult.Item2)
                     Exit Select
                 End If
                 sfx = Game.Sfx.EnemyHit
