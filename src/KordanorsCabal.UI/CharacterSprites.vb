@@ -28,7 +28,7 @@ Module CharacterSprites
         Next
         Return result
     End Function
-    ReadOnly sprites As IReadOnlyDictionary(Of CharacterType, Sprite) =
+    ReadOnly characterSprites As IReadOnlyDictionary(Of CharacterType, Sprite) =
         New Dictionary(Of CharacterType, Sprite) From
         {
             {
@@ -205,6 +205,6 @@ Module CharacterSprites
         }
     <Extension>
     Function Sprite(characterType As CharacterType) As Sprite
-        Return sprites(characterType)
+        Return characterSprites(characterType)
     End Function
 End Module

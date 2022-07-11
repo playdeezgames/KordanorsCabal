@@ -11,6 +11,7 @@ Public Enum RouteType
     GoldLock
     PlatinumLock
     FinalLock
+    Portal
 End Enum
 Public Module RouteTypeExtensions
     <Extension>
