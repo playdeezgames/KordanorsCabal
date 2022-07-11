@@ -28,7 +28,7 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property CanUse As Boolean
+    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get
             Return True
         End Get
@@ -37,11 +37,9 @@
     Public Overrides Sub Use(character As Character)
         Dim healRoll = RNG.RollDice("2d4")
         character.ChangeStatistic(CharacterStatisticType.Wounds, -healRoll)
-        If character.Id = World.PlayerCharacter.Id Then
-            World.PlayerCharacter.EnqueueMessage(
-                    $"Potion heals up to {healRoll} HP!",
-                    $"You now have {character.CurrentHP} HP!")
-        End If
+        character.EnqueueMessage(
+                $"Potion heals up to {healRoll} HP!",
+                $"You now have {character.CurrentHP} HP!")
     End Sub
 
     Public Overrides Function RollSpawnCount(level As Long) As Long

@@ -12,7 +12,7 @@
             Return "Food"
         End Get
     End Property
-    Public Overrides ReadOnly Property CanUse As Boolean
+    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get
             Return True
         End Get
@@ -21,10 +21,8 @@
     Public Overrides Sub Use(character As Character)
         Dim healRoll = 1
         character.ChangeStatistic(CharacterStatisticType.Wounds, -healRoll)
-        If character.Id = World.PlayerCharacter.Id Then
-            World.PlayerCharacter.EnqueueMessage(
-                    $"Food heals up to {healRoll} HP!",
-                    $"You now have {character.CurrentHP} HP!")
-        End If
+        character.EnqueueMessage(
+                $"Food heals up to {healRoll} HP!",
+                $"You now have {character.CurrentHP} HP!")
     End Sub
 End Class

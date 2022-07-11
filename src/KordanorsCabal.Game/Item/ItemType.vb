@@ -39,8 +39,8 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).Name
     End Function
     <Extension>
-    Function CanUse(itemType As ItemType) As Boolean
-        Return ItemTypeDescriptors(itemType).CanUse
+    Function CanUse(itemType As ItemType, character As Character) As Boolean
+        Return ItemTypeDescriptors(itemType).CanUse(character)
     End Function
     <Extension>
     Function Encumbrance(itemType As ItemType) As Single

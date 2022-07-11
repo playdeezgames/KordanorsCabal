@@ -22,9 +22,9 @@
         End Get
     End Property
 
-    ReadOnly Property CanUse As Boolean
+    ReadOnly Property CanUse(character As Character) As Boolean
         Get
-            Return ItemType.CanUse
+            Return ItemType.CanUse(character)
         End Get
     End Property
 

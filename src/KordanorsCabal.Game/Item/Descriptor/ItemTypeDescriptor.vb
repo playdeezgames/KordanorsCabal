@@ -12,7 +12,7 @@
         End Get
     End Property
 
-    Overridable ReadOnly Property CanUse As Boolean
+    Overridable ReadOnly Property CanUse(character As Character) As Boolean
         Get
             Return False
         End Get

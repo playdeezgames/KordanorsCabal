@@ -97,6 +97,9 @@
     Function Enemies(character As Character) As IEnumerable(Of Character)
         Return Characters.Where(Function(x) x.IsEnemy(character))
     End Function
+    Function Enemy(character As Character) As Character
+        Return Enemies(character).FirstOrDefault
+    End Function
     Function Friends(character As Character) As IEnumerable(Of Character)
         Return Characters.Where(Function(x) Not x.IsEnemy(character))
     End Function

@@ -64,7 +64,7 @@
     End Function
 
     Public Sub UseItem(item As Item)
-        If item.CanUse Then
+        If item.CanUse(Me) Then
             item.Use(Me)
             item.Destroy()
         End If
@@ -296,22 +296,7 @@
                     lines.Add($"Yer {brokenItemType.Name} breaks!")
                 Next
                 If enemy.IsDead Then
-                    lines.Add($"You kill {enemy.Name}!")
-                    sfx = Game.Sfx.EnemyDeath
-                    Dim money As Long = enemy.RollMoneyDrop
-                    If money > 0 Then
-                        lines.Add($"You get {money} money!")
-                        ChangeStatistic(CharacterStatisticType.Money, money)
-                    End If
-                    Dim xp As Long = enemy.XPValue
-                    If xp > 0 Then
-                        lines.Add($"You get {xp} XP!")
-                        If AddXP(xp) Then
-                            lines.Add($"You level up!")
-                        End If
-                    End If
-                    enemy.DropLoot()
-                    enemy.Destroy()
+                    sfx = KillEnemy(Me, lines, enemy, sfx)
                     Exit Select
                 End If
                 sfx = Game.Sfx.EnemyHit
@@ -320,20 +305,6 @@
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
 
-    Private Function AddXP(xp As Long) As Boolean
-        ChangeStatistic(CharacterStatisticType.XP, xp)
-        Dim xpGoal = GetStatistic(CharacterStatisticType.XPGoal).Value
-        If GetStatistic(CharacterStatisticType.XP).Value >= xpGoal Then
-            ChangeStatistic(CharacterStatisticType.XP, -xpGoal)
-            ChangeStatistic(CharacterStatisticType.XPGoal, xpGoal)
-            ChangeStatistic(CharacterStatisticType.Unassigned, 1)
-            SetStatistic(CharacterStatisticType.Wounds, 0)
-            SetStatistic(CharacterStatisticType.Stress, 0)
-            SetStatistic(CharacterStatisticType.Fatigue, 0)
-            Return True
-        End If
-        Return False
-    End Function
 
     Public ReadOnly Property HasEquipment As Boolean
         Get

@@ -54,4 +54,8 @@ Module CharacterTypeExtensions
     Sub DropLoot(characterType As CharacterType, location As Location)
         CharacterTypeDescriptors(characterType).DropLoot(location)
     End Sub
+    <Extension>
+    Function IsUndead(characterType As CharacterType) As Boolean
+        Return CharacterTypeDescriptors(characterType).IsUndead
+    End Function
 End Module

@@ -60,4 +60,9 @@
     Public Overrides Function RollMoneyDrop() As Long
         Return RNG.RollDice("2d3")
     End Function
+    Public Overrides ReadOnly Property IsUndead As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 End Class

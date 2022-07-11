@@ -27,7 +27,7 @@
     End Function
 
     Private Shared Function UseItem() As UIState
-        If InteractItem.CanUse Then
+        If InteractItem.CanUse(World.PlayerCharacter) Then
             World.PlayerCharacter.UseItem(InteractItem)
             MainProcessor.PushUIState(UIState.Inventory)
             Return UIState.Message

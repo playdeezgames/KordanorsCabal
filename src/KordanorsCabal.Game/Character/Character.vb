@@ -22,6 +22,12 @@
         End Set
     End Property
 
+    ReadOnly Property IsUndead As Boolean
+        Get
+            Return CharacterType.IsUndead
+        End Get
+    End Property
+
     Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
         'do nothing!
     End Sub
@@ -329,4 +335,38 @@
                     Function(x) Item.FromId(x.Item2))
         End Get
     End Property
+
+    Friend Function AddXP(xp As Long) As Boolean
+        ChangeStatistic(CharacterStatisticType.XP, xp)
+        Dim xpGoal = GetStatistic(CharacterStatisticType.XPGoal).Value
+        If GetStatistic(CharacterStatisticType.XP).Value >= xpGoal Then
+            ChangeStatistic(CharacterStatisticType.XP, -xpGoal)
+            ChangeStatistic(CharacterStatisticType.XPGoal, xpGoal)
+            ChangeStatistic(CharacterStatisticType.Unassigned, 1)
+            SetStatistic(CharacterStatisticType.Wounds, 0)
+            SetStatistic(CharacterStatisticType.Stress, 0)
+            SetStatistic(CharacterStatisticType.Fatigue, 0)
+            Return True
+        End If
+        Return False
+    End Function
+    Friend Shared Function KillEnemy(character As Character, lines As List(Of String), enemy As Character, sfx As Sfx?) As Sfx?
+        lines.Add($"You kill {enemy.Name}!")
+        sfx = Game.Sfx.EnemyDeath
+        Dim money As Long = enemy.RollMoneyDrop
+        If money > 0 Then
+            lines.Add($"You get {money} money!")
+            character.ChangeStatistic(CharacterStatisticType.Money, money)
+        End If
+        Dim xp As Long = enemy.XPValue
+        If xp > 0 Then
+            lines.Add($"You get {xp} XP!")
+            If character.AddXP(xp) Then
+                lines.Add($"You level up!")
+            End If
+        End If
+        enemy.DropLoot()
+        enemy.Destroy()
+        Return sfx
+    End Function
 End Class
