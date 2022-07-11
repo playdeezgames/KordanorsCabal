@@ -101,6 +101,14 @@
             buffer.PutCell((14, 17), Pattern.DownwardDiagonal, False, Hue.Black)
         End If
 
+        If location.HasRoute(Direction.Outward) Then
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.Outward).RouteType.Sprite)
+        End If
+
+        If location.HasRoute(Direction.Inward) Then
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.Inward).RouteType.Sprite)
+        End If
+
         For Each item In player.Location.Inventory.Items
             Dim itemType As ItemType = item.ItemType
             If itemType.DisplayPattern.HasValue Then
@@ -117,7 +125,10 @@
     End Sub
 
     Private Sub ShowEnemy(buffer As PatternBuffer, spriteXY As (Integer, Integer), enemy As Character)
-        Dim sprite = enemy.CharacterType.Sprite
+        ShowSprite(buffer, spriteXY, enemy.CharacterType.Sprite)
+    End Sub
+
+    Private Shared Sub ShowSprite(buffer As PatternBuffer, spriteXY As (Integer, Integer), sprite As Sprite)
         For Each pixel In sprite.Pixels
             Dim xy = (pixel.Key.Item1 + spriteXY.Item1, pixel.Key.Item2 + spriteXY.Item2)
             Dim pattern = pixel.Value.Item1
