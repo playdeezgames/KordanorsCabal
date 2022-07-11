@@ -23,11 +23,14 @@
         Dim sfx As Sfx? = Nothing
         Dim damageRoll = RNG.RollDice("1d4")
         Dim enemy = character.Location.Enemy(character)
-        Dim lines As New List(Of String)
-        lines.Add($"{ItemType.HolyWater.Name} deals {damageRoll} HP to {enemy.Name}!")
+        Dim lines As New List(Of String) From {
+            $"{ItemType.HolyWater.Name} deals {damageRoll} HP to {enemy.Name}!"
+        }
         enemy.DoDamage(damageRoll)
         If enemy.IsDead Then
-            sfx = Game.Character.KillEnemy(character, lines, enemy, sfx)
+            Dim result = enemy.Kill(character)
+            sfx = If(result.Item1, sfx)
+            lines.AddRange(result.Item2)
         End If
         character.EnqueueMessage(sfx, lines.ToArray)
         'TODO: do counter attacks!

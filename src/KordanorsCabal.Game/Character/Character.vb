@@ -350,23 +350,24 @@
         End If
         Return False
     End Function
-    Friend Shared Function KillEnemy(character As Character, lines As List(Of String), enemy As Character, sfx As Sfx?) As Sfx?
-        lines.Add($"You kill {enemy.Name}!")
-        sfx = Game.Sfx.EnemyDeath
-        Dim money As Long = enemy.RollMoneyDrop
+    Friend Function Kill(killedBy As Character) As (Sfx?, List(Of String))
+        Dim lines As New List(Of String)
+        lines.Add($"You kill {Name}!")
+        Dim sfx As Sfx? = Game.Sfx.EnemyDeath
+        Dim money As Long = RollMoneyDrop
         If money > 0 Then
             lines.Add($"You get {money} money!")
-            character.ChangeStatistic(CharacterStatisticType.Money, money)
+            killedBy.ChangeStatistic(CharacterStatisticType.Money, money)
         End If
-        Dim xp As Long = enemy.XPValue
+        Dim xp As Long = XPValue
         If xp > 0 Then
             lines.Add($"You get {xp} XP!")
-            If character.AddXP(xp) Then
+            If killedBy.AddXP(xp) Then
                 lines.Add($"You level up!")
             End If
         End If
-        enemy.DropLoot()
-        enemy.Destroy()
-        Return sfx
+        DropLoot()
+        Destroy()
+        Return (sfx, lines)
     End Function
 End Class
