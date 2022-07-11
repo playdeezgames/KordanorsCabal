@@ -5,6 +5,7 @@ Public Enum ShoppeType
     BlackMage
     Blacksmith
     InnKeeper
+    Healer
 End Enum
 Public Module ShoppeTypeExtensions
     <Extension>

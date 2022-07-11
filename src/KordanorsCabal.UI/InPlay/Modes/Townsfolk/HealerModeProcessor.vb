@@ -4,7 +4,8 @@
     Const WelcomeButtonIndex = 0
     Const HealButtonIndex = 1
 
-    Const BuyPotionIndex = 5
+    Const PricesButtonIndex = 6
+    Const BuyButtonIndex = 7
 
     Const GoodByeButtonIndex = 9
 
@@ -21,10 +22,6 @@
                 Else
                     buffer.WriteText((0, 1), defaultResponse, False, Hue.Black)
                 End If
-            Case BuyPotionIndex
-                buffer.WriteText((0, 1), $"I sell potions for {ItemType.Potion.PurchasePrice.Value} money.", False, Hue.Black)
-                buffer.WriteText((0, 3), $"You have {player.Money} money.", False, Hue.Black)
-                buffer.WriteText((0, 4), $"You have {player.GetItemTypeCount(ItemType.Potion)} potions.", False, Hue.Black)
             Case Else
                 buffer.WriteText((0, 1), defaultResponse, False, Hue.Black)
         End Select
@@ -35,8 +32,9 @@
         If player.NeedsHealing Then
             Buttons(HealButtonIndex).Title = "Heal me!"
         End If
-        Buttons(BuyPotionIndex).Title = "Buy Potion"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
+        Buttons(PricesButtonIndex).Title = "Prices"
+        Buttons(BuyButtonIndex).Title = "Buy"
     End Sub
 
     Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
@@ -46,8 +44,12 @@
                 player.Mode = PlayerMode.Neutral
             Case HealButtonIndex
                 player.Heal()
-            Case BuyPotionIndex
-                player.Buy(ItemType.Potion)
+            Case PricesButtonIndex
+                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.Healer
+                Return UIState.ShoppePrices
+            Case BuyButtonIndex
+                ShoppeProcessor(Of (ItemType, Long)).ShoppeType = Game.ShoppeType.Healer
+                Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay
     End Function

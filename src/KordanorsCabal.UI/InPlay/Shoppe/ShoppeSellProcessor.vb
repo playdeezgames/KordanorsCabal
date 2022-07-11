@@ -29,9 +29,13 @@
             Case Command.Red
                 Return UIState.InPlay
             Case Command.Down
-                currentItemIndex = (currentItemIndex + 1) Mod items.Count
+                If items.Any Then
+                    currentItemIndex = (currentItemIndex + 1) Mod items.Count
+                End If
             Case Command.Up
-                currentItemIndex = (currentItemIndex + items.Count - 1) Mod items.Count
+                If items.Any Then
+                    currentItemIndex = (currentItemIndex + items.Count - 1) Mod items.Count
+                End If
             Case Command.Green, Command.Blue
                 Return SellItem
         End Select

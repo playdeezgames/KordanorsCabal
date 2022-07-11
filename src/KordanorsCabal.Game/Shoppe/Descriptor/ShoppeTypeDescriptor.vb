@@ -10,6 +10,7 @@ Module ShopeTypeDescriptorUtility
         {
             {ShoppeType.BlackMage, New BlackMageShoppeDescriptor},
             {ShoppeType.Blacksmith, New BlacksmithShoppeDescriptor},
+            {ShoppeType.Healer, New HealerShoppeDescriptor},
             {ShoppeType.InnKeeper, New InnkeeperShoppeDescriptor}
         }
 End Module
