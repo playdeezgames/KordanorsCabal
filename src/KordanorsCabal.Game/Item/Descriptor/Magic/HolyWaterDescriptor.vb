@@ -9,7 +9,7 @@
 
     Public Overrides ReadOnly Property Name As String
         Get
-            Return "Holy Water"
+            Return "Holy ""Water"""
         End Get
     End Property
 End Class
