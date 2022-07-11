@@ -21,6 +21,13 @@
             );")
     End Sub
 
+    Public Sub Clear(routeId As Long)
+        ClearForColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (RouteIdColumn, routeId))
+    End Sub
+
     Public Sub WriteRouteType(routeId As Long, routeType As Long)
         WriteColumnValue(
             AddressOf Initialize,

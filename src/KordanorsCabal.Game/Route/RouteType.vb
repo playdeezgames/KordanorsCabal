@@ -26,4 +26,8 @@ Public Module RouteTypeExtensions
     Function UnlockedRouteType(routeType As RouteType) As RouteType?
         Return RouteTypeDescriptors(routeType).UnlockedRouteType
     End Function
+    <Extension>
+    Function IsSingleUse(routeType As RouteType) As Boolean
+        Return RouteTypeDescriptors(routeType).IsSingleUse
+    End Function
 End Module

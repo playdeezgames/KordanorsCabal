@@ -16,6 +16,12 @@
             Return Nothing
         End Get
     End Property
+
+    Overridable ReadOnly Property IsSingleUse As Boolean
+        Get
+            Return False
+        End Get
+    End Property
 End Class
 Friend Module RouteTypeDescriptorUtility
     Friend ReadOnly RouteTypeDescriptors As IReadOnlyDictionary(Of RouteType, RouteTypeDescriptor) =
@@ -27,6 +33,7 @@ Friend Module RouteTypeDescriptorUtility
             {RouteType.IronLock, New IronLockDescriptor},
             {RouteType.Passageway, New PassagewayDescriptor},
             {RouteType.PlatinumLock, New PlatinumLockDescriptor},
+            {RouteType.Portal, New PortalDescriptor},
             {RouteType.Road, New RoadDescriptor},
             {RouteType.SilverLock, New SilverLockDescriptor},
             {RouteType.Stairs, New StairsDescriptor}

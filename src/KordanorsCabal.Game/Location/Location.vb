@@ -16,6 +16,16 @@
         Return LocationStatisticData.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
     End Function
 
+    Friend Sub DestroyRoute(direction As Direction)
+        If Routes.ContainsKey(direction) Then
+            Routes(direction).Destroy()
+        End If
+    End Sub
+
+    Friend Function IsDungeon() As Boolean
+        Return LocationType.IsDungeon
+    End Function
+
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long?
         Return LocationStatisticData.Read(Id, statisticType)
     End Function

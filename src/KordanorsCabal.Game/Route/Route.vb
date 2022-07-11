@@ -22,6 +22,11 @@
             RouteData.WriteRouteType(Id, value)
         End Set
     End Property
+
+    Friend Sub Destroy()
+        RouteData.Clear(Id)
+    End Sub
+
     ReadOnly Property IsLocked As Boolean
         Get
             Return RouteType.UnlockItem.HasValue
@@ -45,7 +50,11 @@
                 RouteType = If(RouteType.UnlockedRouteType, RouteType)
                 Play(Sfx.UnlockDoor)
             End If
-            Return ToLocation
+            Dim destination = ToLocation
+            If RouteType.IsSingleUse Then
+                Destroy()
+            End If
+            Return destination
         End If
         Return player.Location
     End Function
