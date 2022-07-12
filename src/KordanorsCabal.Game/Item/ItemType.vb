@@ -28,6 +28,8 @@ Public Enum ItemType
     Food
     MagicEgg
     Beer
+    Trousers
+    Pr0n
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

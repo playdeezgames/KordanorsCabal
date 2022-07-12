@@ -79,12 +79,14 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.PlateMail, New PlateMailDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},
+            {ItemType.Pr0n, New Pr0nDescriptor},
             {ItemType.RatTail, New RatTailDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor},
             {ItemType.Shield, New ShieldDescriptor},
             {ItemType.Shortsword, New ShortswordDescriptor},
             {ItemType.SkullFragment, New SkullFragmentDescriptor},
             {ItemType.TownPortal, New TownPortalDescriptor},
+            {ItemType.Trousers, New TrousersDescriptor},
             {ItemType.WaterShard, New WaterShardDescriptor}
         }
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

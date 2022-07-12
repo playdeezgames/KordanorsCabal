@@ -26,12 +26,14 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.PlateMail, New PlateMailUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
             {ItemType.Potion, New PotionUIDescriptor},
+            {ItemType.Pr0n, New Pr0nUIDescriptor},
             {ItemType.RatTail, New RatTailUIDescriptor},
             {ItemType.Shield, New ShieldUIDescriptor},
             {ItemType.Shortsword, New ShortswordUIDescriptor},
             {ItemType.SilverKey, New SilverKeyUIDescriptor},
             {ItemType.SkullFragment, New SkullFragmentUIDescriptor},
             {ItemType.TownPortal, New TownPortalUIDescriptor},
+            {ItemType.Trousers, New TrousersUIDescriptor},
             {ItemType.WaterShard, New WaterShardUIDescriptor}
         }
 End Module
