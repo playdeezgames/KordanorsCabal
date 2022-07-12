@@ -76,6 +76,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.HolyWater, New HolyWaterDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
             {ItemType.MagicEgg, New MagicEggDescriptor},
+            {ItemType.MoonPortal, New MoonPortalDescriptor},
             {ItemType.PlateMail, New PlateMailDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},

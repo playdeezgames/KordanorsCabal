@@ -23,6 +23,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.HolyWater, New HolyWaterUIDescriptor},
             {ItemType.IronKey, New IronKeyUIDescriptor},
             {ItemType.MagicEgg, New MagicEggUIDescriptor},
+            {ItemType.MoonPortal, New MoonPortalUIDescriptor},
             {ItemType.PlateMail, New PlateMailUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
             {ItemType.Potion, New PotionUIDescriptor},
