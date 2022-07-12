@@ -37,6 +37,7 @@
     Public Overrides Sub Use(character As Character)
         Dim healRoll = RNG.RollDice("2d4")
         character.ChangeStatistic(CharacterStatisticType.Wounds, -healRoll)
+        character.Inventory.Add(Item.Create(ItemType.Bottle))
         character.EnqueueMessage(
                 $"Potion heals up to {healRoll} HP!",
                 $"You now have {character.CurrentHP} HP!")

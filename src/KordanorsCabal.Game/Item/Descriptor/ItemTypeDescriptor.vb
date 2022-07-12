@@ -62,6 +62,7 @@ Public Module ItemTypeDescriptorUtility
         {
             {ItemType.AirShard, New AirShardDescriptor},
             {ItemType.Beer, New BeerDescriptor},
+            {ItemType.Bottle, New BottleDescriptor},
             {ItemType.BrodeSode, New BrodeSodeDescriptor},
             {ItemType.ChainMail, New ChainMailDescriptor},
             {ItemType.CopperKey, New CopperKeyDescriptor},

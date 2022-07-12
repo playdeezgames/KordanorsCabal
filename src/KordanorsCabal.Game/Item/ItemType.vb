@@ -31,6 +31,7 @@ Public Enum ItemType
     Trousers
     Pr0n
     MoonPortal
+    Bottle
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
