@@ -6,6 +6,7 @@ Public Module EquipSlotDescriptorUtility
         New Dictionary(Of EquipSlot, EquipSlotDescriptor) From
         {
             {EquipSlot.Head, New HeadEquipSlotDescriptor},
+            {EquipSlot.Legs, New LegsEquipSlotDescriptor},
             {EquipSlot.Shield, New ShieldEquipSlotDescriptor},
             {EquipSlot.Torso, New TorsoEquipSlotDescriptor},
             {EquipSlot.Weapon, New WeaponEquipSlotDescriptor}
