@@ -25,6 +25,10 @@
             Return False
         End Get
     End Property
+
+    Overridable Function CanBeBribedWith(itemType As ItemType) As Boolean
+        Return False
+    End Function
 End Class
 Friend Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of CharacterType, CharacterTypeDescriptor) =

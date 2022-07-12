@@ -58,4 +58,8 @@ Module CharacterTypeExtensions
     Function IsUndead(characterType As CharacterType) As Boolean
         Return CharacterTypeDescriptors(characterType).IsUndead
     End Function
+    <Extension>
+    Function CanBeBribedWith(characterType As CharacterType, itemType As ItemType) As Boolean
+        Return CharacterTypeDescriptors(characterType).CanBeBribedWith(itemType)
+    End Function
 End Module

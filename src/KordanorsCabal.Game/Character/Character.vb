@@ -22,6 +22,10 @@
         End Set
     End Property
 
+    Friend Function CanBeBribedWith(itemType As ItemType) As Boolean
+        Return CharacterType.CanBeBribedWith(itemType)
+    End Function
+
     ReadOnly Property IsUndead As Boolean
         Get
             Return CharacterType.IsUndead

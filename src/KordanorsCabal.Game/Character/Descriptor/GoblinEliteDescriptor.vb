@@ -78,4 +78,13 @@
                 Return True
         End Select
     End Function
+
+    Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
+        Select Case itemType
+            Case ItemType.Beer
+                Return True
+            Case Else
+                Return False
+        End Select
+    End Function
 End Class
