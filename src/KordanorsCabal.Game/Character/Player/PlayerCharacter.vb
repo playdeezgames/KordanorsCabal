@@ -27,6 +27,13 @@
         End If
     End Sub
 
+    Public ReadOnly Property CanGamble As Boolean
+        Get
+            Return Money >= 5
+        End Get
+    End Property
+
+
     Public Property Direction As Direction
         Get
             Return CType(PlayerData.ReadDirection().Value, Direction)
@@ -42,6 +49,29 @@
             Inventory.Add(item)
             CharacterEquipSlotData.Clear(Id, equipSlot)
         End If
+    End Sub
+
+    Public Sub Gamble()
+        If Not CanGamble Then
+            EnqueueMessage("You cannot gamble at this time!")
+            Return
+        End If
+        Dim lines As New List(Of String)
+        lines.Add("You flip the two coins!")
+        Dim firstCoin = RNG.FromRange(0, 1)
+        lines.Add($"The first coin comes up {If(firstCoin > 0, "heads", "tails")}!")
+        Dim secondCoin = RNG.FromRange(0, 1)
+        lines.Add($"The second coin comes up {If(secondCoin > 0, "heads", "tails")}!")
+        Dim winner = firstCoin > 0 AndAlso secondCoin > 0
+        If winner Then
+            lines.Add("You win and receive 15 money!")
+            Money += 15
+        Else
+            lines.Add("You lose and must pay 5 money!")
+            Money -= 5
+        End If
+        'TODO: sound effect
+        EnqueueMessage(lines.ToArray)
     End Sub
 
     Public Sub Equip(item As Item)

@@ -3,6 +3,7 @@
 
     Const WelcomeButtonIndex = 0
     Const GoodByeButtonIndex = 9
+    Const GambleButtonIndex = 5
 
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
@@ -10,15 +11,24 @@
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
                 buffer.WriteText((0, 1), "Off with ye then!", False, Hue.Black)
-            Case Else
-                buffer.WriteText((0, 1), "'Allo! 'Allo!", False, Hue.Black)
-                buffer.WriteText((0, 2), "Would you like to buy a lovely pair of trousers?", False, Hue.Black)
+                Return
+            Case GambleButtonIndex
+                If player.CanGamble Then
+                    buffer.WriteText((0, 1), "Play two-up for 5 money! Try yer luck! Flip two coins, and if both are head, you win 15! Otherwise, I take yer 5!", False, Hue.Black)
+                    buffer.WriteText((0, 8), $"You have {player.Money} money.", False, Hue.Black)
+                    Return
+                End If
         End Select
+        buffer.WriteText((0, 1), "'Allo! 'Allo!", False, Hue.Black)
+        buffer.WriteText((0, 2), "Would you like to buy a lovely pair of trousers?", False, Hue.Black)
     End Sub
 
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
+        If player.CanGamble Then
+            Buttons(GambleButtonIndex).Title = "Gamble"
+        End If
     End Sub
 
     Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
@@ -26,6 +36,12 @@
             Case GoodByeButtonIndex
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
+            Case GambleButtonIndex
+                If player.CanGamble Then
+                    player.Gamble()
+                    PushUIState(UIState.InPlay)
+                    Return UIState.Message
+                End If
         End Select
         Return UIState.InPlay
     End Function
