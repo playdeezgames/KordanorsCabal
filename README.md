@@ -47,3 +47,101 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * Earth = Immobilize, Level 2
 * Fire  = Damage    , Level 3
 * Water = Heal      , Level 4
+
+# Universal Tables for all SPLORR!! SQLite based games
+
+## CharacterEquipSlots
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| CharacterId | INT | FK Characters |
+| EquipSlot | INT | Implementation Specific |
+| ItemId | INT | FK Items |
+
+## CharacterLocations
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| CharacterId | INT | FK Characters |
+| LocationId | INT | FK Locations |
+
+## CharacterStatistics
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| CharacterId | INT | FK Characters |
+| StatisticType | INT | Implementation Specific |
+| StatisticValue | INT | Statistic Value |
+
+## Characters
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| CharacterId | INT | PK |
+| LocationId | INT | FK to Locations |
+| CharacterType | INT | Implementation Specific |
+
+## Inventories
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| InventoryId | INT | PK |
+| CharacterId | INT? | FK Characters |
+| LocationId | INT? | FK Locations |
+
+CK CharacterId IS NULL OR LocationId IS NULL, but not both!
+
+## InventoryItems
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| InventoryId | INT | FK Inventories |
+| ItemId | INT | FK Items |
+
+## ItemStatistics
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| ItemId | INT | FK Items |
+| StatisticType | INT | Implementation Specific |
+| StatisticValue | INT | Statististic Value |
+
+## Items
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| ItemId | INT | PK |
+| ItemType | INT | Implementation Specific |
+
+## LocationStatistics
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| LocationId | INT | FK Locations |
+| StatisticType | INT | Implementation Specific |
+| StatisticValue | INT | Statistic Value |
+
+## Locations
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| LocationId | INT | PK |
+| LocationType | INT | Implementation Specific |
+
+## Players
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| PlayerId | INT | CK=1 |
+| CharacterId | INT | FK Characters |
+
+## Routes
+
+| Column Name | Type | Purpose |
+| --- | --- | --- |
+| RouteId | INT | PK |
+| FromLocationId | INT | FK Locations |
+| ToLocationId | INT | FK Locations |
+| RouteType | INT | Implementation Specific |
+| Direction | INT | Implementation Specific |
+
