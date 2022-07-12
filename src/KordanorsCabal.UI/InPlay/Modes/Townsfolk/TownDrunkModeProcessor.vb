@@ -30,7 +30,9 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case EnableButtonIndex
-                Return GiveBeer(player)
+                If player.HasItemType(ItemType.Beer) Then
+                    Return GiveBeer(player)
+                End If
         End Select
         Return UIState.InPlay
     End Function
