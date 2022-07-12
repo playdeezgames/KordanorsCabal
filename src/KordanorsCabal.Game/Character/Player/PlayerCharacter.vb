@@ -238,10 +238,6 @@
         End If
     End Sub
 
-    Friend Function HasItemType(itemType As ItemType) As Boolean
-        Return Inventory.Items.Any(Function(x) x.ItemType = itemType)
-    End Function
-
     Public Sub Move(direction As Direction)
         If CanMove(direction) Then
             Location = Location.Routes(direction).Move(Me)

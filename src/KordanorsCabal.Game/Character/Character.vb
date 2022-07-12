@@ -422,4 +422,8 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
+
+    Function HasItemType(itemType As ItemType) As Boolean
+        Return Inventory.ItemsOfType(itemType).Any
+    End Function
 End Class
