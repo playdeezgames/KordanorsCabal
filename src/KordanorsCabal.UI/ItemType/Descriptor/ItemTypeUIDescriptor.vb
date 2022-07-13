@@ -9,6 +9,7 @@ Module ItemTypeUIDescriptorUtility
         {
             {ItemType.AirShard, New AirShardUIDescriptor},
             {ItemType.Beer, New BeerUIDescriptor},
+            {ItemType.BookOfHolyBolt, New BookOfHolyBoltUIDescriptor},
             {ItemType.Bottle, New BottleUIDescriptor},
             {ItemType.BrodeSode, New BrodeSodeUIDescriptor},
             {ItemType.ChainMail, New ChainMainUIDescriptor},
