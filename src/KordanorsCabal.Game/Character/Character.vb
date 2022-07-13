@@ -82,7 +82,7 @@
         Get
             Dim inventoryId As Long? = CharacterInventoryData.Read(Id)
             If Not inventoryId.HasValue Then
-                inventoryId = InventoryData.Create()
+                inventoryId = InventoryData.CreateForCharacter(Id)
                 CharacterInventoryData.Write(Id, inventoryId.Value)
             End If
             Return New Inventory(inventoryId.Value)

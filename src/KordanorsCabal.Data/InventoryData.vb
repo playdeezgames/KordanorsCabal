@@ -1,16 +1,41 @@
 ﻿Public Module InventoryData
     Friend Const TableName = "Inventories"
     Friend Const InventoryIdColumn = "InventoryId"
+    Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
+    Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Sub Initialize()
+        CharacterData.Initialize()
+        LocationData.Initialize()
         ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
-                [{InventoryIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT
+                [{InventoryIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
+                [{CharacterIdColumn}] INT NULL,
+                [{LocationIdColumn}] INT NULL,
+                FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}]),
+                FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}]),
+                CHECK(
+                    ([{CharacterIdColumn}] IS NULL AND [{LocationIdColumn}] IS NOT NULL) OR 
+                    ([{CharacterIdColumn}] IS NOT NULL AND [{LocationIdColumn}] IS NULL)
+                )
             );")
     End Sub
-    Public Function Create() As Long
+    Public Function CreateForCharacter(characterId As Long) As Long
         Return CreateRecord(
             AddressOf Initialize,
-            TableName)
+            TableName,
+            (CharacterIdColumn, characterId))
     End Function
+    Public Function CreateForLocation(locationId As Long) As Long
+        Return CreateRecord(
+            AddressOf Initialize,
+            TableName,
+            (LocationIdColumn, locationId))
+    End Function
+    Friend Sub ClearForCharacter(characterId As Long)
+        ClearForColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (CharacterIdColumn, characterId))
+    End Sub
 End Module

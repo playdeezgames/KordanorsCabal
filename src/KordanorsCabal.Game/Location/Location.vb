@@ -83,7 +83,7 @@
         Get
             Dim inventoryId As Long? = LocationInventoryData.Read(Id)
             If Not inventoryId.hasValue Then
-                inventoryId = InventoryData.Create()
+                inventoryId = InventoryData.CreateForLocation(Id)
                 LocationInventoryData.Write(Id, inventoryId.Value)
             End If
             Return New Inventory(inventoryId.Value)
