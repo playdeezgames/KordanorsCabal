@@ -1,5 +1,5 @@
 ﻿Public Module CharacterQuestData
-    Friend Const TableName = "ChracterQuests"
+    Friend Const TableName = "CharacterQuests"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const QuestColumn = "Quest"
     Friend Sub Initialize()

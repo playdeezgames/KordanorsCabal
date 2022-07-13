@@ -34,6 +34,7 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 022 - 20220710
 * 023 - 20220711
 * 024 - 20220712
+* 025 - 20220713
 
 ## Credit Due
 
