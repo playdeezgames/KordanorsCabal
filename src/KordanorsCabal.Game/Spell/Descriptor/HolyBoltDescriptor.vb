@@ -27,7 +27,11 @@
 
     Public Overrides ReadOnly Property CanCast(character As Character) As Boolean
         Get
-            Return False
+            Dim enemy = character.Location.Enemy(character)
+            If enemy Is Nothing OrElse Not enemy.IsUndead Then
+                Return False
+            End If
+            Return If(character.GetStatistic(CharacterStatisticType.Mana), 0) > 0
         End Get
     End Property
 End Class
