@@ -9,7 +9,7 @@
     Const MoveRunButtonIndex = 5
     Const InventoryButtonIndex = 6
     Const EquipmentButtonIndex = 7
-    '8
+    Const SpellsButtonIndex = 8
     Const MenuButtonIndex = 9
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
@@ -33,6 +33,9 @@
         Buttons(TurnFightButtonIndex).Title = If(player.CanFight, "FIGHT!", "Turn...")
         Buttons(MoveRunButtonIndex).Title = If(player.CanFight, "RUN!", "Move...")
         Buttons(MenuButtonIndex).Title = "Game Menu"
+        If player.HasSpells Then
+            Buttons(SpellsButtonIndex).Title = "Spells"
+        End If
         If player.CanMap Then
             Buttons(MapButtonIndex).Title = "Map"
         End If
@@ -111,6 +114,10 @@
                     Return UIState.LevelUp
                 End If
                 Return UIState.Status
+            Case SpellsButtonIndex
+                If player.HasSpells Then
+                    Return UIState.SpellList
+                End If
         End Select
         Return UIState.InPlay
     End Function

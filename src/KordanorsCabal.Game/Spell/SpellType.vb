@@ -17,4 +17,8 @@ Public Module SpellTypeExtensions
     Function RequiredPower(spellType As SpellType, level As Long) As Long
         Return SpellDescriptors(spellType).RequiredPower(level)
     End Function
+    <Extension>
+    Function CanCast(spellType As SpellType, character As Character) As Boolean
+        Return SpellDescriptors(spellType).CanCast(character)
+    End Function
 End Module

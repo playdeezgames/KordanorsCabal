@@ -51,6 +51,16 @@
         End If
     End Sub
 
+    Public ReadOnly Property CanCast() As Boolean
+        Get
+            Return Spells.Keys.Any(Function(x) CanCastSpell(x))
+        End Get
+    End Property
+
+    Private Function CanCastSpell(spellType As SpellType) As Boolean
+        Return spellType.CanCast(Me)
+    End Function
+
     Public Sub Gamble()
         If Not CanGamble Then
             EnqueueMessage("You cannot gamble at this time!")

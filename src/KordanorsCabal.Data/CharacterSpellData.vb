@@ -15,6 +15,15 @@
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
+
+    Public Function ReadForCharacter(characterId As Long) As IEnumerable(Of Tuple(Of Long, Long))
+        Return ReadRecordsWithColumnValue(Of Long, Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            (SpellTypeColumn, SpellLevelColumn),
+            (CharacterIdColumn, characterId))
+    End Function
+
     Public Function Read(characterId As Long, spellType As Long) As Long?
         Return ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,

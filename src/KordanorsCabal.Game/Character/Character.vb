@@ -3,6 +3,21 @@
     Sub New(characterId As Long)
         Id = characterId
     End Sub
+
+    ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
+        Get
+            Return CharacterSpellData.
+                ReadForCharacter(Id).
+                ToDictionary(Function(x) CType(x.Item1, SpellType), Function(x) x.Item2)
+        End Get
+    End Property
+
+    ReadOnly Property HasSpells As Boolean
+        Get
+            Return Spells.Any
+        End Get
+    End Property
+
     ReadOnly Property CharacterType As CharacterType
         Get
             Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
