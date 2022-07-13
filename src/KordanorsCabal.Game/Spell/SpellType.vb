@@ -9,4 +9,12 @@ Public Module SpellTypeExtensions
     Function Name(spellType As SpellType) As String
         Return SpellDescriptors(spellType).Name
     End Function
+    <Extension>
+    Function MaximumLevel(spellType As SpellType) As Long
+        Return SpellDescriptors(spellType).MaximumLevel
+    End Function
+    <Extension>
+    Function RequiredPower(spellType As SpellType, level As Long) As Long
+        Return SpellDescriptors(spellType).RequiredPower(level)
+    End Function
 End Module

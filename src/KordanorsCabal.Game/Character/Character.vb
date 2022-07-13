@@ -22,6 +22,24 @@
         End Set
     End Property
 
+    Friend Sub Learn(spellType As SpellType)
+        If Not CanLearn(spellType) Then
+            EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
+            Return
+        End If
+        Dim nextLevel = If(CharacterSpellData.Read(Id, spellType), 0) + 1
+        EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
+        CharacterSpellData.Write(Id, spellType, nextLevel)
+    End Sub
+
+    Friend Function CanLearn(spellType As SpellType) As Boolean
+        Dim nextLevel = If(CharacterSpellData.Read(Id, spellType), 0) + 1
+        If nextLevel > spellType.MaximumLevel Then
+            Return False
+        End If
+        Return If(GetStatistic(CharacterStatisticType.Power), 0) >= spellType.RequiredPower(nextLevel)
+    End Function
+
     Friend Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return CharacterType.CanBeBribedWith(itemType)
     End Function

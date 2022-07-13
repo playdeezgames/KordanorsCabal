@@ -12,4 +12,14 @@
             Return "Book of Holy Bolt"
         End Get
     End Property
+
+    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
+        Get
+            Return character.CanLearn(SpellType.HolyBolt)
+        End Get
+    End Property
+
+    Public Overrides Sub Use(character As Character)
+        character.Learn(SpellType.HolyBolt)
+    End Sub
 End Class

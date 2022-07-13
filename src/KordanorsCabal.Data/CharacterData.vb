@@ -61,6 +61,7 @@
         CharacterLocationData.ClearForCharacter(characterId)
         CharacterStatisticData.ClearForCharacter(characterId)
         PlayerData.ClearForCharacter(characterId)
+        CharacterSpellData.ClearForCharacter(characterId)
         ClearForColumnValue(
             AddressOf Initialize,
             TableName,
