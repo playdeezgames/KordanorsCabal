@@ -12,4 +12,10 @@
             Return True
         End Get
     End Property
+
+    Public Overrides ReadOnly Property CanMap As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 End Class

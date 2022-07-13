@@ -33,7 +33,9 @@
         Buttons(TurnFightButtonIndex).Title = If(player.CanFight, "FIGHT!", "Turn...")
         Buttons(MoveRunButtonIndex).Title = If(player.CanFight, "RUN!", "Move...")
         Buttons(MenuButtonIndex).Title = "Game Menu"
-        Buttons(MapButtonIndex).Title = "Map"
+        If player.CanMap Then
+            Buttons(MapButtonIndex).Title = "Map"
+        End If
         If player.HasEquipment Then
             Buttons(EquipmentButtonIndex).Title = "Equipment"
         End If
@@ -97,7 +99,9 @@
                     Return UIState.Inventory
                 End If
             Case MapButtonIndex
-                Return UIState.Map
+                If player.CanMap Then
+                    Return UIState.Map
+                End If
             Case EquipmentButtonIndex
                 If player.HasEquipment Then
                     Return UIState.Equipment

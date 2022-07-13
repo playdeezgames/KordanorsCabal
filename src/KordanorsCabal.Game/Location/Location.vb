@@ -112,4 +112,10 @@
     Function Friends(character As Character) As IEnumerable(Of Character)
         Return Characters.Where(Function(x) Not x.IsEnemy(character))
     End Function
+
+    Friend ReadOnly Property CanMap As Boolean
+        Get
+            Return LocationType.CanMap
+        End Get
+    End Property
 End Class

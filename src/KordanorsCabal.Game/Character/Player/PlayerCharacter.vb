@@ -131,6 +131,12 @@
         Return CanMove(Direction.PreviousDirection.Value)
     End Function
 
+    Public ReadOnly Property CanMap() As Boolean
+        Get
+            Return Location.CanMap
+        End Get
+    End Property
+
     Public Function CanMoveRight() As Boolean
         Return CanMove(Direction.NextDirection.Value)
     End Function

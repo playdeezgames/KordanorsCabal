@@ -19,4 +19,8 @@ Public Module LocationTypeExtensions
     Public Function IsDungeon(locationType As LocationType) As Boolean
         Return LocationDescriptors(locationType).IsDungeon
     End Function
+    <Extension>
+    Public Function CanMap(locationType As LocationType) As Boolean
+        Return LocationDescriptors(locationType).CanMap
+    End Function
 End Module

@@ -1,6 +1,7 @@
 ﻿Public MustInherit Class LocationDescriptor
     MustOverride ReadOnly Property Name As String
     MustOverride ReadOnly Property IsDungeon As Boolean
+    MustOverride ReadOnly Property CanMap As Boolean
 End Class
 Friend Module LocationDescriptorUtility
     Friend ReadOnly LocationDescriptors As IReadOnlyDictionary(Of LocationType, LocationDescriptor) =
