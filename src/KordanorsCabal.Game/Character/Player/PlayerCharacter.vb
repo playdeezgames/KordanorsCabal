@@ -84,6 +84,14 @@
         EnqueueMessage(lines.ToArray)
     End Sub
 
+    Public Sub Cast(spellType As SpellType)
+        If Not CanCastSpell(spellType) Then
+            EnqueueMessage($"You cannot cast {spellType.Name} at this time.")
+            Return
+        End If
+        spellType.Cast(Me)
+    End Sub
+
     Public Sub Equip(item As Item)
         If item.CanEquip Then
             InventoryItemData.ClearForItem(item.Id)

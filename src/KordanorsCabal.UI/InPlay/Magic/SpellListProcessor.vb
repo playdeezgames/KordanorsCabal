@@ -37,8 +37,14 @@
             Case Command.Up
                 currentItemIndex = (currentItemIndex + items.Count - 1) Mod items.Count
             Case Command.Green, Command.Blue
-                'TODO: view spell details?
+                Return CastSpell()
         End Select
         Return UIState.SpellList
+    End Function
+
+    Private Function CastSpell() As UIState
+        World.PlayerCharacter.Cast(items(currentItemIndex).Item1)
+        PushUIState(UIState.SpellList)
+        Return UIState.Message
     End Function
 End Class

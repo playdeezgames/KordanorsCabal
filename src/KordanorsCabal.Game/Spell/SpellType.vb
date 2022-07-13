@@ -21,4 +21,8 @@ Public Module SpellTypeExtensions
     Function CanCast(spellType As SpellType, character As Character) As Boolean
         Return SpellDescriptors(spellType).CanCast(character)
     End Function
+    <Extension>
+    Sub Cast(spellType As SpellType, character As Character)
+        SpellDescriptors(spellType).Cast(character)
+    End Sub
 End Module

@@ -34,4 +34,8 @@
             Return If(character.GetStatistic(CharacterStatisticType.Mana), 0) > 0
         End Get
     End Property
+
+    Public Overrides Sub Cast(character As Character)
+        character.EnqueueMessage($"You cast {SpellType.HolyBolt.Name}!")
+    End Sub
 End Class
