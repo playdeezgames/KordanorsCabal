@@ -38,4 +38,18 @@
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
+    Public Function ReadForCharacter(characterId As Long) As Long?
+        Return ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            InventoryIdColumn,
+            (CharacterIdColumn, characterId))
+    End Function
+    Public Function ReadForLocation(locationId As Long) As Long?
+        Return ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            InventoryIdColumn,
+            (LocationIdColumn, locationId))
+    End Function
 End Module
