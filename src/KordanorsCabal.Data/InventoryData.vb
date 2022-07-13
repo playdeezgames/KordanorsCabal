@@ -10,8 +10,8 @@
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{InventoryIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
-                [{CharacterIdColumn}] INT NULL,
-                [{LocationIdColumn}] INT NULL,
+                [{CharacterIdColumn}] INT NULL UNIQUE,
+                [{LocationIdColumn}] INT NULL UNIQUE,
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}]),
                 FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}]),
                 CHECK(
