@@ -56,7 +56,6 @@ Module CharacterSprites
                     Hue.Black,
                     LoadPixels(
                         AddressOf PixelConvertor,
-                        "............",
                         "...#.....#..",
                         "..#.......#.",
                         ".##.#...#.##",
@@ -67,7 +66,8 @@ Module CharacterSprites
                         ".#.#.###.#.#",
                         ".....###....",
                         "............",
-                        ".....#.#...."))
+                        ".....#.#....",
+                        "............"))
             },
             {
                 CharacterType.Bishop,
