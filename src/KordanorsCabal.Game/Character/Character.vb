@@ -264,6 +264,10 @@
         ChangeStatistic(CharacterStatisticType.Wounds, damage)
     End Sub
 
+    Friend Sub DoFatigue(fatigue As Long)
+        ChangeStatistic(CharacterStatisticType.Fatigue, fatigue)
+    End Sub
+
     Friend Sub Destroy()
         CharacterData.Clear(Id)
     End Sub

@@ -31,7 +31,7 @@
             If enemy Is Nothing OrElse Not enemy.IsUndead Then
                 Return False
             End If
-            Return If(character.GetStatistic(CharacterStatisticType.Mana), 0) > 0
+            Return character.CurrentMana > 0
         End Get
     End Property
 
@@ -44,7 +44,7 @@
         Dim lines As New List(Of String)
         Dim sfx As Sfx? = Nothing
         lines.Add($"You cast {SpellType.HolyBolt.Name} on {enemy.Name}!")
-        character.ChangeStatistic(CharacterStatisticType.Mana, -1)
+        character.DoFatigue(1)
         Dim damage As Long = character.RollSpellDice(SpellType.HolyBolt)
         lines.Add($"You do {damage} damage!")
         enemy.DoDamage(damage)
