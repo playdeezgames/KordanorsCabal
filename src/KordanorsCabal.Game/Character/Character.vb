@@ -55,6 +55,19 @@
         Return If(GetStatistic(CharacterStatisticType.Power), 0) >= spellType.RequiredPower(nextLevel)
     End Function
 
+    Friend Function RollSpellDice(spellType As SpellType) As Long
+        If Not Spells.ContainsKey(spellType) Then
+            Return 0
+        End If
+        Return RollDice(Power + Spells(SpellType.HolyBolt))
+    End Function
+
+    ReadOnly Property Power As Long
+        Get
+            Return GetStatistic(CharacterStatisticType.Power).Value
+        End Get
+    End Property
+
     Friend Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return CharacterType.CanBeBribedWith(itemType)
     End Function
@@ -148,15 +161,18 @@
         Return CharacterType.IsEnemy(character)
     End Function
 
-    Friend Function RollDefend() As Long
-        Dim dice = GetDefendDice()
+    Private Function RollDice(dice As Long) As Long
         Dim result As Long = 0
         While dice > 0
             result += RNG.RollDice("1d6/6")
             dice -= 1
         End While
+        Return result
+    End Function
+
+    Friend Function RollDefend() As Long
         Dim maximumDefend = GetStatistic(CharacterStatisticType.BaseMaximumDefend).Value
-        Return Math.Min(result, maximumDefend)
+        Return Math.Min(RollDice(GetDefendDice()), maximumDefend)
     End Function
 
     Private Function GetDefendDice() As Long
@@ -168,33 +184,15 @@
     End Function
 
     Friend Function RollAttack() As Long
-        Dim dice = GetAttackDice()
-        Dim result As Long = 0
-        While dice > 0
-            result += RNG.RollDice("1d6/6")
-            dice -= 1
-        End While
-        Return result
+        Return RollDice(GetAttackDice())
     End Function
 
     Friend Function RollInfluence() As Long
-        Dim dice = If(GetStatistic(CharacterStatisticType.Influence), 0)
-        Dim result As Long = 0
-        While dice > 0
-            result += RNG.RollDice("1d6/6")
-            dice -= 1
-        End While
-        Return result
+        Return RollDice(If(GetStatistic(CharacterStatisticType.Influence), 0))
     End Function
 
     Friend Function RollWillpower() As Long
-        Dim dice = If(GetStatistic(CharacterStatisticType.Willpower), 0)
-        Dim result As Long = 0
-        While dice > 0
-            result += RNG.RollDice("1d6/6")
-            dice -= 1
-        End While
-        Return result
+        Return RollDice(If(GetStatistic(CharacterStatisticType.Willpower), 0))
     End Function
 
     Private Function GetAttackDice() As Long

@@ -36,6 +36,24 @@
     End Property
 
     Public Overrides Sub Cast(character As Character)
-        character.EnqueueMessage($"You cast {SpellType.HolyBolt.Name}!")
+        If Not CanCast(character) Then
+            character.EnqueueMessage($"You cannot cast {SpellType.HolyBolt.Name} now!")
+            Return
+        End If
+        Dim enemy = character.Location.Enemy(character)
+        Dim lines As New List(Of String)
+        Dim sfx As Sfx? = Nothing
+        lines.Add($"You cast {SpellType.HolyBolt.Name} on {enemy.Name}!")
+        character.ChangeStatistic(CharacterStatisticType.Mana, -1)
+        Dim damage As Long = character.RollSpellDice(SpellType.HolyBolt)
+        lines.Add($"You do {damage} damage!")
+        enemy.DoDamage(damage)
+        If enemy.IsDead Then
+            Dim result = enemy.Kill(character)
+            sfx = If(result.Item1, sfx)
+            lines.AddRange(result.Item2)
+        End If
+        character.EnqueueMessage(sfx, lines.ToArray)
+        character.DoCounterAttacks()
     End Sub
 End Class
