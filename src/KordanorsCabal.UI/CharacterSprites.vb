@@ -53,7 +53,7 @@ Module CharacterSprites
             {
                 CharacterType.Bat,
                 New Sprite(
-                    Hue.Blue,
+                    Hue.Black,
                     LoadPixels(
                         AddressOf PixelConvertor,
                         "............",

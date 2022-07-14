@@ -8,7 +8,7 @@
                     {CharacterStatisticType.BaseMaximumDefend, 3},
                     {CharacterStatisticType.Strength, 6},
                     {CharacterStatisticType.Dexterity, 3},
-                    {CharacterStatisticType.HP, 2},
+                    {CharacterStatisticType.HP, 3},
                     {CharacterStatisticType.Influence, 3},
                     {CharacterStatisticType.MP, 3},
                     {CharacterStatisticType.Stress, 0},
