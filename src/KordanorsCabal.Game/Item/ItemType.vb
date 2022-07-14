@@ -84,6 +84,10 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).DefendDice > 0
     End Function
     <Extension>
+    Public Function IsConsumed(itemType As ItemType) As Boolean
+        Return ItemTypeDescriptors(itemType).IsConsumed
+    End Function
+    <Extension>
     Public Function MaximumDamage(itemType As ItemType) As Long?
         Return ItemTypeDescriptors(itemType).MaximumDamage
     End Function

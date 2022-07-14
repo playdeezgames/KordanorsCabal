@@ -55,6 +55,12 @@
             Return 0
         End Get
     End Property
+
+    Overridable ReadOnly Property IsConsumed As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 End Class
 Public Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =

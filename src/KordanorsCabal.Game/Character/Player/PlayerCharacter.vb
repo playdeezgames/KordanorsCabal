@@ -114,7 +114,9 @@
     Public Sub UseItem(item As Item)
         If item.CanUse(Me) Then
             item.Use(Me)
-            item.Destroy()
+            If item.IsConsumed Then
+                item.Destroy()
+            End If
         End If
     End Sub
 

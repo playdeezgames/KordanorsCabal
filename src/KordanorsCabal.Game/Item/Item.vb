@@ -121,4 +121,10 @@
             Return ItemType.IsArmor
         End Get
     End Property
+
+    ReadOnly Property IsConsumed As Boolean
+        Get
+            Return ItemType.IsConsumed
+        End Get
+    End Property
 End Class
