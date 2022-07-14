@@ -14,6 +14,7 @@ Public Enum CharacterType
     Rat
     Snake
     Bat
+    Malcontent
 End Enum
 Module CharacterTypeExtensions
     <Extension>

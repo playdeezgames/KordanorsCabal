@@ -41,6 +41,7 @@ Friend Module CharacterTypeDescriptorUtility
             {CharacterType.Goblin, New GoblinDescriptor},
             {CharacterType.GoblinElite, New GoblinEliteDescriptor},
             {CharacterType.Kordanor, New KordanorDescriptor},
+            {CharacterType.Malcontent, New MalcontentDescriptor},
             {CharacterType.N00b, New N00bDescriptor},
             {CharacterType.Priest, New PriestDescriptor},
             {CharacterType.Rat, New RatDescriptor},

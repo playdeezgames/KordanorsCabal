@@ -33,6 +33,7 @@ Public Enum ItemType
     MoonPortal
     Bottle
     BookOfHolyBolt
+    MembershipCard
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

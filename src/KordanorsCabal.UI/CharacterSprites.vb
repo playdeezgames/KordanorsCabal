@@ -165,6 +165,25 @@ Module CharacterSprites
                         ".....#..#..."))
             },
             {
+                CharacterType.Malcontent,
+                New Sprite(
+                    Hue.Orange,
+                    LoadPixels(
+                        AddressOf PixelConvertor,
+                        "............",
+                        ".....#......",
+                        "..#.###.....",
+                        ".#.######...",
+                        ".#.. # #....",
+                        ".#..###.....",
+                        "..#....##...",
+                        ".....###.#..",
+                        "...#.###.#..",
+                        ".....#......",
+                        ".....#.#....",
+                        "....##.#...."))
+            },
+            {
                 CharacterType.Priest,
                 New Sprite(
                     Hue.Purple,
