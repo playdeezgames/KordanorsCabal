@@ -35,6 +35,7 @@ Friend Module CharacterTypeDescriptorUtility
         New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
         {
             {CharacterType.Acolyte, New AcolyteDescriptor},
+            {CharacterType.Bat, New BatDescriptor},
             {CharacterType.Bishop, New BishopDescriptor},
             {CharacterType.CabalLeader, New CabalLeaderDescriptor},
             {CharacterType.Goblin, New GoblinDescriptor},
@@ -43,7 +44,8 @@ Friend Module CharacterTypeDescriptorUtility
             {CharacterType.N00b, New N00bDescriptor},
             {CharacterType.Priest, New PriestDescriptor},
             {CharacterType.Rat, New RatDescriptor},
-            {CharacterType.Skeleton, New SkeletonDescriptor}
+            {CharacterType.Skeleton, New SkeletonDescriptor},
+            {CharacterType.Snake, New SnakeDescriptor}
         }
     ReadOnly Property AllCharacterTypes As IEnumerable(Of CharacterType)
         Get

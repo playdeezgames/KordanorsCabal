@@ -12,6 +12,8 @@ Public Enum CharacterType
     CabalLeader
     Kordanor
     Rat
+    Snake
+    Bat
 End Enum
 Module CharacterTypeExtensions
     <Extension>
