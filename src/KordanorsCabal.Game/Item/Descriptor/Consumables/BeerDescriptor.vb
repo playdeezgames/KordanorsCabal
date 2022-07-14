@@ -12,4 +12,10 @@
             Return "Beer"
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Encumbrance As Single
+        Get
+            Return 2.0!
+        End Get
+    End Property
 End Class

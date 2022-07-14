@@ -21,8 +21,16 @@
             ShowFacing(buffer, (0, 1), player)
             ShowExits(buffer, (0, 2), player)
             ShowFeatures(buffer, (0, 3), player)
+            ShowEncumbered(buffer, (0, 5), player)
         End If
     End Sub
+
+    Private Sub ShowEncumbered(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
+        If player.IsEncumbered Then
+            buffer.WriteText(xy, "You are encumbered!", False, Hue.Red)
+        End If
+    End Sub
+
     Private Sub ShowFeatures(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
         Dim feature = player.Location.Feature
         If feature IsNot Nothing Then

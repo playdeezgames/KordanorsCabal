@@ -122,6 +122,9 @@
         End If
 
         buffer.WriteTextCentered(1, player.Direction.Abbreviation, False, Hue.Purple)
+        If player.IsEncumbered Then
+            buffer.WriteTextCentered(2, "Encumbered", False, Hue.Red)
+        End If
     End Sub
 
     Private Sub ShowEnemy(buffer As PatternBuffer, spriteXY As (Integer, Integer), enemy As Character)

@@ -18,7 +18,7 @@
 
     Public Overrides ReadOnly Property Encumbrance As Single
         Get
-            Return 1
+            Return 2
         End Get
     End Property
 

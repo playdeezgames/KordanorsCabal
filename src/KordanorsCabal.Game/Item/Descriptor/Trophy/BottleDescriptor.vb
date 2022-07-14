@@ -12,4 +12,10 @@
             Return "Empty Bottle"
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Encumbrance As Single
+        Get
+            Return 1.0!
+        End Get
+    End Property
 End Class
