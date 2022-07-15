@@ -204,7 +204,7 @@
     End Function
 
     Friend Function IsDemoralized() As Boolean
-        If CanIntimidate Then
+        If GetStatistic(CharacterStatisticType.Willpower).HasValue Then
             Return CurrentMP <= 0
         End If
         Return False
@@ -247,10 +247,13 @@
         End Get
     End Property
 
-    ReadOnly Property CurrentMP As Long
+    Property CurrentMP As Long
         Get
             Return Math.Max(0, GetStatistic(CharacterStatisticType.MP).Value - GetStatistic(CharacterStatisticType.Stress).Value)
         End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.Stress, GetStatistic(CharacterStatisticType.MP).Value - value)
+        End Set
     End Property
 
     ReadOnly Property CurrentMana As Long

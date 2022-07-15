@@ -18,4 +18,18 @@
             Return 2.0!
         End Get
     End Property
+
+    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
+        Get
+            Return True
+        End Get
+    End Property
+
+    Public Overrides Sub Use(character As Character)
+        Dim lines As New List(Of String)
+        lines.Add("You drink the beer, and suddenly feel braver!")
+        character.CurrentMP = character.GetStatistic(CharacterStatisticType.MP).Value
+        character.Inventory.Add(Game.Item.Create(ItemType.Bottle))
+        character.EnqueueMessage(lines.ToArray)
+    End Sub
 End Class
