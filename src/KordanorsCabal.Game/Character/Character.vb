@@ -422,9 +422,65 @@
         If IsDead Then
             Return
         End If
-        Dim lines As New List(Of String)
-        Dim sfx As Sfx? = Nothing
-        lines.Add($"Counter-attack {enemyIndex}/{enemyCount}:")
+        Select Case enemy.CharacterType.GenerateAttackType(Me)
+            Case AttackType.Physical
+                DoPhysicalCounterAttack(enemy, enemyIndex, enemyCount)
+            Case AttackType.Mental
+                DoMentalCounterAttack(enemy, enemyIndex, enemyCount)
+        End Select
+    End Sub
+
+    Private Sub DoMentalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
+        Dim lines As New List(Of String) From {
+            $"Counter-attack {enemyIndex}/{enemyCount}:"
+        }
+        lines.Add($"{enemy.Name} attempts to intimidate you!")
+        Dim influenceRoll = enemy.RollInfluence
+        lines.Add($"{enemy.Name} rolls influence of {influenceRoll}.")
+        Dim willpowerRoll = RollWillpower()
+        lines.Add($"You roll willpower of {willpowerRoll}.")
+        Dim result = influenceRoll - willpowerRoll
+        Dim sfx As Sfx?
+        Select Case result
+            Case Is <= 0
+                lines.Add($"{enemy.Name} fails to intimidate you!")
+                sfx = Game.Sfx.Miss
+            Case Else
+                lines.Add($"{enemy.Name} adds 1 stress!")
+                AddStress(1)
+                If IsDemoralized() Then
+                    lines.Add($"{enemy.Name} completely demoralizes you and you drop everything and run away!")
+                    Panic()
+                    Money \= 2
+                    Location = Game.Location.FromLocationType(LocationType.TownSquare).Single
+                    Exit Select
+                End If
+                lines.Add($"You have {CurrentMP} MP left.")
+        End Select
+        EnqueueMessage(sfx, lines.ToArray)
+    End Sub
+
+    Public Sub Unequip(equipSlot As EquipSlot)
+        If Equipment.ContainsKey(equipSlot) Then
+            Dim item = Equipment(equipSlot)
+            Inventory.Add(item)
+            CharacterEquipSlotData.Clear(Id, equipSlot)
+        End If
+    End Sub
+
+    Private Sub Panic()
+        For Each equipSlot In Equipment.Keys
+            Unequip(equipSlot)
+        Next
+        For Each item In Inventory.Items
+            Location.Inventory.Add(item)
+        Next
+    End Sub
+
+    Private Sub DoPhysicalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
+        Dim lines As New List(Of String) From {
+            $"Counter-attack {enemyIndex}/{enemyCount}:"
+        }
         Dim attackRoll = enemy.RollAttack()
         lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
         For Each brokenItemType In DoArmorWear(attackRoll)
@@ -433,6 +489,7 @@
         Dim defendRoll = RollDefend()
         lines.Add($"You roll a defend of {defendRoll}.")
         Dim result = attackRoll - defendRoll
+        Dim sfx As Sfx?
         Select Case result
             Case Is <= 0
                 lines.Add($"{enemy.Name} misses!")

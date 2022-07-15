@@ -65,4 +65,8 @@ Module CharacterTypeExtensions
     Function CanBeBribedWith(characterType As CharacterType, itemType As ItemType) As Boolean
         Return CharacterTypeDescriptors(characterType).CanBeBribedWith(itemType)
     End Function
+    <Extension>
+    Function GenerateAttackType(characterType As CharacterType, character As Character) As AttackType
+        Return CharacterTypeDescriptors(characterType).GenerateAttackType(character)
+    End Function
 End Module

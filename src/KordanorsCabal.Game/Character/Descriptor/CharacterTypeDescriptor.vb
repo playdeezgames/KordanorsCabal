@@ -29,6 +29,10 @@
     Overridable Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return False
     End Function
+
+    Overridable Function GenerateAttackType(character As Character) As AttackType
+        Return AttackType.Physical
+    End Function
 End Class
 Friend Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of CharacterType, CharacterTypeDescriptor) =

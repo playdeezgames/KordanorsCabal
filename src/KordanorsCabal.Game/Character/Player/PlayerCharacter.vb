@@ -43,14 +43,6 @@
         End Set
     End Property
 
-    Public Sub Unequip(equipSlot As EquipSlot)
-        If Equipment.ContainsKey(equipSlot) Then
-            Dim item = Equipment(equipSlot)
-            Inventory.Add(item)
-            CharacterEquipSlotData.Clear(Id, equipSlot)
-        End If
-    End Sub
-
     Public ReadOnly Property CanCast() As Boolean
         Get
             Return Spells.Keys.Any(Function(x) CanCastSpell(x))
