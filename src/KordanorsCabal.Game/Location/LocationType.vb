@@ -23,4 +23,8 @@ Public Module LocationTypeExtensions
     Public Function CanMap(locationType As LocationType) As Boolean
         Return LocationDescriptors(locationType).CanMap
     End Function
+    <Extension>
+    Public Function RequiresMP(locationType As LocationType) As Boolean
+        Return LocationDescriptors(locationType).RequiresMP
+    End Function
 End Module

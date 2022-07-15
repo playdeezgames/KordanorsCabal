@@ -231,7 +231,13 @@
         If Not Location.HasRoute(direction) Then
             Return False
         End If
-        Return Location.Routes(direction).CanMove(Me)
+        If Not Location.Routes(direction).CanMove(Me) Then
+            Return False
+        End If
+        If Location.Routes(direction).ToLocation.RequiresMP AndAlso IsDemoralized() Then
+            Return False
+        End If
+        Return True
     End Function
 
     Private Shared ReadOnly RunDirections As IReadOnlyList(Of Direction) =

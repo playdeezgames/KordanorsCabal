@@ -18,4 +18,10 @@
             Return False
         End Get
     End Property
+
+    Public Overrides ReadOnly Property RequiresMP As Boolean
+        Get
+            Return False
+        End Get
+    End Property
 End Class

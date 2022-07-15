@@ -39,6 +39,12 @@
         End Set
     End Property
 
+    ReadOnly Property RequiresMP As Boolean
+        Get
+            Return LocationType.RequiresMP
+        End Get
+    End Property
+
     Public Function HasStairs() As Boolean
         Return Routes.Any(Function(x) x.Value.RouteType = RouteType.Stairs)
     End Function
