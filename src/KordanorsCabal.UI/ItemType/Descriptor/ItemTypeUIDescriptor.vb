@@ -25,6 +25,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.HolyWater, New HolyWaterUIDescriptor},
             {ItemType.IronKey, New IronKeyUIDescriptor},
             {ItemType.MagicEgg, New MagicEggUIDescriptor},
+            {ItemType.MembershipCard, New MembershipCardUIDescriptor},
             {ItemType.MoonPortal, New MoonPortalUIDescriptor},
             {ItemType.PlateMail, New PlateMailUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
