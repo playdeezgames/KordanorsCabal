@@ -172,7 +172,7 @@
 
     Friend Function RollDefend() As Long
         Dim maximumDefend = GetStatistic(CharacterStatisticType.BaseMaximumDefend).Value
-        Return Math.Min(RollDice(GetDefendDice()), maximumDefend)
+        Return Math.Min(RollDice(GetDefendDice() - If(Drunkenness > 0, -1, 0)), maximumDefend)
     End Function
 
     Private Function GetDefendDice() As Long
@@ -184,15 +184,15 @@
     End Function
 
     Friend Function RollAttack() As Long
-        Return RollDice(GetAttackDice())
+        Return RollDice(GetAttackDice() - If(Drunkenness > 0, -1, 0))
     End Function
 
     Friend Function RollInfluence() As Long
-        Return RollDice(If(GetStatistic(CharacterStatisticType.Influence), 0))
+        Return RollDice(If(GetStatistic(CharacterStatisticType.Influence), 0) - If(Drunkenness > 0, -1, 0))
     End Function
 
     Friend Function RollWillpower() As Long
-        Return RollDice(If(GetStatistic(CharacterStatisticType.Willpower), 0))
+        Return RollDice(If(GetStatistic(CharacterStatisticType.Willpower), 0) - If(Drunkenness > 0, -1, 0))
     End Function
 
     Private Function GetAttackDice() As Long
@@ -520,4 +520,13 @@
     Function HasItemType(itemType As ItemType) As Boolean
         Return Inventory.ItemsOfType(itemType).Any
     End Function
+
+    Property Drunkenness As Long
+        Get
+            Return GetStatistic(CharacterStatisticType.Drunkenness).Value
+        End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.Drunkenness, value)
+        End Set
+    End Property
 End Class

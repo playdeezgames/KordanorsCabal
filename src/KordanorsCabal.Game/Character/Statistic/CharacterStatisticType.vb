@@ -19,6 +19,7 @@ Public Enum CharacterStatisticType
     Fatigue
     XP
     XPGoal
+    Drunkenness
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>

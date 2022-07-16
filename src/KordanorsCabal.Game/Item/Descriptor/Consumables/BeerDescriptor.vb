@@ -29,6 +29,7 @@
         Dim lines As New List(Of String)
         lines.Add("You drink the beer, and suddenly feel braver!")
         character.CurrentMP = character.GetStatistic(CharacterStatisticType.MP).Value
+        character.Drunkenness += 10
         character.Inventory.Add(Game.Item.Create(ItemType.Bottle))
         character.EnqueueMessage(lines.ToArray)
     End Sub

@@ -25,6 +25,7 @@ Friend Module CharacterStatisticTypeDescriptorUtility
         {
             {CharacterStatisticType.BaseMaximumDefend, New BaseMaximumDefendDescriptor},
             {CharacterStatisticType.Dexterity, New DexterityDescriptor},
+            {CharacterStatisticType.Drunkenness, New DrunkennessDescriptor},
             {CharacterStatisticType.Fatigue, New FatigueDescriptor},
             {CharacterStatisticType.HP, New HpDescriptor},
             {CharacterStatisticType.Influence, New InfluenceDescriptor},

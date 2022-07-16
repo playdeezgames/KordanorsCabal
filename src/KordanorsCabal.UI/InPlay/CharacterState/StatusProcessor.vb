@@ -21,6 +21,7 @@
         buffer.WriteText((11, 5), $"XP {player.GetStatistic(CharacterStatisticType.XP)}/{player.GetStatistic(CharacterStatisticType.XPGoal)}", False, Hue.Black)
 
         buffer.WriteText((0, 8), $"Money {player.GetStatistic(CharacterStatisticType.Money)}", False, Hue.Black)
+        buffer.WriteText((0, 10), $"Drunkenness {player.GetStatistic(CharacterStatisticType.Drunkenness)}", False, Hue.Black)
     End Sub
 
     Public Sub Initialize() Implements IProcessor.Initialize

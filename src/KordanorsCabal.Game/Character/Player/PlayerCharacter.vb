@@ -264,6 +264,7 @@
 
     Public Sub Move(direction As Direction)
         If CanMove(direction) Then
+            Drunkenness -= 1
             Location = Location.Routes(direction).Move(Me)
         End If
     End Sub
