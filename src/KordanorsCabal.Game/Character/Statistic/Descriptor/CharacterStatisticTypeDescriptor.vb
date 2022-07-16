@@ -29,6 +29,7 @@ Friend Module CharacterStatisticTypeDescriptorUtility
             {CharacterStatisticType.Fatigue, New FatigueDescriptor},
             {CharacterStatisticType.Highness, New HighnessDescriptor},
             {CharacterStatisticType.HP, New HpDescriptor},
+            {CharacterStatisticType.Hunger, New HungerDescriptor},
             {CharacterStatisticType.Influence, New InfluenceDescriptor},
             {CharacterStatisticType.Mana, New ManaDescriptor},
             {CharacterStatisticType.Money, New MoneyDescriptor},

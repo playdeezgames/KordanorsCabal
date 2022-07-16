@@ -264,6 +264,8 @@
 
     Public Sub Move(direction As Direction)
         If CanMove(direction) Then
+            Dim hungerRate = Math.Max(Highness \ 2, 1)
+            Hunger += hungerRate
             Drunkenness -= 1
             Highness -= 1
             Location = Location.Routes(direction).Move(Me)

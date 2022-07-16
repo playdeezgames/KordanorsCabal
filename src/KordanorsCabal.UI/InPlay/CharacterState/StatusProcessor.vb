@@ -23,6 +23,7 @@
         buffer.WriteText((0, 8), $"Money {player.GetStatistic(CharacterStatisticType.Money)}", False, Hue.Black)
         buffer.WriteText((0, 10), $"Drunkenness {player.GetStatistic(CharacterStatisticType.Drunkenness)}", False, Hue.Black)
         buffer.WriteText((0, 11), $"Highness {player.GetStatistic(CharacterStatisticType.Highness)}", False, Hue.Black)
+        buffer.WriteText((0, 12), $"Hunger {player.GetStatistic(CharacterStatisticType.Hunger)}", False, Hue.Black)
     End Sub
 
     Public Sub Initialize() Implements IProcessor.Initialize

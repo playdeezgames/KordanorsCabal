@@ -546,6 +546,15 @@
         End Set
     End Property
 
+    Property Hunger As Long
+        Get
+            Return GetStatistic(CharacterStatisticType.Hunger).Value
+        End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.Hunger, value)
+        End Set
+    End Property
+
     Public ReadOnly Property MaximumMana As Long
         Get
             Return GetStatistic(CharacterStatisticType.Mana).Value
