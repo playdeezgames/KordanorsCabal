@@ -542,7 +542,7 @@
 
     Property Highness As Long
         Get
-            Return GetStatistic(CharacterStatisticType.Highness).Value
+            Return If(GetStatistic(CharacterStatisticType.Highness), 0)
         End Get
         Set(value As Long)
             SetStatistic(CharacterStatisticType.Highness, value)

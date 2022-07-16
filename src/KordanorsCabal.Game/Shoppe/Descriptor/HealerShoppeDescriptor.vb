@@ -18,7 +18,7 @@
             Return New Dictionary(Of ItemType, Long) From
                 {
                     {ItemType.HolyWater, 10},
-                    {ItemType.Potion, 25}
+                    {ItemType.Potion, 15}
                 }
         End Get
     End Property
