@@ -58,30 +58,38 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case DownButtonIndex
-                HandleMove(player, Direction.Down)
+                Return HandleMove(player, Direction.Down)
             Case UpButtonIndex
-                HandleMove(player, Direction.Up)
+                Return HandleMove(player, Direction.Up)
             Case InButtonIndex
-                HandleMove(player, Direction.Inward)
+                Return HandleMove(player, Direction.Inward)
             Case OutButtonIndex
-                HandleMove(player, Direction.Outward)
+                Return HandleMove(player, Direction.Outward)
             Case ForwardButtonIndex
-                HandleMove(player, player.Direction)
+                Return HandleMove(player, player.Direction)
             Case BackwardButtonIndex
-                HandleMove(player, player.Direction.Opposite)
+                Return HandleMove(player, player.Direction.Opposite)
             Case LeftButtonIndex
-                HandleMove(player, player.Direction.PreviousDirection.Value)
+                Return HandleMove(player, player.Direction.PreviousDirection.Value)
             Case RightButtonIndex
-                HandleMove(player, player.Direction.NextDirection.Value)
+                Return HandleMove(player, player.Direction.NextDirection.Value)
         End Select
         Return UIState.InPlay
     End Function
 
-    Private Sub HandleMove(player As PlayerCharacter, direction As Direction)
+    Private Function HandleMove(player As PlayerCharacter, direction As Direction) As UIState
         If player.CanMove(direction) Then
             PopButtonIndex()
-            player.Move(direction)
             player.Mode = PlayerMode.Neutral
+            If player.Move(direction) Then
+                player.EnqueueMessage("You take damage from starvation!")
+                If player.IsDead Then
+                    Return UIState.Dead
+                End If
+                PushUIState(UIState.InPlay)
+                Return UIState.Message
+            End If
         End If
-    End Sub
+        Return UIState.InPlay
+    End Function
 End Class

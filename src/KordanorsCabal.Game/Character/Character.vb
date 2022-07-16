@@ -233,10 +233,13 @@
         End Get
     End Property
 
-    ReadOnly Property CurrentHP As Long
+    Property CurrentHP As Long
         Get
             Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.Wounds).Value)
         End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.Wounds, GetStatistic(CharacterStatisticType.HP).Value - value)
+        End Set
     End Property
 
     ReadOnly Property MaximumHP As Long

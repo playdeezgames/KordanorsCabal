@@ -253,8 +253,8 @@
         If CanFight Then
             Direction = RNG.FromEnumerable(RunDirections)
             If CanMove(Direction) Then
-                Move(Direction)
                 EnqueueMessage("You successfully ran!") 'TODO: sfx
+                Move(Direction)
                 Exit Sub
             End If
             EnqueueMessage("You fail to run!") 'TODO: shucks!
@@ -262,15 +262,21 @@
         End If
     End Sub
 
-    Public Sub Move(direction As Direction)
+    Public Function Move(direction As Direction) As Boolean
         If CanMove(direction) Then
             Dim hungerRate = Math.Max(Highness \ 2, 1)
             Hunger += hungerRate
             Drunkenness -= 1
             Highness -= 1
             Location = Location.Routes(direction).Move(Me)
+            If Hunger = CharacterStatisticType.Hunger.MaximumValue Then
+                Hunger \= 2
+                CurrentHP -= 1
+                Return True
+            End If
         End If
-    End Sub
+        Return False
+    End Function
 
     Public Sub Fight()
         If CanFight Then
