@@ -172,7 +172,7 @@
 
     Friend Function RollDefend() As Long
         Dim maximumDefend = GetStatistic(CharacterStatisticType.BaseMaximumDefend).Value
-        Return Math.Min(RollDice(GetDefendDice() - If(Drunkenness > 0, -1, 0)), maximumDefend)
+        Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
     End Function
 
     Private Function GetDefendDice() As Long
@@ -184,15 +184,19 @@
     End Function
 
     Friend Function RollAttack() As Long
-        Return RollDice(GetAttackDice() - If(Drunkenness > 0, -1, 0))
+        Return RollDice(GetAttackDice() + NegativeInfluence())
+    End Function
+
+    Private Function NegativeInfluence() As Long
+        Return If(Drunkenness > 0 OrElse Highness > 0, -1, 0)
     End Function
 
     Friend Function RollInfluence() As Long
-        Return RollDice(If(GetStatistic(CharacterStatisticType.Influence), 0) - If(Drunkenness > 0, -1, 0))
+        Return RollDice(If(GetStatistic(CharacterStatisticType.Influence), 0) + NegativeInfluence())
     End Function
 
     Friend Function RollWillpower() As Long
-        Return RollDice(If(GetStatistic(CharacterStatisticType.Willpower), 0) - If(Drunkenness > 0, -1, 0))
+        Return RollDice(If(GetStatistic(CharacterStatisticType.Willpower), 0) + NegativeInfluence())
     End Function
 
     Private Function GetAttackDice() As Long
@@ -530,6 +534,15 @@
         End Get
         Set(value As Long)
             SetStatistic(CharacterStatisticType.Drunkenness, value)
+        End Set
+    End Property
+
+    Property Highness As Long
+        Get
+            Return GetStatistic(CharacterStatisticType.Highness).Value
+        End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.Highness, value)
         End Set
     End Property
 

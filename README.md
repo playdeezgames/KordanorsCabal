@@ -42,6 +42,7 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
     * Can replenish mana at BM shoppe
     * Herb is an item used to replenish Mana
     * Bong is an item
+    * Being High has a consequence
 
 
 

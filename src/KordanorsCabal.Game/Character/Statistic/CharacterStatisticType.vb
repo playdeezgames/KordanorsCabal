@@ -20,6 +20,7 @@ Public Enum CharacterStatisticType
     XP
     XPGoal
     Drunkenness
+    Highness
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>
