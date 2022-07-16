@@ -4,9 +4,10 @@
     Const WelcomeButtonIndex = 0
     Const OffersButtonIndex = 1
     Const SellButtonIndex = 2
-    Const GoodByeButtonIndex = 9
+    Const RestoreButtonIndex = 5
     Const PricesButtonIndex = 6
     Const BuyButtonIndex = 7
+    Const GoodByeButtonIndex = 9
 
 
     Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
@@ -26,6 +27,9 @@
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         Buttons(PricesButtonIndex).Title = "Prices"
         Buttons(BuyButtonIndex).Title = "Buy"
+        If player.CurrentMana < player.MaximumMana Then
+            Buttons(RestoreButtonIndex).Title = "Restore"
+        End If
     End Sub
 
     Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
@@ -45,6 +49,11 @@
             Case BuyButtonIndex
                 ShoppeProcessor(Of (ItemType, Long)).ShoppeType = Game.ShoppeType.BlackMage
                 Return UIState.ShoppeBuy
+            Case RestoreButtonIndex
+                player.EnqueueMessage($"{FeatureType.BlackMage.Name} sparks up his {ItemType.Bong.Name} and gives you a hit of {ItemType.Herb.Name}.")
+                player.CurrentMana = player.MaximumMana
+                PushUIState(UIState.InPlay)
+                Return UIState.Message
         End Select
         Return UIState.InPlay
     End Function

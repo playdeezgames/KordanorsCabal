@@ -9,6 +9,7 @@ Module ItemTypeUIDescriptorUtility
         {
             {ItemType.AirShard, New AirShardUIDescriptor},
             {ItemType.Beer, New BeerUIDescriptor},
+            {ItemType.Bong, New BongUIDescriptor},
             {ItemType.BookOfHolyBolt, New BookOfHolyBoltUIDescriptor},
             {ItemType.Bottle, New BottleUIDescriptor},
             {ItemType.BrodeSode, New BrodeSodeUIDescriptor},
@@ -22,6 +23,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.GoblinEar, New GoblinEarUIDescriptor},
             {ItemType.GoldKey, New GoldKeyUIDescriptor},
             {ItemType.Helmet, New HelmetUIDescriptor},
+            {ItemType.Herb, New HerbUIDescriptor},
             {ItemType.HolyWater, New HolyWaterUIDescriptor},
             {ItemType.IronKey, New IronKeyUIDescriptor},
             {ItemType.MagicEgg, New MagicEggUIDescriptor},

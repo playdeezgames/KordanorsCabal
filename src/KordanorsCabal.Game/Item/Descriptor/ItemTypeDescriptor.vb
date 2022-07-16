@@ -68,6 +68,7 @@ Public Module ItemTypeDescriptorUtility
         {
             {ItemType.AirShard, New AirShardDescriptor},
             {ItemType.Beer, New BeerDescriptor},
+            {ItemType.Bong, New BongDescriptor},
             {ItemType.BookOfHolyBolt, New BookOfHolyBoltDescriptor},
             {ItemType.Bottle, New BottleDescriptor},
             {ItemType.BrodeSode, New BrodeSodeDescriptor},
@@ -81,6 +82,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.GoblinEar, New GoblinEarDescriptor},
             {ItemType.GoldKey, New GoldKeyDescriptor},
             {ItemType.Helmet, New HelmetDescriptor},
+            {ItemType.Herb, New HerbDescriptor},
             {ItemType.HolyWater, New HolyWaterDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
             {ItemType.MagicEgg, New MagicEggDescriptor},

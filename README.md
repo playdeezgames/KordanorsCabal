@@ -39,6 +39,10 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 027 - 20220715
 * 028 - 20220716
     * Drunkenness
+    * Can replenish mana at BM shoppe
+    * Herb is an item used to replenish Mana
+    * Bong is an item
+
 
 
 ## Credit Due

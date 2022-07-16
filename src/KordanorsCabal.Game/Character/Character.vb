@@ -256,10 +256,13 @@
         End Set
     End Property
 
-    ReadOnly Property CurrentMana As Long
+    Property CurrentMana As Long
         Get
             Return Math.Max(0, GetStatistic(CharacterStatisticType.Mana).Value - GetStatistic(CharacterStatisticType.Fatigue).Value)
         End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.Fatigue, GetStatistic(CharacterStatisticType.Mana).Value - value)
+        End Set
     End Property
 
 
@@ -528,5 +531,11 @@
         Set(value As Long)
             SetStatistic(CharacterStatisticType.Drunkenness, value)
         End Set
+    End Property
+
+    Public ReadOnly Property MaximumMana As Long
+        Get
+            Return GetStatistic(CharacterStatisticType.Mana).Value
+        End Get
     End Property
 End Class

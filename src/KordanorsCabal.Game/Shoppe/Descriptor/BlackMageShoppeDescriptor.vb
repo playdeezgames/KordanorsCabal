@@ -23,7 +23,9 @@
         Get
             Return New Dictionary(Of ItemType, Long) From
                 {
+                    {ItemType.Bong, 50},
                     {ItemType.BookOfHolyBolt, 100},
+                    {ItemType.Herb, 10},
                     {ItemType.TownPortal, 50}
                 }
         End Get

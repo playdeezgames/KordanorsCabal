@@ -34,6 +34,8 @@ Public Enum ItemType
     Bottle
     BookOfHolyBolt
     MembershipCard
+    Bong
+    Herb
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
