@@ -27,6 +27,7 @@ Friend Module CharacterStatisticTypeDescriptorUtility
             {CharacterStatisticType.Dexterity, New DexterityDescriptor},
             {CharacterStatisticType.Drunkenness, New DrunkennessDescriptor},
             {CharacterStatisticType.Fatigue, New FatigueDescriptor},
+            {CharacterStatisticType.FoodPoisoning, New FoodPoisoningDescriptor},
             {CharacterStatisticType.Highness, New HighnessDescriptor},
             {CharacterStatisticType.HP, New HpDescriptor},
             {CharacterStatisticType.Hunger, New HungerDescriptor},

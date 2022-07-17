@@ -93,6 +93,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Potion, New PotionDescriptor},
             {ItemType.Pr0n, New Pr0nDescriptor},
             {ItemType.RatTail, New RatTailDescriptor},
+            {ItemType.RottenFood, New RottenFoodDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor},
             {ItemType.Shield, New ShieldDescriptor},
             {ItemType.Shortsword, New ShortswordDescriptor},

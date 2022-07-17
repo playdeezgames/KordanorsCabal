@@ -563,4 +563,13 @@
             Return GetStatistic(CharacterStatisticType.Mana).Value
         End Get
     End Property
+
+    Public Property FoodPoisoning As Long
+        Get
+            Return GetStatistic(CharacterStatisticType.FoodPoisoning).Value
+        End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.FoodPoisoning, value)
+        End Set
+    End Property
 End Class

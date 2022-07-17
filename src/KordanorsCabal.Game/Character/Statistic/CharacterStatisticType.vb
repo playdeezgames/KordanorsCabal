@@ -22,6 +22,7 @@ Public Enum CharacterStatisticType
     Drunkenness
     Highness
     Hunger
+    FoodPoisoning
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>

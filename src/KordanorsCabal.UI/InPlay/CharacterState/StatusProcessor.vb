@@ -21,9 +21,20 @@
         buffer.WriteText((11, 5), $"XP {player.GetStatistic(CharacterStatisticType.XP)}/{player.GetStatistic(CharacterStatisticType.XPGoal)}", False, Hue.Black)
 
         buffer.WriteText((0, 8), $"Money {player.GetStatistic(CharacterStatisticType.Money)}", False, Hue.Black)
-        buffer.WriteText((0, 10), $"Drunkenness {player.GetStatistic(CharacterStatisticType.Drunkenness)}", False, Hue.Black)
-        buffer.WriteText((0, 11), $"Highness {player.GetStatistic(CharacterStatisticType.Highness)}", False, Hue.Black)
-        buffer.WriteText((0, 12), $"Hunger {player.GetStatistic(CharacterStatisticType.Hunger)}", False, Hue.Black)
+        buffer.WriteText((0, 10), $"Hunger {player.GetStatistic(CharacterStatisticType.Hunger)}", False, Hue.Black)
+        Dim row = 11
+        If player.Highness > 0 Then
+            buffer.WriteText((0, row), $"Highness {player.Highness}", False, Hue.Black)
+            row += 1
+        End If
+        If player.Drunkenness > 0 Then
+            buffer.WriteText((0, row), $"Drunkenness {player.Drunkenness}", False, Hue.Black)
+            row += 1
+        End If
+        If player.FoodPoisoning > 0 Then
+            buffer.WriteText((0, row), $"Food Poisoning {player.FoodPoisoning}", False, Hue.Black)
+            row += 1
+        End If
     End Sub
 
     Public Sub Initialize() Implements IProcessor.Initialize

@@ -34,6 +34,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.Potion, New PotionUIDescriptor},
             {ItemType.Pr0n, New Pr0nUIDescriptor},
             {ItemType.RatTail, New RatTailUIDescriptor},
+            {ItemType.RottenFood, New RottenFoodUIDescriptor},
             {ItemType.Shield, New ShieldUIDescriptor},
             {ItemType.Shortsword, New ShortswordUIDescriptor},
             {ItemType.SilverKey, New SilverKeyUIDescriptor},
