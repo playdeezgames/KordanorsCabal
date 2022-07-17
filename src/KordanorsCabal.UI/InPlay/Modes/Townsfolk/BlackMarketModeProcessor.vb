@@ -54,4 +54,9 @@
         End Select
         Return UIState.InPlay
     End Function
+
+    Friend Overrides Function HandleRed(player As PlayerCharacter) As UIState
+        player.Mode = PlayerMode.Neutral
+        Return UIState.InPlay
+    End Function
 End Class

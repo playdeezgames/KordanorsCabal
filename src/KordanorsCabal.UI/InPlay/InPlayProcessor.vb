@@ -51,6 +51,8 @@
                 ModeProcessor.CurrentButtonIndex = (ModeProcessor.CurrentButtonIndex + ModeProcessor.Buttons.Count - 1) Mod ModeProcessor.Buttons.Count
             Case Command.Left, Command.Right
                 ModeProcessor.CurrentButtonIndex = (ModeProcessor.CurrentButtonIndex + ModeProcessor.Buttons.Count \ 2) Mod ModeProcessor.Buttons.Count
+            Case Command.Red
+                nextState = _modeProcessors(World.PlayerCharacter.Mode).HandleRed(World.PlayerCharacter)
         End Select
         Return nextState
     End Function

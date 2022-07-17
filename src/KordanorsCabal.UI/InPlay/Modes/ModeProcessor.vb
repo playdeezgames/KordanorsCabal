@@ -19,6 +19,7 @@
     Friend MustOverride Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
     Friend MustOverride Sub UpdateButtons(player As PlayerCharacter)
     Friend MustOverride Function HandleButton(player As PlayerCharacter, button As Button) As UIState
+    Friend MustOverride Function HandleRed(player As PlayerCharacter) As UIState
     Friend Shared Buttons As IReadOnlyList(Of Button) =
         New List(Of Button) From
         {

@@ -50,4 +50,9 @@ Friend Class ChickenModeProcessor
         PushUIState(UIState.InPlay)
         Return UIState.Message
     End Function
+
+    Friend Overrides Function HandleRed(player As PlayerCharacter) As UIState
+        player.Mode = PlayerMode.Neutral
+        Return UIState.InPlay
+    End Function
 End Class
