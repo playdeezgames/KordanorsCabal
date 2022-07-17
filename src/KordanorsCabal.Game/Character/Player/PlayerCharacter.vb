@@ -264,10 +264,11 @@
 
     Public Function Move(direction As Direction) As Boolean
         If CanMove(direction) Then
-            Dim hungerRate = Math.Max(Highness \ 2, 1)
+            Dim hungerRate = Math.Max(Highness \ 2 + FoodPoisoning \ 2, 1)
             Hunger += hungerRate
             Drunkenness -= 1
             Highness -= 1
+            FoodPoisoning -= 1
             Location = Location.Routes(direction).Move(Me)
             If Hunger = CharacterStatisticType.Hunger.MaximumValue Then
                 Hunger \= 2
