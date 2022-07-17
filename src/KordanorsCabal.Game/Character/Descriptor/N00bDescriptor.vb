@@ -9,6 +9,7 @@
                     {CharacterStatisticType.Dexterity, 1},
                     {CharacterStatisticType.Drunkenness, 0},
                     {CharacterStatisticType.Fatigue, 0},
+                    {CharacterStatisticType.FoodPoisoning, 0},
                     {CharacterStatisticType.Highness, 0},
                     {CharacterStatisticType.HP, 3},
                     {CharacterStatisticType.Hunger, 0},
