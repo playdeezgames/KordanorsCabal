@@ -39,6 +39,7 @@ Friend Module CharacterTypeDescriptorUtility
         New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
         {
             {CharacterType.Acolyte, New AcolyteDescriptor},
+            {CharacterType.Badger, New BadgerDescriptor},
             {CharacterType.Bat, New BatDescriptor},
             {CharacterType.Bishop, New BishopDescriptor},
             {CharacterType.CabalLeader, New CabalLeaderDescriptor},

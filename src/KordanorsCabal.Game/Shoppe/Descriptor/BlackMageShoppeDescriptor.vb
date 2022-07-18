@@ -13,6 +13,7 @@
                 {
                     {ItemType.GoblinEar, 5},
                     {ItemType.MagicEgg, 5},
+                    {ItemType.Mushroom, 5},
                     {ItemType.RatTail, 1},
                     {ItemType.SkullFragment, 5}
                 }

@@ -29,6 +29,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.MagicEgg, New MagicEggUIDescriptor},
             {ItemType.MembershipCard, New MembershipCardUIDescriptor},
             {ItemType.MoonPortal, New MoonPortalUIDescriptor},
+            {ItemType.Mushroom, New MushroomUIDescriptor},
             {ItemType.PlateMail, New PlateMailUIDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyUIDescriptor},
             {ItemType.Potion, New PotionUIDescriptor},

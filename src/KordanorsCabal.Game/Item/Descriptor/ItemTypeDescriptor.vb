@@ -88,6 +88,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.MagicEgg, New MagicEggDescriptor},
             {ItemType.MembershipCard, New MembershipCardDescriptor},
             {ItemType.MoonPortal, New MoonPortalDescriptor},
+            {ItemType.Mushroom, New MushroomDescriptor},
             {ItemType.PlateMail, New PlateMailDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},

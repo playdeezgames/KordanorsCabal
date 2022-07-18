@@ -15,6 +15,7 @@ Public Enum CharacterType
     Snake
     Bat
     Malcontent
+    Badger
 End Enum
 Module CharacterTypeExtensions
     <Extension>

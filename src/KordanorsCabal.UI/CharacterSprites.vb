@@ -51,6 +51,25 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
+                CharacterType.Badger,
+                New Sprite(
+                    Hue.Black,
+                    LoadPixels(
+                        AddressOf PixelConvertor,
+                        "............",
+                        "...#.#......",
+                        "..####......",
+                        ".. # ##.....",
+                        ".######.....",
+                        "# # #####...",
+                        "##### ####..",
+                        ".##  ######.",
+                        "...#######.#",
+                        "...#######..",
+                        "....######..",
+                        ".....#...#.."))
+            },
+            {
                 CharacterType.Bat,
                 New Sprite(
                     Hue.Black,
