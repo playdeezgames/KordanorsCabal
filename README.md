@@ -39,8 +39,7 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 027 - 20220715
 * 028 - 20220716
 * 029 - 20220717
-    * rotten food
-    * quality of life escape key handling
+* 030 - 20220718
 
 ## Credit Due
 
