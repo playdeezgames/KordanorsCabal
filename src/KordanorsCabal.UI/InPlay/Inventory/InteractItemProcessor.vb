@@ -55,4 +55,8 @@
     Public Overrides Sub Initialize()
         currentItem = 0
     End Sub
+
+    Public Overrides Function HandleRed() As UIState
+        Return UIState.Inventory
+    End Function
 End Class

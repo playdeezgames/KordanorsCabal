@@ -40,6 +40,9 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 028 - 20220716
 * 029 - 20220717
 * 030 - 20220718
+    * bottles are now weapons
+    * QoL - esc to go back from inventory and equipment details
+    * QoL - equipment color coding
 
 ## Credit Due
 

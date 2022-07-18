@@ -39,4 +39,8 @@
             buffer.WriteText((0, 2), $"Durability: {item.Durability.Value}/{item.MaximumDurability.Value}", False, Hue.Black)
         End If
     End Sub
+
+    Public Overrides Function HandleRed() As UIState
+        Return UIState.Equipment
+    End Function
 End Class

@@ -36,9 +36,16 @@
                 NextMenuItem()
             Case Command.Green, Command.Blue
                 Return MenuItems(currentItem).Item2.Invoke()
+            Case Command.Red
+                Return HandleRed()
         End Select
         Return uiState
     End Function
+
+    Overridable Function HandleRed() As UIState
+        Return uiState
+    End Function
+
     Private Sub NextMenuItem()
         currentItem = (currentItem + 1) Mod MenuItems.Count
     End Sub

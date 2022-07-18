@@ -12,7 +12,11 @@
         Dim row As Integer = 1
         Dim player = World.PlayerCharacter
         For Each entry In player.Equipment
-            buffer.WriteText((0, row + 1), $"{entry.Key.Name}: {entry.Value.Name}", rowIndex = row, Hue.Black)
+            Dim slotName = $"{entry.Key.Name}: "
+            buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
+            Dim condition = entry.Value.MaximumDurability / entry.Value.Durability
+            Dim conditionHue = If(condition >= 4, Hue.Red, If(condition >= 2, Hue.Yellow, Hue.Black))
+            buffer.WriteText((slotName.Length, row + 1), entry.Value.Name, rowIndex = row, conditionHue)
             row += 1
         Next
         buffer.WriteTextCentered(buffer.Rows - 1, "Arrows, Space, Esc", False, Hue.Black)
