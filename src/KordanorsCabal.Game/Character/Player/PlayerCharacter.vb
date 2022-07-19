@@ -49,7 +49,7 @@
         End Get
     End Property
 
-    Private Function CanCastSpell(spellType As SpellType) As Boolean
+    Public Function CanCastSpell(spellType As SpellType) As Boolean
         Return spellType.CanCast(Me)
     End Function
 

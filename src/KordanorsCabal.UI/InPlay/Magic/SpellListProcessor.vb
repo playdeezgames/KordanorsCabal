@@ -15,8 +15,10 @@
         For row = ListStartRow To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
             If itemIndex >= 0 AndAlso itemIndex < items.Count Then
-                buffer.FillCells((0, row), (buffer.Columns, 1), Pattern.Space, itemIndex = currentItemIndex, Hue.Black)
-                buffer.WriteTextCentered(row, $"{items(itemIndex).Item1.Name}(Lvl{items(itemIndex).Item2})", itemIndex = currentItemIndex, Hue.Black)
+                Dim spellType = items(itemIndex).Item1
+                Dim rowHue = If(player.CanCastSpell(spellType), Hue.Black, Hue.Red)
+                buffer.FillCells((0, row), (buffer.Columns, 1), Pattern.Space, itemIndex = currentItemIndex, rowHue)
+                buffer.WriteTextCentered(row, $"{spellType.Name}(Lvl{items(itemIndex).Item2})", itemIndex = currentItemIndex, rowHue)
             End If
         Next
 
