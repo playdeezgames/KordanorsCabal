@@ -30,8 +30,16 @@
             Select Case level
                 Case 1
                     Return 5
+                Case 2
+                    Return 15
+                Case 3
+                    Return 30
+                Case 4
+                    Return 45
+                Case 5
+                    Return 30
                 Case Else
-                    Return 25
+                    Return 0
             End Select
         End Get
     End Property

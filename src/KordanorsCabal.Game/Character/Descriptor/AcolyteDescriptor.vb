@@ -30,6 +30,10 @@
             Select Case level
                 Case 1
                     Return 1
+                Case 2
+                    Return 10
+                Case 3
+                    Return 25
                 Case Else
                     Return 0
             End Select
@@ -61,7 +65,7 @@
             Case 1
                 Return location.LocationType = LocationType.DungeonBoss
             Case Else
-                Return False
+                Return True
         End Select
     End Function
 End Class

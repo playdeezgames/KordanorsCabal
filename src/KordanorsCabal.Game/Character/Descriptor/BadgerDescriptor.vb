@@ -29,9 +29,11 @@
         Get
             Select Case level
                 Case 1
-                    Return 25
+                    Return 24
+                Case 2
+                    Return 12
                 Case Else
-                    Return 5
+                    Return 6
             End Select
         End Get
     End Property

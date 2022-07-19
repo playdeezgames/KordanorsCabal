@@ -28,7 +28,9 @@
         Get
             Select Case level
                 Case 1
-                    Return 25
+                    Return 30
+                Case 2
+                    Return 15
                 Case Else
                     Return 5
             End Select

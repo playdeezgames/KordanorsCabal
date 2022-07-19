@@ -32,7 +32,15 @@
         Get
             Select Case level
                 Case 1
-                    Return RNG.RollDice("4d6")
+                    Return 15
+                Case 2
+                    Return 30
+                Case 3
+                    Return 45
+                Case 4
+                    Return 30
+                Case 5
+                    Return 15
                 Case Else
                     Return 0
             End Select

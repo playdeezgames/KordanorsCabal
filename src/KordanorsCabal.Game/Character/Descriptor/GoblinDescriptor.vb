@@ -30,6 +30,12 @@
             Select Case level
                 Case 1
                     Return 30
+                Case 2
+                    Return 45
+                Case 3
+                    Return 30
+                Case 4
+                    Return 15
                 Case Else
                     Return 0
             End Select
