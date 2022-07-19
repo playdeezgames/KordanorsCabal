@@ -23,6 +23,7 @@ Public Enum CharacterStatisticType
     Highness
     Hunger
     FoodPoisoning
+    Chafing
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>

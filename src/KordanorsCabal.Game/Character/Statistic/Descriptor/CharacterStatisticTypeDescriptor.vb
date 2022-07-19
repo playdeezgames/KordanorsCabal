@@ -24,6 +24,7 @@ Friend Module CharacterStatisticTypeDescriptorUtility
         New Dictionary(Of CharacterStatisticType, CharacterStatisticTypeDescriptor) From
         {
             {CharacterStatisticType.BaseMaximumDefend, New BaseMaximumDefendDescriptor},
+            {CharacterStatisticType.Chafing, New ChafingDescriptor},
             {CharacterStatisticType.Dexterity, New DexterityDescriptor},
             {CharacterStatisticType.Drunkenness, New DrunkennessDescriptor},
             {CharacterStatisticType.Fatigue, New FatigueDescriptor},

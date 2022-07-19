@@ -188,7 +188,7 @@
     End Function
 
     Private Function NegativeInfluence() As Long
-        Return If(Drunkenness > 0 OrElse Highness > 0, -1, 0)
+        Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
     End Function
 
     Friend Function RollInfluence() As Long
@@ -537,6 +537,15 @@
         End Get
         Set(value As Long)
             SetStatistic(CharacterStatisticType.Drunkenness, value)
+        End Set
+    End Property
+
+    Property Chafing As Long
+        Get
+            Return GetStatistic(CharacterStatisticType.Chafing).Value
+        End Get
+        Set(value As Long)
+            SetStatistic(CharacterStatisticType.Chafing, value)
         End Set
     End Property
 

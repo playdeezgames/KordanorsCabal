@@ -269,6 +269,7 @@
             Drunkenness -= 1
             Highness -= 1
             FoodPoisoning -= 1
+            Chafing -= 1
             Location = Location.Routes(direction).Move(Me)
             If Hunger = CharacterStatisticType.Hunger.MaximumValue Then
                 Hunger \= 2

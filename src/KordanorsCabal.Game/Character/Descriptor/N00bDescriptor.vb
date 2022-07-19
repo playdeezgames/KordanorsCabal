@@ -6,6 +6,7 @@
             Return New Dictionary(Of CharacterStatisticType, Long) From
                 {
                     {CharacterStatisticType.BaseMaximumDefend, 1},
+                    {CharacterStatisticType.Chafing, 0},
                     {CharacterStatisticType.Dexterity, 1},
                     {CharacterStatisticType.Drunkenness, 0},
                     {CharacterStatisticType.Fatigue, 0},

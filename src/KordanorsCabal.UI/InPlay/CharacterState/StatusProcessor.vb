@@ -35,6 +35,10 @@
             buffer.WriteText((0, row), $"Food Poisoning {player.FoodPoisoning}", False, Hue.Black)
             row += 1
         End If
+        If player.Chafing > 0 Then
+            buffer.WriteText((0, row), $"Chafing {player.Chafing}", False, Hue.Black)
+            row += 1
+        End If
     End Sub
 
     Public Sub Initialize() Implements IProcessor.Initialize
