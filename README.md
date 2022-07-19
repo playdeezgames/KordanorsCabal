@@ -41,11 +41,6 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 029 - 20220717
 * 030 - 20220718
 * 031 - 20220719
-    * badgers
-    * mushrooms
-    * use pron for morale
-    * chafing when using pron
-    * qol - spell list color coding
 
 ## Credit Due
 
