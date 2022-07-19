@@ -152,3 +152,17 @@ CK CharacterId IS NULL OR LocationId IS NULL, but not both!
 | RouteType | INT | Implementation Specific |
 | Direction | INT | Implementation Specific |
 
+# Useful Queries
+
+## Creatures By Level
+
+```
+SELECT 
+	COUNT(c.CharacterId), ls.StatisticValue
+FROM 
+	Characters c
+	JOIN Locations l ON c.LocationId=l.LocationId
+	JOIN LocationStatistics ls ON ls.LocationId=l.LocationId AND ls.StatisticType=1
+GROUP BY
+	ls.StatisticValue
+```

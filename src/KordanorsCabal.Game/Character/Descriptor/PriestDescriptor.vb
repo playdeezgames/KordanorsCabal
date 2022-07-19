@@ -67,7 +67,7 @@
             Case 2
                 Return location.LocationType = LocationType.DungeonBoss
             Case Else
-                Return True
+                Return Trued
         End Select
     End Function
 End Class
