@@ -1,21 +1,25 @@
 ﻿Friend Class MapProcessor
     Implements IProcessor
+    Private redrawBuffer As Boolean
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
-        buffer.Fill(Pattern.Space, False, Hue.Blue)
-        Dim player = World.PlayerCharacter
-        Dim playerLocation = player.Location
-        Dim level = playerLocation.GetStatistic(LocationStatisticType.DungeonLevel)
-        If level.HasValue Then
-            Dim locations = Location.ByStatisticValue(LocationStatisticType.DungeonLevel, level.Value).Where(Function(x) player.HasVisited(x))
-            For Each location In locations
-                Dim inverted = (location = playerLocation)
-                Dim dungeonColumn = location.GetStatistic(LocationStatisticType.DungeonColumn).Value
-                Dim dungeonRow = location.GetStatistic(LocationStatisticType.DungeonRow).Value
-                Dim displayHue = If(location.Enemies(player).Any, Hue.Pink,
+        If redrawBuffer Then
+            redrawBuffer = False
+            buffer.Fill(Pattern.Space, False, Hue.Blue)
+            Dim player = World.PlayerCharacter
+            Dim playerLocation = player.Location
+            Dim level = playerLocation.GetStatistic(LocationStatisticType.DungeonLevel)
+            If level.HasValue Then
+                Dim locations = Location.ByStatisticValue(LocationStatisticType.DungeonLevel, level.Value).Where(Function(x) player.HasVisited(x))
+                For Each location In locations
+                    Dim inverted = (location = playerLocation)
+                    Dim dungeonColumn = location.GetStatistic(LocationStatisticType.DungeonColumn).Value
+                    Dim dungeonRow = location.GetStatistic(LocationStatisticType.DungeonRow).Value
+                    Dim displayHue = If(location.Enemies(player).Any, Hue.Pink,
                     If(location.HasStairs, Hue.Green, Hue.Black))
-                DrawLocation(buffer, (CInt(dungeonColumn * 2), CInt(dungeonRow * 2)), location, inverted, displayHue)
-            Next
+                    DrawLocation(buffer, (CInt(dungeonColumn * 2), CInt(dungeonRow * 2)), location, inverted, displayHue)
+                Next
+            End If
         End If
     End Sub
 
@@ -47,6 +51,7 @@
     End Sub
 
     Public Sub Initialize() Implements IProcessor.Initialize
+        redrawBuffer = True
     End Sub
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
