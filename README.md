@@ -42,7 +42,6 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 030 - 20220718
 * 031 - 20220719
 * 032 - 20220720
-    * load and save no longer poop dbs all over the file system
 	* Qol - inventory screen
 
 ## Credit Due
