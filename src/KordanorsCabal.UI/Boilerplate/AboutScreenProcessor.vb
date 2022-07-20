@@ -20,7 +20,7 @@
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
         Select Case command
-            Case Command.Green, Command.Blue
+            Case Command.Green, Command.Blue, Command.Red
                 Return UIState.TitleScreen
             Case Else
                 Return UIState.AboutScreen

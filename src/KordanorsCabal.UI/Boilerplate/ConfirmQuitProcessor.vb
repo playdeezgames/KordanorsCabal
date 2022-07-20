@@ -17,4 +17,8 @@
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteText((0, 10), "Are you sure you want to quit?", False, Hue.Red)
     End Sub
+
+    Public Overrides Function HandleRed() As UIState
+        Return UIState.TitleScreen
+    End Function
 End Class

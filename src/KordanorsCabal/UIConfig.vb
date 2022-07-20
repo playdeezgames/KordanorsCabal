@@ -5,7 +5,7 @@ Public Class UIConfig
     Property ScreenSize As Integer
     Property SfxVolume As Single
     Property MuxVolume As Single
-    Const DefaultScreenSize As Integer = 4
+    Const DefaultScreenSize As Integer = 2
     Const DefaultSfxVolume As Single = 0.5
     Const DefaultMuxVolume As Single = 0.5
     Const FileName As String = "config.json"

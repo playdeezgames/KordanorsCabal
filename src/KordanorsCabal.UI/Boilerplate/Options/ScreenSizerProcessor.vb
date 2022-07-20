@@ -52,4 +52,7 @@
 
     Public Shared Property GetCurrentScreenSize As Func(Of Integer)
     Public Shared Property SetCurrentScreenSize As Action(Of Integer)
+    Public Overrides Function HandleRed() As UIState
+        Return UIState.OptionsScreen
+    End Function
 End Class

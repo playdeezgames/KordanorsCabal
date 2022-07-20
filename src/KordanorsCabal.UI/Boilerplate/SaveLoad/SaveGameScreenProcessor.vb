@@ -54,4 +54,8 @@ Friend Class SaveGameScreenProcessor
             UpdateMenuItemText(slotNumber, "(empty)")
         End If
     End Sub
+
+    Public Overrides Function HandleRed() As UIState
+        Return UIState.GameMenuScreen
+    End Function
 End Class

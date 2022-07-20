@@ -64,4 +64,7 @@
 
     Public Shared Property GetCurrentSfxVolume As Func(Of Single)
     Public Shared Property SetCurrentSfxVolume As Action(Of Single)
+    Public Overrides Function HandleRed() As UIState
+        Return UIState.OptionsScreen
+    End Function
 End Class

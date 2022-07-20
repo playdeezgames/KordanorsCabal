@@ -50,4 +50,8 @@ Friend Class LoadGameScreenProcessor
             UpdateMenuItemText(slotNumber, "(empty)")
         End If
     End Sub
+
+    Public Overrides Function HandleRed() As UIState
+        Return UIState.TitleScreen
+    End Function
 End Class

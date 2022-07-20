@@ -64,4 +64,7 @@
 
     Public Shared Property GetCurrentMuxVolume As Func(Of Single)
     Public Shared Property SetCurrentMuxVolume As Action(Of Single)
+    Public Overrides Function HandleRed() As UIState
+        Return UIState.OptionsScreen
+    End Function
 End Class

@@ -17,4 +17,8 @@
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteText((7, 0), "Options:", False, Hue.Blue)
     End Sub
+
+    Public Overrides Function HandleRed() As UIState
+        Return UIState.TitleScreen
+    End Function
 End Class
