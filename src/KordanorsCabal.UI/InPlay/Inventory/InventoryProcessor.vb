@@ -1,7 +1,9 @@
-﻿Friend Class InventoryProcessor
+﻿Imports SPLORR.Game
+
+Friend Class InventoryProcessor
     Implements IProcessor
 
-    Private items As List(Of Item)
+    Private items As List(Of (String, IEnumerable(Of Item)))
     Private currentItemIndex As Integer = 0
     Const ListStartRow = 2
     Const ListHiliteRow = 10
@@ -17,7 +19,7 @@
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
             If itemIndex >= 0 AndAlso itemIndex < items.Count Then
                 buffer.FillCells((0, row), (buffer.Columns, 1), Pattern.Space, itemIndex = currentItemIndex, Hue.Black)
-                buffer.WriteTextCentered(row, items(itemIndex).Name, itemIndex = currentItemIndex, Hue.Black)
+                buffer.WriteTextCentered(row, $"{items(itemIndex).Item1}({items(itemIndex).Item2.Count})", itemIndex = currentItemIndex, Hue.Black)
             End If
         Next
 
@@ -26,7 +28,17 @@
 
     Public Sub Initialize() Implements IProcessor.Initialize
         currentItemIndex = 0
-        items = World.PlayerCharacter.Inventory.Items.ToList
+        items = New List(Of (String, IEnumerable(Of Item)))
+        Dim table As New Dictionary(Of String, List(Of Item))
+        For Each item In World.PlayerCharacter.Inventory.Items.OrderBy(Function(x) x.Name)
+            If Not table.ContainsKey(item.Name) Then
+                table(item.Name) = New List(Of Item)
+            End If
+            table(item.Name).Add(item)
+        Next
+        For Each entry In table
+            items.Add((entry.Key, entry.Value))
+        Next
     End Sub
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
@@ -44,7 +56,7 @@
     End Function
 
     Private Function InteractItem() As UIState
-        InteractItemProcessor.InteractItem = items(currentItemIndex)
+        InteractItemProcessor.InteractItem = RNG.FromEnumerable(items(currentItemIndex).Item2)
         Return UIState.InteractItem
     End Function
 End Class
