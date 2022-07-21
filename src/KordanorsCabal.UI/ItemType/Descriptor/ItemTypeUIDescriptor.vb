@@ -43,6 +43,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.SkullFragment, New SkullFragmentUIDescriptor},
             {ItemType.TownPortal, New TownPortalUIDescriptor},
             {ItemType.Trousers, New TrousersUIDescriptor},
-            {ItemType.WaterShard, New WaterShardUIDescriptor}
+            {ItemType.WaterShard, New WaterShardUIDescriptor},
+            {ItemType.ZombieTaint, New ZombieTaintUIDescriptor}
         }
 End Module

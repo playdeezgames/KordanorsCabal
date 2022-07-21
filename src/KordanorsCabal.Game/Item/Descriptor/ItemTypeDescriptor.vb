@@ -102,7 +102,8 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.SkullFragment, New SkullFragmentDescriptor},
             {ItemType.TownPortal, New TownPortalDescriptor},
             {ItemType.Trousers, New TrousersDescriptor},
-            {ItemType.WaterShard, New WaterShardDescriptor}
+            {ItemType.WaterShard, New WaterShardDescriptor},
+            {ItemType.ZombieTaint, New ZombieTaintDescriptor}
         }
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)
         Get

@@ -16,6 +16,10 @@ Public Enum CharacterType
     Bat
     Malcontent
     Badger
+    Zombie
+    'Mummy
+    'Ghoul
+    'Orc
 End Enum
 Module CharacterTypeExtensions
     <Extension>

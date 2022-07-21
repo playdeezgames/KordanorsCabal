@@ -39,6 +39,7 @@ Public Enum ItemType
     RottenFood
     Mushroom
     RottenEgg
+    ZombieTaint
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

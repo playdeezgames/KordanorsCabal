@@ -15,7 +15,8 @@
                     {ItemType.MagicEgg, 5},
                     {ItemType.Mushroom, 5},
                     {ItemType.RatTail, 1},
-                    {ItemType.SkullFragment, 5}
+                    {ItemType.SkullFragment, 5},
+                    {ItemType.ZombieTaint, 5}
                 }
         End Get
     End Property

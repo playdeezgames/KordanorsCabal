@@ -51,7 +51,8 @@ Friend Module CharacterTypeDescriptorUtility
             {CharacterType.Priest, New PriestDescriptor},
             {CharacterType.Rat, New RatDescriptor},
             {CharacterType.Skeleton, New SkeletonDescriptor},
-            {CharacterType.Snake, New SnakeDescriptor}
+            {CharacterType.Snake, New SnakeDescriptor},
+            {CharacterType.Zombie, New ZombieDescriptor}
         }
     ReadOnly Property AllCharacterTypes As IEnumerable(Of CharacterType)
         Get
