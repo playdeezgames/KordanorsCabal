@@ -38,6 +38,7 @@ Public Enum ItemType
     Herb
     RottenFood
     Mushroom
+    RottenEgg
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

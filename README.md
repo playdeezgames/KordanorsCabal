@@ -44,6 +44,7 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 032 - 20220720
 	* Qol - inventory screen
 * 033 - 20220721
+    * route type colors
 
 ## Credit Due
 

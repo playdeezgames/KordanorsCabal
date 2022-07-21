@@ -21,7 +21,7 @@ Friend Class ChickenModeProcessor
     Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
-        If player.HasItemType(ItemType.Food) Then
+        If player.HasItemType(ItemType.Food) OrElse player.HasItemType(ItemType.RottenFood) Then
             Buttons(FeedButtonIndex).Title = "Feed"
         End If
     End Sub
@@ -32,18 +32,26 @@ Friend Class ChickenModeProcessor
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case FeedButtonIndex
-                If player.HasItemType(ItemType.Food) Then
-                    Return FeedChicken(player)
+                If player.HasItemType(ItemType.Food) OrElse player.HasItemType(ItemType.RottenFood) Then
+                    Dim item = RNG.FromEnumerable(player.Inventory.Items.Where(Function(x) x.Name = ItemType.Food.Name))
+                    Return FeedChicken(player, item)
                 End If
         End Select
         Return UIState.InPlay
     End Function
 
-    Private Function FeedChicken(player As PlayerCharacter) As UIState
-        player.Inventory.ItemsOfType(ItemType.Food).First.Destroy()
+    Private Function FeedChicken(player As PlayerCharacter, item As Item) As UIState
+        Dim itemType = item.ItemType
+        item.Destroy()
         If RNG.FromRange(0, 5) = 0 Then
-            player.EnqueueMessage($"{FeatureType.Chicken.Name} and then a {ItemType.MagicEgg.Name} pops out!")
-            player.Inventory.Add(Item.Create(ItemType.MagicEgg))
+            Select Case itemType
+                Case ItemType.Food
+                    player.EnqueueMessage($"{FeatureType.Chicken.Name} eats the food and then a {ItemType.MagicEgg.Name} pops out!")
+                    player.Inventory.Add(Item.Create(ItemType.MagicEgg))
+                Case ItemType.RottenFood
+                    player.EnqueueMessage($"{FeatureType.Chicken.Name} eats the rotten food and then a {itemType.RottenEgg.Name} pops out!")
+                    player.Inventory.Add(item.Create(itemType.RottenEgg))
+            End Select
         Else
             player.EnqueueMessage($"{FeatureType.Chicken.Name} eats the food, and gives a satified ""moo"" in return.")
         End If
