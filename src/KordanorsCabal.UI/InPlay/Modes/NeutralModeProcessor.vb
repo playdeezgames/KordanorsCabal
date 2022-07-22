@@ -22,6 +22,13 @@
             ShowExits(buffer, (0, 2), player)
             ShowFeatures(buffer, (0, 3), player)
             ShowEncumbered(buffer, (0, 5), player)
+            ShowTownPortal(buffer, (0, 7), player)
+        End If
+    End Sub
+
+    Private Sub ShowTownPortal(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
+        If player.Location.Routes.Values.Any(Function(x) x.RouteType = RouteType.Portal) Then
+            buffer.WriteText(xy, "There is a portal here!", False, Hue.Purple)
         End If
     End Sub
 

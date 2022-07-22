@@ -47,6 +47,7 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 	* zombie taints
 * 034 - 20220722
     * lotion
+	* portal indicator in town
     
 
 ## Credit Due
