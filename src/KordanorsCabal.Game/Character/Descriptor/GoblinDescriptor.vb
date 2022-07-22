@@ -90,12 +90,14 @@
         End If
     End Sub
 
+    Private Shared ReadOnly bribeItems As IReadOnlyList(Of ItemType) =
+        New List(Of ItemType) From
+        {
+            ItemType.Beer,
+            ItemType.Pr0n
+        }
+
     Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
-        Select Case itemType
-            Case ItemType.Beer, ItemType.Pr0n
-                Return True
-            Case Else
-                Return False
-        End Select
+        Return bribeItems.Contains(itemType)
     End Function
 End Class
