@@ -40,6 +40,7 @@ Public Enum ItemType
     Mushroom
     RottenEgg
     ZombieTaint
+    Lotion
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

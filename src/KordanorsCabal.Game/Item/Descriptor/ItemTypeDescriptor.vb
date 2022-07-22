@@ -85,6 +85,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Herb, New HerbDescriptor},
             {ItemType.HolyWater, New HolyWaterDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
+            {ItemType.Lotion, New LotionDescriptor},
             {ItemType.MagicEgg, New MagicEggDescriptor},
             {ItemType.MembershipCard, New MembershipCardDescriptor},
             {ItemType.MoonPortal, New MoonPortalDescriptor},

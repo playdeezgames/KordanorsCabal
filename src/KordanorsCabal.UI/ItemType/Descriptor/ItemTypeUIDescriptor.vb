@@ -26,6 +26,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.Herb, New HerbUIDescriptor},
             {ItemType.HolyWater, New HolyWaterUIDescriptor},
             {ItemType.IronKey, New IronKeyUIDescriptor},
+            {ItemType.Lotion, New LotionUIDescriptor},
             {ItemType.MagicEgg, New MagicEggUIDescriptor},
             {ItemType.MembershipCard, New MembershipCardUIDescriptor},
             {ItemType.MoonPortal, New MoonPortalUIDescriptor},
