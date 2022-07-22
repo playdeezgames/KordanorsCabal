@@ -68,4 +68,13 @@
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return character.CharacterType = CharacterType.N00b
     End Function
+
+    Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
+        Select Case itemType
+            Case ItemType.RottenEgg
+                Return True
+            Case Else
+                Return False
+        End Select
+    End Function
 End Class

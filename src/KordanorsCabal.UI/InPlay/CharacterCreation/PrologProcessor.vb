@@ -7,7 +7,7 @@
         buffer.WriteLines((0, 2), New List(Of String) From
                           {
                             "The town of Zooperdan ",
-                            "has falled upon hard  ",
+                            "has fallen upon hard  ",
                             "times. A few years    ",
                             "ago, the Cabal of     ",
                             "Kordanor moved into a ",
