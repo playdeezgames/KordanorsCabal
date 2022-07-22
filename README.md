@@ -43,17 +43,7 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 031 - 20220719
 * 032 - 20220720
 * 033 - 20220721
-    * zombies
-	* zombie taints
 * 034 - 20220722
-    * lotion
-	* portal indicator in town
-	* bribe badger with rotten egg
-	* typos
-	* Qol - esc to next message
-	* bat wing
-	* snake fang
-    
 
 ## Credit Due
 
