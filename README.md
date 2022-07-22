@@ -49,6 +49,10 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
     * lotion
 	* portal indicator in town
 	* bribe badger with rotten egg
+	* typos
+	* Qol - esc to next message
+	* bat wing
+	* snake fang
     
 
 ## Credit Due

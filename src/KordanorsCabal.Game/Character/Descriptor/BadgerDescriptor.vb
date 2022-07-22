@@ -7,8 +7,8 @@
                 {
                     {CharacterStatisticType.BaseMaximumDefend, 1},
                     {CharacterStatisticType.Strength, 4},
-                    {CharacterStatisticType.Dexterity, 1},
-                    {CharacterStatisticType.HP, 1},
+                    {CharacterStatisticType.Dexterity, 2},
+                    {CharacterStatisticType.HP, 2},
                     {CharacterStatisticType.Influence, 0},
                     {CharacterStatisticType.MP, 3},
                     {CharacterStatisticType.Stress, 0},
@@ -55,7 +55,7 @@
 
     Public Overrides ReadOnly Property XPValue As Long
         Get
-            Return 1
+            Return 2
         End Get
     End Property
 

@@ -67,6 +67,7 @@ Public Module ItemTypeDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {ItemType.AirShard, New AirShardDescriptor},
+            {ItemType.BatWing, New BatWingDescriptor},
             {ItemType.Beer, New BeerDescriptor},
             {ItemType.Bong, New BongDescriptor},
             {ItemType.BookOfHolyBolt, New BookOfHolyBoltDescriptor},
@@ -101,6 +102,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Shield, New ShieldDescriptor},
             {ItemType.Shortsword, New ShortswordDescriptor},
             {ItemType.SkullFragment, New SkullFragmentDescriptor},
+            {ItemType.SnakeFang, New SnakeFangDescriptor},
             {ItemType.TownPortal, New TownPortalDescriptor},
             {ItemType.Trousers, New TrousersDescriptor},
             {ItemType.WaterShard, New WaterShardDescriptor},

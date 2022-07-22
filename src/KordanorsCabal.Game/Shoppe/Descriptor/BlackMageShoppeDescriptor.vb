@@ -11,11 +11,13 @@
         Get
             Return New Dictionary(Of ItemType, Long) From
                 {
+                    {ItemType.BatWing, 3},
                     {ItemType.GoblinEar, 5},
-                    {ItemType.MagicEgg, 5},
-                    {ItemType.Mushroom, 5},
+                    {ItemType.MagicEgg, 10},
+                    {ItemType.Mushroom, 25},
                     {ItemType.RatTail, 1},
                     {ItemType.SkullFragment, 5},
+                    {ItemType.SnakeFang, 3},
                     {ItemType.ZombieTaint, 5}
                 }
         End Get

@@ -20,7 +20,7 @@
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
         Select Case command
-            Case Command.Green, Command.Blue
+            Case Command.Green, Command.Blue, Command.Red
                 Dim messages = PlayerCharacter.Messages
                 messages.Dequeue()
                 If messages.Any Then

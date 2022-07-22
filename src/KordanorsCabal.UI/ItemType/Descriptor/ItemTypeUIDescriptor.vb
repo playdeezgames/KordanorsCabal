@@ -8,6 +8,7 @@ Module ItemTypeUIDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeUIDescriptor) From
         {
             {ItemType.AirShard, New AirShardUIDescriptor},
+            {ItemType.BatWing, New BatWingUIDescriptor},
             {ItemType.Beer, New BeerUIDescriptor},
             {ItemType.Bong, New BongUIDescriptor},
             {ItemType.BookOfHolyBolt, New BookOfHolyBoltUIDescriptor},
@@ -42,6 +43,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.Shortsword, New ShortswordUIDescriptor},
             {ItemType.SilverKey, New SilverKeyUIDescriptor},
             {ItemType.SkullFragment, New SkullFragmentUIDescriptor},
+            {ItemType.SnakeFang, New SnakeFangUIDescriptor},
             {ItemType.TownPortal, New TownPortalUIDescriptor},
             {ItemType.Trousers, New TrousersUIDescriptor},
             {ItemType.WaterShard, New WaterShardUIDescriptor},
