@@ -103,7 +103,7 @@ Public Class Root
         Return MediaPlayer.Volume
     End Function
 
-    Private Shared soundEffectFiles As IReadOnlyDictionary(Of Sfx, String) =
+    Private Shared ReadOnly soundEffectFiles As IReadOnlyDictionary(Of Sfx, String) =
         New Dictionary(Of Sfx, String) From
         {
             {Sfx.CharacterCreation, "Content/RollDice.wav"},

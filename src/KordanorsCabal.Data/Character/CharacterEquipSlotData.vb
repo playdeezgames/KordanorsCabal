@@ -43,10 +43,16 @@
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
+        ClearForColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (CharacterIdColumn, characterId))
     End Sub
 
     Friend Sub ClearForItem(itemId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, (ItemIdColumn, itemId))
+        ClearForColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (ItemIdColumn, itemId))
     End Sub
 End Module

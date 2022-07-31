@@ -1,21 +1,19 @@
 ﻿Imports System.Runtime.CompilerServices
 
 Module RouteTypeExtensions
+    Private ReadOnly table As IReadOnlyDictionary(Of RouteType, Hue) =
+        New Dictionary(Of RouteType, Hue) From
+        {
+            {RouteType.CopperLock, Hue.Green},
+            {RouteType.GoldLock, Hue.Yellow},
+            {RouteType.IronLock, Hue.Black},
+            {RouteType.PlatinumLock, Hue.Cyan},
+            {RouteType.SilverLock, Hue.Purple}
+        }
     <Extension>
     Function TextHue(routeType As RouteType) As Hue
-        Select Case routeType
-            Case RouteType.IronLock
-                Return Hue.Black
-            Case RouteType.CopperLock
-                Return Hue.Green
-            Case RouteType.SilverLock
-                Return Hue.Purple
-            Case RouteType.GoldLock
-                Return Hue.Yellow
-            Case RouteType.PlatinumLock
-                Return Hue.Cyan
-            Case Else
-                Return Hue.Blue
-        End Select
+        Dim result As Hue = Hue.Blue
+        table.TryGetValue(routeType, result)
+        Return result
     End Function
 End Module

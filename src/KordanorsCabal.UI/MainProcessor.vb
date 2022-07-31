@@ -52,5 +52,4 @@ Public Module MainProcessor
 
     Public PushUIState As Action(Of UIState)
     Public PopUIState As Func(Of UIState)
-
 End Module

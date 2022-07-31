@@ -1,54 +1,26 @@
 ﻿Public Class MuxVolumizerProcessor
     Inherits MenuProcessor
-
+    Private Shared Function MakeMenuItem(percent As Integer) As (String, Func(Of UIState))
+        Return ($"{percent}%", Function()
+                                   SetCurrentMuxVolume.Invoke(CSng(percent * 0.01))
+                                   Return UIState.OptionsScreen
+                               End Function)
+    End Function
     Sub New()
         MyBase.New(
             New List(Of (String, Func(Of UIState))) From
             {
-                ("0%", Function()
-                           SetCurrentMuxVolume.Invoke(0)
-                           Return UIState.OptionsScreen
-                       End Function),
-                ("10%", Function()
-                            SetCurrentMuxVolume.Invoke(0.1)
-                            Return UIState.OptionsScreen
-                        End Function),
-                ("20%", Function()
-                            SetCurrentMuxVolume.Invoke(0.2)
-                            Return UIState.OptionsScreen
-                        End Function),
-                ("30%", Function()
-                            SetCurrentMuxVolume.Invoke(0.3)
-                            Return UIState.OptionsScreen
-                        End Function),
-                ("40%", Function()
-                            SetCurrentMuxVolume.Invoke(0.4)
-                            Return UIState.OptionsScreen
-                        End Function),
-                ("50%", Function()
-                            SetCurrentMuxVolume.Invoke(0.5)
-                            Return UIState.OptionsScreen
-                        End Function),
-                ("60%", Function()
-                            SetCurrentMuxVolume.Invoke(0.6)
-                            Return UIState.OptionsScreen
-                        End Function),
-                ("70%", Function()
-                            SetCurrentMuxVolume.Invoke(0.7)
-                            Return UIState.OptionsScreen
-                        End Function),
-                ("80%", Function()
-                            SetCurrentMuxVolume.Invoke(0.8)
-                            Return UIState.OptionsScreen
-                        End Function),
-                ("90%", Function()
-                            SetCurrentMuxVolume.Invoke(0.9)
-                            Return UIState.OptionsScreen
-                        End Function),
-                ("100%", Function()
-                             SetCurrentMuxVolume.Invoke(1)
-                             Return UIState.OptionsScreen
-                         End Function)
+                MakeMenuItem(0),
+                MakeMenuItem(10),
+                MakeMenuItem(20),
+                MakeMenuItem(30),
+                MakeMenuItem(40),
+                MakeMenuItem(50),
+                MakeMenuItem(60),
+                MakeMenuItem(70),
+                MakeMenuItem(80),
+                MakeMenuItem(90),
+                MakeMenuItem(100)
             },
             6,
             UIState.MuxVolumizer)
