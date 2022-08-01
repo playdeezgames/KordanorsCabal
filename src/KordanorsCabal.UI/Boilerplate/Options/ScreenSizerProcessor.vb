@@ -1,42 +1,24 @@
 ﻿Public Class ScreenSizerProcessor
     Inherits MenuProcessor
+    Private Shared Function MakeMenuItem(size As Integer) As (String, Func(Of UIState))
+        Return ($"({size}x) {size * 416}x{size * 240}", Function()
+                                                            SetCurrentScreenSize.Invoke(size)
+                                                            Return UIState.OptionsScreen
+                                                        End Function)
+    End Function
 
     Public Sub New()
         MyBase.New(
             New List(Of (String, Func(Of UIState))) From
             {
-                ("(1x) 416x240", Function()
-                                     SetCurrentScreenSize.Invoke(1)
-                                     Return UIState.OptionsScreen
-                                 End Function),
-                ("(2x) 832x480", Function()
-                                     SetCurrentScreenSize.Invoke(2)
-                                     Return UIState.OptionsScreen
-                                 End Function),
-                ("(3x) 1248x720", Function()
-                                      SetCurrentScreenSize.Invoke(3)
-                                      Return UIState.OptionsScreen
-                                  End Function),
-                ("(4x) 1664x960", Function()
-                                      SetCurrentScreenSize.Invoke(4)
-                                      Return UIState.OptionsScreen
-                                  End Function),
-                ("(5x) 2080x1200", Function()
-                                       SetCurrentScreenSize.Invoke(5)
-                                       Return UIState.OptionsScreen
-                                   End Function),
-                ("(6x) 2496x1440", Function()
-                                       SetCurrentScreenSize.Invoke(6)
-                                       Return UIState.OptionsScreen
-                                   End Function),
-                ("(7x) 2912x1680", Function()
-                                       SetCurrentScreenSize.Invoke(7)
-                                       Return UIState.OptionsScreen
-                                   End Function),
-                ("(8x) 3328x1920", Function()
-                                       SetCurrentScreenSize.Invoke(8)
-                                       Return UIState.OptionsScreen
-                                   End Function)
+                MakeMenuItem(1),
+                MakeMenuItem(2),
+                MakeMenuItem(3),
+                MakeMenuItem(4),
+                MakeMenuItem(5),
+                MakeMenuItem(6),
+                MakeMenuItem(7),
+                MakeMenuItem(8)
             },
             5,
             UIState.ScreenSizer)
