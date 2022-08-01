@@ -8,11 +8,11 @@ Public Module World
     End Sub
 
     Private Sub CreateDungeon(location As Location)
-        location = CreateDungeonLevel(location, 1, ItemType.CopperKey, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
-        location = CreateDungeonLevel(location, 2, ItemType.SilverKey, RouteType.SilverLock)
-        location = CreateDungeonLevel(location, 3, ItemType.GoldKey, RouteType.GoldLock)
-        location = CreateDungeonLevel(location, 4, ItemType.PlatinumKey, RouteType.PlatinumLock)
-        location = CreateDungeonLevel(location, 5, ItemType.ElementalOrb, RouteType.FinalLock)
+        location = CreateDungeonLevel(location, DungeonLevel.Level1, ItemType.CopperKey, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
+        location = CreateDungeonLevel(location, DungeonLevel.Level2, ItemType.SilverKey, RouteType.SilverLock)
+        location = CreateDungeonLevel(location, DungeonLevel.Level3, ItemType.GoldKey, RouteType.GoldLock)
+        location = CreateDungeonLevel(location, DungeonLevel.Level4, ItemType.PlatinumKey, RouteType.PlatinumLock)
+        location = CreateDungeonLevel(location, DungeonLevel.Level5, ItemType.ElementalOrb, RouteType.FinalLock)
     End Sub
 
     Const MazeColumns = 11
@@ -32,12 +32,12 @@ Public Module World
         End Get
     End Property
 
-    Private Function CreateLocations(maze As Maze(Of Direction), dungeonLevel As Long) As IReadOnlyList(Of Location)
+    Private Function CreateLocations(maze As Maze(Of Direction), dungeonLevel As DungeonLevel) As IReadOnlyList(Of Location)
         Dim locations As New List(Of Location)
         For row As Long = 0 To maze.Rows - 1
             For column As Long = 0 To maze.Columns - 1
                 Dim dungeonLocation = Location.Create(LocationType.Dungeon)
-                dungeonLocation.SetStatistic(LocationStatisticType.DungeonLevel, dungeonLevel)
+                dungeonLocation.DungeonLevel = dungeonLevel
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
                 locations.Add(dungeonLocation)
@@ -63,7 +63,7 @@ Public Module World
         Return locations
     End Function
 
-    Private Function CreateDungeonLevel(fromLocation As Location, dungeonLevel As Long, bossKeyType As ItemType, bossRouteType As RouteType) As Location
+    Private Function CreateDungeonLevel(fromLocation As Location, dungeonLevel As DungeonLevel, bossKeyType As ItemType, bossRouteType As RouteType) As Location
         Dim maze = New Maze(Of Direction)(MazeColumns, MazeRows, MazeDirections)
         maze.Generate()
         Dim locations = CreateLocations(maze, dungeonLevel)
@@ -75,8 +75,8 @@ Public Module World
         Return locations.Single(Function(x) x.LocationType = LocationType.DungeonBoss)
     End Function
 
-    Private Sub PopulateCharacters(locations As IEnumerable(Of Location), dungeonLevel As Long)
-        For Each characterType In AllCharacterTypes
+    Private Sub PopulateCharacters(locations As IEnumerable(Of Location), dungeonLevel As DungeonLevel)
+        For Each characterType In AllCharacterTypes()
             Dim characterCount = characterType.SpawnCount(dungeonLevel)
             While characterCount > 0
                 Dim location = RNG.FromEnumerable(locations.Where(Function(x) characterType.CanSpawn(x, dungeonLevel)))

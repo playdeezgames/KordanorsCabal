@@ -33,8 +33,8 @@
             character.EnqueueMessage($"You cannot use {ItemType.AirShard.Name} right now!")
             Return
         End If
-        Dim level = character.Location.GetStatistic(LocationStatisticType.DungeonLevel)
-        Dim locations = Location.FromLocationType(LocationType.Dungeon).Where(Function(x) If(x.GetStatistic(LocationStatisticType.DungeonLevel) = level, False))
+        Dim level = character.Location.DungeonLevel
+        Dim locations = Location.FromLocationType(LocationType.Dungeon).Where(Function(x) x.DungeonLevel = level)
         character.Location = RNG.FromEnumerable(locations)
         character.EnqueueMessage($"You use the {ItemType.AirShard.Name} and suddenly find yerself somewhere else!")
     End Sub

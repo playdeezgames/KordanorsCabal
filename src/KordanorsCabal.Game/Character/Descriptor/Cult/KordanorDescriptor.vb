@@ -25,14 +25,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property SpawnCount(level As Long) As Long
+    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
         Get
-            Select Case level
-                Case 5
-                    Return 1
-                Case Else
-                    Return 0
-            End Select
+            Return If(level = DungeonLevel.Level5, 1, 0)
         End Get
     End Property
 

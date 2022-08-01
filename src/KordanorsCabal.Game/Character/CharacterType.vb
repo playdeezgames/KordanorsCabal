@@ -32,7 +32,7 @@ Module CharacterTypeExtensions
         Return CharacterTypeDescriptors(characterType).IsEnemy(character)
     End Function
     <Extension>
-    Function SpawnCount(characterType As CharacterType, level As Long) As Long
+    Function SpawnCount(characterType As CharacterType, level As DungeonLevel) As Long
         Return CharacterTypeDescriptors(characterType).SpawnCount(level)
     End Function
     <Extension>

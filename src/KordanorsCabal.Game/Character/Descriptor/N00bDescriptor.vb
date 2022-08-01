@@ -37,7 +37,7 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property SpawnCount(level As Long) As Long
+    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
         Get
             Return 0
         End Get

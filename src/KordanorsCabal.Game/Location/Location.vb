@@ -12,6 +12,9 @@
     Public Shared Function ByStatisticValue(statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)
         Return LocationStatisticData.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
     End Function
+    Public Shared Function ByDungeonLevel(dungeonLevel As DungeonLevel) As IEnumerable(Of Location)
+        Return LocationDungeonLevelData.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
+    End Function
     Friend Sub DestroyRoute(direction As Direction)
         If Routes.ContainsKey(direction) Then
             Routes(direction).Destroy()
@@ -105,5 +108,13 @@
         Get
             Return LocationType.CanMap
         End Get
+    End Property
+    Property DungeonLevel As DungeonLevel
+        Get
+            Return CType(If(LocationDungeonLevelData.Read(Id), 0), DungeonLevel)
+        End Get
+        Set(value As DungeonLevel)
+            LocationDungeonLevelData.Write(Id, value)
+        End Set
     End Property
 End Class

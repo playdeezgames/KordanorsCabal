@@ -21,20 +21,19 @@
         End Get
     End Property
 
-    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
-        New Dictionary(Of Long, Long) From
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of DungeonLevel, Long) =
+        New Dictionary(Of DungeonLevel, Long) From
         {
-            {1, 30},
-            {2, 45},
-            {3, 30},
-            {4, 15}
+            {DungeonLevel.Level1, 30},
+            {DungeonLevel.Level2, 45},
+            {DungeonLevel.Level3, 30},
+            {DungeonLevel.Level4, 15}
         }
 
-    Public Overrides ReadOnly Property SpawnCount(level As Long) As Long
+    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
         Get
             Dim result As Long = 0
-            spawnCountTable.TryGetValue(level, result)
-            Return result
+            Return If(spawnCountTable.TryGetValue(level, result), result, 0)
         End Get
     End Property
 

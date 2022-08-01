@@ -8,9 +8,9 @@
             buffer.Fill(Pattern.Space, False, Hue.Blue)
             Dim player = World.PlayerCharacter
             Dim playerLocation = player.Location
-            Dim level = playerLocation.GetStatistic(LocationStatisticType.DungeonLevel)
-            If level.HasValue Then
-                Dim locations = Location.ByStatisticValue(LocationStatisticType.DungeonLevel, level.Value).Where(Function(x) player.HasVisited(x))
+            Dim level = playerLocation.DungeonLevel
+            If level <> DungeonLevel.None Then
+                Dim locations = Location.ByDungeonLevel(level).Where(Function(x) player.HasVisited(x))
                 For Each location In locations
                     Dim inverted = (location = playerLocation)
                     Dim dungeonColumn = location.GetStatistic(LocationStatisticType.DungeonColumn).Value
