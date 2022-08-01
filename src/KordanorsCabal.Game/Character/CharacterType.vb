@@ -11,6 +11,7 @@ Public Enum CharacterType
     GoblinElite
     Kordanor
     Malcontent
+    MoonPerson
     N00b
     Priest
     Rat

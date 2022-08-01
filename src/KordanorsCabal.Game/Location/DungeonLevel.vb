@@ -5,4 +5,5 @@
     Level3
     Level4
     Level5
+    Moon
 End Enum

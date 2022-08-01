@@ -1,0 +1,53 @@
+﻿Friend Class MoonPersonDescriptor
+    Inherits CharacterTypeDescriptor
+
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+        Get
+            Return New Dictionary(Of CharacterStatisticType, Long) From
+                {
+                    {CharacterStatisticType.BaseMaximumDefend, 4},
+                    {CharacterStatisticType.Strength, 8},
+                    {CharacterStatisticType.Dexterity, 4},
+                    {CharacterStatisticType.HP, 3},
+                    {CharacterStatisticType.Influence, 6},
+                    {CharacterStatisticType.MP, 3},
+                    {CharacterStatisticType.Stress, 0},
+                    {CharacterStatisticType.UnarmedMaximumDamage, 4},
+                    {CharacterStatisticType.Willpower, 3},
+                    {CharacterStatisticType.Wounds, 0}
+                }
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property MaximumEncumbrance(character As Character) As Single
+        Get
+            Return 0!
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
+        Get
+            Return If(level = DungeonLevel.Moon, 100, 0)
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "Moon Person"
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property XPValue As Long
+        Get
+            Return 3
+        End Get
+    End Property
+
+    Public Overrides Sub DropLoot(location As Location)
+        'TODO: loot
+    End Sub
+
+    Public Overrides Function IsEnemy(character As Character) As Boolean
+        Return character.CharacterType = CharacterType.N00b
+    End Function
+End Class

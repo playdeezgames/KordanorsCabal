@@ -203,6 +203,25 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
+                CharacterType.MoonPerson,
+                New Sprite(
+                    Hue.LightGreen,
+                    LoadPixels(
+                        AddressOf PixelConvertor,
+                        "............",
+                        "....#####...",
+                        "...# ### #..",
+                        "...#  #  #..",
+                        "....#####...",
+                        "......#.....",
+                        ".....####...",
+                        ".....###.#..",
+                        "...#.###.#..",
+                        ".....#.#....",
+                        ".....#.#....",
+                        "....##.#...."))
+            },
+            {
                 CharacterType.Priest,
                 New Sprite(
                     Hue.Purple,
