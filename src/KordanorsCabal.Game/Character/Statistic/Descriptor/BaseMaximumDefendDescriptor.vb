@@ -12,4 +12,10 @@
             Return 1
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Abbreviation As String
+        Get
+            Return "MaxDef"
+        End Get
+    End Property
 End Class

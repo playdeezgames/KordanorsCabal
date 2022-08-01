@@ -35,6 +35,10 @@ Public Module CharacterStatisticTypeExtensions
         Return CharacterStatisticTypeDescriptors(statisticType).Name
     End Function
     <Extension>
+    Function Abbreviation(statisticType As CharacterStatisticType) As String
+        Return CharacterStatisticTypeDescriptors(statisticType).Abbreviation
+    End Function
+    <Extension>
     Friend Function MinimumValue(statisticType As CharacterStatisticType) As Long
         Return CharacterStatisticTypeDescriptors(statisticType).MinimumValue
     End Function

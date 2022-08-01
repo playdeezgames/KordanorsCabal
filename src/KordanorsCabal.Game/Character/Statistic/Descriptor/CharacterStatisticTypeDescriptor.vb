@@ -18,6 +18,8 @@
             Return Long.MaxValue
         End Get
     End Property
+
+    MustOverride ReadOnly Property Abbreviation As String
 End Class
 Friend Module CharacterStatisticTypeDescriptorUtility
     Friend ReadOnly CharacterStatisticTypeDescriptors As IReadOnlyDictionary(Of CharacterStatisticType, CharacterStatisticTypeDescriptor) =
