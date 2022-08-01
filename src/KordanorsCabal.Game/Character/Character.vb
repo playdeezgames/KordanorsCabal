@@ -3,7 +3,6 @@
     Sub New(characterId As Long)
         Id = characterId
     End Sub
-
     ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
         Get
             Return CharacterSpellData.
@@ -11,23 +10,19 @@
                 ToDictionary(Function(x) CType(x.Item1, SpellType), Function(x) x.Item2)
         End Get
     End Property
-
     ReadOnly Property HasSpells As Boolean
         Get
             Return Spells.Any
         End Get
     End Property
-
     ReadOnly Property CharacterType As CharacterType
         Get
             Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
         End Get
     End Property
-
     Public Function HasQuest(quest As Quest) As Boolean
         Return CharacterQuestData.Exists(Id, quest)
     End Function
-
     Property Money As Long
         Get
             Return GetStatistic(CharacterStatisticType.Money).Value
@@ -36,7 +31,6 @@
             SetStatistic(CharacterStatisticType.Money, value)
         End Set
     End Property
-
     Friend Sub Learn(spellType As SpellType)
         If Not CanLearn(spellType) Then
             EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
@@ -46,7 +40,6 @@
         EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
         CharacterSpellData.Write(Id, spellType, nextLevel)
     End Sub
-
     Friend Function CanLearn(spellType As SpellType) As Boolean
         Dim nextLevel = If(CharacterSpellData.Read(Id, spellType), 0) + 1
         If nextLevel > spellType.MaximumLevel Then
@@ -54,44 +47,36 @@
         End If
         Return If(GetStatistic(CharacterStatisticType.Power), 0) >= spellType.RequiredPower(nextLevel)
     End Function
-
     Friend Function RollSpellDice(spellType As SpellType) As Long
         If Not Spells.ContainsKey(spellType) Then
             Return 0
         End If
         Return RollDice(Power + Spells(SpellType.HolyBolt))
     End Function
-
     ReadOnly Property Power As Long
         Get
             Return GetStatistic(CharacterStatisticType.Power).Value
         End Get
     End Property
-
     Friend Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return CharacterType.CanBeBribedWith(itemType)
     End Function
-
     ReadOnly Property IsUndead As Boolean
         Get
             Return CharacterType.IsUndead
         End Get
     End Property
-
     Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
         'do nothing!
     End Sub
-
     Overridable Sub EnqueueMessage(ParamArray lines() As String)
         'do nothing!
     End Sub
-
     ReadOnly Property CanFight As Boolean
         Get
             Return Location.Enemies(Me).Any
         End Get
     End Property
-
     Friend Shared Function Create(characterType As CharacterType, location As Location) As Character
         Dim character = FromId(CharacterData.Create(characterType, location.Id))
         For Each entry In characterType.InitialStatistics
@@ -99,15 +84,12 @@
         Next
         Return character
     End Function
-
     Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
         CharacterStatisticData.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
-
     Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
     End Sub
-
     Property Location As Location
         Get
             Return Location.FromId(CharacterData.ReadLocation(Id).Value)
@@ -120,7 +102,6 @@
     Shared Function FromId(characterId As Long) As Character
         Return New Character(characterId)
     End Function
-
     Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
         Return If(CharacterStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
@@ -133,7 +114,6 @@
             Return New Inventory(inventoryId.Value)
         End Get
     End Property
-
     ReadOnly Property IsEncumbered As Boolean
         Get
             Return Encumbrance > MaximumEncumbrance
@@ -160,7 +140,6 @@
     Friend Function IsEnemy(character As Character) As Boolean
         Return CharacterType.IsEnemy(character)
     End Function
-
     Private Function RollDice(dice As Long) As Long
         Dim result As Long = 0
         While dice > 0
@@ -169,12 +148,10 @@
         End While
         Return result
     End Function
-
     Friend Function RollDefend() As Long
         Dim maximumDefend = GetStatistic(CharacterStatisticType.BaseMaximumDefend).Value
         Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
     End Function
-
     Private Function GetDefendDice() As Long
         Dim dice = GetStatistic(CharacterStatisticType.Dexterity).Value
         For Each entry In Equipment
@@ -182,23 +159,18 @@
         Next
         Return dice
     End Function
-
     Friend Function RollAttack() As Long
         Return RollDice(GetAttackDice() + NegativeInfluence())
     End Function
-
     Private Function NegativeInfluence() As Long
         Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
     End Function
-
     Friend Function RollInfluence() As Long
         Return RollDice(If(GetStatistic(CharacterStatisticType.Influence), 0) + NegativeInfluence())
     End Function
-
     Friend Function RollWillpower() As Long
         Return RollDice(If(GetStatistic(CharacterStatisticType.Willpower), 0) + NegativeInfluence())
     End Function
-
     Private Function GetAttackDice() As Long
         Dim dice = GetStatistic(CharacterStatisticType.Strength).Value
         For Each entry In Equipment
@@ -206,18 +178,15 @@
         Next
         Return dice
     End Function
-
     Friend Function IsDemoralized() As Boolean
         If GetStatistic(CharacterStatisticType.Willpower).HasValue Then
             Return CurrentMP <= 0
         End If
         Return False
     End Function
-
     Friend Sub AddStress(delta As Long)
         ChangeStatistic(CharacterStatisticType.Stress, delta)
     End Sub
-
     ReadOnly Property CanIntimidate As Boolean
         Get
             If Not GetStatistic(CharacterStatisticType.Willpower).HasValue Then
@@ -226,13 +195,11 @@
             Return Location.Friends(Me).Count <= Location.Enemies(Me).Count
         End Get
     End Property
-
     ReadOnly Property Name As String
         Get
             Return CharacterType.Name
         End Get
     End Property
-
     Property CurrentHP As Long
         Get
             Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.Wounds).Value)
@@ -241,19 +208,16 @@
             SetStatistic(CharacterStatisticType.Wounds, GetStatistic(CharacterStatisticType.HP).Value - value)
         End Set
     End Property
-
     ReadOnly Property MaximumHP As Long
         Get
             Return GetStatistic(CharacterStatisticType.HP).Value
         End Get
     End Property
-
     ReadOnly Property PartingShot As String
         Get
             Return CharacterType.PartingShot
         End Get
     End Property
-
     Property CurrentMP As Long
         Get
             Return Math.Max(0, GetStatistic(CharacterStatisticType.MP).Value - GetStatistic(CharacterStatisticType.Stress).Value)
@@ -262,7 +226,6 @@
             SetStatistic(CharacterStatisticType.Stress, GetStatistic(CharacterStatisticType.MP).Value - value)
         End Set
     End Property
-
     Property CurrentMana As Long
         Get
             Return Math.Max(0, GetStatistic(CharacterStatisticType.Mana).Value - GetStatistic(CharacterStatisticType.Fatigue).Value)
@@ -271,26 +234,20 @@
             SetStatistic(CharacterStatisticType.Fatigue, GetStatistic(CharacterStatisticType.Mana).Value - value)
         End Set
     End Property
-
-
     Friend Sub DoDamage(damage As Long)
         ChangeStatistic(CharacterStatisticType.Wounds, damage)
     End Sub
-
     Friend Sub DoFatigue(fatigue As Long)
         ChangeStatistic(CharacterStatisticType.Fatigue, fatigue)
     End Sub
-
     Friend Sub Destroy()
         CharacterData.Clear(Id)
     End Sub
-
     ReadOnly Property IsDead As Boolean
         Get
             Return GetStatistic(CharacterStatisticType.Wounds).Value >= GetStatistic(CharacterStatisticType.HP).Value
         End Get
     End Property
-
     Function DetermineDamage(value As Long) As Long
         Dim maximumDamage As Long? = Nothing
         For Each entry In Equipment
@@ -303,25 +260,21 @@
         maximumDamage = If(maximumDamage, GetStatistic(CharacterStatisticType.UnarmedMaximumDamage).Value)
         Return If(value < 0, 0, If(value > maximumDamage.Value, maximumDamage.Value, value))
     End Function
-
     ReadOnly Property RollMoneyDrop As Long
         Get
             Return CharacterType.RollMoneyDrop
         End Get
     End Property
-
     ReadOnly Property XPValue As Long
         Get
             Return CharacterType.XPValue
         End Get
     End Property
-
     ReadOnly Property NeedsHealing As Boolean
         Get
             Return GetStatistic(CharacterStatisticType.Wounds).Value > 0
         End Get
     End Property
-
     Friend Function DoWeaponWear(wear As Long) As IEnumerable(Of ItemType)
         Dim result As New List(Of ItemType)
         While wear > 0
@@ -333,7 +286,6 @@
         End While
         Return result
     End Function
-
     Friend Function DoArmorWear(wear As Long) As IEnumerable(Of ItemType)
         Dim result As New List(Of ItemType)
         While wear > 0
@@ -345,7 +297,6 @@
         End While
         Return result
     End Function
-
     Private Function WearOneWeapon() As ItemType?
         Dim items = Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsWeapon)
         If items.Any Then
@@ -357,7 +308,6 @@
             End If
         End If
     End Function
-
     Private Function WearOneArmor() As ItemType?
         Dim items = Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsArmor)
         If items.Any Then
@@ -369,7 +319,6 @@
             End If
         End If
     End Function
-
     Friend Sub DropLoot()
         'TODO: unequip everything
         For Each item In Inventory.Items
@@ -377,7 +326,6 @@
         Next
         CharacterType.DropLoot(Location)
     End Sub
-
     ReadOnly Property Equipment As IReadOnlyDictionary(Of EquipSlot, Item)
         Get
             Return CharacterEquipSlotData.Read(Id).
@@ -386,7 +334,6 @@
                     Function(x) Item.FromId(x.Item2))
         End Get
     End Property
-
     Friend Function AddXP(xp As Long) As Boolean
         ChangeStatistic(CharacterStatisticType.XP, xp)
         Dim xpGoal = GetStatistic(CharacterStatisticType.XPGoal).Value
@@ -430,7 +377,6 @@
             enemyIndex += 1
         Next
     End Sub
-
     Private Sub DoCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
         If IsDead Then
             Return
@@ -442,7 +388,6 @@
                 DoMentalCounterAttack(enemy, enemyIndex, enemyCount)
         End Select
     End Sub
-
     Private Sub DoMentalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
         Dim lines As New List(Of String) From {
             $"Counter-attack {enemyIndex}/{enemyCount}:"
@@ -472,7 +417,6 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-
     Public Sub Unequip(equipSlot As EquipSlot)
         If Equipment.ContainsKey(equipSlot) Then
             Dim item = Equipment(equipSlot)
@@ -480,7 +424,6 @@
             CharacterEquipSlotData.Clear(Id, equipSlot)
         End If
     End Sub
-
     Private Sub Panic()
         For Each equipSlot In Equipment.Keys
             Unequip(equipSlot)
@@ -489,7 +432,6 @@
             Location.Inventory.Add(item)
         Next
     End Sub
-
     Private Sub DoPhysicalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
         Dim lines As New List(Of String) From {
             $"Counter-attack {enemyIndex}/{enemyCount}:"
@@ -526,11 +468,9 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-
     Function HasItemType(itemType As ItemType) As Boolean
         Return Inventory.ItemsOfType(itemType).Any
     End Function
-
     Property Drunkenness As Long
         Get
             Return GetStatistic(CharacterStatisticType.Drunkenness).Value
@@ -539,7 +479,6 @@
             SetStatistic(CharacterStatisticType.Drunkenness, value)
         End Set
     End Property
-
     Property Chafing As Long
         Get
             Return GetStatistic(CharacterStatisticType.Chafing).Value
@@ -548,7 +487,6 @@
             SetStatistic(CharacterStatisticType.Chafing, value)
         End Set
     End Property
-
     Property Highness As Long
         Get
             Return If(GetStatistic(CharacterStatisticType.Highness), 0)
@@ -557,7 +495,6 @@
             SetStatistic(CharacterStatisticType.Highness, value)
         End Set
     End Property
-
     Property Hunger As Long
         Get
             Return GetStatistic(CharacterStatisticType.Hunger).Value
@@ -566,13 +503,11 @@
             SetStatistic(CharacterStatisticType.Hunger, value)
         End Set
     End Property
-
     Public ReadOnly Property MaximumMana As Long
         Get
             Return GetStatistic(CharacterStatisticType.Mana).Value
         End Get
     End Property
-
     Public Property FoodPoisoning As Long
         Get
             Return GetStatistic(CharacterStatisticType.FoodPoisoning).Value
@@ -581,7 +516,6 @@
             SetStatistic(CharacterStatisticType.FoodPoisoning, value)
         End Set
     End Property
-
     ReadOnly Property IsFullyAssigned As Boolean
         Get
             Return If(GetStatistic(CharacterStatisticType.Unassigned), 0) = 0
@@ -593,14 +527,11 @@
             ChangeStatistic(CharacterStatisticType.Unassigned, -1)
         End If
     End Sub
-
     Public ReadOnly Property CanGamble As Boolean
         Get
             Return Money >= 5
         End Get
     End Property
-
-
     Public Property Direction As Direction
         Get
             Return CType(PlayerData.ReadDirection().Value, Direction)
@@ -609,17 +540,14 @@
             PlayerData.WriteDirection(value)
         End Set
     End Property
-
     Public ReadOnly Property CanCast() As Boolean
         Get
             Return Spells.Keys.Any(Function(x) CanCastSpell(x))
         End Get
     End Property
-
     Public Function CanCastSpell(spellType As SpellType) As Boolean
         Return spellType.CanCast(Me)
     End Function
-
     Public Sub Gamble()
         If Not CanGamble Then
             EnqueueMessage("You cannot gamble at this time!")
@@ -642,7 +570,6 @@
         'TODO: sound effect
         EnqueueMessage(lines.ToArray)
     End Sub
-
     Public Sub Cast(spellType As SpellType)
         If Not CanCastSpell(spellType) Then
             EnqueueMessage($"You cannot cast {spellType.Name} at this time.")
@@ -650,7 +577,6 @@
         End If
         spellType.Cast(Me)
     End Sub
-
     Public Sub Equip(item As Item)
         If item.CanEquip Then
             InventoryItemData.ClearForItem(item.Id)
@@ -665,11 +591,9 @@
         End If
         EnqueueMessage($"You cannot equip {item.Name}!")
     End Sub
-
     Public Function CanAcceptQuest(quest As Quest) As Boolean
         Return Not HasQuest(quest) AndAlso quest.CanAccept(Me)
     End Function
-
     Public Sub UseItem(item As Item)
         If item.CanUse(Me) Then
             item.Use(Me)
@@ -678,7 +602,6 @@
             End If
         End If
     End Sub
-
     Public Property Mode As PlayerMode
         Get
             Return CType(PlayerData.ReadMode().Value, PlayerMode)
@@ -687,57 +610,45 @@
             PlayerData.WriteMode(value)
         End Set
     End Property
-
     Public Sub CompleteQuest(quest As Quest)
         quest.Complete(Me)
     End Sub
-
     Public Sub AcceptQuest(quest As Quest)
         quest.Accept(Me)
     End Sub
-
     Public ReadOnly Property CanInteract As Boolean
         Get
             Return If(Location?.Feature?.CanInteract(Me), False)
         End Get
     End Property
-
     Public Function GetItemTypeCount(itemType As ItemType) As Integer
         Return Inventory.Items.Where(Function(x) x.ItemType = itemType).Count
     End Function
-
     Public Function CanMoveLeft() As Boolean
         Return CanMove(Direction.PreviousDirection.Value)
     End Function
-
     Public ReadOnly Property CanMap() As Boolean
         Get
             Return Location.CanMap
         End Get
     End Property
-
     Public Function CanMoveRight() As Boolean
         Return CanMove(Direction.NextDirection.Value)
     End Function
-
     Public Function CanMoveForward() As Boolean
         Return CanMove(Direction)
     End Function
-
     Public Sub Heal()
         SetStatistic(CharacterStatisticType.Wounds, 0)
     End Sub
-
     Public Function CanMoveBackward() As Boolean
         Return CanMove(Direction.Opposite)
     End Function
-
     Public Sub Interact()
         If CanInteract Then
             Mode = Location.Feature.InteractionMode(Me)
         End If
     End Sub
-
     Public Sub Buy(itemType As ItemType)
         If CanBuy(itemType) Then
             Dim price = itemType.PurchasePrice.Value
@@ -745,7 +656,6 @@
             Inventory.Add(Item.Create(itemType))
         End If
     End Sub
-
     ReadOnly Property CanDoIntimidation() As Boolean
         Get
             If If(GetStatistic(CharacterStatisticType.Influence), 0) <= 0 Then
@@ -758,7 +668,6 @@
             Return enemy.CanIntimidate
         End Get
     End Property
-
     Public Sub DoIntimidation()
         If CanDoIntimidation Then
             Dim lines As New List(Of String)
@@ -783,14 +692,12 @@
         End If
         EnqueueMessage("You cannot intimidate at this time!")
     End Sub
-
     Private Function CanBuy(itemType As ItemType) As Boolean
         If itemType.PurchasePrice Is Nothing Then
             Return False
         End If
         Return Money >= itemType.PurchasePrice.Value
     End Function
-
     Public Function CanMove(direction As Direction) As Boolean
         If IsEncumbered Then
             Return False
@@ -806,7 +713,6 @@
         End If
         Return True
     End Function
-
     Private Shared ReadOnly RunDirections As IReadOnlyList(Of Direction) =
         New List(Of Direction) From
         {
@@ -815,7 +721,6 @@
             Direction.South,
             Direction.West
         }
-
     Public Sub Run()
         If CanFight Then
             Direction = RNG.FromEnumerable(RunDirections)
@@ -828,7 +733,6 @@
             DoCounterAttacks()
         End If
     End Sub
-
     Public Function Move(direction As Direction) As Boolean
         If CanMove(direction) Then
             Dim hungerRate = Math.Max(Highness \ 2 + FoodPoisoning \ 2, 1)
@@ -846,15 +750,12 @@
         End If
         Return False
     End Function
-
     Public Sub Fight()
         If CanFight Then
             DoAttack()
             DoCounterAttacks()
         End If
     End Sub
-
-
     Private Sub DoAttack()
         Dim lines As New List(Of String)
         Dim attackRoll = RollAttack()
@@ -887,8 +788,6 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-
-
     Public ReadOnly Property HasEquipment As Boolean
         Get
             Return Equipment.Any

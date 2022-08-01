@@ -22,11 +22,9 @@
             RouteData.WriteRouteType(Id, value)
         End Set
     End Property
-
     Friend Sub Destroy()
         RouteData.Clear(Id)
     End Sub
-
     ReadOnly Property IsLocked As Boolean
         Get
             Return RouteType.UnlockItem.HasValue
@@ -42,7 +40,6 @@
         End If
         Return True
     End Function
-
     Friend Function Move(player As Character) As Location
         If CanMove(player) Then
             If IsLocked Then
