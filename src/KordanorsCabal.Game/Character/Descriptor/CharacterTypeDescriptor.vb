@@ -54,9 +54,7 @@ Friend Module CharacterTypeDescriptorUtility
             {CharacterType.Snake, New SnakeDescriptor},
             {CharacterType.Zombie, New ZombieDescriptor}
         }
-    ReadOnly Property AllCharacterTypes As IEnumerable(Of CharacterType)
-        Get
-            Return CharacterTypeDescriptors.Keys
-        End Get
-    End Property
+    Function AllCharacterTypes() As IEnumerable(Of CharacterType)
+        Return CharacterTypeDescriptors.Keys
+    End Function
 End Module

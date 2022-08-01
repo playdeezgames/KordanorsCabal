@@ -25,18 +25,19 @@
         End Get
     End Property
 
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
+        New Dictionary(Of Long, Long) From
+        {
+            {3, 1},
+            {4, 10},
+            {5, 25}
+        }
+
     Public Overrides ReadOnly Property SpawnCount(level As Long) As Long
         Get
-            Select Case level
-                Case 3
-                    Return 1
-                Case 4
-                    Return 10
-                Case 5
-                    Return 25
-                Case Else
-                    Return 0
-            End Select
+            Dim result As Long = 0
+            spawnCountTable.TryGetValue(level, result)
+            Return result
         End Get
     End Property
 

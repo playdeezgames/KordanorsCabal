@@ -28,22 +28,21 @@
         Return location.LocationType = LocationType.Dungeon
     End Function
 
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
+        New Dictionary(Of Long, Long) From
+        {
+            {1, 15},
+            {2, 30},
+            {3, 45},
+            {4, 30},
+            {5, 15}
+        }
+
     Public Overrides ReadOnly Property SpawnCount(level As Long) As Long
         Get
-            Select Case level
-                Case 1
-                    Return 15
-                Case 2
-                    Return 30
-                Case 3
-                    Return 45
-                Case 4
-                    Return 30
-                Case 5
-                    Return 15
-                Case Else
-                    Return 0
-            End Select
+            Dim result As Long = 0
+            spawnCountTable.TryGetValue(level, result)
+            Return result
         End Get
     End Property
 

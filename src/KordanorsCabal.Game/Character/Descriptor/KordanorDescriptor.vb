@@ -38,7 +38,7 @@
 
     Public Overrides ReadOnly Property Name As String
         Get
-            Return "Acolyte"
+            Return "Kordanor"
         End Get
     End Property
 
@@ -57,11 +57,6 @@
     End Function
 
     Public Overrides Function CanSpawn(location As Location, level As Long) As Boolean
-        Select Case level
-            Case 5
-                Return location.LocationType = LocationType.DungeonBoss
-            Case Else
-                Return False
-        End Select
+        Return level = 5 AndAlso location.LocationType = LocationType.DungeonBoss
     End Function
 End Class

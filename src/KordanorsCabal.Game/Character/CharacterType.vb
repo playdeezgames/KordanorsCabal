@@ -2,24 +2,21 @@
 
 Public Enum CharacterType
     None
-    N00b
-    Skeleton
-    Goblin
-    GoblinElite
     Acolyte
-    Priest
+    Badger
+    Bat
     Bishop
     CabalLeader
+    Goblin
+    GoblinElite
     Kordanor
-    Rat
-    Snake
-    Bat
     Malcontent
-    Badger
+    N00b
+    Priest
+    Rat
+    Skeleton
+    Snake
     Zombie
-    'Mummy
-    'Ghoul
-    'Orc
 End Enum
 Module CharacterTypeExtensions
     <Extension>

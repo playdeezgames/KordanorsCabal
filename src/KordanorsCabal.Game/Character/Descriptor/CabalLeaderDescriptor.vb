@@ -27,12 +27,7 @@
 
     Public Overrides ReadOnly Property SpawnCount(level As Long) As Long
         Get
-            Select Case level
-                Case 4
-                    Return 1
-                Case Else
-                    Return 0
-            End Select
+            Return If(level = 4, 1, 0)
         End Get
     End Property
 
@@ -57,11 +52,6 @@
     End Function
 
     Public Overrides Function CanSpawn(location As Location, level As Long) As Boolean
-        Select Case level
-            Case 4
-                Return location.LocationType = LocationType.DungeonBoss
-            Case Else
-                Return False
-        End Select
+        Return level = 4 AndAlso location.LocationType = LocationType.DungeonBoss
     End Function
 End Class

@@ -24,16 +24,18 @@
         End Get
     End Property
 
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
+        New Dictionary(Of Long, Long) From
+        {
+            {1, 30},
+            {2, 15}
+        }
+
     Public Overrides ReadOnly Property SpawnCount(level As Long) As Long
         Get
-            Select Case level
-                Case 1
-                    Return 30
-                Case 2
-                    Return 15
-                Case Else
-                    Return 5
-            End Select
+            Dim result As Long = 5
+            spawnCountTable.TryGetValue(level, result)
+            Return result
         End Get
     End Property
 
@@ -74,12 +76,7 @@
     End Sub
 
     Public Overrides Function CanSpawn(location As Location, level As Long) As Boolean
-        Select Case level
-            Case 1
-                Return location.LocationType = LocationType.DungeonDeadEnd
-            Case Else
-                Return True
-        End Select
+        Return level <> 1 OrElse location.LocationType = LocationType.DungeonDeadEnd
     End Function
 
     Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
@@ -91,7 +88,7 @@
         End Select
     End Function
 
-    Private Shared table As IReadOnlyDictionary(Of AttackType, Integer) =
+    Private Shared ReadOnly attackTable As IReadOnlyDictionary(Of AttackType, Integer) =
         New Dictionary(Of AttackType, Integer) From
         {
             {AttackType.Physical, 3},
@@ -99,6 +96,6 @@
         }
 
     Public Overrides Function GenerateAttackType(character As Character) As AttackType
-        Return RNG.FromGenerator(table)
+        Return RNG.FromGenerator(attackTable)
     End Function
 End Class

@@ -25,16 +25,18 @@
         End Get
     End Property
 
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
+        New Dictionary(Of Long, Long) From
+        {
+            {1, 24},
+            {2, 12}
+        }
+
     Public Overrides ReadOnly Property SpawnCount(level As Long) As Long
         Get
-            Select Case level
-                Case 1
-                    Return 24
-                Case 2
-                    Return 12
-                Case Else
-                    Return 6
-            End Select
+            Dim result As Long = 6
+            spawnCountTable.TryGetValue(level, result)
+            Return result
         End Get
     End Property
 
@@ -69,12 +71,10 @@
         Return character.CharacterType = CharacterType.N00b
     End Function
 
+    Private ReadOnly bribes As IReadOnlyList(Of ItemType) =
+        New List(Of ItemType) From {ItemType.RottenEgg}
+
     Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
-        Select Case itemType
-            Case ItemType.RottenEgg
-                Return True
-            Case Else
-                Return False
-        End Select
+        Return bribes.Contains(itemType)
     End Function
 End Class
