@@ -3,10 +3,10 @@
         buffer.WriteText((0, 0), "                      ", True, Hue.Blue)
         buffer.WriteTextCentered(0, title, True, Hue.Blue)
     End Sub
-    Protected Shared Sub ShowFacing(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
+    Protected Shared Sub ShowFacing(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
         buffer.WriteText(xy, $"Facing: {player.Direction.Name}", False, Hue.Black)
     End Sub
-    Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
+    Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
         Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) x.Key.Abbreviation))
         buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
     End Sub
@@ -16,10 +16,10 @@
         CurrentButtonIndex = 0
     End Sub
 
-    Friend MustOverride Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
-    Friend MustOverride Sub UpdateButtons(player As PlayerCharacter)
-    Friend MustOverride Function HandleButton(player As PlayerCharacter, button As Button) As UIState
-    Friend MustOverride Function HandleRed(player As PlayerCharacter) As UIState
+    Friend MustOverride Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
+    Friend MustOverride Sub UpdateButtons(player As Character)
+    Friend MustOverride Function HandleButton(player As Character, button As Button) As UIState
+    Friend MustOverride Function HandleRed(player As Character) As UIState
     Friend Shared Buttons As IReadOnlyList(Of Button) =
         New List(Of Button) From
         {
@@ -47,7 +47,7 @@
         End If
         CurrentButtonIndex = 0
     End Sub
-    Protected Sub ShowDungeon(buffer As PatternBuffer, player As PlayerCharacter)
+    Protected Sub ShowDungeon(buffer As PatternBuffer, player As Character)
         buffer.WriteText((0, 0), " ╲                  ╱", False, Hue.Black)
         buffer.WriteText((0, 1), "  ╲                ╱ ", False, Hue.Black)
         buffer.WriteText((0, 2), "   ╲              ╱  ", False, Hue.Black)

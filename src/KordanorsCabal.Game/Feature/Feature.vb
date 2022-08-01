@@ -23,11 +23,11 @@
         End Get
     End Property
 
-    Friend Function CanInteract(player As PlayerCharacter) As Boolean
+    Friend Function CanInteract(player As Character) As Boolean
         Return FeatureType.CanInteract(player)
     End Function
 
-    Friend Function InteractionMode(player As PlayerCharacter) As PlayerMode
+    Friend Function InteractionMode(player As Character) As PlayerMode
         Return FeatureType.InteractionMode(player)
     End Function
 End Class

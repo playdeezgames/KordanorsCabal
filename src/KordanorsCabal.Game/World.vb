@@ -258,7 +258,7 @@ Public Module World
         End While
     End Sub
 
-    Public ReadOnly Property PlayerCharacter As PlayerCharacter
+    Public ReadOnly Property PlayerCharacter As Character
         Get
             Return New PlayerCharacter
         End Get

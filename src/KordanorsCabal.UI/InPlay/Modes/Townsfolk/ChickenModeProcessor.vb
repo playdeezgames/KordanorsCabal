@@ -8,7 +8,7 @@ Friend Class ChickenModeProcessor
     Const FeedButtonIndex = 5
 
 
-    Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
         ShowHeader(buffer, player.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
@@ -18,7 +18,7 @@ Friend Class ChickenModeProcessor
         End Select
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
+    Friend Overrides Sub UpdateButtons(player As Character)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         If player.HasItemType(ItemType.Food) OrElse player.HasItemType(ItemType.RottenFood) Then
@@ -26,7 +26,7 @@ Friend Class ChickenModeProcessor
         End If
     End Sub
 
-    Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
@@ -40,7 +40,7 @@ Friend Class ChickenModeProcessor
         Return UIState.InPlay
     End Function
 
-    Private Function FeedChicken(player As PlayerCharacter, item As Item) As UIState
+    Private Function FeedChicken(player As Character, item As Item) As UIState
         Dim itemType = item.ItemType
         item.Destroy()
         If RNG.FromRange(0, 5) = 0 Then
@@ -49,8 +49,8 @@ Friend Class ChickenModeProcessor
                     player.EnqueueMessage($"{FeatureType.Chicken.Name} eats the food and then a {ItemType.MagicEgg.Name} pops out!")
                     player.Inventory.Add(Item.Create(ItemType.MagicEgg))
                 Case ItemType.RottenFood
-                    player.EnqueueMessage($"{FeatureType.Chicken.Name} eats the rotten food and then a {itemType.RottenEgg.Name} pops out!")
-                    player.Inventory.Add(item.Create(itemType.RottenEgg))
+                    player.EnqueueMessage($"{FeatureType.Chicken.Name} eats the rotten food and then a {ItemType.RottenEgg.Name} pops out!")
+                    player.Inventory.Add(Item.Create(ItemType.RottenEgg))
             End Select
         Else
             player.EnqueueMessage($"{FeatureType.Chicken.Name} eats the food, and gives a satified ""moo"" in return.")
@@ -59,7 +59,7 @@ Friend Class ChickenModeProcessor
         Return UIState.Message
     End Function
 
-    Friend Overrides Function HandleRed(player As PlayerCharacter) As UIState
+    Friend Overrides Function HandleRed(player As Character) As UIState
         player.Mode = PlayerMode.Neutral
         Return UIState.InPlay
     End Function

@@ -9,7 +9,7 @@
     Const GoodByeButtonIndex = 9
 
 
-    Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
         ShowHeader(buffer, player.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
@@ -19,7 +19,7 @@
         End Select
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
+    Friend Overrides Sub UpdateButtons(player As Character)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         Buttons(OffersButtonIndex).Title = "Offers"
@@ -28,7 +28,7 @@
         Buttons(BuyButtonIndex).Title = "Buy"
     End Sub
 
-    Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
@@ -49,7 +49,7 @@
         Return UIState.InPlay
     End Function
 
-    Friend Overrides Function HandleRed(player As PlayerCharacter) As UIState
+    Friend Overrides Function HandleRed(player As Character) As UIState
         player.Mode = PlayerMode.Neutral
         Return UIState.InPlay
     End Function

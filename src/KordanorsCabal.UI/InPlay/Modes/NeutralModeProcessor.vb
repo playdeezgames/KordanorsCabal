@@ -12,7 +12,7 @@
     Const SpellsButtonIndex = 8
     Const MenuButtonIndex = 9
 
-    Friend Overrides Sub UpdateBuffer(player As PlayerCharacter, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
         Dim location = player.Location
         If location.LocationType.IsDungeon Then
             ShowDungeon(buffer, player)
@@ -26,25 +26,25 @@
         End If
     End Sub
 
-    Private Sub ShowTownPortal(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
+    Private Sub ShowTownPortal(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
         If player.Location.Routes.Values.Any(Function(x) x.RouteType = RouteType.Portal) Then
             buffer.WriteText(xy, "There is a portal here!", False, Hue.Purple)
         End If
     End Sub
 
-    Private Sub ShowEncumbered(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
+    Private Sub ShowEncumbered(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
         If player.IsEncumbered Then
             buffer.WriteText(xy, "You are encumbered!", False, Hue.Red)
         End If
     End Sub
 
-    Private Sub ShowFeatures(buffer As PatternBuffer, xy As (Integer, Integer), player As PlayerCharacter)
+    Private Sub ShowFeatures(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
         Dim feature = player.Location.Feature
         If feature IsNot Nothing Then
             buffer.WriteText(xy, $"You see: {feature.Name}", False, Hue.Black)
         End If
     End Sub
-    Friend Overrides Sub UpdateButtons(player As PlayerCharacter)
+    Friend Overrides Sub UpdateButtons(player As Character)
         Buttons(TurnFightButtonIndex).Title = If(player.CanFight, "FIGHT!", "Turn...")
         Buttons(MoveRunButtonIndex).Title = If(player.CanFight, "RUN!", "Move...")
         Buttons(MenuButtonIndex).Title = "Game Menu"
@@ -75,7 +75,7 @@
         End If
     End Sub
 
-    Friend Overrides Function HandleButton(player As PlayerCharacter, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
         Select Case button.Index
             Case TurnFightButtonIndex 'also the fight button!
                 If player.CanFight Then
@@ -137,7 +137,7 @@
         Return UIState.InPlay
     End Function
 
-    Friend Overrides Function HandleRed(player As PlayerCharacter) As UIState
+    Friend Overrides Function HandleRed(player As Character) As UIState
         player.Mode = PlayerMode.Neutral
         Return UIState.InPlay
     End Function

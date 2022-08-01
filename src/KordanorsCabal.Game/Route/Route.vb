@@ -33,7 +33,7 @@
         End Get
     End Property
 
-    Friend Function CanMove(player As PlayerCharacter) As Boolean
+    Friend Function CanMove(player As Character) As Boolean
         If Not IsLocked Then
             Return True
         End If
@@ -43,7 +43,7 @@
         Return True
     End Function
 
-    Friend Function Move(player As PlayerCharacter) As Location
+    Friend Function Move(player As Character) As Location
         If CanMove(player) Then
             If IsLocked Then
                 player.Inventory.ItemsOfType(RouteType.UnlockItem.Value).First.Destroy()

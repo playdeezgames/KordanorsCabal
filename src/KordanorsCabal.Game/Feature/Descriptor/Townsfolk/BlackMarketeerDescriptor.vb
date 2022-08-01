@@ -13,11 +13,11 @@
         End Get
     End Property
 
-    Public Overrides Function CanInteract(player As PlayerCharacter) As Boolean
+    Public Overrides Function CanInteract(player As Character) As Boolean
         Return True
     End Function
 
-    Public Overrides Function InteractionMode(player As PlayerCharacter) As PlayerMode
+    Public Overrides Function InteractionMode(player As Character) As PlayerMode
         Return PlayerMode.BlackMarket
     End Function
 End Class
