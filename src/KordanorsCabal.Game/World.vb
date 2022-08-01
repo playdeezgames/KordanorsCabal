@@ -3,8 +3,36 @@ Public Module World
         Store.Reset()
         CreateTown()
         CreateDungeon(Location.FromLocationType(LocationType.ChurchEntrance).First)
+        CreateMoon()
         CreateFeatures()
         CreatePlayer()
+    End Sub
+
+    Private Sub CreateMoon()
+        Dim locations As New List(Of Location)
+        For row As Long = 0 To MoonRows - 1
+            For column As Long = 0 To MoonColumns - 1
+                Dim dungeonLocation = Location.Create(LocationType.Dungeon)
+                dungeonLocation.DungeonLevel = DungeonLevel.Moon
+                dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
+                dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
+                locations.Add(dungeonLocation)
+            Next
+        Next
+        For row As Long = 0 To MoonRows - 1
+            For column As Long = 0 To MoonColumns - 1
+                Dim moonLocation = locations(CInt(column + row * MoonColumns))
+                Dim northLocation = locations(CInt(column + ((row + MoonRows - 1) Mod MoonRows) * MoonColumns))
+                Dim southLocation = locations(CInt(column + ((row + 1) Mod MoonRows) * MoonColumns))
+                Dim eastLocation = locations(CInt(((column + 1) Mod MoonColumns) + row * MoonColumns))
+                Dim westLocation = locations(CInt(((column + MoonColumns - 1) Mod MoonColumns) + row * MoonColumns))
+                Route.Create(moonLocation, Direction.North, RouteType.MoonPath, northLocation)
+                Route.Create(moonLocation, Direction.South, RouteType.MoonPath, southLocation)
+                Route.Create(moonLocation, Direction.East, RouteType.MoonPath, eastLocation)
+                Route.Create(moonLocation, Direction.West, RouteType.MoonPath, westLocation)
+            Next
+        Next
+        PopulateCharacters(locations, DungeonLevel.Moon)
     End Sub
 
     Private Sub CreateDungeon(location As Location)
@@ -17,6 +45,8 @@ Public Module World
 
     Const MazeColumns = 11
     Const MazeRows = 11
+    Const MoonColumns = 11
+    Const MoonRows = 11
     ReadOnly MazeDirections As IReadOnlyDictionary(Of Direction, MazeDirection(Of Direction)) =
         New Dictionary(Of Direction, MazeDirection(Of Direction)) From
         {

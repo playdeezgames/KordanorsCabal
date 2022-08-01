@@ -31,6 +31,7 @@ Friend Module RouteTypeDescriptorUtility
             {RouteType.FinalLock, New FinalLockDescriptor},
             {RouteType.GoldLock, New GoldLockDescriptor},
             {RouteType.IronLock, New IronLockDescriptor},
+            {RouteType.MoonPath, New MoonPathDescriptor},
             {RouteType.Passageway, New PassagewayDescriptor},
             {RouteType.PlatinumLock, New PlatinumLockDescriptor},
             {RouteType.Portal, New PortalDescriptor},

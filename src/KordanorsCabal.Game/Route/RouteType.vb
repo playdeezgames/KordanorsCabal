@@ -12,6 +12,7 @@ Public Enum RouteType
     PlatinumLock
     FinalLock
     Portal
+    MoonPath
 End Enum
 Public Module RouteTypeExtensions
     <Extension>
