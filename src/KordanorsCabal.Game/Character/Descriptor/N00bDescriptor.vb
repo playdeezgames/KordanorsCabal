@@ -13,6 +13,7 @@
                     {CharacterStatisticType.FoodPoisoning, 0},
                     {CharacterStatisticType.Highness, 0},
                     {CharacterStatisticType.HP, 3},
+                    {CharacterStatisticType.Immobilization, 0},
                     {CharacterStatisticType.Hunger, 0},
                     {CharacterStatisticType.Influence, 1},
                     {CharacterStatisticType.Mana, 1},

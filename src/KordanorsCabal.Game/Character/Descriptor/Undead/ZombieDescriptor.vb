@@ -9,6 +9,7 @@
                     {CharacterStatisticType.Strength, 4},
                     {CharacterStatisticType.Dexterity, 3},
                     {CharacterStatisticType.HP, 1},
+                    {CharacterStatisticType.Immobilization, 0},
                     {CharacterStatisticType.UnarmedMaximumDamage, 2},
                     {CharacterStatisticType.Wounds, 0}
                 }

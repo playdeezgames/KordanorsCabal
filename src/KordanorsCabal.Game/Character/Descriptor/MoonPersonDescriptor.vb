@@ -9,6 +9,7 @@
                     {CharacterStatisticType.Strength, 8},
                     {CharacterStatisticType.Dexterity, 4},
                     {CharacterStatisticType.HP, 3},
+                    {CharacterStatisticType.Immobilization, 0},
                     {CharacterStatisticType.Influence, 6},
                     {CharacterStatisticType.MP, 3},
                     {CharacterStatisticType.Stress, 0},

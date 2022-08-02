@@ -37,7 +37,7 @@
         Dim lines As New List(Of String)
         Dim sfx As Sfx? = Nothing
         lines.Add($"You use {ItemType.FireShard.Name} on {enemy.Name}!")
-        Dim damage As Long = character.RollSpellDice(SpellType.HolyBolt)
+        Dim damage As Long = RNG.RollDice("3d4")
         lines.Add($"You do {damage} damage!")
         enemy.DoDamage(damage)
         If enemy.IsDead Then

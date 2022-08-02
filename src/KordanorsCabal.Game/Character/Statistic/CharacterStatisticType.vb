@@ -24,6 +24,7 @@ Public Enum CharacterStatisticType
     Hunger
     FoodPoisoning
     Chafing
+    Immobilization
 End Enum
 Public Module CharacterStatisticTypeExtensions
     <Extension>

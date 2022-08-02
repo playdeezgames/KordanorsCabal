@@ -47,6 +47,11 @@
         End If
         Return If(GetStatistic(CharacterStatisticType.Power), 0) >= spellType.RequiredPower(nextLevel)
     End Function
+
+    Friend Sub DoImmobilization(delta As Long)
+        ChangeStatistic(CharacterStatisticType.Immobilization, delta)
+    End Sub
+
     Friend Function RollSpellDice(spellType As SpellType) As Long
         If Not Spells.ContainsKey(spellType) Then
             Return 0
