@@ -44,7 +44,9 @@
     End Property
 
     Public Overrides Sub DropLoot(location As Location)
-        'TODO: loot
+        If RNG.RollDice("1d2") > 1 Then
+            location.Inventory.Add(Item.Create(ItemType.ShoeLaces))
+        End If
     End Sub
 
     Public Overrides Function IsEnemy(character As Character) As Boolean
