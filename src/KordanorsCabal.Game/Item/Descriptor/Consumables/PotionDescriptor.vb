@@ -44,6 +44,6 @@
     End Sub
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
-        Return RNG.RollDice("3d6")
+        Return If(level = DungeonLevel.Moon, 0, RNG.RollDice("3d6"))
     End Function
 End Class

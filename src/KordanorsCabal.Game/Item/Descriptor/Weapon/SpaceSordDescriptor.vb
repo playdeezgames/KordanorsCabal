@@ -3,7 +3,7 @@
 
     Public Overrides ReadOnly Property SpawnLocationTypes(level As Long) As HashSet(Of LocationType)
         Get
-            Return New HashSet(Of LocationType) From {LocationType.Dungeon}
+            Return New HashSet(Of LocationType) From {LocationType.Moon}
         End Get
     End Property
 

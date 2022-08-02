@@ -13,6 +13,7 @@ Friend Module LocationDescriptorUtility
             {LocationType.Dungeon, New DungeonLocationTypeDescriptor},
             {LocationType.DungeonBoss, New DungeonBossLocationTypeDescriptor},
             {LocationType.DungeonDeadEnd, New DungeonDeadEndLocationTypeDescriptor},
+            {LocationType.Moon, New MoonLocationTypeDescriptor},
             {LocationType.Town, New TownDescriptor},
             {LocationType.TownSquare, New TownSquareDescriptor}
         }

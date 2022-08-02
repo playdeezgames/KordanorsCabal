@@ -30,6 +30,7 @@
                     {ItemType.Bong, 50},
                     {ItemType.BookOfHolyBolt, 100},
                     {ItemType.Herb, 10},
+                    {ItemType.MoonPortal, 5000},
                     {ItemType.TownPortal, 50}
                 }
         End Get
