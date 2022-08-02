@@ -26,6 +26,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.Helmet, New HelmetUIDescriptor},
             {ItemType.Herb, New HerbUIDescriptor},
             {ItemType.HolyWater, New HolyWaterUIDescriptor},
+            {ItemType.HornsOfKordanor, New HornsOfKordanorUIDescriptor},
             {ItemType.IronKey, New IronKeyUIDescriptor},
             {ItemType.Lotion, New LotionUIDescriptor},
             {ItemType.MagicEgg, New MagicEggUIDescriptor},

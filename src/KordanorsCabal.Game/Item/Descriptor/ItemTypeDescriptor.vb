@@ -84,6 +84,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.GoldKey, New GoldKeyDescriptor},
             {ItemType.Helmet, New HelmetDescriptor},
             {ItemType.Herb, New HerbDescriptor},
+            {ItemType.HornsOfKordanor, New HornsOfKordanorDescriptor},
             {ItemType.HolyWater, New HolyWaterDescriptor},
             {ItemType.IronKey, New IronKeyDescriptor},
             {ItemType.Lotion, New LotionDescriptor},
