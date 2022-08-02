@@ -3,6 +3,7 @@
 
     Const WelcomeButtonIndex = 0
     Const EncourageButtonIndex = 1
+    Const MainQuestButtonIndex = 2
     Const GoodByeButtonIndex = 9
 
 
@@ -13,6 +14,8 @@
                 buffer.WriteText((0, 1), "Fare well!", False, Hue.Black)
             Case EncourageButtonIndex
                 buffer.WriteText((0, 1), "If you find yerself disheartened, I'm always here to help!", False, Hue.Black)
+            Case MainQuestButtonIndex
+                buffer.WriteText((0, 1), "Deep within the cata- combs beneath the ab- andoned church there  is a demon named Kord-anor! Slay this foul  fiend and bring to me his horns, so that    there can be a lastingpeace!", False, Hue.Black)
             Case Else
                 buffer.WriteText((0, 1), "Hello, my friend! Staya while, and listen!", False, Hue.Black)
         End Select
@@ -22,6 +25,7 @@
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         Buttons(EncourageButtonIndex).Title = "Pep talk"
+        Buttons(MainQuestButtonIndex).Title = "The Cabal"
     End Sub
 
     Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
