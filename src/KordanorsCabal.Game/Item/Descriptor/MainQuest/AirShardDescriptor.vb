@@ -24,7 +24,7 @@
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get
-            Return character.Location.IsDungeon
+            Return character.Location.IsDungeon AndAlso character.CurrentMana > 0
         End Get
     End Property
 
@@ -33,6 +33,7 @@
             character.EnqueueMessage($"You cannot use {ItemType.AirShard.Name} right now!")
             Return
         End If
+        character.CurrentMana -= 1
         Dim level = character.Location.DungeonLevel
         Dim locations = Location.FromLocationType(LocationType.Dungeon).Where(Function(x) x.DungeonLevel = level)
         character.Location = RNG.FromEnumerable(locations)
