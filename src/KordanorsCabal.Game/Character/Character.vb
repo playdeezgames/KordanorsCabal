@@ -386,6 +386,10 @@
         If IsDead Then
             Return
         End If
+        If IsImmobilized Then
+            DoImmobilizedTurn(enemy, enemyIndex, enemyCount)
+            Return
+        End If
         Select Case enemy.CharacterType.GenerateAttackType(Me)
             Case AttackType.Physical
                 DoPhysicalCounterAttack(enemy, enemyIndex, enemyCount)
@@ -393,6 +397,20 @@
                 DoMentalCounterAttack(enemy, enemyIndex, enemyCount)
         End Select
     End Sub
+
+    Private Sub DoImmobilizedTurn(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
+        Dim lines As New List(Of String) From {
+            $"Counter-attack {enemyIndex}/{enemyCount}:"
+        }
+        lines.Add($"{enemy.Name} is immobilized!")
+        enemy.ChangeStatistic(CharacterStatisticType.Immobilization, -1)
+        EnqueueMessage(lines.ToArray)
+    End Sub
+
+    Private Function IsImmobilized() As Boolean
+        Return If(GetStatistic(CharacterStatisticType.Immobilization), 0) > 0
+    End Function
+
     Private Sub DoMentalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
         Dim lines As New List(Of String) From {
             $"Counter-attack {enemyIndex}/{enemyCount}:"
