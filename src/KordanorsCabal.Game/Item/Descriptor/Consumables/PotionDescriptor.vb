@@ -43,7 +43,7 @@
                 $"You now have {character.CurrentHP} HP!")
     End Sub
 
-    Public Overrides Function RollSpawnCount(level As Long) As Long
+    Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
         Return RNG.RollDice("3d6")
     End Function
 End Class

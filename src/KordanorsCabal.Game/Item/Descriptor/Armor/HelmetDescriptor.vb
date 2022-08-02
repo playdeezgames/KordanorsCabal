@@ -13,9 +13,9 @@
         End Get
     End Property
 
-    Public Overrides Function RollSpawnCount(level As Long) As Long
+    Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
         Select Case level
-            Case 1
+            Case DungeonLevel.Level1
                 Return RNG.RollDice("3d6")
             Case Else
                 Return 0

@@ -12,9 +12,9 @@
         End Get
     End Property
 
-    Public Overrides Function RollSpawnCount(level As Long) As Long
+    Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
         Select Case level
-            Case 2
+            Case DungeonLevel.Level2
                 Return 1
             Case Else
                 Return 0

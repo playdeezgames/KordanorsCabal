@@ -43,6 +43,8 @@ Public Enum ItemType
     Lotion
     BatWing
     SnakeFang
+    ShoeLaces
+    SpaceSord
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
@@ -70,7 +72,7 @@ Public Module ItemTypeExtensions
         ItemTypeDescriptors(itemType).Use(character)
     End Sub
     <Extension>
-    Public Function RollSpawnCount(itemType As ItemType, level As Long) As Long
+    Public Function RollSpawnCount(itemType As ItemType, level As DungeonLevel) As Long
         Return ItemTypeDescriptors(itemType).RollSpawnCount(level)
     End Function
     <Extension>

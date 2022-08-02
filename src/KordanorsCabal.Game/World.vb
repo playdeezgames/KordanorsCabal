@@ -12,7 +12,7 @@ Public Module World
         Dim locations As New List(Of Location)
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
-                Dim dungeonLocation = Location.Create(LocationType.Dungeon)
+                Dim dungeonLocation = Location.Create(LocationType.Moon)
                 dungeonLocation.DungeonLevel = DungeonLevel.Moon
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
@@ -33,6 +33,7 @@ Public Module World
             Next
         Next
         PopulateCharacters(locations, DungeonLevel.Moon)
+        PopulateItems(locations, DungeonLevel.Moon)
     End Sub
 
     Private Sub CreateDungeon(location As Location)
@@ -116,7 +117,7 @@ Public Module World
         Next
     End Sub
 
-    Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType, dungeonLevel As Long)
+    Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType, dungeonLevel As DungeonLevel)
         Dim partitions =
             locations.GroupBy(
                 Function(x) x.RouteCount = 1).
@@ -143,7 +144,7 @@ Public Module World
         PopulateItems(locations, dungeonLevel)
     End Sub
 
-    Private Sub SpawnItem(locations As IReadOnlyList(Of Location), dungeonLevel As Long, itemType As ItemType)
+    Private Sub SpawnItem(locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel, itemType As ItemType)
         Dim locationTypes = itemType.SpawnLocationTypes(dungeonLevel)
         If locationTypes.Any Then
             Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Contains(x.LocationType)))
@@ -151,7 +152,7 @@ Public Module World
         End If
     End Sub
 
-    Private Sub PopulateItems(locations As IReadOnlyList(Of Location), dungeonLevel As Long)
+    Private Sub PopulateItems(locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel)
         For Each itemType In AllItemTypes
             Dim itemCount As Long = itemType.RollSpawnCount(dungeonLevel)
             While itemCount > 0

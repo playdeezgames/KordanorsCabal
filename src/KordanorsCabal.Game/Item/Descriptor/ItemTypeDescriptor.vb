@@ -22,7 +22,7 @@
         'nothing, by default
     End Sub
 
-    Overridable Function RollSpawnCount(level As Long) As Long
+    Overridable Function RollSpawnCount(level As DungeonLevel) As Long
         Return 0
     End Function
 
@@ -100,9 +100,11 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.RottenFood, New RottenFoodDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor},
             {ItemType.Shield, New ShieldDescriptor},
+            {ItemType.ShoeLaces, New ShoeLacesDescriptor},
             {ItemType.Shortsword, New ShortswordDescriptor},
             {ItemType.SkullFragment, New SkullFragmentDescriptor},
             {ItemType.SnakeFang, New SnakeFangDescriptor},
+            {ItemType.SpaceSord, New SpaceSordDescriptor},
             {ItemType.TownPortal, New TownPortalDescriptor},
             {ItemType.Trousers, New TrousersDescriptor},
             {ItemType.WaterShard, New WaterShardDescriptor},
