@@ -1,5 +1,6 @@
 ﻿Public Class Character
-    ReadOnly Property Id As Long
+    Implements ICharacter(Of LocationType, Location, CharacterType)
+    ReadOnly Property Id As Long Implements ICharacter(Of LocationType, Location, CharacterType).Id
     Sub New(characterId As Long)
         Id = characterId
     End Sub
@@ -15,7 +16,7 @@
             Return Spells.Any
         End Get
     End Property
-    ReadOnly Property CharacterType As CharacterType
+    ReadOnly Property CharacterType As CharacterType Implements ICharacter(Of LocationType, Location, CharacterType).CharacterType
         Get
             Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
         End Get
@@ -95,7 +96,7 @@
     Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
     End Sub
-    Property Location As Location
+    Property Location As Location Implements ICharacter(Of LocationType, Location, CharacterType).Location
         Get
             Return Location.FromId(CharacterData.ReadLocation(Id).Value)
         End Get
@@ -200,7 +201,7 @@
             Return Location.Friends(Me).Count <= Location.Enemies(Me).Count
         End Get
     End Property
-    ReadOnly Property Name As String
+    ReadOnly Property Name As String Implements ICharacter(Of LocationType, Location, CharacterType).Name
         Get
             Return CharacterType.Name
         End Get
@@ -386,7 +387,7 @@
         If IsDead Then
             Return
         End If
-        If IsImmobilized Then
+        If IsImmobilized() Then
             DoImmobilizedTurn(enemy, enemyIndex, enemyCount)
             Return
         End If

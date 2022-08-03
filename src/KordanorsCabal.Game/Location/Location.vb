@@ -1,9 +1,10 @@
 ﻿Public Class Location
-    Public ReadOnly Property Id As Long
+    Implements ILocation(Of LocationType)
+    Public ReadOnly Property Id As Long Implements ILocation(Of LocationType).Id
     Public Sub New(locationId As Long)
         Id = locationId
     End Sub
-    Property LocationType As LocationType
+    Property LocationType As LocationType Implements ILocation(Of LocationType).LocationType
         Get
             Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
         End Get
@@ -46,7 +47,7 @@
     Shared Function FromId(locationId As Long?) As Location
         Return If(locationId.HasValue, New Location(locationId.Value), Nothing)
     End Function
-    ReadOnly Property Name As String
+    ReadOnly Property Name As String Implements ILocation(Of LocationType).Name
         Get
             Return LocationType.Name
         End Get
