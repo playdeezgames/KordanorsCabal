@@ -1,8 +1,17 @@
 ﻿Public Class Location
-    ReadOnly Property Id As Long
-    Sub New(locationId As Long)
+    Public ReadOnly Property Id As Long
+    Public Sub New(locationId As Long)
         Id = locationId
     End Sub
+    Property LocationType As LocationType
+        Get
+            Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
+        End Get
+        Set(value As LocationType)
+            LocationData.WriteLocationType(Id, value)
+        End Set
+    End Property
+
     Friend Shared Function FromLocationType(locationType As LocationType) As IEnumerable(Of Location)
         Return LocationData.ReadForLocationType(locationType).Select(AddressOf FromId)
     End Function
@@ -26,14 +35,6 @@
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long?
         Return LocationStatisticData.Read(Id, statisticType)
     End Function
-    Property LocationType As LocationType
-        Get
-            Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
-        End Get
-        Set(value As LocationType)
-            LocationData.WriteLocationType(Id, value)
-        End Set
-    End Property
     ReadOnly Property RequiresMP As Boolean
         Get
             Return LocationType.RequiresMP
