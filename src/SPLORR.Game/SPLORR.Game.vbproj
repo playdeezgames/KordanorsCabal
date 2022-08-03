@@ -18,4 +18,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SPLORR.Data\SPLORR.Data.vbproj" />
+  </ItemGroup>
+
 </Project>
