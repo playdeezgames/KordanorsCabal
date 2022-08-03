@@ -1,8 +1,8 @@
 ﻿Public Module LocationData
-    Friend Const TableName = "Locations"
-    Friend Const LocationIdColumn = "LocationId"
+    Public Const TableName = "Locations"
+    Public Const LocationIdColumn = "LocationId"
     Friend Const LocationTypeColumn = "LocationType"
-    Friend Sub Initialize()
+    Public Sub Initialize()
         ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
