@@ -1,6 +1,5 @@
 ﻿Public Class Character
-    Implements ICharacter(Of LocationType, Location, CharacterType)
-    ReadOnly Property Id As Long Implements ICharacter(Of LocationType, Location, CharacterType).Id
+    ReadOnly Property Id As Long
     Sub New(characterId As Long)
         Id = characterId
     End Sub
@@ -16,7 +15,7 @@
             Return Spells.Any
         End Get
     End Property
-    ReadOnly Property CharacterType As CharacterType Implements ICharacter(Of LocationType, Location, CharacterType).CharacterType
+    ReadOnly Property CharacterType As CharacterType
         Get
             Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
         End Get
@@ -96,7 +95,7 @@
     Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
     End Sub
-    Property Location As Location Implements ICharacter(Of LocationType, Location, CharacterType).Location
+    Property Location As Location
         Get
             Return Location.FromId(CharacterData.ReadLocation(Id).Value)
         End Get
@@ -201,7 +200,7 @@
             Return Location.Friends(Me).Count <= Location.Enemies(Me).Count
         End Get
     End Property
-    ReadOnly Property Name As String Implements ICharacter(Of LocationType, Location, CharacterType).Name
+    ReadOnly Property Name As String
         Get
             Return CharacterType.Name
         End Get
