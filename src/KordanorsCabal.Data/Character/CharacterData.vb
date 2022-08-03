@@ -1,9 +1,9 @@
 ﻿Public Module CharacterData
-    Friend Const TableName = "Characters"
+    Public Const TableName = "Characters"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const CharacterTypeColumn = "CharacterType"
-    Friend Sub Initialize()
+    Public Sub Initialize()
         LocationData.Initialize()
         ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}]
         (
