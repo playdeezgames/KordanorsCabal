@@ -173,3 +173,7 @@ FROM
 GROUP BY
 	ls.StatisticValue
 ```
+
+# Notes
+
+https://www.aardwolf.com/
