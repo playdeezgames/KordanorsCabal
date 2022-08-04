@@ -36,4 +36,19 @@
                 }
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Repairs As IReadOnlyDictionary(Of ItemType, Long)
+        Get
+            Return New Dictionary(Of ItemType, Long) From
+                {
+                    {ItemType.BrodeSode, 40},
+                    {ItemType.ChainMail, 20},
+                    {ItemType.Dagger, 2},
+                    {ItemType.Helmet, 4},
+                    {ItemType.PlateMail, 100},
+                    {ItemType.Shield, 6},
+                    {ItemType.Shortsword, 10}
+                }
+        End Get
+    End Property
 End Class

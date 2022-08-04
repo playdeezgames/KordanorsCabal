@@ -4,6 +4,7 @@
     Const WelcomeButtonIndex = 0
     Const OffersButtonIndex = 1
     Const SellButtonIndex = 2
+    Const RepairButtonIndex = 3
     Const PricesButtonIndex = 6
     Const BuyButtonIndex = 7
     Const GoodByeButtonIndex = 9
@@ -26,6 +27,9 @@
         Buttons(SellButtonIndex).Title = "Sell"
         Buttons(PricesButtonIndex).Title = "Prices"
         Buttons(BuyButtonIndex).Title = "Buy"
+        If player.HasItemsToRepair(ShoppeType.Blacksmith) Then
+            Buttons(RepairButtonIndex).Title = "Repair"
+        End If
     End Sub
 
     Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
@@ -45,6 +49,11 @@
             Case BuyButtonIndex
                 ShoppeProcessor(Of (ItemType, Long)).ShoppeType = Game.ShoppeType.Blacksmith
                 Return UIState.ShoppeBuy
+            Case RepairButtonIndex
+                If player.HasItemsToRepair(ShoppeType.Blacksmith) Then
+                    ShoppeProcessor(Of Item).ShoppeType = Game.ShoppeType.Blacksmith
+                    Return UIState.ShoppeRepair
+                End If
         End Select
         Return UIState.InPlay
     End Function

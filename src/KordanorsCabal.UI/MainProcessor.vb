@@ -31,6 +31,7 @@ Public Module MainProcessor
             {UIState.ShoppeBuy, New ShoppeBuyProcessor},
             {UIState.ShoppeOffers, New ShoppeOffersProcessor},
             {UIState.ShoppePrices, New ShoppePricesProcessor},
+            {UIState.ShoppeRepair, New ShoppeRepairProcessor},
             {UIState.ShoppeSell, New ShoppeSellProcessor},
             {UIState.SpellList, New SpellListProcessor},
             {UIState.Status, New StatusProcessor},

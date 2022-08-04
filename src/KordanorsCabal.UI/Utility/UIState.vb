@@ -31,4 +31,5 @@
     ShoppePrices
     ShoppeBuy
     SpellList
+    ShoppeRepair
 End Enum

@@ -10,6 +10,16 @@
                 ToDictionary(Function(x) CType(x.Item1, SpellType), Function(x) x.Item2)
         End Get
     End Property
+
+    Public ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of Item)
+        Get
+            Dim items As New List(Of Item)
+            items.AddRange(Inventory.Items.Where(Function(x) x.NeedsRepair))
+            items.AddRange(Equipment.Values.Where(Function(x) x.NeedsRepair))
+            Return items.Where(Function(x) shoppeType.Repairs.ContainsKey(x.ItemType))
+        End Get
+    End Property
+
     ReadOnly Property HasSpells As Boolean
         Get
             Return Spells.Any
@@ -63,6 +73,11 @@
             Return GetStatistic(CharacterStatisticType.Power).Value
         End Get
     End Property
+
+    Public Function HasItemsToRepair(shoppeType As ShoppeType) As Boolean
+        Return ItemsToRepair(shoppeType).Any
+    End Function
+
     Friend Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return CharacterType.CanBeBribedWith(itemType)
     End Function

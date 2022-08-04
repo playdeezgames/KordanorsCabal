@@ -21,4 +21,8 @@ Public Module ShoppeTypeExtensions
     Function Prices(shoppeType As ShoppeType) As IReadOnlyDictionary(Of ItemType, Long)
         Return ShoppeTypeDescriptors(shoppeType).Prices
     End Function
+    <Extension>
+    Function Repairs(shoppeType As ShoppeType) As IReadOnlyDictionary(Of ItemType, Long)
+        Return ShoppeTypeDescriptors(shoppeType).Repairs
+    End Function
 End Module

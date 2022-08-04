@@ -29,6 +29,15 @@
             Return ItemType.EquipSlot.HasValue
         End Get
     End Property
+
+    Public Function RepairCost(shoppeType As ShoppeType) As Long
+        Dim fullRepairPrice = shoppeType.Repairs(ItemType)
+        Dim wear = GetStatistic(ItemStatisticType.Wear)
+        Dim maximum = MaximumDurability.Value
+        Dim remainder = If(wear * fullRepairPrice Mod maximum > 0, 1, 0)
+        Return wear * fullRepairPrice \ maximum + remainder
+    End Function
+
     Public Sub Destroy()
         ItemData.Clear(Id)
     End Sub
@@ -66,12 +75,24 @@
     Private Sub ChangeStatistic(statisticType As ItemStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub
+
+    Public Sub Repair()
+        SetStatistic(ItemStatisticType.Wear, 0)
+    End Sub
+
     Private Function GetStatistic(statisticType As ItemStatisticType) As Long
         Return If(ItemStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
     Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
         ItemStatisticData.Write(Id, statisticType, value)
     End Sub
+
+    Public ReadOnly Property NeedsRepair As Boolean
+        Get
+            Return MaximumDurability.HasValue AndAlso Durability.Value < MaximumDurability.Value
+        End Get
+    End Property
+
     ReadOnly Property IsBroken As Boolean
         Get
             Return MaximumDurability.HasValue AndAlso Durability.Value <= 0
