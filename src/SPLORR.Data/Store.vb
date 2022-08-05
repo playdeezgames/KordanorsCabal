@@ -6,6 +6,16 @@ Public Module Store
         connection = New SqliteConnection("Data Source=:memory:")
         connection.Open()
     End Sub
+    Public Function Renew() As SqliteConnection
+        Dim result = connection
+        connection = Nothing
+        Reset()
+        Return result
+    End Function
+    Public Sub Restore(oldConnection As SqliteConnection)
+        ShutDown()
+        connection = oldConnection
+    End Sub
     Public Sub ShutDown()
         If connection IsNot Nothing Then
             connection.Close()

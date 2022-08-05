@@ -34,14 +34,13 @@ Friend Class SaveGameScreenProcessor
 
     Friend Sub ValidateSlots()
         If Not Validated Then
-            Dim tempFilename = $"{Guid.NewGuid}.db"
-            Store.Save(tempFilename)
+            Dim oldConnection = Store.Renew()
             ValidateSlot(1)
             ValidateSlot(2)
             ValidateSlot(3)
             ValidateSlot(4)
             ValidateSlot(5)
-            Store.Load(tempFilename)
+            Store.Restore(oldConnection)
             Validated = True
         End If
     End Sub
