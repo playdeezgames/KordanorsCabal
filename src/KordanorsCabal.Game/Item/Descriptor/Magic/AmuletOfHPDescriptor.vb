@@ -22,4 +22,8 @@
             Return Game.EquipSlot.Neck
         End Get
     End Property
+
+    Public Overrides Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
+        Return If(statisticType = CharacterStatisticType.HP, 1, Nothing)
+    End Function
 End Class

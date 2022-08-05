@@ -126,4 +126,8 @@
             Return ItemType.IsConsumed
         End Get
     End Property
+
+    Friend Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
+        Return ItemType.EquippedBuff(statisticType)
+    End Function
 End Class

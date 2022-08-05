@@ -61,6 +61,10 @@
             Return True
         End Get
     End Property
+
+    Overridable Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
+        Return Nothing
+    End Function
 End Class
 Public Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =

@@ -123,7 +123,14 @@
         Return New Character(characterId)
     End Function
     Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
-        Return If(CharacterStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
+        Dim result = If(CharacterStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
+        If result.HasValue Then
+            For Each item In Equipment.Values
+                Dim buff As Long = If(item.EquippedBuff(statisticType), 0)
+                result = result.Value + buff
+            Next
+        End If
+        Return result
     End Function
     ReadOnly Property Inventory As Inventory
         Get
