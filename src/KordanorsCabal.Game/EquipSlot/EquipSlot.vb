@@ -7,6 +7,7 @@ Public Enum EquipSlot
     Head
     Torso
     Legs
+    Neck
 End Enum
 Public Module EquipSlotExtensions
     <Extension>

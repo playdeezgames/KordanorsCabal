@@ -7,6 +7,7 @@ Public Module EquipSlotDescriptorUtility
         {
             {EquipSlot.Head, New HeadEquipSlotDescriptor},
             {EquipSlot.Legs, New LegsEquipSlotDescriptor},
+            {EquipSlot.Neck, New NeckEquipSlotDescriptor},
             {EquipSlot.Shield, New ShieldEquipSlotDescriptor},
             {EquipSlot.Torso, New TorsoEquipSlotDescriptor},
             {EquipSlot.Weapon, New WeaponEquipSlotDescriptor}

@@ -8,6 +8,7 @@ Module ItemTypeUIDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeUIDescriptor) From
         {
             {ItemType.AirShard, New AirShardUIDescriptor},
+            {ItemType.AmuletOfHP, New AmuletOfHPUIDescriptor},
             {ItemType.BatWing, New BatWingUIDescriptor},
             {ItemType.Beer, New BeerUIDescriptor},
             {ItemType.Bong, New BongUIDescriptor},

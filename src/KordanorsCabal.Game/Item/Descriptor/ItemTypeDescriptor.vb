@@ -67,6 +67,7 @@ Public Module ItemTypeDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {ItemType.AirShard, New AirShardDescriptor},
+            {ItemType.AmuletOfHP, New AmuletOfHPDescriptor},
             {ItemType.BatWing, New BatWingDescriptor},
             {ItemType.Beer, New BeerDescriptor},
             {ItemType.Bong, New BongDescriptor},

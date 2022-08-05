@@ -46,6 +46,7 @@ Public Enum ItemType
     ShoeLaces
     SpaceSord
     HornsOfKordanor
+    AmuletOfHP
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
