@@ -41,7 +41,7 @@
     Public Sub Destroy()
         ItemData.Clear(Id)
     End Sub
-    Friend Function Encumbrance() As Single
+    Public Function Encumbrance() As Single
         Return ItemType.Encumbrance
     End Function
     Friend Sub Use(character As Character)

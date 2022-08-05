@@ -15,11 +15,16 @@
                     Dim inverted = (location = playerLocation)
                     Dim dungeonColumn = location.GetStatistic(LocationStatisticType.DungeonColumn).Value
                     Dim dungeonRow = location.GetStatistic(LocationStatisticType.DungeonRow).Value
-                    Dim displayHue = If(location.Enemies(player).Any, Hue.Pink,
-                    If(location.HasStairs, Hue.Green, Hue.Black))
+                    Dim displayHue =
+                        If(location.Enemies(player).Any, Hue.Pink,
+                        If(location.HasStairs, Hue.Green,
+                        If(location.Inventory.IsEmpty, Hue.Black, Hue.Purple)))
                     DrawLocation(buffer, (CInt(dungeonColumn * 2), CInt(dungeonRow * 2)), location, inverted, displayHue)
                 Next
             End If
+            buffer.WriteText((2, 22), "Stair", True, Hue.Green)
+            buffer.WriteText((8, 22), "Enemy", True, Hue.Pink)
+            buffer.WriteText((14, 22), "Items", True, Hue.Purple)
         End If
     End Sub
 
