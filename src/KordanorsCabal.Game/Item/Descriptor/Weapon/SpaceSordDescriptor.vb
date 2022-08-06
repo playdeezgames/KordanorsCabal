@@ -23,9 +23,9 @@
         Return If(level = DungeonLevel.Moon, 1, 0)
     End Function
 
-    Public Overrides ReadOnly Property EquipSlot As EquipSlot?
+    Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get
-            Return Game.EquipSlot.Weapon
+            Return New List(Of EquipSlot) From {Game.EquipSlot.Weapon}
         End Get
     End Property
 

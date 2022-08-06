@@ -22,9 +22,9 @@
         End Select
     End Function
 
-    Public Overrides ReadOnly Property EquipSlot As EquipSlot?
+    Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get
-            Return Game.EquipSlot.Shield
+            Return New List(Of EquipSlot) From {Game.EquipSlot.Shield}
         End Get
     End Property
 

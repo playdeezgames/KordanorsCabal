@@ -26,9 +26,9 @@
         Return 0
     End Function
 
-    Overridable ReadOnly Property EquipSlot As EquipSlot?
+    Overridable ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get
-            Return Nothing
+            Return Array.Empty(Of EquipSlot)
         End Get
     End Property
 
@@ -102,6 +102,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Potion, New PotionDescriptor},
             {ItemType.Pr0n, New Pr0nDescriptor},
             {ItemType.RatTail, New RatTailDescriptor},
+            {ItemType.RingOfHP, New RingOfHPDescriptor},
             {ItemType.RottenEgg, New RottenEggDescriptor},
             {ItemType.RottenFood, New RottenFoodDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor},

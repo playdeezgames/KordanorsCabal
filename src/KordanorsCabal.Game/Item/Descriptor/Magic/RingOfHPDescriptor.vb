@@ -1,4 +1,4 @@
-﻿Friend Class TrousersDescriptor
+﻿Friend Class RingOfHPDescriptor
     Inherits ItemTypeDescriptor
 
     Public Overrides ReadOnly Property SpawnLocationTypes(level As Long) As HashSet(Of LocationType)
@@ -9,13 +9,17 @@
 
     Public Overrides ReadOnly Property Name As String
         Get
-            Return "Trousers"
+            Return "Ring Of HP"
         End Get
     End Property
 
     Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get
-            Return New List(Of EquipSlot) From {Game.EquipSlot.Legs}
+            Return New List(Of EquipSlot) From {EquipSlot.LeftHand, EquipSlot.RightHand}
         End Get
     End Property
+
+    Public Overrides Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
+        Return If(statisticType = CharacterStatisticType.HP, 1, Nothing)
+    End Function
 End Class

@@ -26,7 +26,7 @@
     End Property
     ReadOnly Property CanEquip As Boolean
         Get
-            Return ItemType.EquipSlot.HasValue
+            Return ItemType.EquipSlotS.Any
         End Get
     End Property
 
@@ -47,9 +47,9 @@
     Friend Sub Use(character As Character)
         ItemType.Use(character)
     End Sub
-    Friend ReadOnly Property EquipSlot() As EquipSlot?
+    Friend ReadOnly Property EquipSlots() As IEnumerable(Of EquipSlot)
         Get
-            Return ItemType.EquipSlot
+            Return ItemType.EquipSlotS
         End Get
     End Property
     Friend ReadOnly Property MaximumDamage As Long?

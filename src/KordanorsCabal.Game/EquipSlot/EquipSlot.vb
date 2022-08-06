@@ -8,6 +8,8 @@ Public Enum EquipSlot
     Torso
     Legs
     Neck
+    LeftHand
+    RightHand
 End Enum
 Public Module EquipSlotExtensions
     <Extension>

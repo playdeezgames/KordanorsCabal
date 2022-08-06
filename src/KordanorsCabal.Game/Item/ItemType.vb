@@ -47,6 +47,7 @@ Public Enum ItemType
     SpaceSord
     HornsOfKordanor
     AmuletOfHP
+    RingOfHP
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
@@ -78,8 +79,8 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).RollSpawnCount(level)
     End Function
     <Extension>
-    Public Function EquipSlot(itemType As ItemType) As EquipSlot?
-        Return ItemTypeDescriptors(itemType).EquipSlot
+    Public Function EquipSlotS(itemType As ItemType) As IEnumerable(Of EquipSlot)
+        Return ItemTypeDescriptors(itemType).EquipSlots
     End Function
     <Extension>
     Public Function AttackDice(itemType As ItemType) As Long

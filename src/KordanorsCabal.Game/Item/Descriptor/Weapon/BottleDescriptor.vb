@@ -19,9 +19,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property EquipSlot As EquipSlot?
+    Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get
-            Return Game.EquipSlot.Weapon
+            Return New List(Of EquipSlot) From {Game.EquipSlot.Weapon}
         End Get
     End Property
 

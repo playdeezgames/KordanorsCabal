@@ -625,7 +625,9 @@
     Public Sub Equip(item As Item)
         If item.CanEquip Then
             InventoryItemData.ClearForItem(item.Id)
-            Dim equipSlot = item.EquipSlot.Value
+            Dim equipSlots = item.EquipSlots
+            Dim availableEquipSlots = equipSlots.Where(Function(x) Not Equipment.ContainsKey(x))
+            Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
             If Equipment.ContainsKey(equipSlot) Then
                 Dim oldItem = Equipment(equipSlot)
                 Inventory.Add(oldItem)
