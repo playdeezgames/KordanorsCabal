@@ -65,6 +65,10 @@
     Overridable Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
         Return Nothing
     End Function
+
+    Overridable Sub Purify(item As Item)
+        'by default, do nothing
+    End Sub
 End Class
 Public Module ItemTypeDescriptorUtility
     Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =
@@ -76,6 +80,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Beer, New BeerDescriptor},
             {ItemType.Bong, New BongDescriptor},
             {ItemType.BookOfHolyBolt, New BookOfHolyBoltDescriptor},
+            {ItemType.BookOfPurify, New BookOfPurifyDescriptor},
             {ItemType.Bottle, New BottleDescriptor},
             {ItemType.BrodeSode, New BrodeSodeDescriptor},
             {ItemType.ChainMail, New ChainMailDescriptor},

@@ -20,6 +20,15 @@
         End Get
     End Property
 
+    Friend Sub PurifyItems()
+        For Each item In Inventory.Items
+            item.Purify()
+        Next
+        For Each item In Equipment.Values
+            item.Purify()
+        Next
+    End Sub
+
     ReadOnly Property HasSpells As Boolean
         Get
             Return Spells.Any

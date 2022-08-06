@@ -13,6 +13,7 @@ Friend Module SpellDescriptorUtility
     Friend ReadOnly SpellDescriptors As IReadOnlyDictionary(Of SpellType, SpellDescriptor) =
         New Dictionary(Of SpellType, SpellDescriptor) From
         {
-            {SpellType.HolyBolt, New HolyBoltDescriptor}
+            {SpellType.HolyBolt, New HolyBoltDescriptor},
+            {SpellType.Purify, New PurifyDescriptor}
         }
 End Module

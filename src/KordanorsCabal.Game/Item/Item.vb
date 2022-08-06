@@ -38,6 +38,10 @@
         Return wear * fullRepairPrice \ maximum + remainder
     End Function
 
+    Friend Sub Purify()
+        ItemType.Purify(Me)
+    End Sub
+
     Public Sub Destroy()
         ItemData.Clear(Id)
     End Sub

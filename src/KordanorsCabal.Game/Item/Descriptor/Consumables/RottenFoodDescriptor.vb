@@ -42,4 +42,8 @@
                 $"Food heals up to {healRoll} HP!",
                 $"You now have {character.CurrentHP} HP!")
     End Sub
+
+    Public Overrides Sub Purify(item As Item)
+        ItemData.WriteItemType(item.Id, ItemType.Food)
+    End Sub
 End Class

@@ -3,6 +3,7 @@
 Public Enum SpellType
     None
     HolyBolt
+    Purify
 End Enum
 Public Module SpellTypeExtensions
     <Extension>

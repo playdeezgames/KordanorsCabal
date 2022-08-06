@@ -48,6 +48,7 @@ Public Enum ItemType
     HornsOfKordanor
     AmuletOfHP
     RingOfHP
+    BookOfPurify
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
@@ -114,4 +115,8 @@ Public Module ItemTypeExtensions
     Public Function EquippedBuff(itemType As ItemType, statisticType As CharacterStatisticType) As Long?
         Return ItemTypeDescriptors(itemType).EquippedBuff(statisticType)
     End Function
+    <Extension>
+    Public Sub Purify(itemType As ItemType, item As Item)
+        ItemTypeDescriptors(itemType).Purify(item)
+    End Sub
 End Module

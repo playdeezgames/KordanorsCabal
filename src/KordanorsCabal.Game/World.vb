@@ -202,8 +202,8 @@ Public Module World
     Private Sub CreateTown()
         Dim centerTown = Location.Create(LocationType.TownSquare)
 
-        centerTown.Inventory.Add(Item.Create(ItemType.MoonPortal))
-        centerTown.Inventory.Add(Item.Create(ItemType.Bottle))
+        centerTown.Inventory.Add(Item.Create(ItemType.BookOfPurify))
+        centerTown.Inventory.Add(Item.Create(ItemType.RottenFood))
 
         Dim northTown = Location.Create(LocationType.Town)
         Dim northEastTown = Location.Create(LocationType.Town)

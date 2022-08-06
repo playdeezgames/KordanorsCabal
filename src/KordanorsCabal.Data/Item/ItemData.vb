@@ -34,4 +34,12 @@
             TableName,
             (ItemIdColumn, itemId))
     End Sub
+
+    Public Sub WriteItemType(itemId As Long, itemType As Long)
+        Store.WriteColumnValue(
+            AddressOf Initialize,
+            TableName,
+            (ItemTypeColumn, itemType),
+            (ItemIdColumn, itemId))
+    End Sub
 End Module
