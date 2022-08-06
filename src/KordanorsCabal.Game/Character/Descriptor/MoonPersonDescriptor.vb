@@ -57,4 +57,14 @@
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return level = DungeonLevel.Moon
     End Function
+
+    Private Shared ReadOnly bribeItems As IReadOnlyList(Of ItemType) =
+        New List(Of ItemType) From
+        {
+            ItemType.Bottle
+        }
+
+    Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
+        Return bribeItems.Contains(itemType)
+    End Function
 End Class
