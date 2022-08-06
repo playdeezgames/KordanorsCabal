@@ -2,20 +2,11 @@
 
 Friend Class ElementalOrbUIDescriptor
     Inherits ItemTypeUIDescriptor
+    Public Sub New()
+        MyBase.New(Pattern.O, (16, 16), Nothing)
+    End Sub
 
-    Public Overrides ReadOnly Property DisplayPattern As Pattern?
-        Get
-            Return Pattern.O
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property DisplayXY As (Integer, Integer)?
-        Get
-            Return (16, 16)
-        End Get
-    End Property
-
-    Private Shared Hues As IReadOnlyList(Of Hue) =
+    Private Shared ReadOnly Hues As IReadOnlyList(Of Hue) =
         New List(Of Hue) From
         {
             Hue.Red,

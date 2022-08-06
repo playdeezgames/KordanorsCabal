@@ -1,21 +1,6 @@
 ﻿Friend Class ShieldUIDescriptor
     Inherits ItemTypeUIDescriptor
-
-    Public Overrides ReadOnly Property DisplayPattern As Pattern?
-        Get
-            Return Pattern.FilledCircle
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property DisplayXY As (Integer, Integer)?
-        Get
-            Return (16, 17)
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property DisplayHue As Hue?
-        Get
-            Return Hue.Black
-        End Get
-    End Property
+    Public Sub New()
+        MyBase.New(Pattern.FilledCircle, (16, 17), Hue.Black)
+    End Sub
 End Class

@@ -1,13 +1,18 @@
-﻿Public MustInherit Class ItemTypeUIDescriptor
-    MustOverride ReadOnly Property DisplayPattern As Pattern?
-    MustOverride ReadOnly Property DisplayXY() As (Integer, Integer)?
-    MustOverride ReadOnly Property DisplayHue() As Hue?
+﻿Public Class ItemTypeUIDescriptor
+    Sub New(pattern As Pattern?, xy As (Integer, Integer)?, hue As Hue?)
+        DisplayPattern = pattern
+        DisplayXY = xy
+        DisplayHue = hue
+    End Sub
+    Overridable ReadOnly Property DisplayPattern As Pattern?
+    Overridable ReadOnly Property DisplayXY As (Integer, Integer)?
+    Overridable ReadOnly Property DisplayHue As Hue?
 End Class
 Module ItemTypeUIDescriptorUtility
     Friend ReadOnly ItemTypeUIDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeUIDescriptor) =
         New Dictionary(Of ItemType, ItemTypeUIDescriptor) From
         {
-            {ItemType.AirShard, New AirShardUIDescriptor},
+            {ItemType.AirShard, New ItemTypeUIDescriptor(Pattern.A, (10, 15), Hue.Cyan)},
             {ItemType.AmuletOfHP, New AmuletOfHPUIDescriptor},
             {ItemType.BatWing, New BatWingUIDescriptor},
             {ItemType.Beer, New BeerUIDescriptor},
