@@ -13,6 +13,7 @@ Module ItemTypeUIDescriptorUtility
             {ItemType.Beer, New BeerUIDescriptor},
             {ItemType.Bong, New BongUIDescriptor},
             {ItemType.BookOfHolyBolt, New BookOfHolyBoltUIDescriptor},
+            {ItemType.BookOfPurify, New BookOfPurifyUIDescriptor},
             {ItemType.Bottle, New BottleUIDescriptor},
             {ItemType.BrodeSode, New BrodeSodeUIDescriptor},
             {ItemType.ChainMail, New ChainMainUIDescriptor},
