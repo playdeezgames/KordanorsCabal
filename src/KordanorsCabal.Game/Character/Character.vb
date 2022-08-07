@@ -674,7 +674,7 @@
     End Sub
     Public ReadOnly Property CanInteract As Boolean
         Get
-            Return If(Location?.Feature?.CanInteract(Me), False)
+            Return (Location?.Feature?.Id).HasValue
         End Get
     End Property
     Public Function GetItemTypeCount(itemType As ItemType) As Integer
@@ -702,7 +702,7 @@
     End Function
     Public Sub Interact()
         If CanInteract Then
-            Mode = Location.Feature.InteractionMode(Me)
+            Mode = Location.Feature.InteractionMode()
         End If
     End Sub
     Public Sub Buy(itemType As ItemType)

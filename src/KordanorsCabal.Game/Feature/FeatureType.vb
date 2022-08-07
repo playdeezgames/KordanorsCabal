@@ -22,11 +22,7 @@ Public Module FeatureTypeExtensions
         Return FeatureTypeDescriptors(featureType).LocationType
     End Function
     <Extension>
-    Public Function CanInteract(featureType As FeatureType, player As Character) As Boolean
-        Return FeatureTypeDescriptors(featureType).CanInteract(player)
-    End Function
-    <Extension>
-    Public Function InteractionMode(featureType As FeatureType, player As Character) As PlayerMode
-        Return FeatureTypeDescriptors(featureType).InteractionMode(player)
+    Public Function InteractionMode(featureType As FeatureType) As PlayerMode
+        Return FeatureTypeDescriptors(featureType).InteractionMode
     End Function
 End Module
