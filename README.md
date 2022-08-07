@@ -180,3 +180,42 @@ GROUP BY
 # Notes
 
 https://www.aardwolf.com/
+
+# Entity Count
+
+```
+struct Item {
+	unsigned char item_type;
+	unsigned char wear;
+};
+struct Route {
+	unsigned char route_type: 4;
+	unsigned short destination;
+};
+struct Location {//41 bytes
+	unsigned char location_type:4;
+	unsigned char feature_type:4;
+	unsigned char level:3;
+	Route routes[8];//3*8=24
+	Item items[8];//2*8=16
+};
+struct World{
+	Location locations[750];//30,750 bytes
+};
+```
+
+* Location: 750
+    * Type
+    * Feature (0..1)
+	* Routes (1..8)
+    	* Type
+		* Destination
+	* Inventory (0..?)
+* Characters: 1200
+    * Type
+    * Statististics (?..23)
+	* Equipment (0..8)
+	* Inventory (0..?)
+* Items: 500
+    * Type
+    * Statistics (0..1)
