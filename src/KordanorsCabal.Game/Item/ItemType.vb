@@ -119,4 +119,28 @@ Public Module ItemTypeExtensions
     Public Sub Purify(itemType As ItemType, item As Item)
         ItemTypeDescriptors(itemType).Purify(item)
     End Sub
+    <Extension>
+    Public Function Offer(itemType As ItemType) As Long
+        Return ItemTypeDescriptors(itemType).Offer
+    End Function
+    <Extension>
+    Public Function HasOffer(itemType As ItemType, shoppeType As ShoppeType) As Boolean
+        Return ItemTypeDescriptors(itemType).HasOffer(shoppeType)
+    End Function
+    <Extension>
+    Public Function Price(itemType As ItemType) As Long
+        Return ItemTypeDescriptors(itemType).Price
+    End Function
+    <Extension>
+    Public Function HasPrice(itemType As ItemType, shoppeType As ShoppeType) As Boolean
+        Return ItemTypeDescriptors(itemType).HasPrice(shoppeType)
+    End Function
+    <Extension>
+    Public Function RepairPrice(itemType As ItemType) As Long
+        Return ItemTypeDescriptors(itemType).RepairPrice
+    End Function
+    <Extension>
+    Public Function CanRepair(itemType As ItemType, shoppeType As ShoppeType) As Boolean
+        Return ItemTypeDescriptors(itemType).CanRepair(shoppeType)
+    End Function
 End Module

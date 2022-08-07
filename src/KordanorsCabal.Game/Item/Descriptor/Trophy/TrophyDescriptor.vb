@@ -1,6 +1,10 @@
 ﻿Friend Class TrophyDescriptor
     Inherits ItemTypeDescriptor
-    Sub New(name As String)
+    Sub New(
+           name As String,
+           offer As Long,
+           boughtAt As IReadOnlyList(Of ShoppeType))
+        MyBase.New(offer, boughtAt)
         Me.Name = name
     End Sub
 

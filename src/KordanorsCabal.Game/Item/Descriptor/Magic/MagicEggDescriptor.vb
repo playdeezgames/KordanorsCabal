@@ -1,15 +1,9 @@
 ﻿Friend Class MagicEggDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits TrophyDescriptor
 
     Public Overrides ReadOnly Property SpawnLocationTypes(level As Long) As HashSet(Of LocationType)
         Get
             Return New HashSet(Of LocationType)
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Magic Egg"
         End Get
     End Property
 
@@ -37,6 +31,10 @@
             {ItemType.TownPortal, 8},
             {ItemType.Trousers, 1}
         }
+
+    Public Sub New()
+        MyBase.New("Magic Egg", 100, New List(Of ShoppeType) From {ShoppeType.BlackMage})
+    End Sub
 
     Public Overrides Sub Use(character As Character)
         Dim item = Game.Item.Create(RNG.FromGenerator(table))
