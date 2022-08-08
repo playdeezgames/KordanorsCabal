@@ -8,7 +8,9 @@
                 (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd)),
                 (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
                 (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
-                (DungeonLevel.Level5, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon))))
+                (DungeonLevel.Level5, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon))),
+                50,
+                MakeList(ShoppeType.Blacksmith))
     End Sub
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long

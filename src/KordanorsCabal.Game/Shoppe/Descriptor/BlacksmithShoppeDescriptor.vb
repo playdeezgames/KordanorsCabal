@@ -7,21 +7,13 @@
         End Get
     End Property
 
-    Private Shared ReadOnly blacksmithOffers As IReadOnlyDictionary(Of ItemType, Long) =
-        New Dictionary(Of ItemType, Long) From
-                {
-                    {ItemType.BrodeSode, 20},
-                    {ItemType.ChainMail, 10},
-                    {ItemType.Dagger, 1},
-                    {ItemType.Helmet, 2},
-                    {ItemType.PlateMail, 50},
-                    {ItemType.Shield, 3},
-                    {ItemType.Shortsword, 5}
-                }
-
     Public Overrides ReadOnly Property Offers As IReadOnlyDictionary(Of ItemType, Long)
         Get
-            Return blacksmithOffers
+            Return AllItemTypes.Where(
+                Function(x) x.HasOffer(ShoppeType.Blacksmith)).
+                ToDictionary(
+                    Function(x) x,
+                    Function(x) x.Offer)
         End Get
     End Property
 
