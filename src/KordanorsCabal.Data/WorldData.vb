@@ -8,4 +8,5 @@
     Public ReadOnly CharacterStatistic As New CharacterStatisticData
     Public ReadOnly Player As New PlayerData
     Public ReadOnly Inventory As New InventoryData
+    Public ReadOnly InventoryItem As New InventoryItemData
 End Module

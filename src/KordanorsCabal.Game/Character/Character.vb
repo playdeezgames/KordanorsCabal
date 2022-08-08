@@ -633,7 +633,7 @@
     End Sub
     Public Sub Equip(item As Item)
         If item.CanEquip Then
-            InventoryItemData.ClearForItem(item.Id)
+            WorldData.InventoryItem.ClearForItem(item.Id)
             Dim equipSlots = item.EquipSlots
             Dim availableEquipSlots = equipSlots.Where(Function(x) Not Equipment.ContainsKey(x))
             Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
