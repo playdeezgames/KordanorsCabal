@@ -18,7 +18,7 @@
     End Sub
 
     Public Function ReadForStatisticValue(statisticType As Long, statisticValue As Long) As IEnumerable(Of Long)
-        Return ReadRecordsWithColumnValues(Of Long, Long, Long)(
+        Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName, LocationIdColumn,
             (StatisticTypeColumn, statisticType),

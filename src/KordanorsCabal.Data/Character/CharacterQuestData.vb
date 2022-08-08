@@ -24,7 +24,7 @@
     End Sub
 
     Public Function Exists(characterId As Long, quest As Long) As Boolean
-        Return ReadRecordsWithColumnValues(Of Long, Long, Long)(
+        Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterIdColumn,
