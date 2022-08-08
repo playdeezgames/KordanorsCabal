@@ -49,6 +49,10 @@ Public Enum ItemType
     AmuletOfHP
     RingOfHP
     BookOfPurify
+    AmuletOfSTR
+    AmuletOfDEX
+    AmuletOfPOW
+    AmuletOfMana
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

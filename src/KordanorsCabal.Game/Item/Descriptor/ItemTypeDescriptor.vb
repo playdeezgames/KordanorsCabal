@@ -133,7 +133,15 @@ Public Module ItemTypeDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {ItemType.AirShard, New AirShardDescriptor},
-            {ItemType.AmuletOfHP, New AmuletOfHPDescriptor},
+            {ItemType.AmuletOfDEX, New AmuletDescriptor(CharacterStatisticType.Dexterity)},
+            {ItemType.AmuletOfHP, New AmuletDescriptor(
+                CharacterStatisticType.HP,
+                MakeDictionary(
+                    (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
+                MakeDictionary((DungeonLevel.Level1, "1d1")))},
+            {ItemType.AmuletOfMana, New AmuletDescriptor(CharacterStatisticType.Mana)},
+            {ItemType.AmuletOfPOW, New AmuletDescriptor(CharacterStatisticType.Power)},
+            {ItemType.AmuletOfSTR, New AmuletDescriptor(CharacterStatisticType.Strength)},
             {ItemType.BatWing, New TrophyDescriptor("Bat Wing", 3, MakeList(ShoppeType.BlackMage))},
             {ItemType.Beer, New BeerDescriptor},
             {ItemType.Bong, New TrophyDescriptor("Bong", , , 25, MakeList(ShoppeType.BlackMage))},

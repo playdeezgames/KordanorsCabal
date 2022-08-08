@@ -14,6 +14,10 @@ Module ItemTypeUIDescriptorUtility
         {
             {ItemType.AirShard, New ItemTypeUIDescriptor(Pattern.A, (10, 15), Hue.Cyan)},
             {ItemType.AmuletOfHP, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Red)},
+            {ItemType.AmuletOfSTR, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Blue)},
+            {ItemType.AmuletOfDEX, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Green)},
+            {ItemType.AmuletOfPOW, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Purple)},
+            {ItemType.AmuletOfMana, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Orange)},
             {ItemType.BatWing, New ItemTypeUIDescriptor(Pattern.W, (6, 15), Hue.Black)},
             {ItemType.Beer, New ItemTypeUIDescriptor(Pattern.B, (6, 17), Hue.Orange)},
             {ItemType.Bong, New ItemTypeUIDescriptor(Pattern.Pound, (17, 17), Hue.Cyan)},
