@@ -1,4 +1,4 @@
-﻿Public Module CharacterEquipSlotData
+﻿Public Class CharacterEquipSlotData
     Friend Const TableName = "CharacterEquipSlots"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const EquipSlotColumn = "EquipSlot"
@@ -56,4 +56,4 @@
             TableName,
             (ItemIdColumn, itemId))
     End Sub
-End Module
+End Class

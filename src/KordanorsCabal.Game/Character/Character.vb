@@ -364,7 +364,7 @@
     End Sub
     ReadOnly Property Equipment As IReadOnlyDictionary(Of EquipSlot, Item)
         Get
-            Return CharacterEquipSlotData.Read(Id).
+            Return WorldData.CharacterEquipSlot.Read(Id).
                 ToDictionary(
                     Function(x) CType(x.Item1, EquipSlot),
                     Function(x) Item.FromId(x.Item2))
@@ -475,7 +475,7 @@
         If Equipment.ContainsKey(equipSlot) Then
             Dim item = Equipment(equipSlot)
             Inventory.Add(item)
-            CharacterEquipSlotData.Clear(Id, equipSlot)
+            WorldData.CharacterEquipSlot.Clear(Id, equipSlot)
         End If
     End Sub
     Private Sub Panic()
@@ -641,7 +641,7 @@
                 Dim oldItem = Equipment(equipSlot)
                 Inventory.Add(oldItem)
             End If
-            CharacterEquipSlotData.Write(Id, equipSlot, item.Id)
+            WorldData.CharacterEquipSlot.Write(Id, equipSlot, item.Id)
             EnqueueMessage($"You equip {item.Name} to {equipSlot.Name}.")
             Return
         End If

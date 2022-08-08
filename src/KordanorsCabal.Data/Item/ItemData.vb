@@ -27,7 +27,7 @@
     End Function
 
     Public Sub Clear(itemId As Long)
-        CharacterEquipSlotData.ClearForItem(itemId)
+        WorldData.CharacterEquipSlot.ClearForItem(itemId)
         InventoryItemData.ClearForItem(itemId)
         ItemStatisticData.ClearForItem(itemId)
         Store.ClearForColumnValue(
