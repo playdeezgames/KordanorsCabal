@@ -30,7 +30,7 @@
     End Sub
 
     Public Sub WriteRouteType(routeId As Long, routeType As Long)
-        WriteColumnValue(
+        Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (RouteTypeColumn, routeType),

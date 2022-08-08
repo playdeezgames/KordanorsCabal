@@ -1,9 +1,6 @@
 Imports Microsoft.Data.Sqlite
 Public Module StaticStore
     Public ReadOnly Store As New Store
-    Public Sub WriteColumnValue(Of TWhereColumn, TSetColumn)(initializer As Action, tableName As String, setColumn As (String, TSetColumn), whereColumn As (String, TWhereColumn))
-        Store.WriteColumnValue(initializer, tableName, setColumn, whereColumn)
-    End Sub
     Public Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
         Return Store.ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer, tableName, outputColumnName, forColumnValue)
     End Function

@@ -21,7 +21,7 @@
     End Function
 
     Public Sub WriteLocationType(locationId As Long, locationType As Long)
-        WriteColumnValue(
+        Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (LocationTypeColumn, locationType),

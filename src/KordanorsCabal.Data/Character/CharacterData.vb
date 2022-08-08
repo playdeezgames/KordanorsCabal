@@ -39,7 +39,7 @@
     End Function
 
     Public Sub WriteLocation(characterId As Long, locationId As Long)
-        WriteColumnValue(
+        Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),

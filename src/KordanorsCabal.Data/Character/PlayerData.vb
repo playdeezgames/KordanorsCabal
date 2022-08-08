@@ -20,7 +20,7 @@ Public Module PlayerData
     End Sub
 
     Public Sub WriteDirection(direction As Long)
-        WriteColumnValue(
+        Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (DirectionColumn, direction),
@@ -35,7 +35,7 @@ Public Module PlayerData
     End Function
 
     Public Sub WriteMode(mode As Long)
-        WriteColumnValue(
+        Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (ModeColumn, mode),
