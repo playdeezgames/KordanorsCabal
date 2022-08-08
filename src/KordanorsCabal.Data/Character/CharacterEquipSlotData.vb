@@ -3,6 +3,7 @@
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const EquipSlotColumn = "EquipSlot"
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         CharacterData.Initialize()
         ItemData.Initialize()

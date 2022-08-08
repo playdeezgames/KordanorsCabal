@@ -2,6 +2,7 @@
     Friend Const TableName = "LocationDungeonLevels"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const DungeonLevelColumn = "DungeonLevel"
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         LocationData.Initialize()
         ExecuteNonQuery(

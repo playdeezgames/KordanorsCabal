@@ -2,6 +2,7 @@
     Friend Const TableName = "CharacterLocations"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         CharacterData.Initialize()
         LocationData.Initialize()

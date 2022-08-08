@@ -3,6 +3,7 @@
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
     Friend Const StatisticValueColumn = "StatisticValue"
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         LocationData.Initialize()
         ExecuteNonQuery(

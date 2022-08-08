@@ -3,6 +3,7 @@
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
     Friend Const StatisticValueColumn = "StatisticVolume"
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         CharacterData.Initialize()
         ExecuteNonQuery(

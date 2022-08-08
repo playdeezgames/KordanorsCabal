@@ -3,6 +3,7 @@
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const SpellTypeColumn = "SpellType"
     Friend Const SpellLevelColumn = "SpellLevel"
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         CharacterData.Initialize()
         ExecuteNonQuery(

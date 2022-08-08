@@ -1,6 +1,6 @@
 Public Module World
     Public Sub Start()
-        StaticStore.Reset()
+        StaticStore.Store.Reset()
         CreateTown()
         CreateDungeon(Location.FromLocationType(LocationType.ChurchEntrance).First)
         CreateMoon()

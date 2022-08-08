@@ -1,24 +1,6 @@
 Imports Microsoft.Data.Sqlite
 Public Module StaticStore
     Public ReadOnly Store As New Store
-    Public Sub Reset()
-        Store.Reset()
-    End Sub
-    Public Function Renew() As SqliteConnection
-        Return Store.Renew
-    End Function
-    Public Sub Restore(oldConnection As SqliteConnection)
-        Store.Restore(oldConnection)
-    End Sub
-    Public Sub ShutDown()
-        Store.ShutDown()
-    End Sub
-    Public Sub Save(filename As String)
-        Store.Save(filename)
-    End Sub
-    Public Sub Load(filename As String)
-        Store.Load(filename)
-    End Sub
     Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As SqliteParameter)
         Store.ExecuteNonQuery(sql, parameters)
     End Sub

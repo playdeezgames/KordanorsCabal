@@ -3,6 +3,7 @@
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const QuestColumn = "Quest"
     Friend Const CompletionsColumn = "Completions"
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         CharacterData.Initialize()
         ExecuteNonQuery(

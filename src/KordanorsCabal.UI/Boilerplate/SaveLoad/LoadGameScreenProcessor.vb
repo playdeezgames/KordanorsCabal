@@ -19,7 +19,7 @@ Friend Class LoadGameScreenProcessor
     End Sub
 
     Private Shared Function ContinueSlot(slotNumber As Integer) As UIState
-        StaticStore.Load(SaveSlotName(slotNumber))
+        StaticStore.Store.Load(SaveSlotName(slotNumber))
         If World.IsValid Then
             Return UIState.InPlay
         End If
@@ -43,7 +43,7 @@ Friend Class LoadGameScreenProcessor
     End Sub
 
     Private Sub ValidateSlot(slotNumber As Integer)
-        StaticStore.Load(SaveSlotName(slotNumber))
+        StaticStore.Store.Load(SaveSlotName(slotNumber))
         If World.IsValid Then
             UpdateMenuItemText(slotNumber, $"Slot {slotNumber}")
         Else

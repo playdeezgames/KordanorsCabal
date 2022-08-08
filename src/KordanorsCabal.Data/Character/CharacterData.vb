@@ -3,6 +3,7 @@
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const CharacterTypeColumn = "CharacterType"
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Public Sub Initialize()
         LocationData.Initialize()
         ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}]

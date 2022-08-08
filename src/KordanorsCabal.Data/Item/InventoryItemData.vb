@@ -2,6 +2,7 @@
     Friend Const TableName = "InventoryItems"
     Friend Const InventoryIdColumn = InventoryData.InventoryIdColumn
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         ItemData.Initialize()
         InventoryData.Initialize()

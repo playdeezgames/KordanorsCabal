@@ -5,6 +5,7 @@
     Friend Const DirectionColumn = "Direction"
     Friend Const RouteTypeColumn = "RouteType"
     Friend Const ToLocationIdColumn = "To" + LocationData.LocationIdColumn
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         LocationData.Initialize()
         ExecuteNonQuery(

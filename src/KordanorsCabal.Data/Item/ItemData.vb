@@ -2,6 +2,7 @@
     Friend Const TableName = "Items"
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeColumn = "ItemType"
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]

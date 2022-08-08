@@ -2,6 +2,7 @@
     Public Const TableName = "Locations"
     Public Const LocationIdColumn = "LocationId"
     Friend Const LocationTypeColumn = "LocationType"
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Public Sub Initialize()
         ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]

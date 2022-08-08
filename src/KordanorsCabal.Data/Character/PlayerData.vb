@@ -5,6 +5,7 @@ Public Module PlayerData
     Friend Const DirectionColumn = "Direction"
     Friend Const ModeColumn = "Mode"
     Const FixedPlayerId = 1
+    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         CharacterData.Initialize()
         ExecuteNonQuery(
