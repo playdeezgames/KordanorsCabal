@@ -19,7 +19,7 @@
             );")
     End Sub
     Public Function Read(characterId As Long) As IEnumerable(Of Tuple(Of Long, Long))
-        Return ReadRecordsWithColumnValue(Of Long, Long, Long)(
+        Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             (EquipSlotColumn, ItemIdColumn),

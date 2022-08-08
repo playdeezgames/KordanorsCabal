@@ -18,7 +18,7 @@
     End Sub
 
     Public Function ReadForCharacter(characterId As Long) As IEnumerable(Of Tuple(Of Long, Long))
-        Return ReadRecordsWithColumnValue(Of Long, Long, Long)(
+        Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             (SpellTypeColumn, SpellLevelColumn),

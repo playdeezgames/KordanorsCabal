@@ -1,16 +1,5 @@
 Public Module StaticStore
     Public ReadOnly Store As New Store
-    Public Function ReadRecordsWithColumnValue(
-            Of TInputColumn,
-                TFirstOutputColumn,
-                TSecondOutputColumn)(
-                    initializer As Action,
-                    tableName As String,
-                    outputColumnNames As (String, String),
-                    forColumnValue As (String, TInputColumn)) As List(Of Tuple(Of TFirstOutputColumn, TSecondOutputColumn))
-        Return Store.ReadRecordsWithColumnValue(Of TInputColumn, TFirstOutputColumn, TSecondOutputColumn)(
-            initializer, tableName, outputColumnNames, forColumnValue)
-    End Function
     Public Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnValue As (String, TColumn))
         Store.ClearForColumnValue(initializer, tableName, columnValue)
     End Sub
