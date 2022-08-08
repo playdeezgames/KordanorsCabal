@@ -9,17 +9,11 @@
 
     Public Overrides ReadOnly Property Offers As IReadOnlyDictionary(Of ItemType, Long)
         Get
-            Return New Dictionary(Of ItemType, Long) From
-                {
-                    {ItemType.BatWing, 3},
-                    {ItemType.GoblinEar, 5},
-                    {ItemType.MagicEgg, 10},
-                    {ItemType.Mushroom, 25},
-                    {ItemType.RatTail, 1},
-                    {ItemType.SkullFragment, 5},
-                    {ItemType.SnakeFang, 3},
-                    {ItemType.ZombieTaint, 5}
-                }
+            Return AllItemTypes.Where(
+                Function(x) x.HasOffer(ShoppeType.BlackMage)).
+                ToDictionary(
+                    Function(x) x,
+                    Function(x) x.Offer)
         End Get
     End Property
 

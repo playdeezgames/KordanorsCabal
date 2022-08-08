@@ -7,11 +7,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Food"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Food")
+    End Sub
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get
             Return True

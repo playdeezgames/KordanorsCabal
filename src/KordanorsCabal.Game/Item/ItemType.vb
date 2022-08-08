@@ -68,10 +68,6 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).Encumbrance
     End Function
     <Extension>
-    Public Function PurchasePrice(itemType As ItemType) As Long?
-        Return ItemTypeDescriptors(itemType).PurchasePrice
-    End Function
-    <Extension>
     Public Sub Use(itemType As ItemType, character As Character)
         ItemTypeDescriptors(itemType).Use(character)
     End Sub

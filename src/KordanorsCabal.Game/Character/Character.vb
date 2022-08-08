@@ -705,13 +705,6 @@
             Mode = Location.Feature.InteractionMode()
         End If
     End Sub
-    Public Sub Buy(itemType As ItemType)
-        If CanBuy(itemType) Then
-            Dim price = itemType.PurchasePrice.Value
-            Money -= price
-            Inventory.Add(Item.Create(itemType))
-        End If
-    End Sub
     ReadOnly Property CanDoIntimidation() As Boolean
         Get
             If If(GetStatistic(CharacterStatisticType.Influence), 0) <= 0 Then
@@ -748,12 +741,6 @@
         End If
         EnqueueMessage("You cannot intimidate at this time!")
     End Sub
-    Private Function CanBuy(itemType As ItemType) As Boolean
-        If itemType.PurchasePrice Is Nothing Then
-            Return False
-        End If
-        Return Money >= itemType.PurchasePrice.Value
-    End Function
     Public Function CanMove(direction As Direction) As Boolean
         If IsEncumbered Then
             Return False

@@ -7,11 +7,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Ring Of HP"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Ring Of HP")
+    End Sub
 
     Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get

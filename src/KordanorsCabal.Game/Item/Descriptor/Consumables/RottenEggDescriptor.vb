@@ -7,11 +7,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Rotten Egg"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Rotten Egg")
+    End Sub
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get

@@ -11,11 +11,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Chainmail"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Chainmail")
+    End Sub
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
         Select Case level

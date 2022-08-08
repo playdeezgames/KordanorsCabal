@@ -7,11 +7,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "BrodeSode"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("SpaceSord")
+    End Sub
 
     Public Overrides ReadOnly Property Encumbrance As Single
         Get

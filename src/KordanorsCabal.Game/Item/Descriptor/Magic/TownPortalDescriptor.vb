@@ -7,11 +7,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Town Portal"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Town Portal")
+    End Sub
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get

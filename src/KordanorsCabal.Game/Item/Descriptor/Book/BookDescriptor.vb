@@ -2,18 +2,13 @@
     Inherits ItemTypeDescriptor
     Private ReadOnly spellType As SpellType
     Sub New(spellType As SpellType)
+        MyBase.New($"Book of {spellType.Name}")
         Me.spellType = spellType
     End Sub
 
     Public Overrides ReadOnly Property SpawnLocationTypes(level As Long) As HashSet(Of LocationType)
         Get
             Return New HashSet(Of LocationType)
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return $"Book of {spellType.Name}"
         End Get
     End Property
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean

@@ -7,9 +7,7 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "AG KEY"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("AG KEY")
+    End Sub
 End Class

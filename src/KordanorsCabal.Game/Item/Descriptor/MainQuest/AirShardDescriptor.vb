@@ -7,11 +7,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Air Shard"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Air Shard")
+    End Sub
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
         Select Case level

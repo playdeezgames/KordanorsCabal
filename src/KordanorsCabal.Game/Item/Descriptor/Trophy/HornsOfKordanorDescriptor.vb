@@ -7,9 +7,7 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Horns of Kordanor"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Horns of Kordanor")
+    End Sub
 End Class

@@ -7,9 +7,7 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Elemental Orb"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Elemental Orb")
+    End Sub
 End Class

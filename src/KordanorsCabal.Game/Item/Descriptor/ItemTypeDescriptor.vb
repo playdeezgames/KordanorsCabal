@@ -1,6 +1,6 @@
 ﻿Public MustInherit Class ItemTypeDescriptor
     MustOverride ReadOnly Property SpawnLocationTypes(level As Long) As HashSet(Of LocationType)
-    MustOverride ReadOnly Property Name As String
+    ReadOnly Property Name As String
     Overridable ReadOnly Property Encumbrance As Single
         Get
             Return 0!
@@ -92,12 +92,14 @@
     End Function
 
     Sub New(
+           name As String,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
            Optional soldAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing)
+        Me.Name = name
         Me.Offer = offer
         Me.Price = price
         Me.RepairPrice = repairPrice
@@ -114,7 +116,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AmuletOfHP, New AmuletOfHPDescriptor},
             {ItemType.BatWing, New TrophyDescriptor("Bat Wing", 3, New List(Of ShoppeType) From {ShoppeType.BlackMage})},
             {ItemType.Beer, New BeerDescriptor},
-            {ItemType.Bong, New BongDescriptor},
+            {ItemType.Bong, New TrophyDescriptor("Bong", , , 25, New List(Of ShoppeType) From {ShoppeType.BlackMage})},
             {ItemType.BookOfHolyBolt, New BookDescriptor(SpellType.HolyBolt)},
             {ItemType.BookOfPurify, New BookDescriptor(SpellType.Purify)},
             {ItemType.Bottle, New BottleDescriptor},

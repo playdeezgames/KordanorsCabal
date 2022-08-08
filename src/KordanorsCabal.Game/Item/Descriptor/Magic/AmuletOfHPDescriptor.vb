@@ -11,11 +11,9 @@
         Return If(level = DungeonLevel.Level1, 1, 0)
     End Function
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Amulet of HP"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Amulet of HP")
+    End Sub
 
     Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get
