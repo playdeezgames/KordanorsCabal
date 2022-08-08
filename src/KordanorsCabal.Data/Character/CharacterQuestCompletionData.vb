@@ -17,7 +17,7 @@
             );")
     End Sub
     Sub Write(characterId As Long, quest As Long, completions As Long)
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

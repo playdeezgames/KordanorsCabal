@@ -35,7 +35,7 @@
     End Sub
 
     Public Sub Write(characterId As Long, equipSlot As Long, itemId As Long)
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

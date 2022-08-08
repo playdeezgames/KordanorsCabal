@@ -17,7 +17,7 @@
             );")
     End Sub
     Public Sub Write(characterId As Long, statisticType As Long, statisticValue As Long)
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

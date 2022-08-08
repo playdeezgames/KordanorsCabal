@@ -35,7 +35,7 @@
     End Function
 
     Public Sub Write(characterId As Long, spellType As Long, spellLevel As Long)
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

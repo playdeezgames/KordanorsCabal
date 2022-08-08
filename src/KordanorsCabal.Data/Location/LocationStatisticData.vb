@@ -43,7 +43,7 @@
                 (StatisticTypeColumn, statisticType))
             Return
         End If
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),

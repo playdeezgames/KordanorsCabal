@@ -26,7 +26,7 @@
     End Function
 
     Public Sub Write(itemId As Long, statisticType As Long, value As Long)
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId),
