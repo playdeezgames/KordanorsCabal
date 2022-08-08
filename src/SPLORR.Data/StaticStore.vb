@@ -1,9 +1,6 @@
 Imports Microsoft.Data.Sqlite
 Public Module StaticStore
     Public ReadOnly Store As New Store
-    Public Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
-        Return Store.ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer, tableName, outputColumnName, forColumnValue)
-    End Function
     Public Function ReadRecordsWithColumnValues(Of TFirstInputColumn, TSecondInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, firstColumnValue As (String, TFirstInputColumn), secondColumnValue As (String, TSecondInputColumn)) As List(Of TOutputColumn)
         Return Store.ReadRecordsWithColumnValues(Of TFirstInputColumn, TSecondInputColumn, TOutputColumn)(
             initializer, tableName, outputColumnName, firstColumnValue, secondColumnValue)

@@ -47,7 +47,7 @@
     End Sub
 
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)
-        Return ReadRecordsWithColumnValue(Of Long, Long)(
+        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterIdColumn,
