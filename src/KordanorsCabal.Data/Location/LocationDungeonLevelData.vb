@@ -1,4 +1,4 @@
-﻿Public Module LocationDungeonLevelData
+﻿Public Class LocationDungeonLevelData
     Friend Const TableName = "LocationDungeonLevels"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const DungeonLevelColumn = "DungeonLevel"
@@ -35,4 +35,4 @@
             LocationIdColumn,
             (DungeonLevelColumn, dungeonLevel))
     End Function
-End Module
+End Class

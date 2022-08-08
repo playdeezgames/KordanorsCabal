@@ -12,4 +12,5 @@
     Public ReadOnly Item As New ItemData
     Public ReadOnly Feature As New FeatureData
     Public ReadOnly Location As New LocationData
+    Public ReadOnly LocationDungeonLevel As New LocationDungeonLevelData
 End Module
