@@ -22,13 +22,13 @@
             );")
     End Sub
     Public Function CreateForCharacter(characterId As Long) As Long
-        Return CreateRecord(
+        Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))
     End Function
     Public Function CreateForLocation(locationId As Long) As Long
-        Return CreateRecord(
+        Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId))

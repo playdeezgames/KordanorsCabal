@@ -62,7 +62,7 @@
     End Function
 
     Public Function Create(locationId As Long, direction As Long, routeType As Long, toLocationId As Long) As Long
-        Return CreateRecord(
+        Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),

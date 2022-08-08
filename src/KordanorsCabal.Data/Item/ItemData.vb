@@ -12,7 +12,7 @@
             );")
     End Sub
     Public Function Create(itemType As Long) As Long
-        Return CreateRecord(
+        Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (ItemTypeColumn, itemType))

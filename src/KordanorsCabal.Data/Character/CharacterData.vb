@@ -23,7 +23,7 @@
     End Function
 
     Public Function Create(characterType As Long, locationId As Long) As Long
-        Return CreateRecord(
+        Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (CharacterTypeColumn, characterType),

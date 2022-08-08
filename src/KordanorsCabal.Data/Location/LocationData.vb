@@ -37,7 +37,7 @@
     End Function
 
     Public Function Create(locationType As Long) As Long
-        Return CreateRecord(
+        Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (LocationTypeColumn, locationType))

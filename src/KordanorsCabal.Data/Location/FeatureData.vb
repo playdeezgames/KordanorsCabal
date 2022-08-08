@@ -24,7 +24,7 @@
     End Function
 
     Public Function Create(featureType As Long, locationId As Long) As Long
-        Return CreateRecord(
+        Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (FeatureTypeColumn, featureType),
