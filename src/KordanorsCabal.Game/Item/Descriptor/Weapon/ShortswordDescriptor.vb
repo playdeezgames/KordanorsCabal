@@ -13,15 +13,10 @@
             MakeDictionary(
                 (DungeonLevel.Level1, "2d6"),
                 (DungeonLevel.Level2, "1d6")),
-                5,
-                MakeList(ShoppeType.Blacksmith))
+            MakeList(EquipSlot.Weapon),
+            5,
+            MakeList(ShoppeType.Blacksmith))
     End Sub
-
-    Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
-        Get
-            Return New List(Of EquipSlot) From {Game.EquipSlot.Weapon}
-        End Get
-    End Property
 
     Public Overrides ReadOnly Property AttackDice As Long
         Get

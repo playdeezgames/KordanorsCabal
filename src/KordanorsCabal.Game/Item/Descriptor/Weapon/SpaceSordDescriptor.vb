@@ -7,14 +7,9 @@
             MakeDictionary(
                 (DungeonLevel.Moon, MakeHashSet(LocationType.Moon))),
             MakeDictionary(
-                (DungeonLevel.Moon, "1d1")))
+                (DungeonLevel.Moon, "1d1")),
+            MakeList(EquipSlot.Weapon))
     End Sub
-
-    Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
-        Get
-            Return New List(Of EquipSlot) From {Game.EquipSlot.Weapon}
-        End Get
-    End Property
 
     Public Overrides ReadOnly Property AttackDice As Long
         Get

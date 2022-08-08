@@ -2,12 +2,7 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Trousers")
+        MyBase.New("Trousers",,,, MakeList(EquipSlot.Legs))
     End Sub
 
-    Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
-        Get
-            Return New List(Of EquipSlot) From {Game.EquipSlot.Legs}
-        End Get
-    End Property
 End Class

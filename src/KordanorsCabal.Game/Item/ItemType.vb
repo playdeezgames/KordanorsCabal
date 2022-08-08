@@ -53,6 +53,7 @@ Public Enum ItemType
     AmuletOfDEX
     AmuletOfPOW
     AmuletOfMana
+    AmuletOfYendor
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

@@ -2,14 +2,8 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Empty Bottle", 1)
+        MyBase.New("Empty Bottle", 1,,, MakeList(EquipSlot.Weapon))
     End Sub
-
-    Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
-        Get
-            Return New List(Of EquipSlot) From {Game.EquipSlot.Weapon}
-        End Get
-    End Property
 
     Public Overrides ReadOnly Property AttackDice As Long
         Get

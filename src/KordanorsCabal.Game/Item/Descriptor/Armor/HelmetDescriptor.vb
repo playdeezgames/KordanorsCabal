@@ -12,15 +12,10 @@
                 (DungeonLevel.Level4, MakeHashSet(LocationType.Dungeon, LocationType.DungeonDeadEnd)),
                 (DungeonLevel.Level5, MakeHashSet(LocationType.Dungeon, LocationType.DungeonDeadEnd))),
                 MakeDictionary((DungeonLevel.Level1, "3d6")),
+                MakeList(EquipSlot.Head),
                 2,
                 MakeList(ShoppeType.Blacksmith))
     End Sub
-
-    Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
-        Get
-            Return New List(Of EquipSlot) From {Game.EquipSlot.Head}
-        End Get
-    End Property
 
     Public Overrides ReadOnly Property MaximumDurability As Long?
         Get

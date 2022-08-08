@@ -30,11 +30,7 @@
         Return 0
     End Function
 
-    Overridable ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
-        Get
-            Return Array.Empty(Of EquipSlot)
-        End Get
-    End Property
+    ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
 
     Overridable ReadOnly Property AttackDice As Long
         Get
@@ -100,6 +96,7 @@
            Optional encumbrance As Single = 0!,
            Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
            Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing,
+           Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
@@ -119,6 +116,7 @@
                 Function(x) x,
                 Function(x) If(spawnLocationTypes.ContainsKey(x), spawnLocationTypes(x), New HashSet(Of LocationType)))
         End If
+        Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
         Me.spawnCounts = spawnCounts
         Me.Offer = offer
         Me.Price = price
@@ -142,6 +140,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AmuletOfMana, New AmuletDescriptor(CharacterStatisticType.Mana)},
             {ItemType.AmuletOfPOW, New AmuletDescriptor(CharacterStatisticType.Power)},
             {ItemType.AmuletOfSTR, New AmuletDescriptor(CharacterStatisticType.Strength)},
+            {ItemType.AmuletOfYendor, New WornItemDescriptor("Amulet of Yendor", MakeList(EquipSlot.Neck))},
             {ItemType.BatWing, New TrophyDescriptor("Bat Wing", 3, MakeList(ShoppeType.BlackMage))},
             {ItemType.Beer, New BeerDescriptor},
             {ItemType.Bong, New TrophyDescriptor("Bong", , , 25, MakeList(ShoppeType.BlackMage))},
