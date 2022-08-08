@@ -11,20 +11,12 @@
                 (DungeonLevel.Level3, MakeHashSet(LocationType.Dungeon)),
                 (DungeonLevel.Level4, MakeHashSet(LocationType.Dungeon)),
                 (DungeonLevel.Level5, MakeHashSet(LocationType.Dungeon))),
+            MakeDictionary(
+                (DungeonLevel.Level2, "2d6"),
+                (DungeonLevel.Level3, "1d6")),
                 20,
                 MakeList(ShoppeType.Blacksmith))
     End Sub
-
-    Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
-        Select Case level
-            Case DungeonLevel.Level2
-                Return RNG.RollDice("2d6")
-            Case DungeonLevel.Level3
-                Return RNG.RollDice("1d6")
-            Case Else
-                Return 0
-        End Select
-    End Function
 
     Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get

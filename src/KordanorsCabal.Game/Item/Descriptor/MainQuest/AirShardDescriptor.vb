@@ -4,17 +4,10 @@
     Sub New()
         MyBase.New("Air Shard",,
             MakeDictionary(
-                (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonBoss))))
+                (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonBoss))),
+            MakeDictionary(
+                (DungeonLevel.Level1, "1d1")))
     End Sub
-
-    Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
-        Select Case level
-            Case DungeonLevel.Level1
-                Return 1
-            Case Else
-                Return 0
-        End Select
-    End Function
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get

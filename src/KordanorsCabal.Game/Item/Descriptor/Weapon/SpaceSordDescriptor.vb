@@ -5,12 +5,10 @@
         MyBase.New("SpaceSord",
                    5,
             MakeDictionary(
-                (DungeonLevel.Moon, MakeHashSet(LocationType.Moon))))
+                (DungeonLevel.Moon, MakeHashSet(LocationType.Moon))),
+            MakeDictionary(
+                (DungeonLevel.Moon, "1d1")))
     End Sub
-
-    Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
-        Return If(level = DungeonLevel.Moon, 1, 0)
-    End Function
 
     Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get

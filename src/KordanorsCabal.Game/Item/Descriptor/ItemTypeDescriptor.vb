@@ -2,6 +2,7 @@
     ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType))
     ReadOnly Property Name As String
     ReadOnly Property Encumbrance As Single
+    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String)
     Overridable ReadOnly Property PurchasePrice() As Long?
         Get
             Return Nothing
@@ -18,7 +19,14 @@
         'nothing, by default
     End Sub
 
-    Overridable Function RollSpawnCount(level As DungeonLevel) As Long
+    Function RollSpawnCount(level As DungeonLevel) As Long
+        If spawnCounts Is Nothing Then
+            Return 0
+        End If
+        Dim dice As String = ""
+        If spawnCounts.TryGetValue(level, dice) Then
+            Return RNG.RollDice(dice)
+        End If
         Return 0
     End Function
 
@@ -91,6 +99,7 @@
            name As String,
            Optional encumbrance As Single = 0!,
            Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
+           Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
@@ -110,6 +119,7 @@
                 Function(x) x,
                 Function(x) If(spawnLocationTypes.ContainsKey(x), spawnLocationTypes(x), New HashSet(Of LocationType)))
         End If
+        Me.spawnCounts = spawnCounts
         Me.Offer = offer
         Me.Price = price
         Me.RepairPrice = repairPrice
