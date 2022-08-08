@@ -1,12 +1,6 @@
 ﻿Friend Class MagicEggDescriptor
     Inherits TrophyDescriptor
 
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType)
-        End Get
-    End Property
-
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get
             Return True

@@ -1,13 +1,10 @@
 ﻿Friend Class WaterShardDescriptor
     Inherits ItemTypeDescriptor
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType) From {LocationType.DungeonBoss}
-        End Get
-    End Property
 
     Sub New()
-        MyBase.New("Water Shard")
+        MyBase.New("Water Shard",,
+            MakeDictionary(
+                (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonBoss))))
     End Sub
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long

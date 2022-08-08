@@ -1,21 +1,16 @@
 ﻿Friend Class DaggerDescriptor
     Inherits ItemTypeDescriptor
 
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType) From {LocationType.Dungeon}
-        End Get
-    End Property
-
     Sub New()
-        MyBase.New("Dagger")
+        MyBase.New("Dagger",
+                   1,
+            MakeDictionary(
+                (DungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level3, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level4, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level5, MakeHashSet(LocationType.Dungeon))))
     End Sub
-
-    Public Overrides ReadOnly Property Encumbrance As Single
-        Get
-            Return 1
-        End Get
-    End Property
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
         Select Case level

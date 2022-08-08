@@ -1,13 +1,10 @@
 ﻿Friend Class SilverKeyDescriptor
     Inherits ItemTypeDescriptor
 
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType) From {LocationType.DungeonDeadEnd}
-        End Get
-    End Property
-
     Sub New()
-        MyBase.New("AG KEY")
+        MyBase.New(
+            "AG KEY",,
+            MakeDictionary(
+                (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd))))
     End Sub
 End Class

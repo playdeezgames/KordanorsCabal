@@ -1,13 +1,13 @@
 ﻿Friend Class IronKeyDescriptor
     Inherits ItemTypeDescriptor
 
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType) From {LocationType.Dungeon}
-        End Get
-    End Property
-
     Sub New()
-        MyBase.New("FE Key")
+        MyBase.New("FE Key",,
+            MakeDictionary(
+                (DungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level3, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level4, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level5, MakeHashSet(LocationType.Dungeon))))
     End Sub
 End Class

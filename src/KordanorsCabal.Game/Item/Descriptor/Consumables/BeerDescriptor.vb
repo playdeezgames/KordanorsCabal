@@ -1,21 +1,9 @@
 ﻿Friend Class BeerDescriptor
     Inherits ItemTypeDescriptor
 
-    Public Overrides ReadOnly Property SpawnLocationTypes(level As DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType)
-        End Get
-    End Property
-
     Sub New()
-        MyBase.New("Beer")
+        MyBase.New("Beer", 2)
     End Sub
-
-    Public Overrides ReadOnly Property Encumbrance As Single
-        Get
-            Return 2.0!
-        End Get
-    End Property
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get

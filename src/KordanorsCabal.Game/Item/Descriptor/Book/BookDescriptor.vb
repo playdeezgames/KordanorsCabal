@@ -5,12 +5,6 @@
         MyBase.New($"Book of {spellType.Name}")
         Me.spellType = spellType
     End Sub
-
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType)
-        End Get
-    End Property
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get
             Return character.CanLearn(spellType)

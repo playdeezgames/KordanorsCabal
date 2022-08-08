@@ -1,13 +1,9 @@
 ﻿Friend Class FireShardDescriptor
     Inherits ItemTypeDescriptor
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType) From {LocationType.DungeonBoss}
-        End Get
-    End Property
-
     Sub New()
-        MyBase.New("Fire Shard")
+        MyBase.New("Fire Shard",,
+            MakeDictionary(
+                (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonBoss))))
     End Sub
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long

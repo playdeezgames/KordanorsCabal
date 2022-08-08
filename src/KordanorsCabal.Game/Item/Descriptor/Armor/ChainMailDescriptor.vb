@@ -1,18 +1,16 @@
 ﻿Friend Class ChainMailDescriptor
     Inherits ItemTypeDescriptor
 
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Select Case level
-                Case DungeonLevel.Level1
-                    Return New HashSet(Of LocationType) From {LocationType.DungeonDeadEnd}
-            End Select
-            Return New HashSet(Of LocationType) From {LocationType.Dungeon, LocationType.DungeonDeadEnd}
-        End Get
-    End Property
-
     Sub New()
-        MyBase.New("Chainmail")
+        MyBase.New(
+            "Chainmail",
+            20.0!,
+            MakeDictionary(
+                (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd)),
+                (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (DungeonLevel.Level5, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon))))
     End Sub
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
@@ -27,12 +25,6 @@
     Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get
             Return New List(Of EquipSlot) From {Game.EquipSlot.Torso}
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property Encumbrance As Single
-        Get
-            Return 20.0!
         End Get
     End Property
 

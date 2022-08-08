@@ -1,14 +1,16 @@
 ﻿Friend Class HelmetDescriptor
     Inherits ItemTypeDescriptor
 
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType) From {LocationType.Dungeon, LocationType.DungeonDeadEnd}
-        End Get
-    End Property
-
     Sub New()
-        MyBase.New("Helmet")
+        MyBase.New(
+            "Helmet",
+            2.0!,
+            MakeDictionary(
+                (DungeonLevel.Level1, MakeHashSet(LocationType.Dungeon, LocationType.DungeonDeadEnd)),
+                (DungeonLevel.Level2, MakeHashSet(LocationType.Dungeon, LocationType.DungeonDeadEnd)),
+                (DungeonLevel.Level3, MakeHashSet(LocationType.Dungeon, LocationType.DungeonDeadEnd)),
+                (DungeonLevel.Level4, MakeHashSet(LocationType.Dungeon, LocationType.DungeonDeadEnd)),
+                (DungeonLevel.Level5, MakeHashSet(LocationType.Dungeon, LocationType.DungeonDeadEnd))))
     End Sub
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long
@@ -23,12 +25,6 @@
     Public Overrides ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
         Get
             Return New List(Of EquipSlot) From {Game.EquipSlot.Head}
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property Encumbrance As Single
-        Get
-            Return 2.0!
         End Get
     End Property
 

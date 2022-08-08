@@ -1,13 +1,9 @@
 ﻿Friend Class EarthShardDescriptor
     Inherits ItemTypeDescriptor
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType) From {LocationType.DungeonBoss}
-        End Get
-    End Property
-
     Sub New()
-        MyBase.New("Earth Shard")
+        MyBase.New("Earth Shard",,
+            MakeDictionary(
+                (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonBoss))))
     End Sub
 
     Public Overrides Function RollSpawnCount(level As DungeonLevel) As Long

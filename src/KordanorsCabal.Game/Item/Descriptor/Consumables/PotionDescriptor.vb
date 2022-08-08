@@ -1,24 +1,17 @@
 ﻿Friend Class PotionDescriptor
     Inherits ItemTypeDescriptor
 
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType) From
-                {
-                    LocationType.Dungeon
-                }
-        End Get
-    End Property
-
     Sub New()
-        MyBase.New("Potion")
+        MyBase.New(
+            "Potion",
+            2,
+            MakeDictionary(
+                (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (DungeonLevel.Level5, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon))))
     End Sub
-
-    Public Overrides ReadOnly Property Encumbrance As Single
-        Get
-            Return 2
-        End Get
-    End Property
 
     Public Overrides ReadOnly Property PurchasePrice As Long?
         Get

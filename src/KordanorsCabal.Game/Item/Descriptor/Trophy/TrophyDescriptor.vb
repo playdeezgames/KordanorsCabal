@@ -8,12 +8,6 @@
            Optional soldAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing)
-        MyBase.New(name, offer, boughtAt, price, soldAt, repairPrice, repairedAt)
+        MyBase.New(name, , , offer, boughtAt, price, soldAt, repairPrice, repairedAt)
     End Sub
-
-    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
-        Get
-            Return New HashSet(Of LocationType)
-        End Get
-    End Property
 End Class

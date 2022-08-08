@@ -1,11 +1,7 @@
 ﻿Public MustInherit Class ItemTypeDescriptor
-    MustOverride ReadOnly Property SpawnLocationTypes(level As DungeonLevel) As HashSet(Of LocationType)
+    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType))
     ReadOnly Property Name As String
-    Overridable ReadOnly Property Encumbrance As Single
-        Get
-            Return 0!
-        End Get
-    End Property
+    ReadOnly Property Encumbrance As Single
     Overridable ReadOnly Property PurchasePrice() As Long?
         Get
             Return Nothing
@@ -93,6 +89,8 @@
 
     Sub New(
            name As String,
+           Optional encumbrance As Single = 0!,
+           Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
@@ -100,6 +98,18 @@
            Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing)
         Me.Name = name
+        Me.Encumbrance = encumbrance
+        If spawnLocationTypes Is Nothing Then
+            Me.SpawnLocationTypes =
+                AllDungeonLevels.ToDictionary(
+                Function(x) x,
+                Function(x) New HashSet(Of LocationType))
+        Else
+            Me.SpawnLocationTypes =
+                AllDungeonLevels.ToDictionary(
+                Function(x) x,
+                Function(x) If(spawnLocationTypes.ContainsKey(x), spawnLocationTypes(x), New HashSet(Of LocationType)))
+        End If
         Me.Offer = offer
         Me.Price = price
         Me.RepairPrice = repairPrice
