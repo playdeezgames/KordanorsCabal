@@ -1,4 +1,4 @@
-﻿Public Module LocationData
+﻿Public Class LocationData
     Public Const TableName = "Locations"
     Public Const LocationIdColumn = "LocationId"
     Friend Const LocationTypeColumn = "LocationType"
@@ -42,4 +42,4 @@
             TableName,
             (LocationTypeColumn, locationType))
     End Function
-End Module
+End Class

@@ -4,7 +4,7 @@
     Friend Const DungeonLevelColumn = "DungeonLevel"
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
-        LocationData.Initialize()
+        WorldData.Location.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

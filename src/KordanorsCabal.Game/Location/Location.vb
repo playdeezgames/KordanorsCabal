@@ -5,18 +5,18 @@
     End Sub
     Property LocationType As LocationType
         Get
-            Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
+            Return CType(WorldData.Location.ReadLocationType(Id).Value, LocationType)
         End Get
         Set(value As LocationType)
-            LocationData.WriteLocationType(Id, value)
+            WorldData.Location.WriteLocationType(Id, value)
         End Set
     End Property
 
     Friend Shared Function FromLocationType(locationType As LocationType) As IEnumerable(Of Location)
-        Return LocationData.ReadForLocationType(locationType).Select(AddressOf FromId)
+        Return WorldData.Location.ReadForLocationType(locationType).Select(AddressOf FromId)
     End Function
     Shared Function Create(locationType As LocationType) As Location
-        Return FromId(LocationData.Create(locationType))
+        Return FromId(WorldData.Location.Create(locationType))
     End Function
     Public Shared Function ByStatisticValue(statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)
         Return LocationStatisticData.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
