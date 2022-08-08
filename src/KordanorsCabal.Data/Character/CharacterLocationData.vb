@@ -25,7 +25,7 @@
     End Sub
 
     Public Function Read(characterId As Long, locationId As Long) As Boolean
-        Return ReadColumnValue(Of Long, Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterIdColumn,

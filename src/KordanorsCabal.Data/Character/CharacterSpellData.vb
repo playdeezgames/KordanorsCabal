@@ -26,7 +26,7 @@
     End Function
 
     Public Function Read(characterId As Long, spellType As Long) As Long?
-        Return ReadColumnValue(Of Long, Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             SpellLevelColumn,

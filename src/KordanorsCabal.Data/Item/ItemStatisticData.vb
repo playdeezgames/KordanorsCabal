@@ -17,7 +17,7 @@
             );")
     End Sub
     Public Function Read(itemId As Long, statisticType As Long) As Long?
-        Return ReadColumnValue(Of Long, Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             StatisticValueColumn,
