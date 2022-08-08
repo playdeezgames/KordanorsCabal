@@ -27,7 +27,7 @@
     End Function
 
     Public Sub Clear(characterId As Long, equipSlot As Long)
-        ClearForColumnValues(
+        Store.ClearForColumnValues(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

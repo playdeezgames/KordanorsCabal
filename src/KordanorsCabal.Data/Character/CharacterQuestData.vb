@@ -16,7 +16,7 @@
     End Sub
 
     Public Sub Clear(characterId As Long, quest As Long)
-        ClearForColumnValues(
+        Store.ClearForColumnValues(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

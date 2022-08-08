@@ -1,17 +1,10 @@
 Public Module StaticStore
     Public ReadOnly Store As New Store
-    Public Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(
-                                                                   initializer As Action,
-                                                                   tableName As String,
-                                                                   firstColumnValue As (String, TFirstColumn),
-                                                                   secondColumnValue As (String, TSecondColumn))
-        Store.ClearForColumnValues(initializer, tableName, firstColumnValue, secondColumnValue)
-    End Sub
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn))
         Store.ReplaceRecord(initializer, tableName, firstColumnValue, secondColumnValue)
     End Sub
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn))
-        Store.ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer, tableName, firstColumnValue, secondColumnValue, thirdColumnValue)
+        Store.ReplaceRecord(initializer, tableName, firstColumnValue, secondColumnValue, thirdColumnValue)
     End Sub
     Public Sub ReplaceRecord(Of
                                  TFirstColumn,

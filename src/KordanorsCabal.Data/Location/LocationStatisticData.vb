@@ -36,7 +36,7 @@
 
     Public Sub Write(locationId As Long, statisticType As Long, statisticValue As Long?)
         If Not statisticValue.HasValue Then
-            ClearForColumnValues(
+            Store.ClearForColumnValues(
                 AddressOf Initialize,
                 TableName,
                 (LocationIdColumn, locationId),
