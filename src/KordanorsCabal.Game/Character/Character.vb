@@ -125,7 +125,7 @@
         End Get
         Set(value As Location)
             WorldData.Character.WriteLocation(Id, value.Id)
-            CharacterLocationData.Write(Id, value.Id)
+            WorldData.CharacterLocation.Write(Id, value.Id)
         End Set
     End Property
     Shared Function FromId(characterId As Long) As Character
@@ -170,7 +170,7 @@
         End Get
     End Property
     Public Function HasVisited(location As Location) As Boolean
-        Return CharacterLocationData.Read(Id, location.Id)
+        Return WorldData.CharacterLocation.Read(Id, location.Id)
     End Function
 
     Friend Function IsEnemy(character As Character) As Boolean
