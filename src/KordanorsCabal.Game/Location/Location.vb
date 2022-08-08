@@ -93,7 +93,7 @@
     End Operator
     ReadOnly Property Characters As IEnumerable(Of Character)
         Get
-            Return CharacterData.ReadForLocation(Id).Select(AddressOf Character.FromId)
+            Return WorldData.Character.ReadForLocation(Id).Select(AddressOf Character.FromId)
         End Get
     End Property
     Function Enemies(character As Character) As IEnumerable(Of Character)

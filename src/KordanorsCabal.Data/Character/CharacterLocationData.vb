@@ -4,7 +4,7 @@
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
-        CharacterData.Initialize()
+        WorldData.Character.Initialize()
         LocationData.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]

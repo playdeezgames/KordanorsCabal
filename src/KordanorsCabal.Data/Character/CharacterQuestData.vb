@@ -4,7 +4,7 @@
     Friend Const QuestColumn = "Quest"
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
-        CharacterData.Initialize()
+        WorldData.Character.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

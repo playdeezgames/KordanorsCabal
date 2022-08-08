@@ -1,10 +1,10 @@
-﻿Public Module CharacterData
+﻿Public Class CharacterData
     Public Const TableName = "Characters"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const CharacterTypeColumn = "CharacterType"
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
-    Public Sub Initialize()
+    Friend Sub Initialize()
         LocationData.Initialize()
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}]
         (
@@ -68,4 +68,4 @@
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
-End Module
+End Class

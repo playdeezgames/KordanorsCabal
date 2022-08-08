@@ -36,7 +36,7 @@
     End Property
     ReadOnly Property CharacterType As CharacterType
         Get
-            Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
+            Return CType(WorldData.Character.ReadCharacterType(Id).Value, CharacterType)
         End Get
     End Property
     Public Function HasQuest(quest As Quest) As Boolean
@@ -107,7 +107,7 @@
         End Get
     End Property
     Friend Shared Function Create(characterType As CharacterType, location As Location) As Character
-        Dim character = FromId(CharacterData.Create(characterType, location.Id))
+        Dim character = FromId(WorldData.Character.Create(characterType, location.Id))
         For Each entry In characterType.InitialStatistics
             character.SetStatistic(entry.Key, entry.Value)
         Next
@@ -121,10 +121,10 @@
     End Sub
     Property Location As Location
         Get
-            Return Location.FromId(CharacterData.ReadLocation(Id).Value)
+            Return Location.FromId(WorldData.Character.ReadLocation(Id).Value)
         End Get
         Set(value As Location)
-            CharacterData.WriteLocation(Id, value.Id)
+            WorldData.Character.WriteLocation(Id, value.Id)
             CharacterLocationData.Write(Id, value.Id)
         End Set
     End Property
@@ -277,7 +277,7 @@
         ChangeStatistic(CharacterStatisticType.Fatigue, fatigue)
     End Sub
     Friend Sub Destroy()
-        CharacterData.Clear(Id)
+        WorldData.Character.Clear(Id)
     End Sub
     ReadOnly Property IsDead As Boolean
         Get
