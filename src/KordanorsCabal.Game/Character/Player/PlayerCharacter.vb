@@ -12,6 +12,6 @@
         Messages.Enqueue(Message.Create(lines))
     End Sub
     Sub New()
-        MyBase.New(PlayerData.Read().Value)
+        MyBase.New(WorldData.Player.Read().Value)
     End Sub
 End Class

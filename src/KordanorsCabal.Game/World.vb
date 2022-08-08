@@ -59,7 +59,7 @@ Public Module World
 
     Public ReadOnly Property IsValid As Boolean
         Get
-            Return PlayerData.Read.HasValue
+            Return WorldData.Player.Read.HasValue
         End Get
     End Property
 
@@ -195,7 +195,7 @@ Public Module World
         Dim startingLocation = Location.FromLocationType(LocationType.TownSquare).First
         Dim playerCharacter = Character.Create(CharacterType.N00b, startingLocation)
         playerCharacter.Location = startingLocation 'to track that this place has been visited
-        PlayerData.Write(playerCharacter.Id, RNG.FromEnumerable(AllDirections.Where(Function(x) x.IsCardinal)), PlayerMode.Neutral)
+        WorldData.Player.Write(playerCharacter.Id, RNG.FromEnumerable(AllDirections.Where(Function(x) x.IsCardinal)), PlayerMode.Neutral)
         RollUpPlayerCharacter()
     End Sub
 

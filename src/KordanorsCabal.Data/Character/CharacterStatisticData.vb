@@ -1,4 +1,4 @@
-﻿Public Module CharacterStatisticData
+﻿Public Class CharacterStatisticData
     Friend Const TableName = "CharacterStatistics"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
@@ -40,4 +40,4 @@
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
-End Module
+End Class

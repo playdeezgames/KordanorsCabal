@@ -114,7 +114,7 @@
         Return character
     End Function
     Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
-        CharacterStatisticData.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
+        WorldData.CharacterStatistic.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
     Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
@@ -132,7 +132,7 @@
         Return New Character(characterId)
     End Function
     Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
-        Dim result = If(CharacterStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
+        Dim result = If(WorldData.CharacterStatistic.Read(Id, statisticType), statisticType.DefaultValue)
         If result.HasValue Then
             For Each item In Equipment.Values
                 Dim buff As Long = If(item.EquippedBuff(statisticType), 0)
@@ -588,10 +588,10 @@
     End Property
     Public Property Direction As Direction
         Get
-            Return CType(PlayerData.ReadDirection().Value, Direction)
+            Return CType(WorldData.Player.ReadDirection().Value, Direction)
         End Get
         Set(value As Direction)
-            PlayerData.WriteDirection(value)
+            WorldData.Player.WriteDirection(value)
         End Set
     End Property
     Public ReadOnly Property CanCast() As Boolean
@@ -660,10 +660,10 @@
     End Sub
     Public Property Mode As PlayerMode
         Get
-            Return CType(PlayerData.ReadMode().Value, PlayerMode)
+            Return CType(WorldData.Player.ReadMode().Value, PlayerMode)
         End Get
         Set(value As PlayerMode)
-            PlayerData.WriteMode(value)
+            WorldData.Player.WriteMode(value)
         End Set
     End Property
     Public Sub CompleteQuest(quest As Quest)

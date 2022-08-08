@@ -5,4 +5,6 @@
     Public ReadOnly CharacterQuestCompletion As New CharacterQuestCompletionData
     Public ReadOnly CharacterQuest As New CharacterQuestData
     Public ReadOnly CharacterSpell As New CharacterSpellData
+    Public ReadOnly CharacterStatistic As New CharacterStatisticData
+    Public ReadOnly Player As New PlayerData
 End Module

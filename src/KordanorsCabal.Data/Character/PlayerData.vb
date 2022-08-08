@@ -1,4 +1,4 @@
-Public Module PlayerData
+Public Class PlayerData
     Friend Const TableName = "Players"
     Friend Const PlayerIdColumn = "PlayerId"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
@@ -74,4 +74,4 @@ Public Module PlayerData
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
-End Module
+End Class

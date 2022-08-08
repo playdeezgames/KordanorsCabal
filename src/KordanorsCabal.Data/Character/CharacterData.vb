@@ -60,8 +60,8 @@
         WorldData.CharacterEquipSlot.ClearForCharacter(characterId)
         InventoryData.ClearForCharacter(characterId)
         WorldData.CharacterLocation.ClearForCharacter(characterId)
-        CharacterStatisticData.ClearForCharacter(characterId)
-        PlayerData.ClearForCharacter(characterId)
+        WorldData.CharacterStatistic.ClearForCharacter(characterId)
+        WorldData.Player.ClearForCharacter(characterId)
         WorldData.CharacterSpell.ClearForCharacter(characterId)
         Store.ClearForColumnValue(
             AddressOf Initialize,
