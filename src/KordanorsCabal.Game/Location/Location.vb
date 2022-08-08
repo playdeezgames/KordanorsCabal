@@ -75,9 +75,9 @@
     End Property
     ReadOnly Property Inventory As Inventory
         Get
-            Dim inventoryId As Long? = InventoryData.ReadForLocation(Id)
+            Dim inventoryId As Long? = WorldData.Inventory.ReadForLocation(Id)
             If Not inventoryId.HasValue Then
-                inventoryId = InventoryData.CreateForLocation(Id)
+                inventoryId = WorldData.Inventory.CreateForLocation(Id)
             End If
             Return New Inventory(inventoryId.Value)
         End Get

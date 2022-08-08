@@ -7,4 +7,5 @@
     Public ReadOnly CharacterSpell As New CharacterSpellData
     Public ReadOnly CharacterStatistic As New CharacterStatisticData
     Public ReadOnly Player As New PlayerData
+    Public ReadOnly Inventory As New InventoryData
 End Module

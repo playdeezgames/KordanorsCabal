@@ -5,7 +5,7 @@
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         ItemData.Initialize()
-        InventoryData.Initialize()
+        WorldData.Inventory.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

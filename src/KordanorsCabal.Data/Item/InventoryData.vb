@@ -1,4 +1,4 @@
-﻿Public Module InventoryData
+﻿Public Class InventoryData
     Friend Const TableName = "Inventories"
     Friend Const InventoryIdColumn = "InventoryId"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
@@ -53,4 +53,4 @@
             InventoryIdColumn,
             (LocationIdColumn, locationId))
     End Function
-End Module
+End Class

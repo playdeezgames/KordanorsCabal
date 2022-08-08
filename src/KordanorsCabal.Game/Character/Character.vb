@@ -143,9 +143,9 @@
     End Function
     ReadOnly Property Inventory As Inventory
         Get
-            Dim inventoryId As Long? = InventoryData.ReadForCharacter(Id)
+            Dim inventoryId As Long? = WorldData.Inventory.ReadForCharacter(Id)
             If Not inventoryId.HasValue Then
-                inventoryId = InventoryData.CreateForCharacter(Id)
+                inventoryId = WorldData.Inventory.CreateForCharacter(Id)
             End If
             Return New Inventory(inventoryId.Value)
         End Get

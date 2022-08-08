@@ -58,7 +58,7 @@
         WorldData.CharacterQuest.ClearForCharacter(characterId)
         WorldData.CharacterQuestCompletion.ClearForCharacter(characterId)
         WorldData.CharacterEquipSlot.ClearForCharacter(characterId)
-        InventoryData.ClearForCharacter(characterId)
+        WorldData.Inventory.ClearForCharacter(characterId)
         WorldData.CharacterLocation.ClearForCharacter(characterId)
         WorldData.CharacterStatistic.ClearForCharacter(characterId)
         WorldData.Player.ClearForCharacter(characterId)
