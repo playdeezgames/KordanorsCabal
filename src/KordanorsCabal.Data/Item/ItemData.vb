@@ -4,7 +4,7 @@
     Friend Const ItemTypeColumn = "ItemType"
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
-        ExecuteNonQuery(
+        Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{ItemIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,7 +19,7 @@
     End Function
 
     Public Function ReadItemType(itemId As Long) As Long?
-        Return ReadColumnValue(Of Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             ItemTypeColumn,

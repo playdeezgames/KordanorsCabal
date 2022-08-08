@@ -6,7 +6,7 @@
     Friend Sub Initialize()
         CharacterData.Initialize()
         LocationData.Initialize()
-        ExecuteNonQuery(
+        Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{CharacterIdColumn}] INT NOT NULL,

@@ -4,7 +4,7 @@
     Friend Const LocationTypeColumn = "LocationType"
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Public Sub Initialize()
-        ExecuteNonQuery(
+        Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{LocationIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,7 +29,7 @@
     End Sub
 
     Public Function ReadLocationType(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             LocationTypeColumn,

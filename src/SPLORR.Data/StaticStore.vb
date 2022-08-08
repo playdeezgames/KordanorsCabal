@@ -1,18 +1,6 @@
 Imports Microsoft.Data.Sqlite
 Public Module StaticStore
     Public ReadOnly Store As New Store
-    Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As SqliteParameter)
-        Store.ExecuteNonQuery(sql, parameters)
-    End Sub
-    Public Function ReadColumnValue(
-                                   Of TInputColumn,
-                                       TOutputColumn As Structure)(
-                                                                  initializer As Action,
-                                                                  tableName As String,
-                                                                  outputColumnName As String,
-                                                                  inputColumnValue As (String, TInputColumn)) As TOutputColumn?
-        Return Store.ReadColumnValue(Of TInputColumn, TOutputColumn)(initializer, tableName, outputColumnName, inputColumnValue)
-    End Function
     Public Function ReadColumnValue(Of TFirstInputColumn, TSecondInputColumn, TOutputColumn As Structure)(initializer As Action, tableName As String, outputColumnName As String, firstColumnValue As (String, TFirstInputColumn), secondColumnValue As (String, TSecondInputColumn)) As TOutputColumn?
         Return Store.ReadColumnValue(Of TFirstInputColumn, TSecondInputColumn, TOutputColumn)(initializer, tableName, outputColumnName, firstColumnValue, secondColumnValue)
     End Function

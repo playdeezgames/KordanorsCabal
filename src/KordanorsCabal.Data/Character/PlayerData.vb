@@ -8,7 +8,7 @@ Public Module PlayerData
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
         CharacterData.Initialize()
-        ExecuteNonQuery(
+        Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{PlayerIdColumn}] INT NOT NULL UNIQUE CHECK([{PlayerIdColumn}]={FixedPlayerId}),
@@ -28,7 +28,7 @@ Public Module PlayerData
     End Sub
 
     Public Function ReadMode() As Long?
-        Return ReadColumnValue(Of Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName, ModeColumn,
             (PlayerIdColumn, FixedPlayerId))
@@ -43,7 +43,7 @@ Public Module PlayerData
     End Sub
 
     Public Function ReadDirection() As Long?
-        Return ReadColumnValue(Of Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             DirectionColumn,
@@ -51,7 +51,7 @@ Public Module PlayerData
     End Function
 
     Public Function Read() As Long?
-        Return ReadColumnValue(Of Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterIdColumn,

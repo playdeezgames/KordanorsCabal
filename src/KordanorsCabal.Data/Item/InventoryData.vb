@@ -7,7 +7,7 @@
     Friend Sub Initialize()
         CharacterData.Initialize()
         LocationData.Initialize()
-        ExecuteNonQuery(
+        Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{InventoryIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,14 +40,14 @@
             (CharacterIdColumn, characterId))
     End Sub
     Public Function ReadForCharacter(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             InventoryIdColumn,
             (CharacterIdColumn, characterId))
     End Function
     Public Function ReadForLocation(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             InventoryIdColumn,

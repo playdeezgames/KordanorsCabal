@@ -6,7 +6,7 @@
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Public Sub Initialize()
         LocationData.Initialize()
-        ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}]
+        Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}]
         (
             [{CharacterIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
             [{LocationIdColumn}] INT NOT NULL,
@@ -15,7 +15,7 @@
         );")
     End Sub
     Public Function ReadCharacterType(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterTypeColumn,
@@ -31,7 +31,7 @@
     End Function
 
     Public Function ReadLocation(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             LocationIdColumn,

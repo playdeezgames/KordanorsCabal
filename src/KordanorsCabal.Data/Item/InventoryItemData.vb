@@ -6,7 +6,7 @@
     Friend Sub Initialize()
         ItemData.Initialize()
         InventoryData.Initialize()
-        ExecuteNonQuery(
+        Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{InventoryIdColumn}] INT NOT NULL,
