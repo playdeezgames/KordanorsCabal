@@ -1,11 +1,9 @@
 ﻿Friend Class HealerShoppeDescriptor
     Inherits ShoppeTypeDescriptor
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Healer"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Healer")
+    End Sub
 
     Public Overrides ReadOnly Property Offers As IReadOnlyDictionary(Of ItemType, Long)
         Get

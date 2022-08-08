@@ -1,5 +1,5 @@
 ﻿MustInherit Class ShoppeTypeDescriptor
-    MustOverride ReadOnly Property Name As String
+    ReadOnly Property Name As String
 
     MustOverride ReadOnly Property Offers As IReadOnlyDictionary(Of ItemType, Long)
     MustOverride ReadOnly Property Prices As IReadOnlyDictionary(Of ItemType, Long)
@@ -9,6 +9,9 @@
             Return New Dictionary(Of ItemType, Long)
         End Get
     End Property
+    Sub New(name As String)
+        Me.Name = name
+    End Sub
 End Class
 Module ShopeTypeDescriptorUtility
     Friend ReadOnly ShoppeTypeDescriptors As IReadOnlyDictionary(Of ShoppeType, ShoppeTypeDescriptor) =

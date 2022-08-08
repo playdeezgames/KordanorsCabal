@@ -1,11 +1,9 @@
 ﻿Friend Class InnkeeperShoppeDescriptor
     Inherits ShoppeTypeDescriptor
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "The Inn"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("The Inn")
+    End Sub
 
     Public Overrides ReadOnly Property Offers As IReadOnlyDictionary(Of ItemType, Long)
         Get

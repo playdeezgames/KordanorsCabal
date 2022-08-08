@@ -1,11 +1,9 @@
 ﻿Friend Class BlackMageShoppeDescriptor
     Inherits ShoppeTypeDescriptor
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Magic"
-        End Get
-    End Property
+    Sub New()
+        MyBase.New("Magic")
+    End Sub
 
     Public Overrides ReadOnly Property Offers As IReadOnlyDictionary(Of ItemType, Long)
         Get
