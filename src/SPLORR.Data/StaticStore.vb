@@ -1,5 +1,5 @@
 Imports Microsoft.Data.Sqlite
-Public Module Store
+Public Module StaticStore
     Private connection As SqliteConnection
     Public Sub Reset()
         ShutDown()

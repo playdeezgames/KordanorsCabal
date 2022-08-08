@@ -36,7 +36,7 @@
     End Sub
 
     Public Sub WriteItemType(itemId As Long, itemType As Long)
-        Store.WriteColumnValue(
+        StaticStore.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (ItemTypeColumn, itemType),
