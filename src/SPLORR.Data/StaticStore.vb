@@ -4,13 +4,6 @@ Public Module StaticStore
     Public Function ReadColumnValue(Of TFirstInputColumn, TSecondInputColumn, TOutputColumn As Structure)(initializer As Action, tableName As String, outputColumnName As String, firstColumnValue As (String, TFirstInputColumn), secondColumnValue As (String, TSecondInputColumn)) As TOutputColumn?
         Return Store.ReadColumnValue(Of TFirstInputColumn, TSecondInputColumn, TOutputColumn)(initializer, tableName, outputColumnName, firstColumnValue, secondColumnValue)
     End Function
-    Public Function ReadColumnString(
-                                    initializer As Action,
-                                    tableName As String,
-                                    outputColumnName As String,
-                                    inputColumnValue As (String, Long)) As String
-        Return Store.ReadColumnString(initializer, tableName, outputColumnName, inputColumnValue)
-    End Function
     Public Sub WriteColumnValue(Of TWhereColumn, TSetColumn)(initializer As Action, tableName As String, setColumn As (String, TSetColumn), whereColumn As (String, TWhereColumn))
         Store.WriteColumnValue(initializer, tableName, setColumn, whereColumn)
     End Sub
