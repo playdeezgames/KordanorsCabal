@@ -6,4 +6,7 @@
         Return entries.ToDictionary(Of T, U)(
             Function(x) x.Item1, Function(x) x.Item2)
     End Function
+    Public Function MakeList(Of T)(ParamArray items() As T) As IReadOnlyList(Of T)
+        Return items.ToList
+    End Function
 End Module
