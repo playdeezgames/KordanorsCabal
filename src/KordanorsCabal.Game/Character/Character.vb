@@ -40,7 +40,7 @@
         End Get
     End Property
     Public Function HasQuest(quest As Quest) As Boolean
-        Return CharacterQuestData.Exists(Id, quest)
+        Return WorldData.CharacterQuest.Exists(Id, quest)
     End Function
     Property Money As Long
         Get

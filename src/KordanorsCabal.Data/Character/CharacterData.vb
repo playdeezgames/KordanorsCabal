@@ -55,7 +55,7 @@
     End Function
 
     Public Sub Clear(characterId As Long)
-        CharacterQuestData.ClearForCharacter(characterId)
+        WorldData.CharacterQuest.ClearForCharacter(characterId)
         WorldData.CharacterQuestCompletion.ClearForCharacter(characterId)
         WorldData.CharacterEquipSlot.ClearForCharacter(characterId)
         InventoryData.ClearForCharacter(characterId)

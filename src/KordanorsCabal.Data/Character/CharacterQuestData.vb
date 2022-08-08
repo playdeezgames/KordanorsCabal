@@ -1,4 +1,4 @@
-﻿Public Module CharacterQuestData
+﻿Public Class CharacterQuestData
     Friend Const TableName = "CharacterQuests"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const QuestColumn = "Quest"
@@ -46,4 +46,4 @@
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
-End Module
+End Class
