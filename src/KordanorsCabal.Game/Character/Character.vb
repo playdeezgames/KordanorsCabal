@@ -5,7 +5,7 @@
     End Sub
     ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
         Get
-            Return CharacterSpellData.
+            Return WorldData.CharacterSpell.
                 ReadForCharacter(Id).
                 ToDictionary(Function(x) CType(x.Item1, SpellType), Function(x) x.Item2)
         End Get
@@ -55,12 +55,12 @@
             EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
             Return
         End If
-        Dim nextLevel = If(CharacterSpellData.Read(Id, spellType), 0) + 1
+        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
         EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
-        CharacterSpellData.Write(Id, spellType, nextLevel)
+        WorldData.CharacterSpell.Write(Id, spellType, nextLevel)
     End Sub
     Friend Function CanLearn(spellType As SpellType) As Boolean
-        Dim nextLevel = If(CharacterSpellData.Read(Id, spellType), 0) + 1
+        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
         If nextLevel > spellType.MaximumLevel Then
             Return False
         End If

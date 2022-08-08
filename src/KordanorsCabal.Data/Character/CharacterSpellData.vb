@@ -1,4 +1,4 @@
-﻿Public Module CharacterSpellData
+﻿Public Class CharacterSpellData
     Friend Const TableName = "CharacterSpells"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const SpellTypeColumn = "SpellType"
@@ -49,4 +49,4 @@
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
-End Module
+End Class

@@ -62,7 +62,7 @@
         WorldData.CharacterLocation.ClearForCharacter(characterId)
         CharacterStatisticData.ClearForCharacter(characterId)
         PlayerData.ClearForCharacter(characterId)
-        CharacterSpellData.ClearForCharacter(characterId)
+        WorldData.CharacterSpell.ClearForCharacter(characterId)
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
