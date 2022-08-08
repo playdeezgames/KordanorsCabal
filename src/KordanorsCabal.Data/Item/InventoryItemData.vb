@@ -14,7 +14,7 @@
             );")
     End Sub
     Public Sub Write(inventoryId As Long, itemId As Long)
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (InventoryIdColumn, inventoryId),

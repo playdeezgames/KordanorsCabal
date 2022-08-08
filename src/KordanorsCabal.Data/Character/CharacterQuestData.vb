@@ -33,7 +33,7 @@
     End Function
 
     Public Sub Write(characterId As Long, quest As Long)
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

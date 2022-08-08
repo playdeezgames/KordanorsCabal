@@ -21,7 +21,7 @@
     End Function
 
     Public Sub Write(locationId As Long, dungeonLevel As Long)
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),
