@@ -1,4 +1,4 @@
-﻿Public Module ItemData
+﻿Public Class ItemData
     Friend Const TableName = "Items"
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeColumn = "ItemType"
@@ -43,4 +43,4 @@
             (ItemTypeColumn, itemType),
             (ItemIdColumn, itemId))
     End Sub
-End Module
+End Class

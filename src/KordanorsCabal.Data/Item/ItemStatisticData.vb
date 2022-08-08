@@ -5,7 +5,7 @@
     Friend Const StatisticValueColumn = "StatisticValue"
     Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
     Friend Sub Initialize()
-        ItemData.Initialize()
+        WorldData.Item.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

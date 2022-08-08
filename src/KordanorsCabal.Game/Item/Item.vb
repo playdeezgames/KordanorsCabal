@@ -7,11 +7,11 @@
         Return New Item(itemId)
     End Function
     Shared Function Create(itemType As ItemType) As Item
-        Return FromId(ItemData.Create(itemType))
+        Return FromId(WorldData.Item.Create(itemType))
     End Function
     Public ReadOnly Property ItemType As ItemType
         Get
-            Return CType(ItemData.ReadItemType(Id).Value, ItemType)
+            Return CType(WorldData.Item.ReadItemType(Id).Value, ItemType)
         End Get
     End Property
     Public ReadOnly Property Name As String
@@ -43,7 +43,7 @@
     End Sub
 
     Public Sub Destroy()
-        ItemData.Clear(Id)
+        WorldData.Item.Clear(Id)
     End Sub
     Public Function Encumbrance() As Single
         Return ItemType.Encumbrance
