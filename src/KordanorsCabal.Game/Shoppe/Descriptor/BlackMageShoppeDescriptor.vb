@@ -2,18 +2,14 @@
     Inherits ShoppeTypeDescriptor
 
     Sub New()
-        MyBase.New("Magic")
-    End Sub
-
-    Public Overrides ReadOnly Property Offers As IReadOnlyDictionary(Of ItemType, Long)
-        Get
-            Return AllItemTypes.Where(
+        MyBase.New(
+            "Magic",
+            AllItemTypes.Where(
                 Function(x) x.HasOffer(ShoppeType.BlackMage)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.Offer)
-        End Get
-    End Property
+                    Function(x) x.Offer))
+    End Sub
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of ItemType, Long)
         Get
