@@ -56,7 +56,7 @@
 
     Public Sub Clear(characterId As Long)
         CharacterQuestData.ClearForCharacter(characterId)
-        CharacterQuestCompletionData.ClearForCharacter(characterId)
+        WorldData.CharacterQuestCompletion.ClearForCharacter(characterId)
         WorldData.CharacterEquipSlot.ClearForCharacter(characterId)
         InventoryData.ClearForCharacter(characterId)
         WorldData.CharacterLocation.ClearForCharacter(characterId)
