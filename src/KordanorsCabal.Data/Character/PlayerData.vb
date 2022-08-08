@@ -59,7 +59,7 @@ Public Module PlayerData
     End Function
 
     Public Sub Write(characterId As Long, direction As Long, mode As Long)
-        ReplaceRecord(
+        Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (PlayerIdColumn, FixedPlayerId),
