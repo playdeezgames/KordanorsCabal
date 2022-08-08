@@ -23,7 +23,7 @@
     End Sub
 
     Public Sub Clear(routeId As Long)
-        ClearForColumnValue(
+        Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (RouteIdColumn, routeId))

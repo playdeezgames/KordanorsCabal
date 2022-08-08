@@ -1,8 +1,5 @@
 Public Module StaticStore
     Public ReadOnly Store As New Store
-    Public Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnValue As (String, TColumn))
-        Store.ClearForColumnValue(initializer, tableName, columnValue)
-    End Sub
     Public Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(
                                                                    initializer As Action,
                                                                    tableName As String,

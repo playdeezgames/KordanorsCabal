@@ -44,14 +44,14 @@
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)
-        ClearForColumnValue(
+        Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
 
     Friend Sub ClearForItem(itemId As Long)
-        ClearForColumnValue(
+        Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId))

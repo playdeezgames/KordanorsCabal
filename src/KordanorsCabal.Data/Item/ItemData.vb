@@ -30,7 +30,7 @@
         CharacterEquipSlotData.ClearForItem(itemId)
         InventoryItemData.ClearForItem(itemId)
         ItemStatisticData.ClearForItem(itemId)
-        ClearForColumnValue(
+        Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId))

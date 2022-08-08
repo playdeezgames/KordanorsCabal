@@ -30,7 +30,7 @@
     End Function
 
     Public Sub ClearForItem(itemId As Long)
-        ClearForColumnValue(
+        Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId))

@@ -63,7 +63,7 @@
         CharacterStatisticData.ClearForCharacter(characterId)
         PlayerData.ClearForCharacter(characterId)
         CharacterSpellData.ClearForCharacter(characterId)
-        ClearForColumnValue(
+        Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))
