@@ -1,5 +1,5 @@
 ﻿Public MustInherit Class ItemTypeDescriptor
-    MustOverride ReadOnly Property SpawnLocationTypes(level As Long) As HashSet(Of LocationType)
+    MustOverride ReadOnly Property SpawnLocationTypes(level As DungeonLevel) As HashSet(Of LocationType)
     ReadOnly Property Name As String
     Overridable ReadOnly Property Encumbrance As Single
         Get

@@ -1,9 +1,9 @@
 ﻿Friend Class PlateMailDescriptor
     Inherits ItemTypeDescriptor
-    Public Overrides ReadOnly Property SpawnLocationTypes(level As Long) As HashSet(Of LocationType)
+    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
         Get
             Select Case level
-                Case 2
+                Case DungeonLevel.Level2
                     Return New HashSet(Of LocationType) From {LocationType.DungeonDeadEnd}
             End Select
             Return New HashSet(Of LocationType) From {LocationType.Dungeon, LocationType.DungeonDeadEnd}

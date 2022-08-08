@@ -11,7 +11,7 @@
         MyBase.New(name, offer, boughtAt, price, soldAt, repairPrice, repairedAt)
     End Sub
 
-    Public Overrides ReadOnly Property SpawnLocationTypes(level As Long) As HashSet(Of LocationType)
+    Public Overrides ReadOnly Property SpawnLocationTypes(level as DungeonLevel) As HashSet(Of LocationType)
         Get
             Return New HashSet(Of LocationType)
         End Get
