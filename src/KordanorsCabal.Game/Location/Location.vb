@@ -70,7 +70,7 @@
     End Property
     ReadOnly Property Feature As Feature
         Get
-            Return Feature.FromId(FeatureData.ReadForLocation(Id))
+            Return Feature.FromId(WorldData.Feature.ReadForLocation(Id))
         End Get
     End Property
     ReadOnly Property Inventory As Inventory

@@ -1,4 +1,4 @@
-﻿Public Module FeatureData
+﻿Public Class FeatureData
     Friend Const TableName = "Features"
     Friend Const FeatureIdColumn = "FeatureId"
     Friend Const FeatureTypeColumn = "FeatureType"
@@ -38,4 +38,4 @@
             FeatureIdColumn,
             (LocationIdColumn, locationId))
     End Function
-End Module
+End Class

@@ -10,4 +10,5 @@
     Public ReadOnly Inventory As New InventoryData
     Public ReadOnly InventoryItem As New InventoryItemData
     Public ReadOnly Item As New ItemData
+    Public ReadOnly Feature As New FeatureData
 End Module
