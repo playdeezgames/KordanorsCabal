@@ -10,11 +10,13 @@
             Function(character) character.Location.IsDungeon,
             Sub(character)
                 Dim location = character.Location
-                location.DestroyRoute(Direction.Outward.ToDescriptor)
+                Dim outDirection = New DirectionDescriptor("Out")
+                Dim inDirection = New DirectionDescriptor("In")
+                location.DestroyRoute(outDirection)
                 Dim destination = Game.Location.FromLocationType(LocationType.TownSquare).Single
-                destination.DestroyRoute(Direction.Inward.ToDescriptor)
-                Route.Create(location, Direction.Outward.ToDescriptor, RouteType.Portal, destination)
-                Route.Create(destination, Direction.Inward.ToDescriptor, RouteType.Portal, location)
+                destination.DestroyRoute(inDirection)
+                Route.Create(location, outDirection, RouteType.Portal, destination)
+                Route.Create(destination, inDirection, RouteType.Portal, location)
                 character.EnqueueMessage("A portal opens before you!")
             End Sub)
     End Sub
