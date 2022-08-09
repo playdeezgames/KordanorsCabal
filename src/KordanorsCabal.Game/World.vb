@@ -26,10 +26,10 @@ Public Module World
                 Dim southLocation = locations(CInt(column + ((row + 1) Mod MoonRows) * MoonColumns))
                 Dim eastLocation = locations(CInt(((column + 1) Mod MoonColumns) + row * MoonColumns))
                 Dim westLocation = locations(CInt(((column + MoonColumns - 1) Mod MoonColumns) + row * MoonColumns))
-                Route.Create(moonLocation, Direction.North, RouteType.MoonPath, northLocation)
-                Route.Create(moonLocation, Direction.South, RouteType.MoonPath, southLocation)
-                Route.Create(moonLocation, Direction.East, RouteType.MoonPath, eastLocation)
-                Route.Create(moonLocation, Direction.West, RouteType.MoonPath, westLocation)
+                Route.Create(moonLocation, Direction.North.ToDescriptor, RouteType.MoonPath, northLocation)
+                Route.Create(moonLocation, Direction.South.ToDescriptor, RouteType.MoonPath, southLocation)
+                Route.Create(moonLocation, Direction.East.ToDescriptor, RouteType.MoonPath, eastLocation)
+                Route.Create(moonLocation, Direction.West.ToDescriptor, RouteType.MoonPath, westLocation)
             Next
         Next
         PopulateCharacters(locations, DungeonLevel.Moon)
@@ -86,7 +86,7 @@ Public Module World
                         Dim nextColumn = MazeDirections(direction).DeltaX + column
                         Dim nextRow = MazeDirections(direction).DeltaY + row
                         Dim nextLocation = locations(CInt(nextColumn + nextRow * maze.Columns))
-                        Route.Create(dungeonLocation, direction, RouteType.Passageway, nextLocation)
+                        Route.Create(dungeonLocation, direction.ToDescriptor, RouteType.Passageway, nextLocation)
                     End If
                 Next
             Next
@@ -100,8 +100,8 @@ Public Module World
         Dim locations = CreateLocations(maze, dungeonLevel)
         PopulateLocations(locations, bossKeyType, bossRouteType, dungeonLevel)
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount > 1))
-        Route.Create(fromLocation, Direction.Down, RouteType.Stairs, startingLocation)
-        Route.Create(startingLocation, Direction.Up, RouteType.Stairs, fromLocation)
+        Route.Create(fromLocation, Direction.Down.ToDescriptor, RouteType.Stairs, startingLocation)
+        Route.Create(startingLocation, Direction.Up.ToDescriptor, RouteType.Stairs, fromLocation)
         PopulateCharacters(locations, dungeonLevel)
         Return locations.Single(Function(x) x.LocationType = LocationType.DungeonBoss)
     End Function
@@ -187,8 +187,8 @@ Public Module World
 
     Private Sub CreateCellar(fromLocation As Location)
         Dim cellar = Location.Create(LocationType.Cellar)
-        Route.Create(fromLocation, Direction.Down, RouteType.Stairs, cellar)
-        Route.Create(cellar, Direction.Up, RouteType.Stairs, fromLocation)
+        Route.Create(fromLocation, Direction.Down.ToDescriptor, RouteType.Stairs, cellar)
+        Route.Create(cellar, Direction.Up.ToDescriptor, RouteType.Stairs, fromLocation)
     End Sub
 
     Private Sub CreatePlayer()
@@ -238,8 +238,8 @@ Public Module World
     End Sub
 
     Private Sub StitchTown(fromLocation As Location, direction As Direction, toLocation As Location)
-        Route.Create(fromLocation, direction, RouteType.Road, toLocation)
-        Route.Create(toLocation, direction.ToDescriptor.Opposite.ToDirection, RouteType.Road, fromLocation)
+        Route.Create(fromLocation, direction.ToDescriptor, RouteType.Road, toLocation)
+        Route.Create(toLocation, direction.ToDescriptor.Opposite, RouteType.Road, fromLocation)
     End Sub
 
     Private Sub RollUpPlayerCharacter()

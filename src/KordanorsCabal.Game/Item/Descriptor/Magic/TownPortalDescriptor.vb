@@ -13,8 +13,8 @@
                 location.DestroyRoute(Direction.Outward.ToDescriptor)
                 Dim destination = Game.Location.FromLocationType(LocationType.TownSquare).Single
                 destination.DestroyRoute(Direction.Inward.ToDescriptor)
-                Route.Create(location, Direction.Outward, RouteType.Portal, destination)
-                Route.Create(destination, Direction.Inward, RouteType.Portal, location)
+                Route.Create(location, Direction.Outward.ToDescriptor, RouteType.Portal, destination)
+                Route.Create(destination, Direction.Inward.ToDescriptor, RouteType.Portal, location)
                 character.EnqueueMessage("A portal opens before you!")
             End Sub)
     End Sub
