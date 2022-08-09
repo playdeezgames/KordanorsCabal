@@ -6,6 +6,6 @@
                   Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
                   Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing)
         MyBase.New(
-            name,, spawnLocationTypes, spawnCounts)
+            name,, spawnLocationTypes, spawnCounts, equipSlots)
     End Sub
 End Class

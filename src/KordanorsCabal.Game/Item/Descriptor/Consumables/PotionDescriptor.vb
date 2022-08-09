@@ -19,12 +19,6 @@
                 (DungeonLevel.Level5, "3d6")))
     End Sub
 
-    Public Overrides ReadOnly Property PurchasePrice As Long?
-        Get
-            Return 25
-        End Get
-    End Property
-
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get
             Return True

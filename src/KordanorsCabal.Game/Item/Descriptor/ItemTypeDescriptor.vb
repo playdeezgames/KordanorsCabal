@@ -3,11 +3,6 @@
     ReadOnly Property Name As String
     ReadOnly Property Encumbrance As Single
     Private ReadOnly spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String)
-    Overridable ReadOnly Property PurchasePrice() As Long?
-        Get
-            Return Nothing
-        End Get
-    End Property
 
     Overridable ReadOnly Property CanUse(character As Character) As Boolean
         Get
