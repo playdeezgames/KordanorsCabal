@@ -13,16 +13,21 @@
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of ItemType, Long)
         Get
-            Return New Dictionary(Of ItemType, Long) From
-                {
-                    {ItemType.BrodeSode, 100},
-                    {ItemType.ChainMail, 50},
-                    {ItemType.Dagger, 5},
-                    {ItemType.Helmet, 10},
-                    {ItemType.PlateMail, 250},
-                    {ItemType.Shield, 15},
-                    {ItemType.Shortsword, 25}
-                }
+            Return AllItemTypes.Where(
+                Function(x) x.HasPrice(ShoppeType.Blacksmith)).
+                ToDictionary(
+                    Function(x) x,
+                    Function(x) x.Price)
+            'Return New Dictionary(Of ItemType, Long) From
+            '    {
+            '        {ItemType.BrodeSode, 100},
+            '        {ItemType.ChainMail, 50},
+            '        {ItemType.Dagger, 5},
+            '        {ItemType.Helmet, 10},
+            '        {ItemType.PlateMail, 250},
+            '        {ItemType.Shield, 15},
+            '        {ItemType.Shortsword, 25}
+            '    }
         End Get
     End Property
 

@@ -3,7 +3,9 @@
 
     Sub New()
         MyBase.New(
-            "Holy ""Water""",,,,,,,,,,,,,,,,,,
+            "Holy ""Water""",,,,,,,,,,,,,
+            10,
+            MakeList(ShoppeType.Healer),,,,
             Function(character) character.CanFight AndAlso character.Location.Enemy(character).IsUndead,
             Sub(character)
                 Dim sfx As Sfx? = Nothing

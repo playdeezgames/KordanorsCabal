@@ -16,7 +16,9 @@
                 (DungeonLevel.Level2, "3d6"),
                 (DungeonLevel.Level3, "3d6"),
                 (DungeonLevel.Level4, "3d6"),
-                (DungeonLevel.Level5, "3d6")),,,,,,,,,,,,,,,
+                (DungeonLevel.Level5, "3d6")),,,,,,,,,,
+            15,
+            MakeList(ShoppeType.Healer),,,,
             Function(character) True,
             Sub(character)
                 Dim healRoll = RNG.RollDice("2d4")
