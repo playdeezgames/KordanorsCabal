@@ -26,9 +26,9 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
+    Public Overrides ReadOnly Property SpawnCount(level As OldDungeonLevel) As Long
         Get
-            Return If(level = DungeonLevel.Level4, 1, 0)
+            Return If(level = OldDungeonLevel.Level4, 1, 0)
         End Get
     End Property
 
@@ -52,7 +52,7 @@
         Return True
     End Function
 
-    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
-        Return level = DungeonLevel.Level4 AndAlso location.LocationType = LocationType.DungeonBoss
+    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
+        Return level = OldDungeonLevel.Level4 AndAlso location.LocationType = LocationType.DungeonBoss
     End Function
 End Class

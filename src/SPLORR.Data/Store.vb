@@ -87,6 +87,12 @@ Public Class Store
         End If
         Return Nothing
     End Function
+    Public Function ReadColumnValues(Of TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String) As IEnumerable(Of TOutputColumn)
+        initializer()
+        Return ExecuteReader(
+            Function(reader) CType(reader(outputColumnName), TOutputColumn),
+            $"SELECT [{outputColumnName}] FROM [{tableName}];")
+    End Function
     Public Function ReadColumnValue(Of TInputColumn, TOutputColumn As Structure)(initializer As Action, tableName As String, outputColumnName As String, inputColumnValue As (String, TInputColumn)) As TOutputColumn?
         initializer()
         Return ExecuteScalar(Of TOutputColumn)(

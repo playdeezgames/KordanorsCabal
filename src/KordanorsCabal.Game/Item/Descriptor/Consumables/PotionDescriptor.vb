@@ -6,17 +6,17 @@
             "Potion",
             2,
             MakeDictionary(
-                (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
-                (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
-                (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
-                (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
-                (DungeonLevel.Level5, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon))),
+                (OldDungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (OldDungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (OldDungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (OldDungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (OldDungeonLevel.Level5, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon))),
             MakeDictionary(
-                (DungeonLevel.Level1, "3d6"),
-                (DungeonLevel.Level2, "3d6"),
-                (DungeonLevel.Level3, "3d6"),
-                (DungeonLevel.Level4, "3d6"),
-                (DungeonLevel.Level5, "3d6")))
+                (OldDungeonLevel.Level1, "3d6"),
+                (OldDungeonLevel.Level2, "3d6"),
+                (OldDungeonLevel.Level3, "3d6"),
+                (OldDungeonLevel.Level4, "3d6"),
+                (OldDungeonLevel.Level5, "3d6")))
     End Sub
 
     Public Overrides ReadOnly Property PurchasePrice As Long?

@@ -5,14 +5,14 @@
         MyBase.New("Dagger",
                    1,
             MakeDictionary(
-                (DungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
-                (DungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),
-                (DungeonLevel.Level3, MakeHashSet(LocationType.Dungeon)),
-                (DungeonLevel.Level4, MakeHashSet(LocationType.Dungeon)),
-                (DungeonLevel.Level5, MakeHashSet(LocationType.Dungeon))),
+                (OldDungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
+                (OldDungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),
+                (OldDungeonLevel.Level3, MakeHashSet(LocationType.Dungeon)),
+                (OldDungeonLevel.Level4, MakeHashSet(LocationType.Dungeon)),
+                (OldDungeonLevel.Level5, MakeHashSet(LocationType.Dungeon))),
             MakeDictionary(
-                (DungeonLevel.Level1, "4d6"),
-                (DungeonLevel.Level2, "2d6")),
+                (OldDungeonLevel.Level1, "4d6"),
+                (OldDungeonLevel.Level2, "2d6")),
             MakeList(EquipSlot.Weapon),
             1,
             MakeList(ShoppeType.Blacksmith))

@@ -6,12 +6,12 @@
             "Chainmail",
             20.0!,
             MakeDictionary(
-                (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd)),
-                (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
-                (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
-                (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
-                (DungeonLevel.Level5, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon))),
-            MakeDictionary((DungeonLevel.Level1, "1d6")),
+                (OldDungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd)),
+                (OldDungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (OldDungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (OldDungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
+                (OldDungeonLevel.Level5, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon))),
+            MakeDictionary((OldDungeonLevel.Level1, "1d6")),
             MakeList(EquipSlot.Torso),
             10,
             MakeList(ShoppeType.Blacksmith))

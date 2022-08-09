@@ -1,8 +1,8 @@
 ﻿Public MustInherit Class ItemTypeDescriptor
-    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType))
+    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of OldDungeonLevel, HashSet(Of LocationType))
     ReadOnly Property Name As String
     ReadOnly Property Encumbrance As Single
-    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String)
+    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of OldDungeonLevel, String)
     Overridable ReadOnly Property PurchasePrice() As Long?
         Get
             Return Nothing
@@ -19,7 +19,7 @@
         'nothing, by default
     End Sub
 
-    Function RollSpawnCount(level As DungeonLevel) As Long
+    Function RollSpawnCount(level As OldDungeonLevel) As Long
         If spawnCounts Is Nothing Then
             Return 0
         End If
@@ -94,8 +94,8 @@
     Sub New(
            name As String,
            Optional encumbrance As Single = 0!,
-           Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
-           Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing,
+           Optional spawnLocationTypes As IReadOnlyDictionary(Of OldDungeonLevel, HashSet(Of LocationType)) = Nothing,
+           Optional spawnCounts As IReadOnlyDictionary(Of OldDungeonLevel, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
@@ -107,12 +107,12 @@
         Me.Encumbrance = encumbrance
         If spawnLocationTypes Is Nothing Then
             Me.SpawnLocationTypes =
-                AllDungeonLevels.ToDictionary(
+                OldAllDungeonLevels.ToDictionary(
                 Function(x) x,
                 Function(x) New HashSet(Of LocationType))
         Else
             Me.SpawnLocationTypes =
-                AllDungeonLevels.ToDictionary(
+                OldAllDungeonLevels.ToDictionary(
                 Function(x) x,
                 Function(x) If(spawnLocationTypes.ContainsKey(x), spawnLocationTypes(x), New HashSet(Of LocationType)))
         End If
@@ -135,8 +135,8 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AmuletOfHP, New AmuletDescriptor(
                 CharacterStatisticType.HP,
                 MakeDictionary(
-                    (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
-                MakeDictionary((DungeonLevel.Level1, "1d1")))},
+                    (OldDungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
+                MakeDictionary((OldDungeonLevel.Level1, "1d1")))},
             {ItemType.AmuletOfMana, New AmuletDescriptor(CharacterStatisticType.Mana)},
             {ItemType.AmuletOfPOW, New AmuletDescriptor(CharacterStatisticType.Power)},
             {ItemType.AmuletOfSTR, New AmuletDescriptor(CharacterStatisticType.Strength)},

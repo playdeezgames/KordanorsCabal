@@ -26,15 +26,15 @@
         End Get
     End Property
 
-    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of DungeonLevel, Long) =
-        New Dictionary(Of DungeonLevel, Long) From
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of OldDungeonLevel, Long) =
+        New Dictionary(Of OldDungeonLevel, Long) From
         {
-            {DungeonLevel.Level1, 1},
-            {DungeonLevel.Level2, 10},
-            {DungeonLevel.Level3, 25}
+            {OldDungeonLevel.Level1, 1},
+            {OldDungeonLevel.Level2, 10},
+            {OldDungeonLevel.Level3, 25}
         }
 
-    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
+    Public Overrides ReadOnly Property SpawnCount(level As OldDungeonLevel) As Long
         Get
             Dim result As Long = 0
             Return If(spawnCountTable.TryGetValue(level, result), result, 0)
@@ -63,9 +63,9 @@
         Return True
     End Function
 
-    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
+    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
         Select Case level
-            Case DungeonLevel.Level1
+            Case OldDungeonLevel.Level1
                 Return location.LocationType = LocationType.DungeonBoss
             Case Else
                 Return True
