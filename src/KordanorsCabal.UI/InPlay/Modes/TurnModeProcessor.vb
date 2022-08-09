@@ -33,15 +33,15 @@
                 player.Mode = PlayerMode.Neutral
             Case AroundButtonIndex
                 PopButtonIndex()
-                player.Direction = player.Direction.ToDescriptor.Opposite
+                player.Direction = player.Direction.Opposite.ToDescriptor
                 player.Mode = PlayerMode.Neutral
             Case LeftButtonIndex
                 PopButtonIndex()
-                player.Direction = player.Direction.ToDescriptor.PreviousDirection.Value
+                player.Direction = player.Direction.PreviousDirection.Value.ToDescriptor
                 player.Mode = PlayerMode.Neutral
             Case RightButtonIndex
                 PopButtonIndex()
-                player.Direction = player.Direction.ToDescriptor.NextDirection.Value
+                player.Direction = player.Direction.NextDirection.Value.ToDescriptor
                 player.Mode = PlayerMode.Neutral
         End Select
         Return UIState.InPlay

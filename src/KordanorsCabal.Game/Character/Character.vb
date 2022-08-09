@@ -586,12 +586,12 @@
             Return Money >= 5
         End Get
     End Property
-    Public Property Direction As Direction
+    Public Property Direction As DirectionDescriptor
         Get
-            Return CType(StaticWorldData.World.Player.ReadDirection().Value, Direction)
+            Return New DirectionDescriptor(StaticWorldData.World.Player.ReadDirection().Value)
         End Get
-        Set(value As Direction)
-            StaticWorldData.World.Player.WriteDirection(value)
+        Set(value As DirectionDescriptor)
+            StaticWorldData.World.Player.WriteDirection(value.Id)
         End Set
     End Property
     Public ReadOnly Property CanCast() As Boolean
@@ -681,7 +681,7 @@
         Return Inventory.Items.Where(Function(x) x.ItemType = itemType).Count
     End Function
     Public Function CanMoveLeft() As Boolean
-        Return CanMove(Direction.ToDescriptor.PreviousDirection.Value)
+        Return CanMove(Direction.PreviousDirection.Value)
     End Function
     Public ReadOnly Property CanMap() As Boolean
         Get
@@ -689,16 +689,16 @@
         End Get
     End Property
     Public Function CanMoveRight() As Boolean
-        Return CanMove(Direction.ToDescriptor.NextDirection.Value)
+        Return CanMove(Direction.NextDirection.Value)
     End Function
     Public Function CanMoveForward() As Boolean
-        Return CanMove(Direction)
+        Return CanMove(Direction.ToDirection)
     End Function
     Public Sub Heal()
         SetStatistic(CharacterStatisticType.Wounds, 0)
     End Sub
     Public Function CanMoveBackward() As Boolean
-        Return CanMove(Direction.ToDescriptor.Opposite)
+        Return CanMove(Direction.Opposite)
     End Function
     Public Sub Interact()
         If CanInteract Then
@@ -758,10 +758,10 @@
     End Function
     Public Sub Run()
         If CanFight Then
-            Direction = RNG.FromEnumerable(CardinalDirections)
-            If CanMove(Direction) Then
+            Direction = RNG.FromEnumerable(CardinalDirections).ToDescriptor
+            If CanMove(Direction.ToDirection) Then
                 EnqueueMessage("You successfully ran!") 'TODO: sfx
-                Move(Direction)
+                Move(Direction.ToDirection)
                 Exit Sub
             End If
             EnqueueMessage("You fail to run!") 'TODO: shucks!

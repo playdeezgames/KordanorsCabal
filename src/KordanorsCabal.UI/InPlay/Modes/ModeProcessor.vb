@@ -4,7 +4,7 @@
         buffer.WriteTextCentered(0, title, True, Hue.Blue)
     End Sub
     Protected Shared Sub ShowFacing(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
-        buffer.WriteText(xy, $"Facing: {player.Direction.ToDescriptor.Name}", False, Hue.Black)
+        buffer.WriteText(xy, $"Facing: {player.Direction.Name}", False, Hue.Black)
     End Sub
     Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
         Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) x.Key.ToDescriptor.Abbreviation))
@@ -64,29 +64,29 @@
         buffer.PutCell((17, 14), Pattern.BottomRightCorner, False, Hue.Black)
 
         Dim location = player.Location
-        If location.HasRoute(player.Direction) Then
+        If location.HasRoute(player.Direction.ToDirection) Then
             buffer.FillCells((9, 6), (4, 1), Pattern.Horizontal1, False, Hue.Black)
             buffer.FillCells((8, 6), (1, 8), Pattern.Vertical8, False, Hue.Black)
             buffer.FillCells((13, 6), (1, 8), Pattern.Vertical1, False, Hue.Black)
             buffer.PutCell((13, 14), Pattern.BottomLeftCorner, False, Hue.Black)
             buffer.PutCell((8, 14), Pattern.BottomRightCorner, False, Hue.Black)
-            Dim routeType = location.Routes(player.Direction).RouteType
+            Dim routeType = location.Routes(player.Direction.ToDirection).RouteType
             buffer.WriteText((10, 9), routeType.Abbreviation, False, routeType.TextHue)
         End If
 
-        If location.HasRoute(player.Direction.ToDescriptor.PreviousDirection.Value) Then
+        If location.HasRoute(player.Direction.PreviousDirection.Value) Then
             buffer.PutCell((0, 3), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.PutCell((1, 4), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((1, 5), (1, 12), Pattern.Vertical8, False, Hue.Black)
-            Dim routeType = location.Routes(player.Direction.ToDescriptor.PreviousDirection.Value).RouteType
+            Dim routeType = location.Routes(player.Direction.PreviousDirection.Value).RouteType
             buffer.WriteText((0, 9), routeType.Abbreviation.Substring(1, 1), False, routeType.TextHue)
         End If
 
-        If location.HasRoute(player.Direction.ToDescriptor.NextDirection.Value) Then
+        If location.HasRoute(player.Direction.NextDirection.Value) Then
             buffer.PutCell((21, 3), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.PutCell((20, 4), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((20, 5), (1, 12), Pattern.Vertical1, False, Hue.Black)
-            Dim routeType = location.Routes(player.Direction.ToDescriptor.NextDirection.Value).RouteType
+            Dim routeType = location.Routes(player.Direction.NextDirection.Value).RouteType
             buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, routeType.TextHue)
         End If
 
@@ -122,7 +122,7 @@
             ShowEnemy(buffer, (5, 5), enemy)
         End If
 
-        buffer.WriteTextCentered(1, player.Direction.ToDescriptor.Abbreviation, False, Hue.Purple)
+        buffer.WriteTextCentered(1, player.Direction.Abbreviation, False, Hue.Purple)
         If player.IsEncumbered Then
             buffer.WriteTextCentered(2, "Encumbered", False, Hue.Red)
         End If

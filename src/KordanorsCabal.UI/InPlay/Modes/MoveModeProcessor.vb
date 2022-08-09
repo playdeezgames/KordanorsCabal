@@ -66,13 +66,13 @@
             Case OutButtonIndex
                 Return HandleMove(player, Direction.Outward)
             Case ForwardButtonIndex
-                Return HandleMove(player, player.Direction)
+                Return HandleMove(player, player.Direction.ToDirection)
             Case BackwardButtonIndex
-                Return HandleMove(player, player.Direction.ToDescriptor.Opposite)
+                Return HandleMove(player, player.Direction.Opposite)
             Case LeftButtonIndex
-                Return HandleMove(player, player.Direction.ToDescriptor.PreviousDirection.Value)
+                Return HandleMove(player, player.Direction.PreviousDirection.Value)
             Case RightButtonIndex
-                Return HandleMove(player, player.Direction.ToDescriptor.NextDirection.Value)
+                Return HandleMove(player, player.Direction.NextDirection.Value)
         End Select
         Return UIState.InPlay
     End Function
