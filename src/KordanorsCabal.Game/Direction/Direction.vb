@@ -13,15 +13,11 @@ Public Enum Direction
 End Enum
 Public Module DirectionExtensions
     <Extension>
-    Public Function PreviousDirection(direction As Direction) As Direction?
-        Return DirectionDescriptors(direction).PreviousDirection
-    End Function
-    <Extension>
     Public Function ToDescriptor(direction As Direction) As DirectionDescriptor
         Return DirectionDescriptors(direction)
     End Function
     <Extension>
-    Public Function ToDirection(directionId As Long) As Direction
-        Return CType(directionId, Direction)
+    Public Function ToDirection(descriptor As DirectionDescriptor) As Direction
+        Return CType(descriptor.Id, Direction)
     End Function
 End Module
