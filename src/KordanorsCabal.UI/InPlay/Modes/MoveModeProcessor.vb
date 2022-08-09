@@ -72,7 +72,7 @@
             Case LeftButtonIndex
                 Return HandleMove(player, player.Direction.PreviousDirection.Value)
             Case RightButtonIndex
-                Return HandleMove(player, player.Direction.NextDirection.Value)
+                Return HandleMove(player, player.Direction.ToDescriptor.NextDirection.Value)
         End Select
         Return UIState.InPlay
     End Function

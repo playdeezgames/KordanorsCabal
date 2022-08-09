@@ -82,11 +82,11 @@
             buffer.WriteText((0, 9), routeType.Abbreviation.Substring(1, 1), False, routeType.TextHue)
         End If
 
-        If location.HasRoute(player.Direction.NextDirection.Value) Then
+        If location.HasRoute(player.Direction.ToDescriptor.NextDirection.Value) Then
             buffer.PutCell((21, 3), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.PutCell((20, 4), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((20, 5), (1, 12), Pattern.Vertical1, False, Hue.Black)
-            Dim routeType = location.Routes(player.Direction.NextDirection.Value).RouteType
+            Dim routeType = location.Routes(player.Direction.ToDescriptor.NextDirection.Value).RouteType
             buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, routeType.TextHue)
         End If
 

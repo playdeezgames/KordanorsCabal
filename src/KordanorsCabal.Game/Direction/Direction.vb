@@ -13,10 +13,6 @@ Public Enum Direction
 End Enum
 Public Module DirectionExtensions
     <Extension>
-    Public Function NextDirection(direction As Direction) As Direction?
-        Return DirectionDescriptors(direction).NextDirection
-    End Function
-    <Extension>
     Public Function PreviousDirection(direction As Direction) As Direction?
         Return DirectionDescriptors(direction).PreviousDirection
     End Function
