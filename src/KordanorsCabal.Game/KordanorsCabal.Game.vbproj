@@ -29,4 +29,8 @@
     <Import Include="SPLORR.Game" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Item\Descriptor\Book\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿Public MustInherit Class ItemTypeDescriptor
+﻿Public Class ItemTypeDescriptor
     ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType))
     ReadOnly Property Name As String
     ReadOnly Property Encumbrance As Single
@@ -121,8 +121,18 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.BatWing, New TrophyDescriptor("Bat Wing", 3, MakeList(ShoppeType.BlackMage))},
             {ItemType.Beer, New BeerDescriptor},
             {ItemType.Bong, New TrophyDescriptor("Bong", , , 25, MakeList(ShoppeType.BlackMage))},
-            {ItemType.BookOfHolyBolt, New BookDescriptor(SpellType.HolyBolt)},
-            {ItemType.BookOfPurify, New BookDescriptor(SpellType.Purify)},
+            {ItemType.BookOfHolyBolt, New ItemTypeDescriptor(
+                    $"Book of {SpellType.HolyBolt.Name}",,,,,,,,,,,,,
+                    100,
+                    MakeList(ShoppeType.BlackMage),,,,
+                    Function(character) character.CanLearn(SpellType.HolyBolt),
+                    Sub(character) character.Learn(SpellType.HolyBolt))},
+            {ItemType.BookOfPurify, New ItemTypeDescriptor(
+                    $"Book of {SpellType.Purify.Name}",,,,,,,,,,,,,
+                    50,
+                    MakeList(ShoppeType.BlackMage),,,,
+                    Function(character) character.CanLearn(SpellType.Purify),
+                    Sub(character) character.Learn(SpellType.Purify))},
             {ItemType.Bottle, New BottleDescriptor},
             {ItemType.BrodeSode, New BrodeSodeDescriptor},
             {ItemType.ChainMail, New ChainMailDescriptor},
