@@ -698,7 +698,7 @@
         SetStatistic(CharacterStatisticType.Wounds, 0)
     End Sub
     Public Function CanMoveBackward() As Boolean
-        Return CanMove(Direction.Opposite)
+        Return CanMove(Direction.ToDescriptor.Opposite)
     End Function
     Public Sub Interact()
         If CanInteract Then
