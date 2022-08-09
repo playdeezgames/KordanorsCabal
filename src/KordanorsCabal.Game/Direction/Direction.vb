@@ -25,10 +25,6 @@ Public Module DirectionExtensions
         Return DirectionDescriptors(direction).PreviousDirection
     End Function
     <Extension>
-    Public Function Abbreviation(direction As Direction) As String
-        Return DirectionDescriptors(direction).Abbreviation
-    End Function
-    <Extension>
     Public Function ToDescriptor(direction As Direction) As DirectionDescriptor
         Return DirectionDescriptors(direction)
     End Function

@@ -7,7 +7,7 @@
         buffer.WriteText(xy, $"Facing: {player.Direction.ToDescriptor.Name}", False, Hue.Black)
     End Sub
     Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
-        Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) x.Key.Abbreviation))
+        Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) x.Key.ToDescriptor.Abbreviation))
         buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
     End Sub
 
@@ -122,7 +122,7 @@
             ShowEnemy(buffer, (5, 5), enemy)
         End If
 
-        buffer.WriteTextCentered(1, player.Direction.Abbreviation, False, Hue.Purple)
+        buffer.WriteTextCentered(1, player.Direction.ToDescriptor.Abbreviation, False, Hue.Purple)
         If player.IsEncumbered Then
             buffer.WriteTextCentered(2, "Encumbered", False, Hue.Red)
         End If
