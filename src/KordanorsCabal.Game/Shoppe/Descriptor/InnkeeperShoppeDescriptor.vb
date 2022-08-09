@@ -8,7 +8,7 @@
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of ItemType, Long)
         Get
             Return AllItemTypes.Where(
-                Function(x) x.HasPrice(ShoppeType.BlackMage)).
+                Function(x) x.HasPrice(ShoppeType.InnKeeper)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.Price)
