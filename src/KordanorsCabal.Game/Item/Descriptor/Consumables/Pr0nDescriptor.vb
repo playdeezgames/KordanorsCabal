@@ -3,7 +3,9 @@
 
     Sub New()
         MyBase.New(
-            "Pr0n Scroll",,,,,,,,,,,,,,,,,,
+            "Pr0n Scroll",,,,,,,,,,,,,
+            10,
+            MakeList(ShoppeType.BlackMarket),,,,
             Function(character)
                 Dim enemy = character.Location.Enemy(character)
                 Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.Pr0n)) OrElse enemy Is Nothing

@@ -12,12 +12,6 @@
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.Price)
-            'Return New Dictionary(Of ItemType, Long) From
-            '    {
-            '        {ItemType.Lotion, 25},
-            '        {ItemType.Pr0n, 10},
-            '        {ItemType.Trousers, 100}
-            '    }
         End Get
     End Property
 End Class
