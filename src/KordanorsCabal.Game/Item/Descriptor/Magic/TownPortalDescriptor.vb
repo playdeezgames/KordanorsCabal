@@ -10,9 +10,9 @@
             Function(character) character.Location.IsDungeon,
             Sub(character)
                 Dim location = character.Location
-                location.DestroyRoute(Direction.Outward)
+                location.DestroyRoute(Direction.Outward.ToDescriptor)
                 Dim destination = Game.Location.FromLocationType(LocationType.TownSquare).Single
-                destination.DestroyRoute(Direction.Inward)
+                destination.DestroyRoute(Direction.Inward.ToDescriptor)
                 Route.Create(location, Direction.Outward, RouteType.Portal, destination)
                 Route.Create(destination, Direction.Inward, RouteType.Portal, location)
                 character.EnqueueMessage("A portal opens before you!")

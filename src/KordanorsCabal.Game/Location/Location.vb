@@ -24,9 +24,9 @@
     Public Shared Function ByDungeonLevel(dungeonLevel As DungeonLevel) As IEnumerable(Of Location)
         Return StaticWorldData.World.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
     End Function
-    Friend Sub DestroyRoute(direction As Direction)
-        If Routes.ContainsKey(direction) Then
-            Routes(direction).Destroy()
+    Friend Sub DestroyRoute(direction As DirectionDescriptor)
+        If Routes.ContainsKey(direction.ToDirection) Then
+            Routes(direction.ToDirection).Destroy()
         End If
     End Sub
     Friend Function IsDungeon() As Boolean
