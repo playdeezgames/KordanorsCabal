@@ -1,4 +1,4 @@
-﻿Public Module RouteData
+﻿Public Class RouteData
     Friend Const TableName = "Routes"
     Friend Const RouteIdColumn = "RouteId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
@@ -70,4 +70,4 @@
             (RouteTypeColumn, routeType),
             (ToLocationIdColumn, toLocationId))
     End Function
-End Module
+End Class

@@ -19,7 +19,7 @@
         Return FromId(WorldData.Location.Create(locationType))
     End Function
     Public Shared Function ByStatisticValue(statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)
-        Return LocationStatisticData.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
+        Return WorldData.LocationStatistic.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
     End Function
     Public Shared Function ByDungeonLevel(dungeonLevel As DungeonLevel) As IEnumerable(Of Location)
         Return WorldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
@@ -33,7 +33,7 @@
         Return LocationType.IsDungeon
     End Function
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long?
-        Return LocationStatisticData.Read(Id, statisticType)
+        Return WorldData.LocationStatistic.Read(Id, statisticType)
     End Function
     ReadOnly Property RequiresMP As Boolean
         Get
@@ -53,7 +53,7 @@
     End Property
     ReadOnly Property Routes As IReadOnlyDictionary(Of Direction, Route)
         Get
-            Return RouteData.ReadForLocation(Id).
+            Return WorldData.Route.ReadForLocation(Id).
                 ToDictionary(Function(x) CType(x.Item1, Direction), Function(x) Route.FromId(x.Item2))
         End Get
     End Property
@@ -61,7 +61,7 @@
         Return Routes.ContainsKey(direction)
     End Function
     Friend Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
-        LocationStatisticData.Write(Id, statisticType, statisticValue)
+        WorldData.LocationStatistic.Write(Id, statisticType, statisticValue)
     End Sub
     Friend ReadOnly Property HasFeature As Boolean
         Get

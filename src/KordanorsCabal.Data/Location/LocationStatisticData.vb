@@ -1,4 +1,4 @@
-﻿Public Module LocationStatisticData
+﻿Public Class LocationStatisticData
     Friend Const TableName = "LocationStatistics"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
@@ -50,4 +50,4 @@
             (StatisticTypeColumn, statisticType),
             (StatisticValueColumn, statisticValue.Value))
     End Sub
-End Module
+End Class
