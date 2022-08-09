@@ -44,10 +44,10 @@
         If player.CanMove(Direction.FromName("Down")) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
-        If player.CanMove(Direction.FromName("In")) Then
+        If player.CanMove(Direction.FromName(Inward)) Then
             Buttons(InButtonIndex).Title = "In"
         End If
-        If player.CanMove(Direction.FromName("Out")) Then
+        If player.CanMove(Direction.FromName(Outward)) Then
             Buttons(OutButtonIndex).Title = "Out"
         End If
     End Sub
@@ -62,9 +62,9 @@
             Case UpButtonIndex
                 Return HandleMove(player, Direction.FromName("Up"))
             Case InButtonIndex
-                Return HandleMove(player, Direction.FromName("In"))
+                Return HandleMove(player, Direction.FromName(Inward))
             Case OutButtonIndex
-                Return HandleMove(player, Direction.FromName("Out"))
+                Return HandleMove(player, Direction.FromName(Outward))
             Case ForwardButtonIndex
                 Return HandleMove(player, player.Direction)
             Case BackwardButtonIndex

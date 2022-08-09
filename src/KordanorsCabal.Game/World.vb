@@ -19,10 +19,10 @@ Public Module World
                 locations.Add(dungeonLocation)
             Next
         Next
-        Dim north = Direction.FromName("North")
-        Dim east = Direction.FromName("East")
-        Dim south = Direction.FromName("South")
-        Dim west = Direction.FromName("West")
+        Dim north = Direction.FromName(DirectionNames.North)
+        Dim east = Direction.FromName(DirectionNames.East)
+        Dim south = Direction.FromName(DirectionNames.South)
+        Dim west = Direction.FromName(DirectionNames.West)
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
                 Dim moonLocation = locations(CInt(column + row * MoonColumns))
@@ -214,22 +214,22 @@ Public Module World
         Dim westTown = Location.Create(LocationType.Town)
         Dim northWestTown = Location.Create(LocationType.Town)
 
-        StitchTown(centerTown, Direction.FromName("North"), northTown)
-        StitchTown(centerTown, Direction.FromName("East"), eastTown)
-        StitchTown(centerTown, Direction.FromName("South"), southTown)
-        StitchTown(centerTown, Direction.FromName("West"), westTown)
+        StitchTown(centerTown, Direction.FromName(North), northTown)
+        StitchTown(centerTown, Direction.FromName(East), eastTown)
+        StitchTown(centerTown, Direction.FromName(South), southTown)
+        StitchTown(centerTown, Direction.FromName(West), westTown)
 
-        StitchTown(northWestTown, Direction.FromName("East"), northTown)
-        StitchTown(northWestTown, Direction.FromName("South"), westTown)
+        StitchTown(northWestTown, Direction.FromName(East), northTown)
+        StitchTown(northWestTown, Direction.FromName(South), westTown)
 
-        StitchTown(southWestTown, Direction.FromName("East"), southTown)
-        StitchTown(southWestTown, Direction.FromName("North"), westTown)
+        StitchTown(southWestTown, Direction.FromName(East), southTown)
+        StitchTown(southWestTown, Direction.FromName(North), westTown)
 
-        StitchTown(northEastTown, Direction.FromName("West"), northTown)
-        StitchTown(northEastTown, Direction.FromName("South"), eastTown)
+        StitchTown(northEastTown, Direction.FromName(West), northTown)
+        StitchTown(northEastTown, Direction.FromName(South), eastTown)
 
-        StitchTown(southEastTown, Direction.FromName("North"), eastTown)
-        StitchTown(southEastTown, Direction.FromName("West"), southTown)
+        StitchTown(southEastTown, Direction.FromName(North), eastTown)
+        StitchTown(southEastTown, Direction.FromName(West), southTown)
 
         CreateChurchEntrance()
     End Sub
