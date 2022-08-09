@@ -15,7 +15,7 @@
                 (DungeonLevel.Level2, "1d6")),
             MakeList(EquipSlot.Weapon),
             4,
-            2,
+            2,,
             5,
             MakeList(ShoppeType.Blacksmith))
     End Sub

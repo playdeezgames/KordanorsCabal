@@ -29,17 +29,10 @@
     End Function
     ReadOnly Property AttackDice As Long
     ReadOnly Property MaximumDamage As Long?
-
-
+    ReadOnly Property DefendDice As Long
     Overridable ReadOnly Property MaximumDurability As Long?
         Get
             Return Nothing
-        End Get
-    End Property
-
-    Overridable ReadOnly Property DefendDice As Long
-        Get
-            Return 0
         End Get
     End Property
 
@@ -86,6 +79,7 @@
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional attackDice As Long = 0,
            Optional maximumDamage As Long? = Nothing,
+           Optional defendDice As Long = 0,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
@@ -115,6 +109,7 @@
         Me.repairedAt = If(repairedAt, New List(Of ShoppeType))
         Me.AttackDice = attackDice
         Me.MaximumDamage = maximumDamage
+        Me.DefendDice = defendDice
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility
