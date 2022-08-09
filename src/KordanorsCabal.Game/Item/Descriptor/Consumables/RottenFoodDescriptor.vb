@@ -2,7 +2,11 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Food")
+        MyBase.New(
+            "Food",,,,,,,,,,,,,,,,,
+            Sub(item)
+                StaticWorldData.World.Item.WriteItemType(item.Id, ItemType.Food)
+            End Sub)
     End Sub
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
         Get
@@ -33,9 +37,5 @@
         character.EnqueueMessage(
                 $"Food heals up to {healRoll} HP!",
                 $"You now have {character.CurrentHP} HP!")
-    End Sub
-
-    Public Overrides Sub Purify(item As Item)
-        StaticWorldData.World.Item.WriteItemType(item.Id, ItemType.Food)
     End Sub
 End Class
