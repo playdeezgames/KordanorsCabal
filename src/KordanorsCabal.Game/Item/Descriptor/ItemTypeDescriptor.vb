@@ -1,24 +1,41 @@
 ﻿Public Class ItemTypeDescriptor
+    '[ItemTypeSpawnLocationTypes]([ItemTypeId],[DungeonLevelId],[LocationTypeId])
     ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType))
+    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String)
+
+    '[ItemTypes]([ItemTypeId],[ItemTypeName],[Encumbrance])
     ReadOnly Property Name As String
     ReadOnly Property Encumbrance As Single
-    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String)
-    ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
+    ReadOnly Property IsConsumed As Boolean
+
+    '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
     ReadOnly Property AttackDice As Long
     ReadOnly Property MaximumDamage As Long?
     ReadOnly Property DefendDice As Long
     ReadOnly Property MaximumDurability As Long?
-    Friend ReadOnly Property Offer() As Long
+    Friend ReadOnly Property Offer As Long
+    Friend ReadOnly Property Price As Long
+    Friend ReadOnly Property RepairPrice As Long
+
+    '[ItemTypeEquipSlots]([ItemTypeId],[EquipSlotId])
+    ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
+
+    '[ItemTypeOfferShopTypes]([ItemTypeId],[ShoppeTypeId])
     Private ReadOnly Property boughtAt As IReadOnlyList(Of ShoppeType)
-    Friend ReadOnly Property Price() As Long
+    '[ItemTypePriceShopTypes]([ItemTypeId],[ShoppeTypeId])
     Private ReadOnly Property soldAt As IReadOnlyList(Of ShoppeType)
-    Friend ReadOnly Property RepairPrice() As Long
+    '[ItemTypeRepairShopTypes]([ItemTypeId],[ShoppeTypeId])
     Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
-    ReadOnly Property IsConsumed As Boolean
+
+    '[ItemTypeCharacterStatisticBuffs]([ItemTypeId],[CharacterStatisticTypeId],[StatisticValue])
     Private ReadOnly Property buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+
+    '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName])
     ReadOnly Property Purify As Action(Of Item)
-    ReadOnly Property CanUse As Func(Of Character, Boolean)
     ReadOnly Property Use As Action(Of Character)
+
+    '[ItemTypeActionFilterss]([ItemTypeId],[ItemActionId],[ItemActionFilterName])
+    ReadOnly Property CanUse As Func(Of Character, Boolean)
     Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
         If buffs Is Nothing Then
             Return Nothing
