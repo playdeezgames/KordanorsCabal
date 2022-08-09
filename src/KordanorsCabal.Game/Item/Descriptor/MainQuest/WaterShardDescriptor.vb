@@ -6,7 +6,7 @@
             MakeDictionary(
                 (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level4, "1d1")))
+                (DungeonLevel.Level4, "1d1")),,,,,, False)
     End Sub
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
@@ -24,10 +24,4 @@
         character.Heal()
         character.EnqueueMessage($"You use {ItemType.WaterShard.Name} to heal yer wounds!")
     End Sub
-
-    Public Overrides ReadOnly Property IsConsumed As Boolean
-        Get
-            Return False
-        End Get
-    End Property
 End Class

@@ -14,13 +14,8 @@
                 MakeDictionary((DungeonLevel.Level1, "3d6")),
                 MakeList(EquipSlot.Head),,,
                 2,
+                10,,
                 2,
                 MakeList(ShoppeType.Blacksmith))
     End Sub
-
-    Public Overrides ReadOnly Property MaximumDurability As Long?
-        Get
-            Return 10
-        End Get
-    End Property
 End Class

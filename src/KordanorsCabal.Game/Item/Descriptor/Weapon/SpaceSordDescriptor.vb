@@ -10,11 +10,7 @@
                 (DungeonLevel.Moon, "1d1")),
             MakeList(EquipSlot.Weapon),
             10,
-            5)
+            5,,
+            100)
     End Sub
-    Public Overrides ReadOnly Property MaximumDurability As Long?
-        Get
-            Return 100
-        End Get
-    End Property
 End Class

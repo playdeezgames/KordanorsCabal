@@ -30,17 +30,14 @@
     ReadOnly Property AttackDice As Long
     ReadOnly Property MaximumDamage As Long?
     ReadOnly Property DefendDice As Long
-    Overridable ReadOnly Property MaximumDurability As Long?
-        Get
-            Return Nothing
-        End Get
-    End Property
-
-    Overridable ReadOnly Property IsConsumed As Boolean
-        Get
-            Return True
-        End Get
-    End Property
+    ReadOnly Property MaximumDurability As Long?
+    Friend ReadOnly Property Offer() As Long
+    Private ReadOnly Property boughtAt As IReadOnlyList(Of ShoppeType)
+    Friend ReadOnly Property Price() As Long
+    Private ReadOnly Property soldAt As IReadOnlyList(Of ShoppeType)
+    Friend ReadOnly Property RepairPrice() As Long
+    Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
+    ReadOnly Property IsConsumed As Boolean
 
     Overridable Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
         Return Nothing
@@ -49,28 +46,15 @@
     Overridable Sub Purify(item As Item)
         'by default, do nothing
     End Sub
-
-    Friend ReadOnly Property Offer() As Long
-    Private ReadOnly Property boughtAt As IReadOnlyList(Of ShoppeType)
-
-    Friend Overridable Function HasOffer(shoppeType As ShoppeType) As Boolean
+    Friend Function HasOffer(shoppeType As ShoppeType) As Boolean
         Return boughtAt.Contains(shoppeType)
     End Function
-
-    Friend ReadOnly Property Price() As Long
-    Private ReadOnly Property soldAt As IReadOnlyList(Of ShoppeType)
-
-    Friend Overridable Function HasPrice(shoppeType As ShoppeType) As Boolean
+    Friend Function HasPrice(shoppeType As ShoppeType) As Boolean
         Return soldAt.Contains(shoppeType)
     End Function
-
-    Friend ReadOnly Property RepairPrice() As Long
-    Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
-
     Friend Function CanRepair(shoppeType As ShoppeType) As Boolean
         Return repairedAt.Contains(shoppeType)
     End Function
-
     Sub New(
            name As String,
            Optional encumbrance As Single = 0!,
@@ -80,6 +64,8 @@
            Optional attackDice As Long = 0,
            Optional maximumDamage As Long? = Nothing,
            Optional defendDice As Long = 0,
+           Optional maximumDurability As Long? = Nothing,
+           Optional isConsumed As Boolean = True,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
@@ -110,6 +96,8 @@
         Me.AttackDice = attackDice
         Me.MaximumDamage = maximumDamage
         Me.DefendDice = defendDice
+        Me.MaximumDurability = maximumDurability
+        Me.IsConsumed = isConsumed
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility

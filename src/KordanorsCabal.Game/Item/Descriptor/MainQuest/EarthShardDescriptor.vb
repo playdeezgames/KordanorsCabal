@@ -5,7 +5,7 @@
             MakeDictionary(
                 (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level2, "1d1")))
+                (DungeonLevel.Level2, "1d1")),,,,,, False)
     End Sub
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
@@ -31,10 +31,4 @@
         character.EnqueueMessage(sfx, lines.ToArray)
         character.DoCounterAttacks()
     End Sub
-
-    Public Overrides ReadOnly Property IsConsumed As Boolean
-        Get
-            Return False
-        End Get
-    End Property
 End Class

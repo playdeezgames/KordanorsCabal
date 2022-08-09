@@ -6,7 +6,7 @@
             MakeDictionary(
                 (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level1, "1d1")))
+                (DungeonLevel.Level1, "1d1")),,,,,, False)
     End Sub
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
@@ -26,10 +26,4 @@
         character.Location = RNG.FromEnumerable(locations)
         character.EnqueueMessage($"You use the {ItemType.AirShard.Name} and suddenly find yerself somewhere else!")
     End Sub
-
-    Public Overrides ReadOnly Property IsConsumed As Boolean
-        Get
-            Return False
-        End Get
-    End Property
 End Class
