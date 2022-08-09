@@ -16,7 +16,7 @@
     Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
     ReadOnly Property IsConsumed As Boolean
     Private ReadOnly Property buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long)
-    Private ReadOnly Property Purify As Action(Of Item)
+    ReadOnly Property Purify As Action(Of Item)
     Overridable ReadOnly Property CanUse(character As Character) As Boolean
         Get
             Return False

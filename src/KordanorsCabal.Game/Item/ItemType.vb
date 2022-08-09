@@ -118,7 +118,7 @@ Public Module ItemTypeExtensions
     End Function
     <Extension>
     Public Sub Purify(itemType As ItemType, item As Item)
-        ItemTypeDescriptors(itemType).Purify(item)
+        ItemTypeDescriptors(itemType).Purify.Invoke(item)
     End Sub
     <Extension>
     Public Function Offer(itemType As ItemType) As Long
