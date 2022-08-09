@@ -6,6 +6,7 @@
     Public ReadOnly CharacterQuest As CharacterQuestData
     Public ReadOnly CharacterSpell As CharacterSpellData
     Public ReadOnly CharacterStatistic As CharacterStatisticData
+    Public ReadOnly Direction As DirectionData
     Public ReadOnly Feature As FeatureData
     Public ReadOnly Inventory As InventoryData
     Public ReadOnly InventoryItem As InventoryItemData
@@ -25,6 +26,7 @@
         CharacterQuest = New CharacterQuestData(store)
         CharacterSpell = New CharacterSpellData(store)
         CharacterStatistic = New CharacterStatisticData(store)
+        Direction = New DirectionData(store)
         Feature = New FeatureData(store)
         Inventory = New InventoryData(store)
         InventoryItem = New InventoryItemData(store)

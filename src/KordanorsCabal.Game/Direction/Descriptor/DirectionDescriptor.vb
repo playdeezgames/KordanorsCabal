@@ -1,22 +1,34 @@
 ﻿Friend Class DirectionDescriptor
     Sub New(
-           name As String,
-           abbreviation As String,
-           opposite As Direction,
+           directionId As Long,
            Optional nextDirection As Direction? = Nothing,
-           Optional previousDirection As Direction? = Nothing,
-           Optional isCardinal As Boolean = False)
-        Me.Name = name
-        Me.Abbreviation = abbreviation
-        Me.Opposite = opposite
+           Optional previousDirection As Direction? = Nothing)
+        Id = directionId
         Me.NextDirection = nextDirection
         Me.PreviousDirection = previousDirection
-        Me.IsCardinal = isCardinal
     End Sub
+    '[Directions]([DirectionId],[DirectionName],[Abbreviation],[IsCardinal],[OppositeDirectionId],[NextDirectionId],[PreviousDirectionId])
+    ReadOnly Property Id As Long
     ReadOnly Property Name As String
+        Get
+            Return StaticWorldData.World.Direction.ReadName(Id)
+        End Get
+    End Property
     ReadOnly Property Abbreviation As String
+        Get
+            Return StaticWorldData.World.Direction.ReadAbbreviation(Id)
+        End Get
+    End Property
     ReadOnly Property Opposite As Direction
+        Get
+            Return CType(StaticWorldData.World.Direction.ReadOpposite(Id).Value, Direction)
+        End Get
+    End Property
     ReadOnly Property IsCardinal As Boolean
+        Get
+            Return StaticWorldData.World.Direction.ReadIsCardinal(Id)
+        End Get
+    End Property
     ReadOnly Property NextDirection As Direction?
     ReadOnly Property PreviousDirection As Direction?
 End Class
@@ -24,14 +36,14 @@ Friend Module DirectionDescriptorUtility
     Friend DirectionDescriptors As IReadOnlyDictionary(Of Direction, DirectionDescriptor) =
         New Dictionary(Of Direction, DirectionDescriptor) From
         {
-            {Direction.Down, New DirectionDescriptor("Down", "D", Direction.Up)},
-            {Direction.East, New DirectionDescriptor("East", "E", Direction.West, Direction.South, Direction.North, True)},
-            {Direction.Inward, New DirectionDescriptor("In", "In", Direction.Outward)},
-            {Direction.North, New DirectionDescriptor("North", "N", Direction.South, Direction.East, Direction.West, True)},
-            {Direction.Outward, New DirectionDescriptor("Out", "Out", Direction.Inward)},
-            {Direction.South, New DirectionDescriptor("South", "S", Direction.North, Direction.West, Direction.East, True)},
-            {Direction.Up, New DirectionDescriptor("Up", "U", Direction.Down)},
-            {Direction.West, New DirectionDescriptor("West", "W", Direction.East, Direction.North, Direction.South, True)}
+            {Direction.Down, New DirectionDescriptor(Direction.Down)},
+            {Direction.East, New DirectionDescriptor(Direction.East, Direction.South, Direction.North)},
+            {Direction.Inward, New DirectionDescriptor(Direction.Inward)},
+            {Direction.North, New DirectionDescriptor(Direction.North, Direction.East, Direction.West)},
+            {Direction.Outward, New DirectionDescriptor(Direction.Outward)},
+            {Direction.South, New DirectionDescriptor(Direction.South, Direction.West, Direction.East)},
+            {Direction.Up, New DirectionDescriptor(Direction.Up)},
+            {Direction.West, New DirectionDescriptor(Direction.West, Direction.North, Direction.South)}
         }
     Friend ReadOnly Property AllDirections As IEnumerable(Of Direction)
         Get
