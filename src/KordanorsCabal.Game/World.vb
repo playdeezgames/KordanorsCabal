@@ -19,10 +19,10 @@ Public Module World
                 locations.Add(dungeonLocation)
             Next
         Next
-        Dim north = DirectionDescriptor.FromName("North")
-        Dim east = DirectionDescriptor.FromName("East")
-        Dim south = DirectionDescriptor.FromName("South")
-        Dim west = DirectionDescriptor.FromName("West")
+        Dim north = Direction.FromName("North")
+        Dim east = Direction.FromName("East")
+        Dim south = Direction.FromName("South")
+        Dim west = Direction.FromName("West")
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
                 Dim moonLocation = locations(CInt(column + row * MoonColumns))
@@ -90,7 +90,7 @@ Public Module World
                         Dim nextColumn = MazeDirections(direction).DeltaX + column
                         Dim nextRow = MazeDirections(direction).DeltaY + row
                         Dim nextLocation = locations(CInt(nextColumn + nextRow * maze.Columns))
-                        Route.Create(dungeonLocation, DirectionDescriptor.FromName(direction), RouteType.Passageway, nextLocation)
+                        Route.Create(dungeonLocation, Game.Direction.FromName(direction), RouteType.Passageway, nextLocation)
                     End If
                 Next
             Next
@@ -104,8 +104,8 @@ Public Module World
         Dim locations = CreateLocations(maze, dungeonLevel)
         PopulateLocations(locations, bossKeyType, bossRouteType, dungeonLevel)
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount > 1))
-        Route.Create(fromLocation, DirectionDescriptor.FromName("Down"), RouteType.Stairs, startingLocation)
-        Route.Create(startingLocation, DirectionDescriptor.FromName("Up"), RouteType.Stairs, fromLocation)
+        Route.Create(fromLocation, Direction.FromName("Down"), RouteType.Stairs, startingLocation)
+        Route.Create(startingLocation, Direction.FromName("Up"), RouteType.Stairs, fromLocation)
         PopulateCharacters(locations, dungeonLevel)
         Return locations.Single(Function(x) x.LocationType = LocationType.DungeonBoss)
     End Function
@@ -191,8 +191,8 @@ Public Module World
 
     Private Sub CreateCellar(fromLocation As Location)
         Dim cellar = Location.Create(LocationType.Cellar)
-        Route.Create(fromLocation, DirectionDescriptor.FromName("Down"), RouteType.Stairs, cellar)
-        Route.Create(cellar, DirectionDescriptor.FromName("Up"), RouteType.Stairs, fromLocation)
+        Route.Create(fromLocation, Direction.FromName("Down"), RouteType.Stairs, cellar)
+        Route.Create(cellar, Direction.FromName("Up"), RouteType.Stairs, fromLocation)
     End Sub
 
     Private Sub CreatePlayer()
@@ -214,22 +214,22 @@ Public Module World
         Dim westTown = Location.Create(LocationType.Town)
         Dim northWestTown = Location.Create(LocationType.Town)
 
-        StitchTown(centerTown, DirectionDescriptor.FromName("North"), northTown)
-        StitchTown(centerTown, DirectionDescriptor.FromName("East"), eastTown)
-        StitchTown(centerTown, DirectionDescriptor.FromName("South"), southTown)
-        StitchTown(centerTown, DirectionDescriptor.FromName("West"), westTown)
+        StitchTown(centerTown, Direction.FromName("North"), northTown)
+        StitchTown(centerTown, Direction.FromName("East"), eastTown)
+        StitchTown(centerTown, Direction.FromName("South"), southTown)
+        StitchTown(centerTown, Direction.FromName("West"), westTown)
 
-        StitchTown(northWestTown, DirectionDescriptor.FromName("East"), northTown)
-        StitchTown(northWestTown, DirectionDescriptor.FromName("South"), westTown)
+        StitchTown(northWestTown, Direction.FromName("East"), northTown)
+        StitchTown(northWestTown, Direction.FromName("South"), westTown)
 
-        StitchTown(southWestTown, DirectionDescriptor.FromName("East"), southTown)
-        StitchTown(southWestTown, DirectionDescriptor.FromName("North"), westTown)
+        StitchTown(southWestTown, Direction.FromName("East"), southTown)
+        StitchTown(southWestTown, Direction.FromName("North"), westTown)
 
-        StitchTown(northEastTown, DirectionDescriptor.FromName("West"), northTown)
-        StitchTown(northEastTown, DirectionDescriptor.FromName("South"), eastTown)
+        StitchTown(northEastTown, Direction.FromName("West"), northTown)
+        StitchTown(northEastTown, Direction.FromName("South"), eastTown)
 
-        StitchTown(southEastTown, DirectionDescriptor.FromName("North"), eastTown)
-        StitchTown(southEastTown, DirectionDescriptor.FromName("West"), southTown)
+        StitchTown(southEastTown, Direction.FromName("North"), eastTown)
+        StitchTown(southEastTown, Direction.FromName("West"), southTown)
 
         CreateChurchEntrance()
     End Sub
@@ -241,7 +241,7 @@ Public Module World
         StitchTown(townLocation, direction, entrance)
     End Sub
 
-    Private Sub StitchTown(fromLocation As Location, direction As DirectionDescriptor, toLocation As Location)
+    Private Sub StitchTown(fromLocation As Location, direction As Direction, toLocation As Location)
         Route.Create(fromLocation, direction, RouteType.Road, toLocation)
         Route.Create(toLocation, direction.Opposite, RouteType.Road, fromLocation)
     End Sub

@@ -38,16 +38,16 @@
         If player.CanMoveBackward Then
             Buttons(BackwardButtonIndex).Title = "Backward"
         End If
-        If player.CanMove(DirectionDescriptor.FromName("Up")) Then
+        If player.CanMove(Direction.FromName("Up")) Then
             Buttons(UpButtonIndex).Title = "Up"
         End If
-        If player.CanMove(DirectionDescriptor.FromName("Down")) Then
+        If player.CanMove(Direction.FromName("Down")) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
-        If player.CanMove(DirectionDescriptor.FromName("In")) Then
+        If player.CanMove(Direction.FromName("In")) Then
             Buttons(InButtonIndex).Title = "In"
         End If
-        If player.CanMove(DirectionDescriptor.FromName("Out")) Then
+        If player.CanMove(Direction.FromName("Out")) Then
             Buttons(OutButtonIndex).Title = "Out"
         End If
     End Sub
@@ -58,13 +58,13 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case DownButtonIndex
-                Return HandleMove(player, DirectionDescriptor.FromName("Down"))
+                Return HandleMove(player, Direction.FromName("Down"))
             Case UpButtonIndex
-                Return HandleMove(player, DirectionDescriptor.FromName("Up"))
+                Return HandleMove(player, Direction.FromName("Up"))
             Case InButtonIndex
-                Return HandleMove(player, DirectionDescriptor.FromName("In"))
+                Return HandleMove(player, Direction.FromName("In"))
             Case OutButtonIndex
-                Return HandleMove(player, DirectionDescriptor.FromName("Out"))
+                Return HandleMove(player, Direction.FromName("Out"))
             Case ForwardButtonIndex
                 Return HandleMove(player, player.Direction)
             Case BackwardButtonIndex
@@ -77,7 +77,7 @@
         Return UIState.InPlay
     End Function
 
-    Private Function HandleMove(player As Character, direction As DirectionDescriptor) As UIState
+    Private Function HandleMove(player As Character, direction As Direction) As UIState
         If player.CanMove(direction) Then
             PopButtonIndex()
             player.Mode = PlayerMode.Neutral

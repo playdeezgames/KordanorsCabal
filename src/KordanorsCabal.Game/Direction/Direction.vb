@@ -1,12 +1,12 @@
-﻿Public Class DirectionDescriptor
+﻿Public Class Direction
     Sub New(directionId As Long)
         Id = directionId
     End Sub
     Private Sub New(directionName As String)
         Me.New(StaticWorldData.World.Direction.ReadForName(directionName).Value)
     End Sub
-    Shared Function FromName(directionName As String) As DirectionDescriptor
-        Return New DirectionDescriptor(directionName)
+    Shared Function FromName(directionName As String) As Direction
+        Return New Direction(directionName)
     End Function
     ReadOnly Property Id As Long
     ReadOnly Property Name As String
@@ -19,9 +19,9 @@
             Return StaticWorldData.World.Direction.ReadAbbreviation(Id)
         End Get
     End Property
-    ReadOnly Property Opposite As DirectionDescriptor
+    ReadOnly Property Opposite As Direction
         Get
-            Return New DirectionDescriptor(StaticWorldData.World.Direction.ReadOpposite(Id).Value)
+            Return New Direction(StaticWorldData.World.Direction.ReadOpposite(Id).Value)
         End Get
     End Property
     ReadOnly Property IsCardinal As Boolean
@@ -29,26 +29,26 @@
             Return StaticWorldData.World.Direction.ReadIsCardinal(Id)
         End Get
     End Property
-    ReadOnly Property NextDirection As DirectionDescriptor
+    ReadOnly Property NextDirection As Direction
         Get
             Dim result = StaticWorldData.World.Direction.ReadNext(Id)
-            Return If(result.HasValue, New DirectionDescriptor(result.Value), Nothing)
+            Return If(result.HasValue, New Direction(result.Value), Nothing)
         End Get
     End Property
-    ReadOnly Property PreviousDirection As DirectionDescriptor
+    ReadOnly Property PreviousDirection As Direction
         Get
             Dim result = StaticWorldData.World.Direction.ReadPrevious(Id)
-            Return If(result.HasValue, New DirectionDescriptor(result.Value), Nothing)
+            Return If(result.HasValue, New Direction(result.Value), Nothing)
         End Get
     End Property
 End Class
 Friend Module DirectionDescriptorUtility
-    Friend ReadOnly Property AllDirections As IEnumerable(Of DirectionDescriptor)
+    Friend ReadOnly Property AllDirections As IEnumerable(Of Direction)
         Get
-            Return StaticWorldData.World.Direction.ReadAll.Select(Function(x) New DirectionDescriptor(x))
+            Return StaticWorldData.World.Direction.ReadAll.Select(Function(x) New Direction(x))
         End Get
     End Property
-    Friend ReadOnly Property CardinalDirections As IEnumerable(Of DirectionDescriptor)
+    Friend ReadOnly Property CardinalDirections As IEnumerable(Of Direction)
         Get
             Return AllDirections.Where(Function(x) x.IsCardinal)
         End Get

@@ -24,7 +24,7 @@
     Public Shared Function ByDungeonLevel(dungeonLevel As DungeonLevel) As IEnumerable(Of Location)
         Return StaticWorldData.World.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
     End Function
-    Friend Sub DestroyRoute(direction As DirectionDescriptor)
+    Friend Sub DestroyRoute(direction As Direction)
         Routes(direction)?.Destroy()
     End Sub
     Friend Function IsDungeon() As Boolean
@@ -49,10 +49,10 @@
             Return LocationType.Name
         End Get
     End Property
-    Public Function Routes(direction As DirectionDescriptor) As Route
+    Public Function Routes(direction As Direction) As Route
         Return Route.FromId(StaticWorldData.World.Route.ReadForLocationDirection(Id, direction.Id))
     End Function
-    Public Function HasRoute(direction As DirectionDescriptor) As Boolean
+    Public Function HasRoute(direction As Direction) As Boolean
         Return Routes(direction) IsNot Nothing
     End Function
     Friend Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
@@ -77,9 +77,9 @@
             Return New Inventory(inventoryId.Value)
         End Get
     End Property
-    Public ReadOnly Property RouteDirections As IEnumerable(Of DirectionDescriptor)
+    Public ReadOnly Property RouteDirections As IEnumerable(Of Direction)
         Get
-            Return StaticWorldData.World.Route.ReadForLocation(Id).Select(Function(x) New DirectionDescriptor(x.Item1))
+            Return StaticWorldData.World.Route.ReadForLocation(Id).Select(Function(x) New Direction(x.Item1))
         End Get
     End Property
     Public ReadOnly Property RouteTypes As IEnumerable(Of RouteType)

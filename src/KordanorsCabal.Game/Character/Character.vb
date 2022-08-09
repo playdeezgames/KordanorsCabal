@@ -586,11 +586,11 @@
             Return Money >= 5
         End Get
     End Property
-    Public Property Direction As DirectionDescriptor
+    Public Property Direction As Direction
         Get
-            Return New DirectionDescriptor(StaticWorldData.World.Player.ReadDirection().Value)
+            Return New Direction(StaticWorldData.World.Player.ReadDirection().Value)
         End Get
-        Set(value As DirectionDescriptor)
+        Set(value As Direction)
             StaticWorldData.World.Player.WriteDirection(value.Id)
         End Set
     End Property
@@ -741,7 +741,7 @@
         End If
         EnqueueMessage("You cannot intimidate at this time!")
     End Sub
-    Public Function CanMove(direction As DirectionDescriptor) As Boolean
+    Public Function CanMove(direction As Direction) As Boolean
         If IsEncumbered Then
             Return False
         End If
@@ -768,7 +768,7 @@
             DoCounterAttacks()
         End If
     End Sub
-    Public Function Move(direction As DirectionDescriptor) As Boolean
+    Public Function Move(direction As Direction) As Boolean
         If CanMove(direction) Then
             Dim hungerRate = Math.Max(Highness \ 2 + FoodPoisoning \ 2, 1)
             Hunger += hungerRate
