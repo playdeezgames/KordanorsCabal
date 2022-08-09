@@ -16,9 +16,9 @@
             Return StaticWorldData.World.Direction.ReadAbbreviation(Id)
         End Get
     End Property
-    ReadOnly Property Opposite As Direction
+    ReadOnly Property Opposite As DirectionDescriptor
         Get
-            Return CType(StaticWorldData.World.Direction.ReadOpposite(Id).Value, Direction)
+            Return New DirectionDescriptor(StaticWorldData.World.Direction.ReadOpposite(Id).Value)
         End Get
     End Property
     ReadOnly Property IsCardinal As Boolean

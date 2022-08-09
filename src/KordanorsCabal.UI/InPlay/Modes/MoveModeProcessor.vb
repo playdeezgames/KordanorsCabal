@@ -68,7 +68,7 @@
             Case ForwardButtonIndex
                 Return HandleMove(player, player.Direction.ToDirection)
             Case BackwardButtonIndex
-                Return HandleMove(player, player.Direction.Opposite)
+                Return HandleMove(player, player.Direction.Opposite.ToDirection)
             Case LeftButtonIndex
                 Return HandleMove(player, player.Direction.PreviousDirection.Value)
             Case RightButtonIndex

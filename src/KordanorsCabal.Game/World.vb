@@ -130,7 +130,7 @@ Public Module World
         For Each deadEnd In deadEnds
             Dim direction = deadEnd.Routes.First.Key
             Dim nextLocation = deadEnd.Routes(direction).ToLocation
-            Dim route = nextLocation.Routes(direction.ToDescriptor.Opposite)
+            Dim route = nextLocation.Routes(direction.ToDescriptor.Opposite.ToDirection)
             route.RouteType = RouteType.IronLock
             itemTypes.Add(ItemType.IronKey)
         Next
@@ -167,7 +167,7 @@ Public Module World
         bossLocation.LocationType = LocationType.DungeonBoss
         Dim direction = bossLocation.Routes.First.Key
         Dim nextLocation = bossLocation.Routes(direction).ToLocation
-        nextLocation.Routes(direction.ToDescriptor.Opposite).RouteType = routeType
+        nextLocation.Routes(direction.ToDescriptor.Opposite.ToDirection).RouteType = routeType
         Return bossLocation
     End Function
 
@@ -239,7 +239,7 @@ Public Module World
 
     Private Sub StitchTown(fromLocation As Location, direction As Direction, toLocation As Location)
         Route.Create(fromLocation, direction, RouteType.Road, toLocation)
-        Route.Create(toLocation, direction.ToDescriptor.Opposite, RouteType.Road, fromLocation)
+        Route.Create(toLocation, direction.ToDescriptor.Opposite.ToDirection, RouteType.Road, fromLocation)
     End Sub
 
     Private Sub RollUpPlayerCharacter()
