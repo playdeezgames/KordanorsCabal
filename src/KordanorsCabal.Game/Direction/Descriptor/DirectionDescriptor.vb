@@ -26,10 +26,10 @@
             Return StaticWorldData.World.Direction.ReadIsCardinal(Id)
         End Get
     End Property
-    ReadOnly Property NextDirection As Direction?
+    ReadOnly Property NextDirection As DirectionDescriptor
         Get
             Dim result = StaticWorldData.World.Direction.ReadNext(Id)
-            Return If(result.HasValue, CType(result.Value, Direction), Nothing)
+            Return If(result.HasValue, New DirectionDescriptor(result.Value), Nothing)
         End Get
     End Property
     ReadOnly Property PreviousDirection As Direction?

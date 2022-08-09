@@ -41,7 +41,7 @@
                 player.Mode = PlayerMode.Neutral
             Case RightButtonIndex
                 PopButtonIndex()
-                player.Direction = player.Direction.NextDirection.Value.ToDescriptor
+                player.Direction = player.Direction.NextDirection
                 player.Mode = PlayerMode.Neutral
         End Select
         Return UIState.InPlay

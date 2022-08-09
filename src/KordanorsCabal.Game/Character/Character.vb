@@ -689,7 +689,7 @@
         End Get
     End Property
     Public Function CanMoveRight() As Boolean
-        Return CanMove(Direction.NextDirection.Value.ToDescriptor)
+        Return CanMove(Direction.NextDirection)
     End Function
     Public Function CanMoveForward() As Boolean
         Return CanMove(Direction)
