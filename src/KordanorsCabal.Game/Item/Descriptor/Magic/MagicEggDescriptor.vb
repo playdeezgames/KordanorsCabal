@@ -25,12 +25,11 @@
             "Magic Egg",
             100,
             MakeList(ShoppeType.BlackMage),,,,,,
-            Function(character) True)
-    End Sub
-
-    Public Overrides Sub Use(character As Character)
-        Dim item = Game.Item.Create(RNG.FromGenerator(table))
-        character.EnqueueMessage($"You crack open the {ItemType.MagicEgg.Name} and find {item.Name} inside!")
-        character.Inventory.Add(item)
+            Function(character) True,
+            Sub(character)
+                Dim item = Game.Item.Create(RNG.FromGenerator(table))
+                character.EnqueueMessage($"You crack open the {ItemType.MagicEgg.Name} and find {item.Name} inside!")
+                character.Inventory.Add(item)
+            End Sub)
     End Sub
 End Class

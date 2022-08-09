@@ -9,7 +9,8 @@
            Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional purify As Action(Of Item) = Nothing,
-           Optional canUse As Func(Of Character, Boolean) = Nothing)
-        MyBase.New(name, , , , , , , , , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purify, canUse)
+           Optional canUse As Func(Of Character, Boolean) = Nothing,
+           Optional use As Action(Of Character) = Nothing)
+        MyBase.New(name, , , , , , , , , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purify, canUse, use)
     End Sub
 End Class

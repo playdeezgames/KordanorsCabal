@@ -18,9 +18,7 @@
     Private ReadOnly Property buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long)
     ReadOnly Property Purify As Action(Of Item)
     ReadOnly Property CanUse As Func(Of Character, Boolean)
-    Overridable Sub Use(character As Character)
-        'nothing, by default
-    End Sub
+    ReadOnly Property Use As Action(Of Character)
     Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
         If buffs Is Nothing Then
             Return Nothing
@@ -69,7 +67,8 @@
            Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional purify As Action(Of Item) = Nothing,
-           Optional canUse As Func(Of Character, Boolean) = Nothing)
+           Optional canUse As Func(Of Character, Boolean) = Nothing,
+           Optional use As Action(Of Character) = Nothing)
         Me.Name = name
         Me.Encumbrance = encumbrance
         If spawnLocationTypes Is Nothing Then
@@ -98,9 +97,10 @@
         Me.IsConsumed = isConsumed
         Me.buffs = buffs
         Me.Purify = If(purify, Sub(item)
-
                                End Sub)
         Me.CanUse = If(canUse, Function(character) False)
+        Me.Use = If(use, Sub(character)
+                         End Sub)
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility

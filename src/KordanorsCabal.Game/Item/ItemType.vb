@@ -74,7 +74,7 @@ Public Module ItemTypeExtensions
     End Function
     <Extension>
     Public Sub Use(itemType As ItemType, character As Character)
-        ItemTypeDescriptors(itemType).Use(character)
+        ItemTypeDescriptors(itemType).Use.Invoke(character)
     End Sub
     <Extension>
     Public Function RollSpawnCount(itemType As ItemType, level As DungeonLevel) As Long
