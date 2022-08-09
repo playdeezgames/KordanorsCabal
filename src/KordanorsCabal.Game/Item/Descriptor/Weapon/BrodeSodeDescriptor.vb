@@ -16,15 +16,10 @@
                 (DungeonLevel.Level3, "1d6")),
                 MakeList(EquipSlot.Weapon),
                 6,
+                3,
                 20,
                 MakeList(ShoppeType.Blacksmith))
     End Sub
-
-    Public Overrides ReadOnly Property MaximumDamage As Long?
-        Get
-            Return 3
-        End Get
-    End Property
     Public Overrides ReadOnly Property MaximumDurability As Long?
         Get
             Return 40

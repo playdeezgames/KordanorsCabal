@@ -2,14 +2,9 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Empty Bottle", 1,,, MakeList(EquipSlot.Weapon), 2)
+        MyBase.New("Empty Bottle", 1,,, MakeList(EquipSlot.Weapon), 2, 1)
     End Sub
 
-    Public Overrides ReadOnly Property MaximumDamage As Long?
-        Get
-            Return 1
-        End Get
-    End Property
     Public Overrides ReadOnly Property MaximumDurability As Long?
         Get
             Return 3

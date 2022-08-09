@@ -9,14 +9,9 @@
             MakeDictionary(
                 (DungeonLevel.Moon, "1d1")),
             MakeList(EquipSlot.Weapon),
-            10)
+            10,
+            5)
     End Sub
-
-    Public Overrides ReadOnly Property MaximumDamage As Long?
-        Get
-            Return 5
-        End Get
-    End Property
     Public Overrides ReadOnly Property MaximumDurability As Long?
         Get
             Return 100

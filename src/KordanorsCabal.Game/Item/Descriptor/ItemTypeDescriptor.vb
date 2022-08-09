@@ -28,12 +28,8 @@
         Return 0
     End Function
     ReadOnly Property AttackDice As Long
+    ReadOnly Property MaximumDamage As Long?
 
-    Overridable ReadOnly Property MaximumDamage As Long?
-        Get
-            Return Nothing
-        End Get
-    End Property
 
     Overridable ReadOnly Property MaximumDurability As Long?
         Get
@@ -89,6 +85,7 @@
            Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional attackDice As Long = 0,
+           Optional maximumDamage As Long? = Nothing,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
@@ -117,6 +114,7 @@
         Me.soldAt = If(soldAt, New List(Of ShoppeType))
         Me.repairedAt = If(repairedAt, New List(Of ShoppeType))
         Me.AttackDice = attackDice
+        Me.MaximumDamage = maximumDamage
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility
