@@ -4,7 +4,9 @@
     Sub New()
         MyBase.New(
             "Beer",
-            2,,,,,,,,,,,,,,,,,
+            2,,,,,,,,,,,,
+            5,
+            MakeList(ShoppeType.InnKeeper),,,,
             Function(character)
                 Dim enemy = character.Location.Enemy(character)
                 Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.Beer)

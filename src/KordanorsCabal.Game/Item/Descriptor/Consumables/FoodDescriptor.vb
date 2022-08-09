@@ -3,7 +3,9 @@
 
     Sub New()
         MyBase.New(
-            "Food",,,,,,,,,,,,,,,,,,
+            "Food",,,,,,,,,,,,,
+            2,
+            MakeList(ShoppeType.InnKeeper),,,,
             Function(character) True,
             Sub(character)
                 Dim healRoll = 1
