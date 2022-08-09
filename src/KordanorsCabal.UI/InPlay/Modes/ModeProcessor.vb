@@ -7,7 +7,7 @@
         buffer.WriteText(xy, $"Facing: {player.Direction.Name}", False, Hue.Black)
     End Sub
     Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
-        Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) x.Key.ToDescriptor.Abbreviation))
+        Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) New DirectionDescriptor(x.Key).Abbreviation))
         buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
     End Sub
 

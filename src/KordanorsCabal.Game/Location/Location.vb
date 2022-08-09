@@ -51,10 +51,10 @@
             Return LocationType.Name
         End Get
     End Property
-    ReadOnly Property Routes As IReadOnlyDictionary(Of Direction, Route)
+    ReadOnly Property Routes As IReadOnlyDictionary(Of Long, Route)
         Get
             Return StaticWorldData.World.Route.ReadForLocation(Id).
-                ToDictionary(Function(x) CType(x.Item1, Direction), Function(x) Route.FromId(x.Item2))
+                ToDictionary(Function(x) x.Item1, Function(x) Route.FromId(x.Item2))
         End Get
     End Property
     Public Function HasRoute(direction As Direction) As Boolean
