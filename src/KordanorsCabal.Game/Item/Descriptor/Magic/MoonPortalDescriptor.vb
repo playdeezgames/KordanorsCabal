@@ -3,7 +3,9 @@
 
     Sub New()
         MyBase.New(
-            "Moon Portal",,,,,,,,,,,,,,,,,,
+            "Moon Portal",,,,,,,,,,,,,
+            5000,
+            MakeList(ShoppeType.BlackMage),,,,
             Function(character) character.Location.IsDungeon,
             Sub(character)
                 Dim location = character.Location
