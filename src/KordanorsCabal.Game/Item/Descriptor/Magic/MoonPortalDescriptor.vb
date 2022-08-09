@@ -12,9 +12,11 @@
                 Dim location = character.Location
                 location.DestroyRoute(Direction.Outward.ToDescriptor)
                 Dim destination = RNG.FromEnumerable(Game.Location.FromLocationType(LocationType.Moon))
-                destination.DestroyRoute(Direction.Inward.ToDescriptor)
-                Route.Create(location, Direction.Outward.ToDescriptor, RouteType.Portal, destination)
-                Route.Create(destination, Direction.Inward.ToDescriptor, RouteType.Portal, location)
+                Dim inDirection = New DirectionDescriptor("In")
+                Dim outDirection = New DirectionDescriptor("Out")
+                destination.DestroyRoute(inDirection)
+                Route.Create(location, outDirection, RouteType.Portal, destination)
+                Route.Create(destination, inDirection, RouteType.Portal, location)
                 character.EnqueueMessage("A portal opens before you!")
             End Sub)
     End Sub
