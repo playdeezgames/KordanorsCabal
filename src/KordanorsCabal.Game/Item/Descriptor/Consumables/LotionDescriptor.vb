@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.Lotion,
             "Lotion",
             2,,,,,,,,
             5,,,,

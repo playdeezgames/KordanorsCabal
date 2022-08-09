@@ -2,6 +2,8 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Horns of Kordanor")
+        MyBase.New(
+            ItemType.HornsOfKordanor,
+            "Horns of Kordanor")
     End Sub
 End Class

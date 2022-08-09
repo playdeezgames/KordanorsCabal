@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.TownPortal,
             "Town Portal",,,,,,,,,,,,,
             50,
             MakeList(ShoppeType.BlackMage),,,,

@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.Bottle,
             "Empty Bottle",
             1,,,
             MakeList(EquipSlot.Weapon), ,

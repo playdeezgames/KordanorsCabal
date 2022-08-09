@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.Herb,
             """Herb""",,,,,,,,,,,,,
             5,
             MakeList(ShoppeType.BlackMage),,,,

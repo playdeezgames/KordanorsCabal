@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.ChainMail,
             "Chainmail",
             20,
             MakeDictionary(

@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.Trousers,
             "Trousers",,,,
             MakeList(EquipSlot.Legs),,,,,,,,,
             100,

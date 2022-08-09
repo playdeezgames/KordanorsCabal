@@ -2,7 +2,9 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("FE Key",,
+        MyBase.New(
+            ItemType.IronKey,
+            "FE Key",,
             MakeDictionary(
                 (DungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
                 (DungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),

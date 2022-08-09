@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.Beer,
             "Beer",
             2,,,,,,,,,,,,
             5,

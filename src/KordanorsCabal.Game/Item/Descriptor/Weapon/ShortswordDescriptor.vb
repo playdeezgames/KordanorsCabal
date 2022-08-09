@@ -2,7 +2,9 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Shortsword",
+        MyBase.New(
+            ItemType.Shortsword,
+            "Shortsword",
                    5,
             MakeDictionary(
                 (DungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),

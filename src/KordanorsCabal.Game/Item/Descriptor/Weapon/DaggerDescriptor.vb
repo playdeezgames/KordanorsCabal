@@ -2,8 +2,10 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Dagger",
-                   1,
+        MyBase.New(
+            ItemType.Dagger,
+            "Dagger",
+            1,
             MakeDictionary(
                 (DungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
                 (DungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),

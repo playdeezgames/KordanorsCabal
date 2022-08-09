@@ -1,7 +1,9 @@
 ﻿Friend Class EarthShardDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("Earth Shard",,
+        MyBase.New(
+            ItemType.EarthShard,
+            "Earth Shard",,
             MakeDictionary(
                 (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(

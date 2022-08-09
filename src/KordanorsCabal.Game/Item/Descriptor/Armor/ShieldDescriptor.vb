@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.Shield,
             "Shield",
             5,
             MakeDictionary(

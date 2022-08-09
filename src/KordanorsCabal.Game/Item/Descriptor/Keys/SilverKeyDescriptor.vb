@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.SilverKey,
             "AG KEY",,
             MakeDictionary(
                 (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd))))

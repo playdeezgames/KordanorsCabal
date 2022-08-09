@@ -2,7 +2,9 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Air Shard",,
+        MyBase.New(
+            ItemType.AirShard,
+            "Air Shard",,
             MakeDictionary(
                 (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(

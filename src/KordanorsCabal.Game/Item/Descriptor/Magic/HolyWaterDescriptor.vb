@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.HolyWater,
             "Holy ""Water""",,,,,,,,,,,,,
             10,
             MakeList(ShoppeType.Healer),,,,

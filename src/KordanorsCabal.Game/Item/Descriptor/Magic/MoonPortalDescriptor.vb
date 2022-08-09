@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.MoonPortal,
             "Moon Portal",,,,,,,,,,,,,
             5000,
             MakeList(ShoppeType.BlackMage),,,,

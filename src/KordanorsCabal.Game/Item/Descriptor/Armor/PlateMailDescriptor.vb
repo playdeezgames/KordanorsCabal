@@ -2,6 +2,7 @@
     Inherits ItemTypeDescriptor
     Sub New()
         MyBase.New(
+            ItemType.PlateMail,
             "Platemail",
             40,
             MakeDictionary(

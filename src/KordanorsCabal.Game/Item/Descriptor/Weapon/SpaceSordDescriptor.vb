@@ -2,7 +2,9 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("SpaceSord",
+        MyBase.New(
+            ItemType.SpaceSord,
+            "SpaceSord",
                    5,
             MakeDictionary(
                 (DungeonLevel.Moon, MakeHashSet(LocationType.Moon))),

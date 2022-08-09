@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.Potion,
             "Potion",
             2,
             MakeDictionary(

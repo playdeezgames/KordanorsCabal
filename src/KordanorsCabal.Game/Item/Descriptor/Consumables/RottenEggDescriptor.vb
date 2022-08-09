@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.RottenEgg,
             "Rotten Egg",,,,,,,,,,,,,,,,,,
             Function(character)
                 Dim enemy = character.Location.Enemy(character)

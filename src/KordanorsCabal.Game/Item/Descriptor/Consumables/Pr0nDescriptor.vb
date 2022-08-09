@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.Pr0n,
             "Pr0n Scroll",,,,,,,,,,,,,
             10,
             MakeList(ShoppeType.BlackMarket),,,,

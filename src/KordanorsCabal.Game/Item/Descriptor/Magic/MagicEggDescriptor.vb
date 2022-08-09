@@ -22,6 +22,7 @@
 
     Public Sub New()
         MyBase.New(
+            ItemType.MagicEgg,
             "Magic Egg",
             100,
             MakeList(ShoppeType.BlackMage),,,,,,

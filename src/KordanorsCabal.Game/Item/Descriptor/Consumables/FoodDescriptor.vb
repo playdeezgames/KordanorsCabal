@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            ItemType.Food,
             "Food",,,,,,,,,,,,,
             2,
             MakeList(ShoppeType.InnKeeper),,,,

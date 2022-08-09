@@ -2,6 +2,8 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Elemental Orb")
+        MyBase.New(
+            ItemType.ElementalOrb,
+            "Elemental Orb")
     End Sub
 End Class

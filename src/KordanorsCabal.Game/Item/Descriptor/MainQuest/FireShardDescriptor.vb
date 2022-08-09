@@ -1,7 +1,9 @@
 ﻿Friend Class FireShardDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("Fire Shard",,
+        MyBase.New(
+            ItemType.FireShard,
+            "Fire Shard",,
             MakeDictionary(
                 (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(

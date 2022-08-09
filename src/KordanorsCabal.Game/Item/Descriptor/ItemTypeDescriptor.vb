@@ -1,12 +1,13 @@
 ﻿Public Class ItemTypeDescriptor
-    '[ItemTypeSpawnLocationTypes]([ItemTypeId],[DungeonLevelId],[LocationTypeId])
-    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType))
-    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String)
-
     '[ItemTypes]([ItemTypeId],[ItemTypeName],[Encumbrance])
+    ReadOnly Property Id As Long
     ReadOnly Property Name As String
     ReadOnly Property Encumbrance As Long
     ReadOnly Property IsConsumed As Boolean
+
+    '[ItemTypeSpawnLocationTypes]([ItemTypeId],[DungeonLevelId],[LocationTypeId])
+    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType))
+    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String)
 
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
     ReadOnly Property AttackDice As Long
@@ -20,22 +21,19 @@
     '[ItemTypeEquipSlots]([ItemTypeId],[EquipSlotId])
     ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
 
-    '[ItemTypeOfferShopTypes]([ItemTypeId],[ShoppeTypeId])
+    '[ItemTypeOfferShopTypes]([ItemTypeId],[ShoppeTypeId],[TransactionType])--TransactionType = offer, price, repair
     Private ReadOnly Property boughtAt As IReadOnlyList(Of ShoppeType)
-    '[ItemTypePriceShopTypes]([ItemTypeId],[ShoppeTypeId])
     Private ReadOnly Property soldAt As IReadOnlyList(Of ShoppeType)
-    '[ItemTypeRepairShopTypes]([ItemTypeId],[ShoppeTypeId])
     Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
 
     '[ItemTypeCharacterStatisticBuffs]([ItemTypeId],[CharacterStatisticTypeId],[StatisticValue])
     Private ReadOnly Property buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long)
 
-    '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName])
+    '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName],[ItemActionFilterName])
     ReadOnly Property Purify As Action(Of Item)
     ReadOnly Property Use As Action(Of Character)
-
-    '[ItemTypeActionFilterss]([ItemTypeId],[ItemActionId],[ItemActionFilterName])
     ReadOnly Property CanUse As Func(Of Character, Boolean)
+
     Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
         If buffs Is Nothing Then
             Return Nothing
@@ -66,6 +64,7 @@
         Return repairedAt.Contains(shoppeType)
     End Function
     Sub New(
+           itemTypeId As Long,
            name As String,
            Optional encumbrance As Long = 0,
            Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
@@ -86,6 +85,7 @@
            Optional purify As Action(Of Item) = Nothing,
            Optional canUse As Func(Of Character, Boolean) = Nothing,
            Optional use As Action(Of Character) = Nothing)
+        Me.Id = itemTypeId
         Me.Name = name
         Me.Encumbrance = encumbrance
         If spawnLocationTypes Is Nothing Then
@@ -125,40 +125,42 @@ Public Module ItemTypeDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {ItemType.AirShard, New AirShardDescriptor},
-            {ItemType.AmuletOfDEX, New AmuletDescriptor(CharacterStatisticType.Dexterity)},
-            {ItemType.AmuletOfHP, New AmuletDescriptor(
+            {ItemType.AmuletOfDEX, New AmuletDescriptor(ItemType.AmuletOfDEX, CharacterStatisticType.Dexterity)},
+            {ItemType.AmuletOfHP, New AmuletDescriptor(ItemType.AmuletOfHP,
                 CharacterStatisticType.HP,
                 MakeDictionary(
                     (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
                 MakeDictionary((DungeonLevel.Level1, "1d1")))},
-            {ItemType.AmuletOfMana, New AmuletDescriptor(
+            {ItemType.AmuletOfMana, New AmuletDescriptor(ItemType.AmuletOfMana,
                 CharacterStatisticType.Mana,
                 MakeDictionary(
                     (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
                 MakeDictionary((DungeonLevel.Level2, "1d1")))},
-            {ItemType.AmuletOfPOW, New AmuletDescriptor(CharacterStatisticType.Power,
+            {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, CharacterStatisticType.Power,
                 MakeDictionary(
                     (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
                 MakeDictionary((DungeonLevel.Level3, "1d1")))},
-            {ItemType.AmuletOfSTR, New AmuletDescriptor(CharacterStatisticType.Strength,
+            {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, CharacterStatisticType.Strength,
                 MakeDictionary(
                     (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
                 MakeDictionary((DungeonLevel.Level4, "1d1")))},
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
+                ItemType.AmuletOfYendor,
                 "Amulet of Yendor",,,,
                 MakeList(EquipSlot.Neck),,,,,,,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
-            {ItemType.BatWing, New TrophyDescriptor("Bat Wing", 3, MakeList(ShoppeType.BlackMage))},
+            {ItemType.BatWing, New TrophyDescriptor(ItemType.BatWing, "Bat Wing", 3, MakeList(ShoppeType.BlackMage))},
             {ItemType.Beer, New BeerDescriptor},
-            {ItemType.Bong, New TrophyDescriptor("Bong", , , 25, MakeList(ShoppeType.BlackMage))},
+            {ItemType.Bong, New TrophyDescriptor(ItemType.Bong, "Bong", , , 25, MakeList(ShoppeType.BlackMage))},
             {ItemType.BookOfHolyBolt, New ItemTypeDescriptor(
+                    ItemType.BookOfHolyBolt,
                     $"Book of {SpellType.HolyBolt.Name}",,,,,,,,,,,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.HolyBolt),
                     Sub(character) character.Learn(SpellType.HolyBolt))},
-            {ItemType.BookOfPurify, New ItemTypeDescriptor(
+            {ItemType.BookOfPurify, New ItemTypeDescriptor(ItemType.BookOfPurify,
                     $"Book of {SpellType.Purify.Name}",,,,,,,,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
@@ -173,7 +175,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.ElementalOrb, New ElementalOrbDescriptor},
             {ItemType.FireShard, New FireShardDescriptor},
             {ItemType.Food, New FoodDescriptor},
-            {ItemType.GoblinEar, New TrophyDescriptor("Goblin Ear", 5, MakeList(ShoppeType.BlackMage))},
+            {ItemType.GoblinEar, New TrophyDescriptor(ItemType.GoblinEar, "Goblin Ear", 5, MakeList(ShoppeType.BlackMage))},
             {ItemType.GoldKey, New GoldKeyDescriptor},
             {ItemType.Helmet, New HelmetDescriptor},
             {ItemType.Herb, New HerbDescriptor},
@@ -182,28 +184,28 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.IronKey, New IronKeyDescriptor},
             {ItemType.Lotion, New LotionDescriptor},
             {ItemType.MagicEgg, New MagicEggDescriptor},
-            {ItemType.MembershipCard, New TrophyDescriptor("Membership Card", 10)},
+            {ItemType.MembershipCard, New TrophyDescriptor(ItemType.MembershipCard, "Membership Card", 10)},
             {ItemType.MoonPortal, New MoonPortalDescriptor},
-            {ItemType.Mushroom, New TrophyDescriptor("Mushroom", 25, MakeList(ShoppeType.BlackMage))},
+            {ItemType.Mushroom, New TrophyDescriptor(ItemType.Mushroom, "Mushroom", 25, MakeList(ShoppeType.BlackMage))},
             {ItemType.PlateMail, New PlateMailDescriptor},
             {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {ItemType.Potion, New PotionDescriptor},
             {ItemType.Pr0n, New Pr0nDescriptor},
-            {ItemType.RatTail, New TrophyDescriptor("Rat Tail", 1, MakeList(ShoppeType.BlackMage))},
+            {ItemType.RatTail, New TrophyDescriptor(ItemType.RatTail, "Rat Tail", 1, MakeList(ShoppeType.BlackMage))},
             {ItemType.RingOfHP, New RingOfHPDescriptor},
             {ItemType.RottenEgg, New RottenEggDescriptor},
             {ItemType.RottenFood, New RottenFoodDescriptor},
             {ItemType.SilverKey, New SilverKeyDescriptor},
             {ItemType.Shield, New ShieldDescriptor},
-            {ItemType.ShoeLaces, New TrophyDescriptor("Shoe Laces", 0)},
+            {ItemType.ShoeLaces, New TrophyDescriptor(ItemType.ShoeLaces, "Shoe Laces", 0)},
             {ItemType.Shortsword, New ShortswordDescriptor},
-            {ItemType.SkullFragment, New TrophyDescriptor("Skull Fragment", 5, MakeList(ShoppeType.BlackMage))},
-            {ItemType.SnakeFang, New TrophyDescriptor("Snake Fang", 3, MakeList(ShoppeType.BlackMage))},
+            {ItemType.SkullFragment, New TrophyDescriptor(ItemType.SkullFragment, "Skull Fragment", 5, MakeList(ShoppeType.BlackMage))},
+            {ItemType.SnakeFang, New TrophyDescriptor(ItemType.SnakeFang, "Snake Fang", 3, MakeList(ShoppeType.BlackMage))},
             {ItemType.SpaceSord, New SpaceSordDescriptor},
             {ItemType.TownPortal, New TownPortalDescriptor},
             {ItemType.Trousers, New TrousersDescriptor},
             {ItemType.WaterShard, New WaterShardDescriptor},
-            {ItemType.ZombieTaint, New TrophyDescriptor("Zombie Taint", 5, MakeList(ShoppeType.BlackMage))}
+            {ItemType.ZombieTaint, New TrophyDescriptor(ItemType.ZombieTaint, "Zombie Taint", 5, MakeList(ShoppeType.BlackMage))}
         }
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)
         Get
