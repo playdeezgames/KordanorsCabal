@@ -114,10 +114,24 @@ Public Module ItemTypeDescriptorUtility
                 MakeDictionary(
                     (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
                 MakeDictionary((DungeonLevel.Level1, "1d1")))},
-            {ItemType.AmuletOfMana, New AmuletDescriptor(CharacterStatisticType.Mana)},
-            {ItemType.AmuletOfPOW, New AmuletDescriptor(CharacterStatisticType.Power)},
-            {ItemType.AmuletOfSTR, New AmuletDescriptor(CharacterStatisticType.Strength)},
-            {ItemType.AmuletOfYendor, New WornItemDescriptor("Amulet of Yendor", MakeList(EquipSlot.Neck))},
+            {ItemType.AmuletOfMana, New AmuletDescriptor(
+                CharacterStatisticType.Mana,
+                MakeDictionary(
+                    (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
+                MakeDictionary((DungeonLevel.Level2, "1d1")))},
+            {ItemType.AmuletOfPOW, New AmuletDescriptor(CharacterStatisticType.Power,
+                MakeDictionary(
+                    (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
+                MakeDictionary((DungeonLevel.Level3, "1d1")))},
+            {ItemType.AmuletOfSTR, New AmuletDescriptor(CharacterStatisticType.Strength,
+                MakeDictionary(
+                    (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
+                MakeDictionary((DungeonLevel.Level4, "1d1")))},
+            {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
+                "Amulet of Yendor",,,,
+                MakeList(EquipSlot.Neck),,,,,,,,,
+                1000,
+                MakeList(ShoppeType.BlackMarket))},
             {ItemType.BatWing, New TrophyDescriptor("Bat Wing", 3, MakeList(ShoppeType.BlackMage))},
             {ItemType.Beer, New BeerDescriptor},
             {ItemType.Bong, New TrophyDescriptor("Bong", , , 25, MakeList(ShoppeType.BlackMage))},
