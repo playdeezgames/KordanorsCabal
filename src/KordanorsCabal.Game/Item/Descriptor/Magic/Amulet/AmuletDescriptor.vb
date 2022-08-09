@@ -4,8 +4,8 @@
 
     Public Sub New(
                   statisticType As CharacterStatisticType,
-                  Optional spawnLocationTypes As IReadOnlyDictionary(Of OldDungeonLevel, HashSet(Of LocationType)) = Nothing,
-                  Optional spawnCounts As IReadOnlyDictionary(Of OldDungeonLevel, String) = Nothing)
+                  Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
+                  Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing)
         MyBase.New(
             $"Amulet of {statisticType.Abbreviation}", ,
             spawnLocationTypes,

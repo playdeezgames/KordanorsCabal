@@ -16,7 +16,6 @@
     Public ReadOnly LocationStatistic As LocationStatisticData
     Public ReadOnly Player As PlayerData
     Public ReadOnly Route As RouteData
-    Public ReadOnly DungeonLevel As DungeonLevelData
 
     Public Sub New(store As Store)
         Character = New CharacterData(store)

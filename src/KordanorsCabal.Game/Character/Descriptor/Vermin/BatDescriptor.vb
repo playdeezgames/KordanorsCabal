@@ -1,7 +1,7 @@
 ﻿Friend Class BatDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
+    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return location.LocationType = LocationType.Dungeon
     End Function
 
@@ -30,17 +30,17 @@
         End Get
     End Property
 
-    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of OldDungeonLevel, Long) =
-        New Dictionary(Of OldDungeonLevel, Long) From
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of DungeonLevel, Long) =
+        New Dictionary(Of DungeonLevel, Long) From
         {
-            {OldDungeonLevel.Level1, 15},
-            {OldDungeonLevel.Level2, 30},
-            {OldDungeonLevel.Level3, 45},
-            {OldDungeonLevel.Level4, 30},
-            {OldDungeonLevel.Level5, 15}
+            {DungeonLevel.Level1, 15},
+            {DungeonLevel.Level2, 30},
+            {DungeonLevel.Level3, 45},
+            {DungeonLevel.Level4, 30},
+            {DungeonLevel.Level5, 15}
         }
 
-    Public Overrides ReadOnly Property SpawnCount(level As OldDungeonLevel) As Long
+    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
         Get
             Dim result As Long = 0
             Return If(spawnCountTable.TryGetValue(level, result), result, 0)

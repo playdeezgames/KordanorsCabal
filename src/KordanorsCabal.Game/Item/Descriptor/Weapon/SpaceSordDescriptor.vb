@@ -5,9 +5,9 @@
         MyBase.New("SpaceSord",
                    5,
             MakeDictionary(
-                (OldDungeonLevel.Moon, MakeHashSet(LocationType.Moon))),
+                (DungeonLevel.Moon, MakeHashSet(LocationType.Moon))),
             MakeDictionary(
-                (OldDungeonLevel.Moon, "1d1")),
+                (DungeonLevel.Moon, "1d1")),
             MakeList(EquipSlot.Weapon))
     End Sub
 

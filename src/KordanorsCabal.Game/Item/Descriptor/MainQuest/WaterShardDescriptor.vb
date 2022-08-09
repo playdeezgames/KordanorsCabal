@@ -4,9 +4,9 @@
     Sub New()
         MyBase.New("Water Shard",,
             MakeDictionary(
-                (OldDungeonLevel.Level4, MakeHashSet(LocationType.DungeonBoss))),
+                (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (OldDungeonLevel.Level4, "1d1")))
+                (DungeonLevel.Level4, "1d1")))
     End Sub
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean

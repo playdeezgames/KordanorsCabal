@@ -6,14 +6,14 @@
             "BrodeSode",
             10,
             MakeDictionary(
-                (OldDungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level3, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level4, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level5, MakeHashSet(LocationType.Dungeon))),
+                (DungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level3, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level4, MakeHashSet(LocationType.Dungeon)),
+                (DungeonLevel.Level5, MakeHashSet(LocationType.Dungeon))),
             MakeDictionary(
-                (OldDungeonLevel.Level2, "2d6"),
-                (OldDungeonLevel.Level3, "1d6")),
+                (DungeonLevel.Level2, "2d6"),
+                (DungeonLevel.Level3, "1d6")),
                 MakeList(EquipSlot.Weapon),
                 20,
                 MakeList(ShoppeType.Blacksmith))

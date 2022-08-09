@@ -5,6 +5,6 @@
         MyBase.New(
             "AU Key",,
             MakeDictionary(
-                (OldDungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd))))
+                (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd))))
     End Sub
 End Class

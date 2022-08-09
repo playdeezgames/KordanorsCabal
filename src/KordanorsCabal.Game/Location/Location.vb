@@ -21,7 +21,7 @@
     Public Shared Function ByStatisticValue(statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)
         Return StaticWorldData.World.LocationStatistic.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
     End Function
-    Public Shared Function ByDungeonLevel(dungeonLevel As OldDungeonLevel) As IEnumerable(Of Location)
+    Public Shared Function ByDungeonLevel(dungeonLevel As DungeonLevel) As IEnumerable(Of Location)
         Return StaticWorldData.World.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
     End Function
     Friend Sub DestroyRoute(direction As Direction)
@@ -110,11 +110,11 @@
             Return LocationType.CanMap
         End Get
     End Property
-    Property DungeonLevel As OldDungeonLevel
+    Property DungeonLevel As DungeonLevel
         Get
-            Return CType(If(StaticWorldData.World.LocationDungeonLevel.Read(Id), 0), OldDungeonLevel)
+            Return CType(If(StaticWorldData.World.LocationDungeonLevel.Read(Id), 0), DungeonLevel)
         End Get
-        Set(value As OldDungeonLevel)
+        Set(value As DungeonLevel)
             StaticWorldData.World.LocationDungeonLevel.Write(Id, value)
         End Set
     End Property

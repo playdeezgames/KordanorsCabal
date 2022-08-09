@@ -26,16 +26,16 @@
         End Get
     End Property
 
-    Private Shared ReadOnly spawnCountTable As IReadOnlyDictionary(Of OldDungeonLevel, Long) =
-        New Dictionary(Of OldDungeonLevel, Long) From
+    Private Shared ReadOnly spawnCountTable As IReadOnlyDictionary(Of DungeonLevel, Long) =
+        New Dictionary(Of DungeonLevel, Long) From
         {
-            {OldDungeonLevel.Level1, 30},
-            {OldDungeonLevel.Level2, 45},
-            {OldDungeonLevel.Level3, 30},
-            {OldDungeonLevel.Level4, 15}
+            {DungeonLevel.Level1, 30},
+            {DungeonLevel.Level2, 45},
+            {DungeonLevel.Level3, 30},
+            {DungeonLevel.Level4, 15}
         }
 
-    Public Overrides ReadOnly Property SpawnCount(level As OldDungeonLevel) As Long
+    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
         Get
             Dim result As Long
             Return If(spawnCountTable.TryGetValue(level, result), result, 0)
@@ -57,7 +57,7 @@
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return character.CharacterType = CharacterType.N00b
     End Function
-    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
+    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return location.LocationType = LocationType.Dungeon
     End Function
     Public Overrides Function RollMoneyDrop() As Long
