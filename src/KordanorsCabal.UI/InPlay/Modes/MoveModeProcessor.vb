@@ -81,7 +81,7 @@
         If player.CanMove(direction.ToDescriptor) Then
             PopButtonIndex()
             player.Mode = PlayerMode.Neutral
-            If player.Move(direction) Then
+            If player.Move(direction.ToDescriptor) Then
                 player.EnqueueMessage("You take damage from starvation!")
                 If player.IsDead Then
                     Return UIState.Dead
