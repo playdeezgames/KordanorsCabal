@@ -45,7 +45,7 @@
     Public Sub Destroy()
         StaticWorldData.World.Item.Clear(Id)
     End Sub
-    Public Function Encumbrance() As Single
+    Public Function Encumbrance() As Long
         Return ItemType.Encumbrance
     End Function
     Friend Sub Use(character As Character)

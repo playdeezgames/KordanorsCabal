@@ -25,7 +25,7 @@ Module CharacterTypeExtensions
         Return CharacterTypeDescriptors(characterType).InitialStatistics
     End Function
     <Extension>
-    Function MaximumEncumbrance(characterType As CharacterType, character As Character) As Single
+    Function MaximumEncumbrance(characterType As CharacterType, character As Character) As Long
         Return CharacterTypeDescriptors(characterType).MaximumEncumbrance(character)
     End Function
     <Extension>

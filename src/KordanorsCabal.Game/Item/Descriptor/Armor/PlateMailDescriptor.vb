@@ -3,7 +3,7 @@
     Sub New()
         MyBase.New(
             "Platemail",
-            40.0!,
+            40,
             MakeDictionary(
                 (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd)),
                 (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),

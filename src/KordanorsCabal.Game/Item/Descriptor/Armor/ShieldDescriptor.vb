@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             "Shield",
-            5.0!,
+            5,
             MakeDictionary(
                 (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
                 (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),

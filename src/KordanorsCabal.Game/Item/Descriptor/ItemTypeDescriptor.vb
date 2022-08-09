@@ -5,7 +5,7 @@
 
     '[ItemTypes]([ItemTypeId],[ItemTypeName],[Encumbrance])
     ReadOnly Property Name As String
-    ReadOnly Property Encumbrance As Single
+    ReadOnly Property Encumbrance As Long
     ReadOnly Property IsConsumed As Boolean
 
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
@@ -67,7 +67,7 @@
     End Function
     Sub New(
            name As String,
-           Optional encumbrance As Single = 0!,
+           Optional encumbrance As Long = 0,
            Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
            Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,

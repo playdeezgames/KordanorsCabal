@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             "Chainmail",
-            20.0!,
+            20,
             MakeDictionary(
                 (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd)),
                 (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),

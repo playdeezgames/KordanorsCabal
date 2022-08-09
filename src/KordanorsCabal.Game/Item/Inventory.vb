@@ -27,7 +27,7 @@
         End Get
     End Property
 
-    ReadOnly Property TotalEncumbrance As Single
+    ReadOnly Property TotalEncumbrance As Long
         Get
             Return Items.Sum(Function(x) x.Encumbrance)
         End Get

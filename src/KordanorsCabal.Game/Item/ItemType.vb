@@ -69,7 +69,7 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).CanUse(character)
     End Function
     <Extension>
-    Function Encumbrance(itemType As ItemType) As Single
+    Function Encumbrance(itemType As ItemType) As Long
         Return ItemTypeDescriptors(itemType).Encumbrance
     End Function
     <Extension>
