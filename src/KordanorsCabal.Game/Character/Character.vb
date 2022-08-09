@@ -745,7 +745,7 @@
         If IsEncumbered Then
             Return False
         End If
-        If Not Location.HasRoute(direction.ToDirection) Then
+        If Not Location.HasRoute(direction) Then
             Return False
         End If
         If Not Location.Routes(direction.ToDirection).CanMove(Me) Then

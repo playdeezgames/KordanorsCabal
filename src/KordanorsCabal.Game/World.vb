@@ -233,7 +233,7 @@ Public Module World
     Private Sub CreateChurchEntrance()
         Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(LocationType.Town))
         Dim entrance = Location.Create(LocationType.ChurchEntrance)
-        Dim direction = RNG.FromEnumerable(AllDirections.Where(Function(x) x.ToDescriptor.IsCardinal AndAlso Not townLocation.HasRoute(x)))
+        Dim direction = RNG.FromEnumerable(AllDirections.Where(Function(x) x.ToDescriptor.IsCardinal AndAlso Not townLocation.HasRoute(x.ToDescriptor)))
         StitchTown(townLocation, direction, entrance)
     End Sub
 

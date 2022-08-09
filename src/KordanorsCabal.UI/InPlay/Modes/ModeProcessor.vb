@@ -64,7 +64,7 @@
         buffer.PutCell((17, 14), Pattern.BottomRightCorner, False, Hue.Black)
 
         Dim location = player.Location
-        If location.HasRoute(player.Direction.ToDirection) Then
+        If location.HasRoute(player.Direction) Then
             buffer.FillCells((9, 6), (4, 1), Pattern.Horizontal1, False, Hue.Black)
             buffer.FillCells((8, 6), (1, 8), Pattern.Vertical8, False, Hue.Black)
             buffer.FillCells((13, 6), (1, 8), Pattern.Vertical1, False, Hue.Black)
@@ -74,7 +74,7 @@
             buffer.WriteText((10, 9), routeType.Abbreviation, False, routeType.TextHue)
         End If
 
-        If location.HasRoute(player.Direction.PreviousDirection.ToDirection) Then
+        If location.HasRoute(player.Direction.PreviousDirection) Then
             buffer.PutCell((0, 3), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.PutCell((1, 4), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((1, 5), (1, 12), Pattern.Vertical8, False, Hue.Black)
@@ -82,7 +82,7 @@
             buffer.WriteText((0, 9), routeType.Abbreviation.Substring(1, 1), False, routeType.TextHue)
         End If
 
-        If location.HasRoute(player.Direction.NextDirection.ToDirection) Then
+        If location.HasRoute(player.Direction.NextDirection) Then
             buffer.PutCell((21, 3), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.PutCell((20, 4), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((20, 5), (1, 12), Pattern.Vertical1, False, Hue.Black)
@@ -90,23 +90,23 @@
             buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, routeType.TextHue)
         End If
 
-        If location.HasRoute(Direction.Up) Then
+        If location.HasRoute(Direction.Up.ToDescriptor) Then
             buffer.PutCell((7, 0), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((8, 0), (6, 1), Pattern.Horizontal8, False, Hue.Black)
             buffer.PutCell((14, 0), Pattern.UpwardDiagonal, False, Hue.Black)
         End If
 
-        If location.HasRoute(Direction.Down) Then
+        If location.HasRoute(Direction.Down.ToDescriptor) Then
             buffer.PutCell((7, 17), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((8, 17), (6, 1), Pattern.Horizontal1, False, Hue.Black)
             buffer.PutCell((14, 17), Pattern.DownwardDiagonal, False, Hue.Black)
         End If
 
-        If location.HasRoute(Direction.Outward) Then
+        If location.HasRoute(Direction.Outward.ToDescriptor) Then
             ShowSprite(buffer, (5, 5), location.Routes(Direction.Outward).RouteType.Sprite)
         End If
 
-        If location.HasRoute(Direction.Inward) Then
+        If location.HasRoute(Direction.Inward.ToDescriptor) Then
             ShowSprite(buffer, (5, 5), location.Routes(Direction.Inward).RouteType.Sprite)
         End If
 

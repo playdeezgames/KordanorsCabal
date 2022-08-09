@@ -57,8 +57,8 @@
                 ToDictionary(Function(x) x.Item1, Function(x) Route.FromId(x.Item2))
         End Get
     End Property
-    Public Function HasRoute(direction As Direction) As Boolean
-        Return Routes.ContainsKey(direction)
+    Public Function HasRoute(direction As DirectionDescriptor) As Boolean
+        Return Routes.ContainsKey(direction.Id)
     End Function
     Friend Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
         StaticWorldData.World.LocationStatistic.Write(Id, statisticType, statisticValue)
