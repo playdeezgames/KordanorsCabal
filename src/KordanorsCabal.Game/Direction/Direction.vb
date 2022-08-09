@@ -54,3 +54,13 @@ Friend Module DirectionDescriptorUtility
         End Get
     End Property
 End Module
+Public Module DirectionNames
+    Public Const North = "North"
+    Public Const East = "East"
+    Public Const South = "South"
+    Public Const West = "West"
+    Public Const Up = "Up"
+    Public Const Down = "Down"
+    Public Const Inward = "In"
+    Public Const Outward = "Out"
+End Module
