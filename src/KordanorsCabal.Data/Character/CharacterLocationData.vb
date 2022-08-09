@@ -9,7 +9,7 @@
     End Sub
 
     Friend Sub Initialize()
-        StaticWorldData.Character.Initialize()
+        StaticWorldData.World.Character.Initialize()
         StaticWorldData.Location.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]

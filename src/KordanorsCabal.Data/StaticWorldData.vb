@@ -1,5 +1,5 @@
 ﻿Public Module StaticWorldData
-    Public ReadOnly Character As New CharacterData(StaticStore.Store)
+    Public ReadOnly World As New WorldData(StaticStore.Store)
     Public ReadOnly CharacterEquipSlot As New CharacterEquipSlotData(StaticStore.Store)
     Public ReadOnly CharacterLocation As New CharacterLocationData(StaticStore.Store)
     Public ReadOnly CharacterQuestCompletion As New CharacterQuestCompletionData(StaticStore.Store)
