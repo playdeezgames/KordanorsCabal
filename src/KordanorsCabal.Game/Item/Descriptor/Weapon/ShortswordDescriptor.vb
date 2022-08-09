@@ -18,6 +18,8 @@
             2,,
             20,,
             5,
+            MakeList(ShoppeType.Blacksmith),
+            25,
             MakeList(ShoppeType.Blacksmith))
     End Sub
 End Class
