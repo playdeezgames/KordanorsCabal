@@ -37,7 +37,7 @@
                 player.Mode = PlayerMode.Neutral
             Case LeftButtonIndex
                 PopButtonIndex()
-                player.Direction = player.Direction.PreviousDirection.Value.ToDescriptor
+                player.Direction = player.Direction.PreviousDirection
                 player.Mode = PlayerMode.Neutral
             Case RightButtonIndex
                 PopButtonIndex()

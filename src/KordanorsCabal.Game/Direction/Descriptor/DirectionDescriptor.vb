@@ -32,10 +32,10 @@
             Return If(result.HasValue, New DirectionDescriptor(result.Value), Nothing)
         End Get
     End Property
-    ReadOnly Property PreviousDirection As Direction?
+    ReadOnly Property PreviousDirection As DirectionDescriptor
         Get
             Dim result = StaticWorldData.World.Direction.ReadPrevious(Id)
-            Return If(result.HasValue, CType(result.Value, Direction), Nothing)
+            Return If(result.HasValue, New DirectionDescriptor(result.Value), Nothing)
         End Get
     End Property
 End Class

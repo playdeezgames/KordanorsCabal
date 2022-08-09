@@ -70,7 +70,7 @@
             Case BackwardButtonIndex
                 Return HandleMove(player, player.Direction.Opposite.ToDirection)
             Case LeftButtonIndex
-                Return HandleMove(player, player.Direction.PreviousDirection.Value)
+                Return HandleMove(player, player.Direction.PreviousDirection.ToDirection)
             Case RightButtonIndex
                 Return HandleMove(player, player.Direction.NextDirection.ToDirection)
         End Select

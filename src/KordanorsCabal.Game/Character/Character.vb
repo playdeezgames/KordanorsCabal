@@ -681,7 +681,7 @@
         Return Inventory.Items.Where(Function(x) x.ItemType = itemType).Count
     End Function
     Public Function CanMoveLeft() As Boolean
-        Return CanMove(Direction.PreviousDirection.Value.ToDescriptor)
+        Return CanMove(Direction.PreviousDirection)
     End Function
     Public ReadOnly Property CanMap() As Boolean
         Get
