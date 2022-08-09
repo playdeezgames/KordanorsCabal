@@ -85,10 +85,10 @@
     End Sub
 
     Private Function GetStatistic(statisticType As ItemStatisticType) As Long
-        Return If(ItemStatisticData.Read(Id, statisticType), statisticType.DefaultValue)
+        Return If(WorldData.ItemStatistic.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
     Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
-        ItemStatisticData.Write(Id, statisticType, value)
+        WorldData.ItemStatistic.Write(Id, statisticType, value)
     End Sub
 
     Public ReadOnly Property NeedsRepair As Boolean

@@ -1,8 +1,13 @@
 ﻿Public Class ItemData
+    Inherits BaseData
     Friend Const TableName = "Items"
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeColumn = "ItemType"
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
@@ -29,7 +34,7 @@
     Public Sub Clear(itemId As Long)
         WorldData.CharacterEquipSlot.ClearForItem(itemId)
         WorldData.InventoryItem.ClearForItem(itemId)
-        ItemStatisticData.ClearForItem(itemId)
+        WorldData.ItemStatistic.ClearForItem(itemId)
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,

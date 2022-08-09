@@ -1,11 +1,16 @@
 Public Class PlayerData
+    Inherits BaseData
     Friend Const TableName = "Players"
     Friend Const PlayerIdColumn = "PlayerId"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const DirectionColumn = "Direction"
     Friend Const ModeColumn = "Mode"
     Const FixedPlayerId = 1
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Character.Initialize()
         Store.ExecuteNonQuery(

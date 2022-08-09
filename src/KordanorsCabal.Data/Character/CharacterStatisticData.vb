@@ -1,9 +1,14 @@
 ﻿Public Class CharacterStatisticData
+    Inherits BaseData
     Friend Const TableName = "CharacterStatistics"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
     Friend Const StatisticValueColumn = "StatisticVolume"
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Character.Initialize()
         Store.ExecuteNonQuery(

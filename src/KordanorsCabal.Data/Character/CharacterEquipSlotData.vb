@@ -1,9 +1,14 @@
 ﻿Public Class CharacterEquipSlotData
+    Inherits BaseData
     Friend Const TableName = "CharacterEquipSlots"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const EquipSlotColumn = "EquipSlot"
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Character.Initialize()
         WorldData.Item.Initialize()

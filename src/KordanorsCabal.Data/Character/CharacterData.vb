@@ -1,9 +1,13 @@
 ﻿Public Class CharacterData
+    Inherits BaseData
     Public Const TableName = "Characters"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const CharacterTypeColumn = "CharacterType"
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Location.Initialize()
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}]

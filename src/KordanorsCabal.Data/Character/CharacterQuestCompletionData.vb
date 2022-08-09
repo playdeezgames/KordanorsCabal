@@ -1,9 +1,14 @@
 ﻿Public Class CharacterQuestCompletionData
+    Inherits BaseData
     Friend Const TableName = "CharacterQuestCompletions"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const QuestColumn = "Quest"
     Friend Const CompletionsColumn = "Completions"
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Character.Initialize()
         Store.ExecuteNonQuery(

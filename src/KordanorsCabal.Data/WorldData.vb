@@ -1,18 +1,19 @@
 ﻿Public Module WorldData
-    Public ReadOnly Character As New CharacterData
-    Public ReadOnly CharacterEquipSlot As New CharacterEquipSlotData
-    Public ReadOnly CharacterLocation As New CharacterLocationData
-    Public ReadOnly CharacterQuestCompletion As New CharacterQuestCompletionData
-    Public ReadOnly CharacterQuest As New CharacterQuestData
-    Public ReadOnly CharacterSpell As New CharacterSpellData
-    Public ReadOnly CharacterStatistic As New CharacterStatisticData
-    Public ReadOnly Player As New PlayerData
-    Public ReadOnly Inventory As New InventoryData
-    Public ReadOnly InventoryItem As New InventoryItemData
-    Public ReadOnly Item As New ItemData
-    Public ReadOnly Feature As New FeatureData
-    Public ReadOnly Location As New LocationData
-    Public ReadOnly LocationDungeonLevel As New LocationDungeonLevelData
-    Public ReadOnly LocationStatistic As New LocationStatisticData
-    Public ReadOnly Route As New RouteData
+    Public ReadOnly Character As New CharacterData(StaticStore.Store)
+    Public ReadOnly CharacterEquipSlot As New CharacterEquipSlotData(StaticStore.Store)
+    Public ReadOnly CharacterLocation As New CharacterLocationData(StaticStore.Store)
+    Public ReadOnly CharacterQuestCompletion As New CharacterQuestCompletionData(StaticStore.Store)
+    Public ReadOnly CharacterQuest As New CharacterQuestData(StaticStore.Store)
+    Public ReadOnly CharacterSpell As New CharacterSpellData(StaticStore.Store)
+    Public ReadOnly CharacterStatistic As New CharacterStatisticData(StaticStore.Store)
+    Public ReadOnly Feature As New FeatureData(StaticStore.Store)
+    Public ReadOnly Inventory As New InventoryData(StaticStore.Store)
+    Public ReadOnly InventoryItem As New InventoryItemData(StaticStore.Store)
+    Public ReadOnly Item As New ItemData(StaticStore.Store)
+    Public ReadOnly ItemStatistic As New ItemStatisticData(StaticStore.Store)
+    Public ReadOnly Location As New LocationData(StaticStore.Store)
+    Public ReadOnly LocationDungeonLevel As New LocationDungeonLevelData(StaticStore.Store)
+    Public ReadOnly LocationStatistic As New LocationStatisticData(StaticStore.Store)
+    Public ReadOnly Player As New PlayerData(StaticStore.Store)
+    Public ReadOnly Route As New RouteData(StaticStore.Store)
 End Module

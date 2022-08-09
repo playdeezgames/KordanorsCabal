@@ -1,8 +1,13 @@
 ﻿Public Class LocationData
+    Inherits BaseData
     Public Const TableName = "Locations"
     Public Const LocationIdColumn = "LocationId"
     Friend Const LocationTypeColumn = "LocationType"
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Public Sub Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]

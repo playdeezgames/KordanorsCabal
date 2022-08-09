@@ -1,9 +1,14 @@
 ﻿Public Class CharacterSpellData
+    Inherits BaseData
     Friend Const TableName = "CharacterSpells"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const SpellTypeColumn = "SpellType"
     Friend Const SpellLevelColumn = "SpellLevel"
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Character.Initialize()
         Store.ExecuteNonQuery(

@@ -1,8 +1,13 @@
 ﻿Public Class LocationDungeonLevelData
+    Inherits BaseData
     Friend Const TableName = "LocationDungeonLevels"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const DungeonLevelColumn = "DungeonLevel"
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Location.Initialize()
         Store.ExecuteNonQuery(

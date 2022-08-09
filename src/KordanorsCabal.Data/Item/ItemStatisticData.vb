@@ -1,9 +1,14 @@
-﻿Public Module ItemStatisticData
+﻿Public Class ItemStatisticData
+    Inherits BaseData
     Friend Const TableName = "ItemStatistics"
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
     Friend Const StatisticValueColumn = "StatisticValue"
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Item.Initialize()
         Store.ExecuteNonQuery(
@@ -40,4 +45,4 @@
             TableName,
             (ItemIdColumn, itemId))
     End Sub
-End Module
+End Class

@@ -1,8 +1,13 @@
 ﻿Public Class InventoryItemData
+    Inherits BaseData
     Friend Const TableName = "InventoryItems"
     Friend Const InventoryIdColumn = InventoryData.InventoryIdColumn
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Item.Initialize()
         WorldData.Inventory.Initialize()

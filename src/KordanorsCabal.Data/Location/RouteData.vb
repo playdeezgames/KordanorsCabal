@@ -1,11 +1,16 @@
 ﻿Public Class RouteData
+    Inherits BaseData
     Friend Const TableName = "Routes"
     Friend Const RouteIdColumn = "RouteId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const DirectionColumn = "Direction"
     Friend Const RouteTypeColumn = "RouteType"
     Friend Const ToLocationIdColumn = "To" + LocationData.LocationIdColumn
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Location.Initialize()
         Store.ExecuteNonQuery(

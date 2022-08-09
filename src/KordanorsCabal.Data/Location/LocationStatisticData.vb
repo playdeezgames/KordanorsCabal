@@ -1,9 +1,14 @@
 ﻿Public Class LocationStatisticData
+    Inherits BaseData
     Friend Const TableName = "LocationStatistics"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
     Friend Const StatisticValueColumn = "StatisticValue"
-    Private ReadOnly Store As SPLORR.Data.Store = StaticStore.Store
+
+    Public Sub New(store As Store)
+        MyBase.New(store)
+    End Sub
+
     Friend Sub Initialize()
         WorldData.Location.Initialize()
         Store.ExecuteNonQuery(
