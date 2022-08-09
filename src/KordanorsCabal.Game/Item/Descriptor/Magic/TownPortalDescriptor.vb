@@ -10,8 +10,8 @@
             Function(character) character.Location.IsDungeon,
             Sub(character)
                 Dim location = character.Location
-                Dim outDirection = New DirectionDescriptor("Out")
-                Dim inDirection = New DirectionDescriptor("In")
+                Dim outDirection = DirectionDescriptor.FromName("Out")
+                Dim inDirection = DirectionDescriptor.FromName("In")
                 location.DestroyRoute(outDirection)
                 Dim destination = Game.Location.FromLocationType(LocationType.TownSquare).Single
                 destination.DestroyRoute(inDirection)

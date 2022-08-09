@@ -38,16 +38,16 @@
         If player.CanMoveBackward Then
             Buttons(BackwardButtonIndex).Title = "Backward"
         End If
-        If player.CanMove(Direction.Up.ToDescriptor) Then
+        If player.CanMove(DirectionDescriptor.FromName("Up")) Then
             Buttons(UpButtonIndex).Title = "Up"
         End If
-        If player.CanMove(Direction.Down.ToDescriptor) Then
+        If player.CanMove(DirectionDescriptor.FromName("Down")) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
-        If player.CanMove(Direction.Inward.ToDescriptor) Then
+        If player.CanMove(DirectionDescriptor.FromName("In")) Then
             Buttons(InButtonIndex).Title = "In"
         End If
-        If player.CanMove(Direction.Outward.ToDescriptor) Then
+        If player.CanMove(DirectionDescriptor.FromName("Out")) Then
             Buttons(OutButtonIndex).Title = "Out"
         End If
     End Sub
@@ -58,30 +58,30 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case DownButtonIndex
-                Return HandleMove(player, Direction.Down)
+                Return HandleMove(player, DirectionDescriptor.FromName("Down"))
             Case UpButtonIndex
-                Return HandleMove(player, Direction.Up)
+                Return HandleMove(player, DirectionDescriptor.FromName("Up"))
             Case InButtonIndex
-                Return HandleMove(player, Direction.Inward)
+                Return HandleMove(player, DirectionDescriptor.FromName("In"))
             Case OutButtonIndex
-                Return HandleMove(player, Direction.Outward)
+                Return HandleMove(player, DirectionDescriptor.FromName("Out"))
             Case ForwardButtonIndex
-                Return HandleMove(player, player.Direction.ToDirection)
+                Return HandleMove(player, player.Direction)
             Case BackwardButtonIndex
-                Return HandleMove(player, player.Direction.Opposite.ToDirection)
+                Return HandleMove(player, player.Direction.Opposite)
             Case LeftButtonIndex
-                Return HandleMove(player, player.Direction.PreviousDirection.ToDirection)
+                Return HandleMove(player, player.Direction.PreviousDirection)
             Case RightButtonIndex
-                Return HandleMove(player, player.Direction.NextDirection.ToDirection)
+                Return HandleMove(player, player.Direction.NextDirection)
         End Select
         Return UIState.InPlay
     End Function
 
-    Private Function HandleMove(player As Character, direction As Direction) As UIState
-        If player.CanMove(direction.ToDescriptor) Then
+    Private Function HandleMove(player As Character, direction As DirectionDescriptor) As UIState
+        If player.CanMove(direction) Then
             PopButtonIndex()
             player.Mode = PlayerMode.Neutral
-            If player.Move(direction.ToDescriptor) Then
+            If player.Move(direction) Then
                 player.EnqueueMessage("You take damage from starvation!")
                 If player.IsDead Then
                     Return UIState.Dead

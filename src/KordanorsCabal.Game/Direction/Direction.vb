@@ -16,8 +16,4 @@ Public Module DirectionExtensions
     Public Function ToDescriptor(direction As Direction) As DirectionDescriptor
         Return DirectionDescriptors(direction)
     End Function
-    <Extension>
-    Public Function ToDirection(descriptor As DirectionDescriptor) As Direction
-        Return CType(descriptor.Id, Direction)
-    End Function
 End Module

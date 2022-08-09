@@ -2,9 +2,12 @@
     Sub New(directionId As Long)
         Id = directionId
     End Sub
-    Sub New(directionName As String)
+    Private Sub New(directionName As String)
         Me.New(StaticWorldData.World.Direction.ReadForName(directionName).Value)
     End Sub
+    Shared Function FromName(directionName As String) As DirectionDescriptor
+        Return New DirectionDescriptor(directionName)
+    End Function
     ReadOnly Property Id As Long
     ReadOnly Property Name As String
         Get
@@ -52,14 +55,14 @@ Friend Module DirectionDescriptorUtility
             {Direction.Up, New DirectionDescriptor(Direction.Up)},
             {Direction.West, New DirectionDescriptor(Direction.West)}
         }
-    Friend ReadOnly Property AllDirections As IEnumerable(Of Direction)
+    Friend ReadOnly Property AllDirections As IEnumerable(Of DirectionDescriptor)
         Get
-            Return DirectionDescriptors.Keys
+            Return StaticWorldData.World.Direction.ReadAll.Select(Function(x) New DirectionDescriptor(x))
         End Get
     End Property
-    Friend ReadOnly Property CardinalDirections As IEnumerable(Of Direction)
+    Friend ReadOnly Property CardinalDirections As IEnumerable(Of DirectionDescriptor)
         Get
-            Return AllDirections.Where(Function(x) x.ToDescriptor.IsCardinal)
+            Return AllDirections.Where(Function(x) x.IsCardinal)
         End Get
     End Property
 End Module

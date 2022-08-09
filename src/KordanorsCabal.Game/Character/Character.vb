@@ -758,7 +758,7 @@
     End Function
     Public Sub Run()
         If CanFight Then
-            Direction = RNG.FromEnumerable(CardinalDirections).ToDescriptor
+            Direction = RNG.FromEnumerable(CardinalDirections)
             If CanMove(Direction) Then
                 EnqueueMessage("You successfully ran!") 'TODO: sfx
                 Move(Direction)

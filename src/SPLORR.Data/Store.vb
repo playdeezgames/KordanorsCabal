@@ -125,6 +125,12 @@ Public Class Store
             MakeParameter($"@{whereColumn.Item1}", whereColumn.Item2),
             MakeParameter($"@{setColumn.Item1}", setColumn.Item2))
     End Sub
+    Public Function ReadRecords(Of TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String) As List(Of TOutputColumn)
+        initializer()
+        Return ExecuteReader(
+            Function(reader) CType(reader(outputColumnName), TOutputColumn),
+            $"SELECT [{outputColumnName}] FROM [{tableName}];")
+    End Function
     Public Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
         initializer()
         Return ExecuteReader(
