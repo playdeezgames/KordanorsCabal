@@ -756,17 +756,9 @@
         End If
         Return True
     End Function
-    Private Shared ReadOnly RunDirections As IReadOnlyList(Of Direction) =
-        New List(Of Direction) From
-        {
-            Direction.North,
-            Direction.East,
-            Direction.South,
-            Direction.West
-        }
     Public Sub Run()
         If CanFight Then
-            Direction = RNG.FromEnumerable(RunDirections)
+            Direction = RNG.FromEnumerable(CardinalDirections)
             If CanMove(Direction) Then
                 EnqueueMessage("You successfully ran!") 'TODO: sfx
                 Move(Direction)

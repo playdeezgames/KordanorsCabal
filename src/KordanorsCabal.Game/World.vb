@@ -195,7 +195,7 @@ Public Module World
         Dim startingLocation = Location.FromLocationType(LocationType.TownSquare).First
         Dim playerCharacter = Character.Create(CharacterType.N00b, startingLocation)
         playerCharacter.Location = startingLocation 'to track that this place has been visited
-        StaticWorldData.World.Player.Write(playerCharacter.Id, RNG.FromEnumerable(AllDirections.Where(Function(x) x.IsCardinal)), PlayerMode.Neutral)
+        StaticWorldData.World.Player.Write(playerCharacter.Id, RNG.FromEnumerable(AllDirections.Where(Function(x) x.ToDescriptor.IsCardinal)), PlayerMode.Neutral)
         RollUpPlayerCharacter()
     End Sub
 
@@ -233,7 +233,7 @@ Public Module World
     Private Sub CreateChurchEntrance()
         Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(LocationType.Town))
         Dim entrance = Location.Create(LocationType.ChurchEntrance)
-        Dim direction = RNG.FromEnumerable(AllDirections.Where(Function(x) x.IsCardinal AndAlso Not townLocation.HasRoute(x)))
+        Dim direction = RNG.FromEnumerable(AllDirections.Where(Function(x) x.ToDescriptor.IsCardinal AndAlso Not townLocation.HasRoute(x)))
         StitchTown(townLocation, direction, entrance)
     End Sub
 

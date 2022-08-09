@@ -1,8 +1,10 @@
-﻿Friend Class DirectionDescriptor
+﻿Public Class DirectionDescriptor
     Sub New(directionId As Long)
         Id = directionId
     End Sub
-    '[Directions]([DirectionId],[DirectionName],[Abbreviation],[IsCardinal],[OppositeDirectionId],[NextDirectionId],[PreviousDirectionId])
+    Sub New(directionName As String)
+        Me.New(StaticWorldData.World.Direction.ReadForName(directionName).Value)
+    End Sub
     ReadOnly Property Id As Long
     ReadOnly Property Name As String
         Get
@@ -53,6 +55,11 @@ Friend Module DirectionDescriptorUtility
     Friend ReadOnly Property AllDirections As IEnumerable(Of Direction)
         Get
             Return DirectionDescriptors.Keys
+        End Get
+    End Property
+    Friend ReadOnly Property CardinalDirections As IEnumerable(Of Direction)
+        Get
+            Return AllDirections.Where(Function(x) x.ToDescriptor.IsCardinal)
         End Get
     End Property
 End Module

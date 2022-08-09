@@ -42,6 +42,10 @@
     Public Sub New(store As Store)
         MyBase.New(store)
     End Sub
+    Public Function ReadForName(directionName As String) As Long?
+        Return Store.ReadColumnValue(Of String, Long)(AddressOf Initialize, TableName, DirectionIdColumn, (DirectionNameColumn, directionName))
+    End Function
+
     Public Function ReadName(directionId As Long) As String
         Return Store.ReadColumnString(
             AddressOf Initialize,
