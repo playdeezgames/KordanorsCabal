@@ -43,18 +43,6 @@
     End Property
 End Class
 Friend Module DirectionDescriptorUtility
-    Friend DirectionDescriptors As IReadOnlyDictionary(Of Direction, DirectionDescriptor) =
-        New Dictionary(Of Direction, DirectionDescriptor) From
-        {
-            {Direction.Down, New DirectionDescriptor(Direction.Down)},
-            {Direction.East, New DirectionDescriptor(Direction.East)},
-            {Direction.Inward, New DirectionDescriptor(Direction.Inward)},
-            {Direction.North, New DirectionDescriptor(Direction.North)},
-            {Direction.Outward, New DirectionDescriptor(Direction.Outward)},
-            {Direction.South, New DirectionDescriptor(Direction.South)},
-            {Direction.Up, New DirectionDescriptor(Direction.Up)},
-            {Direction.West, New DirectionDescriptor(Direction.West)}
-        }
     Friend ReadOnly Property AllDirections As IEnumerable(Of DirectionDescriptor)
         Get
             Return StaticWorldData.World.Direction.ReadAll.Select(Function(x) New DirectionDescriptor(x))
