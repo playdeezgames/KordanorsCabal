@@ -10,10 +10,8 @@
             $"Amulet of {statisticType.Abbreviation}", ,
             spawnLocationTypes,
             spawnCounts,
-            MakeList(EquipSlot.Neck))
+            MakeList(EquipSlot.Neck),
+            New Dictionary(Of CharacterStatisticType, Long) From {{statisticType, 1}})
         buffedStatisticType = statisticType
     End Sub
-    Public Overrides Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
-        Return If(statisticType = buffedStatisticType, 1, Nothing)
-    End Function
 End Class

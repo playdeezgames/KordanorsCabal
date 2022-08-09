@@ -6,7 +6,7 @@
             MakeDictionary(
                 (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level4, "1d1")),,,,,, False)
+                (DungeonLevel.Level4, "1d1")),,,,,, , False)
     End Sub
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean

@@ -4,29 +4,6 @@
     ReadOnly Property Encumbrance As Single
     Private ReadOnly spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String)
     ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
-
-
-
-    Overridable ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return False
-        End Get
-    End Property
-
-    Overridable Sub Use(character As Character)
-        'nothing, by default
-    End Sub
-
-    Function RollSpawnCount(level As DungeonLevel) As Long
-        If spawnCounts Is Nothing Then
-            Return 0
-        End If
-        Dim dice As String = ""
-        If spawnCounts.TryGetValue(level, dice) Then
-            Return RNG.RollDice(dice)
-        End If
-        Return 0
-    End Function
     ReadOnly Property AttackDice As Long
     ReadOnly Property MaximumDamage As Long?
     ReadOnly Property DefendDice As Long
@@ -38,14 +15,38 @@
     Friend ReadOnly Property RepairPrice() As Long
     Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
     ReadOnly Property IsConsumed As Boolean
-
-    Overridable Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
-        Return Nothing
-    End Function
-
+    Private ReadOnly Property buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long)
     Overridable Sub Purify(item As Item)
         'by default, do nothing
     End Sub
+    Overridable ReadOnly Property CanUse(character As Character) As Boolean
+        Get
+            Return False
+        End Get
+    End Property
+    Overridable Sub Use(character As Character)
+        'nothing, by default
+    End Sub
+    Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
+        If buffs Is Nothing Then
+            Return Nothing
+        End If
+        Dim result As Long = 0
+        If buffs.TryGetValue(statisticType, result) Then
+            Return result
+        End If
+        Return Nothing
+    End Function
+    Function RollSpawnCount(level As DungeonLevel) As Long
+        If spawnCounts Is Nothing Then
+            Return 0
+        End If
+        Dim dice As String = ""
+        If spawnCounts.TryGetValue(level, dice) Then
+            Return RNG.RollDice(dice)
+        End If
+        Return 0
+    End Function
     Friend Function HasOffer(shoppeType As ShoppeType) As Boolean
         Return boughtAt.Contains(shoppeType)
     End Function
@@ -61,6 +62,7 @@
            Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
            Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
+           Optional buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long) = Nothing,
            Optional attackDice As Long = 0,
            Optional maximumDamage As Long? = Nothing,
            Optional defendDice As Long = 0,
@@ -98,6 +100,7 @@
         Me.DefendDice = defendDice
         Me.MaximumDurability = maximumDurability
         Me.IsConsumed = isConsumed
+        Me.buffs = buffs
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility

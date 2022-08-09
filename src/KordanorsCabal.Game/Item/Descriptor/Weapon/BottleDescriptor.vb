@@ -2,7 +2,7 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Empty Bottle", 1,,, MakeList(EquipSlot.Weapon), 2, 1,, 3)
+        MyBase.New("Empty Bottle", 1,,, MakeList(EquipSlot.Weapon), , 2, 1,, 3)
     End Sub
 
     Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
