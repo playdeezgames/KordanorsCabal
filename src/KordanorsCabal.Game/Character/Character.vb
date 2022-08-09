@@ -681,7 +681,7 @@
         Return Inventory.Items.Where(Function(x) x.ItemType = itemType).Count
     End Function
     Public Function CanMoveLeft() As Boolean
-        Return CanMove(Direction.PreviousDirection.Value)
+        Return CanMove(Direction.PreviousDirection.Value.ToDescriptor)
     End Function
     Public ReadOnly Property CanMap() As Boolean
         Get
@@ -689,16 +689,16 @@
         End Get
     End Property
     Public Function CanMoveRight() As Boolean
-        Return CanMove(Direction.NextDirection.Value)
+        Return CanMove(Direction.NextDirection.Value.ToDescriptor)
     End Function
     Public Function CanMoveForward() As Boolean
-        Return CanMove(Direction.ToDirection)
+        Return CanMove(Direction)
     End Function
     Public Sub Heal()
         SetStatistic(CharacterStatisticType.Wounds, 0)
     End Sub
     Public Function CanMoveBackward() As Boolean
-        Return CanMove(Direction.Opposite)
+        Return CanMove(Direction.Opposite.ToDescriptor)
     End Function
     Public Sub Interact()
         If CanInteract Then
@@ -741,17 +741,17 @@
         End If
         EnqueueMessage("You cannot intimidate at this time!")
     End Sub
-    Public Function CanMove(direction As Direction) As Boolean
+    Public Function CanMove(direction As DirectionDescriptor) As Boolean
         If IsEncumbered Then
             Return False
         End If
-        If Not Location.HasRoute(direction) Then
+        If Not Location.HasRoute(direction.ToDirection) Then
             Return False
         End If
-        If Not Location.Routes(direction).CanMove(Me) Then
+        If Not Location.Routes(direction.ToDirection).CanMove(Me) Then
             Return False
         End If
-        If Location.Routes(direction).ToLocation.RequiresMP AndAlso IsDemoralized() Then
+        If Location.Routes(direction.ToDirection).ToLocation.RequiresMP AndAlso IsDemoralized() Then
             Return False
         End If
         Return True
@@ -759,7 +759,7 @@
     Public Sub Run()
         If CanFight Then
             Direction = RNG.FromEnumerable(CardinalDirections).ToDescriptor
-            If CanMove(Direction.ToDirection) Then
+            If CanMove(Direction) Then
                 EnqueueMessage("You successfully ran!") 'TODO: sfx
                 Move(Direction.ToDirection)
                 Exit Sub
@@ -769,7 +769,7 @@
         End If
     End Sub
     Public Function Move(direction As Direction) As Boolean
-        If CanMove(direction) Then
+        If CanMove(direction.ToDescriptor) Then
             Dim hungerRate = Math.Max(Highness \ 2 + FoodPoisoning \ 2, 1)
             Hunger += hungerRate
             Drunkenness -= 1

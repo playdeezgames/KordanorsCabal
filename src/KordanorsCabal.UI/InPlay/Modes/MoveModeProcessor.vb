@@ -38,16 +38,16 @@
         If player.CanMoveBackward Then
             Buttons(BackwardButtonIndex).Title = "Backward"
         End If
-        If player.CanMove(Direction.Up) Then
+        If player.CanMove(Direction.Up.ToDescriptor) Then
             Buttons(UpButtonIndex).Title = "Up"
         End If
-        If player.CanMove(Direction.Down) Then
+        If player.CanMove(Direction.Down.ToDescriptor) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
-        If player.CanMove(Direction.Inward) Then
+        If player.CanMove(Direction.Inward.ToDescriptor) Then
             Buttons(InButtonIndex).Title = "In"
         End If
-        If player.CanMove(Direction.Outward) Then
+        If player.CanMove(Direction.Outward.ToDescriptor) Then
             Buttons(OutButtonIndex).Title = "Out"
         End If
     End Sub
@@ -78,7 +78,7 @@
     End Function
 
     Private Function HandleMove(player As Character, direction As Direction) As UIState
-        If player.CanMove(direction) Then
+        If player.CanMove(direction.ToDescriptor) Then
             PopButtonIndex()
             player.Mode = PlayerMode.Neutral
             If player.Move(direction) Then
