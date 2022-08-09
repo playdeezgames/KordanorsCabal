@@ -14,12 +14,12 @@
 
     ReadOnly Property Items As IReadOnlyList(Of Item)
         Get
-            Return WorldData.InventoryItem.ReadItems(Id).Select(AddressOf Item.FromId).ToList
+            Return StaticWorldData.InventoryItem.ReadItems(Id).Select(AddressOf Item.FromId).ToList
         End Get
     End Property
 
     Public Sub Add(item As Item)
-        WorldData.InventoryItem.Write(Id, item.Id)
+        StaticWorldData.InventoryItem.Write(Id, item.Id)
     End Sub
     ReadOnly Property ItemsOfType(itemType As ItemType) As IEnumerable(Of Item)
         Get

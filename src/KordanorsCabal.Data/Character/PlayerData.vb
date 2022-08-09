@@ -12,7 +12,7 @@ Public Class PlayerData
     End Sub
 
     Friend Sub Initialize()
-        WorldData.Character.Initialize()
+        StaticWorldData.Character.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

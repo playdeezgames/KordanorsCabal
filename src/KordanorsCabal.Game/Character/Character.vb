@@ -5,7 +5,7 @@
     End Sub
     ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
         Get
-            Return WorldData.CharacterSpell.
+            Return StaticWorldData.CharacterSpell.
                 ReadForCharacter(Id).
                 ToDictionary(Function(x) CType(x.Item1, SpellType), Function(x) x.Item2)
         End Get
@@ -36,11 +36,11 @@
     End Property
     ReadOnly Property CharacterType As CharacterType
         Get
-            Return CType(WorldData.Character.ReadCharacterType(Id).Value, CharacterType)
+            Return CType(StaticWorldData.Character.ReadCharacterType(Id).Value, CharacterType)
         End Get
     End Property
     Public Function HasQuest(quest As Quest) As Boolean
-        Return WorldData.CharacterQuest.Exists(Id, quest)
+        Return StaticWorldData.CharacterQuest.Exists(Id, quest)
     End Function
     Property Money As Long
         Get
@@ -55,12 +55,12 @@
             EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
             Return
         End If
-        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
+        Dim nextLevel = If(StaticWorldData.CharacterSpell.Read(Id, spellType), 0) + 1
         EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
-        WorldData.CharacterSpell.Write(Id, spellType, nextLevel)
+        StaticWorldData.CharacterSpell.Write(Id, spellType, nextLevel)
     End Sub
     Friend Function CanLearn(spellType As SpellType) As Boolean
-        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
+        Dim nextLevel = If(StaticWorldData.CharacterSpell.Read(Id, spellType), 0) + 1
         If nextLevel > spellType.MaximumLevel Then
             Return False
         End If
@@ -107,32 +107,32 @@
         End Get
     End Property
     Friend Shared Function Create(characterType As CharacterType, location As Location) As Character
-        Dim character = FromId(WorldData.Character.Create(characterType, location.Id))
+        Dim character = FromId(StaticWorldData.Character.Create(characterType, location.Id))
         For Each entry In characterType.InitialStatistics
             character.SetStatistic(entry.Key, entry.Value)
         Next
         Return character
     End Function
     Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
-        WorldData.CharacterStatistic.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
+        StaticWorldData.CharacterStatistic.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
     Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
     End Sub
     Property Location As Location
         Get
-            Return Location.FromId(WorldData.Character.ReadLocation(Id).Value)
+            Return Location.FromId(StaticWorldData.Character.ReadLocation(Id).Value)
         End Get
         Set(value As Location)
-            WorldData.Character.WriteLocation(Id, value.Id)
-            WorldData.CharacterLocation.Write(Id, value.Id)
+            StaticWorldData.Character.WriteLocation(Id, value.Id)
+            StaticWorldData.CharacterLocation.Write(Id, value.Id)
         End Set
     End Property
     Shared Function FromId(characterId As Long) As Character
         Return New Character(characterId)
     End Function
     Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
-        Dim result = If(WorldData.CharacterStatistic.Read(Id, statisticType), statisticType.DefaultValue)
+        Dim result = If(StaticWorldData.CharacterStatistic.Read(Id, statisticType), statisticType.DefaultValue)
         If result.HasValue Then
             For Each item In Equipment.Values
                 Dim buff As Long = If(item.EquippedBuff(statisticType), 0)
@@ -143,9 +143,9 @@
     End Function
     ReadOnly Property Inventory As Inventory
         Get
-            Dim inventoryId As Long? = WorldData.Inventory.ReadForCharacter(Id)
+            Dim inventoryId As Long? = StaticWorldData.Inventory.ReadForCharacter(Id)
             If Not inventoryId.HasValue Then
-                inventoryId = WorldData.Inventory.CreateForCharacter(Id)
+                inventoryId = StaticWorldData.Inventory.CreateForCharacter(Id)
             End If
             Return New Inventory(inventoryId.Value)
         End Get
@@ -170,7 +170,7 @@
         End Get
     End Property
     Public Function HasVisited(location As Location) As Boolean
-        Return WorldData.CharacterLocation.Read(Id, location.Id)
+        Return StaticWorldData.CharacterLocation.Read(Id, location.Id)
     End Function
 
     Friend Function IsEnemy(character As Character) As Boolean
@@ -277,7 +277,7 @@
         ChangeStatistic(CharacterStatisticType.Fatigue, fatigue)
     End Sub
     Friend Sub Destroy()
-        WorldData.Character.Clear(Id)
+        StaticWorldData.Character.Clear(Id)
     End Sub
     ReadOnly Property IsDead As Boolean
         Get
@@ -364,7 +364,7 @@
     End Sub
     ReadOnly Property Equipment As IReadOnlyDictionary(Of EquipSlot, Item)
         Get
-            Return WorldData.CharacterEquipSlot.Read(Id).
+            Return StaticWorldData.CharacterEquipSlot.Read(Id).
                 ToDictionary(
                     Function(x) CType(x.Item1, EquipSlot),
                     Function(x) Item.FromId(x.Item2))
@@ -475,7 +475,7 @@
         If Equipment.ContainsKey(equipSlot) Then
             Dim item = Equipment(equipSlot)
             Inventory.Add(item)
-            WorldData.CharacterEquipSlot.Clear(Id, equipSlot)
+            StaticWorldData.CharacterEquipSlot.Clear(Id, equipSlot)
         End If
     End Sub
     Private Sub Panic()
@@ -588,10 +588,10 @@
     End Property
     Public Property Direction As Direction
         Get
-            Return CType(WorldData.Player.ReadDirection().Value, Direction)
+            Return CType(StaticWorldData.Player.ReadDirection().Value, Direction)
         End Get
         Set(value As Direction)
-            WorldData.Player.WriteDirection(value)
+            StaticWorldData.Player.WriteDirection(value)
         End Set
     End Property
     Public ReadOnly Property CanCast() As Boolean
@@ -633,7 +633,7 @@
     End Sub
     Public Sub Equip(item As Item)
         If item.CanEquip Then
-            WorldData.InventoryItem.ClearForItem(item.Id)
+            StaticWorldData.InventoryItem.ClearForItem(item.Id)
             Dim equipSlots = item.EquipSlots
             Dim availableEquipSlots = equipSlots.Where(Function(x) Not Equipment.ContainsKey(x))
             Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
@@ -641,7 +641,7 @@
                 Dim oldItem = Equipment(equipSlot)
                 Inventory.Add(oldItem)
             End If
-            WorldData.CharacterEquipSlot.Write(Id, equipSlot, item.Id)
+            StaticWorldData.CharacterEquipSlot.Write(Id, equipSlot, item.Id)
             EnqueueMessage($"You equip {item.Name} to {equipSlot.Name}.")
             Return
         End If
@@ -660,10 +660,10 @@
     End Sub
     Public Property Mode As PlayerMode
         Get
-            Return CType(WorldData.Player.ReadMode().Value, PlayerMode)
+            Return CType(StaticWorldData.Player.ReadMode().Value, PlayerMode)
         End Get
         Set(value As PlayerMode)
-            WorldData.Player.WriteMode(value)
+            StaticWorldData.Player.WriteMode(value)
         End Set
     End Property
     Public Sub CompleteQuest(quest As Quest)

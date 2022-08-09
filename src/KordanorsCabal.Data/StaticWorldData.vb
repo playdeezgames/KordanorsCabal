@@ -1,4 +1,4 @@
-﻿Public Module WorldData
+﻿Public Module StaticWorldData
     Public ReadOnly Character As New CharacterData(StaticStore.Store)
     Public ReadOnly CharacterEquipSlot As New CharacterEquipSlotData(StaticStore.Store)
     Public ReadOnly CharacterLocation As New CharacterLocationData(StaticStore.Store)

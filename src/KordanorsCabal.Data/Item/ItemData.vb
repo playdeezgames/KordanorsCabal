@@ -32,9 +32,9 @@
     End Function
 
     Public Sub Clear(itemId As Long)
-        WorldData.CharacterEquipSlot.ClearForItem(itemId)
-        WorldData.InventoryItem.ClearForItem(itemId)
-        WorldData.ItemStatistic.ClearForItem(itemId)
+        StaticWorldData.CharacterEquipSlot.ClearForItem(itemId)
+        StaticWorldData.InventoryItem.ClearForItem(itemId)
+        StaticWorldData.ItemStatistic.ClearForItem(itemId)
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,

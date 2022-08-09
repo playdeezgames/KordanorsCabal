@@ -7,11 +7,11 @@
         Return New Item(itemId)
     End Function
     Shared Function Create(itemType As ItemType) As Item
-        Return FromId(WorldData.Item.Create(itemType))
+        Return FromId(StaticWorldData.Item.Create(itemType))
     End Function
     Public ReadOnly Property ItemType As ItemType
         Get
-            Return CType(WorldData.Item.ReadItemType(Id).Value, ItemType)
+            Return CType(StaticWorldData.Item.ReadItemType(Id).Value, ItemType)
         End Get
     End Property
     Public ReadOnly Property Name As String
@@ -43,7 +43,7 @@
     End Sub
 
     Public Sub Destroy()
-        WorldData.Item.Clear(Id)
+        StaticWorldData.Item.Clear(Id)
     End Sub
     Public Function Encumbrance() As Single
         Return ItemType.Encumbrance
@@ -85,10 +85,10 @@
     End Sub
 
     Private Function GetStatistic(statisticType As ItemStatisticType) As Long
-        Return If(WorldData.ItemStatistic.Read(Id, statisticType), statisticType.DefaultValue)
+        Return If(StaticWorldData.ItemStatistic.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
     Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
-        WorldData.ItemStatistic.Write(Id, statisticType, value)
+        StaticWorldData.ItemStatistic.Write(Id, statisticType, value)
     End Sub
 
     Public ReadOnly Property NeedsRepair As Boolean

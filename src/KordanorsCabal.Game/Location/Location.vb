@@ -5,24 +5,24 @@
     End Sub
     Property LocationType As LocationType
         Get
-            Return CType(WorldData.Location.ReadLocationType(Id).Value, LocationType)
+            Return CType(StaticWorldData.Location.ReadLocationType(Id).Value, LocationType)
         End Get
         Set(value As LocationType)
-            WorldData.Location.WriteLocationType(Id, value)
+            StaticWorldData.Location.WriteLocationType(Id, value)
         End Set
     End Property
 
     Friend Shared Function FromLocationType(locationType As LocationType) As IEnumerable(Of Location)
-        Return WorldData.Location.ReadForLocationType(locationType).Select(AddressOf FromId)
+        Return StaticWorldData.Location.ReadForLocationType(locationType).Select(AddressOf FromId)
     End Function
     Shared Function Create(locationType As LocationType) As Location
-        Return FromId(WorldData.Location.Create(locationType))
+        Return FromId(StaticWorldData.Location.Create(locationType))
     End Function
     Public Shared Function ByStatisticValue(statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)
-        Return WorldData.LocationStatistic.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
+        Return StaticWorldData.LocationStatistic.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
     End Function
     Public Shared Function ByDungeonLevel(dungeonLevel As DungeonLevel) As IEnumerable(Of Location)
-        Return WorldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
+        Return StaticWorldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
     End Function
     Friend Sub DestroyRoute(direction As Direction)
         If Routes.ContainsKey(direction) Then
@@ -33,7 +33,7 @@
         Return LocationType.IsDungeon
     End Function
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long?
-        Return WorldData.LocationStatistic.Read(Id, statisticType)
+        Return StaticWorldData.LocationStatistic.Read(Id, statisticType)
     End Function
     ReadOnly Property RequiresMP As Boolean
         Get
@@ -53,7 +53,7 @@
     End Property
     ReadOnly Property Routes As IReadOnlyDictionary(Of Direction, Route)
         Get
-            Return WorldData.Route.ReadForLocation(Id).
+            Return StaticWorldData.Route.ReadForLocation(Id).
                 ToDictionary(Function(x) CType(x.Item1, Direction), Function(x) Route.FromId(x.Item2))
         End Get
     End Property
@@ -61,7 +61,7 @@
         Return Routes.ContainsKey(direction)
     End Function
     Friend Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
-        WorldData.LocationStatistic.Write(Id, statisticType, statisticValue)
+        StaticWorldData.LocationStatistic.Write(Id, statisticType, statisticValue)
     End Sub
     Friend ReadOnly Property HasFeature As Boolean
         Get
@@ -70,14 +70,14 @@
     End Property
     ReadOnly Property Feature As Feature
         Get
-            Return Feature.FromId(WorldData.Feature.ReadForLocation(Id))
+            Return Feature.FromId(StaticWorldData.Feature.ReadForLocation(Id))
         End Get
     End Property
     ReadOnly Property Inventory As Inventory
         Get
-            Dim inventoryId As Long? = WorldData.Inventory.ReadForLocation(Id)
+            Dim inventoryId As Long? = StaticWorldData.Inventory.ReadForLocation(Id)
             If Not inventoryId.HasValue Then
-                inventoryId = WorldData.Inventory.CreateForLocation(Id)
+                inventoryId = StaticWorldData.Inventory.CreateForLocation(Id)
             End If
             Return New Inventory(inventoryId.Value)
         End Get
@@ -93,7 +93,7 @@
     End Operator
     ReadOnly Property Characters As IEnumerable(Of Character)
         Get
-            Return WorldData.Character.ReadForLocation(Id).Select(AddressOf Character.FromId)
+            Return StaticWorldData.Character.ReadForLocation(Id).Select(AddressOf Character.FromId)
         End Get
     End Property
     Function Enemies(character As Character) As IEnumerable(Of Character)
@@ -112,10 +112,10 @@
     End Property
     Property DungeonLevel As DungeonLevel
         Get
-            Return CType(If(WorldData.LocationDungeonLevel.Read(Id), 0), DungeonLevel)
+            Return CType(If(StaticWorldData.LocationDungeonLevel.Read(Id), 0), DungeonLevel)
         End Get
         Set(value As DungeonLevel)
-            WorldData.LocationDungeonLevel.Write(Id, value)
+            StaticWorldData.LocationDungeonLevel.Write(Id, value)
         End Set
     End Property
 End Class

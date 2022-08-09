@@ -8,12 +8,12 @@
     End Function
 
     Friend Shared Function Create(featureType As FeatureType, location As Location) As Feature
-        Return FromId(WorldData.Feature.Create(featureType, location.Id))
+        Return FromId(StaticWorldData.Feature.Create(featureType, location.Id))
     End Function
 
     ReadOnly Property FeatureType As FeatureType
         Get
-            Return CType(WorldData.Feature.ReadFeatureType(Id).Value, FeatureType)
+            Return CType(StaticWorldData.Feature.ReadFeatureType(Id).Value, FeatureType)
         End Get
     End Property
 
