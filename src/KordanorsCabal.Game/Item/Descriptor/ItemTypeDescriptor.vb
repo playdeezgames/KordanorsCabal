@@ -3,6 +3,9 @@
     ReadOnly Property Name As String
     ReadOnly Property Encumbrance As Single
     Private ReadOnly spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String)
+    ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
+
+
 
     Overridable ReadOnly Property CanUse(character As Character) As Boolean
         Get
@@ -24,14 +27,7 @@
         End If
         Return 0
     End Function
-
-    ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
-
-    Overridable ReadOnly Property AttackDice As Long
-        Get
-            Return 0
-        End Get
-    End Property
+    ReadOnly Property AttackDice As Long
 
     Overridable ReadOnly Property MaximumDamage As Long?
         Get
@@ -92,6 +88,7 @@
            Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
            Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
+           Optional attackDice As Long = 0,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
@@ -119,6 +116,7 @@
         Me.boughtAt = If(boughtAt, New List(Of ShoppeType))
         Me.soldAt = If(soldAt, New List(Of ShoppeType))
         Me.repairedAt = If(repairedAt, New List(Of ShoppeType))
+        Me.AttackDice = attackDice
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility

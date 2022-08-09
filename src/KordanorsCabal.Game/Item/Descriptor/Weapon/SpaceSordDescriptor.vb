@@ -8,14 +8,9 @@
                 (DungeonLevel.Moon, MakeHashSet(LocationType.Moon))),
             MakeDictionary(
                 (DungeonLevel.Moon, "1d1")),
-            MakeList(EquipSlot.Weapon))
+            MakeList(EquipSlot.Weapon),
+            10)
     End Sub
-
-    Public Overrides ReadOnly Property AttackDice As Long
-        Get
-            Return 10
-        End Get
-    End Property
 
     Public Overrides ReadOnly Property MaximumDamage As Long?
         Get

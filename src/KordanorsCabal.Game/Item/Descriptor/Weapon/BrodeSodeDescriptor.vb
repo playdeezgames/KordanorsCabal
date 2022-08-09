@@ -15,15 +15,10 @@
                 (DungeonLevel.Level2, "2d6"),
                 (DungeonLevel.Level3, "1d6")),
                 MakeList(EquipSlot.Weapon),
+                6,
                 20,
                 MakeList(ShoppeType.Blacksmith))
     End Sub
-
-    Public Overrides ReadOnly Property AttackDice As Long
-        Get
-            Return 6
-        End Get
-    End Property
 
     Public Overrides ReadOnly Property MaximumDamage As Long?
         Get
