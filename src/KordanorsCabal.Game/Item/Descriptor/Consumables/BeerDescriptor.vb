@@ -2,16 +2,14 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Beer", 2)
+        MyBase.New(
+            "Beer",
+            2,,,,,,,,,,,,,,,,,
+            Function(character)
+                Dim enemy = character.Location.Enemy(character)
+                Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.Beer)
+            End Function)
     End Sub
-
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Dim enemy = character.Location.Enemy(character)
-            Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.Beer)
-        End Get
-    End Property
-
     Public Overrides Sub Use(character As Character)
         Dim enemy = character.Location.Enemy(character)
         If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.Beer) Then

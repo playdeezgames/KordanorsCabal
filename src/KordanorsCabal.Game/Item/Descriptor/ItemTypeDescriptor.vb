@@ -17,11 +17,7 @@
     ReadOnly Property IsConsumed As Boolean
     Private ReadOnly Property buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long)
     ReadOnly Property Purify As Action(Of Item)
-    Overridable ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return False
-        End Get
-    End Property
+    ReadOnly Property CanUse As Func(Of Character, Boolean)
     Overridable Sub Use(character As Character)
         'nothing, by default
     End Sub
@@ -72,7 +68,8 @@
            Optional soldAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
-           Optional purify As Action(Of Item) = Nothing)
+           Optional purify As Action(Of Item) = Nothing,
+           Optional canUse As Func(Of Character, Boolean) = Nothing)
         Me.Name = name
         Me.Encumbrance = encumbrance
         If spawnLocationTypes Is Nothing Then
@@ -103,6 +100,7 @@
         Me.Purify = If(purify, Sub(item)
 
                                End Sub)
+        Me.CanUse = If(canUse, Function(character) False)
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility

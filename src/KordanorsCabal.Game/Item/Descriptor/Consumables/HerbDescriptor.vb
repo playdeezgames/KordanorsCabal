@@ -2,15 +2,10 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("""Herb""")
+        MyBase.New(
+            """Herb""",,,,,,,,,,,,,,,,,,
+            Function(character) character.Inventory.ItemsOfType(ItemType.Bong).Any)
     End Sub
-
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return character.Inventory.ItemsOfType(ItemType.Bong).Any
-        End Get
-    End Property
-
     Public Overrides Sub Use(character As Character)
         If Not CanUse(character) Then
             character.EnqueueMessage($"You need a {ItemType.Bong.Name} for that!")

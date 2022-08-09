@@ -2,14 +2,10 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Food")
+        MyBase.New(
+            "Food",,,,,,,,,,,,,,,,,,
+            Function(character) True)
     End Sub
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return True
-        End Get
-    End Property
-
     Public Overrides Sub Use(character As Character)
         Dim healRoll = 1
         character.ChangeStatistic(CharacterStatisticType.Wounds, -healRoll)

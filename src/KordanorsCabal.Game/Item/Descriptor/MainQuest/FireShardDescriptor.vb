@@ -5,15 +5,13 @@
             MakeDictionary(
                 (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level3, "1d1")),,,,,, , False)
+                (DungeonLevel.Level3, "1d1")),,,,,, ,
+            False,,,,,,,,
+            Function(character)
+                Dim location = character.Location
+                Return location.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0
+            End Function)
     End Sub
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Dim location = character.Location
-            Return location.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0
-        End Get
-    End Property
-
     Public Overrides Sub Use(character As Character)
         If Not CanUse(character) Then
             character.EnqueueMessage($"You cannot use {ItemType.FireShard.Name} right now!")

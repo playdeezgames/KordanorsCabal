@@ -16,15 +16,9 @@
                 (DungeonLevel.Level2, "3d6"),
                 (DungeonLevel.Level3, "3d6"),
                 (DungeonLevel.Level4, "3d6"),
-                (DungeonLevel.Level5, "3d6")))
+                (DungeonLevel.Level5, "3d6")),,,,,,,,,,,,,,,
+            Function(character) True)
     End Sub
-
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return True
-        End Get
-    End Property
-
     Public Overrides Sub Use(character As Character)
         Dim healRoll = RNG.RollDice("2d4")
         character.ChangeStatistic(CharacterStatisticType.Wounds, -healRoll)

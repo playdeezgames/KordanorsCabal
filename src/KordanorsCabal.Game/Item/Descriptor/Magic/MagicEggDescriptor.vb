@@ -1,12 +1,6 @@
 ﻿Friend Class MagicEggDescriptor
     Inherits TrophyDescriptor
 
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return True
-        End Get
-    End Property
-
     Private Shared table As IReadOnlyDictionary(Of ItemType, Integer) =
         New Dictionary(Of ItemType, Integer) From
         {
@@ -27,7 +21,11 @@
         }
 
     Public Sub New()
-        MyBase.New("Magic Egg", 100, New List(Of ShoppeType) From {ShoppeType.BlackMage})
+        MyBase.New(
+            "Magic Egg",
+            100,
+            MakeList(ShoppeType.BlackMage),,,,,,
+            Function(character) True)
     End Sub
 
     Public Overrides Sub Use(character As Character)

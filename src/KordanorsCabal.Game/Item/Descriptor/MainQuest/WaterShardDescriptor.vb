@@ -6,14 +6,10 @@
             MakeDictionary(
                 (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level4, "1d1")),,,,,, , False)
+                (DungeonLevel.Level4, "1d1")),,,,,, ,
+            False,,,,,,,,
+            Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0)
     End Sub
-
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return character.Location.IsDungeon AndAlso character.CurrentMana > 0
-        End Get
-    End Property
 
     Public Overrides Sub Use(character As Character)
         If Not CanUse(character) Then

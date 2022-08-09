@@ -2,14 +2,10 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Moon Portal")
+        MyBase.New(
+            "Moon Portal",,,,,,,,,,,,,,,,,,
+            Function(character) character.Location.IsDungeon)
     End Sub
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return character.Location.IsDungeon
-        End Get
-    End Property
-
     Public Overrides Sub Use(character As Character)
         Dim location = character.Location
         location.DestroyRoute(Direction.Outward)

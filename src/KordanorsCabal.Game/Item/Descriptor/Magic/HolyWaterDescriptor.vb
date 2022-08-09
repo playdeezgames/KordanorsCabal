@@ -2,15 +2,10 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New("Holy ""Water""")
+        MyBase.New(
+            "Holy ""Water""",,,,,,,,,,,,,,,,,,
+            Function(character) character.CanFight AndAlso character.Location.Enemy(character).IsUndead)
     End Sub
-
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return character.CanFight AndAlso character.Location.Enemy(character).IsUndead
-        End Get
-    End Property
-
     Public Overrides Sub Use(character As Character)
         Dim sfx As Sfx? = Nothing
         Dim damageRoll = RNG.RollDice("1d4")

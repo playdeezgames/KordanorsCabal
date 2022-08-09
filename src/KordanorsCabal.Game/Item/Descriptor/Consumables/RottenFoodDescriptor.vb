@@ -6,13 +6,9 @@
             "Food",,,,,,,,,,,,,,,,,
             Sub(item)
                 StaticWorldData.World.Item.WriteItemType(item.Id, ItemType.Food)
-            End Sub)
+            End Sub,
+            Function(character) True)
     End Sub
-    Public Overrides ReadOnly Property CanUse(character As Character) As Boolean
-        Get
-            Return True
-        End Get
-    End Property
 
     Public Overrides Sub Use(character As Character)
         If RNG.RollDice("1d2") = 1 Then
