@@ -58,12 +58,30 @@
             (RouteIdColumn, routeId))
     End Function
 
+    Public Function ReadForLocationRouteType(locationId As Long, routeType As Long) As IEnumerable(Of Long)
+        Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            RouteIdColumn,
+            (LocationIdColumn, locationId),
+            (RouteTypeColumn, routeType))
+    End Function
+
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long))
         Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             (DirectionColumn, RouteIdColumn),
             (LocationIdColumn, locationId))
+    End Function
+
+    Public Function ReadForLocationDirection(locationId As Long, direction As Long) As Long?
+        Return Store.ReadColumnValue(Of Long, Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            RouteIdColumn,
+            (LocationIdColumn, locationId),
+            (DirectionColumn, direction))
     End Function
 
     Public Function Create(locationId As Long, direction As Long, routeType As Long, toLocationId As Long) As Long
@@ -74,5 +92,9 @@
             (DirectionColumn, direction),
             (RouteTypeColumn, routeType),
             (ToLocationIdColumn, toLocationId))
+    End Function
+
+    Public Function ReadCountForLocation(locationId As Long) As Long
+        Return Store.ReadCountForColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId))
     End Function
 End Class

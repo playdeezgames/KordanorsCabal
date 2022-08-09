@@ -99,7 +99,7 @@ Public Module World
         maze.Generate()
         Dim locations = CreateLocations(maze, dungeonLevel)
         PopulateLocations(locations, bossKeyType, bossRouteType, dungeonLevel)
-        Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.Routes.Count > 1))
+        Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount > 1))
         Route.Create(fromLocation, Direction.Down, RouteType.Stairs, startingLocation)
         Route.Create(startingLocation, Direction.Up, RouteType.Stairs, fromLocation)
         PopulateCharacters(locations, dungeonLevel)
@@ -128,9 +128,9 @@ Public Module World
         Dim nonDeadEnds = partitions(LocationType.Dungeon)
         Dim itemTypes As New List(Of ItemType)
         For Each deadEnd In deadEnds
-            Dim direction = New DirectionDescriptor(deadEnd.Routes.First.Key)
-            Dim nextLocation = deadEnd.Routes(direction.Id).ToLocation
-            Dim route = nextLocation.Routes(direction.Opposite.Id)
+            Dim direction = deadEnd.RouteDirections.First
+            Dim nextLocation = deadEnd.Routes(direction).ToLocation
+            Dim route = nextLocation.Routes(direction.Opposite)
             route.RouteType = RouteType.IronLock
             itemTypes.Add(ItemType.IronKey)
         Next
@@ -165,9 +165,9 @@ Public Module World
     Private Function PlaceBossLocation(deadEnds As IEnumerable(Of Location), routeType As RouteType) As Location
         Dim bossLocation = RNG.FromEnumerable(deadEnds)
         bossLocation.LocationType = LocationType.DungeonBoss
-        Dim direction = New DirectionDescriptor(bossLocation.Routes.First.Key)
-        Dim nextLocation = bossLocation.Routes(direction.Id).ToLocation
-        nextLocation.Routes(direction.Opposite.ToDirection).RouteType = routeType
+        Dim direction = bossLocation.RouteDirections.First
+        Dim nextLocation = bossLocation.Routes(direction).ToLocation
+        nextLocation.Routes(direction.Opposite).RouteType = routeType
         Return bossLocation
     End Function
 

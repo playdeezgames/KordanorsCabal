@@ -25,9 +25,7 @@
         Return StaticWorldData.World.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
     End Function
     Friend Sub DestroyRoute(direction As DirectionDescriptor)
-        If Routes.ContainsKey(direction.ToDirection) Then
-            Routes(direction.ToDirection).Destroy()
-        End If
+        Routes(direction)?.Destroy()
     End Sub
     Friend Function IsDungeon() As Boolean
         Return LocationType.IsDungeon
@@ -41,7 +39,7 @@
         End Get
     End Property
     Public Function HasStairs() As Boolean
-        Return Routes.Any(Function(x) x.Value.RouteType = RouteType.Stairs)
+        Return StaticWorldData.World.Route.ReadForLocationRouteType(Id, RouteType.Stairs).Any()
     End Function
     Shared Function FromId(locationId As Long?) As Location
         Return If(locationId.HasValue, New Location(locationId.Value), Nothing)
@@ -51,14 +49,11 @@
             Return LocationType.Name
         End Get
     End Property
-    ReadOnly Property Routes As IReadOnlyDictionary(Of Long, Route)
-        Get
-            Return StaticWorldData.World.Route.ReadForLocation(Id).
-                ToDictionary(Function(x) x.Item1, Function(x) Route.FromId(x.Item2))
-        End Get
-    End Property
+    Public Function Routes(direction As DirectionDescriptor) As Route
+        Return Route.FromId(StaticWorldData.World.Route.ReadForLocationDirection(Id, direction.Id))
+    End Function
     Public Function HasRoute(direction As DirectionDescriptor) As Boolean
-        Return Routes.ContainsKey(direction.Id)
+        Return Routes(direction) IsNot Nothing
     End Function
     Friend Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
         StaticWorldData.World.LocationStatistic.Write(Id, statisticType, statisticValue)
@@ -82,8 +77,18 @@
             Return New Inventory(inventoryId.Value)
         End Get
     End Property
-    Friend Function RouteCount() As Integer
-        Return Routes.Count
+    Public ReadOnly Property RouteDirections As IEnumerable(Of DirectionDescriptor)
+        Get
+            Return StaticWorldData.World.Route.ReadForLocation(Id).Select(Function(x) New DirectionDescriptor(x.Item1))
+        End Get
+    End Property
+    Public ReadOnly Property RouteTypes As IEnumerable(Of RouteType)
+        Get
+            Return StaticWorldData.World.Route.ReadForLocation(Id).Select(Function(x) CType(x.Item2, RouteType))
+        End Get
+    End Property
+    Friend Function RouteCount() As Long
+        Return StaticWorldData.World.Route.ReadCountForLocation(Id)
     End Function
     Public Shared Operator =(first As Location, second As Location) As Boolean
         Return first.Id = second.Id

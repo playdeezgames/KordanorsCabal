@@ -7,7 +7,7 @@
         buffer.WriteText(xy, $"Facing: {player.Direction.Name}", False, Hue.Black)
     End Sub
     Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
-        Dim exits = String.Join(",", player.Location.Routes.Select(Function(x) New DirectionDescriptor(x.Key).Abbreviation))
+        Dim exits = String.Join(",", player.Location.RouteDirections.Select(Function(x) x.Abbreviation))
         buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
     End Sub
 
@@ -70,7 +70,7 @@
             buffer.FillCells((13, 6), (1, 8), Pattern.Vertical1, False, Hue.Black)
             buffer.PutCell((13, 14), Pattern.BottomLeftCorner, False, Hue.Black)
             buffer.PutCell((8, 14), Pattern.BottomRightCorner, False, Hue.Black)
-            Dim routeType = location.Routes(player.Direction.ToDirection).RouteType
+            Dim routeType = location.Routes(player.Direction).RouteType
             buffer.WriteText((10, 9), routeType.Abbreviation, False, routeType.TextHue)
         End If
 
@@ -78,7 +78,7 @@
             buffer.PutCell((0, 3), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.PutCell((1, 4), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((1, 5), (1, 12), Pattern.Vertical8, False, Hue.Black)
-            Dim routeType = location.Routes(player.Direction.PreviousDirection.ToDirection).RouteType
+            Dim routeType = location.Routes(player.Direction.PreviousDirection).RouteType
             buffer.WriteText((0, 9), routeType.Abbreviation.Substring(1, 1), False, routeType.TextHue)
         End If
 
@@ -86,7 +86,7 @@
             buffer.PutCell((21, 3), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.PutCell((20, 4), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((20, 5), (1, 12), Pattern.Vertical1, False, Hue.Black)
-            Dim routeType = location.Routes(player.Direction.NextDirection.ToDirection).RouteType
+            Dim routeType = location.Routes(player.Direction.NextDirection).RouteType
             buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, routeType.TextHue)
         End If
 
@@ -103,11 +103,11 @@
         End If
 
         If location.HasRoute(Direction.Outward.ToDescriptor) Then
-            ShowSprite(buffer, (5, 5), location.Routes(Direction.Outward).RouteType.Sprite)
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.Outward.ToDescriptor).RouteType.Sprite)
         End If
 
         If location.HasRoute(Direction.Inward.ToDescriptor) Then
-            ShowSprite(buffer, (5, 5), location.Routes(Direction.Inward).RouteType.Sprite)
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.Inward.ToDescriptor).RouteType.Sprite)
         End If
 
         For Each item In player.Location.Inventory.Items

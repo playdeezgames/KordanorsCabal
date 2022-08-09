@@ -748,10 +748,10 @@
         If Not Location.HasRoute(direction) Then
             Return False
         End If
-        If Not Location.Routes(direction.ToDirection).CanMove(Me) Then
+        If Not Location.Routes(direction).CanMove(Me) Then
             Return False
         End If
-        If Location.Routes(direction.ToDirection).ToLocation.RequiresMP AndAlso IsDemoralized() Then
+        If Location.Routes(direction).ToLocation.RequiresMP AndAlso IsDemoralized() Then
             Return False
         End If
         Return True
@@ -776,7 +776,7 @@
             Highness -= 1
             FoodPoisoning -= 1
             Chafing -= 1
-            Location = Location.Routes(direction.ToDirection).Move(Me)
+            Location = Location.Routes(direction).Move(Me)
             If Hunger = CharacterStatisticType.Hunger.MaximumValue Then
                 Hunger \= 2
                 CurrentHP -= 1
