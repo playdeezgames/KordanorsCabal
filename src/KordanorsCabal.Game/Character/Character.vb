@@ -5,7 +5,7 @@
     End Sub
     ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
         Get
-            Return StaticWorldData.CharacterSpell.
+            Return StaticWorldData.World.CharacterSpell.
                 ReadForCharacter(Id).
                 ToDictionary(Function(x) CType(x.Item1, SpellType), Function(x) x.Item2)
         End Get
@@ -40,7 +40,7 @@
         End Get
     End Property
     Public Function HasQuest(quest As Quest) As Boolean
-        Return StaticWorldData.CharacterQuest.Exists(Id, quest)
+        Return StaticWorldData.World.CharacterQuest.Exists(Id, quest)
     End Function
     Property Money As Long
         Get
@@ -55,12 +55,12 @@
             EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
             Return
         End If
-        Dim nextLevel = If(StaticWorldData.CharacterSpell.Read(Id, spellType), 0) + 1
+        Dim nextLevel = If(StaticWorldData.World.CharacterSpell.Read(Id, spellType), 0) + 1
         EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
-        StaticWorldData.CharacterSpell.Write(Id, spellType, nextLevel)
+        StaticWorldData.World.CharacterSpell.Write(Id, spellType, nextLevel)
     End Sub
     Friend Function CanLearn(spellType As SpellType) As Boolean
-        Dim nextLevel = If(StaticWorldData.CharacterSpell.Read(Id, spellType), 0) + 1
+        Dim nextLevel = If(StaticWorldData.World.CharacterSpell.Read(Id, spellType), 0) + 1
         If nextLevel > spellType.MaximumLevel Then
             Return False
         End If
@@ -114,7 +114,7 @@
         Return character
     End Function
     Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
-        StaticWorldData.CharacterStatistic.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
+        StaticWorldData.World.CharacterStatistic.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
     Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
@@ -125,14 +125,14 @@
         End Get
         Set(value As Location)
             StaticWorldData.World.Character.WriteLocation(Id, value.Id)
-            StaticWorldData.CharacterLocation.Write(Id, value.Id)
+            StaticWorldData.World.CharacterLocation.Write(Id, value.Id)
         End Set
     End Property
     Shared Function FromId(characterId As Long) As Character
         Return New Character(characterId)
     End Function
     Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
-        Dim result = If(StaticWorldData.CharacterStatistic.Read(Id, statisticType), statisticType.DefaultValue)
+        Dim result = If(StaticWorldData.World.CharacterStatistic.Read(Id, statisticType), statisticType.DefaultValue)
         If result.HasValue Then
             For Each item In Equipment.Values
                 Dim buff As Long = If(item.EquippedBuff(statisticType), 0)
@@ -143,9 +143,9 @@
     End Function
     ReadOnly Property Inventory As Inventory
         Get
-            Dim inventoryId As Long? = StaticWorldData.Inventory.ReadForCharacter(Id)
+            Dim inventoryId As Long? = StaticWorldData.World.Inventory.ReadForCharacter(Id)
             If Not inventoryId.HasValue Then
-                inventoryId = StaticWorldData.Inventory.CreateForCharacter(Id)
+                inventoryId = StaticWorldData.World.Inventory.CreateForCharacter(Id)
             End If
             Return New Inventory(inventoryId.Value)
         End Get
@@ -170,7 +170,7 @@
         End Get
     End Property
     Public Function HasVisited(location As Location) As Boolean
-        Return StaticWorldData.CharacterLocation.Read(Id, location.Id)
+        Return StaticWorldData.World.CharacterLocation.Read(Id, location.Id)
     End Function
 
     Friend Function IsEnemy(character As Character) As Boolean
@@ -364,7 +364,7 @@
     End Sub
     ReadOnly Property Equipment As IReadOnlyDictionary(Of EquipSlot, Item)
         Get
-            Return StaticWorldData.CharacterEquipSlot.Read(Id).
+            Return StaticWorldData.World.CharacterEquipSlot.Read(Id).
                 ToDictionary(
                     Function(x) CType(x.Item1, EquipSlot),
                     Function(x) Item.FromId(x.Item2))
@@ -475,7 +475,7 @@
         If Equipment.ContainsKey(equipSlot) Then
             Dim item = Equipment(equipSlot)
             Inventory.Add(item)
-            StaticWorldData.CharacterEquipSlot.Clear(Id, equipSlot)
+            StaticWorldData.World.CharacterEquipSlot.Clear(Id, equipSlot)
         End If
     End Sub
     Private Sub Panic()
@@ -588,10 +588,10 @@
     End Property
     Public Property Direction As Direction
         Get
-            Return CType(StaticWorldData.Player.ReadDirection().Value, Direction)
+            Return CType(StaticWorldData.World.Player.ReadDirection().Value, Direction)
         End Get
         Set(value As Direction)
-            StaticWorldData.Player.WriteDirection(value)
+            StaticWorldData.World.Player.WriteDirection(value)
         End Set
     End Property
     Public ReadOnly Property CanCast() As Boolean
@@ -633,7 +633,7 @@
     End Sub
     Public Sub Equip(item As Item)
         If item.CanEquip Then
-            StaticWorldData.InventoryItem.ClearForItem(item.Id)
+            StaticWorldData.World.InventoryItem.ClearForItem(item.Id)
             Dim equipSlots = item.EquipSlots
             Dim availableEquipSlots = equipSlots.Where(Function(x) Not Equipment.ContainsKey(x))
             Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
@@ -641,7 +641,7 @@
                 Dim oldItem = Equipment(equipSlot)
                 Inventory.Add(oldItem)
             End If
-            StaticWorldData.CharacterEquipSlot.Write(Id, equipSlot, item.Id)
+            StaticWorldData.World.CharacterEquipSlot.Write(Id, equipSlot, item.Id)
             EnqueueMessage($"You equip {item.Name} to {equipSlot.Name}.")
             Return
         End If
@@ -660,10 +660,10 @@
     End Sub
     Public Property Mode As PlayerMode
         Get
-            Return CType(StaticWorldData.Player.ReadMode().Value, PlayerMode)
+            Return CType(StaticWorldData.World.Player.ReadMode().Value, PlayerMode)
         End Get
         Set(value As PlayerMode)
-            StaticWorldData.Player.WriteMode(value)
+            StaticWorldData.World.Player.WriteMode(value)
         End Set
     End Property
     Public Sub CompleteQuest(quest As Quest)

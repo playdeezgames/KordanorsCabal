@@ -11,7 +11,7 @@
 
     Friend Sub Initialize()
         StaticWorldData.World.Character.Initialize()
-        StaticWorldData.Item.Initialize()
+        StaticWorldData.World.Item.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

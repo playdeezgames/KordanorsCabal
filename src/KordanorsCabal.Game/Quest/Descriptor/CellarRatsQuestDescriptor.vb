@@ -15,11 +15,11 @@
                 character.Money += 1
                 ratTail.Destroy()
             Next
-            StaticWorldData.CharacterQuest.Clear(character.Id, Quest.CellarRats)
-            StaticWorldData.CharacterQuestCompletion.Write(
+            StaticWorldData.World.CharacterQuest.Clear(character.Id, Quest.CellarRats)
+            StaticWorldData.World.CharacterQuestCompletion.Write(
                 character.Id,
                 Quest.CellarRats,
-                If(StaticWorldData.CharacterQuestCompletion.Read(character.Id, Quest.CellarRats), 0) + 1)
+                If(StaticWorldData.World.CharacterQuestCompletion.Read(character.Id, Quest.CellarRats), 0) + 1)
             Return
         End If
         character.EnqueueMessage("You cannot complete this quest at this time.")
@@ -28,8 +28,8 @@
     Public Overrides Sub Accept(character As Character)
         If CanAccept(character) Then
             character.EnqueueMessage("You accept the quest!")
-            StaticWorldData.CharacterQuest.Write(character.Id, Quest.CellarRats)
-            Dim ratCount = If(StaticWorldData.CharacterQuestCompletion.Read(character.Id, Quest.CellarRats), 0) + 1
+            StaticWorldData.World.CharacterQuest.Write(character.Id, Quest.CellarRats)
+            Dim ratCount = If(StaticWorldData.World.CharacterQuestCompletion.Read(character.Id, Quest.CellarRats), 0) + 1
             Dim location = Game.Location.FromLocationType(LocationType.Cellar).Single
             While ratCount > 0
                 Game.Character.Create(CharacterType.Rat, location)

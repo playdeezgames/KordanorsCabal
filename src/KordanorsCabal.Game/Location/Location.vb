@@ -5,24 +5,24 @@
     End Sub
     Property LocationType As LocationType
         Get
-            Return CType(StaticWorldData.Location.ReadLocationType(Id).Value, LocationType)
+            Return CType(StaticWorldData.World.Location.ReadLocationType(Id).Value, LocationType)
         End Get
         Set(value As LocationType)
-            StaticWorldData.Location.WriteLocationType(Id, value)
+            StaticWorldData.World.Location.WriteLocationType(Id, value)
         End Set
     End Property
 
     Friend Shared Function FromLocationType(locationType As LocationType) As IEnumerable(Of Location)
-        Return StaticWorldData.Location.ReadForLocationType(locationType).Select(AddressOf FromId)
+        Return StaticWorldData.World.Location.ReadForLocationType(locationType).Select(AddressOf FromId)
     End Function
     Shared Function Create(locationType As LocationType) As Location
-        Return FromId(StaticWorldData.Location.Create(locationType))
+        Return FromId(StaticWorldData.World.Location.Create(locationType))
     End Function
     Public Shared Function ByStatisticValue(statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)
-        Return StaticWorldData.LocationStatistic.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
+        Return StaticWorldData.World.LocationStatistic.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
     End Function
     Public Shared Function ByDungeonLevel(dungeonLevel As DungeonLevel) As IEnumerable(Of Location)
-        Return StaticWorldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
+        Return StaticWorldData.World.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel).Select(AddressOf Location.FromId)
     End Function
     Friend Sub DestroyRoute(direction As Direction)
         If Routes.ContainsKey(direction) Then
@@ -33,7 +33,7 @@
         Return LocationType.IsDungeon
     End Function
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long?
-        Return StaticWorldData.LocationStatistic.Read(Id, statisticType)
+        Return StaticWorldData.World.LocationStatistic.Read(Id, statisticType)
     End Function
     ReadOnly Property RequiresMP As Boolean
         Get
@@ -53,7 +53,7 @@
     End Property
     ReadOnly Property Routes As IReadOnlyDictionary(Of Direction, Route)
         Get
-            Return StaticWorldData.Route.ReadForLocation(Id).
+            Return StaticWorldData.World.Route.ReadForLocation(Id).
                 ToDictionary(Function(x) CType(x.Item1, Direction), Function(x) Route.FromId(x.Item2))
         End Get
     End Property
@@ -61,7 +61,7 @@
         Return Routes.ContainsKey(direction)
     End Function
     Friend Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
-        StaticWorldData.LocationStatistic.Write(Id, statisticType, statisticValue)
+        StaticWorldData.World.LocationStatistic.Write(Id, statisticType, statisticValue)
     End Sub
     Friend ReadOnly Property HasFeature As Boolean
         Get
@@ -70,14 +70,14 @@
     End Property
     ReadOnly Property Feature As Feature
         Get
-            Return Feature.FromId(StaticWorldData.Feature.ReadForLocation(Id))
+            Return Feature.FromId(StaticWorldData.World.Feature.ReadForLocation(Id))
         End Get
     End Property
     ReadOnly Property Inventory As Inventory
         Get
-            Dim inventoryId As Long? = StaticWorldData.Inventory.ReadForLocation(Id)
+            Dim inventoryId As Long? = StaticWorldData.World.Inventory.ReadForLocation(Id)
             If Not inventoryId.HasValue Then
-                inventoryId = StaticWorldData.Inventory.CreateForLocation(Id)
+                inventoryId = StaticWorldData.World.Inventory.CreateForLocation(Id)
             End If
             Return New Inventory(inventoryId.Value)
         End Get
@@ -112,10 +112,10 @@
     End Property
     Property DungeonLevel As DungeonLevel
         Get
-            Return CType(If(StaticWorldData.LocationDungeonLevel.Read(Id), 0), DungeonLevel)
+            Return CType(If(StaticWorldData.World.LocationDungeonLevel.Read(Id), 0), DungeonLevel)
         End Get
         Set(value As DungeonLevel)
-            StaticWorldData.LocationDungeonLevel.Write(Id, value)
+            StaticWorldData.World.LocationDungeonLevel.Write(Id, value)
         End Set
     End Property
 End Class

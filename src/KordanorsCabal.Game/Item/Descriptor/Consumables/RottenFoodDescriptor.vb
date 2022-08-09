@@ -36,6 +36,6 @@
     End Sub
 
     Public Overrides Sub Purify(item As Item)
-        StaticWorldData.Item.WriteItemType(item.Id, ItemType.Food)
+        StaticWorldData.World.Item.WriteItemType(item.Id, ItemType.Food)
     End Sub
 End Class

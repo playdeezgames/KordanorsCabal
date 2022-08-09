@@ -9,7 +9,7 @@
     End Sub
 
     Friend Sub Initialize()
-        StaticWorldData.Location.Initialize()
+        StaticWorldData.World.Location.Initialize()
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}]
         (
             [{CharacterIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,14 +59,14 @@
     End Function
 
     Public Sub Clear(characterId As Long)
-        StaticWorldData.CharacterQuest.ClearForCharacter(characterId)
-        StaticWorldData.CharacterQuestCompletion.ClearForCharacter(characterId)
-        StaticWorldData.CharacterEquipSlot.ClearForCharacter(characterId)
-        StaticWorldData.Inventory.ClearForCharacter(characterId)
-        StaticWorldData.CharacterLocation.ClearForCharacter(characterId)
-        StaticWorldData.CharacterStatistic.ClearForCharacter(characterId)
-        StaticWorldData.Player.ClearForCharacter(characterId)
-        StaticWorldData.CharacterSpell.ClearForCharacter(characterId)
+        StaticWorldData.World.CharacterQuest.ClearForCharacter(characterId)
+        StaticWorldData.World.CharacterQuestCompletion.ClearForCharacter(characterId)
+        StaticWorldData.World.CharacterEquipSlot.ClearForCharacter(characterId)
+        StaticWorldData.World.Inventory.ClearForCharacter(characterId)
+        StaticWorldData.World.CharacterLocation.ClearForCharacter(characterId)
+        StaticWorldData.World.CharacterStatistic.ClearForCharacter(characterId)
+        StaticWorldData.World.Player.ClearForCharacter(characterId)
+        StaticWorldData.World.CharacterSpell.ClearForCharacter(characterId)
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
