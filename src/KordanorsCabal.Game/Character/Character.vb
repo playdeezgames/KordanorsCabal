@@ -642,7 +642,7 @@
                 Inventory.Add(oldItem)
             End If
             StaticWorldData.World.CharacterEquipSlot.Write(Id, equipSlot, item.Id)
-            EnqueueMessage($"You equip {item.Name} to {equipSlot.Name}.")
+            EnqueueMessage($"You equip {item.Name} to {equipSlot.ToDescriptor.Name}.")
             Return
         End If
         EnqueueMessage($"You cannot equip {item.Name}!")

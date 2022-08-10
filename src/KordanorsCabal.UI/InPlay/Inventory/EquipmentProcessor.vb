@@ -12,7 +12,7 @@
         Dim row As Integer = 1
         Dim player = World.PlayerCharacter
         For Each entry In player.Equipment
-            Dim slotName = $"{entry.Key.Name}: "
+            Dim slotName = $"{entry.Key.ToDescriptor.Name}: "
             buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
             Dim condition = entry.Value.MaximumDurability / entry.Value.Durability
             Dim conditionHue = If(condition >= 4, Hue.Red, If(condition >= 2, Hue.Yellow, Hue.Black))

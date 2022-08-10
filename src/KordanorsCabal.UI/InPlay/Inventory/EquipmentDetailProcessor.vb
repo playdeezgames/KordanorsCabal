@@ -33,7 +33,7 @@
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         Dim item = World.PlayerCharacter.Equipment(EquipSlot)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
-        buffer.WriteTextCentered(0, EquipSlot.Name, True, Hue.Blue)
+        buffer.WriteTextCentered(0, EquipSlot.ToDescriptor.Name, True, Hue.Blue)
         buffer.WriteText((0, 1), $"Item: {item.Name}", False, Hue.Black)
         If item.Durability.HasValue Then
             buffer.WriteText((0, 2), $"Durability: {item.Durability.Value}/{item.MaximumDurability.Value}", False, Hue.Black)

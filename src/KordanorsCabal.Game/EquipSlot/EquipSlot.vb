@@ -13,10 +13,6 @@ Public Enum EquipSlot
 End Enum
 Public Module EquipSlotUtility
     <Extension>
-    Public Function Name(equipSlot As EquipSlot) As String
-        Return EquipSlotDescriptors(equipSlot).Name
-    End Function
-    <Extension>
     Public Function ToDescriptor(equipSlot As EquipSlot) As EquipSlotDescriptor
         Return New EquipSlotDescriptor(equipSlot)
     End Function
