@@ -12,14 +12,6 @@ Public Enum EquipSlot
     RightHand
 End Enum
 Public Module EquipSlotUtility
-    <Extension>
-    Public Function ToDescriptor(equipSlot As EquipSlot) As EquipSlotDescriptor
-        Return New EquipSlotDescriptor(equipSlot)
-    End Function
-    <Extension>
-    Public Function ToEquipSlot(descriptor As EquipSlotDescriptor) As EquipSlot
-        Return CType(descriptor.Id, EquipSlot)
-    End Function
     Public Const Weapon = "Weapon"
     Public Const Shield = "Shield"
     Public Const Head = "Head"
