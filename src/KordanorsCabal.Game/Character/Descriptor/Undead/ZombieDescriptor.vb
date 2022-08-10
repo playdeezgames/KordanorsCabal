@@ -63,7 +63,7 @@
             Case 1
                 Return location.LocationType = OldLocationType.DungeonDeadEnd
             Case Else
-                Return location.LocationType.IsDungeon
+                Return location.LocationType.ToNew.IsDungeon
         End Select
     End Function
     Public Overrides Function RollMoneyDrop() As Long

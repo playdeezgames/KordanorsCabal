@@ -13,7 +13,7 @@ Public Module World
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
                 Dim dungeonLocation = Location.Create(OldLocationType.Moon)
-                dungeonLocation.DungeonLevel = DungeonLevel.FromName(Moon)
+                dungeonLocation.DungeonLevel = DungeonLevel.FromName(TheMoon)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
                 locations.Add(dungeonLocation)
@@ -36,8 +36,8 @@ Public Module World
                 Route.Create(moonLocation, west, RouteType.MoonPath, westLocation)
             Next
         Next
-        PopulateCharacters(locations, DungeonLevel.FromName(Moon))
-        PopulateItems(locations, DungeonLevel.FromName(Moon))
+        PopulateCharacters(locations, DungeonLevel.FromName(TheMoon))
+        PopulateItems(locations, DungeonLevel.FromName(TheMoon))
     End Sub
 
     Private Sub CreateDungeon(location As Location)

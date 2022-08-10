@@ -12,5 +12,5 @@ Public Module DungeonLevelUtility
     Public Const Level3 = "Level III"
     Public Const Level4 = "Level IV"
     Public Const Level5 = "Level V"
-    Public Const Moon = "The Moon"
+    Public Const TheMoon = "The Moon"
 End Module

@@ -22,7 +22,7 @@
                     (5,'Dungeon Dead End',1,1,1),
                     (6,'Dungeon Boss',1,1,1),
                     (7,'Cellar',1,0,1),
-                    (8,'Moon',1,1,1),
+                    (8,'Moon',1,1,1))
                 SELECT 
                     [{LocationTypeIdColumn}],
                     [{LocationTypeNameColumn}],
@@ -32,16 +32,28 @@
                 FROM [cte];")
     End Sub
 
-    Public Function ReadRequiresMP(id As Long) As Boolean
-        Throw New NotImplementedException()
+    Public Function ReadRequiresMP(locationTypeId As Long) As Boolean
+        Return If(Store.ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            RequiresMPColumn,
+            (LocationTypeIdColumn, locationTypeId)), 0) > 0
     End Function
 
-    Public Function ReadCanMap(id As Long) As Boolean
-        Throw New NotImplementedException()
+    Public Function ReadCanMap(locationTypeId As Long) As Boolean
+        Return If(Store.ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            CanMapColumn,
+            (LocationTypeIdColumn, locationTypeId)), 0) > 0
     End Function
 
-    Public Function ReadIsDungeon(id As Long) As Boolean
-        Throw New NotImplementedException()
+    Public Function ReadIsDungeon(locationTypeId As Long) As Boolean
+        Return If(Store.ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            IsDungeonColumn,
+            (LocationTypeIdColumn, locationTypeId)), 0) > 0
     End Function
 
     Public Sub New(store As Store)

@@ -27,18 +27,6 @@ Public Class LocationType
     End Property
 End Class
 Public Module LocationTypeUtility
-    Friend ReadOnly LocationDescriptors As IReadOnlyDictionary(Of OldLocationType, LocationType) =
-        New Dictionary(Of OldLocationType, LocationType) From
-        {
-            {OldLocationType.Cellar, New CellarDescriptor},
-            {OldLocationType.ChurchEntrance, New ChurchEntranceDescriptor},
-            {OldLocationType.Dungeon, New DungeonLocationTypeDescriptor},
-            {OldLocationType.DungeonBoss, New DungeonBossLocationTypeDescriptor},
-            {OldLocationType.DungeonDeadEnd, New DungeonDeadEndLocationTypeDescriptor},
-            {OldLocationType.Moon, New MoonLocationTypeDescriptor},
-            {OldLocationType.Town, New TownDescriptor},
-            {OldLocationType.TownSquare, New TownSquareDescriptor}
-        }
     <Extension>
     Public Function ToOld(locationType As LocationType) As OldLocationType
         Return CType(locationType.Id, OldLocationType)
@@ -47,4 +35,12 @@ Public Module LocationTypeUtility
     Public Function ToNew(oldLocationType As OldLocationType) As LocationType
         Return New LocationType(oldLocationType)
     End Function
+    Public Const TownSquare = "Town Square"
+    Public Const Town = "Town"
+    Public Const ChurchEntrance = "Church Entrance"
+    Public Const Dungeon = "Dungeon"
+    Public Const DungeonDeadEnd = "Dungeon Dead End"
+    Public Const DungeonBoss = "Dungeon Boss"
+    Public Const Cellar = "Cellar"
+    Public Const Moon = "Moon"
 End Module

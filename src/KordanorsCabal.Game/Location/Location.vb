@@ -28,14 +28,14 @@
         Routes(direction)?.Destroy()
     End Sub
     Friend Function IsDungeon() As Boolean
-        Return LocationType.IsDungeon
+        Return LocationType.ToNew.IsDungeon
     End Function
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long?
         Return StaticWorldData.World.LocationStatistic.Read(Id, statisticType)
     End Function
     ReadOnly Property RequiresMP As Boolean
         Get
-            Return LocationType.RequiresMP
+            Return LocationType.ToNew.RequiresMP
         End Get
     End Property
     Public Function HasStairs() As Boolean
@@ -46,7 +46,7 @@
     End Function
     ReadOnly Property Name As String
         Get
-            Return LocationType.Name
+            Return LocationType.ToNew.Name
         End Get
     End Property
     Public Function Routes(direction As Direction) As Route
@@ -112,7 +112,7 @@
     End Function
     Friend ReadOnly Property CanMap As Boolean
         Get
-            Return LocationType.CanMap
+            Return LocationType.ToNew.CanMap
         End Get
     End Property
     Property DungeonLevel As DungeonLevel
