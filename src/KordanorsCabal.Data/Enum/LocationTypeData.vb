@@ -35,4 +35,12 @@
     Public Sub New(store As Store)
         MyBase.New(store)
     End Sub
+
+    Public Function ReadName(locationTypeId As Long) As String
+        Return Store.ReadColumnString(
+            AddressOf Initialize,
+            TableName,
+            LocationTypeNameColumn,
+            (LocationTypeIdColumn, locationTypeId))
+    End Function
 End Class

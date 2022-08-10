@@ -5,12 +5,6 @@
         MyBase.New(8)
     End Sub
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Moon"
-        End Get
-    End Property
-
     Public Overrides ReadOnly Property IsDungeon As Boolean
         Get
             Return True

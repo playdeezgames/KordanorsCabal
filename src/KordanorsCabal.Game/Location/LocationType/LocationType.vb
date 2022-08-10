@@ -3,7 +3,11 @@
     Sub New(locationTypeId As Long)
         Id = locationTypeId
     End Sub
-    MustOverride ReadOnly Property Name As String
+    ReadOnly Property Name As String
+        Get
+            Return StaticWorldData.World.LocationType.ReadName(Id)
+        End Get
+    End Property
     MustOverride ReadOnly Property IsDungeon As Boolean
     MustOverride ReadOnly Property CanMap As Boolean
     MustOverride ReadOnly Property RequiresMP() As Boolean
