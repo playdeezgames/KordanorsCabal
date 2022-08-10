@@ -32,6 +32,18 @@
                 FROM [cte];")
     End Sub
 
+    Public Function ReadRequiresMP(id As Long) As Boolean
+        Throw New NotImplementedException()
+    End Function
+
+    Public Function ReadCanMap(id As Long) As Boolean
+        Throw New NotImplementedException()
+    End Function
+
+    Public Function ReadIsDungeon(id As Long) As Boolean
+        Throw New NotImplementedException()
+    End Function
+
     Public Sub New(store As Store)
         MyBase.New(store)
     End Sub
