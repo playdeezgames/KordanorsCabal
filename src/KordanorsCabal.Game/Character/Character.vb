@@ -475,16 +475,16 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-    Public Sub Unequip(equipSlot As EquipSlot)
-        Dim item = Equipment(equipSlot.ToDescriptor)
+    Public Sub Unequip(equipSlot As EquipSlotDescriptor)
+        Dim item = Equipment(equipSlot)
         If item IsNot Nothing Then
             Inventory.Add(item)
-            StaticWorldData.World.CharacterEquipSlot.Clear(Id, equipSlot)
+            StaticWorldData.World.CharacterEquipSlot.Clear(Id, equipSlot.Id)
         End If
     End Sub
     Private Sub Panic()
         For Each equipSlot In EquippedSlots
-            Unequip(equipSlot.ToEquipSlot)
+            Unequip(equipSlot)
         Next
         For Each item In Inventory.Items
             Location.Inventory.Add(item)

@@ -19,7 +19,7 @@
 
     Private Shared Function Unequip() As UIState
         Dim player = World.PlayerCharacter
-        player.Unequip(EquipSlot)
+        player.Unequip(EquipSlot.ToDescriptor)
         If player.HasEquipment Then
             Return UIState.Equipment
         End If
