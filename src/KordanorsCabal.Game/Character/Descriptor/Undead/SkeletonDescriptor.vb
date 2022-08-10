@@ -22,13 +22,13 @@
         End Get
     End Property
 
-    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of OldDungeonLevel, Long) =
-        New Dictionary(Of OldDungeonLevel, Long) From
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
+        New Dictionary(Of Long, Long) From
         {
-            {OldDungeonLevel.Level1, 30},
-            {OldDungeonLevel.Level2, 45},
-            {OldDungeonLevel.Level3, 30},
-            {OldDungeonLevel.Level4, 15}
+            {1, 30},
+            {2, 45},
+            {3, 30},
+            {4, 15}
         }
 
     Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long

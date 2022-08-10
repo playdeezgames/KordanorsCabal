@@ -26,14 +26,14 @@
         End Get
     End Property
 
-    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of OldDungeonLevel, Long) =
-        New Dictionary(Of OldDungeonLevel, Long) From
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
+        New Dictionary(Of Long, Long) From
         {
-            {OldDungeonLevel.Level1, 5},
-            {OldDungeonLevel.Level2, 15},
-            {OldDungeonLevel.Level3, 30},
-            {OldDungeonLevel.Level4, 45},
-            {OldDungeonLevel.Level5, 30}
+            {1, 5},
+            {2, 15},
+            {3, 30},
+            {4, 45},
+            {5, 30}
         }
 
     Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
@@ -90,7 +90,7 @@
     End Sub
 
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
-        Return level.ToOld <> OldDungeonLevel.Level1 OrElse location.LocationType = LocationType.DungeonDeadEnd
+        Return level.Id <> 1 OrElse location.LocationType = LocationType.DungeonDeadEnd
     End Function
 
     Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
