@@ -3,7 +3,7 @@
     MustOverride ReadOnly Property MaximumEncumbrance(character As Character) As Long
     MustOverride Function IsEnemy(character As Character) As Boolean
     MustOverride ReadOnly Property SpawnCount(level As DungeonLevel) As Long
-    Overridable Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
+    Overridable Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
         Return False
     End Function
     MustOverride ReadOnly Property Name As String

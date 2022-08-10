@@ -5,9 +5,9 @@
             ItemType.FireShard,
             "Fire Shard",,
             MakeDictionary(
-                (DungeonLevel.Level3, MakeHashSet(LocationType.DungeonBoss))),
+                (OldDungeonLevel.Level3, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level3, "1d1")),,,,,, ,
+                (OldDungeonLevel.Level3, "1d1")),,,,,, ,
             False,,,,,,,,
             Function(character)
                 Dim location = character.Location

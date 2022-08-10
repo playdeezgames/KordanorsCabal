@@ -28,7 +28,7 @@
 
     Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
         Get
-            Return If(level = DungeonLevel.Moon, 100, 0)
+            Return If(level.ToOld = OldDungeonLevel.Moon, 100, 0)
         End Get
     End Property
 
@@ -54,8 +54,8 @@
         Return character.CharacterType = CharacterType.N00b
     End Function
 
-    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
-        Return level = DungeonLevel.Moon
+    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
+        Return level = OldDungeonLevel.Moon
     End Function
 
     Private Shared ReadOnly bribeItems As IReadOnlyList(Of ItemType) =

@@ -57,7 +57,7 @@ Public Enum ItemType
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
-    Function SpawnLocationTypes(itemType As ItemType, level As DungeonLevel) As HashSet(Of LocationType)
+    Function SpawnLocationTypes(itemType As ItemType, level As OldDungeonLevel) As HashSet(Of LocationType)
         Return ItemTypeDescriptors(itemType).SpawnLocationTypes(level)
     End Function
     <Extension>
@@ -77,7 +77,7 @@ Public Module ItemTypeExtensions
         ItemTypeDescriptors(itemType).Use.Invoke(character)
     End Sub
     <Extension>
-    Public Function RollSpawnCount(itemType As ItemType, level As DungeonLevel) As Long
+    Public Function RollSpawnCount(itemType As ItemType, level As OldDungeonLevel) As Long
         Return ItemTypeDescriptors(itemType).RollSpawnCount(level)
     End Function
     <Extension>

@@ -6,9 +6,9 @@
             ItemType.AirShard,
             "Air Shard",,
             MakeDictionary(
-                (DungeonLevel.Level1, MakeHashSet(LocationType.DungeonBoss))),
+                (OldDungeonLevel.Level1, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level1, "1d1")),,,,,, ,
+                (OldDungeonLevel.Level1, "1d1")),,,,,, ,
             False,,,,,,,,
             Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
             Sub(character)

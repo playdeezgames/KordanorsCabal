@@ -6,6 +6,6 @@
             ItemType.PlatinumKey,
             "PT Key",,
             MakeDictionary(
-                (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd))))
+                (OldDungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd))))
     End Sub
 End Class

@@ -5,9 +5,9 @@
             ItemType.EarthShard,
             "Earth Shard",,
             MakeDictionary(
-                (DungeonLevel.Level2, MakeHashSet(LocationType.DungeonBoss))),
+                (OldDungeonLevel.Level2, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level2, "1d1")),,,,,, ,
+                (OldDungeonLevel.Level2, "1d1")),,,,,, ,
             False,,,,,,,,
             Function(character)
                 Dim location = character.Location

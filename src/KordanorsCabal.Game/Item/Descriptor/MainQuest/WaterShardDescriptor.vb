@@ -6,9 +6,9 @@
             ItemType.WaterShard,
             "Water Shard",,
             MakeDictionary(
-                (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonBoss))),
+                (OldDungeonLevel.Level4, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (DungeonLevel.Level4, "1d1")),,,,,, ,
+                (OldDungeonLevel.Level4, "1d1")),,,,,, ,
             False,,,,,,,,
             Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
             Sub(character)

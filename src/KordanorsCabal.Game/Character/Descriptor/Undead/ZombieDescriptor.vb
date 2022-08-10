@@ -22,18 +22,18 @@
         End Get
     End Property
 
-    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of DungeonLevel, Long) =
-        New Dictionary(Of DungeonLevel, Long) From
+    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of OldDungeonLevel, Long) =
+        New Dictionary(Of OldDungeonLevel, Long) From
         {
-            {DungeonLevel.Level2, 30},
-            {DungeonLevel.Level3, 45},
-            {DungeonLevel.Level4, 30}
+            {OldDungeonLevel.Level2, 30},
+            {OldDungeonLevel.Level3, 45},
+            {OldDungeonLevel.Level4, 30}
         }
 
     Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
         Get
             Dim result As Long = 0
-            Return If(spawnCountTable.TryGetValue(level, result), result, 15)
+            Return If(spawnCountTable.TryGetValue(level.ToOld, result), result, 15)
         End Get
     End Property
 
@@ -58,9 +58,9 @@
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return character.CharacterType = CharacterType.N00b
     End Function
-    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
+    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
         Select Case level
-            Case DungeonLevel.Level1
+            Case OldDungeonLevel.Level1
                 Return location.LocationType = LocationType.DungeonDeadEnd
             Case Else
                 Return location.LocationType.IsDungeon
