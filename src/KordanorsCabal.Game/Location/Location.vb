@@ -3,19 +3,19 @@
     Public Sub New(locationId As Long)
         Id = locationId
     End Sub
-    Property LocationType As LocationType
+    Property LocationType As OldLocationType
         Get
-            Return CType(StaticWorldData.World.Location.ReadLocationType(Id).Value, LocationType)
+            Return CType(StaticWorldData.World.Location.ReadLocationType(Id).Value, OldLocationType)
         End Get
-        Set(value As LocationType)
+        Set(value As OldLocationType)
             StaticWorldData.World.Location.WriteLocationType(Id, value)
         End Set
     End Property
 
-    Friend Shared Function FromLocationType(locationType As LocationType) As IEnumerable(Of Location)
+    Friend Shared Function FromLocationType(locationType As OldLocationType) As IEnumerable(Of Location)
         Return StaticWorldData.World.Location.ReadForLocationType(locationType).Select(AddressOf FromId)
     End Function
-    Shared Function Create(locationType As LocationType) As Location
+    Shared Function Create(locationType As OldLocationType) As Location
         Return FromId(StaticWorldData.World.Location.Create(locationType))
     End Function
     Public Shared Function ByStatisticValue(statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)

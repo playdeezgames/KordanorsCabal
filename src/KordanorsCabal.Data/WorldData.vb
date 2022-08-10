@@ -17,6 +17,7 @@
     Public ReadOnly Location As LocationData
     Public ReadOnly LocationDungeonLevel As LocationDungeonLevelData
     Public ReadOnly LocationStatistic As LocationStatisticData
+    Public ReadOnly LocationType As LocationTypeData
     Public ReadOnly Player As PlayerData
     Public ReadOnly Route As RouteData
 
@@ -37,6 +38,7 @@
         Item = New ItemData(store)
         ItemStatistic = New ItemStatisticData(store)
         Location = New LocationData(store)
+        LocationType = New LocationTypeData(store)
         LocationDungeonLevel = New LocationDungeonLevelData(store)
         LocationStatistic = New LocationStatisticData(store)
         Player = New PlayerData(store)

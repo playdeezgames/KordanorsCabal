@@ -18,7 +18,7 @@ Public Module FeatureTypeExtensions
         Return FeatureTypeDescriptors(featureType).Name
     End Function
     <Extension>
-    Public Function LocationType(featureType As FeatureType) As LocationType
+    Public Function LocationType(featureType As FeatureType) As OldLocationType
         Return FeatureTypeDescriptors(featureType).LocationType
     End Function
     <Extension>

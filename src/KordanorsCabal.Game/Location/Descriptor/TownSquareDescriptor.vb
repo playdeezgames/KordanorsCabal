@@ -1,5 +1,9 @@
 ﻿Friend Class TownSquareDescriptor
-    Inherits LocationDescriptor
+    Inherits LocationType
+
+    Public Sub New()
+        MyBase.New(1)
+    End Sub
 
     Public Overrides ReadOnly Property Name As String
         Get

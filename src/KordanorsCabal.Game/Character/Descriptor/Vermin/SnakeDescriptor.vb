@@ -26,7 +26,7 @@
     End Property
 
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
-        Return location.LocationType = LocationType.Dungeon
+        Return location.LocationType = OldLocationType.Dungeon
     End Function
 
     Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =

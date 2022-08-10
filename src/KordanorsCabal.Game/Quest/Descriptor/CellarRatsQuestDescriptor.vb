@@ -30,7 +30,7 @@
             character.EnqueueMessage("You accept the quest!")
             StaticWorldData.World.CharacterQuest.Write(character.Id, Quest.CellarRats)
             Dim ratCount = If(StaticWorldData.World.CharacterQuestCompletion.Read(character.Id, Quest.CellarRats), 0) + 1
-            Dim location = Game.Location.FromLocationType(LocationType.Cellar).Single
+            Dim location = Game.Location.FromLocationType(OldLocationType.Cellar).Single
             While ratCount > 0
                 Game.Character.Create(CharacterType.Rat, location)
                 ratCount -= 1

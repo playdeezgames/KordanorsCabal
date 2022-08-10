@@ -5,7 +5,7 @@
     Public Sub New(
                   itemTypeId As Long,
                   statisticType As CharacterStatisticType,
-                  Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType)) = Nothing,
+                  Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of OldLocationType)) = Nothing,
                   Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing)
         MyBase.New(
             itemTypeId,

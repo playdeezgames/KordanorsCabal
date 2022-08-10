@@ -61,7 +61,7 @@
         Return character.CharacterType = CharacterType.N00b
     End Function
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
-        Return location.LocationType = LocationType.Dungeon
+        Return location.LocationType = OldLocationType.Dungeon
     End Function
     Public Overrides Function RollMoneyDrop() As Long
         Return RNG.RollDice("2d3")

@@ -1,5 +1,9 @@
 ﻿Friend Class CellarDescriptor
-    Inherits LocationDescriptor
+    Inherits LocationType
+
+    Public Sub New()
+        MyBase.New(7)
+    End Sub
 
     Public Overrides ReadOnly Property Name As String
         Get

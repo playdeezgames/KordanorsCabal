@@ -1,5 +1,9 @@
 ﻿Friend Class ChurchEntranceDescriptor
-    Inherits LocationDescriptor
+    Inherits LocationType
+
+    Public Sub New()
+        MyBase.New(3)
+    End Sub
 
     Public Overrides ReadOnly Property Name As String
         Get

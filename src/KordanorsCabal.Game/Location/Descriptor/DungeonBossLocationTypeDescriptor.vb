@@ -1,5 +1,9 @@
 ﻿Friend Class DungeonBossLocationTypeDescriptor
-    Inherits LocationDescriptor
+    Inherits LocationType
+
+    Public Sub New()
+        MyBase.New(6)
+    End Sub
 
     Public Overrides ReadOnly Property Name As String
         Get
