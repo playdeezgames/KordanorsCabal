@@ -6,7 +6,7 @@
             ItemType.WaterShard,
             "Water Shard",,
             MakeDictionary(
-                (OldDungeonLevel.Level4, MakeHashSet(LocationType.DungeonBoss))),
+                (4L, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
                 (OldDungeonLevel.Level4, "1d1")),,,,,, ,
             False,,,,,,,,

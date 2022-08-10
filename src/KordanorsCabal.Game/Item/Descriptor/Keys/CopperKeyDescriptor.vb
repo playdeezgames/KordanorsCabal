@@ -6,6 +6,6 @@
             ItemType.CopperKey,
             "CU Key",,
             MakeDictionary(
-                (OldDungeonLevel.Level1, MakeHashSet(LocationType.DungeonDeadEnd))))
+                (1L, MakeHashSet(LocationType.DungeonDeadEnd))))
     End Sub
 End Class

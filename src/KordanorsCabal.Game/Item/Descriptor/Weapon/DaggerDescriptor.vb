@@ -7,11 +7,11 @@
             "Dagger",
             1,
             MakeDictionary(
-                (OldDungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level3, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level4, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level5, MakeHashSet(LocationType.Dungeon))),
+                (1L, MakeHashSet(LocationType.Dungeon)),
+                (2L, MakeHashSet(LocationType.Dungeon)),
+                (3L, MakeHashSet(LocationType.Dungeon)),
+                (4L, MakeHashSet(LocationType.Dungeon)),
+                (5L, MakeHashSet(LocationType.Dungeon))),
             MakeDictionary(
                 (OldDungeonLevel.Level1, "4d6"),
                 (OldDungeonLevel.Level2, "2d6")),

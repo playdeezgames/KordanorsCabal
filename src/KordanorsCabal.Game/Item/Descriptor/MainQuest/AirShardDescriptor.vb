@@ -6,7 +6,7 @@
             ItemType.AirShard,
             "Air Shard",,
             MakeDictionary(
-                (OldDungeonLevel.Level1, MakeHashSet(LocationType.DungeonBoss))),
+                (1L, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
                 (OldDungeonLevel.Level1, "1d1")),,,,,, ,
             False,,,,,,,,

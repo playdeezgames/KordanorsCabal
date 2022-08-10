@@ -7,11 +7,11 @@
             "Shortsword",
                    5,
             MakeDictionary(
-                (OldDungeonLevel.Level1, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level2, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level3, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level4, MakeHashSet(LocationType.Dungeon)),
-                (OldDungeonLevel.Level5, MakeHashSet(LocationType.Dungeon))),
+                (1l, MakeHashSet(LocationType.Dungeon)),
+                (2l, MakeHashSet(LocationType.Dungeon)),
+                (3l, MakeHashSet(LocationType.Dungeon)),
+                (4l, MakeHashSet(LocationType.Dungeon)),
+                (5l, MakeHashSet(LocationType.Dungeon))),
             MakeDictionary(
                 (OldDungeonLevel.Level1, "2d6"),
                 (OldDungeonLevel.Level2, "1d6")),
