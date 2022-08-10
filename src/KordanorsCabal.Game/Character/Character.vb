@@ -369,9 +369,9 @@
             Return StaticWorldData.World.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(x))
         End Get
     End Property
-    ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot)
+    ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlotDescriptor)
         Get
-            Return StaticWorldData.World.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) CType(x, EquipSlot))
+            Return StaticWorldData.World.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlotDescriptor(x))
         End Get
     End Property
     Friend Function AddXP(xp As Long) As Boolean
@@ -484,7 +484,7 @@
     End Sub
     Private Sub Panic()
         For Each equipSlot In EquippedSlots
-            Unequip(equipSlot)
+            Unequip(equipSlot.ToEquipSlot)
         Next
         For Each item In Inventory.Items
             Location.Inventory.Add(item)

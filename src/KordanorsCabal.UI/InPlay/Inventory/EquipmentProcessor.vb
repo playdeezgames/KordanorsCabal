@@ -12,9 +12,9 @@
         Dim row As Integer = 1
         Dim player = World.PlayerCharacter
         For Each entry In player.EquippedSlots
-            Dim slotName = $"{entry.ToDescriptor.Name}: "
+            Dim slotName = $"{entry.Name}: "
             buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
-            Dim item = player.Equipment(entry.ToDescriptor)
+            Dim item = player.Equipment(entry)
             Dim condition = item.MaximumDurability / item.Durability
             Dim conditionHue = If(condition >= 4, Hue.Red, If(condition >= 2, Hue.Yellow, Hue.Black))
             buffer.WriteText((slotName.Length, row + 1), item.Name, rowIndex = row, conditionHue)
@@ -29,7 +29,7 @@
         table(0) = EquipSlot.None
         Dim row As Integer = 1
         For Each entry In World.PlayerCharacter.EquippedSlots
-            table(row) = entry
+            table(row) = entry.ToEquipSlot
             row += 1
         Next
     End Sub
