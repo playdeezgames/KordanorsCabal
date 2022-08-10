@@ -11,7 +11,7 @@
                 (DungeonLevel.Level4, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon)),
                 (DungeonLevel.Level5, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.Dungeon))),
                 MakeDictionary((DungeonLevel.Level2, "1d6")),
-                MakeList(EquipSlotDescriptor.FromName(Torso)),,,,
+                MakeList(EquipSlot.FromName(Torso)),,,,
                 4,
                 50,,
                 50,

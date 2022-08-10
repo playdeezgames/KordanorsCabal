@@ -10,7 +10,7 @@
                 (DungeonLevel.Moon, MakeHashSet(LocationType.Moon))),
             MakeDictionary(
                 (DungeonLevel.Moon, "1d1")),
-            MakeList(EquipSlotDescriptor.FromName(Weapon)),,
+            MakeList(EquipSlot.FromName(Weapon)),,
             10,
             5,,
             100)

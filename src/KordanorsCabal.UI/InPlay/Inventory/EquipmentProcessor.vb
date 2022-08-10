@@ -2,7 +2,7 @@
     Implements IProcessor
 
     Private rowIndex As Integer = 0
-    Private table As New Dictionary(Of Integer, EquipSlotDescriptor)
+    Private table As New Dictionary(Of Integer, EquipSlot)
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Black)
@@ -48,7 +48,7 @@
         Return UIState.Equipment
     End Function
 
-    Private Function InteractEquipSlot(equipSlot As EquipSlotDescriptor) As UIState
+    Private Function InteractEquipSlot(equipSlot As EquipSlot) As UIState
         If equipSlot Is Nothing Then
             Return UIState.InPlay
         End If

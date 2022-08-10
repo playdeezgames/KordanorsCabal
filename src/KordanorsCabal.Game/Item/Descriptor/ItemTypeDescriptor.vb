@@ -19,7 +19,7 @@
     Friend ReadOnly Property RepairPrice As Long
 
     '[ItemTypeEquipSlots]([ItemTypeId],[EquipSlotId])
-    ReadOnly Property EquipSlots As IEnumerable(Of EquipSlotDescriptor)
+    ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
 
     '[ItemTypeOfferShopTypes]([ItemTypeId],[ShoppeTypeId],[TransactionType])--TransactionType = offer, price, repair
     Private ReadOnly Property boughtAt As IReadOnlyList(Of ShoppeType)
@@ -69,7 +69,7 @@
            Optional encumbrance As Long = 0,
            Optional spawnLocationTypes As IReadOnlyDictionary(Of DungeonLevel, HashSet(Of LocationType)) = Nothing,
            Optional spawnCounts As IReadOnlyDictionary(Of DungeonLevel, String) = Nothing,
-           Optional equipSlots As IEnumerable(Of EquipSlotDescriptor) = Nothing,
+           Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long) = Nothing,
            Optional attackDice As Long = 0,
            Optional maximumDamage As Long? = Nothing,
@@ -99,7 +99,7 @@
                 Function(x) x,
                 Function(x) If(spawnLocationTypes.ContainsKey(x), spawnLocationTypes(x), New HashSet(Of LocationType)))
         End If
-        Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlotDescriptor))
+        Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
         Me.spawnCounts = spawnCounts
         Me.Offer = offer
         Me.Price = price
@@ -147,7 +147,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
                 ItemType.AmuletOfYendor,
                 "Amulet of Yendor",,,,
-                MakeList(EquipSlotDescriptor.FromName(Neck)),,,,,,,,,
+                MakeList(EquipSlot.FromName(Neck)),,,,,,,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
             {ItemType.BatWing, New TrophyDescriptor(ItemType.BatWing, "Bat Wing", 3, MakeList(ShoppeType.BlackMage))},

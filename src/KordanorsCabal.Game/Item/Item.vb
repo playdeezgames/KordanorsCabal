@@ -51,7 +51,7 @@
     Friend Sub Use(character As Character)
         ItemType.Use(character)
     End Sub
-    Friend ReadOnly Property EquipSlots() As IEnumerable(Of EquipSlotDescriptor)
+    Friend ReadOnly Property EquipSlots() As IEnumerable(Of EquipSlot)
         Get
             Return ItemType.EquipSlots
         End Get

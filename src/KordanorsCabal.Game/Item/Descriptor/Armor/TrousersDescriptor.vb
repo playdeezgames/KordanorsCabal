@@ -5,7 +5,7 @@
         MyBase.New(
             ItemType.Trousers,
             "Trousers",,,,
-            MakeList(EquipSlotDescriptor.FromName(Legs)),,,,,,,,,
+            MakeList(EquipSlot.FromName(Legs)),,,,,,,,,
             100,
             MakeList(ShoppeType.BlackMarket))
     End Sub

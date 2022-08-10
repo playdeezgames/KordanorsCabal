@@ -361,7 +361,7 @@
         Next
         CharacterType.DropLoot(Location)
     End Sub
-    Function Equipment(equipSlot As EquipSlotDescriptor) As Item
+    Function Equipment(equipSlot As EquipSlot) As Item
         Return Item.FromId(StaticWorldData.World.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
     End Function
     ReadOnly Property EquippedItems As IEnumerable(Of Item)
@@ -369,9 +369,9 @@
             Return StaticWorldData.World.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(x))
         End Get
     End Property
-    ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlotDescriptor)
+    ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot)
         Get
-            Return StaticWorldData.World.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlotDescriptor(x))
+            Return StaticWorldData.World.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(x))
         End Get
     End Property
     Friend Function AddXP(xp As Long) As Boolean
@@ -475,7 +475,7 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-    Public Sub Unequip(equipSlot As EquipSlotDescriptor)
+    Public Sub Unequip(equipSlot As EquipSlot)
         Dim item = Equipment(equipSlot)
         If item IsNot Nothing Then
             Inventory.Add(item)

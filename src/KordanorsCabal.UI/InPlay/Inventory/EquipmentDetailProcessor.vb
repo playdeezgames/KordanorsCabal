@@ -1,7 +1,7 @@
 ﻿Friend Class EquipmentDetailProcessor
     Inherits MenuProcessor
 
-    Public Shared Property EquipSlot As EquipSlotDescriptor
+    Public Shared Property EquipSlot As EquipSlot
 
     Const GoBackMenuItem = "Go Back"
     Const UnequipMenuItem = "Unequip"
