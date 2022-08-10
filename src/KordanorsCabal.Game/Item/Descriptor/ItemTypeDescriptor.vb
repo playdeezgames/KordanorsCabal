@@ -6,7 +6,7 @@
     ReadOnly Property IsConsumed As Boolean
 
     '[ItemTypeSpawnLocationTypes]([ItemTypeId],[DungeonLevelId],[LocationTypeId])
-    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of OldDungeonLevel, HashSet(Of LocationType))
+    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType))
     Private ReadOnly spawnCounts As IReadOnlyDictionary(Of Long, String)
 
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
@@ -44,7 +44,7 @@
         End If
         Return Nothing
     End Function
-    Function RollSpawnCount(level As OldDungeonLevel) As Long
+    Function RollSpawnCount(level As Long) As Long
         If spawnCounts Is Nothing Then
             Return 0
         End If
@@ -91,12 +91,12 @@
         If spawnLocationTypes Is Nothing Then
             Me.SpawnLocationTypes =
                 AllDungeonLevels.ToDictionary(
-                Function(x) x,
+                Function(x) CLng(x),
                 Function(x) New HashSet(Of LocationType))
         Else
             Me.SpawnLocationTypes =
                 AllDungeonLevels.ToDictionary(
-                Function(x) x,
+                Function(x) CLng(x),
                 Function(x) If(spawnLocationTypes.ContainsKey(x), spawnLocationTypes(x), New HashSet(Of LocationType)))
         End If
         Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))

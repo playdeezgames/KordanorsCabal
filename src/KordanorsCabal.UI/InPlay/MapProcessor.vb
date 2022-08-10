@@ -10,7 +10,7 @@
             Dim playerLocation = player.Location
             Dim level = playerLocation.DungeonLevel
             If level <> OldDungeonLevel.None Then
-                Dim locations = Location.ByDungeonLevel(level).Where(Function(x) player.HasVisited(x))
+                Dim locations = Location.ByDungeonLevel(level.ToNew).Where(Function(x) player.HasVisited(x))
                 For Each location In locations
                     Dim inverted = (location = playerLocation)
                     Dim dungeonColumn = location.GetStatistic(LocationStatisticType.DungeonColumn).Value
