@@ -11,12 +11,13 @@
         buffer.WriteText((0, 1), "Go Back", rowIndex = 0, Hue.Black)
         Dim row As Integer = 1
         Dim player = World.PlayerCharacter
-        For Each entry In player.OldEquipment
-            Dim slotName = $"{entry.Key.ToDescriptor.Name}: "
+        For Each entry In player.EquippedSlots
+            Dim slotName = $"{entry.ToDescriptor.Name}: "
             buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
-            Dim condition = entry.Value.MaximumDurability / entry.Value.Durability
+            Dim item = player.Equipment(entry.ToDescriptor)
+            Dim condition = item.MaximumDurability / item.Durability
             Dim conditionHue = If(condition >= 4, Hue.Red, If(condition >= 2, Hue.Yellow, Hue.Black))
-            buffer.WriteText((slotName.Length, row + 1), entry.Value.Name, rowIndex = row, conditionHue)
+            buffer.WriteText((slotName.Length, row + 1), item.Name, rowIndex = row, conditionHue)
             row += 1
         Next
         buffer.WriteTextCentered(buffer.Rows - 1, "Arrows, Space, Esc", False, Hue.Black)
@@ -27,8 +28,8 @@
         table.Clear()
         table(0) = EquipSlot.None
         Dim row As Integer = 1
-        For Each entry In World.PlayerCharacter.OldEquipment
-            table(row) = entry.Key
+        For Each entry In World.PlayerCharacter.EquippedSlots
+            table(row) = entry
             row += 1
         Next
     End Sub

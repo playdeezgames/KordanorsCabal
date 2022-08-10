@@ -70,4 +70,10 @@
             (CharacterIdColumn, characterId),
             (EquipSlotColumn, equipSlotId))
     End Function
+    Public Function ReadItemsForCharacter(characterId As Long) As IEnumerable(Of Long)
+        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ItemIdColumn, (CharacterIdColumn, characterId))
+    End Function
+    Public Function ReadEquipSlotsForCharacter(characterId As Long) As IEnumerable(Of Long)
+        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, EquipSlotColumn, (CharacterIdColumn, characterId))
+    End Function
 End Class
