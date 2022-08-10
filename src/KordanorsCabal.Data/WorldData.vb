@@ -7,6 +7,7 @@
     Public ReadOnly CharacterSpell As CharacterSpellData
     Public ReadOnly CharacterStatistic As CharacterStatisticData
     Public ReadOnly Direction As DirectionData
+    Public ReadOnly EquipSlot As EquipSlotData
     Public ReadOnly Feature As FeatureData
     Public ReadOnly Inventory As InventoryData
     Public ReadOnly InventoryItem As InventoryItemData
@@ -27,6 +28,7 @@
         CharacterSpell = New CharacterSpellData(store)
         CharacterStatistic = New CharacterStatisticData(store)
         Direction = New DirectionData(store)
+        EquipSlot = New EquipSlotData(store)
         Feature = New FeatureData(store)
         Inventory = New InventoryData(store)
         InventoryItem = New InventoryItemData(store)
