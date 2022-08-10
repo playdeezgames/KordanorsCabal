@@ -19,10 +19,10 @@ Public Module World
                 locations.Add(dungeonLocation)
             Next
         Next
-        Dim north = Direction.FromName(DirectionNames.North)
-        Dim east = Direction.FromName(DirectionNames.East)
-        Dim south = Direction.FromName(DirectionNames.South)
-        Dim west = Direction.FromName(DirectionNames.West)
+        Dim north = Direction.FromName(DirectionUtility.North)
+        Dim east = Direction.FromName(DirectionUtility.East)
+        Dim south = Direction.FromName(DirectionUtility.South)
+        Dim west = Direction.FromName(DirectionUtility.West)
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
                 Dim moonLocation = locations(CInt(column + row * MoonColumns))

@@ -42,7 +42,7 @@
         End Get
     End Property
 End Class
-Friend Module DirectionDescriptorUtility
+Public Module DirectionUtility
     Friend ReadOnly Property AllDirections As IEnumerable(Of Direction)
         Get
             Return StaticWorldData.World.Direction.ReadAll.Select(Function(x) New Direction(x))
@@ -53,8 +53,6 @@ Friend Module DirectionDescriptorUtility
             Return AllDirections.Where(Function(x) x.IsCardinal)
         End Get
     End Property
-End Module
-Public Module DirectionNames
     Public Const North = "North"
     Public Const East = "East"
     Public Const South = "South"
