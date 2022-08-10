@@ -2,7 +2,7 @@
     Implements IProcessor
 
     Private rowIndex As Integer = 0
-    Private table As New Dictionary(Of Integer, EquipSlot)
+    Private table As New Dictionary(Of Integer, EquipSlotDescriptor)
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Black)
@@ -26,10 +26,10 @@
     Public Sub Initialize() Implements IProcessor.Initialize
         rowIndex = 0
         table.Clear()
-        table(0) = EquipSlot.None
+        table(0) = Nothing
         Dim row As Integer = 1
         For Each entry In World.PlayerCharacter.EquippedSlots
-            table(row) = entry.ToEquipSlot
+            table(row) = entry
             row += 1
         Next
     End Sub
@@ -48,8 +48,8 @@
         Return UIState.Equipment
     End Function
 
-    Private Function InteractEquipSlot(equipSlot As EquipSlot) As UIState
-        If equipSlot = EquipSlot.None Then
+    Private Function InteractEquipSlot(equipSlot As EquipSlotDescriptor) As UIState
+        If equipSlot Is Nothing Then
             Return UIState.InPlay
         End If
         EquipmentDetailProcessor.EquipSlot = equipSlot
