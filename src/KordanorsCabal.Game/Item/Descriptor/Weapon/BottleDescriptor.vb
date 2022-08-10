@@ -6,7 +6,7 @@
             ItemType.Bottle,
             "Empty Bottle",
             1,,,
-            MakeList(EquipSlot.Weapon.ToDescriptor), ,
+            MakeList(EquipSlotDescriptor.FromName(Weapon)), ,
             2,
             1,,
             3,,,,,,,,,

@@ -12,6 +12,14 @@
             (EquipSlotIdColumn, equipSlotId))
     End Function
 
+    Public Function ReadForName(equipSlotName As String) As Long?
+        Return Store.ReadColumnValue(Of String, Long)(
+            AddressOf Initialize,
+            TableName,
+            EquipSlotIdColumn,
+            (EquipSlotNameColumn, equipSlotName))
+    End Function
+
     Friend Sub Initialize()
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](

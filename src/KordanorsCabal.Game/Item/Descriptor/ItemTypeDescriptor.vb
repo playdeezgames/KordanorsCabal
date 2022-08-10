@@ -147,7 +147,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
                 ItemType.AmuletOfYendor,
                 "Amulet of Yendor",,,,
-                MakeList(EquipSlot.Neck.ToDescriptor),,,,,,,,,
+                MakeList(EquipSlotDescriptor.FromName(Neck)),,,,,,,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
             {ItemType.BatWing, New TrophyDescriptor(ItemType.BatWing, "Bat Wing", 3, MakeList(ShoppeType.BlackMage))},
