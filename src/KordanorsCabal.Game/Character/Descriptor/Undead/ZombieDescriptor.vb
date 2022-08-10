@@ -33,7 +33,7 @@
     Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
         Get
             Dim result As Long = 0
-            Return If(spawnCountTable.TryGetValue(level.ToOld, result), result, 15)
+            Return If(spawnCountTable.TryGetValue(level.Id, result), result, 15)
         End Get
     End Property
 

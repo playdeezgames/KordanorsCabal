@@ -91,13 +91,13 @@
         If spawnLocationTypes Is Nothing Then
             Me.SpawnLocationTypes =
                 AllDungeonLevels.ToDictionary(
-                Function(x) CLng(x),
+                Function(x) x.Id,
                 Function(x) New HashSet(Of LocationType))
         Else
             Me.SpawnLocationTypes =
                 AllDungeonLevels.ToDictionary(
-                Function(x) CLng(x),
-                Function(x) If(spawnLocationTypes.ContainsKey(x), spawnLocationTypes(x), New HashSet(Of LocationType)))
+                Function(x) x.Id,
+                Function(x) If(spawnLocationTypes.ContainsKey(x.Id), spawnLocationTypes(x.Id), New HashSet(Of LocationType)))
         End If
         Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
         Me.spawnCounts = spawnCounts

@@ -21,6 +21,13 @@
                 FROM [cte];")
     End Sub
 
+    Public Function ReadAll() As IEnumerable(Of Long)
+        Return Store.ReadRecords(Of Long)(
+            AddressOf Initialize,
+            TableName,
+            DungeonLevelIdColumn)
+    End Function
+
     Public Function ReadForName(name As String) As Long?
         Return Store.ReadColumnValue(Of String, Long)(
             AddressOf Initialize,
