@@ -1,7 +1,7 @@
 ﻿Friend Class BatDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
+    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return location.LocationType = LocationType.Dungeon
     End Function
 

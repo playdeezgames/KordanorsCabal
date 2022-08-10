@@ -52,7 +52,7 @@
         Return True
     End Function
 
-    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
-        Return level = OldDungeonLevel.Level4 AndAlso location.LocationType = LocationType.DungeonBoss
+    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
+        Return level.ToOld = OldDungeonLevel.Level4 AndAlso location.LocationType = LocationType.DungeonBoss
     End Function
 End Class

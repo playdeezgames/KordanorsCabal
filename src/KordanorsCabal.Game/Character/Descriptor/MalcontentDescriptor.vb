@@ -75,8 +75,8 @@
         End If
     End Sub
 
-    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
-        Return level <> OldDungeonLevel.Level1 OrElse location.LocationType = LocationType.DungeonDeadEnd
+    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
+        Return level.ToOld <> OldDungeonLevel.Level1 OrElse location.LocationType = LocationType.DungeonDeadEnd
     End Function
 
     Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean

@@ -40,8 +40,8 @@
         End Get
     End Property
 
-    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
-        Select Case level
+    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
+        Select Case level.ToOld
             Case OldDungeonLevel.Level1
                 Return location.LocationType = LocationType.DungeonDeadEnd
             Case Else

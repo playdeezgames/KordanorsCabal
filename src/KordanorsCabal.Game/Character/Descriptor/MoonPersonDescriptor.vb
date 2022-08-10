@@ -54,8 +54,8 @@
         Return character.CharacterType = CharacterType.N00b
     End Function
 
-    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
-        Return level = OldDungeonLevel.Moon
+    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
+        Return level.ToOld = OldDungeonLevel.Moon
     End Function
 
     Private Shared ReadOnly bribeItems As IReadOnlyList(Of ItemType) =

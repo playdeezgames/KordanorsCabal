@@ -63,8 +63,8 @@
         Return True
     End Function
 
-    Public Overrides Function CanSpawn(location As Location, level As OldDungeonLevel) As Boolean
-        Select Case level
+    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
+        Select Case level.ToOld
             Case OldDungeonLevel.Level3
                 Return location.LocationType = LocationType.DungeonBoss
             Case Else
