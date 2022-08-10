@@ -3,8 +3,8 @@
     Sub New(itemId As Long)
         Id = itemId
     End Sub
-    Shared Function FromId(itemId As Long) As Item
-        Return New Item(itemId)
+    Shared Function FromId(itemId As Long?) As Item
+        Return If(itemId.HasValue, New Item(itemId.Value), Nothing)
     End Function
     Shared Function Create(itemType As ItemType) As Item
         Return FromId(StaticWorldData.World.Item.Create(itemType))

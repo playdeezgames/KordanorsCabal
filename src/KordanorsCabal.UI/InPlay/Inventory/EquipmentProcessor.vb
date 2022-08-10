@@ -11,7 +11,7 @@
         buffer.WriteText((0, 1), "Go Back", rowIndex = 0, Hue.Black)
         Dim row As Integer = 1
         Dim player = World.PlayerCharacter
-        For Each entry In player.Equipment
+        For Each entry In player.OldEquipment
             Dim slotName = $"{entry.Key.ToDescriptor.Name}: "
             buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
             Dim condition = entry.Value.MaximumDurability / entry.Value.Durability
@@ -27,7 +27,7 @@
         table.Clear()
         table(0) = EquipSlot.None
         Dim row As Integer = 1
-        For Each entry In World.PlayerCharacter.Equipment
+        For Each entry In World.PlayerCharacter.OldEquipment
             table(row) = entry.Key
             row += 1
         Next

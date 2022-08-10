@@ -6,7 +6,7 @@ Friend Class DeadProcessor
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.WriteText((0, 0), "yer dead!", False, Hue.Red)
-        If World.PlayerCharacter.Equipment.ContainsKey(EquipSlot.Legs) Then
+        If World.PlayerCharacter.OldEquipment.ContainsKey(EquipSlot.Legs) Then
             buffer.WriteText((0, 2), "But at least you died with dignity!", False, Hue.Black)
         End If
     End Sub

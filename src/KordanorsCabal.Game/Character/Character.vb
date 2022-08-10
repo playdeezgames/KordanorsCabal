@@ -15,7 +15,7 @@
         Get
             Dim items As New List(Of Item)
             items.AddRange(Inventory.Items.Where(Function(x) x.NeedsRepair))
-            items.AddRange(Equipment.Values.Where(Function(x) x.NeedsRepair))
+            items.AddRange(OldEquipment.Values.Where(Function(x) x.NeedsRepair))
             Return items.Where(Function(x) shoppeType.Repairs.ContainsKey(x.ItemType))
         End Get
     End Property
@@ -24,7 +24,7 @@
         For Each item In Inventory.Items
             item.Purify()
         Next
-        For Each item In Equipment.Values
+        For Each item In OldEquipment.Values
             item.Purify()
         Next
     End Sub
@@ -134,7 +134,7 @@
     Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
         Dim result = If(StaticWorldData.World.CharacterStatistic.Read(Id, statisticType), statisticType.DefaultValue)
         If result.HasValue Then
-            For Each item In Equipment.Values
+            For Each item In OldEquipment.Values
                 Dim buff As Long = If(item.EquippedBuff(statisticType), 0)
                 result = result.Value + buff
             Next
@@ -158,7 +158,7 @@
     ReadOnly Property Encumbrance As Long
         Get
             Dim result = Inventory.TotalEncumbrance
-            For Each item In Equipment.Values
+            For Each item In OldEquipment.Values
                 result += item.Encumbrance
             Next
             Return result
@@ -190,7 +190,7 @@
     End Function
     Private Function GetDefendDice() As Long
         Dim dice = GetStatistic(CharacterStatisticType.Dexterity).Value
-        For Each entry In Equipment
+        For Each entry In OldEquipment
             dice += entry.Value.DefendDice
         Next
         Return dice
@@ -209,7 +209,7 @@
     End Function
     Private Function GetAttackDice() As Long
         Dim dice = GetStatistic(CharacterStatisticType.Strength).Value
-        For Each entry In Equipment
+        For Each entry In OldEquipment
             dice += entry.Value.AttackDice
         Next
         Return dice
@@ -286,7 +286,7 @@
     End Property
     Function DetermineDamage(value As Long) As Long
         Dim maximumDamage As Long? = Nothing
-        For Each entry In Equipment
+        For Each entry In OldEquipment
             Dim item = entry.Value
             Dim itemMaximumDamage = item.MaximumDamage
             If itemMaximumDamage.HasValue Then
@@ -334,7 +334,7 @@
         Return result
     End Function
     Private Function WearOneWeapon() As ItemType?
-        Dim items = Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsWeapon)
+        Dim items = OldEquipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsWeapon)
         If items.Any Then
             Dim item = RNG.FromEnumerable(items)
             item.ReduceDurability(1)
@@ -345,7 +345,7 @@
         End If
     End Function
     Private Function WearOneArmor() As ItemType?
-        Dim items = Equipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsArmor)
+        Dim items = OldEquipment.Values.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsArmor)
         If items.Any Then
             Dim item = RNG.FromEnumerable(items)
             item.ReduceDurability(1)
@@ -362,7 +362,7 @@
         Next
         CharacterType.DropLoot(Location)
     End Sub
-    ReadOnly Property Equipment As IReadOnlyDictionary(Of EquipSlot, Item)
+    ReadOnly Property OldEquipment As IReadOnlyDictionary(Of EquipSlot, Item)
         Get
             Return StaticWorldData.World.CharacterEquipSlot.Read(Id).
                 ToDictionary(
@@ -370,6 +370,9 @@
                     Function(x) Item.FromId(x.Item2))
         End Get
     End Property
+    Function Equipment(equipSlot As EquipSlotDescriptor) As Item
+        Return Item.FromId(StaticWorldData.World.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
+    End Function
     Friend Function AddXP(xp As Long) As Boolean
         ChangeStatistic(CharacterStatisticType.XP, xp)
         Dim xpGoal = GetStatistic(CharacterStatisticType.XPGoal).Value
@@ -472,14 +475,14 @@
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
     Public Sub Unequip(equipSlot As EquipSlot)
-        If Equipment.ContainsKey(equipSlot) Then
-            Dim item = Equipment(equipSlot)
+        If OldEquipment.ContainsKey(equipSlot) Then
+            Dim item = OldEquipment(equipSlot)
             Inventory.Add(item)
             StaticWorldData.World.CharacterEquipSlot.Clear(Id, equipSlot)
         End If
     End Sub
     Private Sub Panic()
-        For Each equipSlot In Equipment.Keys
+        For Each equipSlot In OldEquipment.Keys
             Unequip(equipSlot)
         Next
         For Each item In Inventory.Items
@@ -635,10 +638,10 @@
         If item.CanEquip Then
             StaticWorldData.World.InventoryItem.ClearForItem(item.Id)
             Dim equipSlots = item.EquipSlots
-            Dim availableEquipSlots = equipSlots.Where(Function(x) Not Equipment.ContainsKey(x))
+            Dim availableEquipSlots = equipSlots.Where(Function(x) Not OldEquipment.ContainsKey(x))
             Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
-            If Equipment.ContainsKey(equipSlot) Then
-                Dim oldItem = Equipment(equipSlot)
+            If OldEquipment.ContainsKey(equipSlot) Then
+                Dim oldItem = OldEquipment(equipSlot)
                 Inventory.Add(oldItem)
             End If
             StaticWorldData.World.CharacterEquipSlot.Write(Id, equipSlot, item.Id)
@@ -825,7 +828,7 @@
     End Sub
     Public ReadOnly Property HasEquipment As Boolean
         Get
-            Return Equipment.Any
+            Return OldEquipment.Any
         End Get
     End Property
 End Class

@@ -20,7 +20,7 @@
     Private Shared Function Unequip() As UIState
         Dim player = World.PlayerCharacter
         player.Unequip(EquipSlot)
-        If player.Equipment.Any Then
+        If player.OldEquipment.Any Then
             Return UIState.Equipment
         End If
         Return UIState.InPlay
@@ -31,7 +31,7 @@
     End Sub
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
-        Dim item = World.PlayerCharacter.Equipment(EquipSlot)
+        Dim item = World.PlayerCharacter.OldEquipment(EquipSlot)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, EquipSlot.ToDescriptor.Name, True, Hue.Blue)
         buffer.WriteText((0, 1), $"Item: {item.Name}", False, Hue.Black)
