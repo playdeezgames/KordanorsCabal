@@ -13,8 +13,8 @@
                 (4L, MakeHashSet(LocationType.Dungeon)),
                 (5L, MakeHashSet(LocationType.Dungeon))),
             MakeDictionary(
-                (OldDungeonLevel.Level1, "4d6"),
-                (OldDungeonLevel.Level2, "2d6")),
+                (1L, "4d6"),
+                (2L, "2d6")),
             MakeList(EquipSlot.FromName(Weapon)),,
             2,
             1,,

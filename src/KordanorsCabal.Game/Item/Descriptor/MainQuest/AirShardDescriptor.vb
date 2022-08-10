@@ -8,7 +8,7 @@
             MakeDictionary(
                 (1L, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (OldDungeonLevel.Level1, "1d1")),,,,,, ,
+                (1L, "1d1")),,,,,, ,
             False,,,,,,,,
             Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
             Sub(character)

@@ -7,7 +7,7 @@
             MakeDictionary(
                 (2L, MakeHashSet(LocationType.DungeonBoss))),
             MakeDictionary(
-                (OldDungeonLevel.Level2, "1d1")),,,,,, ,
+                (2L, "1d1")),,,,,, ,
             False,,,,,,,,
             Function(character)
                 Dim location = character.Location

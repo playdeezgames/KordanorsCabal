@@ -7,7 +7,7 @@
 
     '[ItemTypeSpawnLocationTypes]([ItemTypeId],[DungeonLevelId],[LocationTypeId])
     ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of OldDungeonLevel, HashSet(Of LocationType))
-    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of OldDungeonLevel, String)
+    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of Long, String)
 
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
     ReadOnly Property AttackDice As Long
@@ -68,7 +68,7 @@
            name As String,
            Optional encumbrance As Long = 0,
            Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType)) = Nothing,
-           Optional spawnCounts As IReadOnlyDictionary(Of OldDungeonLevel, String) = Nothing,
+           Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long) = Nothing,
            Optional attackDice As Long = 0,
@@ -130,20 +130,20 @@ Public Module ItemTypeDescriptorUtility
                 CharacterStatisticType.HP,
                 MakeDictionary(
                     (1L, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
-                MakeDictionary((OldDungeonLevel.Level1, "1d1")))},
+                MakeDictionary((1L, "1d1")))},
             {ItemType.AmuletOfMana, New AmuletDescriptor(ItemType.AmuletOfMana,
                 CharacterStatisticType.Mana,
                 MakeDictionary(
                     (2L, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
-                MakeDictionary((OldDungeonLevel.Level2, "1d1")))},
+                MakeDictionary((2L, "1d1")))},
             {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, CharacterStatisticType.Power,
                 MakeDictionary(
                     (3L, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
-                MakeDictionary((OldDungeonLevel.Level3, "1d1")))},
+                MakeDictionary((3L, "1d1")))},
             {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, CharacterStatisticType.Strength,
                 MakeDictionary(
                     (4L, MakeHashSet(LocationType.DungeonDeadEnd, LocationType.DungeonBoss))),
-                MakeDictionary((OldDungeonLevel.Level4, "1d1")))},
+                MakeDictionary((4L, "1d1")))},
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
                 ItemType.AmuletOfYendor,
                 "Amulet of Yendor",,,,
