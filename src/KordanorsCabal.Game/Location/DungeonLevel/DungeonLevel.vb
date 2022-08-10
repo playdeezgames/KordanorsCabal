@@ -1,13 +1,4 @@
-﻿Public Enum OldDungeonLevel
-    None
-    Level1
-    Level2
-    Level3
-    Level4
-    Level5
-    Moon
-End Enum
-Public Class DungeonLevel
+﻿Public Class DungeonLevel
     ReadOnly Property Id As Long
     ReadOnly Property Name As String
         Get
