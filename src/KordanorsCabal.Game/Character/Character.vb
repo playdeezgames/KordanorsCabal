@@ -639,14 +639,14 @@
         If item.CanEquip Then
             StaticWorldData.World.InventoryItem.ClearForItem(item.Id)
             Dim equipSlots = item.EquipSlots
-            Dim availableEquipSlots = equipSlots.Where(Function(x) Equipment(x.ToDescriptor) Is Nothing)
+            Dim availableEquipSlots = equipSlots.Where(Function(x) Equipment(x) Is Nothing)
             Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
-            Dim oldItem = Equipment(equipSlot.ToDescriptor)
+            Dim oldItem = Equipment(equipSlot)
             If oldItem IsNot Nothing Then
                 Inventory.Add(oldItem)
             End If
-            StaticWorldData.World.CharacterEquipSlot.Write(Id, equipSlot, item.Id)
-            EnqueueMessage($"You equip {item.Name} to {equipSlot.ToDescriptor.Name}.")
+            StaticWorldData.World.CharacterEquipSlot.Write(Id, equipSlot.Id, item.Id)
+            EnqueueMessage($"You equip {item.Name} to {equipSlot.Name}.")
             Return
         End If
         EnqueueMessage($"You cannot equip {item.Name}!")

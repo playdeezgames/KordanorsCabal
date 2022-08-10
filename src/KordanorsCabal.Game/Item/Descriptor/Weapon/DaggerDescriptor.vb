@@ -15,7 +15,7 @@
             MakeDictionary(
                 (DungeonLevel.Level1, "4d6"),
                 (DungeonLevel.Level2, "2d6")),
-            MakeList(EquipSlot.Weapon),,
+            MakeList(EquipSlot.Weapon.ToDescriptor),,
             2,
             1,,
             10,,

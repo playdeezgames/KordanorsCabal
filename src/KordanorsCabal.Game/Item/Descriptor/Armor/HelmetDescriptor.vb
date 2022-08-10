@@ -13,7 +13,7 @@
                 (DungeonLevel.Level4, MakeHashSet(LocationType.Dungeon, LocationType.DungeonDeadEnd)),
                 (DungeonLevel.Level5, MakeHashSet(LocationType.Dungeon, LocationType.DungeonDeadEnd))),
                 MakeDictionary((DungeonLevel.Level1, "3d6")),
-                MakeList(EquipSlot.Head),,,,
+                MakeList(EquipSlot.Head.ToDescriptor),,,,
                 2,
                 10,,
                 2,

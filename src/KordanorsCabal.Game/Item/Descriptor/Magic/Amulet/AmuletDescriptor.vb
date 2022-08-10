@@ -12,7 +12,7 @@
             $"Amulet of {statisticType.Abbreviation}", ,
             spawnLocationTypes,
             spawnCounts,
-            MakeList(EquipSlot.Neck),
+            MakeList(EquipSlot.Neck.ToDescriptor),
             New Dictionary(Of CharacterStatisticType, Long) From {{statisticType, 1}})
         buffedStatisticType = statisticType
     End Sub
