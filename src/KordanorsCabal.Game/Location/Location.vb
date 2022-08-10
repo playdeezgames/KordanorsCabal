@@ -115,12 +115,12 @@
             Return LocationType.CanMap
         End Get
     End Property
-    Property DungeonLevel As OldDungeonLevel
+    Property DungeonLevel As DungeonLevel
         Get
-            Return CType(If(StaticWorldData.World.LocationDungeonLevel.Read(Id), 0), OldDungeonLevel)
+            Return Game.DungeonLevel.FromId(StaticWorldData.World.LocationDungeonLevel.Read(Id))
         End Get
-        Set(value As OldDungeonLevel)
-            StaticWorldData.World.LocationDungeonLevel.Write(Id, value)
+        Set(value As DungeonLevel)
+            StaticWorldData.World.LocationDungeonLevel.Write(Id, value.Id)
         End Set
     End Property
 End Class

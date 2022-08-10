@@ -13,7 +13,7 @@ Public Module World
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
                 Dim dungeonLocation = Location.Create(LocationType.Moon)
-                dungeonLocation.DungeonLevel = OldDungeonLevel.Moon
+                dungeonLocation.DungeonLevel = DungeonLevel.FromName(Moon)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
                 locations.Add(dungeonLocation)
@@ -72,7 +72,7 @@ Public Module World
         For row As Long = 0 To maze.Rows - 1
             For column As Long = 0 To maze.Columns - 1
                 Dim dungeonLocation = Location.Create(LocationType.Dungeon)
-                dungeonLocation.DungeonLevel = dungeonLevel
+                dungeonLocation.DungeonLevel = dungeonLevel.ToNew
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
                 locations.Add(dungeonLocation)

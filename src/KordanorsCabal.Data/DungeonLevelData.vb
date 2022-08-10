@@ -21,6 +21,14 @@
                 FROM [cte];")
     End Sub
 
+    Public Function ReadForName(name As String) As Long?
+        Return Store.ReadColumnValue(Of String, Long)(
+            AddressOf Initialize,
+            TableName,
+            DungeonLevelIdColumn,
+            (DungeonLevelNameColumn, name))
+    End Function
+
     Public Sub New(store As Store)
         MyBase.New(store)
     End Sub

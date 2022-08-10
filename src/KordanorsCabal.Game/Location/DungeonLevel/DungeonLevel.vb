@@ -17,5 +17,15 @@ Public Class DungeonLevel
     Sub New(dungeonLevelId As Long)
         Id = dungeonLevelId
     End Sub
+    Private Sub New(name As String)
+        Me.New(StaticWorldData.World.DungeonLevel.ReadForName(name).Value)
+    End Sub
+    Public Shared Function FromId(dungeonLevelId As Long?) As DungeonLevel
+        Return If(dungeonLevelId.HasValue, New DungeonLevel(dungeonLevelId.Value), Nothing)
+    End Function
+
+    Friend Shared Function FromName(name As String) As DungeonLevel
+        Return New DungeonLevel(name)
+    End Function
 End Class
 
