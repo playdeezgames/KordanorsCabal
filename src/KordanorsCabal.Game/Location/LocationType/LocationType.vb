@@ -5,6 +5,9 @@ Public Class LocationType
     Sub New(locationTypeId As Long)
         Id = locationTypeId
     End Sub
+    Private Sub New(name As String)
+        Me.New(StaticWorldData.World.LocationType.ReadForName(name).Value)
+    End Sub
     ReadOnly Property Name As String
         Get
             Return StaticWorldData.World.LocationType.ReadName(Id)
@@ -25,6 +28,9 @@ Public Class LocationType
             Return StaticWorldData.World.LocationType.ReadRequiresMP(Id)
         End Get
     End Property
+    Shared Function FromName(name As String) As LocationType
+        Return New LocationType(name)
+    End Function
 End Class
 Public Module LocationTypeUtility
     <Extension>

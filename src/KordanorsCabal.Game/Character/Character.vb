@@ -468,7 +468,7 @@
                     lines.Add($"{enemy.Name} completely demoralizes you and you drop everything and run away!")
                     Panic()
                     Money \= 2
-                    Location = Game.Location.FromLocationType(OldLocationType.TownSquare).Single
+                    Location = Game.Location.FromLocationType(LocationType.FromName(TownSquare)).Single
                     Exit Select
                 End If
                 lines.Add($"You have {CurrentMP} MP left.")

@@ -14,7 +14,7 @@
             Sub(character)
                 character.CurrentMana -= 1
                 Dim level = character.Location.DungeonLevel
-                Dim locations = Location.FromLocationType(OldLocationType.Dungeon).Where(Function(x) x.DungeonLevel.Id = level.Id)
+                Dim locations = Location.FromLocationType(LocationType.FromName(Dungeon)).Where(Function(x) x.DungeonLevel.Id = level.Id)
                 character.Location = RNG.FromEnumerable(locations)
                 character.EnqueueMessage($"You use the {ItemType.AirShard.Name} and suddenly find yerself somewhere else!")
             End Sub)

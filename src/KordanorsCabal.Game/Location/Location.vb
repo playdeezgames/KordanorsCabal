@@ -12,8 +12,8 @@
         End Set
     End Property
 
-    Friend Shared Function FromLocationType(locationType As OldLocationType) As IEnumerable(Of Location)
-        Return StaticWorldData.World.Location.ReadForLocationType(locationType).Select(AddressOf FromId)
+    Friend Shared Function FromLocationType(locationType As LocationType) As IEnumerable(Of Location)
+        Return StaticWorldData.World.Location.ReadForLocationType(locationType.Id).Select(AddressOf FromId)
     End Function
     Shared Function Create(locationType As OldLocationType) As Location
         Return FromId(StaticWorldData.World.Location.Create(locationType))

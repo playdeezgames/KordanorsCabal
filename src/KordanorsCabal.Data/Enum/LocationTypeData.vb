@@ -4,6 +4,15 @@
     Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const LocationTypeNameColumn = "LocationTypeName"
     Friend Const IsDungeonColumn = "IsDungeon"
+
+    Public Function ReadForName(name As String) As Long?
+        Return Store.ReadColumnValue(Of String, Long)(
+            AddressOf Initialize,
+            TableName,
+            LocationTypeIdColumn,
+            (LocationTypeNameColumn, name))
+    End Function
+
     Friend Const CanMapColumn = "CanMap"
     Friend Const RequiresMPColumn = "RequiresMP"
     Friend Sub Initialize()

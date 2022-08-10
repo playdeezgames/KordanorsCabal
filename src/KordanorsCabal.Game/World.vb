@@ -2,7 +2,7 @@ Public Module World
     Public Sub Start()
         StaticStore.Store.Reset()
         CreateTown()
-        CreateDungeon(Location.FromLocationType(OldLocationType.ChurchEntrance).First)
+        CreateDungeon(Location.FromLocationType(LocationType.FromName(ChurchEntrance)).First)
         CreateMoon()
         CreateFeatures()
         CreatePlayer()
@@ -196,7 +196,7 @@ Public Module World
     End Sub
 
     Private Sub CreatePlayer()
-        Dim startingLocation = Location.FromLocationType(OldLocationType.TownSquare).First
+        Dim startingLocation = Location.FromLocationType(LocationType.FromName(TownSquare)).First
         Dim playerCharacter = Character.Create(CharacterType.N00b, startingLocation)
         playerCharacter.Location = startingLocation 'to track that this place has been visited
         StaticWorldData.World.Player.Write(playerCharacter.Id, RNG.FromEnumerable(CardinalDirections).Id, PlayerMode.Neutral)
@@ -235,7 +235,7 @@ Public Module World
     End Sub
 
     Private Sub CreateChurchEntrance()
-        Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(OldLocationType.Town))
+        Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(LocationType.FromName(Town)))
         Dim entrance = Location.Create(OldLocationType.ChurchEntrance)
         Dim direction = RNG.FromEnumerable(AllDirections.Where(Function(x) x.IsCardinal AndAlso Not townLocation.HasRoute(x)))
         StitchTown(townLocation, direction, entrance)
