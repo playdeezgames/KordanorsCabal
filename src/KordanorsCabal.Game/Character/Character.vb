@@ -47,7 +47,7 @@
             Return GetStatistic(OldCharacterStatisticType.Money.ToNew).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Money, value)
+            SetStatistic(OldCharacterStatisticType.Money.ToNew, value)
         End Set
     End Property
     Friend Sub Learn(spellType As SpellType)
@@ -109,15 +109,15 @@
     Friend Shared Function Create(characterType As CharacterType, location As Location) As Character
         Dim character = FromId(StaticWorldData.World.Character.Create(characterType, location.Id))
         For Each entry In characterType.InitialStatistics
-            character.SetStatistic(entry.Key, entry.Value)
+            character.SetStatistic(entry.Key.ToNew, entry.Value)
         Next
         Return character
     End Function
-    Public Sub SetStatistic(statisticType As OldCharacterStatisticType, statisticValue As Long)
-        StaticWorldData.World.CharacterStatistic.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.ToNew.MinimumValue), statisticType.ToNew.MaximumValue))
+    Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
+        StaticWorldData.World.CharacterStatistic.Write(Id, statisticType.Id, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
     Friend Sub ChangeStatistic(statisticType As OldCharacterStatisticType, delta As Long)
-        SetStatistic(statisticType, GetStatistic(statisticType.ToNew).Value + delta)
+        SetStatistic(statisticType.ToNew, GetStatistic(statisticType.ToNew).Value + delta)
     End Sub
     Property Location As Location
         Get
@@ -241,7 +241,7 @@
             Return Math.Max(0, MaximumHP - GetStatistic(OldCharacterStatisticType.Wounds.ToNew).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Wounds, GetStatistic(OldCharacterStatisticType.HP.ToNew).Value - value)
+            SetStatistic(OldCharacterStatisticType.Wounds.ToNew, GetStatistic(OldCharacterStatisticType.HP.ToNew).Value - value)
         End Set
     End Property
     ReadOnly Property MaximumHP As Long
@@ -259,7 +259,7 @@
             Return Math.Max(0, GetStatistic(OldCharacterStatisticType.MP.ToNew).Value - GetStatistic(OldCharacterStatisticType.Stress.ToNew).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Stress, GetStatistic(OldCharacterStatisticType.MP.ToNew).Value - value)
+            SetStatistic(OldCharacterStatisticType.Stress.ToNew, GetStatistic(OldCharacterStatisticType.MP.ToNew).Value - value)
         End Set
     End Property
     Property CurrentMana As Long
@@ -267,7 +267,7 @@
             Return Math.Max(0, GetStatistic(OldCharacterStatisticType.Mana.ToNew).Value - GetStatistic(OldCharacterStatisticType.Fatigue.ToNew).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Fatigue, GetStatistic(OldCharacterStatisticType.Mana.ToNew).Value - value)
+            SetStatistic(OldCharacterStatisticType.Fatigue.ToNew, GetStatistic(OldCharacterStatisticType.Mana.ToNew).Value - value)
         End Set
     End Property
     Friend Sub DoDamage(damage As Long)
@@ -381,9 +381,9 @@
             ChangeStatistic(OldCharacterStatisticType.XP, -xpGoal)
             ChangeStatistic(OldCharacterStatisticType.XPGoal, xpGoal)
             ChangeStatistic(OldCharacterStatisticType.Unassigned, 1)
-            SetStatistic(OldCharacterStatisticType.Wounds, 0)
-            SetStatistic(OldCharacterStatisticType.Stress, 0)
-            SetStatistic(OldCharacterStatisticType.Fatigue, 0)
+            SetStatistic(OldCharacterStatisticType.Wounds.ToNew, 0)
+            SetStatistic(OldCharacterStatisticType.Stress.ToNew, 0)
+            SetStatistic(OldCharacterStatisticType.Fatigue.ToNew, 0)
             Return True
         End If
         Return False
@@ -534,7 +534,7 @@
             Return GetStatistic(OldCharacterStatisticType.Drunkenness.ToNew).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Drunkenness, value)
+            SetStatistic(OldCharacterStatisticType.Drunkenness.ToNew, value)
         End Set
     End Property
     Property Chafing As Long
@@ -542,7 +542,7 @@
             Return GetStatistic(OldCharacterStatisticType.Chafing.ToNew).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Chafing, value)
+            SetStatistic(OldCharacterStatisticType.Chafing.ToNew, value)
         End Set
     End Property
     Property Highness As Long
@@ -550,7 +550,7 @@
             Return If(GetStatistic(OldCharacterStatisticType.Highness.ToNew), 0)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Highness, value)
+            SetStatistic(OldCharacterStatisticType.Highness.ToNew, value)
         End Set
     End Property
     Property Hunger As Long
@@ -558,7 +558,7 @@
             Return GetStatistic(OldCharacterStatisticType.Hunger.ToNew).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Hunger, value)
+            SetStatistic(OldCharacterStatisticType.Hunger.ToNew, value)
         End Set
     End Property
     Public ReadOnly Property MaximumMana As Long
@@ -571,7 +571,7 @@
             Return GetStatistic(OldCharacterStatisticType.FoodPoisoning.ToNew).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.FoodPoisoning, value)
+            SetStatistic(OldCharacterStatisticType.FoodPoisoning.ToNew, value)
         End Set
     End Property
     ReadOnly Property IsFullyAssigned As Boolean
@@ -699,7 +699,7 @@
         Return CanMove(Direction)
     End Function
     Public Sub Heal()
-        SetStatistic(OldCharacterStatisticType.Wounds, 0)
+        SetStatistic(OldCharacterStatisticType.Wounds.ToNew, 0)
     End Sub
     Public Function CanMoveBackward() As Boolean
         Return CanMove(Direction.Opposite)
