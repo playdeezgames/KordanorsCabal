@@ -5,7 +5,7 @@
         Get
             Return New Dictionary(Of Long, Long) From
                 {
-                    {OldCharacterStatisticType.BaseMaximumDefend, 1},
+                    {11, 1},
                     {OldCharacterStatisticType.Chafing, 0},
                     {OldCharacterStatisticType.Dexterity, 1},
                     {OldCharacterStatisticType.Drunkenness, 0},
@@ -13,7 +13,7 @@
                     {OldCharacterStatisticType.FoodPoisoning, 0},
                     {OldCharacterStatisticType.Highness, 0},
                     {OldCharacterStatisticType.HP, 3},
-                    {OldCharacterStatisticType.Immobilization, 0},
+                    {23, 0},
                     {OldCharacterStatisticType.Hunger, 0},
                     {OldCharacterStatisticType.Influence, 1},
                     {OldCharacterStatisticType.Mana, 1},

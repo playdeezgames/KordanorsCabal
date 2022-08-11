@@ -5,11 +5,11 @@
         Get
             Return New Dictionary(Of Long, Long) From
                 {
-                    {OldCharacterStatisticType.BaseMaximumDefend, 4},
+                    {11, 4},
                     {OldCharacterStatisticType.Strength, 8},
                     {OldCharacterStatisticType.Dexterity, 4},
                     {OldCharacterStatisticType.HP, 3},
-                    {OldCharacterStatisticType.Immobilization, 0},
+                    {23, 0},
                     {OldCharacterStatisticType.Influence, 6},
                     {OldCharacterStatisticType.MP, 3},
                     {OldCharacterStatisticType.Stress, 0},
