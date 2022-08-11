@@ -11,7 +11,7 @@
         buffer.WriteText((0, 2), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity))}", False, Hue.Black)
         buffer.WriteText((0, 3), $"{OldCharacterStatisticType.HP.ToNew.Abbreviation} {player.CurrentHP}/{player.GetStatistic(OldCharacterStatisticType.HP.ToNew)}", False, Hue.Black)
 
-        buffer.WriteText((11, 1), $"{OldCharacterStatisticType.Influence.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Influence.ToNew)}", False, Hue.Black)
+        buffer.WriteText((11, 1), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Influence).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Influence))}", False, Hue.Black)
         buffer.WriteText((11, 2), $"{OldCharacterStatisticType.Willpower.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Willpower.ToNew)}", False, Hue.Black)
         buffer.WriteText((11, 3), $"{CharacterStatisticType.FromName(MP).Abbreviation} {player.CurrentMP}/{player.GetStatistic(CharacterStatisticType.FromName(MP))}", False, Hue.Black)
 
