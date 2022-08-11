@@ -13,14 +13,14 @@
 
         buffer.WriteText((11, 1), $"{OldCharacterStatisticType.Influence.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Influence.ToNew)}", False, Hue.Black)
         buffer.WriteText((11, 2), $"{OldCharacterStatisticType.Willpower.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Willpower.ToNew)}", False, Hue.Black)
-        buffer.WriteText((11, 3), $"{OldCharacterStatisticType.MP.ToNew.Abbreviation} {player.CurrentMP}/{player.GetStatistic(OldCharacterStatisticType.MP.ToNew)}", False, Hue.Black)
+        buffer.WriteText((11, 3), $"{CharacterStatisticType.FromName(MP).Abbreviation} {player.CurrentMP}/{player.GetStatistic(CharacterStatisticType.FromName(MP))}", False, Hue.Black)
 
-        buffer.WriteText((0, 5), $"{OldCharacterStatisticType.Power.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Power.ToNew)}", False, Hue.Black)
+        buffer.WriteText((0, 5), $"{CharacterStatisticType.FromName(Power).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(Power))}", False, Hue.Black)
         buffer.WriteText((0, 6), $"{OldCharacterStatisticType.Mana.ToNew.Abbreviation} {player.CurrentMana}/{player.GetStatistic(OldCharacterStatisticType.Mana.ToNew)}", False, Hue.Black)
 
         buffer.WriteText((11, 5), $"{OldCharacterStatisticType.XP.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.XP.ToNew)}/{player.GetStatistic(OldCharacterStatisticType.XPGoal.ToNew)}", False, Hue.Black)
 
-        buffer.WriteText((0, 8), $"{OldCharacterStatisticType.Money.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Money.ToNew)}", False, Hue.Black)
+        buffer.WriteText((0, 8), $"{CharacterStatisticType.FromName(Money).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(Money))}", False, Hue.Black)
         buffer.WriteText((0, 10), $"{OldCharacterStatisticType.Hunger.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Hunger.ToNew)}", False, Hue.Black)
         Dim row = 11
         If player.Highness > 0 Then

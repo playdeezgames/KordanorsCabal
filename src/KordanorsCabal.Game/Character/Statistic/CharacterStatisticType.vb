@@ -50,4 +50,27 @@ Public Module CharacterStatisticTypeUtility
     Public Function ToNew(oldCharacterStatisticType As OldCharacterStatisticType) As CharacterStatisticType
         Return New CharacterStatisticType(oldCharacterStatisticType)
     End Function
+    Public Const Strength = "Strength"
+    Public Const Dexterity = "Dexterity"
+    Public Const Influence = "Influence"
+    Public Const Willpower = "Willpower"
+    Public Const Power = "Power"
+    Public Const HP = "HP"
+    Public Const MP = "MP"
+    Public Const Mana = "Mana"
+    Public Const Unassigned = "Unassigned"
+    Public Const UnarmedMaximumDamage = "Unarmed Maximum Damage"
+    Public Const BaseMaximumDefend = "Base Maximum Defend"
+    Public Const Wounds = "Wounds"
+    Public Const Stress = "Stress"
+    Public Const Money = "Money"
+    Public Const Fatigue = "Fatigue"
+    Public Const XP = "XP"
+    Public Const XPGoal = "XP Goal"
+    Public Const Drunkenness = "Drunkenness"
+    Public Const Highness = "Highness"
+    Public Const Hunger = "Hunger"
+    Public Const FoodPoisoning = "Food Poisoning"
+    Public Const Chafing = "Chafing"
+    Public Const Immobilization = "Immobilization"
 End Module

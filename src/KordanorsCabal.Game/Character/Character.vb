@@ -44,10 +44,10 @@
     End Function
     Property Money As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Money.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Money)).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Money.ToNew, value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Money), value)
         End Set
     End Property
     Friend Sub Learn(spellType As SpellType)
@@ -64,11 +64,11 @@
         If nextLevel > spellType.MaximumLevel Then
             Return False
         End If
-        Return If(GetStatistic(OldCharacterStatisticType.Power.ToNew), 0) >= spellType.RequiredPower(nextLevel)
+        Return If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Power)), 0) >= spellType.RequiredPower(nextLevel)
     End Function
 
     Friend Sub DoImmobilization(delta As Long)
-        ChangeStatistic(OldCharacterStatisticType.Immobilization.ToNew, delta)
+        ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Immobilization), delta)
     End Sub
 
     Friend Function RollSpellDice(spellType As SpellType) As Long
@@ -79,7 +79,7 @@
     End Function
     ReadOnly Property Power As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Power.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Power)).Value
         End Get
     End Property
 
@@ -256,10 +256,10 @@
     End Property
     Property CurrentMP As Long
         Get
-            Return Math.Max(0, GetStatistic(OldCharacterStatisticType.MP.ToNew).Value - GetStatistic(OldCharacterStatisticType.Stress.ToNew).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromName(MP)).Value - GetStatistic(OldCharacterStatisticType.Stress.ToNew).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Stress.ToNew, GetStatistic(OldCharacterStatisticType.MP.ToNew).Value - value)
+            SetStatistic(OldCharacterStatisticType.Stress.ToNew, GetStatistic(CharacterStatisticType.FromName(MP)).Value - value)
         End Set
     End Property
     Property CurrentMana As Long
@@ -395,7 +395,7 @@
         Dim money As Long = RollMoneyDrop
         If money > 0 Then
             lines.Add($"You get {money} money!")
-            killedBy.ChangeStatistic(OldCharacterStatisticType.Money.ToNew, money)
+            killedBy.ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Money), money)
         End If
         Dim xp As Long = XPValue
         If xp > 0 Then
@@ -438,12 +438,12 @@
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
         lines.Add($"{enemy.Name} is immobilized!")
-        enemy.ChangeStatistic(OldCharacterStatisticType.Immobilization.ToNew, -1)
+        enemy.ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Immobilization), -1)
         EnqueueMessage(lines.ToArray)
     End Sub
 
     Private Function IsImmobilized() As Boolean
-        Return If(GetStatistic(OldCharacterStatisticType.Immobilization.ToNew), 0) > 0
+        Return If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Immobilization)), 0) > 0
     End Function
 
     Private Sub DoMentalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
