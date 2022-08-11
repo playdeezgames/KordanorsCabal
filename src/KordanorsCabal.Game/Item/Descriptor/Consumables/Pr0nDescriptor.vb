@@ -23,7 +23,7 @@
                     Return
                 End If
                 Dim healRoll = RNG.RollDice("1d4")
-                character.ChangeStatistic(OldCharacterStatisticType.Stress, -healRoll)
+                character.ChangeStatistic(OldCharacterStatisticType.Stress.ToNew, -healRoll)
                 Dim lines As New List(Of String)
                 lines.Add($"You make use of {ItemType.Pr0n.Name}, which cheers you up by {healRoll} {OldCharacterStatisticType.MP.ToNew.Name}.")
                 lines.Add($"You now have {character.CurrentMP} {OldCharacterStatisticType.MP.ToNew.Name}.")

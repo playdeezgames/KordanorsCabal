@@ -261,7 +261,7 @@ Public Module World
         PlayerCharacter.SetStatistic(OldCharacterStatisticType.Unassigned.ToNew, 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(SecondRollTable)
-            PlayerCharacter.ChangeStatistic(statisticType, 1)
+            PlayerCharacter.ChangeStatistic(statisticType.ToNew, 1)
             dice -= 1
         End While
     End Sub
@@ -292,7 +292,7 @@ Public Module World
         PlayerCharacter.SetStatistic(OldCharacterStatisticType.Unassigned.ToNew, 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(FirstRollTable)
-            PlayerCharacter.ChangeStatistic(statisticType, 1)
+            PlayerCharacter.ChangeStatistic(statisticType.ToNew, 1)
             dice -= 1
         End While
     End Sub

@@ -68,7 +68,7 @@
     End Function
 
     Friend Sub DoImmobilization(delta As Long)
-        ChangeStatistic(OldCharacterStatisticType.Immobilization, delta)
+        ChangeStatistic(OldCharacterStatisticType.Immobilization.ToNew, delta)
     End Sub
 
     Friend Function RollSpellDice(spellType As SpellType) As Long
@@ -116,8 +116,8 @@
     Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
         StaticWorldData.World.CharacterStatistic.Write(Id, statisticType.Id, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
-    Friend Sub ChangeStatistic(statisticType As OldCharacterStatisticType, delta As Long)
-        SetStatistic(statisticType.ToNew, GetStatistic(statisticType.ToNew).Value + delta)
+    Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
+        SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
     End Sub
     Property Location As Location
         Get
@@ -221,7 +221,7 @@
         Return False
     End Function
     Friend Sub AddStress(delta As Long)
-        ChangeStatistic(OldCharacterStatisticType.Stress, delta)
+        ChangeStatistic(OldCharacterStatisticType.Stress.ToNew, delta)
     End Sub
     ReadOnly Property CanIntimidate As Boolean
         Get
@@ -271,10 +271,10 @@
         End Set
     End Property
     Friend Sub DoDamage(damage As Long)
-        ChangeStatistic(OldCharacterStatisticType.Wounds, damage)
+        ChangeStatistic(OldCharacterStatisticType.Wounds.ToNew, damage)
     End Sub
     Friend Sub DoFatigue(fatigue As Long)
-        ChangeStatistic(OldCharacterStatisticType.Fatigue, fatigue)
+        ChangeStatistic(OldCharacterStatisticType.Fatigue.ToNew, fatigue)
     End Sub
     Friend Sub Destroy()
         StaticWorldData.World.Character.Clear(Id)
@@ -375,12 +375,12 @@
         End Get
     End Property
     Friend Function AddXP(xp As Long) As Boolean
-        ChangeStatistic(OldCharacterStatisticType.XP, xp)
+        ChangeStatistic(OldCharacterStatisticType.XP.ToNew, xp)
         Dim xpGoal = GetStatistic(OldCharacterStatisticType.XPGoal.ToNew).Value
         If GetStatistic(OldCharacterStatisticType.XP.ToNew).Value >= xpGoal Then
-            ChangeStatistic(OldCharacterStatisticType.XP, -xpGoal)
-            ChangeStatistic(OldCharacterStatisticType.XPGoal, xpGoal)
-            ChangeStatistic(OldCharacterStatisticType.Unassigned, 1)
+            ChangeStatistic(OldCharacterStatisticType.XP.ToNew, -xpGoal)
+            ChangeStatistic(OldCharacterStatisticType.XPGoal.ToNew, xpGoal)
+            ChangeStatistic(OldCharacterStatisticType.Unassigned.ToNew, 1)
             SetStatistic(OldCharacterStatisticType.Wounds.ToNew, 0)
             SetStatistic(OldCharacterStatisticType.Stress.ToNew, 0)
             SetStatistic(OldCharacterStatisticType.Fatigue.ToNew, 0)
@@ -395,7 +395,7 @@
         Dim money As Long = RollMoneyDrop
         If money > 0 Then
             lines.Add($"You get {money} money!")
-            killedBy.ChangeStatistic(OldCharacterStatisticType.Money, money)
+            killedBy.ChangeStatistic(OldCharacterStatisticType.Money.ToNew, money)
         End If
         Dim xp As Long = XPValue
         If xp > 0 Then
@@ -438,7 +438,7 @@
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
         lines.Add($"{enemy.Name} is immobilized!")
-        enemy.ChangeStatistic(OldCharacterStatisticType.Immobilization, -1)
+        enemy.ChangeStatistic(OldCharacterStatisticType.Immobilization.ToNew, -1)
         EnqueueMessage(lines.ToArray)
     End Sub
 
@@ -581,8 +581,8 @@
     End Property
     Public Sub AssignPoint(statisticType As OldCharacterStatisticType)
         If Not IsFullyAssigned Then
-            ChangeStatistic(statisticType, 1)
-            ChangeStatistic(OldCharacterStatisticType.Unassigned, -1)
+            ChangeStatistic(statisticType.ToNew, 1)
+            ChangeStatistic(OldCharacterStatisticType.Unassigned.ToNew, -1)
         End If
     End Sub
     Public ReadOnly Property CanGamble As Boolean
