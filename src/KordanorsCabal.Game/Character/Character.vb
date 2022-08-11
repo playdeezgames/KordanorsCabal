@@ -135,7 +135,7 @@
         Dim result = If(StaticWorldData.World.CharacterStatistic.Read(Id, statisticType.Id), statisticType.DefaultValue)
         If result.HasValue Then
             For Each item In EquippedItems
-                Dim buff As Long = If(item.EquippedBuff(statisticType.ToOld), 0)
+                Dim buff As Long = If(item.EquippedBuff(statisticType), 0)
                 result = result.Value + buff
             Next
         End If

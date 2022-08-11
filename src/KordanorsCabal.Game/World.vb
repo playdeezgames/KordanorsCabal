@@ -272,7 +272,7 @@ Public Module World
             {2, 1},
             {3, 1},
             {1, 1},
-            {OldCharacterStatisticType.Unassigned, 2},
+            {9, 2},
             {4, 1}
         }
 
@@ -281,9 +281,9 @@ Public Module World
         {
             {2, 1},
             {3, 1},
-            {OldCharacterStatisticType.Power, 1},
+            {5, 1},
             {1, 1},
-            {OldCharacterStatisticType.Unassigned, 1},
+            {9, 1},
             {4, 1}
         }
 

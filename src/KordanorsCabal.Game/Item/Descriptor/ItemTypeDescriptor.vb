@@ -34,12 +34,12 @@
     ReadOnly Property Use As Action(Of Character)
     ReadOnly Property CanUse As Func(Of Character, Boolean)
 
-    Function EquippedBuff(statisticType As Long) As Long?
+    Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
         If buffs Is Nothing Then
             Return Nothing
         End If
         Dim result As Long = 0
-        If buffs.TryGetValue(statisticType, result) Then
+        If buffs.TryGetValue(statisticType.Id, result) Then
             Return result
         End If
         Return Nothing
@@ -125,22 +125,22 @@ Public Module ItemTypeDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {ItemType.AirShard, New AirShardDescriptor},
-            {ItemType.AmuletOfDEX, New AmuletDescriptor(ItemType.AmuletOfDEX, OldCharacterStatisticType.Dexterity)},
+            {ItemType.AmuletOfDEX, New AmuletDescriptor(ItemType.AmuletOfDEX, 2)},
             {ItemType.AmuletOfHP, New AmuletDescriptor(ItemType.AmuletOfHP,
-                OldCharacterStatisticType.HP,
+                6,
                 MakeDictionary(
                     (1L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((1L, "1d1")))},
             {ItemType.AmuletOfMana, New AmuletDescriptor(ItemType.AmuletOfMana,
-                OldCharacterStatisticType.Mana,
+                8,
                 MakeDictionary(
                     (2L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((2L, "1d1")))},
-            {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, OldCharacterStatisticType.Power,
+            {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, 5,
                 MakeDictionary(
                     (3L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((3L, "1d1")))},
-            {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, OldCharacterStatisticType.Strength,
+            {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, 1,
                 MakeDictionary(
                     (4L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((4L, "1d1")))},

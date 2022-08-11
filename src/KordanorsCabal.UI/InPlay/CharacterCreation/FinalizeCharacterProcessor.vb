@@ -28,17 +28,17 @@
         Me.prompt = prompt
     End Sub
 
-    Private ReadOnly table As IReadOnlyDictionary(Of Long, Integer) =
-        New Dictionary(Of Long, Integer) From
+    Private ReadOnly indices As IReadOnlyList(Of Integer) =
+        New List(Of Integer) From
         {
-            {1, 1},
-            {2, 2},
-            {3, 3},
-            {4, 4},
-            {OldCharacterStatisticType.Power, 5},
-            {6, 6},
-            {7, 7},
-            {OldCharacterStatisticType.Mana, 8}
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
         }
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
@@ -46,8 +46,8 @@
         Dim player = World.PlayerCharacter
         buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned).Name}: {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned))}", False, Hue.Purple)
         buffer.WriteText((0, 4), "Choose where to assignpoint(s):", False, Hue.Black)
-        For Each entry In table
-            UpdateMenuItemText(entry.Value, $"{New CharacterStatisticType(entry.Key).Name}: {player.GetStatistic(New CharacterStatisticType(entry.Key))}")
+        For Each index In indices
+            UpdateMenuItemText(index, $"{New CharacterStatisticType(index).Name}: {player.GetStatistic(New CharacterStatisticType(index))}")
         Next
     End Sub
 End Class
