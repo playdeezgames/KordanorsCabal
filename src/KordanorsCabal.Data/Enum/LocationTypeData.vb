@@ -4,13 +4,22 @@
     Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const LocationTypeNameColumn = "LocationTypeName"
     Friend Const IsDungeonColumn = "IsDungeon"
+    Private nameLookUp As New Dictionary(Of String, Long)
 
     Public Function ReadForName(name As String) As Long?
-        Return Store.ReadColumnValue(Of String, Long)(
+        Dim candidate As Long = 0
+        If nameLookUp.TryGetValue(name, candidate) Then
+            Return candidate
+        End If
+        Dim result = Store.ReadColumnValue(Of String, Long)(
             AddressOf Initialize,
             TableName,
             LocationTypeIdColumn,
             (LocationTypeNameColumn, name))
+        If result.HasValue Then
+            nameLookUp(name) = result.Value
+        End If
+        Return result
     End Function
 
     Friend Const CanMapColumn = "CanMap"

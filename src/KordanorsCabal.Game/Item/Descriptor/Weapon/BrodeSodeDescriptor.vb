@@ -7,11 +7,11 @@
             "BrodeSode",
             10,
             MakeDictionary(
-                (1L, MakeHashSet(OldLocationType.Dungeon)),
-                (2L, MakeHashSet(OldLocationType.Dungeon)),
-                (3L, MakeHashSet(OldLocationType.Dungeon)),
-                (4L, MakeHashSet(OldLocationType.Dungeon)),
-                (5L, MakeHashSet(OldLocationType.Dungeon))),
+                (1L, MakeHashSet(LocationType.FromName(Dungeon))),
+                (2L, MakeHashSet(LocationType.FromName(Dungeon))),
+                (3L, MakeHashSet(LocationType.FromName(Dungeon))),
+                (4L, MakeHashSet(LocationType.FromName(Dungeon))),
+                (5L, MakeHashSet(LocationType.FromName(Dungeon)))),
             MakeDictionary(
                 (2L, "2d6"),
                 (3L, "1d6")),

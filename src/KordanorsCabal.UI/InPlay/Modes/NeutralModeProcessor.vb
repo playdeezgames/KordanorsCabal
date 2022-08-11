@@ -14,7 +14,7 @@
 
     Friend Overrides Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
         Dim location = player.Location
-        If location.LocationType.ToNew.IsDungeon Then
+        If location.LocationType.IsDungeon Then
             ShowDungeon(buffer, player)
         Else
             ShowHeader(buffer, location.Name)

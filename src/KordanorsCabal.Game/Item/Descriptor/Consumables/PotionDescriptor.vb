@@ -7,11 +7,11 @@
             "Potion",
             2,
             MakeDictionary(
-                (1L, MakeHashSet(OldLocationType.DungeonDeadEnd, OldLocationType.Dungeon)),
-                (2L, MakeHashSet(OldLocationType.DungeonDeadEnd, OldLocationType.Dungeon)),
-                (3L, MakeHashSet(OldLocationType.DungeonDeadEnd, OldLocationType.Dungeon)),
-                (4L, MakeHashSet(OldLocationType.DungeonDeadEnd, OldLocationType.Dungeon)),
-                (5L, MakeHashSet(OldLocationType.DungeonDeadEnd, OldLocationType.Dungeon))),
+                (1L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(Dungeon))),
+                (2L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(Dungeon))),
+                (3L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(Dungeon))),
+                (4L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(Dungeon))),
+                (5L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(Dungeon)))),
             MakeDictionary(
                 (1L, "3d6"),
                 (2L, "3d6"),

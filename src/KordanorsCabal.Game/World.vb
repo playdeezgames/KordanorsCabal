@@ -12,7 +12,7 @@ Public Module World
         Dim locations As New List(Of Location)
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
-                Dim dungeonLocation = Location.Create(OldLocationType.Moon)
+                Dim dungeonLocation = Location.Create(LocationType.FromName(Moon))
                 dungeonLocation.DungeonLevel = DungeonLevel.FromName(TheMoon)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
@@ -71,7 +71,7 @@ Public Module World
         Dim locations As New List(Of Location)
         For row As Long = 0 To maze.Rows - 1
             For column As Long = 0 To maze.Columns - 1
-                Dim dungeonLocation = Location.Create(OldLocationType.Dungeon)
+                Dim dungeonLocation = Location.Create(LocationType.FromName(Dungeon))
                 dungeonLocation.DungeonLevel = dungeonLevel
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
@@ -84,7 +84,7 @@ Public Module World
                 Dim dungeonLocation = locations(CInt(column + row * maze.Columns))
                 For Each direction In MazeDirections.Keys
                     If cell.OpenDoorCount = 1 Then
-                        dungeonLocation.LocationType = OldLocationType.DungeonDeadEnd
+                        dungeonLocation.LocationType = LocationType.FromName(DungeonDeadEnd)
                     End If
                     If If(cell.GetDoor(direction)?.Open, False) Then
                         Dim nextColumn = MazeDirections(direction).DeltaX + column
@@ -107,7 +107,7 @@ Public Module World
         Route.Create(fromLocation, Direction.FromName("Down"), RouteType.Stairs, startingLocation)
         Route.Create(startingLocation, Direction.FromName("Up"), RouteType.Stairs, fromLocation)
         PopulateCharacters(locations, dungeonLevel)
-        Return locations.Single(Function(x) x.LocationType = OldLocationType.DungeonBoss)
+        Return locations.Single(Function(x) x.LocationType = LocationType.FromName(DungeonBoss))
     End Function
 
     Private Sub PopulateCharacters(locations As IEnumerable(Of Location), dungeonLevel As DungeonLevel)
@@ -122,14 +122,17 @@ Public Module World
     End Sub
 
     Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType, dungeonLevel As DungeonLevel)
+        Dim deadEndId = LocationType.FromName(DungeonDeadEnd).Id
+        Dim dungeonBossId = LocationType.FromName(DungeonBoss).Id
+        Dim dungeonId = LocationType.FromName(Dungeon).Id
         Dim partitions =
             locations.GroupBy(
                 Function(x) x.RouteCount = 1).
-                    ToDictionary(Of OldLocationType, List(Of Location))(
-                        Function(x) If(x.Key, OldLocationType.DungeonDeadEnd, OldLocationType.Dungeon),
+                    ToDictionary(Of Long, List(Of Location))(
+                        Function(x) If(x.Key, deadEndId, dungeonId),
                         Function(x) x.ToList)
-        Dim deadEnds = partitions(OldLocationType.DungeonDeadEnd)
-        Dim nonDeadEnds = partitions(OldLocationType.Dungeon)
+        Dim deadEnds = partitions(deadEndId)
+        Dim nonDeadEnds = partitions(dungeonId)
         Dim itemTypes As New List(Of ItemType)
         For Each deadEnd In deadEnds
             Dim direction = deadEnd.RouteDirections.First
@@ -140,8 +143,8 @@ Public Module World
         Next
         itemTypes(0) = bossKeyType
         Dim bossLocation = PlaceBossLocation(deadEnds, bossRouteType)
-        partitions(OldLocationType.DungeonDeadEnd).Remove(bossLocation)
-        partitions.Add(OldLocationType.DungeonBoss, New List(Of Location) From {bossLocation})
+        partitions(deadEndId).Remove(bossLocation)
+        partitions.Add(dungeonBossId, New List(Of Location) From {bossLocation})
         For Each itemType In itemTypes
             SpawnItem(locations, dungeonLevel, itemType)
         Next
@@ -151,7 +154,7 @@ Public Module World
     Private Sub SpawnItem(locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel, itemType As ItemType)
         Dim locationTypes = itemType.SpawnLocationTypes(dungeonLevel.Id)
         If locationTypes.Any Then
-            Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Contains(x.LocationType)))
+            Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Select(Function(y) y.Id).Contains(x.LocationType.Id)))
             spawnLocation.Inventory.Add(Item.Create(itemType))
         End If
     End Sub
@@ -168,7 +171,7 @@ Public Module World
 
     Private Function PlaceBossLocation(deadEnds As IEnumerable(Of Location), routeType As RouteType) As Location
         Dim bossLocation = RNG.FromEnumerable(deadEnds)
-        bossLocation.LocationType = OldLocationType.DungeonBoss
+        bossLocation.LocationType = LocationType.FromName(DungeonBoss)
         Dim direction = bossLocation.RouteDirections.First
         Dim nextLocation = bossLocation.Routes(direction).ToLocation
         nextLocation.Routes(direction.Opposite).RouteType = routeType
@@ -190,7 +193,7 @@ Public Module World
     End Sub
 
     Private Sub CreateCellar(fromLocation As Location)
-        Dim cellar = Location.Create(OldLocationType.Cellar)
+        Dim cellar = Location.Create(LocationType.FromName(LocationTypeUtility.Cellar))
         Route.Create(fromLocation, Direction.FromName("Down"), RouteType.Stairs, cellar)
         Route.Create(cellar, Direction.FromName("Up"), RouteType.Stairs, fromLocation)
     End Sub
@@ -204,15 +207,16 @@ Public Module World
     End Sub
 
     Private Sub CreateTown()
-        Dim centerTown = Location.Create(OldLocationType.TownSquare)
-        Dim northTown = Location.Create(OldLocationType.Town)
-        Dim northEastTown = Location.Create(OldLocationType.Town)
-        Dim eastTown = Location.Create(OldLocationType.Town)
-        Dim southEastTown = Location.Create(OldLocationType.Town)
-        Dim southTown = Location.Create(OldLocationType.Town)
-        Dim southWestTown = Location.Create(OldLocationType.Town)
-        Dim westTown = Location.Create(OldLocationType.Town)
-        Dim northWestTown = Location.Create(OldLocationType.Town)
+        Dim townLocationType = LocationType.FromName(Town)
+        Dim centerTown = Location.Create(LocationType.FromName(TownSquare))
+        Dim northTown = Location.Create(townLocationType)
+        Dim northEastTown = Location.Create(townLocationType)
+        Dim eastTown = Location.Create(townLocationType)
+        Dim southEastTown = Location.Create(townLocationType)
+        Dim southTown = Location.Create(townLocationType)
+        Dim southWestTown = Location.Create(townLocationType)
+        Dim westTown = Location.Create(townLocationType)
+        Dim northWestTown = Location.Create(townLocationType)
 
         StitchTown(centerTown, Direction.FromName(North), northTown)
         StitchTown(centerTown, Direction.FromName(East), eastTown)
@@ -236,7 +240,7 @@ Public Module World
 
     Private Sub CreateChurchEntrance()
         Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(LocationType.FromName(Town)))
-        Dim entrance = Location.Create(OldLocationType.ChurchEntrance)
+        Dim entrance = Location.Create(LocationType.FromName(ChurchEntrance))
         Dim direction = RNG.FromEnumerable(AllDirections.Where(Function(x) x.IsCardinal AndAlso Not townLocation.HasRoute(x)))
         StitchTown(townLocation, direction, entrance)
     End Sub

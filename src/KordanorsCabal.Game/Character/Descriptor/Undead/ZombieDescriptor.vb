@@ -61,9 +61,9 @@
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Select Case level.Id
             Case 1
-                Return location.LocationType = OldLocationType.DungeonDeadEnd
+                Return location.LocationType = LocationType.FromName(DungeonDeadEnd)
             Case Else
-                Return location.LocationType.ToNew.IsDungeon
+                Return location.LocationType.IsDungeon
         End Select
     End Function
     Public Overrides Function RollMoneyDrop() As Long

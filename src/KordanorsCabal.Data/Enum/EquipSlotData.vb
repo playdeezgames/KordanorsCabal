@@ -11,13 +11,21 @@
             EquipSlotNameColumn,
             (EquipSlotIdColumn, equipSlotId))
     End Function
-
+    Private ReadOnly nameLookUp As New Dictionary(Of String, Long)
     Public Function ReadForName(equipSlotName As String) As Long?
-        Return Store.ReadColumnValue(Of String, Long)(
+        Dim candidate As Long = 0
+        If nameLookUp.TryGetValue(equipSlotName, candidate) Then
+            Return candidate
+        End If
+        Dim result = Store.ReadColumnValue(Of String, Long)(
             AddressOf Initialize,
             TableName,
             EquipSlotIdColumn,
             (EquipSlotNameColumn, equipSlotName))
+        If result.HasValue Then
+            nameLookUp(equipSlotName) = result.Value
+        End If
+        Return result
     End Function
 
     Friend Sub Initialize()

@@ -67,11 +67,19 @@
             (RouteTypeColumn, routeType))
     End Function
 
-    Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long))
+    Public Function ReadDirectionRouteForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long))
         Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             (DirectionColumn, RouteIdColumn),
+            (LocationIdColumn, locationId))
+    End Function
+
+    Public Function ReadDirectionRouteTypeForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long))
+        Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            (DirectionColumn, RouteTypeColumn),
             (LocationIdColumn, locationId))
     End Function
 

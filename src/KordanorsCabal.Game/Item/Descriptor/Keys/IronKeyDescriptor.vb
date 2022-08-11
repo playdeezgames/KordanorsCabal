@@ -6,10 +6,10 @@
             ItemType.IronKey,
             "FE Key",,
             MakeDictionary(
-                (1L, MakeHashSet(OldLocationType.Dungeon)),
-                (2L, MakeHashSet(OldLocationType.Dungeon)),
-                (3L, MakeHashSet(OldLocationType.Dungeon)),
-                (4L, MakeHashSet(OldLocationType.Dungeon)),
-                (5L, MakeHashSet(OldLocationType.Dungeon))))
+                (1L, MakeHashSet(LocationType.FromName(Dungeon))),
+                (2L, MakeHashSet(LocationType.FromName(Dungeon))),
+                (3L, MakeHashSet(LocationType.FromName(Dungeon))),
+                (4L, MakeHashSet(LocationType.FromName(Dungeon))),
+                (5L, MakeHashSet(LocationType.FromName(Dungeon)))))
     End Sub
 End Class

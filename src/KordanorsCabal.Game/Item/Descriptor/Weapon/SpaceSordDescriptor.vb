@@ -7,7 +7,7 @@
             "SpaceSord",
                    5,
             MakeDictionary(
-                (6L, MakeHashSet(OldLocationType.Moon))),
+                (6L, MakeHashSet(LocationType.FromName(Moon)))),
             MakeDictionary(
                 (6L, "1d1")),
             MakeList(EquipSlot.FromName(Weapon)),,

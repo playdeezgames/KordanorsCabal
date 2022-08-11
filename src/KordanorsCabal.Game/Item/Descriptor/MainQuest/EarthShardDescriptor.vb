@@ -5,7 +5,7 @@
             ItemType.EarthShard,
             "Earth Shard",,
             MakeDictionary(
-                (2L, MakeHashSet(OldLocationType.DungeonBoss))),
+                (2L, MakeHashSet(LocationType.FromName(DungeonBoss)))),
             MakeDictionary(
                 (2L, "1d1")),,,,,, ,
             False,,,,,,,,

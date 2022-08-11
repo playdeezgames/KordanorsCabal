@@ -6,7 +6,7 @@
     ReadOnly Property IsConsumed As Boolean
 
     '[ItemTypeSpawnLocationTypes]([ItemTypeId],[DungeonLevelId],[LocationTypeId])
-    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of OldLocationType))
+    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType))
     Private ReadOnly spawnCounts As IReadOnlyDictionary(Of Long, String)
 
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
@@ -67,7 +67,7 @@
            itemTypeId As Long,
            name As String,
            Optional encumbrance As Long = 0,
-           Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of OldLocationType)) = Nothing,
+           Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType)) = Nothing,
            Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long) = Nothing,
@@ -92,12 +92,12 @@
             Me.SpawnLocationTypes =
                 AllDungeonLevels.ToDictionary(
                 Function(x) x.Id,
-                Function(x) New HashSet(Of OldLocationType))
+                Function(x) New HashSet(Of LocationType))
         Else
             Me.SpawnLocationTypes =
                 AllDungeonLevels.ToDictionary(
                 Function(x) x.Id,
-                Function(x) If(spawnLocationTypes.ContainsKey(x.Id), spawnLocationTypes(x.Id), New HashSet(Of OldLocationType)))
+                Function(x) If(spawnLocationTypes.ContainsKey(x.Id), spawnLocationTypes(x.Id), New HashSet(Of LocationType)))
         End If
         Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
         Me.spawnCounts = spawnCounts
@@ -129,20 +129,20 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AmuletOfHP, New AmuletDescriptor(ItemType.AmuletOfHP,
                 CharacterStatisticType.HP,
                 MakeDictionary(
-                    (1L, MakeHashSet(OldLocationType.DungeonDeadEnd, OldLocationType.DungeonBoss))),
+                    (1L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((1L, "1d1")))},
             {ItemType.AmuletOfMana, New AmuletDescriptor(ItemType.AmuletOfMana,
                 CharacterStatisticType.Mana,
                 MakeDictionary(
-                    (2L, MakeHashSet(OldLocationType.DungeonDeadEnd, OldLocationType.DungeonBoss))),
+                    (2L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((2L, "1d1")))},
             {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, CharacterStatisticType.Power,
                 MakeDictionary(
-                    (3L, MakeHashSet(OldLocationType.DungeonDeadEnd, OldLocationType.DungeonBoss))),
+                    (3L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((3L, "1d1")))},
             {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, CharacterStatisticType.Strength,
                 MakeDictionary(
-                    (4L, MakeHashSet(OldLocationType.DungeonDeadEnd, OldLocationType.DungeonBoss))),
+                    (4L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((4L, "1d1")))},
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
                 ItemType.AmuletOfYendor,

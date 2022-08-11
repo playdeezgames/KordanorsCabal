@@ -3,20 +3,20 @@
     Public Sub New(locationId As Long)
         Id = locationId
     End Sub
-    Property LocationType As OldLocationType
+    Property LocationType As LocationType
         Get
-            Return CType(StaticWorldData.World.Location.ReadLocationType(Id).Value, OldLocationType)
+            Return New LocationType(StaticWorldData.World.Location.ReadLocationType(Id).Value)
         End Get
-        Set(value As OldLocationType)
-            StaticWorldData.World.Location.WriteLocationType(Id, value)
+        Set(value As LocationType)
+            StaticWorldData.World.Location.WriteLocationType(Id, value.Id)
         End Set
     End Property
 
     Friend Shared Function FromLocationType(locationType As LocationType) As IEnumerable(Of Location)
         Return StaticWorldData.World.Location.ReadForLocationType(locationType.Id).Select(AddressOf FromId)
     End Function
-    Shared Function Create(locationType As OldLocationType) As Location
-        Return FromId(StaticWorldData.World.Location.Create(locationType))
+    Shared Function Create(locationType As LocationType) As Location
+        Return FromId(StaticWorldData.World.Location.Create(locationType.Id))
     End Function
     Public Shared Function ByStatisticValue(statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)
         Return StaticWorldData.World.LocationStatistic.ReadForStatisticValue(statisticType, statisticValue).Select(AddressOf Location.FromId)
@@ -28,14 +28,14 @@
         Routes(direction)?.Destroy()
     End Sub
     Friend Function IsDungeon() As Boolean
-        Return LocationType.ToNew.IsDungeon
+        Return LocationType.IsDungeon
     End Function
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long?
         Return StaticWorldData.World.LocationStatistic.Read(Id, statisticType)
     End Function
     ReadOnly Property RequiresMP As Boolean
         Get
-            Return LocationType.ToNew.RequiresMP
+            Return LocationType.RequiresMP
         End Get
     End Property
     Public Function HasStairs() As Boolean
@@ -46,7 +46,7 @@
     End Function
     ReadOnly Property Name As String
         Get
-            Return LocationType.ToNew.Name
+            Return LocationType.Name
         End Get
     End Property
     Public Function Routes(direction As Direction) As Route
@@ -79,12 +79,12 @@
     End Property
     Public ReadOnly Property RouteDirections As IEnumerable(Of Direction)
         Get
-            Return StaticWorldData.World.Route.ReadForLocation(Id).Select(Function(x) New Direction(x.Item1))
+            Return StaticWorldData.World.Route.ReadDirectionRouteForLocation(Id).Select(Function(x) New Direction(x.Item1))
         End Get
     End Property
     Public ReadOnly Property RouteTypes As IEnumerable(Of RouteType)
         Get
-            Return StaticWorldData.World.Route.ReadForLocation(Id).Select(Function(x) CType(x.Item2, RouteType))
+            Return StaticWorldData.World.Route.ReadDirectionRouteTypeForLocation(Id).Select(Function(x) CType(x.Item2, RouteType))
         End Get
     End Property
     Friend Function RouteCount() As Long
@@ -112,7 +112,7 @@
     End Function
     Friend ReadOnly Property CanMap As Boolean
         Get
-            Return LocationType.ToNew.CanMap
+            Return LocationType.CanMap
         End Get
     End Property
     Property DungeonLevel As DungeonLevel

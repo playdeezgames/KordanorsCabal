@@ -2,7 +2,7 @@
     Inherits CharacterTypeDescriptor
 
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
-        Return location.LocationType = OldLocationType.Dungeon
+        Return location.LocationType = LocationType.FromName(Dungeon)
     End Function
 
     Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)

@@ -31,22 +31,10 @@ Public Class LocationType
     Shared Function FromName(name As String) As LocationType
         Return New LocationType(name)
     End Function
+    Public Shared Operator =(first As LocationType, second As LocationType) As Boolean
+        Return first.Id = second.Id
+    End Operator
+    Public Shared Operator <>(first As LocationType, second As LocationType) As Boolean
+        Return first.Id <> second.Id
+    End Operator
 End Class
-Public Module LocationTypeUtility
-    <Extension>
-    Public Function ToOld(locationType As LocationType) As OldLocationType
-        Return CType(locationType.Id, OldLocationType)
-    End Function
-    <Extension>
-    Public Function ToNew(oldLocationType As OldLocationType) As LocationType
-        Return New LocationType(oldLocationType)
-    End Function
-    Public Const TownSquare = "Town Square"
-    Public Const Town = "Town"
-    Public Const ChurchEntrance = "Church Entrance"
-    Public Const Dungeon = "Dungeon"
-    Public Const DungeonDeadEnd = "Dungeon Dead End"
-    Public Const DungeonBoss = "Dungeon Boss"
-    Public Const Cellar = "Cellar"
-    Public Const Moon = "Moon"
-End Module

@@ -42,8 +42,21 @@
     Public Sub New(store As Store)
         MyBase.New(store)
     End Sub
+    Private ReadOnly nameLookUp As New Dictionary(Of String, Long)
     Public Function ReadForName(directionName As String) As Long?
-        Return Store.ReadColumnValue(Of String, Long)(AddressOf Initialize, TableName, DirectionIdColumn, (DirectionNameColumn, directionName))
+        Dim candidate As Long = 0
+        If nameLookUp.TryGetValue(directionName, candidate) Then
+            Return candidate
+        End If
+        Dim result = Store.ReadColumnValue(Of String, Long)(
+            AddressOf Initialize,
+            TableName,
+            DirectionIdColumn,
+            (DirectionNameColumn, directionName))
+        If result.HasValue Then
+            nameLookUp(directionName) = result.Value
+        End If
+        Return result
     End Function
 
     Public Function ReadName(directionId As Long) As String
