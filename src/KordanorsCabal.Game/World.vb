@@ -269,9 +269,9 @@ Public Module World
     ReadOnly FirstRollTable As IReadOnlyDictionary(Of Long, Integer) =
         New Dictionary(Of Long, Integer) From
         {
-            {OldCharacterStatisticType.Dexterity, 1},
+            {2, 1},
             {3, 1},
-            {OldCharacterStatisticType.Strength, 1},
+            {1, 1},
             {OldCharacterStatisticType.Unassigned, 2},
             {4, 1}
         }
@@ -279,10 +279,10 @@ Public Module World
     ReadOnly SecondRollTable As IReadOnlyDictionary(Of Long, Integer) =
         New Dictionary(Of Long, Integer) From
         {
-            {OldCharacterStatisticType.Dexterity, 1},
+            {2, 1},
             {3, 1},
             {OldCharacterStatisticType.Power, 1},
-            {OldCharacterStatisticType.Strength, 1},
+            {1, 1},
             {OldCharacterStatisticType.Unassigned, 1},
             {4, 1}
         }

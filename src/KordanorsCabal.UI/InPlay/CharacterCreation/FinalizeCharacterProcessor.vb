@@ -31,12 +31,12 @@
     Private ReadOnly table As IReadOnlyDictionary(Of Long, Integer) =
         New Dictionary(Of Long, Integer) From
         {
-            {OldCharacterStatisticType.Strength, 1},
-            {OldCharacterStatisticType.Dexterity, 2},
+            {1, 1},
+            {2, 2},
             {3, 3},
             {4, 4},
             {OldCharacterStatisticType.Power, 5},
-            {OldCharacterStatisticType.HP, 6},
+            {6, 6},
             {7, 7},
             {OldCharacterStatisticType.Mana, 8}
         }

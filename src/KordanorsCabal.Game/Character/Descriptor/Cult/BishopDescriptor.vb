@@ -6,9 +6,9 @@
             Return New Dictionary(Of Long, Long) From
                 {
                     {11, 3},
-                    {OldCharacterStatisticType.Strength, 6},
-                    {OldCharacterStatisticType.Dexterity, 3},
-                    {OldCharacterStatisticType.HP, 4},
+                    {1, 6},
+                    {2, 3},
+                    {6, 4},
                     {23, 0},
                     {3, 6},
                     {7, 3},
