@@ -185,7 +185,7 @@
         Return result
     End Function
     Friend Function RollDefend() As Long
-        Dim maximumDefend = GetStatistic(OldCharacterStatisticType.BaseMaximumDefend.ToNew).Value
+        Dim maximumDefend = GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.BaseMaximumDefend)).Value
         Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
     End Function
     Private Function GetDefendDice() As Long
