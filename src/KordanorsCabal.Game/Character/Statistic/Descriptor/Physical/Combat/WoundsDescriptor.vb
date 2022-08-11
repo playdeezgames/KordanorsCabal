@@ -1,5 +1,9 @@
 ﻿Friend Class WoundsDescriptor
-    Inherits CharacterStatisticTypeDescriptor
+    Inherits CharacterStatisticType
+
+    Public Sub New(characterStatisticTypeId As Long)
+        MyBase.New(characterStatisticTypeId)
+    End Sub
 
     Public Overrides ReadOnly Property Name As String
         Get

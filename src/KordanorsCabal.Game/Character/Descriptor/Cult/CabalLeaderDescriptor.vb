@@ -1,21 +1,21 @@
 ﻿Friend Class CabalLeaderDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
         Get
-            Return New Dictionary(Of CharacterStatisticType, Long) From
+            Return New Dictionary(Of OldCharacterStatisticType, Long) From
                 {
-                    {CharacterStatisticType.BaseMaximumDefend, 4},
-                    {CharacterStatisticType.Strength, 8},
-                    {CharacterStatisticType.Dexterity, 4},
-                    {CharacterStatisticType.HP, 5},
-                    {CharacterStatisticType.Immobilization, 0},
-                    {CharacterStatisticType.Influence, 6},
-                    {CharacterStatisticType.MP, 3},
-                    {CharacterStatisticType.Stress, 0},
-                    {CharacterStatisticType.UnarmedMaximumDamage, 4},
-                    {CharacterStatisticType.Willpower, 3},
-                    {CharacterStatisticType.Wounds, 0}
+                    {OldCharacterStatisticType.BaseMaximumDefend, 4},
+                    {OldCharacterStatisticType.Strength, 8},
+                    {OldCharacterStatisticType.Dexterity, 4},
+                    {OldCharacterStatisticType.HP, 5},
+                    {OldCharacterStatisticType.Immobilization, 0},
+                    {OldCharacterStatisticType.Influence, 6},
+                    {OldCharacterStatisticType.MP, 3},
+                    {OldCharacterStatisticType.Stress, 0},
+                    {OldCharacterStatisticType.UnarmedMaximumDamage, 4},
+                    {OldCharacterStatisticType.Willpower, 3},
+                    {OldCharacterStatisticType.Wounds, 0}
                 }
         End Get
     End Property

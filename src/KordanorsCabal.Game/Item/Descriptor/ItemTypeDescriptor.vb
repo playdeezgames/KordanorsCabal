@@ -27,14 +27,14 @@
     Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
 
     '[ItemTypeCharacterStatisticBuffs]([ItemTypeId],[CharacterStatisticTypeId],[StatisticValue])
-    Private ReadOnly Property buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+    Private ReadOnly Property buffs As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
 
     '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName],[ItemActionFilterName])
     ReadOnly Property Purify As Action(Of Item)
     ReadOnly Property Use As Action(Of Character)
     ReadOnly Property CanUse As Func(Of Character, Boolean)
 
-    Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
+    Function EquippedBuff(statisticType As OldCharacterStatisticType) As Long?
         If buffs Is Nothing Then
             Return Nothing
         End If
@@ -70,7 +70,7 @@
            Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType)) = Nothing,
            Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
-           Optional buffs As IReadOnlyDictionary(Of CharacterStatisticType, Long) = Nothing,
+           Optional buffs As IReadOnlyDictionary(Of OldCharacterStatisticType, Long) = Nothing,
            Optional attackDice As Long = 0,
            Optional maximumDamage As Long? = Nothing,
            Optional defendDice As Long = 0,
@@ -125,22 +125,22 @@ Public Module ItemTypeDescriptorUtility
         New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {ItemType.AirShard, New AirShardDescriptor},
-            {ItemType.AmuletOfDEX, New AmuletDescriptor(ItemType.AmuletOfDEX, CharacterStatisticType.Dexterity)},
+            {ItemType.AmuletOfDEX, New AmuletDescriptor(ItemType.AmuletOfDEX, OldCharacterStatisticType.Dexterity)},
             {ItemType.AmuletOfHP, New AmuletDescriptor(ItemType.AmuletOfHP,
-                CharacterStatisticType.HP,
+                OldCharacterStatisticType.HP,
                 MakeDictionary(
                     (1L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((1L, "1d1")))},
             {ItemType.AmuletOfMana, New AmuletDescriptor(ItemType.AmuletOfMana,
-                CharacterStatisticType.Mana,
+                OldCharacterStatisticType.Mana,
                 MakeDictionary(
                     (2L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((2L, "1d1")))},
-            {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, CharacterStatisticType.Power,
+            {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, OldCharacterStatisticType.Power,
                 MakeDictionary(
                     (3L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((3L, "1d1")))},
-            {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, CharacterStatisticType.Strength,
+            {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, OldCharacterStatisticType.Strength,
                 MakeDictionary(
                     (4L, MakeHashSet(LocationType.FromName(DungeonDeadEnd), LocationType.FromName(DungeonBoss)))),
                 MakeDictionary((4L, "1d1")))},

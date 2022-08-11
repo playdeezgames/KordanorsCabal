@@ -1,21 +1,21 @@
 ﻿Friend Class BadgerDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
         Get
-            Return New Dictionary(Of CharacterStatisticType, Long) From
+            Return New Dictionary(Of OldCharacterStatisticType, Long) From
                 {
-                    {CharacterStatisticType.BaseMaximumDefend, 1},
-                    {CharacterStatisticType.Strength, 4},
-                    {CharacterStatisticType.Dexterity, 2},
-                    {CharacterStatisticType.HP, 2},
-                    {CharacterStatisticType.Immobilization, 0},
-                    {CharacterStatisticType.Influence, 0},
-                    {CharacterStatisticType.MP, 3},
-                    {CharacterStatisticType.Stress, 0},
-                    {CharacterStatisticType.UnarmedMaximumDamage, 2},
-                    {CharacterStatisticType.Willpower, 3},
-                    {CharacterStatisticType.Wounds, 0}
+                    {OldCharacterStatisticType.BaseMaximumDefend, 1},
+                    {OldCharacterStatisticType.Strength, 4},
+                    {OldCharacterStatisticType.Dexterity, 2},
+                    {OldCharacterStatisticType.HP, 2},
+                    {OldCharacterStatisticType.Immobilization, 0},
+                    {OldCharacterStatisticType.Influence, 0},
+                    {OldCharacterStatisticType.MP, 3},
+                    {OldCharacterStatisticType.Stress, 0},
+                    {OldCharacterStatisticType.UnarmedMaximumDamage, 2},
+                    {OldCharacterStatisticType.Willpower, 3},
+                    {OldCharacterStatisticType.Wounds, 0}
                 }
         End Get
     End Property

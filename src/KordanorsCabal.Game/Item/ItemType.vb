@@ -113,7 +113,7 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).MaximumDurability
     End Function
     <Extension>
-    Public Function EquippedBuff(itemType As ItemType, statisticType As CharacterStatisticType) As Long?
+    Public Function EquippedBuff(itemType As ItemType, statisticType As OldCharacterStatisticType) As Long?
         Return ItemTypeDescriptors(itemType).EquippedBuff(statisticType)
     End Function
     <Extension>

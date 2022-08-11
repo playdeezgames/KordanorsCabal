@@ -1,17 +1,17 @@
 ﻿Friend Class ZombieDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
         Get
-            Return New Dictionary(Of CharacterStatisticType, Long) From
+            Return New Dictionary(Of OldCharacterStatisticType, Long) From
                 {
-                    {CharacterStatisticType.BaseMaximumDefend, 3},
-                    {CharacterStatisticType.Strength, 4},
-                    {CharacterStatisticType.Dexterity, 3},
-                    {CharacterStatisticType.HP, 1},
-                    {CharacterStatisticType.Immobilization, 0},
-                    {CharacterStatisticType.UnarmedMaximumDamage, 2},
-                    {CharacterStatisticType.Wounds, 0}
+                    {OldCharacterStatisticType.BaseMaximumDefend, 3},
+                    {OldCharacterStatisticType.Strength, 4},
+                    {OldCharacterStatisticType.Dexterity, 3},
+                    {OldCharacterStatisticType.HP, 1},
+                    {OldCharacterStatisticType.Immobilization, 0},
+                    {OldCharacterStatisticType.UnarmedMaximumDamage, 2},
+                    {OldCharacterStatisticType.Wounds, 0}
                 }
         End Get
     End Property

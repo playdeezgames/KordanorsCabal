@@ -1,21 +1,21 @@
 ﻿Friend Class AcolyteDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
         Get
-            Return New Dictionary(Of CharacterStatisticType, Long) From
+            Return New Dictionary(Of OldCharacterStatisticType, Long) From
                 {
-                    {CharacterStatisticType.BaseMaximumDefend, 2},
-                    {CharacterStatisticType.Strength, 6},
-                    {CharacterStatisticType.Dexterity, 2},
-                    {CharacterStatisticType.HP, 2},
-                    {CharacterStatisticType.Immobilization, 0},
-                    {CharacterStatisticType.Influence, 0},
-                    {CharacterStatisticType.MP, 2},
-                    {CharacterStatisticType.Stress, 0},
-                    {CharacterStatisticType.UnarmedMaximumDamage, 3},
-                    {CharacterStatisticType.Willpower, 2},
-                    {CharacterStatisticType.Wounds, 0}
+                    {OldCharacterStatisticType.BaseMaximumDefend, 2},
+                    {OldCharacterStatisticType.Strength, 6},
+                    {OldCharacterStatisticType.Dexterity, 2},
+                    {OldCharacterStatisticType.HP, 2},
+                    {OldCharacterStatisticType.Immobilization, 0},
+                    {OldCharacterStatisticType.Influence, 0},
+                    {OldCharacterStatisticType.MP, 2},
+                    {OldCharacterStatisticType.Stress, 0},
+                    {OldCharacterStatisticType.UnarmedMaximumDamage, 3},
+                    {OldCharacterStatisticType.Willpower, 2},
+                    {OldCharacterStatisticType.Wounds, 0}
                 }
         End Get
     End Property

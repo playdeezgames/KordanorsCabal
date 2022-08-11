@@ -1,21 +1,21 @@
 ﻿Friend Class RatDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
         Get
-            Return New Dictionary(Of CharacterStatisticType, Long) From
+            Return New Dictionary(Of OldCharacterStatisticType, Long) From
                 {
-                    {CharacterStatisticType.BaseMaximumDefend, 1},
-                    {CharacterStatisticType.Strength, 2},
-                    {CharacterStatisticType.Dexterity, 1},
-                    {CharacterStatisticType.HP, 1},
-                    {CharacterStatisticType.Immobilization, 0},
-                    {CharacterStatisticType.Influence, 0},
-                    {CharacterStatisticType.MP, 1},
-                    {CharacterStatisticType.Stress, 0},
-                    {CharacterStatisticType.UnarmedMaximumDamage, 1},
-                    {CharacterStatisticType.Willpower, 1},
-                    {CharacterStatisticType.Wounds, 0}
+                    {OldCharacterStatisticType.BaseMaximumDefend, 1},
+                    {OldCharacterStatisticType.Strength, 2},
+                    {OldCharacterStatisticType.Dexterity, 1},
+                    {OldCharacterStatisticType.HP, 1},
+                    {OldCharacterStatisticType.Immobilization, 0},
+                    {OldCharacterStatisticType.Influence, 0},
+                    {OldCharacterStatisticType.MP, 1},
+                    {OldCharacterStatisticType.Stress, 0},
+                    {OldCharacterStatisticType.UnarmedMaximumDamage, 1},
+                    {OldCharacterStatisticType.Willpower, 1},
+                    {OldCharacterStatisticType.Wounds, 0}
                 }
         End Get
     End Property

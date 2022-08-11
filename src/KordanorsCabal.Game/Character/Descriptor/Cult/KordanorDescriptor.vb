@@ -1,21 +1,21 @@
 ﻿Friend Class KordanorDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
         Get
-            Return New Dictionary(Of CharacterStatisticType, Long) From
+            Return New Dictionary(Of OldCharacterStatisticType, Long) From
                 {
-                    {CharacterStatisticType.BaseMaximumDefend, 5},
-                    {CharacterStatisticType.Strength, 8},
-                    {CharacterStatisticType.Dexterity, 5},
-                    {CharacterStatisticType.HP, 10},
-                    {CharacterStatisticType.Immobilization, 0},
-                    {CharacterStatisticType.Influence, 4},
-                    {CharacterStatisticType.MP, 4},
-                    {CharacterStatisticType.Stress, 0},
-                    {CharacterStatisticType.UnarmedMaximumDamage, 4},
-                    {CharacterStatisticType.Willpower, 4},
-                    {CharacterStatisticType.Wounds, 0}
+                    {OldCharacterStatisticType.BaseMaximumDefend, 5},
+                    {OldCharacterStatisticType.Strength, 8},
+                    {OldCharacterStatisticType.Dexterity, 5},
+                    {OldCharacterStatisticType.HP, 10},
+                    {OldCharacterStatisticType.Immobilization, 0},
+                    {OldCharacterStatisticType.Influence, 4},
+                    {OldCharacterStatisticType.MP, 4},
+                    {OldCharacterStatisticType.Stress, 0},
+                    {OldCharacterStatisticType.UnarmedMaximumDamage, 4},
+                    {OldCharacterStatisticType.Willpower, 4},
+                    {OldCharacterStatisticType.Wounds, 0}
                 }
         End Get
     End Property

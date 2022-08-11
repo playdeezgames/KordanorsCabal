@@ -1,40 +1,40 @@
 ﻿Friend Class N00bDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of CharacterStatisticType, Long)
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
         Get
-            Return New Dictionary(Of CharacterStatisticType, Long) From
+            Return New Dictionary(Of OldCharacterStatisticType, Long) From
                 {
-                    {CharacterStatisticType.BaseMaximumDefend, 1},
-                    {CharacterStatisticType.Chafing, 0},
-                    {CharacterStatisticType.Dexterity, 1},
-                    {CharacterStatisticType.Drunkenness, 0},
-                    {CharacterStatisticType.Fatigue, 0},
-                    {CharacterStatisticType.FoodPoisoning, 0},
-                    {CharacterStatisticType.Highness, 0},
-                    {CharacterStatisticType.HP, 3},
-                    {CharacterStatisticType.Immobilization, 0},
-                    {CharacterStatisticType.Hunger, 0},
-                    {CharacterStatisticType.Influence, 1},
-                    {CharacterStatisticType.Mana, 1},
-                    {CharacterStatisticType.Money, 0},
-                    {CharacterStatisticType.MP, 3},
-                    {CharacterStatisticType.Power, 1},
-                    {CharacterStatisticType.Strength, 1},
-                    {CharacterStatisticType.Stress, 0},
-                    {CharacterStatisticType.UnarmedMaximumDamage, 1},
-                    {CharacterStatisticType.Unassigned, 8},
-                    {CharacterStatisticType.Willpower, 1},
-                    {CharacterStatisticType.Wounds, 0},
-                    {CharacterStatisticType.XP, 0},
-                    {CharacterStatisticType.XPGoal, 10}
+                    {OldCharacterStatisticType.BaseMaximumDefend, 1},
+                    {OldCharacterStatisticType.Chafing, 0},
+                    {OldCharacterStatisticType.Dexterity, 1},
+                    {OldCharacterStatisticType.Drunkenness, 0},
+                    {OldCharacterStatisticType.Fatigue, 0},
+                    {OldCharacterStatisticType.FoodPoisoning, 0},
+                    {OldCharacterStatisticType.Highness, 0},
+                    {OldCharacterStatisticType.HP, 3},
+                    {OldCharacterStatisticType.Immobilization, 0},
+                    {OldCharacterStatisticType.Hunger, 0},
+                    {OldCharacterStatisticType.Influence, 1},
+                    {OldCharacterStatisticType.Mana, 1},
+                    {OldCharacterStatisticType.Money, 0},
+                    {OldCharacterStatisticType.MP, 3},
+                    {OldCharacterStatisticType.Power, 1},
+                    {OldCharacterStatisticType.Strength, 1},
+                    {OldCharacterStatisticType.Stress, 0},
+                    {OldCharacterStatisticType.UnarmedMaximumDamage, 1},
+                    {OldCharacterStatisticType.Unassigned, 8},
+                    {OldCharacterStatisticType.Willpower, 1},
+                    {OldCharacterStatisticType.Wounds, 0},
+                    {OldCharacterStatisticType.XP, 0},
+                    {OldCharacterStatisticType.XPGoal, 10}
                 }
         End Get
     End Property
 
     Public Overrides ReadOnly Property MaximumEncumbrance(character As Character) As Long
         Get
-            Return 50 + If(character.GetStatistic(CharacterStatisticType.Strength), 0) * 10
+            Return 50 + If(character.GetStatistic(OldCharacterStatisticType.Strength), 0) * 10
         End Get
     End Property
 

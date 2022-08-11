@@ -257,8 +257,8 @@ Public Module World
     End Sub
 
     Private Sub SecondRoll()
-        Dim dice = PlayerCharacter.GetStatistic(CharacterStatisticType.Unassigned)
-        PlayerCharacter.SetStatistic(CharacterStatisticType.Unassigned, 0)
+        Dim dice = PlayerCharacter.GetStatistic(OldCharacterStatisticType.Unassigned)
+        PlayerCharacter.SetStatistic(OldCharacterStatisticType.Unassigned, 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(SecondRollTable)
             PlayerCharacter.ChangeStatistic(statisticType, 1)
@@ -266,30 +266,30 @@ Public Module World
         End While
     End Sub
 
-    ReadOnly FirstRollTable As IReadOnlyDictionary(Of CharacterStatisticType, Integer) =
-        New Dictionary(Of CharacterStatisticType, Integer) From
+    ReadOnly FirstRollTable As IReadOnlyDictionary(Of OldCharacterStatisticType, Integer) =
+        New Dictionary(Of OldCharacterStatisticType, Integer) From
         {
-            {CharacterStatisticType.Dexterity, 1},
-            {CharacterStatisticType.Influence, 1},
-            {CharacterStatisticType.Strength, 1},
-            {CharacterStatisticType.Unassigned, 2},
-            {CharacterStatisticType.Willpower, 1}
+            {OldCharacterStatisticType.Dexterity, 1},
+            {OldCharacterStatisticType.Influence, 1},
+            {OldCharacterStatisticType.Strength, 1},
+            {OldCharacterStatisticType.Unassigned, 2},
+            {OldCharacterStatisticType.Willpower, 1}
         }
 
-    ReadOnly SecondRollTable As IReadOnlyDictionary(Of CharacterStatisticType, Integer) =
-        New Dictionary(Of CharacterStatisticType, Integer) From
+    ReadOnly SecondRollTable As IReadOnlyDictionary(Of OldCharacterStatisticType, Integer) =
+        New Dictionary(Of OldCharacterStatisticType, Integer) From
         {
-            {CharacterStatisticType.Dexterity, 1},
-            {CharacterStatisticType.Influence, 1},
-            {CharacterStatisticType.Power, 1},
-            {CharacterStatisticType.Strength, 1},
-            {CharacterStatisticType.Unassigned, 1},
-            {CharacterStatisticType.Willpower, 1}
+            {OldCharacterStatisticType.Dexterity, 1},
+            {OldCharacterStatisticType.Influence, 1},
+            {OldCharacterStatisticType.Power, 1},
+            {OldCharacterStatisticType.Strength, 1},
+            {OldCharacterStatisticType.Unassigned, 1},
+            {OldCharacterStatisticType.Willpower, 1}
         }
 
     Private Sub FirstRoll()
-        Dim dice = PlayerCharacter.GetStatistic(CharacterStatisticType.Unassigned)
-        PlayerCharacter.SetStatistic(CharacterStatisticType.Unassigned, 0)
+        Dim dice = PlayerCharacter.GetStatistic(OldCharacterStatisticType.Unassigned)
+        PlayerCharacter.SetStatistic(OldCharacterStatisticType.Unassigned, 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(FirstRollTable)
             PlayerCharacter.ChangeStatistic(statisticType, 1)
