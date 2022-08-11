@@ -1,5 +1,5 @@
 ﻿Friend MustInherit Class CharacterTypeDescriptor
-    MustOverride ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
+    MustOverride ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
     MustOverride ReadOnly Property MaximumEncumbrance(character As Character) As Long
     MustOverride Function IsEnemy(character As Character) As Boolean
     MustOverride ReadOnly Property SpawnCount(level As DungeonLevel) As Long

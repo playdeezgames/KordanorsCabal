@@ -1,9 +1,9 @@
 ﻿Friend Class KordanorDescriptor
     Inherits CharacterTypeDescriptor
 
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
+    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
         Get
-            Return New Dictionary(Of OldCharacterStatisticType, Long) From
+            Return New Dictionary(Of Long, Long) From
                 {
                     {OldCharacterStatisticType.BaseMaximumDefend, 5},
                     {OldCharacterStatisticType.Strength, 8},
