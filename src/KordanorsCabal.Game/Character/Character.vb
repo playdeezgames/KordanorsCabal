@@ -189,7 +189,7 @@
         Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
     End Function
     Private Function GetDefendDice() As Long
-        Dim dice = GetStatistic(OldCharacterStatisticType.Dexterity.ToNew).Value
+        Dim dice = GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity)).Value
         For Each entry In EquippedItems
             dice += entry.DefendDice
         Next

@@ -8,7 +8,7 @@
         Dim player = World.PlayerCharacter
 
         buffer.WriteText((0, 1), $"{OldCharacterStatisticType.Strength.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Strength.ToNew)}", False, Hue.Black)
-        buffer.WriteText((0, 2), $"{OldCharacterStatisticType.Dexterity.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Dexterity.ToNew)}", False, Hue.Black)
+        buffer.WriteText((0, 2), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity))}", False, Hue.Black)
         buffer.WriteText((0, 3), $"{OldCharacterStatisticType.HP.ToNew.Abbreviation} {player.CurrentHP}/{player.GetStatistic(OldCharacterStatisticType.HP.ToNew)}", False, Hue.Black)
 
         buffer.WriteText((11, 1), $"{OldCharacterStatisticType.Influence.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Influence.ToNew)}", False, Hue.Black)
