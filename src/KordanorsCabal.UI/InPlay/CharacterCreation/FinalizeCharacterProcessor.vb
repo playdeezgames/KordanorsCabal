@@ -14,14 +14,14 @@
             New List(Of (String, Func(Of UIState))) From
             {
                 ("Cancel", Function() cancelState),
-                ($"{OldCharacterStatisticType.Strength.Name}: ?", Function() ApplyPoint(OldCharacterStatisticType.Strength, nextState, currentState)),
-                ($"{OldCharacterStatisticType.Dexterity.Name}: ?", Function() ApplyPoint(OldCharacterStatisticType.Dexterity, nextState, currentState)),
-                ($"{OldCharacterStatisticType.Influence.Name}: ?", Function() ApplyPoint(OldCharacterStatisticType.Influence, nextState, currentState)),
-                ($"{OldCharacterStatisticType.Willpower.Name}: ?", Function() ApplyPoint(OldCharacterStatisticType.Willpower, nextState, currentState)),
-                ($"{OldCharacterStatisticType.Power.Name}: ?", Function() ApplyPoint(OldCharacterStatisticType.Power, nextState, currentState)),
-                ($"{OldCharacterStatisticType.HP.Name}: ?", Function() ApplyPoint(OldCharacterStatisticType.HP, nextState, currentState)),
-                ($"{OldCharacterStatisticType.MP.Name}: ?", Function() ApplyPoint(OldCharacterStatisticType.MP, nextState, currentState)),
-                ($"{OldCharacterStatisticType.Mana.Name}: ?", Function() ApplyPoint(OldCharacterStatisticType.Mana, nextState, currentState))
+                ($"STR: ?", Function() ApplyPoint(OldCharacterStatisticType.Strength, nextState, currentState)),
+                ($"DEX: ?", Function() ApplyPoint(OldCharacterStatisticType.Dexterity, nextState, currentState)),
+                ($"INF: ?", Function() ApplyPoint(OldCharacterStatisticType.Influence, nextState, currentState)),
+                ($"WIL: ?", Function() ApplyPoint(OldCharacterStatisticType.Willpower, nextState, currentState)),
+                ($"POW: ?", Function() ApplyPoint(OldCharacterStatisticType.Power, nextState, currentState)),
+                ($"HP: ?", Function() ApplyPoint(OldCharacterStatisticType.HP, nextState, currentState)),
+                ($"MP: ?", Function() ApplyPoint(OldCharacterStatisticType.MP, nextState, currentState)),
+                ($"Mana: ?", Function() ApplyPoint(OldCharacterStatisticType.Mana, nextState, currentState))
             },
             7,
             currentState)
