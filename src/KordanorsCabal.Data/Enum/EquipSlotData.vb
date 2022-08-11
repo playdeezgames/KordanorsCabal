@@ -1,5 +1,5 @@
 ﻿Public Class EquipSlotData
-    Inherits BaseData
+    Inherits NameCacheData
     Friend Const TableName = "EquipSlots"
     Friend Const EquipSlotIdColumn = "EquipSlotId"
     Friend Const EquipSlotNameColumn = "EquipSlotName"
@@ -11,23 +11,6 @@
             EquipSlotNameColumn,
             (EquipSlotIdColumn, equipSlotId))
     End Function
-    Private ReadOnly nameLookUp As New Dictionary(Of String, Long)
-    Public Function ReadForName(equipSlotName As String) As Long?
-        Dim candidate As Long = 0
-        If nameLookUp.TryGetValue(equipSlotName, candidate) Then
-            Return candidate
-        End If
-        Dim result = Store.ReadColumnValue(Of String, Long)(
-            AddressOf Initialize,
-            TableName,
-            EquipSlotIdColumn,
-            (EquipSlotNameColumn, equipSlotName))
-        If result.HasValue Then
-            nameLookUp(equipSlotName) = result.Value
-        End If
-        Return result
-    End Function
-
     Friend Sub Initialize()
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
@@ -50,5 +33,10 @@
 
     Public Sub New(store As Store)
         MyBase.New(store)
+        lookUpByName = Function(name) store.ReadColumnValue(Of String, Long)(
+            AddressOf Initialize,
+            TableName,
+            EquipSlotIdColumn,
+            (EquipSlotNameColumn, name))
     End Sub
 End Class

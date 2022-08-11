@@ -1,27 +1,9 @@
 ﻿Public Class LocationTypeData
-    Inherits BaseData
+    Inherits NameCacheData
     Friend Const TableName = "LocationTypes"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const LocationTypeNameColumn = "LocationTypeName"
     Friend Const IsDungeonColumn = "IsDungeon"
-    Private nameLookUp As New Dictionary(Of String, Long)
-
-    Public Function ReadForName(name As String) As Long?
-        Dim candidate As Long = 0
-        If nameLookUp.TryGetValue(name, candidate) Then
-            Return candidate
-        End If
-        Dim result = Store.ReadColumnValue(Of String, Long)(
-            AddressOf Initialize,
-            TableName,
-            LocationTypeIdColumn,
-            (LocationTypeNameColumn, name))
-        If result.HasValue Then
-            nameLookUp(name) = result.Value
-        End If
-        Return result
-    End Function
-
     Friend Const CanMapColumn = "CanMap"
     Friend Const RequiresMPColumn = "RequiresMP"
     Friend Sub Initialize()
@@ -76,6 +58,11 @@
 
     Public Sub New(store As Store)
         MyBase.New(store)
+        lookUpByName = Function(name) store.ReadColumnValue(Of String, Long)(
+            AddressOf Initialize,
+            TableName,
+            LocationTypeIdColumn,
+            (LocationTypeNameColumn, name))
     End Sub
 
     Public Function ReadName(locationTypeId As Long) As String

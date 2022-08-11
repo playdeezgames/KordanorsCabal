@@ -1,5 +1,5 @@
 ﻿Public Class DirectionData
-    Inherits BaseData
+    Inherits NameCacheData
     Friend Const TableName = "Directions"
     Friend Const DirectionIdColumn = "DirectionId"
     Friend Const DirectionNameColumn = "DirectionName"
@@ -41,23 +41,12 @@
 
     Public Sub New(store As Store)
         MyBase.New(store)
-    End Sub
-    Private ReadOnly nameLookUp As New Dictionary(Of String, Long)
-    Public Function ReadForName(directionName As String) As Long?
-        Dim candidate As Long = 0
-        If nameLookUp.TryGetValue(directionName, candidate) Then
-            Return candidate
-        End If
-        Dim result = Store.ReadColumnValue(Of String, Long)(
+        lookUpByName = Function(name) store.ReadColumnValue(Of String, Long)(
             AddressOf Initialize,
             TableName,
             DirectionIdColumn,
-            (DirectionNameColumn, directionName))
-        If result.HasValue Then
-            nameLookUp(directionName) = result.Value
-        End If
-        Return result
-    End Function
+            (DirectionNameColumn, name))
+    End Sub
 
     Public Function ReadName(directionId As Long) As String
         Return Store.ReadColumnString(
