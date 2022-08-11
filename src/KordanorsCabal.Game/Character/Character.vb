@@ -238,10 +238,10 @@
     End Property
     Property CurrentHP As Long
         Get
-            Return Math.Max(0, MaximumHP - GetStatistic(OldCharacterStatisticType.Wounds.ToNew).Value)
+            Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Wounds.ToNew, GetStatistic(OldCharacterStatisticType.HP.ToNew).Value - value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), GetStatistic(OldCharacterStatisticType.HP.ToNew).Value - value)
         End Set
     End Property
     ReadOnly Property MaximumHP As Long
@@ -271,7 +271,7 @@
         End Set
     End Property
     Friend Sub DoDamage(damage As Long)
-        ChangeStatistic(OldCharacterStatisticType.Wounds.ToNew, damage)
+        ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), damage)
     End Sub
     Friend Sub DoFatigue(fatigue As Long)
         ChangeStatistic(OldCharacterStatisticType.Fatigue.ToNew, fatigue)
@@ -281,7 +281,7 @@
     End Sub
     ReadOnly Property IsDead As Boolean
         Get
-            Return GetStatistic(OldCharacterStatisticType.Wounds.ToNew).Value >= GetStatistic(OldCharacterStatisticType.HP.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds)).Value >= GetStatistic(OldCharacterStatisticType.HP.ToNew).Value
         End Get
     End Property
     Function DetermineDamage(value As Long) As Long
@@ -307,7 +307,7 @@
     End Property
     ReadOnly Property NeedsHealing As Boolean
         Get
-            Return GetStatistic(OldCharacterStatisticType.Wounds.ToNew).Value > 0
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds)).Value > 0
         End Get
     End Property
     Friend Function DoWeaponWear(wear As Long) As IEnumerable(Of ItemType)
@@ -381,7 +381,7 @@
             ChangeStatistic(OldCharacterStatisticType.XP.ToNew, -xpGoal)
             ChangeStatistic(OldCharacterStatisticType.XPGoal.ToNew, xpGoal)
             ChangeStatistic(OldCharacterStatisticType.Unassigned.ToNew, 1)
-            SetStatistic(OldCharacterStatisticType.Wounds.ToNew, 0)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), 0)
             SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress), 0)
             SetStatistic(OldCharacterStatisticType.Fatigue.ToNew, 0)
             Return True
@@ -699,7 +699,7 @@
         Return CanMove(Direction)
     End Function
     Public Sub Heal()
-        SetStatistic(OldCharacterStatisticType.Wounds.ToNew, 0)
+        SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), 0)
     End Sub
     Public Function CanMoveBackward() As Boolean
         Return CanMove(Direction.Opposite)
