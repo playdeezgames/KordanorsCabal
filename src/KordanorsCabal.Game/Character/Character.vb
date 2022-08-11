@@ -114,7 +114,7 @@
         Return character
     End Function
     Public Sub SetStatistic(statisticType As OldCharacterStatisticType, statisticValue As Long)
-        StaticWorldData.World.CharacterStatistic.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
+        StaticWorldData.World.CharacterStatistic.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.ToNew.MinimumValue), statisticType.ToNew.MaximumValue))
     End Sub
     Friend Sub ChangeStatistic(statisticType As OldCharacterStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
@@ -132,7 +132,7 @@
         Return New Character(characterId)
     End Function
     Public Function GetStatistic(statisticType As OldCharacterStatisticType) As Long?
-        Dim result = If(StaticWorldData.World.CharacterStatistic.Read(Id, statisticType), statisticType.DefaultValue)
+        Dim result = If(StaticWorldData.World.CharacterStatistic.Read(Id, statisticType), statisticType.ToNew.DefaultValue)
         If result.HasValue Then
             For Each item In EquippedItems
                 Dim buff As Long = If(item.EquippedBuff(statisticType), 0)
@@ -781,7 +781,7 @@
             FoodPoisoning -= 1
             Chafing -= 1
             Location = Location.Routes(direction).Move(Me)
-            If Hunger = OldCharacterStatisticType.Hunger.MaximumValue Then
+            If Hunger = OldCharacterStatisticType.Hunger.ToNew.MaximumValue Then
                 Hunger \= 2
                 CurrentHP -= 1
                 Return True
