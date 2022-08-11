@@ -208,7 +208,7 @@
         Return RollDice(If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Willpower)), 0) + NegativeInfluence())
     End Function
     Private Function GetAttackDice() As Long
-        Dim dice = GetStatistic(OldCharacterStatisticType.Strength.ToNew).Value
+        Dim dice = GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Strength)).Value
         For Each entry In EquippedItems
             dice += entry.AttackDice
         Next

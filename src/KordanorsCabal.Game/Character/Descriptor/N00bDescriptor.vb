@@ -34,7 +34,7 @@
 
     Public Overrides ReadOnly Property MaximumEncumbrance(character As Character) As Long
         Get
-            Return 50 + If(character.GetStatistic(OldCharacterStatisticType.Strength.ToNew), 0) * 10
+            Return 50 + If(character.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Strength)), 0) * 10
         End Get
     End Property
 
