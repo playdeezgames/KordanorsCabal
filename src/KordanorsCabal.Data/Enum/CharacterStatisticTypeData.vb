@@ -52,12 +52,12 @@
                     (15,'Fatigue','Fatigue',0,NULL,99999),
                     (16,'XP','XP',0,NULL,99999),
                     (17,'XP Goal','XP Goal',0,NULL,99999),
-                    (18,'Drunkenness','',0,0,99999),
-                    (19,'Highness','',0,NULL,99999),
-                    (20,'Hunger','',0,0,100),
-                    (21,'Food Poisoning','',0,NULL,99999),
-                    (22,'Chafing','',0,0,99999),
-                    (23,'Immobilization','',0,NULL,99999))
+                    (18,'Drunkenness','Drunkenness',0,0,99999),
+                    (19,'Highness','Highness',0,NULL,99999),
+                    (20,'Hunger','Hunger',0,0,100),
+                    (21,'Food Poisoning','Food Poisoning',0,NULL,99999),
+                    (22,'Chafing','Chafing',0,0,99999),
+                    (23,'Immobilization','Immobilization',0,NULL,99999))
                 SELECT 
                     [{CharacterStatisticTypeIdColumn}],
                     [{CharacterStatisticTypeNameColumn}],
