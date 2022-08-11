@@ -221,7 +221,7 @@
         Return False
     End Function
     Friend Sub AddStress(delta As Long)
-        ChangeStatistic(OldCharacterStatisticType.Stress.ToNew, delta)
+        ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress), delta)
     End Sub
     ReadOnly Property CanIntimidate As Boolean
         Get
@@ -256,10 +256,10 @@
     End Property
     Property CurrentMP As Long
         Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromName(MP)).Value - GetStatistic(OldCharacterStatisticType.Stress.ToNew).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromName(MP)).Value - GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Stress.ToNew, GetStatistic(CharacterStatisticType.FromName(MP)).Value - value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress), GetStatistic(CharacterStatisticType.FromName(MP)).Value - value)
         End Set
     End Property
     Property CurrentMana As Long
@@ -382,7 +382,7 @@
             ChangeStatistic(OldCharacterStatisticType.XPGoal.ToNew, xpGoal)
             ChangeStatistic(OldCharacterStatisticType.Unassigned.ToNew, 1)
             SetStatistic(OldCharacterStatisticType.Wounds.ToNew, 0)
-            SetStatistic(OldCharacterStatisticType.Stress.ToNew, 0)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress), 0)
             SetStatistic(OldCharacterStatisticType.Fatigue.ToNew, 0)
             Return True
         End If
