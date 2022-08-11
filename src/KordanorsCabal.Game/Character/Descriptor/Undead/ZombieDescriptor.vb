@@ -10,8 +10,8 @@
                     {OldCharacterStatisticType.Dexterity, 3},
                     {OldCharacterStatisticType.HP, 1},
                     {23, 0},
-                    {OldCharacterStatisticType.UnarmedMaximumDamage, 2},
-                    {OldCharacterStatisticType.Wounds, 0}
+                    {10, 2},
+                    {12, 0}
                 }
         End Get
     End Property

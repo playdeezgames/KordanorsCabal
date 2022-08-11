@@ -34,7 +34,7 @@
             {OldCharacterStatisticType.Strength, 1},
             {OldCharacterStatisticType.Dexterity, 2},
             {3, 3},
-            {OldCharacterStatisticType.Willpower, 4},
+            {4, 4},
             {OldCharacterStatisticType.Power, 5},
             {OldCharacterStatisticType.HP, 6},
             {7, 7},

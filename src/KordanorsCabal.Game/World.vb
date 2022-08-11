@@ -273,7 +273,7 @@ Public Module World
             {3, 1},
             {OldCharacterStatisticType.Strength, 1},
             {OldCharacterStatisticType.Unassigned, 2},
-            {OldCharacterStatisticType.Willpower, 1}
+            {4, 1}
         }
 
     ReadOnly SecondRollTable As IReadOnlyDictionary(Of Long, Integer) =
@@ -284,7 +284,7 @@ Public Module World
             {OldCharacterStatisticType.Power, 1},
             {OldCharacterStatisticType.Strength, 1},
             {OldCharacterStatisticType.Unassigned, 1},
-            {OldCharacterStatisticType.Willpower, 1}
+            {4, 1}
         }
 
     Private Sub FirstRoll()

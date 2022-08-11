@@ -21,11 +21,11 @@
                     {7, 3},
                     {OldCharacterStatisticType.Power, 1},
                     {OldCharacterStatisticType.Strength, 1},
-                    {OldCharacterStatisticType.Stress, 0},
-                    {OldCharacterStatisticType.UnarmedMaximumDamage, 1},
+                    {13, 0},
+                    {10, 1},
                     {OldCharacterStatisticType.Unassigned, 8},
-                    {OldCharacterStatisticType.Willpower, 1},
-                    {OldCharacterStatisticType.Wounds, 0},
+                    {4, 1},
+                    {12, 0},
                     {OldCharacterStatisticType.XP, 0},
                     {OldCharacterStatisticType.XPGoal, 10}
                 }

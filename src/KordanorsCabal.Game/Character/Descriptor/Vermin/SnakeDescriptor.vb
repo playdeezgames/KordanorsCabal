@@ -11,10 +11,10 @@
                     {23, 0},
                     {3, 0},
                     {7, 1},
-                    {OldCharacterStatisticType.Stress, 0},
-                    {OldCharacterStatisticType.UnarmedMaximumDamage, 2},
-                    {OldCharacterStatisticType.Willpower, 1},
-                    {OldCharacterStatisticType.Wounds, 0}
+                    {13, 0},
+                    {10, 2},
+                    {4, 1},
+                    {12, 0}
                 }
         End Get
     End Property
