@@ -1,15 +1,15 @@
 ﻿Public Class AmuletDescriptor
     Inherits ItemTypeDescriptor
-    Private ReadOnly buffedStatisticType As OldCharacterStatisticType
+    Private ReadOnly buffedStatisticType As Long
 
     Public Sub New(
                   itemTypeId As Long,
-                  statisticType As OldCharacterStatisticType,
+                  statisticType As Long,
                   Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType)) = Nothing,
                   Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing)
         MyBase.New(
             itemTypeId,
-            $"Amulet of {statisticType.ToNew.Abbreviation}", ,
+            $"Amulet of {New CharacterStatisticType(itemTypeId).Abbreviation}", ,
             spawnLocationTypes,
             spawnCounts,
             MakeList(EquipSlot.FromName(Neck)),

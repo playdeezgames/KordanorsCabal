@@ -34,7 +34,7 @@
     ReadOnly Property Use As Action(Of Character)
     ReadOnly Property CanUse As Func(Of Character, Boolean)
 
-    Function EquippedBuff(statisticType As OldCharacterStatisticType) As Long?
+    Function EquippedBuff(statisticType As Long) As Long?
         If buffs Is Nothing Then
             Return Nothing
         End If
