@@ -1,6 +1,4 @@
-﻿Imports System.Runtime.CompilerServices
-
-Public Enum OldCharacterStatisticType
+﻿Public Enum OldCharacterStatisticType
     None
     Strength
     Dexterity

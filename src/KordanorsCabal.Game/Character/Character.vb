@@ -44,7 +44,7 @@
     End Function
     Property Money As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Money).Value
+            Return GetStatistic(OldCharacterStatisticType.Money.ToNew).Value
         End Get
         Set(value As Long)
             SetStatistic(OldCharacterStatisticType.Money, value)
@@ -64,7 +64,7 @@
         If nextLevel > spellType.MaximumLevel Then
             Return False
         End If
-        Return If(GetStatistic(OldCharacterStatisticType.Power), 0) >= spellType.RequiredPower(nextLevel)
+        Return If(GetStatistic(OldCharacterStatisticType.Power.ToNew), 0) >= spellType.RequiredPower(nextLevel)
     End Function
 
     Friend Sub DoImmobilization(delta As Long)
@@ -79,7 +79,7 @@
     End Function
     ReadOnly Property Power As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Power).Value
+            Return GetStatistic(OldCharacterStatisticType.Power.ToNew).Value
         End Get
     End Property
 
@@ -117,7 +117,7 @@
         StaticWorldData.World.CharacterStatistic.Write(Id, statisticType, Math.Min(Math.Max(statisticValue, statisticType.ToNew.MinimumValue), statisticType.ToNew.MaximumValue))
     End Sub
     Friend Sub ChangeStatistic(statisticType As OldCharacterStatisticType, delta As Long)
-        SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
+        SetStatistic(statisticType, GetStatistic(statisticType.ToNew).Value + delta)
     End Sub
     Property Location As Location
         Get
@@ -131,11 +131,11 @@
     Shared Function FromId(characterId As Long) As Character
         Return New Character(characterId)
     End Function
-    Public Function GetStatistic(statisticType As OldCharacterStatisticType) As Long?
-        Dim result = If(StaticWorldData.World.CharacterStatistic.Read(Id, statisticType), statisticType.ToNew.DefaultValue)
+    Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
+        Dim result = If(StaticWorldData.World.CharacterStatistic.Read(Id, statisticType.Id), statisticType.DefaultValue)
         If result.HasValue Then
             For Each item In EquippedItems
-                Dim buff As Long = If(item.EquippedBuff(statisticType), 0)
+                Dim buff As Long = If(item.EquippedBuff(statisticType.ToOld), 0)
                 result = result.Value + buff
             Next
         End If
@@ -185,11 +185,11 @@
         Return result
     End Function
     Friend Function RollDefend() As Long
-        Dim maximumDefend = GetStatistic(OldCharacterStatisticType.BaseMaximumDefend).Value
+        Dim maximumDefend = GetStatistic(OldCharacterStatisticType.BaseMaximumDefend.ToNew).Value
         Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
     End Function
     Private Function GetDefendDice() As Long
-        Dim dice = GetStatistic(OldCharacterStatisticType.Dexterity).Value
+        Dim dice = GetStatistic(OldCharacterStatisticType.Dexterity.ToNew).Value
         For Each entry In EquippedItems
             dice += entry.DefendDice
         Next
@@ -202,20 +202,20 @@
         Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
     End Function
     Friend Function RollInfluence() As Long
-        Return RollDice(If(GetStatistic(OldCharacterStatisticType.Influence), 0) + NegativeInfluence())
+        Return RollDice(If(GetStatistic(OldCharacterStatisticType.Influence.ToNew), 0) + NegativeInfluence())
     End Function
     Friend Function RollWillpower() As Long
-        Return RollDice(If(GetStatistic(OldCharacterStatisticType.Willpower), 0) + NegativeInfluence())
+        Return RollDice(If(GetStatistic(OldCharacterStatisticType.Willpower.ToNew), 0) + NegativeInfluence())
     End Function
     Private Function GetAttackDice() As Long
-        Dim dice = GetStatistic(OldCharacterStatisticType.Strength).Value
+        Dim dice = GetStatistic(OldCharacterStatisticType.Strength.ToNew).Value
         For Each entry In EquippedItems
             dice += entry.AttackDice
         Next
         Return dice
     End Function
     Friend Function IsDemoralized() As Boolean
-        If GetStatistic(OldCharacterStatisticType.Willpower).HasValue Then
+        If GetStatistic(OldCharacterStatisticType.Willpower.ToNew).HasValue Then
             Return CurrentMP <= 0
         End If
         Return False
@@ -225,7 +225,7 @@
     End Sub
     ReadOnly Property CanIntimidate As Boolean
         Get
-            If Not GetStatistic(OldCharacterStatisticType.Willpower).HasValue Then
+            If Not GetStatistic(OldCharacterStatisticType.Willpower.ToNew).HasValue Then
                 Return False
             End If
             Return Location.Friends(Me).Count <= Location.Enemies(Me).Count
@@ -238,15 +238,15 @@
     End Property
     Property CurrentHP As Long
         Get
-            Return Math.Max(0, MaximumHP - GetStatistic(OldCharacterStatisticType.Wounds).Value)
+            Return Math.Max(0, MaximumHP - GetStatistic(OldCharacterStatisticType.Wounds.ToNew).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Wounds, GetStatistic(OldCharacterStatisticType.HP).Value - value)
+            SetStatistic(OldCharacterStatisticType.Wounds, GetStatistic(OldCharacterStatisticType.HP.ToNew).Value - value)
         End Set
     End Property
     ReadOnly Property MaximumHP As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.HP).Value
+            Return GetStatistic(OldCharacterStatisticType.HP.ToNew).Value
         End Get
     End Property
     ReadOnly Property PartingShot As String
@@ -256,18 +256,18 @@
     End Property
     Property CurrentMP As Long
         Get
-            Return Math.Max(0, GetStatistic(OldCharacterStatisticType.MP).Value - GetStatistic(OldCharacterStatisticType.Stress).Value)
+            Return Math.Max(0, GetStatistic(OldCharacterStatisticType.MP.ToNew).Value - GetStatistic(OldCharacterStatisticType.Stress.ToNew).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Stress, GetStatistic(OldCharacterStatisticType.MP).Value - value)
+            SetStatistic(OldCharacterStatisticType.Stress, GetStatistic(OldCharacterStatisticType.MP.ToNew).Value - value)
         End Set
     End Property
     Property CurrentMana As Long
         Get
-            Return Math.Max(0, GetStatistic(OldCharacterStatisticType.Mana).Value - GetStatistic(OldCharacterStatisticType.Fatigue).Value)
+            Return Math.Max(0, GetStatistic(OldCharacterStatisticType.Mana.ToNew).Value - GetStatistic(OldCharacterStatisticType.Fatigue.ToNew).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Fatigue, GetStatistic(OldCharacterStatisticType.Mana).Value - value)
+            SetStatistic(OldCharacterStatisticType.Fatigue, GetStatistic(OldCharacterStatisticType.Mana.ToNew).Value - value)
         End Set
     End Property
     Friend Sub DoDamage(damage As Long)
@@ -281,7 +281,7 @@
     End Sub
     ReadOnly Property IsDead As Boolean
         Get
-            Return GetStatistic(OldCharacterStatisticType.Wounds).Value >= GetStatistic(OldCharacterStatisticType.HP).Value
+            Return GetStatistic(OldCharacterStatisticType.Wounds.ToNew).Value >= GetStatistic(OldCharacterStatisticType.HP.ToNew).Value
         End Get
     End Property
     Function DetermineDamage(value As Long) As Long
@@ -292,7 +292,7 @@
                 maximumDamage = If(maximumDamage, 0) + itemMaximumDamage.Value
             End If
         Next
-        maximumDamage = If(maximumDamage, GetStatistic(OldCharacterStatisticType.UnarmedMaximumDamage).Value)
+        maximumDamage = If(maximumDamage, GetStatistic(OldCharacterStatisticType.UnarmedMaximumDamage.ToNew).Value)
         Return If(value < 0, 0, If(value > maximumDamage.Value, maximumDamage.Value, value))
     End Function
     ReadOnly Property RollMoneyDrop As Long
@@ -307,7 +307,7 @@
     End Property
     ReadOnly Property NeedsHealing As Boolean
         Get
-            Return GetStatistic(OldCharacterStatisticType.Wounds).Value > 0
+            Return GetStatistic(OldCharacterStatisticType.Wounds.ToNew).Value > 0
         End Get
     End Property
     Friend Function DoWeaponWear(wear As Long) As IEnumerable(Of ItemType)
@@ -376,8 +376,8 @@
     End Property
     Friend Function AddXP(xp As Long) As Boolean
         ChangeStatistic(OldCharacterStatisticType.XP, xp)
-        Dim xpGoal = GetStatistic(OldCharacterStatisticType.XPGoal).Value
-        If GetStatistic(OldCharacterStatisticType.XP).Value >= xpGoal Then
+        Dim xpGoal = GetStatistic(OldCharacterStatisticType.XPGoal.ToNew).Value
+        If GetStatistic(OldCharacterStatisticType.XP.ToNew).Value >= xpGoal Then
             ChangeStatistic(OldCharacterStatisticType.XP, -xpGoal)
             ChangeStatistic(OldCharacterStatisticType.XPGoal, xpGoal)
             ChangeStatistic(OldCharacterStatisticType.Unassigned, 1)
@@ -443,7 +443,7 @@
     End Sub
 
     Private Function IsImmobilized() As Boolean
-        Return If(GetStatistic(OldCharacterStatisticType.Immobilization), 0) > 0
+        Return If(GetStatistic(OldCharacterStatisticType.Immobilization.ToNew), 0) > 0
     End Function
 
     Private Sub DoMentalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
@@ -531,7 +531,7 @@
     End Function
     Property Drunkenness As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Drunkenness).Value
+            Return GetStatistic(OldCharacterStatisticType.Drunkenness.ToNew).Value
         End Get
         Set(value As Long)
             SetStatistic(OldCharacterStatisticType.Drunkenness, value)
@@ -539,7 +539,7 @@
     End Property
     Property Chafing As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Chafing).Value
+            Return GetStatistic(OldCharacterStatisticType.Chafing.ToNew).Value
         End Get
         Set(value As Long)
             SetStatistic(OldCharacterStatisticType.Chafing, value)
@@ -547,7 +547,7 @@
     End Property
     Property Highness As Long
         Get
-            Return If(GetStatistic(OldCharacterStatisticType.Highness), 0)
+            Return If(GetStatistic(OldCharacterStatisticType.Highness.ToNew), 0)
         End Get
         Set(value As Long)
             SetStatistic(OldCharacterStatisticType.Highness, value)
@@ -555,7 +555,7 @@
     End Property
     Property Hunger As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Hunger).Value
+            Return GetStatistic(OldCharacterStatisticType.Hunger.ToNew).Value
         End Get
         Set(value As Long)
             SetStatistic(OldCharacterStatisticType.Hunger, value)
@@ -563,12 +563,12 @@
     End Property
     Public ReadOnly Property MaximumMana As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Mana).Value
+            Return GetStatistic(OldCharacterStatisticType.Mana.ToNew).Value
         End Get
     End Property
     Public Property FoodPoisoning As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.FoodPoisoning).Value
+            Return GetStatistic(OldCharacterStatisticType.FoodPoisoning.ToNew).Value
         End Get
         Set(value As Long)
             SetStatistic(OldCharacterStatisticType.FoodPoisoning, value)
@@ -576,7 +576,7 @@
     End Property
     ReadOnly Property IsFullyAssigned As Boolean
         Get
-            Return If(GetStatistic(OldCharacterStatisticType.Unassigned), 0) = 0
+            Return If(GetStatistic(OldCharacterStatisticType.Unassigned.ToNew), 0) = 0
         End Get
     End Property
     Public Sub AssignPoint(statisticType As OldCharacterStatisticType)
@@ -711,7 +711,7 @@
     End Sub
     ReadOnly Property CanDoIntimidation() As Boolean
         Get
-            If If(GetStatistic(OldCharacterStatisticType.Influence), 0) <= 0 Then
+            If If(GetStatistic(OldCharacterStatisticType.Influence.ToNew), 0) <= 0 Then
                 Return False
             End If
             Dim enemy = Location.Enemies(Me).FirstOrDefault

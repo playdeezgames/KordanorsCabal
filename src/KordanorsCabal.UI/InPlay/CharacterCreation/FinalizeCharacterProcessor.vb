@@ -44,10 +44,10 @@
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteTextCentered(0, prompt, True, Hue.Blue)
         Dim player = World.PlayerCharacter
-        buffer.WriteTextCentered(2, $"{OldCharacterStatisticType.Unassigned.Name}: {player.GetStatistic(OldCharacterStatisticType.Unassigned)}", False, Hue.Purple)
+        buffer.WriteTextCentered(2, $"{OldCharacterStatisticType.Unassigned.ToNew.Name}: {player.GetStatistic(OldCharacterStatisticType.Unassigned.ToNew)}", False, Hue.Purple)
         buffer.WriteText((0, 4), "Choose where to assignpoint(s):", False, Hue.Black)
         For Each entry In table
-            UpdateMenuItemText(entry.Value, $"{entry.Key.Name}: {player.GetStatistic(entry.Key)}")
+            UpdateMenuItemText(entry.Value, $"{entry.Key.ToNew.Name}: {player.GetStatistic(entry.Key.ToNew)}")
         Next
     End Sub
 End Class
