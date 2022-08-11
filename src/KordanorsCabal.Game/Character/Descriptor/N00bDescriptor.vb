@@ -15,7 +15,7 @@
                     {OldCharacterStatisticType.HP, 3},
                     {23, 0},
                     {OldCharacterStatisticType.Hunger, 0},
-                    {OldCharacterStatisticType.Influence, 1},
+                    {3, 1},
                     {OldCharacterStatisticType.Mana, 1},
                     {OldCharacterStatisticType.Money, 0},
                     {OldCharacterStatisticType.MP, 3},

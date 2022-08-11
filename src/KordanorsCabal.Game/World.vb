@@ -261,26 +261,26 @@ Public Module World
         PlayerCharacter.SetStatistic(OldCharacterStatisticType.Unassigned.ToNew, 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(SecondRollTable)
-            PlayerCharacter.ChangeStatistic(statisticType.ToNew, 1)
+            PlayerCharacter.ChangeStatistic(New CharacterStatisticType(statisticType), 1)
             dice -= 1
         End While
     End Sub
 
-    ReadOnly FirstRollTable As IReadOnlyDictionary(Of OldCharacterStatisticType, Integer) =
-        New Dictionary(Of OldCharacterStatisticType, Integer) From
+    ReadOnly FirstRollTable As IReadOnlyDictionary(Of Long, Integer) =
+        New Dictionary(Of Long, Integer) From
         {
             {OldCharacterStatisticType.Dexterity, 1},
-            {OldCharacterStatisticType.Influence, 1},
+            {3, 1},
             {OldCharacterStatisticType.Strength, 1},
             {OldCharacterStatisticType.Unassigned, 2},
             {OldCharacterStatisticType.Willpower, 1}
         }
 
-    ReadOnly SecondRollTable As IReadOnlyDictionary(Of OldCharacterStatisticType, Integer) =
-        New Dictionary(Of OldCharacterStatisticType, Integer) From
+    ReadOnly SecondRollTable As IReadOnlyDictionary(Of Long, Integer) =
+        New Dictionary(Of Long, Integer) From
         {
             {OldCharacterStatisticType.Dexterity, 1},
-            {OldCharacterStatisticType.Influence, 1},
+            {3, 1},
             {OldCharacterStatisticType.Power, 1},
             {OldCharacterStatisticType.Strength, 1},
             {OldCharacterStatisticType.Unassigned, 1},
@@ -292,7 +292,7 @@ Public Module World
         PlayerCharacter.SetStatistic(OldCharacterStatisticType.Unassigned.ToNew, 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(FirstRollTable)
-            PlayerCharacter.ChangeStatistic(statisticType.ToNew, 1)
+            PlayerCharacter.ChangeStatistic(New CharacterStatisticType(statisticType), 1)
             dice -= 1
         End While
     End Sub

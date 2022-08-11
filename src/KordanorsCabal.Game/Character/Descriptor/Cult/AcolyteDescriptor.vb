@@ -10,7 +10,7 @@
                     {2, 2},
                     {6, 2},
                     {23, 0},
-                    {OldCharacterStatisticType.Influence, 0},
+                    {3, 0},
                     {OldCharacterStatisticType.MP, 2},
                     {OldCharacterStatisticType.Stress, 0},
                     {OldCharacterStatisticType.UnarmedMaximumDamage, 3},

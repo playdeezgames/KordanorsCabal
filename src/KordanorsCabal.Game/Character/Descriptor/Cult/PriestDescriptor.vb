@@ -10,7 +10,7 @@
                     {OldCharacterStatisticType.Dexterity, 3},
                     {OldCharacterStatisticType.HP, 3},
                     {23, 0},
-                    {OldCharacterStatisticType.Influence, 3},
+                    {3, 3},
                     {OldCharacterStatisticType.MP, 3},
                     {OldCharacterStatisticType.Stress, 0},
                     {OldCharacterStatisticType.UnarmedMaximumDamage, 3},
