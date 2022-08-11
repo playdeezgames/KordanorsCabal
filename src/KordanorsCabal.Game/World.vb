@@ -257,8 +257,8 @@ Public Module World
     End Sub
 
     Private Sub SecondRoll()
-        Dim dice = PlayerCharacter.GetStatistic(OldCharacterStatisticType.Unassigned.ToNew)
-        PlayerCharacter.SetStatistic(OldCharacterStatisticType.Unassigned.ToNew, 0)
+        Dim dice = PlayerCharacter.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned))
+        PlayerCharacter.SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(SecondRollTable)
             PlayerCharacter.ChangeStatistic(New CharacterStatisticType(statisticType), 1)
@@ -288,8 +288,8 @@ Public Module World
         }
 
     Private Sub FirstRoll()
-        Dim dice = PlayerCharacter.GetStatistic(OldCharacterStatisticType.Unassigned.ToNew)
-        PlayerCharacter.SetStatistic(OldCharacterStatisticType.Unassigned.ToNew, 0)
+        Dim dice = PlayerCharacter.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned))
+        PlayerCharacter.SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(FirstRollTable)
             PlayerCharacter.ChangeStatistic(New CharacterStatisticType(statisticType), 1)

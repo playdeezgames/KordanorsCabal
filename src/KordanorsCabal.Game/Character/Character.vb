@@ -241,12 +241,12 @@
             Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), GetStatistic(OldCharacterStatisticType.HP.ToNew).Value - value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP)).Value - value)
         End Set
     End Property
     ReadOnly Property MaximumHP As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.HP.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP)).Value
         End Get
     End Property
     ReadOnly Property PartingShot As String
@@ -264,24 +264,24 @@
     End Property
     Property CurrentMana As Long
         Get
-            Return Math.Max(0, GetStatistic(OldCharacterStatisticType.Mana.ToNew).Value - GetStatistic(OldCharacterStatisticType.Fatigue.ToNew).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana)).Value - GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Fatigue)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Fatigue.ToNew, GetStatistic(OldCharacterStatisticType.Mana.ToNew).Value - value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Fatigue), GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana)).Value - value)
         End Set
     End Property
     Friend Sub DoDamage(damage As Long)
         ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), damage)
     End Sub
     Friend Sub DoFatigue(fatigue As Long)
-        ChangeStatistic(OldCharacterStatisticType.Fatigue.ToNew, fatigue)
+        ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Fatigue), fatigue)
     End Sub
     Friend Sub Destroy()
         StaticWorldData.World.Character.Clear(Id)
     End Sub
     ReadOnly Property IsDead As Boolean
         Get
-            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds)).Value >= GetStatistic(OldCharacterStatisticType.HP.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds)).Value >= GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP)).Value
         End Get
     End Property
     Function DetermineDamage(value As Long) As Long
@@ -292,7 +292,7 @@
                 maximumDamage = If(maximumDamage, 0) + itemMaximumDamage.Value
             End If
         Next
-        maximumDamage = If(maximumDamage, GetStatistic(OldCharacterStatisticType.UnarmedMaximumDamage.ToNew).Value)
+        maximumDamage = If(maximumDamage, GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.UnarmedMaximumDamage)).Value)
         Return If(value < 0, 0, If(value > maximumDamage.Value, maximumDamage.Value, value))
     End Function
     ReadOnly Property RollMoneyDrop As Long
@@ -375,15 +375,15 @@
         End Get
     End Property
     Friend Function AddXP(xp As Long) As Boolean
-        ChangeStatistic(OldCharacterStatisticType.XP.ToNew, xp)
-        Dim xpGoal = GetStatistic(OldCharacterStatisticType.XPGoal.ToNew).Value
-        If GetStatistic(OldCharacterStatisticType.XP.ToNew).Value >= xpGoal Then
-            ChangeStatistic(OldCharacterStatisticType.XP.ToNew, -xpGoal)
-            ChangeStatistic(OldCharacterStatisticType.XPGoal.ToNew, xpGoal)
-            ChangeStatistic(OldCharacterStatisticType.Unassigned.ToNew, 1)
+        ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XP), xp)
+        Dim xpGoal = GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XPGoal)).Value
+        If GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XP)).Value >= xpGoal Then
+            ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XP), -xpGoal)
+            ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XPGoal), xpGoal)
+            ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned), 1)
             SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), 0)
             SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress), 0)
-            SetStatistic(OldCharacterStatisticType.Fatigue.ToNew, 0)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Fatigue), 0)
             Return True
         End If
         Return False
@@ -531,58 +531,58 @@
     End Function
     Property Drunkenness As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Drunkenness.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Drunkenness)).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Drunkenness.ToNew, value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Drunkenness), value)
         End Set
     End Property
     Property Chafing As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Chafing.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Chafing)).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Chafing.ToNew, value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Chafing), value)
         End Set
     End Property
     Property Highness As Long
         Get
-            Return If(GetStatistic(OldCharacterStatisticType.Highness.ToNew), 0)
+            Return If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Highness)), 0)
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Highness.ToNew, value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Highness), value)
         End Set
     End Property
     Property Hunger As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Hunger.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Hunger)).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.Hunger.ToNew, value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Hunger), value)
         End Set
     End Property
     Public ReadOnly Property MaximumMana As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.Mana.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana)).Value
         End Get
     End Property
     Public Property FoodPoisoning As Long
         Get
-            Return GetStatistic(OldCharacterStatisticType.FoodPoisoning.ToNew).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.FoodPoisoning)).Value
         End Get
         Set(value As Long)
-            SetStatistic(OldCharacterStatisticType.FoodPoisoning.ToNew, value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.FoodPoisoning), value)
         End Set
     End Property
     ReadOnly Property IsFullyAssigned As Boolean
         Get
-            Return If(GetStatistic(OldCharacterStatisticType.Unassigned.ToNew), 0) = 0
+            Return If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned)), 0) = 0
         End Get
     End Property
-    Public Sub AssignPoint(statisticType As OldCharacterStatisticType)
+    Public Sub AssignPoint(statisticType As CharacterStatisticType)
         If Not IsFullyAssigned Then
-            ChangeStatistic(statisticType.ToNew, 1)
-            ChangeStatistic(OldCharacterStatisticType.Unassigned.ToNew, -1)
+            ChangeStatistic(statisticType, 1)
+            ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned), -1)
         End If
     End Sub
     Public ReadOnly Property CanGamble As Boolean
@@ -781,7 +781,7 @@
             FoodPoisoning -= 1
             Chafing -= 1
             Location = Location.Routes(direction).Move(Me)
-            If Hunger = OldCharacterStatisticType.Hunger.ToNew.MaximumValue Then
+            If Hunger = CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Hunger).MaximumValue Then
                 Hunger \= 2
                 CurrentHP -= 1
                 Return True

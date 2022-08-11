@@ -13,7 +13,7 @@
             spawnLocationTypes,
             spawnCounts,
             MakeList(EquipSlot.FromName(Neck)),
-            New Dictionary(Of OldCharacterStatisticType, Long) From {{statisticType, 1}})
+            New Dictionary(Of Long, Long) From {{statisticType, 1}})
         buffedStatisticType = statisticType
     End Sub
 End Class

@@ -29,10 +29,10 @@
                 lines.Add($"You now have {character.CurrentMP} {CharacterStatisticType.FromName(MP).Name}.")
                 Dim lotionItem = character.Inventory.ItemsOfType(ItemType.Lotion).FirstOrDefault
                 If lotionItem Is Nothing Then
-                    lines.Add($"You also receive 10 {OldCharacterStatisticType.Chafing.ToNew.Name}. Try {ItemType.Lotion.Name} next time.")
+                    lines.Add($"You also receive 10 {CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Chafing).Name}. Try {ItemType.Lotion.Name} next time.")
                     character.Chafing = 10
                 Else
-                    lines.Add($"You use a bit of {ItemType.Lotion.Name} to prevent {OldCharacterStatisticType.Chafing.ToNew.Name}.")
+                    lines.Add($"You use a bit of {ItemType.Lotion.Name} to prevent {CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Chafing).Name}.")
                     lotionItem.ReduceDurability(1)
                     If lotionItem.Durability = 0 Then
                         lines.Add($"You ran out that bottle of {ItemType.Lotion.Name}.")

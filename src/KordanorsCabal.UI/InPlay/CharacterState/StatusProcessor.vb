@@ -9,34 +9,34 @@
 
         buffer.WriteText((0, 1), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Strength).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Strength))}", False, Hue.Black)
         buffer.WriteText((0, 2), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity))}", False, Hue.Black)
-        buffer.WriteText((0, 3), $"{OldCharacterStatisticType.HP.ToNew.Abbreviation} {player.CurrentHP}/{player.GetStatistic(OldCharacterStatisticType.HP.ToNew)}", False, Hue.Black)
+        buffer.WriteText((0, 3), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP).Abbreviation} {player.CurrentHP}/{player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP))}", False, Hue.Black)
 
         buffer.WriteText((11, 1), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Influence).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Influence))}", False, Hue.Black)
         buffer.WriteText((11, 2), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Willpower).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Willpower))}", False, Hue.Black)
         buffer.WriteText((11, 3), $"{CharacterStatisticType.FromName(MP).Abbreviation} {player.CurrentMP}/{player.GetStatistic(CharacterStatisticType.FromName(MP))}", False, Hue.Black)
 
         buffer.WriteText((0, 5), $"{CharacterStatisticType.FromName(Power).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(Power))}", False, Hue.Black)
-        buffer.WriteText((0, 6), $"{OldCharacterStatisticType.Mana.ToNew.Abbreviation} {player.CurrentMana}/{player.GetStatistic(OldCharacterStatisticType.Mana.ToNew)}", False, Hue.Black)
+        buffer.WriteText((0, 6), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana).Abbreviation} {player.CurrentMana}/{player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana))}", False, Hue.Black)
 
-        buffer.WriteText((11, 5), $"{OldCharacterStatisticType.XP.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.XP.ToNew)}/{player.GetStatistic(OldCharacterStatisticType.XPGoal.ToNew)}", False, Hue.Black)
+        buffer.WriteText((11, 5), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XP).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XP))}/{player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XPGoal))}", False, Hue.Black)
 
         buffer.WriteText((0, 8), $"{CharacterStatisticType.FromName(Money).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(Money))}", False, Hue.Black)
-        buffer.WriteText((0, 10), $"{OldCharacterStatisticType.Hunger.ToNew.Abbreviation} {player.GetStatistic(OldCharacterStatisticType.Hunger.ToNew)}", False, Hue.Black)
+        buffer.WriteText((0, 10), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Hunger).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Hunger))}", False, Hue.Black)
         Dim row = 11
         If player.Highness > 0 Then
-            buffer.WriteText((0, row), $"{OldCharacterStatisticType.Highness.ToNew.Abbreviation} {player.Highness}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Highness).Abbreviation} {player.Highness}", False, Hue.Black)
             row += 1
         End If
         If player.Drunkenness > 0 Then
-            buffer.WriteText((0, row), $"{OldCharacterStatisticType.Drunkenness.ToNew.Abbreviation} {player.Drunkenness}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Drunkenness).Abbreviation} {player.Drunkenness}", False, Hue.Black)
             row += 1
         End If
         If player.FoodPoisoning > 0 Then
-            buffer.WriteText((0, row), $"{OldCharacterStatisticType.FoodPoisoning.ToNew.Abbreviation} {player.FoodPoisoning}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.FoodPoisoning).Abbreviation} {player.FoodPoisoning}", False, Hue.Black)
             row += 1
         End If
         If player.Chafing > 0 Then
-            buffer.WriteText((0, row), $"{OldCharacterStatisticType.Chafing.ToNew.Abbreviation} {player.Chafing}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Chafing).Abbreviation} {player.Chafing}", False, Hue.Black)
             row += 1
         End If
     End Sub

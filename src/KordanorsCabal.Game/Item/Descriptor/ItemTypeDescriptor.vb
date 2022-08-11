@@ -27,7 +27,7 @@
     Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
 
     '[ItemTypeCharacterStatisticBuffs]([ItemTypeId],[CharacterStatisticTypeId],[StatisticValue])
-    Private ReadOnly Property buffs As IReadOnlyDictionary(Of OldCharacterStatisticType, Long)
+    Private ReadOnly Property buffs As IReadOnlyDictionary(Of Long, Long)
 
     '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName],[ItemActionFilterName])
     ReadOnly Property Purify As Action(Of Item)
@@ -70,7 +70,7 @@
            Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType)) = Nothing,
            Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
-           Optional buffs As IReadOnlyDictionary(Of OldCharacterStatisticType, Long) = Nothing,
+           Optional buffs As IReadOnlyDictionary(Of Long, Long) = Nothing,
            Optional attackDice As Long = 0,
            Optional maximumDamage As Long? = Nothing,
            Optional defendDice As Long = 0,
