@@ -6,28 +6,28 @@
             Return New Dictionary(Of Long, Long) From
                 {
                     {11, 1},
-                    {OldCharacterStatisticType.Chafing, 0},
+                    {22, 0},
                     {2, 1},
-                    {OldCharacterStatisticType.Drunkenness, 0},
-                    {OldCharacterStatisticType.Fatigue, 0},
-                    {OldCharacterStatisticType.FoodPoisoning, 0},
-                    {OldCharacterStatisticType.Highness, 0},
+                    {18, 0},
+                    {15, 0},
+                    {21, 0},
+                    {19, 0},
                     {6, 3},
                     {23, 0},
-                    {OldCharacterStatisticType.Hunger, 0},
+                    {20, 0},
                     {3, 1},
-                    {OldCharacterStatisticType.Mana, 1},
-                    {OldCharacterStatisticType.Money, 0},
+                    {8, 1},
+                    {14, 0},
                     {7, 3},
-                    {OldCharacterStatisticType.Power, 1},
+                    {5, 1},
                     {1, 1},
                     {13, 0},
                     {10, 1},
-                    {OldCharacterStatisticType.Unassigned, 8},
+                    {9, 8},
                     {4, 1},
                     {12, 0},
-                    {OldCharacterStatisticType.XP, 0},
-                    {OldCharacterStatisticType.XPGoal, 10}
+                    {16, 0},
+                    {17, 10}
                 }
         End Get
     End Property
