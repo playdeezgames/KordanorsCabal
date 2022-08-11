@@ -37,7 +37,7 @@
             {OldCharacterStatisticType.Willpower, 4},
             {OldCharacterStatisticType.Power, 5},
             {OldCharacterStatisticType.HP, 6},
-            {OldCharacterStatisticType.MP, 7},
+            {7, 7},
             {OldCharacterStatisticType.Mana, 8}
         }
 

@@ -11,7 +11,7 @@
                     {OldCharacterStatisticType.HP, 4},
                     {23, 0},
                     {3, 6},
-                    {OldCharacterStatisticType.MP, 3},
+                    {7, 3},
                     {OldCharacterStatisticType.Stress, 0},
                     {OldCharacterStatisticType.UnarmedMaximumDamage, 3},
                     {OldCharacterStatisticType.Willpower, 3},

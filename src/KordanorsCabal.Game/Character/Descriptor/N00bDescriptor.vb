@@ -18,7 +18,7 @@
                     {3, 1},
                     {OldCharacterStatisticType.Mana, 1},
                     {OldCharacterStatisticType.Money, 0},
-                    {OldCharacterStatisticType.MP, 3},
+                    {7, 3},
                     {OldCharacterStatisticType.Power, 1},
                     {OldCharacterStatisticType.Strength, 1},
                     {OldCharacterStatisticType.Stress, 0},
