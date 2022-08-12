@@ -36,12 +36,6 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property XPValue As Long
-        Get
-            Return 1
-        End Get
-    End Property
-
     Public Overrides Sub DropLoot(location As Location)
         location.Inventory.Add(Item.Create(ItemType.RatTail))
     End Sub

@@ -36,12 +36,6 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property XPValue As Long
-        Get
-            Return 5
-        End Get
-    End Property
-
     Public Overrides Sub DropLoot(location As Location)
         'TODO
     End Sub

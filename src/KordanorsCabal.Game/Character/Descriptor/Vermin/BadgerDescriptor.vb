@@ -49,12 +49,6 @@
         End Select
     End Function
 
-    Public Overrides ReadOnly Property XPValue As Long
-        Get
-            Return 2
-        End Get
-    End Property
-
     Public Overrides Sub DropLoot(location As Location)
         If RNG.RollDice("1d3") = 1 Then
             location.Inventory.Add(Item.Create(ItemType.Mushroom))

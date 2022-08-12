@@ -41,12 +41,6 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property XPValue As Long
-        Get
-            Return 1
-        End Get
-    End Property
-
     Public Overrides Sub DropLoot(location As Location)
         If RNG.RollDice("1d4") > 1 Then
             location.Inventory.Add(Item.Create(ItemType.ZombieTaint))
@@ -63,9 +57,6 @@
             Case Else
                 Return location.LocationType.IsDungeon
         End Select
-    End Function
-    Public Overrides Function RollMoneyDrop() As Long
-        Return RNG.RollDice("2d4")
     End Function
     Public Overrides ReadOnly Property IsUndead As Boolean
         Get

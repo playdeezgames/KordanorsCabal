@@ -43,17 +43,8 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property XPValue As Long
-        Get
-            Return 2
-        End Get
-    End Property
-
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return True
-    End Function
-    Public Overrides Function RollMoneyDrop() As Long
-        Return RNG.RollDice("3d6")
     End Function
     Private ReadOnly partingShots As IReadOnlyList(Of String) =
         New List(Of String) From

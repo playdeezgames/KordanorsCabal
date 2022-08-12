@@ -5,10 +5,16 @@
             Return StaticWorldData.World.CharacterType.ReadName(Id)
         End Get
     End Property
+    ReadOnly Property XPValue As Long
+        Get
+            Return StaticWorldData.World.CharacterType.ReadXPValue(Id).Value
+        End Get
+    End Property
 
     Sub New(characterTypeId As Long)
         Id = characterTypeId
     End Sub
+
     MustOverride ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
     MustOverride ReadOnly Property MaximumEncumbrance(character As Character) As Long
     MustOverride Function IsEnemy(character As Character) As Boolean
@@ -17,15 +23,10 @@
         Return False
     End Function
 
-    Overridable Function RollMoneyDrop() As Long
-        Return 0
-    End Function
-
     Overridable Function PartingShot() As String
         Return ""
     End Function
 
-    MustOverride ReadOnly Property XPValue As Long
 
     MustOverride Sub DropLoot(location As Location)
 
@@ -41,5 +42,8 @@
 
     Overridable Function GenerateAttackType(character As Character) As AttackType
         Return AttackType.Physical
+    End Function
+    Function RollMoneyDrop() As Long
+        Return RNG.RollDice(StaticWorldData.World.CharacterType.ReadMoneyDropDice(Id))
     End Function
 End Class
