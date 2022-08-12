@@ -26,24 +26,9 @@
         End Get
     End Property
 
-    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
-        New Dictionary(Of Long, Long) From
-        {
-            {1, 1},
-            {2, 10},
-            {3, 25}
-        }
-
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)
     End Sub
-
-    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
-        Get
-            Dim result As Long = 0
-            Return If(spawnCountTable.TryGetValue(level.Id, result), result, 0)
-        End Get
-    End Property
 
     Public Overrides Sub DropLoot(location As Location)
         If RNG.RollDice("1d2/2") = 1 Then

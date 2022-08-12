@@ -26,22 +26,6 @@
         End Get
     End Property
 
-    Private Shared ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
-        New Dictionary(Of Long, Long) From
-        {
-            {1, 30},
-            {2, 45},
-            {3, 30},
-            {4, 15}
-        }
-
-    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
-        Get
-            Dim result As Long
-            Return If(spawnCountTable.TryGetValue(level.Id, result), result, 0)
-        End Get
-    End Property
-
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return character.CharacterType = OldCharacterType.N00b
     End Function

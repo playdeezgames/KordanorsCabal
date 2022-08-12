@@ -26,12 +26,6 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
-        Get
-            Return If(level.Id = 6, 100, 0)
-        End Get
-    End Property
-
     Public Overrides Sub DropLoot(location As Location)
         If RNG.RollDice("1d2") > 1 Then
             location.Inventory.Add(Item.Create(ItemType.ShoeLaces))

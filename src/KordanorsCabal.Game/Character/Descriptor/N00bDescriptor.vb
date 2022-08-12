@@ -42,12 +42,6 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
-        Get
-            Return 0
-        End Get
-    End Property
-
     Public Overrides Sub DropLoot(location As Location)
         'drop nothing
     End Sub

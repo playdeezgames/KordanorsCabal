@@ -15,6 +15,9 @@
             Return If(StaticWorldData.World.CharacterType.ReadIsUndead(Id), 0) > 0
         End Get
     End Property
+    Function SpawnCount(level As DungeonLevel) As Long
+        Return If(StaticWorldData.World.CharacterTypeSpawnCount.ReadSpawnCount(Id, level.Id), 0)
+    End Function
 
 
     Sub New(characterTypeId As Long)
@@ -24,7 +27,6 @@
     MustOverride ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
     MustOverride ReadOnly Property MaximumEncumbrance(character As Character) As Long
     MustOverride Function IsEnemy(character As Character) As Boolean
-    MustOverride ReadOnly Property SpawnCount(level As DungeonLevel) As Long
     Overridable Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return False
     End Function

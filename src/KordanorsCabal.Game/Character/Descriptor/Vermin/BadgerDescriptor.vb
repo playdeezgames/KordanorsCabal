@@ -26,20 +26,6 @@
         End Get
     End Property
 
-    Private ReadOnly spawnCountTable As IReadOnlyDictionary(Of Long, Long) =
-        New Dictionary(Of Long, Long) From
-        {
-            {1, 24},
-            {2, 12}
-        }
-
-    Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
-        Get
-            Dim result As Long
-            Return If(spawnCountTable.TryGetValue(level.Id, result), result, 6)
-        End Get
-    End Property
-
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Select Case level.Id
             Case 1
