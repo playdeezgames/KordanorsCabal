@@ -1,5 +1,5 @@
 ﻿Friend Class ZombieDescriptor
-    Inherits CharacterTypeDescriptor
+    Inherits CharacterType
 
     Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
         Get
@@ -56,7 +56,7 @@
     End Sub
 
     Public Overrides Function IsEnemy(character As Character) As Boolean
-        Return character.CharacterType = CharacterType.N00b
+        Return character.CharacterType = OldCharacterType.N00b
     End Function
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Select Case level.Id

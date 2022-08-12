@@ -34,9 +34,9 @@
             Return Spells.Any
         End Get
     End Property
-    ReadOnly Property CharacterType As CharacterType
+    ReadOnly Property CharacterType As OldCharacterType
         Get
-            Return CType(StaticWorldData.World.Character.ReadCharacterType(Id).Value, CharacterType)
+            Return CType(StaticWorldData.World.Character.ReadCharacterType(Id).Value, OldCharacterType)
         End Get
     End Property
     Public Function HasQuest(quest As Quest) As Boolean
@@ -106,7 +106,7 @@
             Return Location.Enemies(Me).Any
         End Get
     End Property
-    Friend Shared Function Create(characterType As CharacterType, location As Location) As Character
+    Friend Shared Function Create(characterType As OldCharacterType, location As Location) As Character
         Dim character = FromId(StaticWorldData.World.Character.Create(characterType, location.Id))
         For Each entry In characterType.InitialStatistics
             character.SetStatistic(New CharacterStatisticType(entry.Key), entry.Value)

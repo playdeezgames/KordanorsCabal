@@ -1,5 +1,5 @@
 ﻿Friend Class SnakeDescriptor
-    Inherits CharacterTypeDescriptor
+    Inherits CharacterType
     Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
         Get
             Return New Dictionary(Of Long, Long) From
@@ -65,6 +65,6 @@
     End Sub
 
     Public Overrides Function IsEnemy(character As Character) As Boolean
-        Return character.CharacterType = CharacterType.N00b
+        Return character.CharacterType = OldCharacterType.N00b
     End Function
 End Class

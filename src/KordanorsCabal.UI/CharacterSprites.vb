@@ -28,11 +28,11 @@ Module CharacterSprites
         Next
         Return result
     End Function
-    ReadOnly characterSprites As IReadOnlyDictionary(Of CharacterType, Sprite) =
-        New Dictionary(Of CharacterType, Sprite) From
+    ReadOnly characterSprites As IReadOnlyDictionary(Of OldCharacterType, Sprite) =
+        New Dictionary(Of OldCharacterType, Sprite) From
         {
             {
-                CharacterType.Acolyte,
+                OldCharacterType.Acolyte,
                 New Sprite(
                     Hue.Cyan,
                     LoadPixels(
@@ -51,7 +51,7 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
-                CharacterType.Badger,
+                OldCharacterType.Badger,
                 New Sprite(
                     Hue.Black,
                     LoadPixels(
@@ -70,7 +70,7 @@ Module CharacterSprites
                         ".....#...#.."))
             },
             {
-                CharacterType.Bat,
+                OldCharacterType.Bat,
                 New Sprite(
                     Hue.Black,
                     LoadPixels(
@@ -89,7 +89,7 @@ Module CharacterSprites
                         "............"))
             },
             {
-                CharacterType.Bishop,
+                OldCharacterType.Bishop,
                 New Sprite(
                     Hue.Red,
                     LoadPixels(
@@ -108,7 +108,7 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
-                CharacterType.CabalLeader,
+                OldCharacterType.CabalLeader,
                 New Sprite(
                     Hue.Orange,
                     LoadPixels(
@@ -127,7 +127,7 @@ Module CharacterSprites
                         "..#..#####.."))
             },
             {
-                CharacterType.Goblin,
+                OldCharacterType.Goblin,
                 New Sprite(
                     Hue.Green,
                     LoadPixels(
@@ -146,7 +146,7 @@ Module CharacterSprites
                         "....##..#..."))
             },
             {
-                CharacterType.GoblinElite,
+                OldCharacterType.GoblinElite,
                 New Sprite(
                     Hue.Green,
                     LoadPixels(
@@ -165,7 +165,7 @@ Module CharacterSprites
                         "....##..#..."))
             },
             {
-                CharacterType.Kordanor,
+                OldCharacterType.Kordanor,
                 New Sprite(
                     Hue.Red,
                     LoadPixels(
@@ -184,7 +184,7 @@ Module CharacterSprites
                         ".....#..#..."))
             },
             {
-                CharacterType.Malcontent,
+                OldCharacterType.Malcontent,
                 New Sprite(
                     Hue.Orange,
                     LoadPixels(
@@ -203,7 +203,7 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
-                CharacterType.MoonPerson,
+                OldCharacterType.MoonPerson,
                 New Sprite(
                     Hue.LightGreen,
                     LoadPixels(
@@ -222,7 +222,7 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
-                CharacterType.Priest,
+                OldCharacterType.Priest,
                 New Sprite(
                     Hue.Purple,
                     LoadPixels(
@@ -241,7 +241,7 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
-                CharacterType.Rat,
+                OldCharacterType.Rat,
                 New Sprite(
                     Hue.Black,
                     LoadPixels(
@@ -260,7 +260,7 @@ Module CharacterSprites
                         ".##.#####..."))
             },
             {
-                CharacterType.Skeleton,
+                OldCharacterType.Skeleton,
                 New Sprite(
                     Hue.Blue,
                     LoadPixels(
@@ -279,7 +279,7 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
-                CharacterType.Snake,
+                OldCharacterType.Snake,
                 New Sprite(
                     Hue.Green,
                     LoadPixels(
@@ -298,7 +298,7 @@ Module CharacterSprites
                         "......####.."))
             },
             {
-                CharacterType.Zombie,
+                OldCharacterType.Zombie,
                 New Sprite(
                     Hue.Purple,
                     LoadPixels(
@@ -318,7 +318,7 @@ Module CharacterSprites
             }
         }
     <Extension>
-    Function Sprite(characterType As CharacterType) As Sprite
+    Function Sprite(characterType As OldCharacterType) As Sprite
         Return characterSprites(characterType)
     End Function
 End Module

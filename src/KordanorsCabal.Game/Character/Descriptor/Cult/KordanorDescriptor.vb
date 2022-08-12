@@ -1,5 +1,5 @@
 ﻿Friend Class KordanorDescriptor
-    Inherits CharacterTypeDescriptor
+    Inherits CharacterType
 
     Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
         Get

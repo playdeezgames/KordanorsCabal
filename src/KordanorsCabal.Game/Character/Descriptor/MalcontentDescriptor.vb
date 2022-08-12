@@ -1,5 +1,5 @@
 ﻿Friend Class MalcontentDescriptor
-    Inherits CharacterTypeDescriptor
+    Inherits CharacterType
     Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
         Get
             Return New Dictionary(Of Long, Long) From

@@ -32,7 +32,7 @@
             Dim ratCount = If(StaticWorldData.World.CharacterQuestCompletion.Read(character.Id, Quest.CellarRats), 0) + 1
             Dim location = Game.Location.FromLocationType(LocationType.FromName(Cellar)).Single
             While ratCount > 0
-                Game.Character.Create(CharacterType.Rat, location)
+                Game.Character.Create(OldCharacterType.Rat, location)
                 ratCount -= 1
             End While
             Return
