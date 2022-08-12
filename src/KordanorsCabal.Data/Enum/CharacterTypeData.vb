@@ -5,6 +5,7 @@
     Friend Const CharacterTypeNameColumn = "CharacterTypeName"
     Friend Const XPValueColumn = "XPValue"
     Friend Const MoneyDropDiceColumn = "MoneyDropDice"
+    Friend Const IsUndeadColumn = "IsUndead"
 
     Friend Sub Initialize()
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
@@ -12,32 +13,42 @@
                     [{CharacterTypeIdColumn}],
                     [{CharacterTypeNameColumn}],
                     [{XPValueColumn}],
-                    [{MoneyDropDiceColumn}]) AS
+                    [{MoneyDropDiceColumn}],
+                    [{IsUndeadColumn}]) AS
                 (VALUES
-                        (1,'Acolyte',5,'2d8'),
-                        (2,'Badger',2,'0d1'),
-                        (3,'Bat',1,'0d1'),
-                        (4,'Bishop',5,'4d8'),
-                        (5,'Cabal Leader',5,'5d8'),
-                        (6,'Goblin',1,'2d6'),
-                        (7,'Goblin Elite',2,'3d6'),
-                        (8,'Kordanor',5,'0d1'),
-                        (9,'Malcontent',2,'3d6'),
-                        (10,'MoonPerson',3,'0d1'),
-                        (11,'N00b',0,'0d1'),
-                        (12,'Priest', 5,'3d8'),
-                        (13,'Rat',1,'0d1'),
-                        (14,'Skeleton',1,'2d3'),
-                        (15,'Snake',1,'0d1'),
-                        (16,'Zombie',1,'2d4')
+                        (1,'Acolyte',5,'2d8',0),
+                        (2,'Badger',2,'0d1',0),
+                        (3,'Bat',1,'0d1',0),
+                        (4,'Bishop',5,'4d8',0),
+                        (5,'Cabal Leader',5,'5d8',0),
+                        (6,'Goblin',1,'2d6',0),
+                        (7,'Goblin Elite',2,'3d6',0),
+                        (8,'Kordanor',5,'0d1',0),
+                        (9,'Malcontent',2,'3d6',0),
+                        (10,'MoonPerson',3,'0d1',0),
+                        (11,'N00b',0,'0d1',0),
+                        (12,'Priest', 5,'3d8',0),
+                        (13,'Rat',1,'0d1',0),
+                        (14,'Skeleton',1,'2d3',1),
+                        (15,'Snake',1,'0d1',0),
+                        (16,'Zombie',1,'2d4',1)
                 )
                 SELECT 
                     [{CharacterTypeIdColumn}],
                     [{CharacterTypeNameColumn}],
                     [{XPValueColumn}],
-                    [{MoneyDropDiceColumn}]
+                    [{MoneyDropDiceColumn}],
+                    [{IsUndeadColumn}]
                 FROM [cte];")
     End Sub
+
+    Public Function ReadIsUndead(characterTypeId As Long) As Long?
+        Return Store.ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            IsUndeadColumn,
+            (CharacterTypeIdColumn, characterTypeId))
+    End Function
 
     Public Function ReadXPValue(characterTypeId As Long) As Long?
         Return Store.ReadColumnValue(Of Long, Long)(

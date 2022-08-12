@@ -55,9 +55,4 @@
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return location.LocationType = LocationType.FromName(Dungeon)
     End Function
-    Public Overrides ReadOnly Property IsUndead As Boolean
-        Get
-            Return True
-        End Get
-    End Property
 End Class

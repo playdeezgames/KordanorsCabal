@@ -58,9 +58,4 @@
                 Return location.LocationType.IsDungeon
         End Select
     End Function
-    Public Overrides ReadOnly Property IsUndead As Boolean
-        Get
-            Return True
-        End Get
-    End Property
 End Class

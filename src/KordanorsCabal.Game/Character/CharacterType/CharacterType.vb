@@ -10,6 +10,12 @@
             Return StaticWorldData.World.CharacterType.ReadXPValue(Id).Value
         End Get
     End Property
+    ReadOnly Property IsUndead As Boolean
+        Get
+            Return If(StaticWorldData.World.CharacterType.ReadIsUndead(Id), 0) > 0
+        End Get
+    End Property
+
 
     Sub New(characterTypeId As Long)
         Id = characterTypeId
@@ -29,12 +35,6 @@
 
 
     MustOverride Sub DropLoot(location As Location)
-
-    Overridable ReadOnly Property IsUndead As Boolean
-        Get
-            Return False
-        End Get
-    End Property
 
     Overridable Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return False
