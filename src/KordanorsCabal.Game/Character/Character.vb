@@ -425,7 +425,7 @@
             DoImmobilizedTurn(enemy, enemyIndex, enemyCount)
             Return
         End If
-        Select Case enemy.CharacterType.GenerateAttackType(Me)
+        Select Case enemy.CharacterType.GenerateAttackType
             Case AttackType.Physical
                 DoPhysicalCounterAttack(enemy, enemyIndex, enemyCount)
             Case AttackType.Mental

@@ -69,8 +69,8 @@ Module CharacterTypeExtensions
         Return CharacterTypeDescriptors(characterType).CanBeBribedWith(itemType)
     End Function
     <Extension>
-    Function GenerateAttackType(characterType As OldCharacterType, character As Character) As AttackType
-        Return CharacterTypeDescriptors(characterType).GenerateAttackType(character)
+    Function GenerateAttackType(characterType As OldCharacterType) As AttackType
+        Return CharacterTypeDescriptors(characterType).GenerateAttackType
     End Function
 End Module
 Friend Module CharacterTypeUtility

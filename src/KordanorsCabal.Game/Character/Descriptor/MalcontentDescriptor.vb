@@ -59,18 +59,7 @@
         End Select
     End Function
 
-    Private Shared ReadOnly attackTable As IReadOnlyDictionary(Of AttackType, Integer) =
-        New Dictionary(Of AttackType, Integer) From
-        {
-            {AttackType.Physical, 3},
-            {AttackType.Mental, 1}
-        }
-
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)
     End Sub
-
-    Public Overrides Function GenerateAttackType(character As Character) As AttackType
-        Return RNG.FromGenerator(attackTable)
-    End Function
 End Class

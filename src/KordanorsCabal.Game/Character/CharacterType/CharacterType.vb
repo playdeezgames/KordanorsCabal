@@ -15,11 +15,6 @@
             Return If(StaticWorldData.World.CharacterType.ReadIsUndead(Id), 0) > 0
         End Get
     End Property
-    Function SpawnCount(level As DungeonLevel) As Long
-        Return If(StaticWorldData.World.CharacterTypeSpawnCount.ReadSpawnCount(Id, level.Id), 0)
-    End Function
-
-
     Sub New(characterTypeId As Long)
         Id = characterTypeId
     End Sub
@@ -41,11 +36,13 @@
     Overridable Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return False
     End Function
-
-    Overridable Function GenerateAttackType(character As Character) As AttackType
-        Return AttackType.Physical
+    Function GenerateAttackType() As AttackType
+        Return CType(RNG.FromGenerator(StaticWorldData.World.CharacterTypeAttackType.Read(Id)), AttackType)
     End Function
     Function RollMoneyDrop() As Long
         Return RNG.RollDice(StaticWorldData.World.CharacterType.ReadMoneyDropDice(Id))
+    End Function
+    Function SpawnCount(level As DungeonLevel) As Long
+        Return If(StaticWorldData.World.CharacterTypeSpawnCount.ReadSpawnCount(Id, level.Id), 0)
     End Function
 End Class
