@@ -79,6 +79,10 @@
             {ItemType.RottenFood, 1}
         }
 
+    Public Sub New(characterTypeId As Long)
+        MyBase.New(characterTypeId)
+    End Sub
+
     Public Overrides Sub DropLoot(location As Location)
         If RNG.RollDice("1d2") > 1 Then
             location.Inventory.Add(Item.Create(ItemType.GoblinEar))

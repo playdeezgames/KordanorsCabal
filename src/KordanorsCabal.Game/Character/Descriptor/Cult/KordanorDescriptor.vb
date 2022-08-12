@@ -1,6 +1,10 @@
 ﻿Friend Class KordanorDescriptor
     Inherits CharacterType
 
+    Public Sub New(characterTypeId As Long)
+        MyBase.New(characterTypeId)
+    End Sub
+
     Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
         Get
             Return New Dictionary(Of Long, Long) From

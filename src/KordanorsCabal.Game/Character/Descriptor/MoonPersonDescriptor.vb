@@ -64,6 +64,10 @@
             ItemType.Bottle
         }
 
+    Public Sub New(characterTypeId As Long)
+        MyBase.New(characterTypeId)
+    End Sub
+
     Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return bribeItems.Contains(itemType)
     End Function

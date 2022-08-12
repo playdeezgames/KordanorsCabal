@@ -34,6 +34,10 @@
             {3, 25}
         }
 
+    Public Sub New(characterTypeId As Long)
+        MyBase.New(characterTypeId)
+    End Sub
+
     Public Overrides ReadOnly Property SpawnCount(level As DungeonLevel) As Long
         Get
             Dim result As Long = 0

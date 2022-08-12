@@ -95,6 +95,10 @@
             {AttackType.Mental, 1}
         }
 
+    Public Sub New(characterTypeId As Long)
+        MyBase.New(characterTypeId)
+    End Sub
+
     Public Overrides Function GenerateAttackType(character As Character) As AttackType
         Return RNG.FromGenerator(attackTable)
     End Function

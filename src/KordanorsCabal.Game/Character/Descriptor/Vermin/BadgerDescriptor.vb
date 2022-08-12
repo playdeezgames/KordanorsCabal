@@ -74,6 +74,10 @@
     Private ReadOnly bribes As IReadOnlyList(Of ItemType) =
         New List(Of ItemType) From {ItemType.RottenEgg}
 
+    Public Sub New(characterTypeId As Long)
+        MyBase.New(characterTypeId)
+    End Sub
+
     Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return bribes.Contains(itemType)
     End Function

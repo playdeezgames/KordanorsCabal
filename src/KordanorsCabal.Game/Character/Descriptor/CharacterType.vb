@@ -1,4 +1,8 @@
 ﻿Friend MustInherit Class CharacterType
+    ReadOnly Property Id As Long
+    Sub New(characterTypeId As Long)
+        Id = characterTypeId
+    End Sub
     MustOverride ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
     MustOverride ReadOnly Property MaximumEncumbrance(character As Character) As Long
     MustOverride Function IsEnemy(character As Character) As Boolean
@@ -38,22 +42,22 @@ Friend Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of OldCharacterType, CharacterType) =
         New Dictionary(Of OldCharacterType, CharacterType) From
         {
-            {OldCharacterType.Acolyte, New AcolyteDescriptor},
-            {OldCharacterType.Badger, New BadgerDescriptor},
-            {OldCharacterType.Bat, New BatDescriptor},
-            {OldCharacterType.Bishop, New BishopDescriptor},
-            {OldCharacterType.CabalLeader, New CabalLeaderDescriptor},
-            {OldCharacterType.Goblin, New GoblinDescriptor},
-            {OldCharacterType.GoblinElite, New GoblinEliteDescriptor},
-            {OldCharacterType.Kordanor, New KordanorDescriptor},
-            {OldCharacterType.Malcontent, New MalcontentDescriptor},
-            {OldCharacterType.MoonPerson, New MoonPersonDescriptor},
-            {OldCharacterType.N00b, New N00bDescriptor},
-            {OldCharacterType.Priest, New PriestDescriptor},
-            {OldCharacterType.Rat, New RatDescriptor},
-            {OldCharacterType.Skeleton, New SkeletonDescriptor},
-            {OldCharacterType.Snake, New SnakeDescriptor},
-            {OldCharacterType.Zombie, New ZombieDescriptor}
+            {OldCharacterType.Acolyte, New AcolyteDescriptor(OldCharacterType.Acolyte)},
+            {OldCharacterType.Badger, New BadgerDescriptor(OldCharacterType.Badger)},
+            {OldCharacterType.Bat, New BatDescriptor(OldCharacterType.Bat)},
+            {OldCharacterType.Bishop, New BishopDescriptor(OldCharacterType.Bishop)},
+            {OldCharacterType.CabalLeader, New CabalLeaderDescriptor(OldCharacterType.CabalLeader)},
+            {OldCharacterType.Goblin, New GoblinDescriptor(OldCharacterType.Goblin)},
+            {OldCharacterType.GoblinElite, New GoblinEliteDescriptor(OldCharacterType.GoblinElite)},
+            {OldCharacterType.Kordanor, New KordanorDescriptor(OldCharacterType.Kordanor)},
+            {OldCharacterType.Malcontent, New MalcontentDescriptor(OldCharacterType.Malcontent)},
+            {OldCharacterType.MoonPerson, New MoonPersonDescriptor(OldCharacterType.MoonPerson)},
+            {OldCharacterType.N00b, New N00bDescriptor(OldCharacterType.N00b)},
+            {OldCharacterType.Priest, New PriestDescriptor(OldCharacterType.Priest)},
+            {OldCharacterType.Rat, New RatDescriptor(OldCharacterType.Rat)},
+            {OldCharacterType.Skeleton, New SkeletonDescriptor(OldCharacterType.Skeleton)},
+            {OldCharacterType.Snake, New SnakeDescriptor(OldCharacterType.Snake)},
+            {OldCharacterType.Zombie, New ZombieDescriptor(OldCharacterType.Zombie)}
         }
     Function AllCharacterTypes() As IEnumerable(Of OldCharacterType)
         Return CharacterTypeDescriptors.Keys
