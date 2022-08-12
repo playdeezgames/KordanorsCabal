@@ -82,7 +82,7 @@ Public Class Store
     End Property
     Private Function ExecuteScalar(Of TResult As Structure)(command As SqliteCommand) As TResult?
         Dim result = command.ExecuteScalar
-        If result IsNot Nothing Then
+        If result IsNot Nothing AndAlso result IsNot DBNull.Value Then
             Return CType(result, TResult?)
         End If
         Return Nothing

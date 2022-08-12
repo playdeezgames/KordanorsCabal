@@ -49,12 +49,6 @@
         End Select
     End Function
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Badger"
-        End Get
-    End Property
-
     Public Overrides ReadOnly Property XPValue As Long
         Get
             Return 2

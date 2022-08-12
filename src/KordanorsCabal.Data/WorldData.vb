@@ -7,6 +7,7 @@
     Public ReadOnly CharacterSpell As CharacterSpellData
     Public ReadOnly CharacterStatistic As CharacterStatisticData
     Public ReadOnly CharacterStatisticType As CharacterStatisticTypeData
+    Public ReadOnly CharacterType As CharacterTypeData
     Public ReadOnly Direction As DirectionData
     Public ReadOnly DungeonLevel As DungeonLevelData
     Public ReadOnly EquipSlot As EquipSlotData
@@ -31,6 +32,7 @@
         CharacterSpell = New CharacterSpellData(store)
         CharacterStatistic = New CharacterStatisticData(store)
         CharacterStatisticType = New CharacterStatisticTypeData(store)
+        CharacterType = New CharacterTypeData(store)
         Direction = New DirectionData(store)
         DungeonLevel = New DungeonLevelData(store)
         EquipSlot = New EquipSlotData(store)

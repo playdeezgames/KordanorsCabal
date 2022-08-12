@@ -45,12 +45,6 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Bishop"
-        End Get
-    End Property
-
     Public Overrides ReadOnly Property XPValue As Long
         Get
             Return 5
