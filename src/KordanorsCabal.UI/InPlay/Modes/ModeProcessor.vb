@@ -102,12 +102,12 @@
             buffer.PutCell((14, 17), Pattern.DownwardDiagonal, False, Hue.Black)
         End If
 
-        If location.HasRoute(Direction.FromName(Outward)) Then
-            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromName(Outward)).RouteType.Sprite)
+        If location.HasRoute(Direction.FromId(Outward)) Then
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(Outward)).RouteType.Sprite)
         End If
 
-        If location.HasRoute(Direction.FromName(Inward)) Then
-            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromName(Inward)).RouteType.Sprite)
+        If location.HasRoute(Direction.FromId(Inward)) Then
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(Inward)).RouteType.Sprite)
         End If
 
         For Each item In player.Location.Inventory.Items

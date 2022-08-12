@@ -38,16 +38,16 @@
         If player.CanMoveBackward Then
             Buttons(BackwardButtonIndex).Title = "Backward"
         End If
-        If player.CanMove(Direction.FromName("Up")) Then
+        If player.CanMove(Direction.FromId(Up)) Then
             Buttons(UpButtonIndex).Title = "Up"
         End If
-        If player.CanMove(Direction.FromName("Down")) Then
+        If player.CanMove(Direction.FromId(Down)) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
-        If player.CanMove(Direction.FromName(Inward)) Then
+        If player.CanMove(Direction.FromId(Inward)) Then
             Buttons(InButtonIndex).Title = "In"
         End If
-        If player.CanMove(Direction.FromName(Outward)) Then
+        If player.CanMove(Direction.FromId(Outward)) Then
             Buttons(OutButtonIndex).Title = "Out"
         End If
     End Sub
@@ -58,13 +58,13 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case DownButtonIndex
-                Return HandleMove(player, Direction.FromName("Down"))
+                Return HandleMove(player, Direction.FromId(Down))
             Case UpButtonIndex
-                Return HandleMove(player, Direction.FromName("Up"))
+                Return HandleMove(player, Direction.FromId(Up))
             Case InButtonIndex
-                Return HandleMove(player, Direction.FromName(Inward))
+                Return HandleMove(player, Direction.FromId(Inward))
             Case OutButtonIndex
-                Return HandleMove(player, Direction.FromName(Outward))
+                Return HandleMove(player, Direction.FromId(Outward))
             Case ForwardButtonIndex
                 Return HandleMove(player, player.Direction)
             Case BackwardButtonIndex

@@ -29,10 +29,10 @@
     End Sub
 
     Private Sub DrawLocation(buffer As PatternBuffer, xy As (Integer, Integer), location As Location, inverted As Boolean, displayHue As Hue)
-        Dim northExit = location.HasRoute(Direction.FromName(North))
-        Dim eastExit = location.HasRoute(Direction.FromName(East))
-        Dim southExit = location.HasRoute(Direction.FromName(South))
-        Dim westExit = location.HasRoute(Direction.FromName(West))
+        Dim northExit = location.HasRoute(Direction.FromId(North))
+        Dim eastExit = location.HasRoute(Direction.FromId(East))
+        Dim southExit = location.HasRoute(Direction.FromId(South))
+        Dim westExit = location.HasRoute(Direction.FromId(West))
         'upper left
         buffer.PutCell(xy,
                        If(northExit AndAlso westExit, Pattern.ElbowUpLeft,

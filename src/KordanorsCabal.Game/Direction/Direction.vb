@@ -8,6 +8,9 @@
     Shared Function FromName(directionName As String) As Direction
         Return New Direction(directionName)
     End Function
+    Shared Function FromId(directionId As Long?) As Direction
+        Return If(directionId.HasValue, New Direction(directionId.Value), Nothing)
+    End Function
     ReadOnly Property Id As Long
     ReadOnly Property Name As String
         Get
