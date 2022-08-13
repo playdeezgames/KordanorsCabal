@@ -9,8 +9,4 @@
             Return 50 + If(character.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Strength)), 0) * 10
         End Get
     End Property
-
-    Public Overrides Function IsEnemy(character As Character) As Boolean
-        Return character.CharacterType <> OldCharacterType.N00b
-    End Function
 End Class

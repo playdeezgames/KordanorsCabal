@@ -10,6 +10,7 @@
     Public ReadOnly CharacterType As CharacterTypeData
     Public ReadOnly CharacterTypeAttackType As CharacterTypeAttackTypeData
     Public ReadOnly CharacterTypeBribe As CharacterTypeBribeData
+    Public ReadOnly CharacterTypeEnemy As CharacterTypeEnemyData
     Public ReadOnly CharacterTypeInitialStatistic As CharacterTypeInitialStatisticData
     Public ReadOnly CharacterTypeLoot As CharacterTypeLootData
     Public ReadOnly CharacterTypePartingShot As CharacterTypePartingShotData
@@ -41,6 +42,7 @@
         CharacterType = New CharacterTypeData(store)
         CharacterTypeAttackType = New CharacterTypeAttackTypeData(store)
         CharacterTypeBribe = New CharacterTypeBribeData(store)
+        CharacterTypeEnemy = New CharacterTypeEnemyData(store)
         CharacterTypeInitialStatistic = New CharacterTypeInitialStatisticData(store)
         CharacterTypeLoot = New CharacterTypeLootData(store)
         CharacterTypePartingShot = New CharacterTypePartingShotData(store)

@@ -9,10 +9,6 @@
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)
     End Sub
-
-    Public Overrides Function IsEnemy(character As Character) As Boolean
-        Return character.CharacterType = OldCharacterType.N00b
-    End Function
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Select Case level.Id
             Case 1

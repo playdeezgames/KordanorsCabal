@@ -28,7 +28,9 @@
             Select(Function(x) New CharacterStatisticType(x)).ToList
     End Function
     MustOverride ReadOnly Property MaximumEncumbrance(character As Character) As Long
-    MustOverride Function IsEnemy(character As Character) As Boolean
+    Function IsEnemy(character As Character) As Boolean
+        Return StaticWorldData.World.CharacterTypeEnemy.Read(Id, character.CharacterType)
+    End Function
     Overridable Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return False
     End Function

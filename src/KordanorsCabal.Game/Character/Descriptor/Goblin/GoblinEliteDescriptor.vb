@@ -6,10 +6,6 @@
         End Get
     End Property
 
-    Public Overrides Function IsEnemy(character As Character) As Boolean
-        Return True
-    End Function
-
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)
     End Sub

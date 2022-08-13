@@ -20,7 +20,6 @@
                     [{CharacterTypeIdColumn}],
                     [{ItemTypeIdColumn}]
                 FROM [cte];")
-
     End Sub
 
     Public Sub New(store As Store)

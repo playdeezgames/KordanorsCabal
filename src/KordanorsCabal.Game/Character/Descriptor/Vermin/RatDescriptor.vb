@@ -9,8 +9,4 @@
             Return 0
         End Get
     End Property
-
-    Public Overrides Function IsEnemy(character As Character) As Boolean
-        Return character.CharacterType = OldCharacterType.N00b
-    End Function
 End Class
