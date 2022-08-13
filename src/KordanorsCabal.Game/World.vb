@@ -124,7 +124,7 @@ Public Module World
         For Each characterType In AllCharacterTypes()
             Dim characterCount = characterType.ToNew.SpawnCount(dungeonLevel)
             MarkTimeKeeper($"{dungeonLevel.Name} - {characterType.Name} - Spawn Count Determined")
-            Dim candidates = locations.Where(Function(x) characterType.CanSpawn(x.LocationType, dungeonLevel))
+            Dim candidates = locations.Where(Function(x) characterType.ToNew.CanSpawn(x.LocationType, dungeonLevel))
             MarkTimeKeeper($"{dungeonLevel.Name} - {characterType.Name} - Candidate Locations Determined")
             While characterCount > 0
                 Dim location = RNG.FromEnumerable(candidates)

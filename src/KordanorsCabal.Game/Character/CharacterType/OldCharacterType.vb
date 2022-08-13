@@ -21,10 +21,6 @@ Public Enum OldCharacterType
 End Enum
 Module CharacterTypeExtensions
     <Extension>
-    Function CanSpawn(characterType As OldCharacterType, locationType As LocationType, level As DungeonLevel) As Boolean
-        Return CharacterTypeDescriptors(characterType).CanSpawn(locationType, level)
-    End Function
-    <Extension>
     Function Name(characterType As OldCharacterType) As String
         Return CharacterTypeDescriptors(characterType).Name
     End Function
