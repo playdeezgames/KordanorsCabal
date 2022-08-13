@@ -88,11 +88,11 @@
     End Function
 
     Friend Function CanBeBribedWith(itemType As ItemType) As Boolean
-        Return CharacterType.CanBeBribedWith(itemType)
+        Return CharacterType.ToNew.CanBeBribedWith(itemType)
     End Function
     ReadOnly Property IsUndead As Boolean
         Get
-            Return CharacterType.IsUndead
+            Return CharacterType.ToNew.IsUndead
         End Get
     End Property
     Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)

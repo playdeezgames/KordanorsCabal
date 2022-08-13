@@ -21,14 +21,6 @@ Public Enum OldCharacterType
 End Enum
 Module CharacterTypeExtensions
     <Extension>
-    Function IsUndead(characterType As OldCharacterType) As Boolean
-        Return CharacterTypeDescriptors(characterType).IsUndead
-    End Function
-    <Extension>
-    Function CanBeBribedWith(characterType As OldCharacterType, itemType As ItemType) As Boolean
-        Return CharacterTypeDescriptors(characterType).CanBeBribedWith(itemType)
-    End Function
-    <Extension>
     Function GenerateAttackType(characterType As OldCharacterType) As AttackType
         Return CharacterTypeDescriptors(characterType).GenerateAttackType
     End Function
