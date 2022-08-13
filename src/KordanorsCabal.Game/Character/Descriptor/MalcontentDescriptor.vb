@@ -50,15 +50,6 @@
         Return level.Id <> 1 OrElse location.LocationType = LocationType.FromName(DungeonDeadEnd)
     End Function
 
-    Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
-        Select Case itemType
-            Case ItemType.Pr0n
-                Return True
-            Case Else
-                Return False
-        End Select
-    End Function
-
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)
     End Sub

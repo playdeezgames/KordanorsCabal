@@ -9,6 +9,7 @@
     Public ReadOnly CharacterStatisticType As CharacterStatisticTypeData
     Public ReadOnly CharacterType As CharacterTypeData
     Public ReadOnly CharacterTypeAttackType As CharacterTypeAttackTypeData
+    Public ReadOnly CharacterTypeBribe As CharacterTypeBribeData
     Public ReadOnly CharacterTypeSpawnCount As CharacterTypeSpawnCountData
     Public ReadOnly Direction As DirectionData
     Public ReadOnly DungeonLevel As DungeonLevelData
@@ -36,6 +37,7 @@
         CharacterStatisticType = New CharacterStatisticTypeData(store)
         CharacterType = New CharacterTypeData(store)
         CharacterTypeAttackType = New CharacterTypeAttackTypeData(store)
+        CharacterTypeBribe = New CharacterTypeBribeData(store)
         CharacterTypeSpawnCount = New CharacterTypeSpawnCountData(store)
         Direction = New DirectionData(store)
         DungeonLevel = New DungeonLevelData(store)

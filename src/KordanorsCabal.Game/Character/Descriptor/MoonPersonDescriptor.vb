@@ -40,17 +40,7 @@
         Return level.Id = 6
     End Function
 
-    Private Shared ReadOnly bribeItems As IReadOnlyList(Of ItemType) =
-        New List(Of ItemType) From
-        {
-            ItemType.Bottle
-        }
-
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)
     End Sub
-
-    Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
-        Return bribeItems.Contains(itemType)
-    End Function
 End Class

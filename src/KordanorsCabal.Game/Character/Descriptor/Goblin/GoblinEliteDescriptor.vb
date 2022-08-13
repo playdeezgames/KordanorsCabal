@@ -64,13 +64,4 @@
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return level.Id <> 1 OrElse location.LocationType = LocationType.FromName(DungeonDeadEnd)
     End Function
-
-    Public Overrides Function CanBeBribedWith(itemType As ItemType) As Boolean
-        Select Case itemType
-            Case ItemType.Beer
-                Return True
-            Case Else
-                Return False
-        End Select
-    End Function
 End Class

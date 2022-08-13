@@ -33,8 +33,8 @@
 
     MustOverride Sub DropLoot(location As Location)
 
-    Overridable Function CanBeBribedWith(itemType As ItemType) As Boolean
-        Return False
+    Function CanBeBribedWith(itemType As ItemType) As Boolean
+        Return StaticWorldData.World.CharacterTypeBribe.Read(Id, itemType)
     End Function
     Function GenerateAttackType() As AttackType
         Return CType(RNG.FromGenerator(StaticWorldData.World.CharacterTypeAttackType.Read(Id)), AttackType)
