@@ -233,7 +233,7 @@
     End Property
     ReadOnly Property Name As String
         Get
-            Return CharacterType.Name
+            Return CharacterType.ToNew.Name
         End Get
     End Property
     Property CurrentHP As Long

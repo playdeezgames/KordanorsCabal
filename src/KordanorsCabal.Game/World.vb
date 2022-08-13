@@ -1,13 +1,4 @@
 Public Module World
-    Private timeKeeper As DateTimeOffset
-    Private Sub StartTimeKeeper()
-        timeKeeper = DateTimeOffset.Now
-    End Sub
-    Private Sub MarkTimeKeeper(message As String)
-        Dim current = DateTimeOffset.Now
-        Debug.Print($"{message}: {current - timeKeeper}")
-        timeKeeper = current
-    End Sub
     Public Sub Start()
         StaticStore.Store.Reset()
         CreateTown()
@@ -120,18 +111,14 @@ Public Module World
     End Function
 
     Private Sub PopulateCharacters(locations As IEnumerable(Of Location), dungeonLevel As DungeonLevel)
-        StartTimeKeeper()
         For Each characterType In AllCharacterTypes()
             Dim characterCount = characterType.ToNew.SpawnCount(dungeonLevel)
-            MarkTimeKeeper($"{dungeonLevel.Name} - {characterType.Name} - Spawn Count Determined")
             Dim candidates = locations.Where(Function(x) characterType.ToNew.CanSpawn(x.LocationType, dungeonLevel))
-            MarkTimeKeeper($"{dungeonLevel.Name} - {characterType.Name} - Candidate Locations Determined")
             While characterCount > 0
                 Dim location = RNG.FromEnumerable(candidates)
                 Character.Create(characterType, location)
                 characterCount -= 1
             End While
-            MarkTimeKeeper($"{dungeonLevel.Name} - {characterType.Name} - Characters Populated")
         Next
     End Sub
 
