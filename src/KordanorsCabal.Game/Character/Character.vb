@@ -251,7 +251,7 @@
     End Property
     ReadOnly Property PartingShot As String
         Get
-            Return CharacterType.PartingShot
+            Return CharacterType.ToNew.PartingShot
         End Get
     End Property
     Property CurrentMP As Long

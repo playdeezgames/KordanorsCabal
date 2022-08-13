@@ -21,10 +21,6 @@ Public Enum OldCharacterType
 End Enum
 Module CharacterTypeExtensions
     <Extension>
-    Function PartingShot(characterType As OldCharacterType) As String
-        Return CharacterTypeDescriptors(characterType).PartingShot
-    End Function
-    <Extension>
     Function XPValue(characterType As OldCharacterType) As Long
         Return CharacterTypeDescriptors(characterType).XPValue
     End Function
