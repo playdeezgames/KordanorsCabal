@@ -15,6 +15,7 @@
     Public ReadOnly CharacterTypeLoot As CharacterTypeLootData
     Public ReadOnly CharacterTypePartingShot As CharacterTypePartingShotData
     Public ReadOnly CharacterTypeSpawnCount As CharacterTypeSpawnCountData
+    Public ReadOnly CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData
     Public ReadOnly Direction As DirectionData
     Public ReadOnly DungeonLevel As DungeonLevelData
     Public ReadOnly EquipSlot As EquipSlotData
@@ -47,6 +48,7 @@
         CharacterTypeLoot = New CharacterTypeLootData(store)
         CharacterTypePartingShot = New CharacterTypePartingShotData(store)
         CharacterTypeSpawnCount = New CharacterTypeSpawnCountData(store)
+        CharacterTypeSpawnLocation = New CharacterTypeSpawnLocationData(store)
         Direction = New DirectionData(store)
         DungeonLevel = New DungeonLevelData(store)
         EquipSlot = New EquipSlotData(store)

@@ -9,7 +9,4 @@
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)
     End Sub
-    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
-        Return location.LocationType = LocationType.FromName(Dungeon)
-    End Function
 End Class

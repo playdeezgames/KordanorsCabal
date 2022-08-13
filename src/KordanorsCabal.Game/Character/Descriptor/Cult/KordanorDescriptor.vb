@@ -10,8 +10,4 @@
             Return 0
         End Get
     End Property
-
-    Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
-        Return level.Id = 5 AndAlso location.LocationType = LocationType.FromName(DungeonBoss)
-    End Function
 End Class
