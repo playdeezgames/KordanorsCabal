@@ -1,4 +1,4 @@
-﻿Friend Class CharacterType
+﻿Public Class CharacterType
     ReadOnly Property Id As Long
     ReadOnly Property Name As String
         Get
@@ -36,7 +36,7 @@
                 character.GetStatistic(CharacterStatisticType.FromName(Strength)), 0)
     End Function
     Function IsEnemy(character As Character) As Boolean
-        Return StaticWorldData.World.CharacterTypeEnemy.Read(Id, character.CharacterType)
+        Return StaticWorldData.World.CharacterTypeEnemy.Read(Id, character.CharacterType.Id)
     End Function
     Function CanSpawn(locationType As LocationType, level As DungeonLevel) As Boolean
         Return StaticWorldData.World.CharacterTypeSpawnLocation.Read(Id, level.Id, locationType.Id)
@@ -70,5 +70,8 @@
     End Function
     Function SpawnCount(level As DungeonLevel) As Long
         Return If(StaticWorldData.World.CharacterTypeSpawnCount.ReadSpawnCount(Id, level.Id), 0)
+    End Function
+    Shared Function FromId(characterTypeId As Long) As CharacterType
+        Return New CharacterType(characterTypeId)
     End Function
 End Class

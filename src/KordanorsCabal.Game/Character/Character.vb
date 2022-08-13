@@ -34,9 +34,9 @@
             Return Spells.Any
         End Get
     End Property
-    ReadOnly Property CharacterType As OldCharacterType
+    ReadOnly Property CharacterType As CharacterType
         Get
-            Return CType(StaticWorldData.World.Character.ReadCharacterType(Id).Value, OldCharacterType)
+            Return CharacterType.FromId(StaticWorldData.World.Character.ReadCharacterType(Id).Value)
         End Get
     End Property
     Public Function HasQuest(quest As Quest) As Boolean
@@ -88,11 +88,11 @@
     End Function
 
     Friend Function CanBeBribedWith(itemType As ItemType) As Boolean
-        Return CharacterType.ToNew.CanBeBribedWith(itemType)
+        Return CharacterType.CanBeBribedWith(itemType)
     End Function
     ReadOnly Property IsUndead As Boolean
         Get
-            Return CharacterType.ToNew.IsUndead
+            Return CharacterType.IsUndead
         End Get
     End Property
     Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
@@ -166,7 +166,7 @@
     End Property
     ReadOnly Property MaximumEncumbrance As Long
         Get
-            Return CharacterType.ToNew.MaximumEncumbrance(Me)
+            Return CharacterType.MaximumEncumbrance(Me)
         End Get
     End Property
     Public Function HasVisited(location As Location) As Boolean
@@ -174,7 +174,7 @@
     End Function
 
     Friend Function IsEnemy(character As Character) As Boolean
-        Return CharacterType.ToNew.IsEnemy(character)
+        Return CharacterType.IsEnemy(character)
     End Function
     Private Function RollDice(dice As Long) As Long
         Dim result As Long = 0
@@ -233,7 +233,7 @@
     End Property
     ReadOnly Property Name As String
         Get
-            Return CharacterType.ToNew.Name
+            Return CharacterType.Name
         End Get
     End Property
     Property CurrentHP As Long
@@ -251,7 +251,7 @@
     End Property
     ReadOnly Property PartingShot As String
         Get
-            Return CharacterType.ToNew.PartingShot
+            Return CharacterType.PartingShot
         End Get
     End Property
     Property CurrentMP As Long
@@ -297,12 +297,12 @@
     End Function
     ReadOnly Property RollMoneyDrop As Long
         Get
-            Return CharacterType.ToNew.RollMoneyDrop
+            Return CharacterType.RollMoneyDrop
         End Get
     End Property
     ReadOnly Property XPValue As Long
         Get
-            Return CharacterType.ToNew.XPValue
+            Return CharacterType.XPValue
         End Get
     End Property
     ReadOnly Property NeedsHealing As Boolean
@@ -359,7 +359,7 @@
         For Each item In Inventory.Items
             Location.Inventory.Add(item)
         Next
-        CharacterType.ToNew.DropLoot(Location)
+        CharacterType.DropLoot(Location)
     End Sub
     Function Equipment(equipSlot As EquipSlot) As Item
         Return Item.FromId(StaticWorldData.World.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
@@ -425,7 +425,7 @@
             DoImmobilizedTurn(enemy, enemyIndex, enemyCount)
             Return
         End If
-        Select Case enemy.CharacterType.ToNew.GenerateAttackType
+        Select Case enemy.CharacterType.GenerateAttackType
             Case AttackType.Physical
                 DoPhysicalCounterAttack(enemy, enemyIndex, enemyCount)
             Case AttackType.Mental
