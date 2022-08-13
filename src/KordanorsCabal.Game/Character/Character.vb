@@ -166,7 +166,7 @@
     End Property
     ReadOnly Property MaximumEncumbrance As Long
         Get
-            Return CharacterType.MaximumEncumbrance(Me)
+            Return CharacterType.ToNew.MaximumEncumbrance(Me)
         End Get
     End Property
     Public Function HasVisited(location As Location) As Boolean
