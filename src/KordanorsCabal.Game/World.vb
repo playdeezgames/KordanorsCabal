@@ -112,11 +112,11 @@ Public Module World
 
     Private Sub PopulateCharacters(locations As IEnumerable(Of Location), dungeonLevel As DungeonLevel)
         For Each characterType In AllCharacterTypes()
-            Dim characterCount = characterType.ToNew.SpawnCount(dungeonLevel)
-            Dim candidates = locations.Where(Function(x) characterType.ToNew.CanSpawn(x.LocationType, dungeonLevel))
+            Dim characterCount = characterType.SpawnCount(dungeonLevel)
+            Dim candidates = locations.Where(Function(x) characterType.CanSpawn(x.LocationType, dungeonLevel))
             While characterCount > 0
                 Dim location = RNG.FromEnumerable(candidates)
-                Character.Create(characterType.ToNew, location)
+                Character.Create(characterType, location)
                 characterCount -= 1
             End While
         Next

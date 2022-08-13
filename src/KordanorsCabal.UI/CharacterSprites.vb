@@ -32,7 +32,7 @@ Module CharacterSprites
         New Dictionary(Of Long, Sprite) From
         {
             {
-                OldCharacterType.Acolyte,
+                Acolyte,
                 New Sprite(
                     Hue.Cyan,
                     LoadPixels(
@@ -51,7 +51,7 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
-                OldCharacterType.Badger,
+                Badger,
                 New Sprite(
                     Hue.Black,
                     LoadPixels(
@@ -70,7 +70,7 @@ Module CharacterSprites
                         ".....#...#.."))
             },
             {
-                OldCharacterType.Bat,
+                Bat,
                 New Sprite(
                     Hue.Black,
                     LoadPixels(
@@ -89,7 +89,7 @@ Module CharacterSprites
                         "............"))
             },
             {
-                OldCharacterType.Bishop,
+                Bishop,
                 New Sprite(
                     Hue.Red,
                     LoadPixels(
@@ -108,7 +108,7 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
-                OldCharacterType.CabalLeader,
+                CabalLeader,
                 New Sprite(
                     Hue.Orange,
                     LoadPixels(
@@ -127,7 +127,7 @@ Module CharacterSprites
                         "..#..#####.."))
             },
             {
-                OldCharacterType.Goblin,
+                Goblin,
                 New Sprite(
                     Hue.Green,
                     LoadPixels(
@@ -146,7 +146,7 @@ Module CharacterSprites
                         "....##..#..."))
             },
             {
-                OldCharacterType.GoblinElite,
+                GoblinElite,
                 New Sprite(
                     Hue.Green,
                     LoadPixels(
@@ -165,7 +165,7 @@ Module CharacterSprites
                         "....##..#..."))
             },
             {
-                OldCharacterType.Kordanor,
+                Kordanor,
                 New Sprite(
                     Hue.Red,
                     LoadPixels(
@@ -184,7 +184,7 @@ Module CharacterSprites
                         ".....#..#..."))
             },
             {
-                OldCharacterType.Malcontent,
+                Malcontent,
                 New Sprite(
                     Hue.Orange,
                     LoadPixels(
@@ -203,7 +203,7 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
-                OldCharacterType.MoonPerson,
+                MoonPerson,
                 New Sprite(
                     Hue.LightGreen,
                     LoadPixels(
@@ -222,7 +222,7 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
-                OldCharacterType.Priest,
+                Priest,
                 New Sprite(
                     Hue.Purple,
                     LoadPixels(
@@ -241,7 +241,7 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
-                OldCharacterType.Rat,
+                Rat,
                 New Sprite(
                     Hue.Black,
                     LoadPixels(
@@ -260,7 +260,7 @@ Module CharacterSprites
                         ".##.#####..."))
             },
             {
-                OldCharacterType.Skeleton,
+                Skeleton,
                 New Sprite(
                     Hue.Blue,
                     LoadPixels(
@@ -279,7 +279,7 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
-                OldCharacterType.Snake,
+                Snake,
                 New Sprite(
                     Hue.Green,
                     LoadPixels(
@@ -298,7 +298,7 @@ Module CharacterSprites
                         "......####.."))
             },
             {
-                OldCharacterType.Zombie,
+                Zombie,
                 New Sprite(
                     Hue.Purple,
                     LoadPixels(
