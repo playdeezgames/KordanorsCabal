@@ -21,10 +21,6 @@ Public Enum OldCharacterType
 End Enum
 Module CharacterTypeExtensions
     <Extension>
-    Function XPValue(characterType As OldCharacterType) As Long
-        Return CharacterTypeDescriptors(characterType).XPValue
-    End Function
-    <Extension>
     Sub DropLoot(characterType As OldCharacterType, location As Location)
         CharacterTypeDescriptors(characterType).DropLoot(location)
     End Sub
