@@ -57,7 +57,10 @@
                     (20,'Hunger','Hunger',0,0,100),
                     (21,'Food Poisoning','Food Poisoning',0,NULL,99999),
                     (22,'Chafing','Chafing',0,0,99999),
-                    (23,'Immobilization','Immobilization',0,NULL,99999))
+                    (23,'Immobilization','Immobilization',0,NULL,99999),
+                    (24,'Base Lift','Base Lift',0,0,99999),
+                    (25,'Bonus Lift','Bonus Lift',0,0,99999)
+                )
                 SELECT 
                     [{CharacterStatisticTypeIdColumn}],
                     [{CharacterStatisticTypeNameColumn}],

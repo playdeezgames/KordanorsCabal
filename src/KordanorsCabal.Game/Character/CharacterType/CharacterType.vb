@@ -27,7 +27,14 @@
             CharacterTypeInitialStatistic.ReadForCharacterType(Id).
             Select(Function(x) New CharacterStatisticType(x)).ToList
     End Function
-    MustOverride ReadOnly Property MaximumEncumbrance(character As Character) As Long
+    Function MaximumEncumbrance(character As Character) As Long
+        Return If(
+            character.GetStatistic(CharacterStatisticType.FromName(BaseLift)), 0) +
+            If(
+                character.GetStatistic(CharacterStatisticType.FromName(BonusLift)), 0) *
+            If(
+                character.GetStatistic(CharacterStatisticType.FromName(Strength)), 0)
+    End Function
     Function IsEnemy(character As Character) As Boolean
         Return StaticWorldData.World.CharacterTypeEnemy.Read(Id, character.CharacterType)
     End Function

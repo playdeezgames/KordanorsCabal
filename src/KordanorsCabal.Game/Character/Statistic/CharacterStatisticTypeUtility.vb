@@ -22,4 +22,6 @@
     Public Const FoodPoisoning = "Food Poisoning"
     Public Const Chafing = "Chafing"
     Public Const Immobilization = "Immobilization"
+    Public Const BaseLift = "Base Lift"
+    Public Const BonusLift = "Bonus Lift"
 End Module

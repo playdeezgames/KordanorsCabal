@@ -63,7 +63,7 @@
     End Sub
 
     Public Function ReadForCharacterEquipSlot(characterId As Long, equipSlotId As Long) As Long?
-        Store.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             ItemIdColumn,
