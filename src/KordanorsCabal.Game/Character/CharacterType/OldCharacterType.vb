@@ -19,12 +19,6 @@ Public Enum OldCharacterType
     Snake
     Zombie
 End Enum
-Module CharacterTypeExtensions
-    <Extension>
-    Function GenerateAttackType(characterType As OldCharacterType) As AttackType
-        Return CharacterTypeDescriptors(characterType).GenerateAttackType
-    End Function
-End Module
 Friend Module CharacterTypeUtility
     Friend ReadOnly CharacterTypeDescriptors As IReadOnlyDictionary(Of OldCharacterType, CharacterType) =
         New Dictionary(Of OldCharacterType, CharacterType) From
