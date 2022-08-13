@@ -41,8 +41,8 @@ Module CharacterTypeExtensions
         Return CharacterTypeDescriptors(characterType).SpawnCount(level)
     End Function
     <Extension>
-    Function CanSpawn(characterType As OldCharacterType, location As Location, level As DungeonLevel) As Boolean
-        Return CharacterTypeDescriptors(characterType).CanSpawn(location, level)
+    Function CanSpawn(characterType As OldCharacterType, locationType As LocationType, level As DungeonLevel) As Boolean
+        Return CharacterTypeDescriptors(characterType).CanSpawn(locationType, level)
     End Function
     <Extension>
     Function Name(characterType As OldCharacterType) As String

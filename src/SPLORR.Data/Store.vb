@@ -109,7 +109,7 @@ Public Class Store
     Public Function ReadColumnValue(Of TFirstInputColumn, TSecondInputColumn, TThirdInputColumn, TOutputColumn As Structure)(initializer As Action, tableName As String, outputColumnName As String, firstColumnValue As (String, TFirstInputColumn), secondColumnValue As (String, TSecondInputColumn), thirdColumnValue As (String, TThirdInputColumn)) As TOutputColumn?
         initializer()
         Return ExecuteScalar(Of TOutputColumn)(
-            $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{firstColumnValue.Item1}]=@{firstColumnValue.Item1} AND  [{secondColumnValue.Item1}]=@{secondColumnValue.Item1};",
+            $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{firstColumnValue.Item1}]=@{firstColumnValue.Item1} AND [{secondColumnValue.Item1}]=@{secondColumnValue.Item1} AND [{thirdColumnValue.Item1}]=@{thirdColumnValue.Item1};",
             MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
             MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2),
             MakeParameter($"@{thirdColumnValue.Item1}", thirdColumnValue.Item2))

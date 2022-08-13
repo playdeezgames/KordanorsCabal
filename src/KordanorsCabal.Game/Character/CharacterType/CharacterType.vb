@@ -38,8 +38,8 @@
     Function IsEnemy(character As Character) As Boolean
         Return StaticWorldData.World.CharacterTypeEnemy.Read(Id, character.CharacterType)
     End Function
-    Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
-        Return StaticWorldData.World.CharacterTypeSpawnLocation.Read(Id, level.Id, location.LocationType.Id)
+    Function CanSpawn(locationType As LocationType, level As DungeonLevel) As Boolean
+        Return StaticWorldData.World.CharacterTypeSpawnLocation.Read(Id, level.Id, locationType.Id)
     End Function
 
     Function PartingShot() As String
