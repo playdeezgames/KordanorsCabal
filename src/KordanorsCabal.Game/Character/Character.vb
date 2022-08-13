@@ -108,7 +108,7 @@
     End Property
     Friend Shared Function Create(characterType As OldCharacterType, location As Location) As Character
         Dim character = FromId(StaticWorldData.World.Character.Create(characterType, location.Id))
-        For Each entry In characterType.InitialStatistics
+        For Each entry In characterType.ToNew.InitialStatistics
             character.SetStatistic(entry, characterType.ToNew.InitialStatistic(entry).Value)
         Next
         Return character

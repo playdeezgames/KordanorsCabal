@@ -21,10 +21,6 @@ Public Enum OldCharacterType
 End Enum
 Module CharacterTypeExtensions
     <Extension>
-    Function InitialStatistics(characterType As OldCharacterType) As IReadOnlyList(Of CharacterStatisticType)
-        Return CharacterTypeDescriptors(characterType).InitialStatistics
-    End Function
-    <Extension>
     Function MaximumEncumbrance(characterType As OldCharacterType, character As Character) As Long
         Return CharacterTypeDescriptors(characterType).MaximumEncumbrance(character)
     End Function
