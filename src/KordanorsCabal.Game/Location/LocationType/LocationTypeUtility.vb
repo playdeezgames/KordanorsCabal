@@ -1,10 +1,10 @@
 ﻿Public Module LocationTypeUtility
-    Public Const TownSquare = "Town Square"
-    Public Const Town = "Town"
-    Public Const ChurchEntrance = "Church Entrance"
-    Public Const Dungeon = "Dungeon"
-    Public Const DungeonDeadEnd = "Dungeon Dead End"
-    Public Const DungeonBoss = "Dungeon Boss"
-    Public Const Cellar = "Cellar"
-    Public Const Moon = "Moon"
+    Public Const TownSquare = 1L
+    Public Const Town = 2L
+    Public Const ChurchEntrance = 3L
+    Public Const Dungeon = 4L
+    Public Const DungeonDeadEnd = 5L
+    Public Const DungeonBoss = 6L
+    Public Const Cellar = 7L
+    Public Const Moon = 8L
 End Module

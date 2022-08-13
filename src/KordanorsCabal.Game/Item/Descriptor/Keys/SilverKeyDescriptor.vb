@@ -6,6 +6,6 @@
             ItemType.SilverKey,
             "AG KEY",,
             MakeDictionary(
-                (2L, MakeHashSet(LocationType.FromName(DungeonDeadEnd)))))
+                (2L, MakeHashSet(LocationType.FromId(DungeonDeadEnd)))))
     End Sub
 End Class

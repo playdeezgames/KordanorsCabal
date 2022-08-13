@@ -5,7 +5,7 @@
             ItemType.FireShard,
             "Fire Shard",,
             MakeDictionary(
-                (3L, MakeHashSet(LocationType.FromName(DungeonBoss)))),
+                (3L, MakeHashSet(LocationType.FromId(DungeonBoss)))),
             MakeDictionary(
                 (3L, "1d1")),,,,,, ,
             False,,,,,,,,

@@ -31,6 +31,9 @@ Public Class LocationType
     Shared Function FromName(name As String) As LocationType
         Return New LocationType(name)
     End Function
+    Shared Function FromId(locationTypeId As Long) As LocationType
+        Return New LocationType(locationTypeId)
+    End Function
     Public Shared Operator =(first As LocationType, second As LocationType) As Boolean
         Return first.Id = second.Id
     End Operator

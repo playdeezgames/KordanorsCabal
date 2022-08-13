@@ -13,7 +13,7 @@
                 Dim outDirection = Direction.FromId(Outward)
                 Dim inDirection = Direction.FromId(Inward)
                 location.DestroyRoute(outDirection)
-                Dim destination = RNG.FromEnumerable(Game.Location.FromLocationType(LocationType.FromName(Moon)))
+                Dim destination = RNG.FromEnumerable(Game.Location.FromLocationType(LocationType.FromId(Moon)))
                 destination.DestroyRoute(inDirection)
                 Route.Create(location, outDirection, RouteType.Portal, destination)
                 Route.Create(destination, inDirection, RouteType.Portal, location)

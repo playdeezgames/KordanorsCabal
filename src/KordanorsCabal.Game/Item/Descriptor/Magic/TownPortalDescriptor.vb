@@ -13,7 +13,7 @@
                 Dim outDirection = Direction.FromId(Outward)
                 Dim inDirection = Direction.FromId(Inward)
                 location.DestroyRoute(outDirection)
-                Dim destination = Game.Location.FromLocationType(LocationType.FromName(TownSquare)).Single
+                Dim destination = Game.Location.FromLocationType(LocationType.FromId(TownSquare)).Single
                 destination.DestroyRoute(inDirection)
                 Route.Create(location, outDirection, RouteType.Portal, destination)
                 Route.Create(destination, inDirection, RouteType.Portal, location)

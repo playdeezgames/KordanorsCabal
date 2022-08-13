@@ -12,15 +12,15 @@ Public Module FeatureTypeDescriptorUtility
     Friend FeatureTypeDescriptors As IReadOnlyDictionary(Of FeatureType, FeatureTypeDescriptor) =
         New Dictionary(Of FeatureType, FeatureTypeDescriptor) From
         {
-            {FeatureType.BlackMage, New FeatureTypeDescriptor("Marcus the Black Mage", LocationType.FromName(Town), PlayerMode.BlackMage)},
-            {FeatureType.BlackMarketeer, New FeatureTypeDescriptor("""Honest"" Dan", LocationType.FromName(Town), PlayerMode.BlackMarket)},
-            {FeatureType.Blacksmith, New FeatureTypeDescriptor("Samuli the Blacksmith", LocationType.FromName(Town), PlayerMode.Blacksmith)},
-            {FeatureType.Chicken, New FeatureTypeDescriptor("Sander the Chicken", LocationType.FromName(Town), PlayerMode.Chicken)},
-            {FeatureType.Constable, New FeatureTypeDescriptor("David the Constable", LocationType.FromName(Town), PlayerMode.Constable)},
-            {FeatureType.Elder, New FeatureTypeDescriptor("Zooperdan the Elder", LocationType.FromName(TownSquare), PlayerMode.Elder)},
-            {FeatureType.Healer, New FeatureTypeDescriptor("Nihilist Healer Marten", LocationType.FromName(Town), PlayerMode.Healer)},
-            {FeatureType.InnKeeper, New FeatureTypeDescriptor("Graham the Innkeeper", LocationType.FromName(Town), PlayerMode.InnKeeper)},
-            {FeatureType.TownDrunk, New FeatureTypeDescriptor("Yermom the Drunk", LocationType.FromName(Town), PlayerMode.TownDrunk)}
+            {FeatureType.BlackMage, New FeatureTypeDescriptor("Marcus the Black Mage", LocationType.FromId(Town), PlayerMode.BlackMage)},
+            {FeatureType.BlackMarketeer, New FeatureTypeDescriptor("""Honest"" Dan", LocationType.FromId(Town), PlayerMode.BlackMarket)},
+            {FeatureType.Blacksmith, New FeatureTypeDescriptor("Samuli the Blacksmith", LocationType.FromId(Town), PlayerMode.Blacksmith)},
+            {FeatureType.Chicken, New FeatureTypeDescriptor("Sander the Chicken", LocationType.FromId(Town), PlayerMode.Chicken)},
+            {FeatureType.Constable, New FeatureTypeDescriptor("David the Constable", LocationType.FromId(Town), PlayerMode.Constable)},
+            {FeatureType.Elder, New FeatureTypeDescriptor("Zooperdan the Elder", LocationType.FromId(TownSquare), PlayerMode.Elder)},
+            {FeatureType.Healer, New FeatureTypeDescriptor("Nihilist Healer Marten", LocationType.FromId(Town), PlayerMode.Healer)},
+            {FeatureType.InnKeeper, New FeatureTypeDescriptor("Graham the Innkeeper", LocationType.FromId(Town), PlayerMode.InnKeeper)},
+            {FeatureType.TownDrunk, New FeatureTypeDescriptor("Yermom the Drunk", LocationType.FromId(Town), PlayerMode.TownDrunk)}
         }
     Public ReadOnly Property AllFeatureTypes As IEnumerable(Of FeatureType)
         Get
