@@ -13,7 +13,7 @@ Public Module World
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
                 Dim dungeonLocation = Location.Create(LocationType.FromName(Moon))
-                dungeonLocation.DungeonLevel = DungeonLevel.FromName(TheMoon)
+                dungeonLocation.DungeonLevel = DungeonLevel.FromId(TheMoon)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
                 locations.Add(dungeonLocation)
@@ -36,16 +36,16 @@ Public Module World
                 Route.Create(moonLocation, west, RouteType.MoonPath, westLocation)
             Next
         Next
-        PopulateCharacters(locations, DungeonLevel.FromName(TheMoon))
-        PopulateItems(locations, DungeonLevel.FromName(TheMoon))
+        PopulateCharacters(locations, DungeonLevel.FromId(TheMoon))
+        PopulateItems(locations, DungeonLevel.FromId(TheMoon))
     End Sub
 
     Private Sub CreateDungeon(location As Location)
-        location = CreateDungeonLevel(location, DungeonLevel.FromName(Level1), ItemType.CopperKey, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
-        location = CreateDungeonLevel(location, DungeonLevel.FromName(Level2), ItemType.SilverKey, RouteType.SilverLock)
-        location = CreateDungeonLevel(location, DungeonLevel.FromName(Level3), ItemType.GoldKey, RouteType.GoldLock)
-        location = CreateDungeonLevel(location, DungeonLevel.FromName(Level4), ItemType.PlatinumKey, RouteType.PlatinumLock)
-        location = CreateDungeonLevel(location, DungeonLevel.FromName(Level5), ItemType.ElementalOrb, RouteType.FinalLock)
+        location = CreateDungeonLevel(location, DungeonLevel.FromId(Level1), ItemType.CopperKey, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
+        location = CreateDungeonLevel(location, DungeonLevel.FromId(Level2), ItemType.SilverKey, RouteType.SilverLock)
+        location = CreateDungeonLevel(location, DungeonLevel.FromId(Level3), ItemType.GoldKey, RouteType.GoldLock)
+        location = CreateDungeonLevel(location, DungeonLevel.FromId(Level4), ItemType.PlatinumKey, RouteType.PlatinumLock)
+        location = CreateDungeonLevel(location, DungeonLevel.FromId(Level5), ItemType.ElementalOrb, RouteType.FinalLock)
     End Sub
 
     Const MazeColumns = 11

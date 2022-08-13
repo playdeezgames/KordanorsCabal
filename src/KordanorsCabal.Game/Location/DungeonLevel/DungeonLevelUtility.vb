@@ -7,10 +7,10 @@ Public Module DungeonLevelUtility
         End Get
     End Property
 
-    Public Const Level1 = "Level I"
-    Public Const Level2 = "Level II"
-    Public Const Level3 = "Level III"
-    Public Const Level4 = "Level IV"
-    Public Const Level5 = "Level V"
-    Public Const TheMoon = "The Moon"
+    Public Const Level1 = 1L
+    Public Const Level2 = 2L
+    Public Const Level3 = 3L
+    Public Const Level4 = 4L
+    Public Const Level5 = 5L
+    Public Const TheMoon = 6L
 End Module
