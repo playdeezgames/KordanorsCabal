@@ -122,7 +122,7 @@ Public Module World
     Private Sub PopulateCharacters(locations As IEnumerable(Of Location), dungeonLevel As DungeonLevel)
         StartTimeKeeper()
         For Each characterType In AllCharacterTypes()
-            Dim characterCount = characterType.SpawnCount(dungeonLevel)
+            Dim characterCount = characterType.ToNew.SpawnCount(dungeonLevel)
             MarkTimeKeeper($"{dungeonLevel.Name} - {characterType.Name} - Spawn Count Determined")
             Dim candidates = locations.Where(Function(x) characterType.CanSpawn(x.LocationType, dungeonLevel))
             MarkTimeKeeper($"{dungeonLevel.Name} - {characterType.Name} - Candidate Locations Determined")
