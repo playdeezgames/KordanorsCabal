@@ -28,8 +28,8 @@ Module CharacterSprites
         Next
         Return result
     End Function
-    ReadOnly characterSprites As IReadOnlyDictionary(Of OldCharacterType, Sprite) =
-        New Dictionary(Of OldCharacterType, Sprite) From
+    ReadOnly characterSprites As IReadOnlyDictionary(Of Long, Sprite) =
+        New Dictionary(Of Long, Sprite) From
         {
             {
                 OldCharacterType.Acolyte,
@@ -318,7 +318,7 @@ Module CharacterSprites
             }
         }
     <Extension>
-    Function Sprite(characterType As OldCharacterType) As Sprite
-        Return characterSprites(characterType)
+    Function Sprite(characterType As CharacterType) As Sprite
+        Return characterSprites(characterType.Id)
     End Function
 End Module
