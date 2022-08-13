@@ -33,18 +33,16 @@
         End If
         Return RNG.FromGenerator(partingShotTable)
     End Function
-
     Sub DropLoot(location As Location)
         Dim lootTable = StaticWorldData.World.CharacterTypeLoot.Read(Id)
         If Not lootTable.Any Then
             Return
         End If
         Dim itemType = CType(RNG.FromGenerator(lootTable), ItemType)
-        If itemType <> itemType.None Then
+        If itemType <> ItemType.None Then
             location.Inventory.Add(Item.Create(itemType))
         End If
     End Sub
-
     Function CanBeBribedWith(itemType As ItemType) As Boolean
         Return StaticWorldData.World.CharacterTypeBribe.Read(Id, itemType)
     End Function
