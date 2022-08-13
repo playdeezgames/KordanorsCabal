@@ -27,10 +27,6 @@ Public Module CharacterTypeUtility
     Function ToNew(oldCharacterType As OldCharacterType) As CharacterType
         Return New CharacterType(oldCharacterType)
     End Function
-    <Extension>
-    Function ToOld(characterType As CharacterType) As OldCharacterType
-        Return CType(characterType.Id, OldCharacterType)
-    End Function
     Public Const Acolyte = 1L
     Public Const Badger = 2L
     Public Const Bat = 3L
