@@ -21,10 +21,6 @@ Public Enum OldCharacterType
 End Enum
 Module CharacterTypeExtensions
     <Extension>
-    Function IsEnemy(characterType As OldCharacterType, character As Character) As Boolean
-        Return CharacterTypeDescriptors(characterType).IsEnemy(character)
-    End Function
-    <Extension>
     Function SpawnCount(characterType As OldCharacterType, level As DungeonLevel) As Long
         Return CharacterTypeDescriptors(characterType).SpawnCount(level)
     End Function

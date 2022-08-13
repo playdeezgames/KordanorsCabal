@@ -174,7 +174,7 @@
     End Function
 
     Friend Function IsEnemy(character As Character) As Boolean
-        Return CharacterType.IsEnemy(character)
+        Return CharacterType.ToNew.IsEnemy(character)
     End Function
     Private Function RollDice(dice As Long) As Long
         Dim result As Long = 0
