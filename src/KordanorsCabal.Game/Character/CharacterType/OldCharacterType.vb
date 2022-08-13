@@ -21,10 +21,6 @@ Public Enum OldCharacterType
 End Enum
 Module CharacterTypeExtensions
     <Extension>
-    Sub DropLoot(characterType As OldCharacterType, location As Location)
-        CharacterTypeDescriptors(characterType).DropLoot(location)
-    End Sub
-    <Extension>
     Function IsUndead(characterType As OldCharacterType) As Boolean
         Return CharacterTypeDescriptors(characterType).IsUndead
     End Function
