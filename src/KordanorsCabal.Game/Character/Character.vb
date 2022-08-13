@@ -109,7 +109,7 @@
     Friend Shared Function Create(characterType As OldCharacterType, location As Location) As Character
         Dim character = FromId(StaticWorldData.World.Character.Create(characterType, location.Id))
         For Each entry In characterType.InitialStatistics
-            character.SetStatistic(entry, characterType.InitialStatistic(entry).Value)
+            character.SetStatistic(entry, characterType.ToNew.InitialStatistic(entry).Value)
         Next
         Return character
     End Function

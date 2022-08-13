@@ -1,4 +1,4 @@
-﻿Friend MustInherit Class CharacterType
+﻿Friend Class CharacterType
     ReadOnly Property Id As Long
     ReadOnly Property Name As String
         Get

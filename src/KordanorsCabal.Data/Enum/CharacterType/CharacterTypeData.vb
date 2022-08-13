@@ -77,4 +77,11 @@
             CharacterTypeNameColumn,
             (CharacterTypeIdColumn, characterTypeId))
     End Function
+
+    Public Function ReadAll() As IEnumerable(Of Long)
+        Return Store.ReadRecords(Of Long)(
+            AddressOf Initialize,
+            TableName,
+            CharacterTypeIdColumn)
+    End Function
 End Class
