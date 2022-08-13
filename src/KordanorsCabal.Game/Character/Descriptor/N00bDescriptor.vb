@@ -4,38 +4,6 @@
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)
     End Sub
-
-    Public Overrides ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
-        Get
-            Return New Dictionary(Of Long, Long) From
-                {
-                    {11, 1},
-                    {22, 0},
-                    {2, 1},
-                    {18, 0},
-                    {15, 0},
-                    {21, 0},
-                    {19, 0},
-                    {6, 3},
-                    {23, 0},
-                    {20, 0},
-                    {3, 1},
-                    {8, 1},
-                    {14, 0},
-                    {7, 3},
-                    {5, 1},
-                    {1, 1},
-                    {13, 0},
-                    {10, 1},
-                    {9, 8},
-                    {4, 1},
-                    {12, 0},
-                    {16, 0},
-                    {17, 10}
-                }
-        End Get
-    End Property
-
     Public Overrides ReadOnly Property MaximumEncumbrance(character As Character) As Long
         Get
             Return 50 + If(character.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Strength)), 0) * 10

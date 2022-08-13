@@ -19,7 +19,14 @@
         Id = characterTypeId
     End Sub
 
-    MustOverride ReadOnly Property InitialStatistics As IReadOnlyDictionary(Of Long, Long)
+    Function InitialStatistic(statisticType As CharacterStatisticType) As Long?
+        Return StaticWorldData.World.CharacterTypeInitialStatistic.Read(Id, statisticType.Id)
+    End Function
+    Function InitialStatistics() As IReadOnlyList(Of CharacterStatisticType)
+        Return StaticWorldData.World.
+            CharacterTypeInitialStatistic.ReadForCharacterType(Id).
+            Select(Function(x) New CharacterStatisticType(x)).ToList
+    End Function
     MustOverride ReadOnly Property MaximumEncumbrance(character As Character) As Long
     MustOverride Function IsEnemy(character As Character) As Boolean
     Overridable Function CanSpawn(location As Location, level As DungeonLevel) As Boolean

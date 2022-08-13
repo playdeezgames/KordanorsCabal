@@ -21,7 +21,11 @@ Public Enum OldCharacterType
 End Enum
 Module CharacterTypeExtensions
     <Extension>
-    Function InitialStatistics(characterType As OldCharacterType) As IReadOnlyDictionary(Of Long, Long)
+    Function InitialStatistic(characterType As OldCharacterType, statisticType As CharacterStatisticType) As Long?
+        Return CharacterTypeDescriptors(characterType).InitialStatistic(statisticType)
+    End Function
+    <Extension>
+    Function InitialStatistics(characterType As OldCharacterType) As IReadOnlyList(Of CharacterStatisticType)
         Return CharacterTypeDescriptors(characterType).InitialStatistics
     End Function
     <Extension>
