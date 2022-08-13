@@ -42,24 +42,6 @@
         Return RNG.FromEnumerable(partingShots)
     End Function
 
-    Private ReadOnly foodTable As IReadOnlyDictionary(Of ItemType, Integer) =
-        New Dictionary(Of ItemType, Integer) From
-        {
-            {ItemType.None, 2},
-            {ItemType.Food, 1},
-            {ItemType.RottenFood, 1}
-        }
-
-    Public Overrides Sub DropLoot(location As Location)
-        If RNG.RollDice("1d2") > 1 Then
-            location.Inventory.Add(Item.Create(ItemType.GoblinEar))
-        End If
-        Dim foodType = RNG.FromGenerator(foodTable)
-        If foodType <> ItemType.None Then
-            location.Inventory.Add(Item.Create(foodType))
-        End If
-    End Sub
-
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)
     End Sub

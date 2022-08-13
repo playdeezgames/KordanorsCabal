@@ -33,13 +33,6 @@
         MyBase.New(characterTypeId)
     End Sub
 
-
-    Public Overrides Sub DropLoot(location As Location)
-        If RNG.RollDice("1d2") > 1 Then
-            location.Inventory.Add(Item.Create(ItemType.SnakeFang))
-        End If
-    End Sub
-
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return character.CharacterType = OldCharacterType.N00b
     End Function

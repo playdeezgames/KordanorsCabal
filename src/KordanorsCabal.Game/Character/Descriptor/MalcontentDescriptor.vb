@@ -30,22 +30,6 @@
         Return True
     End Function
 
-    Private ReadOnly foodTable As IReadOnlyDictionary(Of ItemType, Integer) =
-        New Dictionary(Of ItemType, Integer) From
-        {
-            {ItemType.None, 2},
-            {ItemType.Food, 1},
-            {ItemType.RottenFood, 2}
-        }
-
-    Public Overrides Sub DropLoot(location As Location)
-        location.Inventory.Add(Item.Create(ItemType.MembershipCard))
-        Dim foodType = RNG.FromGenerator(foodTable)
-        If foodType <> ItemType.None Then
-            location.Inventory.Add(Item.Create(foodType))
-        End If
-    End Sub
-
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return level.Id <> 1 OrElse location.LocationType = LocationType.FromName(DungeonDeadEnd)
     End Function

@@ -30,10 +30,6 @@
         End Get
     End Property
 
-    Public Overrides Sub DropLoot(location As Location)
-        location.Inventory.Add(Item.Create(ItemType.RatTail))
-    End Sub
-
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return character.CharacterType = OldCharacterType.N00b
     End Function

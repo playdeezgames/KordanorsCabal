@@ -30,10 +30,6 @@
         End Get
     End Property
 
-    Public Overrides Sub DropLoot(location As Location)
-        'TODO
-    End Sub
-
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return True
     End Function
