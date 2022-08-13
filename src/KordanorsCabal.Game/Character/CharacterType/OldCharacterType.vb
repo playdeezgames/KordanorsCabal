@@ -21,10 +21,6 @@ Public Enum OldCharacterType
 End Enum
 Module CharacterTypeExtensions
     <Extension>
-    Function RollMoneyDrop(characterType As OldCharacterType) As Long
-        Return CharacterTypeDescriptors(characterType).RollMoneyDrop
-    End Function
-    <Extension>
     Function PartingShot(characterType As OldCharacterType) As String
         Return CharacterTypeDescriptors(characterType).PartingShot
     End Function
