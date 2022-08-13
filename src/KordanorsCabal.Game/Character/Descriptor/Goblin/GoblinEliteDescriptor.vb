@@ -29,15 +29,6 @@
     Public Overrides Function IsEnemy(character As Character) As Boolean
         Return True
     End Function
-    Private ReadOnly partingShots As IReadOnlyList(Of String) =
-        New List(Of String) From
-        {
-            "@#$% you!"
-        }
-    Public Overrides Function PartingShot() As String
-
-        Return RNG.FromEnumerable(partingShots)
-    End Function
 
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)

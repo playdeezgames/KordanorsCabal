@@ -32,15 +32,6 @@
     Public Overrides Function CanSpawn(location As Location, level As DungeonLevel) As Boolean
         Return location.LocationType = LocationType.FromName(Dungeon)
     End Function
-    Private ReadOnly partingShots As IReadOnlyList(Of String) =
-        New List(Of String) From
-        {
-            "@#$% you!"
-        }
-    Public Overrides Function PartingShot() As String
-
-        Return RNG.FromEnumerable(partingShots)
-    End Function
 
     Public Sub New(characterTypeId As Long)
         MyBase.New(characterTypeId)

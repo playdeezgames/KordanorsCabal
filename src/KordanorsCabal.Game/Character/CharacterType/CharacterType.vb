@@ -26,10 +26,13 @@
         Return False
     End Function
 
-    Overridable Function PartingShot() As String
-        Return ""
+    Function PartingShot() As String
+        Dim partingShotTable = StaticWorldData.World.CharacterTypePartingShot.Read(Id)
+        If Not partingShotTable.Any Then
+            Return ""
+        End If
+        Return RNG.FromGenerator(partingShotTable)
     End Function
-
 
     Sub DropLoot(location As Location)
         Dim lootTable = StaticWorldData.World.CharacterTypeLoot.Read(Id)

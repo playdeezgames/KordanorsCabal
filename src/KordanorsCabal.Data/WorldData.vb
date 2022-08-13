@@ -11,6 +11,7 @@
     Public ReadOnly CharacterTypeAttackType As CharacterTypeAttackTypeData
     Public ReadOnly CharacterTypeBribe As CharacterTypeBribeData
     Public ReadOnly CharacterTypeLoot As CharacterTypeLootData
+    Public ReadOnly CharacterTypePartingShot As CharacterTypePartingShotData
     Public ReadOnly CharacterTypeSpawnCount As CharacterTypeSpawnCountData
     Public ReadOnly Direction As DirectionData
     Public ReadOnly DungeonLevel As DungeonLevelData
@@ -40,6 +41,7 @@
         CharacterTypeAttackType = New CharacterTypeAttackTypeData(store)
         CharacterTypeBribe = New CharacterTypeBribeData(store)
         CharacterTypeLoot = New CharacterTypeLootData(store)
+        CharacterTypePartingShot = New CharacterTypePartingShotData(store)
         CharacterTypeSpawnCount = New CharacterTypeSpawnCountData(store)
         Direction = New DirectionData(store)
         DungeonLevel = New DungeonLevelData(store)
