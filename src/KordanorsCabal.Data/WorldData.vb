@@ -20,6 +20,7 @@
     Public ReadOnly DungeonLevel As DungeonLevelData
     Public ReadOnly EquipSlot As EquipSlotData
     Public ReadOnly Feature As FeatureData
+    Public ReadOnly FeatureType As FeatureTypeData
     Public ReadOnly Inventory As InventoryData
     Public ReadOnly InventoryItem As InventoryItemData
     Public ReadOnly Item As ItemData
@@ -53,6 +54,7 @@
         DungeonLevel = New DungeonLevelData(store)
         EquipSlot = New EquipSlotData(store)
         Feature = New FeatureData(store)
+        FeatureType = New FeatureTypeData(store)
         Inventory = New InventoryData(store)
         InventoryItem = New InventoryItemData(store)
         Item = New ItemData(store)
