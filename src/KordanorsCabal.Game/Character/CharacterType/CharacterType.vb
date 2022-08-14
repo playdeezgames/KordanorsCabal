@@ -29,9 +29,9 @@
     End Function
     Function MaximumEncumbrance(character As Character) As Long
         Return If(
-            character.GetStatistic(CharacterStatisticType.FromName(BaseLift)), 0) +
+            character.GetStatistic(CharacterStatisticType.FromId(BaseLift)), 0) +
             If(
-                character.GetStatistic(CharacterStatisticType.FromName(BonusLift)), 0) *
+                character.GetStatistic(CharacterStatisticType.FromId(BonusLift)), 0) *
             If(
                 character.GetStatistic(CharacterStatisticType.FromId(Strength)), 0)
     End Function
