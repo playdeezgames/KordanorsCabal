@@ -1,6 +1,6 @@
 ﻿Imports System.Runtime.CompilerServices
 
-Public Enum FeatureType
+Public Enum OldFeatureType
     None
     Elder
     InnKeeper
@@ -14,15 +14,15 @@ Public Enum FeatureType
 End Enum
 Public Module FeatureTypeExtensions
     <Extension>
-    Public Function Name(featureType As FeatureType) As String
+    Public Function Name(featureType As OldFeatureType) As String
         Return FeatureTypeDescriptors(featureType).Name
     End Function
     <Extension>
-    Public Function LocationType(featureType As FeatureType) As LocationType
+    Public Function LocationType(featureType As OldFeatureType) As LocationType
         Return FeatureTypeDescriptors(featureType).LocationType
     End Function
     <Extension>
-    Public Function InteractionMode(featureType As FeatureType) As PlayerMode
+    Public Function InteractionMode(featureType As OldFeatureType) As PlayerMode
         Return FeatureTypeDescriptors(featureType).InteractionMode
     End Function
 End Module

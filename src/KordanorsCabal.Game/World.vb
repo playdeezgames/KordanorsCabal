@@ -189,10 +189,10 @@ Public Module World
         Next
     End Sub
 
-    Private Sub CreateFeature(featureType As FeatureType)
+    Private Sub CreateFeature(featureType As OldFeatureType)
         Dim featureLocation = RNG.FromEnumerable(Location.FromLocationType(featureType.LocationType).Where(Function(x) Not x.HasFeature))
         Feature.Create(featureType, featureLocation)
-        If featureType = FeatureType.InnKeeper Then
+        If featureType = OldFeatureType.InnKeeper Then
             CreateCellar(featureLocation)
         End If
     End Sub

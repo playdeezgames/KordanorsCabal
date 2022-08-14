@@ -38,7 +38,7 @@
     End Function
 
     Private Function GiveBeer(player As Character) As UIState
-        player.EnqueueMessage($"You give {ItemType.Beer.Name} to {FeatureType.TownDrunk.Name}.", $"{FeatureType.TownDrunk.Name} drinks it all in one swallow, burps, and hands you {ItemType.Bottle.Name}.")
+        player.EnqueueMessage($"You give {ItemType.Beer.Name} to {OldFeatureType.TownDrunk.Name}.", $"{OldFeatureType.TownDrunk.Name} drinks it all in one swallow, burps, and hands you {ItemType.Bottle.Name}.")
         player.Inventory.ItemsOfType(ItemType.Beer).First.Destroy()
         player.Inventory.Add(Item.Create(ItemType.Bottle))
         PushUIState(UIState.InPlay)

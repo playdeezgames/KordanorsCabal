@@ -7,13 +7,13 @@
         Return If(featureId.HasValue, New Feature(featureId.Value), Nothing)
     End Function
 
-    Friend Shared Function Create(featureType As FeatureType, location As Location) As Feature
+    Friend Shared Function Create(featureType As OldFeatureType, location As Location) As Feature
         Return FromId(StaticWorldData.World.Feature.Create(featureType, location.Id))
     End Function
 
-    ReadOnly Property FeatureType As FeatureType
+    ReadOnly Property FeatureType As OldFeatureType
         Get
-            Return CType(StaticWorldData.World.Feature.ReadFeatureType(Id).Value, FeatureType)
+            Return CType(StaticWorldData.World.Feature.ReadFeatureType(Id).Value, OldFeatureType)
         End Get
     End Property
 
