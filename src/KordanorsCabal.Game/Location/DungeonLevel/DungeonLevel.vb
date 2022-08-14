@@ -14,9 +14,5 @@
     Public Shared Function FromId(dungeonLevelId As Long?) As DungeonLevel
         Return If(dungeonLevelId.HasValue, New DungeonLevel(dungeonLevelId.Value), Nothing)
     End Function
-
-    Friend Shared Function FromName(name As String) As DungeonLevel
-        Return New DungeonLevel(name)
-    End Function
 End Class
 
