@@ -11,7 +11,7 @@
     Sub New(name As String)
         Me.New(StaticWorldData.World.EquipSlot.ReadForName(name).Value)
     End Sub
-    Public Shared Function FromName(name As String) As EquipSlot
-        Return New EquipSlot(name)
+    Public Shared Function FromId(equipSlotId As Long) As EquipSlot
+        Return New EquipSlot(equipSlotId)
     End Function
 End Class

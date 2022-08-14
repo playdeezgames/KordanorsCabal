@@ -15,7 +15,7 @@
             MakeDictionary(
                 (2L, "2d6"),
                 (3L, "1d6")),
-                MakeList(EquipSlot.FromName(Weapon)),,
+                MakeList(EquipSlot.FromId(Weapon)),,
                 6,
                 3,,
                 40,,
