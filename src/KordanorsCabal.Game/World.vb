@@ -52,13 +52,13 @@ Public Module World
     Const MazeRows = 11
     Const MoonColumns = 11
     Const MoonRows = 11
-    ReadOnly MazeDirections As IReadOnlyDictionary(Of String, MazeDirection(Of String)) =
-        New Dictionary(Of String, MazeDirection(Of String)) From
+    ReadOnly MazeDirections As IReadOnlyDictionary(Of Long, MazeDirection(Of Long)) =
+        New Dictionary(Of Long, MazeDirection(Of Long)) From
         {
-            {"North", New MazeDirection(Of String)("South", 0, -1)},
-            {"East", New MazeDirection(Of String)("West", 1, 0)},
-            {"South", New MazeDirection(Of String)("North", 0, 1)},
-            {"West", New MazeDirection(Of String)("East", -1, 0)}
+            {1, New MazeDirection(Of Long)(3, 0, -1)},
+            {2, New MazeDirection(Of Long)(4, 1, 0)},
+            {3, New MazeDirection(Of Long)(1, 0, 1)},
+            {4, New MazeDirection(Of Long)(2, -1, 0)}
         }
 
     Public ReadOnly Property IsValid As Boolean
@@ -67,7 +67,7 @@ Public Module World
         End Get
     End Property
 
-    Private Function CreateLocations(maze As Maze(Of String), dungeonLevel As DungeonLevel) As IReadOnlyList(Of Location)
+    Private Function CreateLocations(maze As Maze(Of Long), dungeonLevel As DungeonLevel) As IReadOnlyList(Of Location)
         Dim locations As New List(Of Location)
         For row As Long = 0 To maze.Rows - 1
             For column As Long = 0 To maze.Columns - 1
@@ -90,7 +90,7 @@ Public Module World
                         Dim nextColumn = MazeDirections(direction).DeltaX + column
                         Dim nextRow = MazeDirections(direction).DeltaY + row
                         Dim nextLocation = locations(CInt(nextColumn + nextRow * maze.Columns))
-                        Route.Create(dungeonLocation, Game.Direction.FromName(direction), RouteType.Passageway, nextLocation)
+                        Route.Create(dungeonLocation, Game.Direction.FromId(direction), RouteType.Passageway, nextLocation)
                     End If
                 Next
             Next
@@ -99,7 +99,7 @@ Public Module World
     End Function
 
     Private Function CreateDungeonLevel(fromLocation As Location, dungeonLevel As DungeonLevel, bossKeyType As ItemType, bossRouteType As RouteType) As Location
-        Dim maze = New Maze(Of String)(MazeColumns, MazeRows, MazeDirections)
+        Dim maze = New Maze(Of Long)(MazeColumns, MazeRows, MazeDirections)
         maze.Generate()
         Dim locations = CreateLocations(maze, dungeonLevel)
         PopulateLocations(locations, bossKeyType, bossRouteType, dungeonLevel)

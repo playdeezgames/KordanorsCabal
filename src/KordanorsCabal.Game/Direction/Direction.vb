@@ -5,9 +5,6 @@
     Private Sub New(directionName As String)
         Me.New(StaticWorldData.World.Direction.ReadForName(directionName).Value)
     End Sub
-    Shared Function FromName(directionName As String) As Direction
-        Return New Direction(directionName)
-    End Function
     Shared Function FromId(directionId As Long?) As Direction
         Return If(directionId.HasValue, New Direction(directionId.Value), Nothing)
     End Function
