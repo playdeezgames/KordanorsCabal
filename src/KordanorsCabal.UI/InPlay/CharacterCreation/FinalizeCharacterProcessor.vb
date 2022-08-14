@@ -14,14 +14,14 @@
             New List(Of (String, Func(Of UIState))) From
             {
                 ("Cancel", Function() cancelState),
-                ($"STR: ?", Function() ApplyPoint(CharacterStatisticType.FromName("Strength"), nextState, currentState)),
-                ($"DEX: ?", Function() ApplyPoint(CharacterStatisticType.FromName("Dexterity"), nextState, currentState)),
-                ($"INF: ?", Function() ApplyPoint(CharacterStatisticType.FromName("Influence"), nextState, currentState)),
-                ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromName("Willpower"), nextState, currentState)),
-                ($"POW: ?", Function() ApplyPoint(CharacterStatisticType.FromName("Power"), nextState, currentState)),
-                ($"HP: ?", Function() ApplyPoint(CharacterStatisticType.FromName("HP"), nextState, currentState)),
-                ($"MP: ?", Function() ApplyPoint(CharacterStatisticType.FromName("MP"), nextState, currentState)),
-                ($"Mana: ?", Function() ApplyPoint(CharacterStatisticType.FromName("Mana"), nextState, currentState))
+                ($"STR: ?", Function() ApplyPoint(CharacterStatisticType.FromId(Strength), nextState, currentState)),
+                ($"DEX: ?", Function() ApplyPoint(CharacterStatisticType.FromId(Dexterity), nextState, currentState)),
+                ($"INF: ?", Function() ApplyPoint(CharacterStatisticType.FromId(Influence), nextState, currentState)),
+                ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromId(Willpower), nextState, currentState)),
+                ($"POW: ?", Function() ApplyPoint(CharacterStatisticType.FromId(Power), nextState, currentState)),
+                ($"HP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(HP), nextState, currentState)),
+                ($"MP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(MP), nextState, currentState)),
+                ($"Mana: ?", Function() ApplyPoint(CharacterStatisticType.FromId(Mana), nextState, currentState))
             },
             7,
             currentState)

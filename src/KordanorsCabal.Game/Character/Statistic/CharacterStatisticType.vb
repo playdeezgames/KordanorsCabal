@@ -6,9 +6,6 @@
     Private Sub New(characterStatisticTypeName As String)
         Me.New(StaticWorldData.World.CharacterStatisticType.ReadForName(characterStatisticTypeName).Value)
     End Sub
-    Public Shared Function FromName(characterStatisticTypeName As String) As CharacterStatisticType
-        Return New CharacterStatisticType(characterStatisticTypeName)
-    End Function
     Public Shared Function FromId(statisticTypeId As Long) As CharacterStatisticType
         Return New CharacterStatisticType(statisticTypeId)
     End Function
