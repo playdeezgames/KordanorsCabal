@@ -106,10 +106,10 @@
             Return Location.Enemies(Me).Any
         End Get
     End Property
-    Friend Shared Function Create(characterType As CharacterType, location As Location) As Character
+    Friend Shared Function Create(characterType As CharacterType, location As Location, initialStatistics As IReadOnlyList(Of (CharacterStatisticType, Long))) As Character
         Dim character = FromId(StaticWorldData.World.Character.Create(characterType.Id, location.Id))
-        For Each entry In characterType.InitialStatistics
-            character.SetStatistic(entry, characterType.InitialStatistic(entry).Value)
+        For Each entry In initialStatistics
+            character.SetStatistic(entry.Item1, entry.Item2)
         Next
         Return character
     End Function

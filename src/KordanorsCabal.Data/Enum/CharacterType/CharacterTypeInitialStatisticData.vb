@@ -202,6 +202,14 @@
 
     End Sub
 
+    Public Function ReadAllForCharacterType(characterTypeId As Long) As List(Of Tuple(Of Long, Long))
+        Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            (CharacterStatisticTypeIdColumn, InitialValueColumn),
+            (CharacterTypeIdColumn, characterTypeId))
+    End Function
+
     Public Sub New(store As Store)
         MyBase.New(store)
     End Sub

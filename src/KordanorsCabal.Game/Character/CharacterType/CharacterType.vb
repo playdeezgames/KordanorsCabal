@@ -19,13 +19,18 @@
         Id = characterTypeId
     End Sub
 
-    Function InitialStatistic(statisticType As CharacterStatisticType) As Long?
+    Function OldInitialStatistic(statisticType As CharacterStatisticType) As Long?
         Return StaticWorldData.World.CharacterTypeInitialStatistic.Read(Id, statisticType.Id)
     End Function
-    Function InitialStatistics() As IReadOnlyList(Of CharacterStatisticType)
+    Function OldInitialStatistics() As IReadOnlyList(Of CharacterStatisticType)
         Return StaticWorldData.World.
             CharacterTypeInitialStatistic.ReadForCharacterType(Id).
             Select(Function(x) New CharacterStatisticType(x)).ToList
+    End Function
+    Function InitialStatistics() As IReadOnlyList(Of (CharacterStatisticType, Long))
+        Return StaticWorldData.World.
+            CharacterTypeInitialStatistic.ReadAllForCharacterType(Id).
+            Select(Function(x) (CharacterStatisticType.FromId(x.Item1), x.Item2)).ToList
     End Function
     Function MaximumEncumbrance(character As Character) As Long
         Return If(
