@@ -19,7 +19,7 @@
                     character.EnqueueMessage($"You give {enemy.Name} the {ItemType.Beer.Name}, and they wander off to get drunk.")
                     Return
                 End If
-                character.CurrentMP = character.GetStatistic(CharacterStatisticType.FromName(MP)).Value
+                character.CurrentMP = character.GetStatistic(CharacterStatisticType.FromId(MP)).Value
                 character.Drunkenness += 10
                 character.Inventory.Add(Game.Item.Create(ItemType.Bottle))
                 character.EnqueueMessage("You drink the beer, and suddenly feel braver!")

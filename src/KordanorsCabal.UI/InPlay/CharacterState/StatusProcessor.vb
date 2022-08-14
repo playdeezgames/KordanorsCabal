@@ -7,16 +7,16 @@
         buffer.WriteTextCentered(0, "Status", True, Hue.Blue)
         Dim player = World.PlayerCharacter
 
-        buffer.WriteText((0, 1), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Strength).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Strength))}", False, Hue.Black)
-        buffer.WriteText((0, 2), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity))}", False, Hue.Black)
-        buffer.WriteText((0, 3), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP).Abbreviation} {player.CurrentHP}/{player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP))}", False, Hue.Black)
+        buffer.WriteText((0, 1), $"{CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Strength).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Strength))}", False, Hue.Black)
+        buffer.WriteText((0, 2), $"{CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Dexterity).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Dexterity))}", False, Hue.Black)
+        buffer.WriteText((0, 3), $"{CharacterStatisticType.FromId(CharacterStatisticTypeUtility.HP).Abbreviation} {player.CurrentHP}/{player.GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.HP))}", False, Hue.Black)
 
-        buffer.WriteText((11, 1), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Influence).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Influence))}", False, Hue.Black)
-        buffer.WriteText((11, 2), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Willpower).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Willpower))}", False, Hue.Black)
-        buffer.WriteText((11, 3), $"{CharacterStatisticType.FromName(MP).Abbreviation} {player.CurrentMP}/{player.GetStatistic(CharacterStatisticType.FromName(MP))}", False, Hue.Black)
+        buffer.WriteText((11, 1), $"{CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Influence).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Influence))}", False, Hue.Black)
+        buffer.WriteText((11, 2), $"{CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Willpower).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Willpower))}", False, Hue.Black)
+        buffer.WriteText((11, 3), $"{CharacterStatisticType.FromId(MP).Abbreviation} {player.CurrentMP}/{player.GetStatistic(CharacterStatisticType.FromId(MP))}", False, Hue.Black)
 
-        buffer.WriteText((0, 5), $"{CharacterStatisticType.FromName(Power).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(Power))}", False, Hue.Black)
-        buffer.WriteText((0, 6), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana).Abbreviation} {player.CurrentMana}/{player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana))}", False, Hue.Black)
+        buffer.WriteText((0, 5), $"{CharacterStatisticType.FromId(Power).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(Power))}", False, Hue.Black)
+        buffer.WriteText((0, 6), $"{CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Mana).Abbreviation} {player.CurrentMana}/{player.GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Mana))}", False, Hue.Black)
 
         buffer.WriteText((11, 5), $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XP).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XP))}/{player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XPGoal))}", False, Hue.Black)
 

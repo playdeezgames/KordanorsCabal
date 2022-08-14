@@ -64,7 +64,7 @@
         If nextLevel > spellType.MaximumLevel Then
             Return False
         End If
-        Return If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Power)), 0) >= spellType.RequiredPower(nextLevel)
+        Return If(GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Power)), 0) >= spellType.RequiredPower(nextLevel)
     End Function
 
     Friend Sub DoImmobilization(delta As Long)
@@ -79,7 +79,7 @@
     End Function
     ReadOnly Property Power As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Power)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Power)).Value
         End Get
     End Property
 
@@ -189,7 +189,7 @@
         Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
     End Function
     Private Function GetDefendDice() As Long
-        Dim dice = GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Dexterity)).Value
+        Dim dice = GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Dexterity)).Value
         For Each entry In EquippedItems
             dice += entry.DefendDice
         Next
@@ -202,20 +202,20 @@
         Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
     End Function
     Friend Function RollInfluence() As Long
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Influence)), 0) + NegativeInfluence())
+        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Influence)), 0) + NegativeInfluence())
     End Function
     Friend Function RollWillpower() As Long
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Willpower)), 0) + NegativeInfluence())
+        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Willpower)), 0) + NegativeInfluence())
     End Function
     Private Function GetAttackDice() As Long
-        Dim dice = GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Strength)).Value
+        Dim dice = GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Strength)).Value
         For Each entry In EquippedItems
             dice += entry.AttackDice
         Next
         Return dice
     End Function
     Friend Function IsDemoralized() As Boolean
-        If GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Willpower)).HasValue Then
+        If GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Willpower)).HasValue Then
             Return CurrentMP <= 0
         End If
         Return False
@@ -225,7 +225,7 @@
     End Sub
     ReadOnly Property CanIntimidate As Boolean
         Get
-            If Not GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Willpower)).HasValue Then
+            If Not GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Willpower)).HasValue Then
                 Return False
             End If
             Return Location.Friends(Me).Count <= Location.Enemies(Me).Count
@@ -241,12 +241,12 @@
             Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP)).Value - value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.HP)).Value - value)
         End Set
     End Property
     ReadOnly Property MaximumHP As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.HP)).Value
         End Get
     End Property
     ReadOnly Property PartingShot As String
@@ -256,18 +256,18 @@
     End Property
     Property CurrentMP As Long
         Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromName(MP)).Value - GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress)).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(MP)).Value - GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress), GetStatistic(CharacterStatisticType.FromName(MP)).Value - value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress), GetStatistic(CharacterStatisticType.FromId(MP)).Value - value)
         End Set
     End Property
     Property CurrentMana As Long
         Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana)).Value - GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Fatigue)).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Mana)).Value - GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Fatigue)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Fatigue), GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana)).Value - value)
+            SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Fatigue), GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Mana)).Value - value)
         End Set
     End Property
     Friend Sub DoDamage(damage As Long)
@@ -281,7 +281,7 @@
     End Sub
     ReadOnly Property IsDead As Boolean
         Get
-            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds)).Value >= GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.HP)).Value
+            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds)).Value >= GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.HP)).Value
         End Get
     End Property
     Function DetermineDamage(value As Long) As Long
@@ -380,7 +380,7 @@
         If GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XP)).Value >= xpGoal Then
             ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XP), -xpGoal)
             ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.XPGoal), xpGoal)
-            ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned), 1)
+            ChangeStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Unassigned), 1)
             SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Wounds), 0)
             SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Stress), 0)
             SetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Fatigue), 0)
@@ -563,7 +563,7 @@
     End Property
     Public ReadOnly Property MaximumMana As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Mana)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Mana)).Value
         End Get
     End Property
     Public Property FoodPoisoning As Long
@@ -576,13 +576,13 @@
     End Property
     ReadOnly Property IsFullyAssigned As Boolean
         Get
-            Return If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned)), 0) = 0
+            Return If(GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Unassigned)), 0) = 0
         End Get
     End Property
     Public Sub AssignPoint(statisticType As CharacterStatisticType)
         If Not IsFullyAssigned Then
             ChangeStatistic(statisticType, 1)
-            ChangeStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned), -1)
+            ChangeStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Unassigned), -1)
         End If
     End Sub
     Public ReadOnly Property CanGamble As Boolean
@@ -711,7 +711,7 @@
     End Sub
     ReadOnly Property CanDoIntimidation() As Boolean
         Get
-            If If(GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Influence)), 0) <= 0 Then
+            If If(GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Influence)), 0) <= 0 Then
                 Return False
             End If
             Dim enemy = Location.Enemies(Me).FirstOrDefault

@@ -44,7 +44,7 @@
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteTextCentered(0, prompt, True, Hue.Blue)
         Dim player = World.PlayerCharacter
-        buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned).Name}: {player.GetStatistic(CharacterStatisticType.FromName(CharacterStatisticTypeUtility.Unassigned))}", False, Hue.Purple)
+        buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Unassigned).Name}: {player.GetStatistic(CharacterStatisticType.FromId(CharacterStatisticTypeUtility.Unassigned))}", False, Hue.Purple)
         buffer.WriteText((0, 4), "Choose where to assignpoint(s):", False, Hue.Black)
         For Each index In indices
             UpdateMenuItemText(index, $"{New CharacterStatisticType(index).Name}: {player.GetStatistic(New CharacterStatisticType(index))}")

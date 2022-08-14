@@ -33,7 +33,7 @@
             If(
                 character.GetStatistic(CharacterStatisticType.FromName(BonusLift)), 0) *
             If(
-                character.GetStatistic(CharacterStatisticType.FromName(Strength)), 0)
+                character.GetStatistic(CharacterStatisticType.FromId(Strength)), 0)
     End Function
     Function IsEnemy(character As Character) As Boolean
         Return StaticWorldData.World.CharacterTypeEnemy.Read(Id, character.CharacterType.Id)

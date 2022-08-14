@@ -1,13 +1,13 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const Strength = "Strength"
-    Public Const Dexterity = "Dexterity"
-    Public Const Influence = "Influence"
-    Public Const Willpower = "Willpower"
-    Public Const Power = "Power"
-    Public Const HP = "HP"
-    Public Const MP = "MP"
-    Public Const Mana = "Mana"
-    Public Const Unassigned = "Unassigned"
+    Public Const Strength = 1
+    Public Const Dexterity = 2
+    Public Const Influence = 3
+    Public Const Willpower = 4
+    Public Const Power = 5
+    Public Const HP = 6
+    Public Const MP = 7
+    Public Const Mana = 8
+    Public Const Unassigned = 9
     Public Const UnarmedMaximumDamage = "Unarmed Maximum Damage"
     Public Const BaseMaximumDefend = "Base Maximum Defend"
     Public Const Wounds = "Wounds"

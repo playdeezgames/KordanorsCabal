@@ -9,6 +9,9 @@
     Public Shared Function FromName(characterStatisticTypeName As String) As CharacterStatisticType
         Return New CharacterStatisticType(characterStatisticTypeName)
     End Function
+    Public Shared Function FromId(statisticTypeId As Long) As CharacterStatisticType
+        Return New CharacterStatisticType(statisticTypeId)
+    End Function
     ReadOnly Property DefaultValue As Long?
         Get
             Return StaticWorldData.World.CharacterStatisticType.ReadDefaultValue(Id)
