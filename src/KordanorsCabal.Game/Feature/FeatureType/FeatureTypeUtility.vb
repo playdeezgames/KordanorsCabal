@@ -1,15 +1,31 @@
-﻿Public Class FeatureType
-    ReadOnly Property Id As Long
-    ReadOnly Property Name As String
-    ReadOnly Property LocationType As LocationType
-    ReadOnly Property InteractionMode As PlayerMode
-    Sub New(featureTypeId As Long, name As String, locationType As LocationType, mode As PlayerMode)
-        Me.Id = featureTypeId
-        Me.Name = name
-        Me.LocationType = locationType
-        Me.InteractionMode = mode
-    End Sub
-End Class
+﻿Imports System.Runtime.CompilerServices
+
+Public Enum OldFeatureType
+    None
+    Elder
+    InnKeeper
+    TownDrunk
+    Chicken
+    BlackMarketeer
+    BlackMage
+    Blacksmith
+    Healer
+    Constable
+End Enum
+Public Module FeatureTypeExtensions
+    <Extension>
+    Public Function Name(featureType As OldFeatureType) As String
+        Return FeatureTypeDescriptors(featureType).Name
+    End Function
+    <Extension>
+    Public Function LocationType(featureType As OldFeatureType) As LocationType
+        Return FeatureTypeDescriptors(featureType).LocationType
+    End Function
+    <Extension>
+    Public Function InteractionMode(featureType As OldFeatureType) As PlayerMode
+        Return FeatureTypeDescriptors(featureType).InteractionMode
+    End Function
+End Module
 Public Module FeatureTypeUtility
     Friend FeatureTypeDescriptors As IReadOnlyDictionary(Of OldFeatureType, FeatureType) =
         New Dictionary(Of OldFeatureType, FeatureType) From
@@ -29,4 +45,13 @@ Public Module FeatureTypeUtility
             Return FeatureTypeDescriptors.Keys
         End Get
     End Property
+    Public Const Elder = 1L
+    Public Const InnKeeper = 2L
+    Public Const TownDrunk = 3L
+    Public Const Chicken = 4L
+    Public Const BlackMarketeer = 5L
+    Public Const BlackMage = 6L
+    Public Const Blacksmith = 7L
+    Public Const Healer = 8L
+    Public Const Constable = 9L
 End Module
