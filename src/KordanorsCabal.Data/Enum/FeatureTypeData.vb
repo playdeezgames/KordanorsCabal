@@ -3,6 +3,32 @@
     Friend Const TableName = "FeatureTypes"
     Friend Const FeatureTypeIdColumn = "FeatureTypeId"
     Friend Const FeatureTypeNameColumn = "FeatureTypeName"
+
+
+    Public Function ReadName(featureTypeId As Long) As String
+        Return Store.ReadColumnString(
+            AddressOf Initialize,
+            TableName,
+            FeatureTypeNameColumn,
+            (FeatureTypeIdColumn, featureTypeId))
+    End Function
+
+    Public Function ReadLocationType(featureTypeId As Long) As Long?
+        Return Store.ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            LocationTypeColumn,
+            (FeatureTypeIdColumn, featureTypeId))
+    End Function
+
+    Public Function ReadInteractionMode(featureTypeId As Long) As Long?
+        Return Store.ReadColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            PlayerModeColumn,
+            (FeatureTypeIdColumn, featureTypeId))
+    End Function
+
     Friend Const LocationTypeColumn = "LocationType"
     Friend Const PlayerModeColumn = "PlayerMode"
     Friend Sub Initialize()

@@ -28,8 +28,8 @@ Public Class LocationType
             Return StaticWorldData.World.LocationType.ReadRequiresMP(Id)
         End Get
     End Property
-    Shared Function FromId(locationTypeId As Long) As LocationType
-        Return New LocationType(locationTypeId)
+    Shared Function FromId(locationTypeId As Long?) As LocationType
+        Return If(locationTypeId.HasValue, New LocationType(locationTypeId.Value), Nothing)
     End Function
     Public Shared Operator =(first As LocationType, second As LocationType) As Boolean
         Return first.Id = second.Id

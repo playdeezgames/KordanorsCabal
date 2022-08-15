@@ -50,7 +50,7 @@
                 ShoppeProcessor(Of (ItemType, Long)).ShoppeType = Game.ShoppeType.BlackMage
                 Return UIState.ShoppeBuy
             Case RestoreButtonIndex
-                player.EnqueueMessage($"{OldFeatureType.BlackMage.Name} sparks up his {ItemType.Bong.Name} and gives you a hit of {ItemType.Herb.Name}.")
+                player.EnqueueMessage($"{OldFeatureType.BlackMage.ToNew.Name} sparks up his {ItemType.Bong.Name} and gives you a hit of {ItemType.Herb.Name}.")
                 player.CurrentMana = player.MaximumMana
                 PushUIState(UIState.InPlay)
                 Return UIState.Message

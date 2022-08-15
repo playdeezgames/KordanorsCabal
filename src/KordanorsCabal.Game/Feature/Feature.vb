@@ -19,11 +19,11 @@
 
     ReadOnly Property Name As String
         Get
-            Return FeatureType.Name
+            Return FeatureType.ToNew.Name
         End Get
     End Property
 
     Friend Function InteractionMode() As PlayerMode
-        Return FeatureType.InteractionMode
+        Return FeatureType.ToNew.InteractionMode
     End Function
 End Class
