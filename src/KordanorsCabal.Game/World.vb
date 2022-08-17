@@ -118,7 +118,7 @@ Public Module World
             Dim initialStatistics = characterType.InitialStatistics(StaticWorldData.World)
             While characterCount > 0
                 Dim location = RNG.FromEnumerable(candidates)
-                Character.Create(characterType, location, initialStatistics)
+                Character.Create(StaticWorldData.World, characterType, location, initialStatistics)
                 characterCount -= 1
             End While
         Next
@@ -205,7 +205,7 @@ Public Module World
 
     Private Sub CreatePlayer()
         Dim startingLocation = Location.FromLocationType(LocationType.FromId(TownSquare)).First
-        Dim playerCharacter = Character.Create(CharacterType.FromId(StaticWorldData.World, 11), startingLocation, CharacterType.FromId(StaticWorldData.World, 1).InitialStatistics(StaticWorldData.World))
+        Dim playerCharacter = Character.Create(StaticWorldData.World, CharacterType.FromId(StaticWorldData.World, 11), startingLocation, CharacterType.FromId(StaticWorldData.World, 1).InitialStatistics(StaticWorldData.World))
         playerCharacter.Location = startingLocation 'to track that this place has been visited
         StaticWorldData.World.Player.Write(playerCharacter.Id, RNG.FromEnumerable(CardinalDirections).Id, PlayerMode.Neutral)
         RollUpPlayerCharacter()

@@ -33,7 +33,7 @@
             Dim location = Game.Location.FromLocationType(LocationType.FromId(Cellar)).Single
             Dim initialStatistics = CharacterType.FromId(StaticWorldData.World, 13).InitialStatistics(StaticWorldData.World)
             While ratCount > 0
-                Game.Character.Create(CharacterType.FromId(StaticWorldData.World, 13), location, initialStatistics)
+                Game.Character.Create(StaticWorldData.World, CharacterType.FromId(StaticWorldData.World, 13), location, initialStatistics)
                 ratCount -= 1
             End While
             Return
