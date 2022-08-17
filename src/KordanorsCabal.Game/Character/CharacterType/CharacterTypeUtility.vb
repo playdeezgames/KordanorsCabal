@@ -1,6 +1,6 @@
 ﻿Public Module CharacterTypeUtility
-    Function AllCharacterTypes() As IEnumerable(Of CharacterType)
-        Return StaticWorldData.World.CharacterType.ReadAll().Select(Function(x) CharacterType.FromId(x))
+    Function AllCharacterTypes(worldData As WorldData) As IEnumerable(Of CharacterType)
+        Return StaticWorldData.World.CharacterType.ReadAll().Select(Function(x) CharacterType.FromId(worldData, x))
     End Function
     Public Const Acolyte = 1L
     Public Const Badger = 2L

@@ -36,7 +36,7 @@
     End Property
     ReadOnly Property CharacterType As CharacterType
         Get
-            Return CharacterType.FromId(StaticWorldData.World.Character.ReadCharacterType(Id).Value)
+            Return CharacterType.FromId(StaticWorldData.World, StaticWorldData.World.Character.ReadCharacterType(Id).Value)
         End Get
     End Property
     Public Function HasQuest(quest As Quest) As Boolean

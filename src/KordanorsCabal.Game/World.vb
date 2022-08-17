@@ -112,7 +112,7 @@ Public Module World
 
     Private Sub PopulateCharacters(locations As IEnumerable(Of Location), dungeonLevel As DungeonLevel)
         Dim start = DateTimeOffset.Now
-        For Each characterType In AllCharacterTypes()
+        For Each characterType In AllCharacterTypes(StaticWorldData.World)
             Dim characterCount = characterType.SpawnCount(dungeonLevel)
             Dim candidates = locations.Where(Function(x) characterType.CanSpawn(x.LocationType, dungeonLevel))
             Dim initialStatistics = characterType.InitialStatistics
@@ -205,7 +205,7 @@ Public Module World
 
     Private Sub CreatePlayer()
         Dim startingLocation = Location.FromLocationType(LocationType.FromId(TownSquare)).First
-        Dim playerCharacter = Character.Create(CharacterType.FromId(N00b), startingLocation, CharacterType.FromId(N00b).InitialStatistics)
+        Dim playerCharacter = Character.Create(CharacterType.FromId(StaticWorldData.World, N00b), startingLocation, CharacterType.FromId(StaticWorldData.World, N00b).InitialStatistics)
         playerCharacter.Location = startingLocation 'to track that this place has been visited
         StaticWorldData.World.Player.Write(playerCharacter.Id, RNG.FromEnumerable(CardinalDirections).Id, PlayerMode.Neutral)
         RollUpPlayerCharacter()
