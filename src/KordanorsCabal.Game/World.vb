@@ -205,7 +205,7 @@ Public Module World
 
     Private Sub CreatePlayer()
         Dim startingLocation = Location.FromLocationType(LocationType.FromId(TownSquare)).First
-        Dim playerCharacter = Character.Create(CharacterType.FromId(StaticWorldData.World, N00b), startingLocation, CharacterType.FromId(StaticWorldData.World, N00b).InitialStatistics)
+        Dim playerCharacter = Character.Create(CharacterType.FromId(StaticWorldData.World, 11), startingLocation, CharacterType.FromId(StaticWorldData.World, 1).InitialStatistics)
         playerCharacter.Location = startingLocation 'to track that this place has been visited
         StaticWorldData.World.Player.Write(playerCharacter.Id, RNG.FromEnumerable(CardinalDirections).Id, PlayerMode.Neutral)
         RollUpPlayerCharacter()

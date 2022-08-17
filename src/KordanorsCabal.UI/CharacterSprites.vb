@@ -32,7 +32,7 @@ Module CharacterSprites
         New Dictionary(Of Long, Sprite) From
         {
             {
-                Acolyte,
+                1,
                 New Sprite(
                     Hue.Cyan,
                     LoadPixels(
@@ -51,7 +51,7 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
-                Badger,
+                2,
                 New Sprite(
                     Hue.Black,
                     LoadPixels(
@@ -70,7 +70,7 @@ Module CharacterSprites
                         ".....#...#.."))
             },
             {
-                Bat,
+                3,
                 New Sprite(
                     Hue.Black,
                     LoadPixels(
@@ -79,7 +79,7 @@ Module CharacterSprites
                         "..#.......#.",
                         ".##.#...#.##",
                         ".##.#####.##",
-                        ".##.#.#.#.##",
+                        ".##.# # #.##",
                         ".##..###..##",
                         "..##..#..##.",
                         ".#.#.###.#.#",
@@ -89,7 +89,7 @@ Module CharacterSprites
                         "............"))
             },
             {
-                Bishop,
+                4,
                 New Sprite(
                     Hue.Red,
                     LoadPixels(
@@ -108,7 +108,7 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
-                CabalLeader,
+                5,
                 New Sprite(
                     Hue.Orange,
                     LoadPixels(
@@ -127,7 +127,7 @@ Module CharacterSprites
                         "..#..#####.."))
             },
             {
-                Goblin,
+                6,
                 New Sprite(
                     Hue.Green,
                     LoadPixels(
@@ -146,7 +146,7 @@ Module CharacterSprites
                         "....##..#..."))
             },
             {
-                GoblinElite,
+                7,
                 New Sprite(
                     Hue.Green,
                     LoadPixels(
@@ -165,7 +165,7 @@ Module CharacterSprites
                         "....##..#..."))
             },
             {
-                Kordanor,
+                8,
                 New Sprite(
                     Hue.Red,
                     LoadPixels(
@@ -184,7 +184,7 @@ Module CharacterSprites
                         ".....#..#..."))
             },
             {
-                Malcontent,
+                9,
                 New Sprite(
                     Hue.Orange,
                     LoadPixels(
@@ -203,7 +203,7 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
-                MoonPerson,
+                10,
                 New Sprite(
                     Hue.LightGreen,
                     LoadPixels(
@@ -222,7 +222,7 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
-                Priest,
+                12,
                 New Sprite(
                     Hue.Purple,
                     LoadPixels(
@@ -241,7 +241,7 @@ Module CharacterSprites
                         "....#####..."))
             },
             {
-                Rat,
+                13,
                 New Sprite(
                     Hue.Black,
                     LoadPixels(
@@ -260,7 +260,7 @@ Module CharacterSprites
                         ".##.#####..."))
             },
             {
-                Skeleton,
+                14,
                 New Sprite(
                     Hue.Blue,
                     LoadPixels(
@@ -279,7 +279,7 @@ Module CharacterSprites
                         "....##.#...."))
             },
             {
-                Snake,
+                15,
                 New Sprite(
                     Hue.Green,
                     LoadPixels(
@@ -298,7 +298,7 @@ Module CharacterSprites
                         "......####.."))
             },
             {
-                Zombie,
+                16,
                 New Sprite(
                     Hue.Purple,
                     LoadPixels(
