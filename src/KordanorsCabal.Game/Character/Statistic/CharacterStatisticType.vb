@@ -1,13 +1,13 @@
 ﻿Public Class CharacterStatisticType
-    ReadOnly Property Id As Long
-    Sub New(characterStatisticTypeId As Long)
-        Id = characterStatisticTypeId
+    Inherits BaseThingie
+    Sub New(worldData As WorldData, characterStatisticTypeId As Long)
+        MyBase.New(worldData, characterStatisticTypeId)
     End Sub
-    Private Sub New(characterStatisticTypeName As String)
-        Me.New(StaticWorldData.World.CharacterStatisticType.ReadForName(characterStatisticTypeName).Value)
+    Private Sub New(worldData As WorldData, characterStatisticTypeName As String)
+        Me.New(worldData, StaticWorldData.World.CharacterStatisticType.ReadForName(characterStatisticTypeName).Value)
     End Sub
-    Public Shared Function FromId(statisticTypeId As Long) As CharacterStatisticType
-        Return New CharacterStatisticType(statisticTypeId)
+    Public Shared Function FromId(worldData As WorldData, statisticTypeId As Long) As CharacterStatisticType
+        Return New CharacterStatisticType(worldData, statisticTypeId)
     End Function
     ReadOnly Property DefaultValue As Long?
         Get

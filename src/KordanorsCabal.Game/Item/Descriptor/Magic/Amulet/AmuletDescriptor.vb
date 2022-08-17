@@ -9,7 +9,7 @@
                   Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing)
         MyBase.New(
             itemTypeId,
-            $"Amulet of {New CharacterStatisticType(itemTypeId).Abbreviation}", ,
+            $"Amulet of {New CharacterStatisticType(StaticWorldData.World, itemTypeId).Abbreviation}", ,
             spawnLocationTypes,
             spawnCounts,
             MakeList(EquipSlot.FromId(Neck)),

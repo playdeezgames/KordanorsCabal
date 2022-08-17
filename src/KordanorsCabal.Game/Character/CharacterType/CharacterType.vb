@@ -22,23 +22,23 @@
     Function OldInitialStatistic(statisticType As CharacterStatisticType) As Long?
         Return WorldData.CharacterTypeInitialStatistic.Read(Id, statisticType.Id)
     End Function
-    Function OldInitialStatistics() As IReadOnlyList(Of CharacterStatisticType)
-        Return WorldData.
+    Function OldInitialStatistics(worldData As WorldData) As IReadOnlyList(Of CharacterStatisticType)
+        Return worldData.
             CharacterTypeInitialStatistic.ReadForCharacterType(Id).
-            Select(Function(x) New CharacterStatisticType(x)).ToList
+            Select(Function(x) New CharacterStatisticType(worldData, x)).ToList
     End Function
-    Function InitialStatistics() As IReadOnlyList(Of (CharacterStatisticType, Long))
-        Return WorldData.
+    Function InitialStatistics(worldData As WorldData) As IReadOnlyList(Of (CharacterStatisticType, Long))
+        Return worldData.
             CharacterTypeInitialStatistic.ReadAllForCharacterType(Id).
-            Select(Function(x) (CharacterStatisticType.FromId(x.Item1), x.Item2)).ToList
+            Select(Function(x) (CharacterStatisticType.FromId(worldData, x.Item1), x.Item2)).ToList
     End Function
-    Function MaximumEncumbrance(character As Character) As Long
+    Function MaximumEncumbrance(worldData As WorldData, character As Character) As Long
         Return If(
-            character.GetStatistic(CharacterStatisticType.FromId(BaseLift)), 0) +
+            character.GetStatistic(CharacterStatisticType.FromId(worldData, BaseLift)), 0) +
             If(
-                character.GetStatistic(CharacterStatisticType.FromId(BonusLift)), 0) *
+                character.GetStatistic(CharacterStatisticType.FromId(worldData, BonusLift)), 0) *
             If(
-                character.GetStatistic(CharacterStatisticType.FromId(Strength)), 0)
+                character.GetStatistic(CharacterStatisticType.FromId(worldData, Strength)), 0)
     End Function
     Function IsEnemy(character As Character) As Boolean
         Return WorldData.CharacterTypeEnemy.Read(Id, character.CharacterType.Id)
