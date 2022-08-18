@@ -1,12 +1,12 @@
 ﻿Public Module DirectionUtility
-    Friend ReadOnly Property AllDirections As IEnumerable(Of Direction)
+    Friend ReadOnly Property AllDirections(worldData As WorldData) As IEnumerable(Of Direction)
         Get
-            Return StaticWorldData.World.Direction.ReadAll.Select(Function(x) New Direction(x))
+            Return StaticWorldData.World.Direction.ReadAll.Select(Function(x) New Direction(worldData, x))
         End Get
     End Property
-    Friend ReadOnly Property CardinalDirections As IEnumerable(Of Direction)
+    Friend ReadOnly Property CardinalDirections(worldData As WorldData) As IEnumerable(Of Direction)
         Get
-            Return AllDirections.Where(Function(x) x.IsCardinal)
+            Return AllDirections(worldData).Where(Function(x) x.IsCardinal)
         End Get
     End Property
     Public Const North = 1L

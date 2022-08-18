@@ -1,4 +1,6 @@
-﻿Friend Class TitleScreenProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class TitleScreenProcessor
     Inherits MenuProcessor
     Const StartMenuItem = "Start"
     Const ContinueMenuItem = "Continue"
@@ -30,8 +32,8 @@
     End Function
 
     Friend Shared Function StartGame() As UIState
-        World.Start()
-        If Not World.PlayerCharacter.IsFullyAssigned Then
+        Game.World.Start(StaticWorldData.World)
+        If Not Game.World.PlayerCharacter.IsFullyAssigned Then
             Return UIState.FinalizeCharacter
         End If
         Return UIState.Prolog

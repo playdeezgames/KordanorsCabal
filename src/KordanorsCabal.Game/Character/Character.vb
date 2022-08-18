@@ -592,7 +592,7 @@
     End Property
     Public Property Direction As Direction
         Get
-            Return New Direction(WorldData.Player.ReadDirection().Value)
+            Return New Direction(StaticWorldData.World, WorldData.Player.ReadDirection().Value)
         End Get
         Set(value As Direction)
             WorldData.Player.WriteDirection(value.Id)
@@ -762,7 +762,7 @@
     End Function
     Public Sub Run()
         If CanFight Then
-            Direction = RNG.FromEnumerable(CardinalDirections)
+            Direction = RNG.FromEnumerable(CardinalDirections(StaticWorldData.World))
             If CanMove(Direction) Then
                 EnqueueMessage("You successfully ran!") 'TODO: sfx
                 Move(Direction)

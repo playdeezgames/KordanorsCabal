@@ -1,44 +1,44 @@
 ﻿Public Class Direction
-    Sub New(directionId As Long)
-        Id = directionId
+    Inherits BaseThingie
+    Sub New(worldData As WorldData, directionId As Long)
+        MyBase.New(worldData, directionId)
     End Sub
-    Private Sub New(directionName As String)
-        Me.New(StaticWorldData.World.Direction.ReadForName(directionName).Value)
+    Private Sub New(worldData As WorldData, directionName As String)
+        Me.New(worldData, worldData.Direction.ReadForName(directionName).Value)
     End Sub
-    Shared Function FromId(directionId As Long?) As Direction
-        Return If(directionId.HasValue, New Direction(directionId.Value), Nothing)
+    Shared Function FromId(worldData As WorldData, directionId As Long?) As Direction
+        Return If(directionId.HasValue, New Direction(worldData, directionId.Value), Nothing)
     End Function
-    ReadOnly Property Id As Long
     ReadOnly Property Name As String
         Get
-            Return StaticWorldData.World.Direction.ReadName(Id)
+            Return WorldData.Direction.ReadName(Id)
         End Get
     End Property
     ReadOnly Property Abbreviation As String
         Get
-            Return StaticWorldData.World.Direction.ReadAbbreviation(Id)
+            Return WorldData.Direction.ReadAbbreviation(Id)
         End Get
     End Property
     ReadOnly Property Opposite As Direction
         Get
-            Return New Direction(StaticWorldData.World.Direction.ReadOpposite(Id).Value)
+            Return New Direction(WorldData, WorldData.Direction.ReadOpposite(Id).Value)
         End Get
     End Property
     ReadOnly Property IsCardinal As Boolean
         Get
-            Return StaticWorldData.World.Direction.ReadIsCardinal(Id)
+            Return WorldData.Direction.ReadIsCardinal(Id)
         End Get
     End Property
     ReadOnly Property NextDirection As Direction
         Get
-            Dim result = StaticWorldData.World.Direction.ReadNext(Id)
-            Return If(result.HasValue, New Direction(result.Value), Nothing)
+            Dim result = WorldData.Direction.ReadNext(Id)
+            Return If(result.HasValue, New Direction(WorldData, result.Value), Nothing)
         End Get
     End Property
     ReadOnly Property PreviousDirection As Direction
         Get
-            Dim result = StaticWorldData.World.Direction.ReadPrevious(Id)
-            Return If(result.HasValue, New Direction(result.Value), Nothing)
+            Dim result = WorldData.Direction.ReadPrevious(Id)
+            Return If(result.HasValue, New Direction(WorldData, result.Value), Nothing)
         End Get
     End Property
 End Class

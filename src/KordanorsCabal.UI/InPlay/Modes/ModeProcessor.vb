@@ -1,4 +1,6 @@
-﻿Public MustInherit Class ModeProcessor
+﻿Imports KordanorsCabal.Data
+
+Public MustInherit Class ModeProcessor
     Protected Shared Sub ShowHeader(buffer As PatternBuffer, title As String)
         buffer.WriteText((0, 0), "                      ", True, Hue.Blue)
         buffer.WriteTextCentered(0, title, True, Hue.Blue)
@@ -90,24 +92,24 @@
             buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, routeType.TextHue)
         End If
 
-        If location.HasRoute(Direction.FromId(Up)) Then
+        If location.HasRoute(Direction.FromId(StaticWorldData.World, Up)) Then
             buffer.PutCell((7, 0), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((8, 0), (6, 1), Pattern.Horizontal8, False, Hue.Black)
             buffer.PutCell((14, 0), Pattern.UpwardDiagonal, False, Hue.Black)
         End If
 
-        If location.HasRoute(Direction.FromId(Down)) Then
+        If location.HasRoute(Direction.FromId(StaticWorldData.World, Down)) Then
             buffer.PutCell((7, 17), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((8, 17), (6, 1), Pattern.Horizontal1, False, Hue.Black)
             buffer.PutCell((14, 17), Pattern.DownwardDiagonal, False, Hue.Black)
         End If
 
-        If location.HasRoute(Direction.FromId(Outward)) Then
-            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(Outward)).RouteType.Sprite)
+        If location.HasRoute(Direction.FromId(StaticWorldData.World, Outward)) Then
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(StaticWorldData.World, Outward)).RouteType.Sprite)
         End If
 
-        If location.HasRoute(Direction.FromId(Inward)) Then
-            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(Inward)).RouteType.Sprite)
+        If location.HasRoute(Direction.FromId(StaticWorldData.World, Inward)) Then
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(StaticWorldData.World, Inward)).RouteType.Sprite)
         End If
 
         For Each item In player.Location.Inventory.Items

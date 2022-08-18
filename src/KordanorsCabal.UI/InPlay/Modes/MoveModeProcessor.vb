@@ -1,4 +1,6 @@
-﻿Friend Class MoveModeProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class MoveModeProcessor
     Inherits ModeProcessor
 
     Const CancelButtonIndex = 4
@@ -38,16 +40,16 @@
         If player.CanMoveBackward Then
             Buttons(BackwardButtonIndex).Title = "Backward"
         End If
-        If player.CanMove(Direction.FromId(Up)) Then
+        If player.CanMove(Direction.FromId(StaticWorldData.World, Up)) Then
             Buttons(UpButtonIndex).Title = "Up"
         End If
-        If player.CanMove(Direction.FromId(Down)) Then
+        If player.CanMove(Direction.FromId(StaticWorldData.World, Down)) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
-        If player.CanMove(Direction.FromId(Inward)) Then
+        If player.CanMove(Direction.FromId(StaticWorldData.World, Inward)) Then
             Buttons(InButtonIndex).Title = "In"
         End If
-        If player.CanMove(Direction.FromId(Outward)) Then
+        If player.CanMove(Direction.FromId(StaticWorldData.World, Outward)) Then
             Buttons(OutButtonIndex).Title = "Out"
         End If
     End Sub
@@ -58,13 +60,13 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case DownButtonIndex
-                Return HandleMove(player, Direction.FromId(Down))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.World, Down))
             Case UpButtonIndex
-                Return HandleMove(player, Direction.FromId(Up))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.World, Up))
             Case InButtonIndex
-                Return HandleMove(player, Direction.FromId(Inward))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.World, Inward))
             Case OutButtonIndex
-                Return HandleMove(player, Direction.FromId(Outward))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.World, Outward))
             Case ForwardButtonIndex
                 Return HandleMove(player, player.Direction)
             Case BackwardButtonIndex

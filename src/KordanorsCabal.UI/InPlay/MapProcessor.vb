@@ -1,4 +1,6 @@
-﻿Friend Class MapProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class MapProcessor
     Implements IProcessor
     Private redrawBuffer As Boolean
 
@@ -6,7 +8,7 @@
         If redrawBuffer Then
             redrawBuffer = False
             buffer.Fill(Pattern.Space, False, Hue.Blue)
-            Dim player = World.PlayerCharacter
+            Dim player = Game.World.PlayerCharacter
             Dim playerLocation = player.Location
             Dim level = playerLocation.DungeonLevel
             If level IsNot Nothing Then
@@ -29,10 +31,10 @@
     End Sub
 
     Private Sub DrawLocation(buffer As PatternBuffer, xy As (Integer, Integer), location As Location, inverted As Boolean, displayHue As Hue)
-        Dim northExit = location.HasRoute(Direction.FromId(North))
-        Dim eastExit = location.HasRoute(Direction.FromId(East))
-        Dim southExit = location.HasRoute(Direction.FromId(South))
-        Dim westExit = location.HasRoute(Direction.FromId(West))
+        Dim northExit = location.HasRoute(Direction.FromId(StaticWorldData.World, North))
+        Dim eastExit = location.HasRoute(Direction.FromId(StaticWorldData.World, East))
+        Dim southExit = location.HasRoute(Direction.FromId(StaticWorldData.World, South))
+        Dim westExit = location.HasRoute(Direction.FromId(StaticWorldData.World, West))
         'upper left
         buffer.PutCell(xy,
                        If(northExit AndAlso westExit, Pattern.ElbowUpLeft,

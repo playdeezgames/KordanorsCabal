@@ -10,8 +10,8 @@
             Function(character) character.Location.IsDungeon,
             Sub(character)
                 Dim location = character.Location
-                Dim outDirection = Direction.FromId(Outward)
-                Dim inDirection = Direction.FromId(Inward)
+                Dim outDirection = Direction.FromId(StaticWorldData.World, Outward)
+                Dim inDirection = Direction.FromId(StaticWorldData.World, Inward)
                 location.DestroyRoute(outDirection)
                 Dim destination = RNG.FromEnumerable(Game.Location.FromLocationType(LocationType.FromId(Moon)))
                 destination.DestroyRoute(inDirection)

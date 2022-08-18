@@ -79,7 +79,7 @@
     End Property
     Public ReadOnly Property RouteDirections As IEnumerable(Of Direction)
         Get
-            Return StaticWorldData.World.Route.ReadDirectionRouteForLocation(Id).Select(Function(x) New Direction(x.Item1))
+            Return StaticWorldData.World.Route.ReadDirectionRouteForLocation(Id).Select(Function(x) New Direction(StaticWorldData.World, x.Item1))
         End Get
     End Property
     Public ReadOnly Property RouteTypes As IEnumerable(Of RouteType)
