@@ -68,7 +68,7 @@
     End Function
 
     Friend Sub DoImmobilization(delta As Long)
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Immobilization), delta)
+        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)
     End Sub
 
     Friend Function RollSpellDice(spellType As SpellType) As Long
@@ -438,12 +438,12 @@
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
         lines.Add($"{enemy.Name} is immobilized!")
-        enemy.ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Immobilization), -1)
+        enemy.ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), -1)
         EnqueueMessage(lines.ToArray)
     End Sub
 
     Private Function IsImmobilized() As Boolean
-        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Immobilization)), 0) > 0
+        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 23L)), 0) > 0
     End Function
 
     Private Sub DoMentalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
