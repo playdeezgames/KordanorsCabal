@@ -531,10 +531,10 @@
     End Function
     Property Drunkenness As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Drunkenness)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 18L)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Drunkenness), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 18L), value)
         End Set
     End Property
     Property Chafing As Long

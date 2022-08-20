@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const Drunkenness = 18
     Public Const Highness = 19
     Public Const Hunger = 20
     Public Const FoodPoisoning = 21
