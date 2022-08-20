@@ -304,7 +304,7 @@ Public Module World
 
     Public ReadOnly Property PlayerCharacter As Character
         Get
-            Return New PlayerCharacter
+            Return New PlayerCharacter(StaticWorldData.World)
         End Get
     End Property
 End Module

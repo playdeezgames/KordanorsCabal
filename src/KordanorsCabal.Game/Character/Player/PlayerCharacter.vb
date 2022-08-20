@@ -11,7 +11,7 @@
         End If
         Messages.Enqueue(Message.Create(lines))
     End Sub
-    Sub New()
-        MyBase.New(StaticWorldData.World, StaticWorldData.World.Player.Read().Value)
+    Sub New(worldData As WorldData)
+        MyBase.New(worldData, worldData.Player.Read().Value)
     End Sub
 End Class
