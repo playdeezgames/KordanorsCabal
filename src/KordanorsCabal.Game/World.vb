@@ -71,7 +71,7 @@ Public Module World
         Dim locations As New List(Of Location)
         For row As Long = 0 To maze.Rows - 1
             For column As Long = 0 To maze.Columns - 1
-                Dim dungeonLocation = Location.Create(LocationType.FromId(Dungeon))
+                Dim dungeonLocation = Location.Create(LocationType.FromId(4L))
                 dungeonLocation.DungeonLevel = dungeonLevel
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
@@ -129,7 +129,7 @@ Public Module World
     Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType, dungeonLevel As DungeonLevel)
         Dim deadEndId = LocationType.FromId(DungeonDeadEnd).Id
         Dim dungeonBossId = LocationType.FromId(DungeonBoss).Id
-        Dim dungeonId = LocationType.FromId(Dungeon).Id
+        Dim dungeonId = LocationType.FromId(4L).Id
         Dim partitions =
             locations.GroupBy(
                 Function(x) x.RouteCount = 1).
