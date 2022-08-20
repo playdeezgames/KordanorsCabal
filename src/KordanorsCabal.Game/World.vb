@@ -198,7 +198,7 @@ Public Module World
     End Sub
 
     Private Sub CreateCellar(worldData As WorldData, fromLocation As Location)
-        Dim cellar = Location.Create(LocationType.FromId(LocationTypeUtility.Cellar))
+        Dim cellar = Location.Create(LocationType.FromId(7L))
         Route.Create(fromLocation, Direction.FromId(worldData, Down), RouteType.Stairs, cellar)
         Route.Create(cellar, Direction.FromId(worldData, Up), RouteType.Stairs, fromLocation)
     End Sub
