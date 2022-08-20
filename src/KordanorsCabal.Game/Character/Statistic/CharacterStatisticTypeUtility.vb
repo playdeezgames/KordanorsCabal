@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const XPGoal = 17
     Public Const Drunkenness = 18
     Public Const Highness = 19
     Public Const Hunger = 20
