@@ -2,7 +2,7 @@ Public Module World
     Public Sub Start(worldData As WorldData)
         StaticStore.Store.Reset()
         CreateTown(worldData)
-        CreateDungeon(worldData, Location.FromLocationType(LocationType.FromId(ChurchEntrance)).First)
+        CreateDungeon(worldData, Location.FromLocationType(LocationType.FromId(3L)).First)
         CreateMoon(worldData)
         CreateFeatures(worldData)
         CreatePlayer(worldData)
@@ -245,7 +245,7 @@ Public Module World
 
     Private Sub CreateChurchEntrance(worldData As WorldData)
         Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(LocationType.FromId(2L)))
-        Dim entrance = Location.Create(LocationType.FromId(ChurchEntrance))
+        Dim entrance = Location.Create(LocationType.FromId(3L))
         Dim direction = RNG.FromEnumerable(AllDirections(worldData).Where(Function(x) x.IsCardinal AndAlso Not townLocation.HasRoute(x)))
         StitchTown(townLocation, direction, entrance)
     End Sub
