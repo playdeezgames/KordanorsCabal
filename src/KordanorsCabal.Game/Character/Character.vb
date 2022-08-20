@@ -380,7 +380,7 @@
         If GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XP)).Value >= xpGoal Then
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XP), -xpGoal)
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XPGoal), xpGoal)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Unassigned), 1)
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), 1)
             SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds), 0)
             SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress), 0)
             SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue), 0)
@@ -576,13 +576,13 @@
     End Property
     ReadOnly Property IsFullyAssigned As Boolean
         Get
-            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Unassigned)), 0) = 0
+            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 9L)), 0) = 0
         End Get
     End Property
     Public Sub AssignPoint(statisticType As CharacterStatisticType)
         If Not IsFullyAssigned Then
             ChangeStatistic(statisticType, 1)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Unassigned), -1)
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), -1)
         End If
     End Sub
     Public ReadOnly Property CanGamble As Boolean

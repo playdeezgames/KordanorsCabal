@@ -46,7 +46,7 @@ Friend Class FinalizeCharacterProcessor
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteTextCentered(0, prompt, True, Hue.Blue)
         Dim player = Game.World.PlayerCharacter
-        buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Unassigned).Name}: {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Unassigned))}", False, Hue.Purple)
+        buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromId(StaticWorldData.World, 9L).Name}: {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 9L))}", False, Hue.Purple)
         buffer.WriteText((0, 4), "Choose where to assignpoint(s):", False, Hue.Black)
         For Each index In indices
             UpdateMenuItemText(index, $"{New CharacterStatisticType(StaticWorldData.World, index).Name}: {player.GetStatistic(New CharacterStatisticType(StaticWorldData.World, index))}")
