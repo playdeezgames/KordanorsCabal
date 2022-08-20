@@ -264,10 +264,10 @@
     End Property
     Property CurrentMana As Long
         Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Mana)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue)).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue), GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Mana)).Value - value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue), GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - value)
         End Set
     End Property
     Friend Sub DoDamage(damage As Long)
@@ -563,7 +563,7 @@
     End Property
     Public ReadOnly Property MaximumMana As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Mana)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value
         End Get
     End Property
     Public Property FoodPoisoning As Long
