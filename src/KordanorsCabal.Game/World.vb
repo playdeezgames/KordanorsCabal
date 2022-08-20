@@ -12,7 +12,7 @@ Public Module World
         Dim locations As New List(Of Location)
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
-                Dim dungeonLocation = Location.Create(LocationType.FromId(Moon))
+                Dim dungeonLocation = Location.Create(LocationType.FromId(8L))
                 dungeonLocation.DungeonLevel = DungeonLevel.FromId(6L)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
