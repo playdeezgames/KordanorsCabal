@@ -204,7 +204,7 @@ Public Module World
     End Sub
 
     Private Sub CreatePlayer(worldData As WorldData)
-        Dim startingLocation = Location.FromLocationType(LocationType.FromId(TownSquare)).First
+        Dim startingLocation = Location.FromLocationType(LocationType.FromId(1L)).First
         Dim playerCharacter = Character.Create(StaticWorldData.World, CharacterType.FromId(StaticWorldData.World, 11), startingLocation, CharacterType.FromId(StaticWorldData.World, 1).InitialStatistics(StaticWorldData.World))
         playerCharacter.Location = startingLocation 'to track that this place has been visited
         StaticWorldData.World.Player.Write(playerCharacter.Id, RNG.FromEnumerable(CardinalDirections(worldData)).Id, PlayerMode.Neutral)
@@ -213,7 +213,7 @@ Public Module World
 
     Private Sub CreateTown(worldData As WorldData)
         Dim townLocationType = LocationType.FromId(Town)
-        Dim centerTown = Location.Create(LocationType.FromId(TownSquare))
+        Dim centerTown = Location.Create(LocationType.FromId(1L))
         Dim northTown = Location.Create(townLocationType)
         Dim northEastTown = Location.Create(townLocationType)
         Dim eastTown = Location.Create(townLocationType)
