@@ -221,7 +221,7 @@
         Return False
     End Function
     Friend Sub AddStress(delta As Long)
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress), delta)
+        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 13L), delta)
     End Sub
     ReadOnly Property CanIntimidate As Boolean
         Get
@@ -256,10 +256,10 @@
     End Property
     Property CurrentMP As Long
         Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress)).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, 13L)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress), GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 13L), GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - value)
         End Set
     End Property
     Property CurrentMana As Long
@@ -382,7 +382,7 @@
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XPGoal), xpGoal)
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), 1)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress), 0)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 13L), 0)
             SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue), 0)
             Return True
         End If
