@@ -1,5 +1,4 @@
 ﻿Public Module LocationTypeUtility
-    Public Const Town = 2L
     Public Const ChurchEntrance = 3L
     Public Const Dungeon = 4L
     Public Const DungeonDeadEnd = 5L

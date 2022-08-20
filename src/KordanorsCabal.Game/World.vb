@@ -212,7 +212,7 @@ Public Module World
     End Sub
 
     Private Sub CreateTown(worldData As WorldData)
-        Dim townLocationType = LocationType.FromId(Town)
+        Dim townLocationType = LocationType.FromId(2L)
         Dim centerTown = Location.Create(LocationType.FromId(1L))
         Dim northTown = Location.Create(townLocationType)
         Dim northEastTown = Location.Create(townLocationType)
@@ -244,7 +244,7 @@ Public Module World
     End Sub
 
     Private Sub CreateChurchEntrance(worldData As WorldData)
-        Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(LocationType.FromId(Town)))
+        Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(LocationType.FromId(2L)))
         Dim entrance = Location.Create(LocationType.FromId(ChurchEntrance))
         Dim direction = RNG.FromEnumerable(AllDirections(worldData).Where(Function(x) x.IsCardinal AndAlso Not townLocation.HasRoute(x)))
         StitchTown(townLocation, direction, entrance)
