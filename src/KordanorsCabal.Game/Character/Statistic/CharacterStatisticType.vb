@@ -4,38 +4,38 @@
         MyBase.New(worldData, characterStatisticTypeId)
     End Sub
     Private Sub New(worldData As WorldData, characterStatisticTypeName As String)
-        Me.New(worldData, StaticWorldData.World.CharacterStatisticType.ReadForName(characterStatisticTypeName).Value)
+        Me.New(worldData, worldData.CharacterStatisticType.ReadForName(characterStatisticTypeName).Value)
     End Sub
     Public Shared Function FromId(worldData As WorldData, statisticTypeId As Long) As CharacterStatisticType
         Return New CharacterStatisticType(worldData, statisticTypeId)
     End Function
     ReadOnly Property DefaultValue As Long?
         Get
-            Return StaticWorldData.World.CharacterStatisticType.ReadDefaultValue(Id)
+            Return WorldData.CharacterStatisticType.ReadDefaultValue(Id)
         End Get
     End Property
 
     ReadOnly Property Name As String
         Get
-            Return StaticWorldData.World.CharacterStatisticType.ReadName(Id)
+            Return WorldData.CharacterStatisticType.ReadName(Id)
         End Get
     End Property
 
     ReadOnly Property MinimumValue() As Long
         Get
-            Return StaticWorldData.World.CharacterStatisticType.ReadMinimumValue(Id).Value
+            Return WorldData.CharacterStatisticType.ReadMinimumValue(Id).Value
         End Get
     End Property
 
     ReadOnly Property MaximumValue As Long
         Get
-            Return StaticWorldData.World.CharacterStatisticType.ReadMaximumValue(Id).Value
+            Return WorldData.CharacterStatisticType.ReadMaximumValue(Id).Value
         End Get
     End Property
 
     ReadOnly Property Abbreviation As String
         Get
-            Return StaticWorldData.World.CharacterStatisticType.ReadAbbreviation(Id)
+            Return WorldData.CharacterStatisticType.ReadAbbreviation(Id)
         End Get
     End Property
 End Class
