@@ -64,7 +64,7 @@
         If nextLevel > spellType.MaximumLevel Then
             Return False
         End If
-        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Power)), 0) >= spellType.RequiredPower(nextLevel)
+        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) >= spellType.RequiredPower(nextLevel)
     End Function
 
     Friend Sub DoImmobilization(delta As Long)
@@ -79,7 +79,7 @@
     End Function
     ReadOnly Property Power As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Power)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)).Value
         End Get
     End Property
 

@@ -17,7 +17,7 @@ Friend Class StatusProcessor
         buffer.WriteText((11, 2), $"{CharacterStatisticType.FromId(StaticWorldData.World, 4L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 4L))}", False, Hue.Black)
         buffer.WriteText((11, 3), $"{CharacterStatisticType.FromId(StaticWorldData.World, MP).Abbreviation} {player.CurrentMP}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, MP))}", False, Hue.Black)
 
-        buffer.WriteText((0, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, Power).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, Power))}", False, Hue.Black)
+        buffer.WriteText((0, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, 5L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 5L))}", False, Hue.Black)
         buffer.WriteText((0, 6), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Mana).Abbreviation} {player.CurrentMana}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Mana))}", False, Hue.Black)
 
         buffer.WriteText((11, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.XP).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.XP))}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.XPGoal))}", False, Hue.Black)

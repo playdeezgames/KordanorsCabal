@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const Power = 5
     Public Const HP = 6
     Public Const MP = 7
     Public Const Mana = 8
