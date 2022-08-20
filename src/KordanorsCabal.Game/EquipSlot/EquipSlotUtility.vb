@@ -1,6 +1,4 @@
-﻿Imports System.Runtime.CompilerServices
-
-Public Module EquipSlotUtility
+﻿Public Module EquipSlotUtility
     Public Const Weapon = 1L
     Public Const Shield = 2L
     Public Const Head = 3L
