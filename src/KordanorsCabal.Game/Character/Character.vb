@@ -547,10 +547,10 @@
     End Property
     Property Highness As Long
         Get
-            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Highness)), 0)
+            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 19L)), 0)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Highness), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 19L), value)
         End Set
     End Property
     Property Hunger As Long
