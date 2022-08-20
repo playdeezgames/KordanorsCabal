@@ -2,7 +2,7 @@ Public Module World
     Public Sub Start(worldData As WorldData)
         StaticStore.Store.Reset()
         CreateTown(worldData)
-        CreateDungeon(worldData, Location.FromLocationType(LocationType.FromId(StaticWorldData.World, 3L)).First)
+        CreateDungeon(worldData, Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 3L)).First)
         CreateMoon(worldData)
         CreateFeatures(worldData)
         CreatePlayer(worldData)
@@ -12,7 +12,7 @@ Public Module World
         Dim locations As New List(Of Location)
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
-                Dim dungeonLocation = Location.Create(LocationType.FromId(StaticWorldData.World, 8L))
+                Dim dungeonLocation = Location.Create(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 8L))
                 dungeonLocation.DungeonLevel = DungeonLevel.FromId(6L)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
@@ -71,7 +71,7 @@ Public Module World
         Dim locations As New List(Of Location)
         For row As Long = 0 To maze.Rows - 1
             For column As Long = 0 To maze.Columns - 1
-                Dim dungeonLocation = Location.Create(LocationType.FromId(StaticWorldData.World, 4L))
+                Dim dungeonLocation = Location.Create(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 4L))
                 dungeonLocation.DungeonLevel = dungeonLevel
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
@@ -190,7 +190,7 @@ Public Module World
     End Sub
 
     Private Sub CreateFeature(worldData As WorldData, featureType As FeatureType)
-        Dim featureLocation = RNG.FromEnumerable(Location.FromLocationType(featureType.LocationType).Where(Function(x) Not x.HasFeature))
+        Dim featureLocation = RNG.FromEnumerable(Location.FromLocationType(StaticWorldData.World, featureType.LocationType).Where(Function(x) Not x.HasFeature))
         Feature.Create(worldData, featureType, featureLocation)
         If featureType.Id = 2L Then
             CreateCellar(worldData, featureLocation)
@@ -198,14 +198,14 @@ Public Module World
     End Sub
 
     Private Sub CreateCellar(worldData As WorldData, fromLocation As Location)
-        Dim cellar = Location.Create(LocationType.FromId(StaticWorldData.World, 7L))
+        Dim cellar = Location.Create(worldData, LocationType.FromId(worldData, 7L))
         Route.Create(fromLocation, Direction.FromId(worldData, Down), RouteType.Stairs, cellar)
         Route.Create(cellar, Direction.FromId(worldData, Up), RouteType.Stairs, fromLocation)
     End Sub
 
     Private Sub CreatePlayer(worldData As WorldData)
-        Dim startingLocation = Location.FromLocationType(LocationType.FromId(StaticWorldData.World, 1L)).First
-        Dim playerCharacter = Character.Create(StaticWorldData.World, CharacterType.FromId(StaticWorldData.World, 11), startingLocation, CharacterType.FromId(StaticWorldData.World, 1).InitialStatistics(StaticWorldData.World))
+        Dim startingLocation = Location.FromLocationType(worldData, LocationType.FromId(worldData, 1L)).First
+        Dim playerCharacter = Character.Create(StaticWorldData.World, CharacterType.FromId(worldData, 11), startingLocation, CharacterType.FromId(StaticWorldData.World, 1).InitialStatistics(StaticWorldData.World))
         playerCharacter.Location = startingLocation 'to track that this place has been visited
         StaticWorldData.World.Player.Write(playerCharacter.Id, RNG.FromEnumerable(CardinalDirections(worldData)).Id, PlayerMode.Neutral)
         RollUpPlayerCharacter()
@@ -213,15 +213,15 @@ Public Module World
 
     Private Sub CreateTown(worldData As WorldData)
         Dim townLocationType = LocationType.FromId(StaticWorldData.World, 2L)
-        Dim centerTown = Location.Create(LocationType.FromId(StaticWorldData.World, 1L))
-        Dim northTown = Location.Create(townLocationType)
-        Dim northEastTown = Location.Create(townLocationType)
-        Dim eastTown = Location.Create(townLocationType)
-        Dim southEastTown = Location.Create(townLocationType)
-        Dim southTown = Location.Create(townLocationType)
-        Dim southWestTown = Location.Create(townLocationType)
-        Dim westTown = Location.Create(townLocationType)
-        Dim northWestTown = Location.Create(townLocationType)
+        Dim centerTown = Location.Create(worldData, LocationType.FromId(StaticWorldData.World, 1L))
+        Dim northTown = Location.Create(worldData, townLocationType)
+        Dim northEastTown = Location.Create(worldData, townLocationType)
+        Dim eastTown = Location.Create(worldData, townLocationType)
+        Dim southEastTown = Location.Create(worldData, townLocationType)
+        Dim southTown = Location.Create(worldData, townLocationType)
+        Dim southWestTown = Location.Create(worldData, townLocationType)
+        Dim westTown = Location.Create(worldData, townLocationType)
+        Dim northWestTown = Location.Create(worldData, townLocationType)
 
         StitchTown(centerTown, Direction.FromId(worldData, North), northTown)
         StitchTown(centerTown, Direction.FromId(worldData, East), eastTown)
@@ -244,8 +244,8 @@ Public Module World
     End Sub
 
     Private Sub CreateChurchEntrance(worldData As WorldData)
-        Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(LocationType.FromId(StaticWorldData.World, 2L)))
-        Dim entrance = Location.Create(LocationType.FromId(StaticWorldData.World, 3L))
+        Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 2L)))
+        Dim entrance = Location.Create(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 3L))
         Dim direction = RNG.FromEnumerable(AllDirections(worldData).Where(Function(x) x.IsCardinal AndAlso Not townLocation.HasRoute(x)))
         StitchTown(townLocation, direction, entrance)
     End Sub

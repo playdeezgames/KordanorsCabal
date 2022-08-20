@@ -121,7 +121,7 @@
     End Sub
     Property Location As Location
         Get
-            Return Location.FromId(WorldData.Character.ReadLocation(Id).Value)
+            Return Location.FromId(WorldData, WorldData.Character.ReadLocation(Id).Value)
         End Get
         Set(value As Location)
             WorldData.Character.WriteLocation(Id, value.Id)
@@ -468,7 +468,7 @@
                     lines.Add($"{enemy.Name} completely demoralizes you and you drop everything and run away!")
                     Panic()
                     Money \= 2
-                    Location = Game.Location.FromLocationType(LocationType.FromId(WorldData, 1L)).Single
+                    Location = Game.Location.FromLocationType(WorldData, LocationType.FromId(WorldData, 1L)).Single
                     Exit Select
                 End If
                 lines.Add($"You have {CurrentMP} MP left.")

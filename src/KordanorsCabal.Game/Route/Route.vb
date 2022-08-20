@@ -11,7 +11,7 @@
     End Function
     Friend ReadOnly Property ToLocation As Location
         Get
-            Return Location.FromId(StaticWorldData.World.Route.ReadToLocation(Id))
+            Return Location.FromId(StaticWorldData.World, StaticWorldData.World.Route.ReadToLocation(Id))
         End Get
     End Property
     Property RouteType As RouteType
