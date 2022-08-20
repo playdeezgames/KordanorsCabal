@@ -46,14 +46,14 @@ Friend Class ChickenModeProcessor
         If RNG.FromRange(0, 5) = 0 Then
             Select Case itemType
                 Case ItemType.Food
-                    player.EnqueueMessage($"{OldFeatureType.Chicken.ToNew.Name} eats the food and then a {ItemType.MagicEgg.Name} pops out!")
+                    player.EnqueueMessage($"{New FeatureType(Chicken).Name} eats the food and then a {ItemType.MagicEgg.Name} pops out!")
                     player.Inventory.Add(Item.Create(ItemType.MagicEgg))
                 Case ItemType.RottenFood
-                    player.EnqueueMessage($"{OldFeatureType.Chicken.ToNew.Name} eats the rotten food and then a {ItemType.RottenEgg.Name} pops out!")
+                    player.EnqueueMessage($"{New FeatureType(Chicken).Name} eats the rotten food and then a {ItemType.RottenEgg.Name} pops out!")
                     player.Inventory.Add(Item.Create(ItemType.RottenEgg))
             End Select
         Else
-            player.EnqueueMessage($"{OldFeatureType.Chicken.ToNew.Name} eats the food, and gives a satified ""moo"" in return.")
+            player.EnqueueMessage($"{New FeatureType(Chicken).Name} eats the food, and gives a satified ""moo"" in return.")
         End If
         PushUIState(UIState.InPlay)
         Return UIState.Message
