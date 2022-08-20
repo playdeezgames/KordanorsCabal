@@ -27,7 +27,7 @@
         Return If(
             character.GetStatistic(CharacterStatisticType.FromId(worldData, 24L)), 0) +
             If(
-                character.GetStatistic(CharacterStatisticType.FromId(worldData, BonusLift)), 0) *
+                character.GetStatistic(CharacterStatisticType.FromId(worldData, 25L)), 0) *
             If(
                 character.GetStatistic(CharacterStatisticType.FromId(worldData, 1L)), 0)
     End Function
