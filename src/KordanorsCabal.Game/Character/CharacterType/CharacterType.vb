@@ -18,15 +18,6 @@
     Sub New(worldData As WorldData, characterTypeId As Long)
         MyBase.New(worldData, characterTypeId)
     End Sub
-
-    Function OldInitialStatistic(statisticType As CharacterStatisticType) As Long?
-        Return WorldData.CharacterTypeInitialStatistic.Read(Id, statisticType.Id)
-    End Function
-    Function OldInitialStatistics(worldData As WorldData) As IReadOnlyList(Of CharacterStatisticType)
-        Return worldData.
-            CharacterTypeInitialStatistic.ReadForCharacterType(Id).
-            Select(Function(x) New CharacterStatisticType(worldData, x)).ToList
-    End Function
     Function InitialStatistics(worldData As WorldData) As IReadOnlyList(Of (CharacterStatisticType, Long))
         Return worldData.
             CharacterTypeInitialStatistic.ReadAllForCharacterType(Id).
@@ -46,7 +37,6 @@
     Function CanSpawn(locationType As LocationType, level As DungeonLevel) As Boolean
         Return WorldData.CharacterTypeSpawnLocation.Read(Id, level.Id, locationType.Id)
     End Function
-
     Function PartingShot() As String
         Dim partingShotTable = WorldData.CharacterTypePartingShot.Read(Id)
         If Not partingShotTable.Any Then
