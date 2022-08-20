@@ -315,4 +315,9 @@ Public Module World
             Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(x))
         End Get
     End Property
+    Friend ReadOnly Property AllDungeonLevels As IReadOnlyList(Of DungeonLevel)
+        Get
+            Return StaticWorldData.World.DungeonLevel.ReadAll().Select(Function(x) New DungeonLevel(x)).ToList
+        End Get
+    End Property
 End Module

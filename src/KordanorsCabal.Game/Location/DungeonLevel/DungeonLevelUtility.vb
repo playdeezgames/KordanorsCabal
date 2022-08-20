@@ -1,11 +1,6 @@
 ﻿Imports System.Runtime.CompilerServices
 
 Public Module DungeonLevelUtility
-    Friend ReadOnly Property AllDungeonLevels As IReadOnlyList(Of DungeonLevel)
-        Get
-            Return StaticWorldData.World.DungeonLevel.ReadAll().Select(Function(x) New DungeonLevel(x)).ToList
-        End Get
-    End Property
 
     Public Const Level1 = 1L
     Public Const Level2 = 2L
