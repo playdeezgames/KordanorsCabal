@@ -23,7 +23,7 @@ Friend Class StatusProcessor
         buffer.WriteText((11, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, 16L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 16L))}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 17L))}", False, Hue.Black)
 
         buffer.WriteText((0, 8), $"{CharacterStatisticType.FromId(StaticWorldData.World, 14L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 14L))}", False, Hue.Black)
-        buffer.WriteText((0, 10), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Hunger).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Hunger))}", False, Hue.Black)
+        buffer.WriteText((0, 10), $"{CharacterStatisticType.FromId(StaticWorldData.World, 20L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 20L))}", False, Hue.Black)
         Dim row = 11
         If player.Highness > 0 Then
             buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Highness).Abbreviation} {player.Highness}", False, Hue.Black)

@@ -555,10 +555,10 @@
     End Property
     Property Hunger As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Hunger)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 20L)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Hunger), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 20L), value)
         End Set
     End Property
     Public ReadOnly Property MaximumMana As Long
@@ -781,7 +781,7 @@
             FoodPoisoning -= 1
             Chafing -= 1
             Location = Location.Routes(direction).Move(Me)
-            If Hunger = CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Hunger).MaximumValue Then
+            If Hunger = CharacterStatisticType.FromId(WorldData, 20L).MaximumValue Then
                 Hunger \= 2
                 CurrentHP -= 1
                 Return True
