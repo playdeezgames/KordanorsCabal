@@ -310,4 +310,9 @@ Public Module World
     Function AllCharacterTypes(worldData As WorldData) As IEnumerable(Of CharacterType)
         Return worldData.CharacterType.ReadAll().Select(Function(x) CharacterType.FromId(worldData, x))
     End Function
+    Public ReadOnly Property AllFeatureTypes(worldData As WorldData) As IEnumerable(Of FeatureType)
+        Get
+            Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(x))
+        End Get
+    End Property
 End Module
