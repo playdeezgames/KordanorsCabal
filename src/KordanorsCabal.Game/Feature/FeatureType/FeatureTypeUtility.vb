@@ -4,7 +4,6 @@
             Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(x))
         End Get
     End Property
-    Public Const BlackMage = 6L
     Public Const Blacksmith = 7L
     Public Const Healer = 8L
     Public Const Constable = 9L
