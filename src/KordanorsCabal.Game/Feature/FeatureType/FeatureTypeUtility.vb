@@ -4,6 +4,5 @@
             Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(x))
         End Get
     End Property
-    Public Const Healer = 8L
     Public Const Constable = 9L
 End Module
