@@ -4,8 +4,6 @@
             Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(x))
         End Get
     End Property
-    Public Const Elder = 1L
-    Public Const InnKeeper = 2L
     Public Const TownDrunk = 3L
     Public Const Chicken = 4L
     Public Const BlackMarketeer = 5L
