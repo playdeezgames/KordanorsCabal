@@ -38,7 +38,7 @@ Friend Class StatusProcessor
             row += 1
         End If
         If player.Chafing > 0 Then
-            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Chafing).Abbreviation} {player.Chafing}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, 22L).Abbreviation} {player.Chafing}", False, Hue.Black)
             row += 1
         End If
     End Sub

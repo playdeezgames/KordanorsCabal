@@ -539,10 +539,10 @@
     End Property
     Property Chafing As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Chafing)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 22L)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Chafing), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 22L), value)
         End Set
     End Property
     Property Highness As Long
