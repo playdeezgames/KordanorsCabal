@@ -191,7 +191,7 @@ Public Module World
 
     Private Sub CreateFeature(worldData As WorldData, featureType As FeatureType)
         Dim featureLocation = RNG.FromEnumerable(Location.FromLocationType(featureType.LocationType).Where(Function(x) Not x.HasFeature))
-        Feature.Create(featureType, featureLocation)
+        Feature.Create(worldData, featureType, featureLocation)
         If featureType.Id = 2L Then
             CreateCellar(worldData, featureLocation)
         End If
