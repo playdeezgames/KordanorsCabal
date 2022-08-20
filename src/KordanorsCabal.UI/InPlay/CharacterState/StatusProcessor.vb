@@ -26,15 +26,15 @@ Friend Class StatusProcessor
         buffer.WriteText((0, 10), $"{CharacterStatisticType.FromId(StaticWorldData.World, 20L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 20L))}", False, Hue.Black)
         Dim row = 11
         If player.Highness > 0 Then
-            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Highness).Abbreviation} {player.Highness}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, 19L).Abbreviation} {player.Highness}", False, Hue.Black)
             row += 1
         End If
         If player.Drunkenness > 0 Then
-            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Drunkenness).Abbreviation} {player.Drunkenness}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, 18L).Abbreviation} {player.Drunkenness}", False, Hue.Black)
             row += 1
         End If
         If player.FoodPoisoning > 0 Then
-            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.FoodPoisoning).Abbreviation} {player.FoodPoisoning}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, 21L).Abbreviation} {player.FoodPoisoning}", False, Hue.Black)
             row += 1
         End If
         If player.Chafing > 0 Then

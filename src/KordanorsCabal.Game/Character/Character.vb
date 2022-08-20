@@ -568,10 +568,10 @@
     End Property
     Public Property FoodPoisoning As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.FoodPoisoning)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 21L)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.FoodPoisoning), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 21L), value)
         End Set
     End Property
     ReadOnly Property IsFullyAssigned As Boolean
