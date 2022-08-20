@@ -107,7 +107,7 @@ Public Module World
         Route.Create(fromLocation, Direction.FromId(worldData, Down), RouteType.Stairs, startingLocation)
         Route.Create(startingLocation, Direction.FromId(worldData, Up), RouteType.Stairs, fromLocation)
         PopulateCharacters(locations, dungeonLevel)
-        Return locations.Single(Function(x) x.LocationType = LocationType.FromId(DungeonBoss))
+        Return locations.Single(Function(x) x.LocationType = LocationType.FromId(6L))
     End Function
 
     Private Sub PopulateCharacters(locations As IEnumerable(Of Location), dungeonLevel As DungeonLevel)
@@ -128,7 +128,7 @@ Public Module World
 
     Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType, dungeonLevel As DungeonLevel)
         Dim deadEndId = LocationType.FromId(5L).Id
-        Dim dungeonBossId = LocationType.FromId(DungeonBoss).Id
+        Dim dungeonBossId = LocationType.FromId(6L).Id
         Dim dungeonId = LocationType.FromId(4L).Id
         Dim partitions =
             locations.GroupBy(
@@ -176,7 +176,7 @@ Public Module World
 
     Private Function PlaceBossLocation(deadEnds As IEnumerable(Of Location), routeType As RouteType) As Location
         Dim bossLocation = RNG.FromEnumerable(deadEnds)
-        bossLocation.LocationType = LocationType.FromId(DungeonBoss)
+        bossLocation.LocationType = LocationType.FromId(6L)
         Dim direction = bossLocation.RouteDirections.First
         Dim nextLocation = bossLocation.Routes(direction).ToLocation
         nextLocation.Routes(direction.Opposite).RouteType = routeType
