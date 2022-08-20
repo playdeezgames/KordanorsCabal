@@ -7,11 +7,11 @@
             "Potion",
             2,
             MakeDictionary(
-                (1L, MakeHashSet(LocationType.FromId(5L), LocationType.FromId(4L))),
-                (2L, MakeHashSet(LocationType.FromId(5L), LocationType.FromId(4L))),
-                (3L, MakeHashSet(LocationType.FromId(5L), LocationType.FromId(4L))),
-                (4L, MakeHashSet(LocationType.FromId(5L), LocationType.FromId(4L))),
-                (5L, MakeHashSet(LocationType.FromId(5L), LocationType.FromId(4L)))),
+                (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L))),
+                (2L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L))),
+                (3L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L))),
+                (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L))),
+                (5L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L)))),
             MakeDictionary(
                 (1L, "3d6"),
                 (2L, "3d6"),

@@ -129,20 +129,20 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AmuletOfHP, New AmuletDescriptor(ItemType.AmuletOfHP,
                 6,
                 MakeDictionary(
-                    (1L, MakeHashSet(LocationType.FromId(5L), LocationType.FromId(6L)))),
+                    (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 6L)))),
                 MakeDictionary((1L, "1d1")))},
             {ItemType.AmuletOfMana, New AmuletDescriptor(ItemType.AmuletOfMana,
                 8,
                 MakeDictionary(
-                    (2L, MakeHashSet(LocationType.FromId(5L), LocationType.FromId(6L)))),
+                    (2L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 6L)))),
                 MakeDictionary((2L, "1d1")))},
             {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, 5,
                 MakeDictionary(
-                    (3L, MakeHashSet(LocationType.FromId(5L), LocationType.FromId(6L)))),
+                    (3L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 6L)))),
                 MakeDictionary((3L, "1d1")))},
             {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, 1,
                 MakeDictionary(
-                    (4L, MakeHashSet(LocationType.FromId(5L), LocationType.FromId(6L)))),
+                    (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 6L)))),
                 MakeDictionary((4L, "1d1")))},
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
                 ItemType.AmuletOfYendor,

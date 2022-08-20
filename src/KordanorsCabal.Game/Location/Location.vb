@@ -5,7 +5,7 @@
     End Sub
     Property LocationType As LocationType
         Get
-            Return New LocationType(StaticWorldData.World.Location.ReadLocationType(Id).Value)
+            Return New LocationType(StaticWorldData.World, StaticWorldData.World.Location.ReadLocationType(Id).Value)
         End Get
         Set(value As LocationType)
             StaticWorldData.World.Location.WriteLocationType(Id, value.Id)

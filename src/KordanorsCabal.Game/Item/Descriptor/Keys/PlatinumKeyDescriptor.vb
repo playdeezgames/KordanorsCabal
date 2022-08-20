@@ -6,6 +6,6 @@
             ItemType.PlatinumKey,
             "PT Key",,
             MakeDictionary(
-                (4L, MakeHashSet(LocationType.FromId(5L)))))
+                (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L)))))
     End Sub
 End Class

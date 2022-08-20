@@ -6,6 +6,6 @@
             ItemType.CopperKey,
             "CU Key",,
             MakeDictionary(
-                (1L, MakeHashSet(LocationType.FromId(5L)))))
+                (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L)))))
     End Sub
 End Class

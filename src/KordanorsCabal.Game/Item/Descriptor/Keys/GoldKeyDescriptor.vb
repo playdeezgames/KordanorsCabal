@@ -6,6 +6,6 @@
             ItemType.GoldKey,
             "AU Key",,
             MakeDictionary(
-                (3L, MakeHashSet(LocationType.FromId(5L)))))
+                (3L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L)))))
     End Sub
 End Class

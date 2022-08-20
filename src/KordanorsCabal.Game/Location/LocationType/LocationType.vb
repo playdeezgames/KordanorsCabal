@@ -1,35 +1,35 @@
 ﻿Imports System.Runtime.CompilerServices
 
 Public Class LocationType
-    ReadOnly Property Id As Long
-    Sub New(locationTypeId As Long)
-        Id = locationTypeId
+    Inherits BaseThingie
+    Sub New(worldData As WorldData, locationTypeId As Long)
+        MyBase.New(worldData, locationTypeId)
     End Sub
-    Private Sub New(name As String)
-        Me.New(StaticWorldData.World.LocationType.ReadForName(name).Value)
+    Private Sub New(worldData As WorldData, name As String)
+        Me.New(worldData, worldData.LocationType.ReadForName(name).Value)
     End Sub
     ReadOnly Property Name As String
         Get
-            Return StaticWorldData.World.LocationType.ReadName(Id)
+            Return WorldData.LocationType.ReadName(Id)
         End Get
     End Property
     ReadOnly Property IsDungeon As Boolean
         Get
-            Return StaticWorldData.World.LocationType.ReadIsDungeon(Id)
+            Return WorldData.LocationType.ReadIsDungeon(Id)
         End Get
     End Property
     ReadOnly Property CanMap As Boolean
         Get
-            Return StaticWorldData.World.LocationType.ReadCanMap(Id)
+            Return WorldData.LocationType.ReadCanMap(Id)
         End Get
     End Property
     ReadOnly Property RequiresMP() As Boolean
         Get
-            Return StaticWorldData.World.LocationType.ReadRequiresMP(Id)
+            Return WorldData.LocationType.ReadRequiresMP(Id)
         End Get
     End Property
-    Shared Function FromId(locationTypeId As Long?) As LocationType
-        Return If(locationTypeId.HasValue, New LocationType(locationTypeId.Value), Nothing)
+    Shared Function FromId(worldData As WorldData, locationTypeId As Long?) As LocationType
+        Return If(locationTypeId.HasValue, New LocationType(worldData, locationTypeId.Value), Nothing)
     End Function
     Public Shared Operator =(first As LocationType, second As LocationType) As Boolean
         Return first.Id = second.Id
