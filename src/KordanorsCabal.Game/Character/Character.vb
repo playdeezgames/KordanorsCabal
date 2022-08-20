@@ -205,7 +205,7 @@
         Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 3L)), 0) + NegativeInfluence())
     End Function
     Friend Function RollWillpower() As Long
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Willpower)), 0) + NegativeInfluence())
+        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)), 0) + NegativeInfluence())
     End Function
     Private Function GetAttackDice() As Long
         Dim dice = GetStatistic(CharacterStatisticType.FromId(WorldData, 1L)).Value
@@ -215,7 +215,7 @@
         Return dice
     End Function
     Friend Function IsDemoralized() As Boolean
-        If GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Willpower)).HasValue Then
+        If GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
             Return CurrentMP <= 0
         End If
         Return False
@@ -225,7 +225,7 @@
     End Sub
     ReadOnly Property CanIntimidate As Boolean
         Get
-            If Not GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Willpower)).HasValue Then
+            If Not GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
                 Return False
             End If
             Return Location.Friends(Me).Count <= Location.Enemies(Me).Count

@@ -19,7 +19,7 @@ Friend Class FinalizeCharacterProcessor
                 ($"STR: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, 1L), nextState, currentState)),
                 ($"DEX: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, 2L), nextState, currentState)),
                 ($"INF: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, 3L), nextState, currentState)),
-                ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Willpower), nextState, currentState)),
+                ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, 4L), nextState, currentState)),
                 ($"POW: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Power), nextState, currentState)),
                 ($"HP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, HP), nextState, currentState)),
                 ($"MP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, MP), nextState, currentState)),
