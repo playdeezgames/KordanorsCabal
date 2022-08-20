@@ -13,22 +13,9 @@ Public Enum OldFeatureType
     Constable
 End Enum
 Public Module FeatureTypeUtility
-    Friend FeatureTypeDescriptors As IReadOnlyDictionary(Of Long, FeatureType) =
-        New Dictionary(Of Long, FeatureType) From
-        {
-            {OldFeatureType.BlackMage, New FeatureType(OldFeatureType.BlackMage)},
-            {OldFeatureType.BlackMarketeer, New FeatureType(OldFeatureType.BlackMarketeer)},
-            {OldFeatureType.Blacksmith, New FeatureType(OldFeatureType.Blacksmith)},
-            {OldFeatureType.Chicken, New FeatureType(OldFeatureType.Chicken)},
-            {OldFeatureType.Constable, New FeatureType(OldFeatureType.Constable)},
-            {OldFeatureType.Elder, New FeatureType(OldFeatureType.Elder)},
-            {OldFeatureType.Healer, New FeatureType(OldFeatureType.Healer)},
-            {OldFeatureType.InnKeeper, New FeatureType(OldFeatureType.InnKeeper)},
-            {OldFeatureType.TownDrunk, New FeatureType(OldFeatureType.TownDrunk)}
-        }
-    Public ReadOnly Property AllFeatureTypes As IEnumerable(Of FeatureType)
+    Public ReadOnly Property AllFeatureTypes(worldData As WorldData) As IEnumerable(Of FeatureType)
         Get
-            Return FeatureTypeDescriptors.Keys.Select(Function(x) New FeatureType(x))
+            Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(x))
         End Get
     End Property
     <Extension>

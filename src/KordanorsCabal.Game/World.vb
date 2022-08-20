@@ -184,7 +184,7 @@ Public Module World
     End Function
 
     Private Sub CreateFeatures(worldData As WorldData)
-        For Each featureType In AllFeatureTypes
+        For Each featureType In AllFeatureTypes(worldData)
             CreateFeature(worldData, featureType)
         Next
     End Sub
