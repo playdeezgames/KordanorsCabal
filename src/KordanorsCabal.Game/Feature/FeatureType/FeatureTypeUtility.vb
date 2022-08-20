@@ -26,9 +26,9 @@ Public Module FeatureTypeUtility
             {OldFeatureType.InnKeeper, New FeatureType(OldFeatureType.InnKeeper)},
             {OldFeatureType.TownDrunk, New FeatureType(OldFeatureType.TownDrunk)}
         }
-    Public ReadOnly Property AllFeatureTypes As IEnumerable(Of OldFeatureType)
+    Public ReadOnly Property AllFeatureTypes As IEnumerable(Of FeatureType)
         Get
-            Return FeatureTypeDescriptors.Keys.Select(Function(x) CType(x, OldFeatureType))
+            Return FeatureTypeDescriptors.Keys.Select(Function(x) New FeatureType(x))
         End Get
     End Property
     <Extension>
