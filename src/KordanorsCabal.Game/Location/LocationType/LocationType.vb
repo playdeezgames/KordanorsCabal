@@ -1,6 +1,4 @@
-﻿Imports System.Runtime.CompilerServices
-
-Public Class LocationType
+﻿Public Class LocationType
     Inherits BaseThingie
     Sub New(worldData As WorldData, locationTypeId As Long)
         MyBase.New(worldData, locationTypeId)
