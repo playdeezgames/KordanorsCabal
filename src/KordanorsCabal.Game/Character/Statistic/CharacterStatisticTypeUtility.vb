@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const Money = 14
     Public Const Fatigue = 15
     Public Const XP = 16
     Public Const XPGoal = 17

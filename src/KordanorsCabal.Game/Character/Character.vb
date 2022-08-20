@@ -44,10 +44,10 @@
     End Function
     Property Money As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Money)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 14L)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Money), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 14L), value)
         End Set
     End Property
     Friend Sub Learn(spellType As SpellType)
@@ -395,7 +395,7 @@
         Dim money As Long = RollMoneyDrop
         If money > 0 Then
             lines.Add($"You get {money} money!")
-            killedBy.ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Money), money)
+            killedBy.ChangeStatistic(CharacterStatisticType.FromId(WorldData, 14L), money)
         End If
         Dim xp As Long = XPValue
         If xp > 0 Then
