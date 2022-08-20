@@ -25,8 +25,8 @@
                 Dim healRoll = RNG.RollDice("1d4")
                 character.ChangeStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Stress), -healRoll)
                 Dim lines As New List(Of String)
-                lines.Add($"You make use of {ItemType.Pr0n.Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(StaticWorldData.World, MP).Name}.")
-                lines.Add($"You now have {character.CurrentMP} {CharacterStatisticType.FromId(StaticWorldData.World, MP).Name}.")
+                lines.Add($"You make use of {ItemType.Pr0n.Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
+                lines.Add($"You now have {character.CurrentMP} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
                 Dim lotionItem = character.Inventory.ItemsOfType(ItemType.Lotion).FirstOrDefault
                 If lotionItem Is Nothing Then
                     lines.Add($"You also receive 10 {CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Chafing).Name}. Try {ItemType.Lotion.Name} next time.")

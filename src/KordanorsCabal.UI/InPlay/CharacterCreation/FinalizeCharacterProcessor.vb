@@ -22,7 +22,7 @@ Friend Class FinalizeCharacterProcessor
                 ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, 4L), nextState, currentState)),
                 ($"POW: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, 5L), nextState, currentState)),
                 ($"HP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, 6L), nextState, currentState)),
-                ($"MP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, MP), nextState, currentState)),
+                ($"MP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, 7L), nextState, currentState)),
                 ($"Mana: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Mana), nextState, currentState))
             },
             7,

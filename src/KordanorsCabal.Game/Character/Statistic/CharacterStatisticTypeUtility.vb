@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const MP = 7
     Public Const Mana = 8
     Public Const Unassigned = 9
     Public Const UnarmedMaximumDamage = 10

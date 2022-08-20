@@ -256,10 +256,10 @@
     End Property
     Property CurrentMP As Long
         Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, MP)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress)).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress), GetStatistic(CharacterStatisticType.FromId(WorldData, MP)).Value - value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress), GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - value)
         End Set
     End Property
     Property CurrentMana As Long
