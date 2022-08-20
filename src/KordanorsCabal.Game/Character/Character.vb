@@ -241,12 +241,12 @@
             Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds), GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.HP)).Value - value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds), GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value - value)
         End Set
     End Property
     ReadOnly Property MaximumHP As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.HP)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value
         End Get
     End Property
     ReadOnly Property PartingShot As String
@@ -281,7 +281,7 @@
     End Sub
     ReadOnly Property IsDead As Boolean
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds)).Value >= GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.HP)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds)).Value >= GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value
         End Get
     End Property
     Function DetermineDamage(value As Long) As Long
