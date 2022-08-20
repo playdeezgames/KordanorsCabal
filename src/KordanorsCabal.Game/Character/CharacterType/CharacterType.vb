@@ -25,7 +25,7 @@
     End Function
     Function MaximumEncumbrance(worldData As WorldData, character As Character) As Long
         Return If(
-            character.GetStatistic(CharacterStatisticType.FromId(worldData, BaseLift)), 0) +
+            character.GetStatistic(CharacterStatisticType.FromId(worldData, 24L)), 0) +
             If(
                 character.GetStatistic(CharacterStatisticType.FromId(worldData, BonusLift)), 0) *
             If(
