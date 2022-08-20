@@ -1,5 +1,4 @@
 ﻿Public Module EquipSlotUtility
-    Public Const Weapon = 1L
     Public Const Shield = 2L
     Public Const Head = 3L
     Public Const Torso = 4L

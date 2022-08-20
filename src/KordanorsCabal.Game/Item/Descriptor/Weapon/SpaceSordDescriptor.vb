@@ -10,7 +10,7 @@
                 (6L, MakeHashSet(LocationType.FromId(Moon)))),
             MakeDictionary(
                 (6L, "1d1")),
-            MakeList(EquipSlot.FromId(Weapon)),,
+            MakeList(EquipSlot.FromId(1L)),,
             10,
             5,,
             100)
