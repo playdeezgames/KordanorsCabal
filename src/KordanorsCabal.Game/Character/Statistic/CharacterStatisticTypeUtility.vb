@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const UnarmedMaximumDamage = 10
     Public Const BaseMaximumDefend = 11
     Public Const Wounds = 12
     Public Const Stress = 13
