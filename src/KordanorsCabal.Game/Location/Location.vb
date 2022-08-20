@@ -18,9 +18,6 @@
     Shared Function Create(worldData As WorldData, locationType As LocationType) As Location
         Return FromId(worldData, worldData.Location.Create(locationType.Id))
     End Function
-    Public Shared Function ByStatisticValue(worldData As WorldData, statisticType As LocationStatisticType, statisticValue As Long) As IEnumerable(Of Location)
-        Return worldData.LocationStatistic.ReadForStatisticValue(statisticType, statisticValue).Select(Function(x) Location.FromId(worldData, x))
-    End Function
     Public Shared Function ByDungeonLevel(worldData As WorldData, dungeonLevel As DungeonLevel) As IEnumerable(Of Location)
         Return worldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel.Id).Select(Function(x) Location.FromId(worldData, x))
     End Function
