@@ -238,10 +238,10 @@
     End Property
     Property CurrentHP As Long
         Get
-            Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds)).Value)
+            Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds), GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value - value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value - value)
         End Set
     End Property
     ReadOnly Property MaximumHP As Long
@@ -271,7 +271,7 @@
         End Set
     End Property
     Friend Sub DoDamage(damage As Long)
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds), damage)
+        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 12L), damage)
     End Sub
     Friend Sub DoFatigue(fatigue As Long)
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue), fatigue)
@@ -281,7 +281,7 @@
     End Sub
     ReadOnly Property IsDead As Boolean
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds)).Value >= GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value >= GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value
         End Get
     End Property
     Function DetermineDamage(value As Long) As Long
@@ -307,7 +307,7 @@
     End Property
     ReadOnly Property NeedsHealing As Boolean
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds)).Value > 0
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value > 0
         End Get
     End Property
     Friend Function DoWeaponWear(wear As Long) As IEnumerable(Of ItemType)
@@ -381,7 +381,7 @@
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XP), -xpGoal)
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XPGoal), xpGoal)
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), 1)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds), 0)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
             SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Stress), 0)
             SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue), 0)
             Return True
@@ -699,7 +699,7 @@
         Return CanMove(Direction)
     End Function
     Public Sub Heal()
-        SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Wounds), 0)
+        SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
     End Sub
     Public Function CanMoveBackward() As Boolean
         Return CanMove(Direction.Opposite)

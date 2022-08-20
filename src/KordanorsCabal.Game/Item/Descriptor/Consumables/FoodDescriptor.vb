@@ -10,7 +10,7 @@
             Function(character) True,
             Sub(character)
                 Dim healRoll = 1
-                character.ChangeStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Wounds), -healRoll)
+                character.ChangeStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 12L), -healRoll)
                 character.Hunger = 0
                 character.EnqueueMessage(
                 $"Food heals up to {healRoll} HP!",

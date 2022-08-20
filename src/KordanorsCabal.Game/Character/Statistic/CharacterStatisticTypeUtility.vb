@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const Wounds = 12
     Public Const Stress = 13
     Public Const Money = 14
     Public Const Fatigue = 15
