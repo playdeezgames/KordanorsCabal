@@ -375,11 +375,11 @@
         End Get
     End Property
     Friend Function AddXP(xp As Long) As Boolean
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XP), xp)
-        Dim xpGoal = GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XPGoal)).Value
-        If GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XP)).Value >= xpGoal Then
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XP), -xpGoal)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.XPGoal), xpGoal)
+        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 16L), xp)
+        Dim xpGoal = GetStatistic(CharacterStatisticType.FromId(WorldData, 17L)).Value
+        If GetStatistic(CharacterStatisticType.FromId(WorldData, 16L)).Value >= xpGoal Then
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 16L), -xpGoal)
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 17L), xpGoal)
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), 1)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 13L), 0)

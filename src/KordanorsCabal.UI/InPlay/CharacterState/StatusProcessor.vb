@@ -20,7 +20,7 @@ Friend Class StatusProcessor
         buffer.WriteText((0, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, 5L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 5L))}", False, Hue.Black)
         buffer.WriteText((0, 6), $"{CharacterStatisticType.FromId(StaticWorldData.World, 8L).Abbreviation} {player.CurrentMana}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 8L))}", False, Hue.Black)
 
-        buffer.WriteText((11, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.XP).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.XP))}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.XPGoal))}", False, Hue.Black)
+        buffer.WriteText((11, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, 16L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 16L))}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 17L))}", False, Hue.Black)
 
         buffer.WriteText((0, 8), $"{CharacterStatisticType.FromId(StaticWorldData.World, 14L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 14L))}", False, Hue.Black)
         buffer.WriteText((0, 10), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Hunger).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Hunger))}", False, Hue.Black)
