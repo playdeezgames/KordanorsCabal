@@ -13,7 +13,7 @@
                 (4L, MakeHashSet(LocationType.FromId(DungeonDeadEnd), LocationType.FromId(Dungeon))),
                 (5L, MakeHashSet(LocationType.FromId(DungeonDeadEnd), LocationType.FromId(Dungeon)))),
             MakeDictionary((1L, "1d6")),
-            MakeList(EquipSlot.FromId(Torso)),,,,
+            MakeList(EquipSlot.FromId(4L)),,,,
             2,
             25,,
             10,
