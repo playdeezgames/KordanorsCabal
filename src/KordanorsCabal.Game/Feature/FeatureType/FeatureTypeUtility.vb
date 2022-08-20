@@ -4,7 +4,6 @@
             Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(x))
         End Get
     End Property
-    Public Const Chicken = 4L
     Public Const BlackMarketeer = 5L
     Public Const BlackMage = 6L
     Public Const Blacksmith = 7L
