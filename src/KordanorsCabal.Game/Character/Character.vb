@@ -202,7 +202,7 @@
         Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
     End Function
     Friend Function RollInfluence() As Long
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Influence)), 0) + NegativeInfluence())
+        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 3L)), 0) + NegativeInfluence())
     End Function
     Friend Function RollWillpower() As Long
         Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Willpower)), 0) + NegativeInfluence())
@@ -711,7 +711,7 @@
     End Sub
     ReadOnly Property CanDoIntimidation() As Boolean
         Get
-            If If(GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Influence)), 0) <= 0 Then
+            If If(GetStatistic(CharacterStatisticType.FromId(WorldData, 3L)), 0) <= 0 Then
                 Return False
             End If
             Dim enemy = Location.Enemies(Me).FirstOrDefault

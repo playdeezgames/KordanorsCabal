@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const Influence = 3
     Public Const Willpower = 4
     Public Const Power = 5
     Public Const HP = 6
