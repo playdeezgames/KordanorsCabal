@@ -84,7 +84,7 @@ Public Module World
                 Dim dungeonLocation = locations(CInt(column + row * maze.Columns))
                 For Each direction In MazeDirections.Keys
                     If cell.OpenDoorCount = 1 Then
-                        dungeonLocation.LocationType = LocationType.FromId(DungeonDeadEnd)
+                        dungeonLocation.LocationType = LocationType.FromId(5L)
                     End If
                     If If(cell.GetDoor(direction)?.Open, False) Then
                         Dim nextColumn = MazeDirections(direction).DeltaX + column
@@ -127,7 +127,7 @@ Public Module World
     End Sub
 
     Private Sub PopulateLocations(locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType, dungeonLevel As DungeonLevel)
-        Dim deadEndId = LocationType.FromId(DungeonDeadEnd).Id
+        Dim deadEndId = LocationType.FromId(5L).Id
         Dim dungeonBossId = LocationType.FromId(DungeonBoss).Id
         Dim dungeonId = LocationType.FromId(4L).Id
         Dim partitions =
