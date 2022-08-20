@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const Fatigue = 15
     Public Const XP = 16
     Public Const XPGoal = 17
     Public Const Drunkenness = 18

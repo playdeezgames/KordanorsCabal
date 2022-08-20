@@ -264,17 +264,17 @@
     End Property
     Property CurrentMana As Long
         Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue)).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, 15L)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue), GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 15L), GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - value)
         End Set
     End Property
     Friend Sub DoDamage(damage As Long)
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 12L), damage)
     End Sub
     Friend Sub DoFatigue(fatigue As Long)
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue), fatigue)
+        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 15L), fatigue)
     End Sub
     Friend Sub Destroy()
         WorldData.Character.Clear(Id)
@@ -383,7 +383,7 @@
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), 1)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 13L), 0)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticTypeUtility.Fatigue), 0)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, 15L), 0)
             Return True
         End If
         Return False
