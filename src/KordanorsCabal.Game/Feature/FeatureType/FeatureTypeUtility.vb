@@ -13,8 +13,8 @@ Public Enum OldFeatureType
     Constable
 End Enum
 Public Module FeatureTypeUtility
-    Friend FeatureTypeDescriptors As IReadOnlyDictionary(Of OldFeatureType, FeatureType) =
-        New Dictionary(Of OldFeatureType, FeatureType) From
+    Friend FeatureTypeDescriptors As IReadOnlyDictionary(Of Long, FeatureType) =
+        New Dictionary(Of Long, FeatureType) From
         {
             {OldFeatureType.BlackMage, New FeatureType(OldFeatureType.BlackMage)},
             {OldFeatureType.BlackMarketeer, New FeatureType(OldFeatureType.BlackMarketeer)},
@@ -28,7 +28,7 @@ Public Module FeatureTypeUtility
         }
     Public ReadOnly Property AllFeatureTypes As IEnumerable(Of OldFeatureType)
         Get
-            Return FeatureTypeDescriptors.Keys
+            Return FeatureTypeDescriptors.Keys.Select(Function(x) CType(x, OldFeatureType))
         End Get
     End Property
     <Extension>

@@ -7,23 +7,23 @@
         Return If(featureId.HasValue, New Feature(featureId.Value), Nothing)
     End Function
 
-    Friend Shared Function Create(featureType As OldFeatureType, location As Location) As Feature
-        Return FromId(StaticWorldData.World.Feature.Create(featureType, location.Id))
+    Friend Shared Function Create(featureType As FeatureType, location As Location) As Feature
+        Return FromId(StaticWorldData.World.Feature.Create(featureType.Id, location.Id))
     End Function
 
-    ReadOnly Property FeatureType As OldFeatureType
+    ReadOnly Property FeatureType As FeatureType
         Get
-            Return CType(StaticWorldData.World.Feature.ReadFeatureType(Id).Value, OldFeatureType)
+            Return New FeatureType(StaticWorldData.World.Feature.ReadFeatureType(Id).Value)
         End Get
     End Property
 
     ReadOnly Property Name As String
         Get
-            Return FeatureType.ToNew.Name
+            Return FeatureType.Name
         End Get
     End Property
 
     Friend Function InteractionMode() As PlayerMode
-        Return FeatureType.ToNew.InteractionMode
+        Return FeatureType.InteractionMode
     End Function
 End Class
