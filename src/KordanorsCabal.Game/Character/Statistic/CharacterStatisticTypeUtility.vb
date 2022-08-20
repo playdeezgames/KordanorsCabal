@@ -1,5 +1,4 @@
 ﻿Public Module CharacterStatisticTypeUtility
-    Public Const Strength = 1
     Public Const Dexterity = 2
     Public Const Influence = 3
     Public Const Willpower = 4

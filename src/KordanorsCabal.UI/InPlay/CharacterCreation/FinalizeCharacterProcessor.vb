@@ -16,7 +16,7 @@ Friend Class FinalizeCharacterProcessor
             New List(Of (String, Func(Of UIState))) From
             {
                 ("Cancel", Function() cancelState),
-                ($"STR: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Strength), nextState, currentState)),
+                ($"STR: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, 1L), nextState, currentState)),
                 ($"DEX: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Dexterity), nextState, currentState)),
                 ($"INF: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Influence), nextState, currentState)),
                 ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Willpower), nextState, currentState)),

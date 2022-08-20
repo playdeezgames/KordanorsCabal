@@ -9,7 +9,7 @@ Friend Class StatusProcessor
         buffer.WriteTextCentered(0, "Status", True, Hue.Blue)
         Dim player = Game.World.PlayerCharacter
 
-        buffer.WriteText((0, 1), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Strength).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Strength))}", False, Hue.Black)
+        buffer.WriteText((0, 1), $"{CharacterStatisticType.FromId(StaticWorldData.World, 1L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 1L))}", False, Hue.Black)
         buffer.WriteText((0, 2), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Dexterity).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.Dexterity))}", False, Hue.Black)
         buffer.WriteText((0, 3), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.HP).Abbreviation} {player.CurrentHP}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticTypeUtility.HP))}", False, Hue.Black)
 
