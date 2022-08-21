@@ -13,7 +13,7 @@ Public Module World
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
                 Dim dungeonLocation = Location.Create(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 8L))
-                dungeonLocation.DungeonLevel = DungeonLevel.FromId(6L)
+                dungeonLocation.DungeonLevel = DungeonLevel.FromId(StaticWorldData.World, 6L)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonColumn, column)
                 dungeonLocation.SetStatistic(LocationStatisticType.DungeonRow, row)
                 locations.Add(dungeonLocation)
@@ -36,16 +36,16 @@ Public Module World
                 Route.Create(moonLocation, west, RouteType.MoonPath, westLocation)
             Next
         Next
-        PopulateCharacters(locations, DungeonLevel.FromId(6L))
-        PopulateItems(locations, DungeonLevel.FromId(6L))
+        PopulateCharacters(locations, DungeonLevel.FromId(StaticWorldData.World, 6L))
+        PopulateItems(locations, DungeonLevel.FromId(StaticWorldData.World, 6L))
     End Sub
 
     Private Sub CreateDungeon(worldData As WorldData, location As Location)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(1L), ItemType.CopperKey, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(2L), ItemType.SilverKey, RouteType.SilverLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(3L), ItemType.GoldKey, RouteType.GoldLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(4L), ItemType.PlatinumKey, RouteType.PlatinumLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(5L), ItemType.ElementalOrb, RouteType.FinalLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(StaticWorldData.World, 1L), ItemType.CopperKey, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(StaticWorldData.World, 2L), ItemType.SilverKey, RouteType.SilverLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(StaticWorldData.World, 3L), ItemType.GoldKey, RouteType.GoldLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(StaticWorldData.World, 4L), ItemType.PlatinumKey, RouteType.PlatinumLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(StaticWorldData.World, 5L), ItemType.ElementalOrb, RouteType.FinalLock)
     End Sub
 
     Const MazeColumns = 11
@@ -315,9 +315,9 @@ Public Module World
             Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(x))
         End Get
     End Property
-    Friend ReadOnly Property AllDungeonLevels As IReadOnlyList(Of DungeonLevel)
+    Friend ReadOnly Property AllDungeonLevels(worldData As WorldData) As IReadOnlyList(Of DungeonLevel)
         Get
-            Return StaticWorldData.World.DungeonLevel.ReadAll().Select(Function(x) New DungeonLevel(x)).ToList
+            Return worldData.DungeonLevel.ReadAll().Select(Function(x) New DungeonLevel(worldData, x)).ToList
         End Get
     End Property
 End Module

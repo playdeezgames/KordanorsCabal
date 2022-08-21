@@ -90,12 +90,12 @@
         Me.Encumbrance = encumbrance
         If spawnLocationTypes Is Nothing Then
             Me.SpawnLocationTypes =
-                AllDungeonLevels.ToDictionary(
+                AllDungeonLevels(StaticWorldData.World).ToDictionary(
                 Function(x) x.Id,
                 Function(x) New HashSet(Of LocationType))
         Else
             Me.SpawnLocationTypes =
-                AllDungeonLevels.ToDictionary(
+                AllDungeonLevels(StaticWorldData.World).ToDictionary(
                 Function(x) x.Id,
                 Function(x) If(spawnLocationTypes.ContainsKey(x.Id), spawnLocationTypes(x.Id), New HashSet(Of LocationType)))
         End If

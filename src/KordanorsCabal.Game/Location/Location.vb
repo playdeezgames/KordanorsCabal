@@ -114,7 +114,7 @@
     End Property
     Property DungeonLevel As DungeonLevel
         Get
-            Return Game.DungeonLevel.FromId(WorldData.LocationDungeonLevel.Read(Id))
+            Return Game.DungeonLevel.FromId(WorldData, WorldData.LocationDungeonLevel.Read(Id))
         End Get
         Set(value As DungeonLevel)
             WorldData.LocationDungeonLevel.Write(Id, value.Id)
