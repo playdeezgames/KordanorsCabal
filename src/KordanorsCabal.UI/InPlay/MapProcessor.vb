@@ -33,7 +33,7 @@ Friend Class MapProcessor
     Private Sub DrawLocation(buffer As PatternBuffer, xy As (Integer, Integer), location As Location, inverted As Boolean, displayHue As Hue)
         Dim northExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 1L))
         Dim eastExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 2L))
-        Dim southExit = location.HasRoute(Direction.FromId(StaticWorldData.World, South))
+        Dim southExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 3L))
         Dim westExit = location.HasRoute(Direction.FromId(StaticWorldData.World, West))
         'upper left
         buffer.PutCell(xy,
