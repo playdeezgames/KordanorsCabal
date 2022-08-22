@@ -22,6 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="boilerplate.db" />
     <None Remove="Content\EnemyDeath.wav" />
     <None Remove="Content\EnemyHit.wav" />
     <None Remove="Content\LevelUp.wav" />
@@ -37,6 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="boilerplate.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\EnemyDeath.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

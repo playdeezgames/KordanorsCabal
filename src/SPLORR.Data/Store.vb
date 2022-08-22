@@ -2,10 +2,19 @@
 
 Public Class Store
     Private connection As SqliteConnection
+    Private templateFilename As String
+    Public Sub New(filename As String)
+        Me.templateFilename = filename
+    End Sub
+
     Public Sub Reset()
         ShutDown()
         connection = New SqliteConnection("Data Source=:memory:")
         connection.Open()
+        Using loadConnection As New SqliteConnection($"Data Source={templateFilename}")
+            loadConnection.Open()
+            loadConnection.BackupDatabase(connection)
+        End Using
     End Sub
     Public Function Renew() As SqliteConnection
         Dim result = connection
@@ -29,11 +38,10 @@ Public Class Store
         End Using
     End Sub
     Public Sub Load(filename As String)
+        Dim oldFilename = templateFilename
+        templateFilename = filename
         Reset()
-        Using loadConnection As New SqliteConnection($"Data Source={filename}")
-            loadConnection.Open()
-            loadConnection.BackupDatabase(connection)
-        End Using
+        templateFilename = oldFilename
     End Sub
     Private Function CreateCommand(query As String, ParamArray parameters() As SqliteParameter) As SqliteCommand
         Dim command = connection.CreateCommand()
