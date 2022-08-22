@@ -320,4 +320,14 @@ Public Module World
             Return worldData.DungeonLevel.ReadAll().Select(Function(x) New DungeonLevel(worldData, x)).ToList
         End Get
     End Property
+    Friend ReadOnly Property AllDirections(worldData As WorldData) As IEnumerable(Of Direction)
+        Get
+            Return StaticWorldData.World.Direction.ReadAll.Select(Function(x) New Direction(worldData, x))
+        End Get
+    End Property
+    Friend ReadOnly Property CardinalDirections(worldData As WorldData) As IEnumerable(Of Direction)
+        Get
+            Return AllDirections(worldData).Where(Function(x) x.IsCardinal)
+        End Get
+    End Property
 End Module
