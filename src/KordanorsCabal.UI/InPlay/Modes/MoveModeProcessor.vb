@@ -40,10 +40,10 @@ Friend Class MoveModeProcessor
         If player.CanMoveBackward Then
             Buttons(BackwardButtonIndex).Title = "Backward"
         End If
-        If player.CanMove(Direction.FromId(StaticWorldData.World, Up)) Then
+        If player.CanMove(Direction.FromId(StaticWorldData.World, 5L)) Then
             Buttons(UpButtonIndex).Title = "Up"
         End If
-        If player.CanMove(Direction.FromId(StaticWorldData.World, Down)) Then
+        If player.CanMove(Direction.FromId(StaticWorldData.World, 6L)) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
         If player.CanMove(Direction.FromId(StaticWorldData.World, Inward)) Then
@@ -60,9 +60,9 @@ Friend Class MoveModeProcessor
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case DownButtonIndex
-                Return HandleMove(player, Direction.FromId(StaticWorldData.World, Down))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.World, 6L))
             Case UpButtonIndex
-                Return HandleMove(player, Direction.FromId(StaticWorldData.World, Up))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.World, 5L))
             Case InButtonIndex
                 Return HandleMove(player, Direction.FromId(StaticWorldData.World, Inward))
             Case OutButtonIndex
