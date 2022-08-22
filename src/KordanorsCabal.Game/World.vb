@@ -19,7 +19,7 @@ Public Module World
                 locations.Add(dungeonLocation)
             Next
         Next
-        Dim north = Direction.FromId(worldData, DirectionUtility.North)
+        Dim north = Direction.FromId(worldData, 1L)
         Dim east = Direction.FromId(worldData, DirectionUtility.East)
         Dim south = Direction.FromId(worldData, DirectionUtility.South)
         Dim west = Direction.FromId(worldData, DirectionUtility.West)
@@ -223,7 +223,7 @@ Public Module World
         Dim westTown = Location.Create(worldData, townLocationType)
         Dim northWestTown = Location.Create(worldData, townLocationType)
 
-        StitchTown(centerTown, Direction.FromId(worldData, North), northTown)
+        StitchTown(centerTown, Direction.FromId(worldData, 1L), northTown)
         StitchTown(centerTown, Direction.FromId(worldData, East), eastTown)
         StitchTown(centerTown, Direction.FromId(worldData, South), southTown)
         StitchTown(centerTown, Direction.FromId(worldData, West), westTown)
@@ -232,12 +232,12 @@ Public Module World
         StitchTown(northWestTown, Direction.FromId(worldData, South), westTown)
 
         StitchTown(southWestTown, Direction.FromId(worldData, East), southTown)
-        StitchTown(southWestTown, Direction.FromId(worldData, North), westTown)
+        StitchTown(southWestTown, Direction.FromId(worldData, 1L), westTown)
 
         StitchTown(northEastTown, Direction.FromId(worldData, West), northTown)
         StitchTown(northEastTown, Direction.FromId(worldData, South), eastTown)
 
-        StitchTown(southEastTown, Direction.FromId(worldData, North), eastTown)
+        StitchTown(southEastTown, Direction.FromId(worldData, 1L), eastTown)
         StitchTown(southEastTown, Direction.FromId(worldData, West), southTown)
 
         CreateChurchEntrance(worldData)
