@@ -20,9 +20,9 @@ Public Module World
             Next
         Next
         Dim north = Direction.FromId(worldData, 1L)
-        Dim east = Direction.FromId(worldData, DirectionUtility.East)
-        Dim south = Direction.FromId(worldData, DirectionUtility.South)
-        Dim west = Direction.FromId(worldData, DirectionUtility.West)
+        Dim east = Direction.FromId(worldData, 2L)
+        Dim south = Direction.FromId(worldData, 3L)
+        Dim west = Direction.FromId(worldData, 4L)
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
                 Dim moonLocation = locations(CInt(column + row * MoonColumns))
@@ -224,14 +224,14 @@ Public Module World
         Dim northWestTown = Location.Create(worldData, townLocationType)
 
         StitchTown(centerTown, Direction.FromId(worldData, 1L), northTown)
-        StitchTown(centerTown, Direction.FromId(worldData, East), eastTown)
+        StitchTown(centerTown, Direction.FromId(worldData, 2L), eastTown)
         StitchTown(centerTown, Direction.FromId(worldData, South), southTown)
         StitchTown(centerTown, Direction.FromId(worldData, West), westTown)
 
-        StitchTown(northWestTown, Direction.FromId(worldData, East), northTown)
+        StitchTown(northWestTown, Direction.FromId(worldData, 2L), northTown)
         StitchTown(northWestTown, Direction.FromId(worldData, South), westTown)
 
-        StitchTown(southWestTown, Direction.FromId(worldData, East), southTown)
+        StitchTown(southWestTown, Direction.FromId(worldData, 2L), southTown)
         StitchTown(southWestTown, Direction.FromId(worldData, 1L), westTown)
 
         StitchTown(northEastTown, Direction.FromId(worldData, West), northTown)
