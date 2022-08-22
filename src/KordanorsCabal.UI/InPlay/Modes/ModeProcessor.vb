@@ -108,8 +108,8 @@ Public MustInherit Class ModeProcessor
             ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(StaticWorldData.World, Outward)).RouteType.Sprite)
         End If
 
-        If location.HasRoute(Direction.FromId(StaticWorldData.World, Inward)) Then
-            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(StaticWorldData.World, Inward)).RouteType.Sprite)
+        If location.HasRoute(Direction.FromId(StaticWorldData.World, 7L)) Then
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(StaticWorldData.World, 7L)).RouteType.Sprite)
         End If
 
         For Each item In player.Location.Inventory.Items

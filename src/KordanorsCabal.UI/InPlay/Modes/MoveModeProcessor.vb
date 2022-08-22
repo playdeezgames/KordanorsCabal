@@ -46,7 +46,7 @@ Friend Class MoveModeProcessor
         If player.CanMove(Direction.FromId(StaticWorldData.World, 6L)) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
-        If player.CanMove(Direction.FromId(StaticWorldData.World, Inward)) Then
+        If player.CanMove(Direction.FromId(StaticWorldData.World, 7L)) Then
             Buttons(InButtonIndex).Title = "In"
         End If
         If player.CanMove(Direction.FromId(StaticWorldData.World, Outward)) Then
@@ -64,7 +64,7 @@ Friend Class MoveModeProcessor
             Case UpButtonIndex
                 Return HandleMove(player, Direction.FromId(StaticWorldData.World, 5L))
             Case InButtonIndex
-                Return HandleMove(player, Direction.FromId(StaticWorldData.World, Inward))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.World, 7L))
             Case OutButtonIndex
                 Return HandleMove(player, Direction.FromId(StaticWorldData.World, Outward))
             Case ForwardButtonIndex

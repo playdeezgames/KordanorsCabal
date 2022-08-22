@@ -11,7 +11,7 @@
             Sub(character)
                 Dim location = character.Location
                 Dim outDirection = Direction.FromId(StaticWorldData.World, Outward)
-                Dim inDirection = Direction.FromId(StaticWorldData.World, Inward)
+                Dim inDirection = Direction.FromId(StaticWorldData.World, 7L)
                 location.DestroyRoute(outDirection)
                 Dim destination = Game.Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 1L)).Single
                 destination.DestroyRoute(inDirection)
