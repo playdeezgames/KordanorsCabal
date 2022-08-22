@@ -226,7 +226,7 @@ Public Module World
         StitchTown(centerTown, Direction.FromId(worldData, 1L), northTown)
         StitchTown(centerTown, Direction.FromId(worldData, 2L), eastTown)
         StitchTown(centerTown, Direction.FromId(worldData, 3L), southTown)
-        StitchTown(centerTown, Direction.FromId(worldData, West), westTown)
+        StitchTown(centerTown, Direction.FromId(worldData, 4L), westTown)
 
         StitchTown(northWestTown, Direction.FromId(worldData, 2L), northTown)
         StitchTown(northWestTown, Direction.FromId(worldData, 3L), westTown)
@@ -234,11 +234,11 @@ Public Module World
         StitchTown(southWestTown, Direction.FromId(worldData, 2L), southTown)
         StitchTown(southWestTown, Direction.FromId(worldData, 1L), westTown)
 
-        StitchTown(northEastTown, Direction.FromId(worldData, West), northTown)
+        StitchTown(northEastTown, Direction.FromId(worldData, 4L), northTown)
         StitchTown(northEastTown, Direction.FromId(worldData, 3L), eastTown)
 
         StitchTown(southEastTown, Direction.FromId(worldData, 1L), eastTown)
-        StitchTown(southEastTown, Direction.FromId(worldData, West), southTown)
+        StitchTown(southEastTown, Direction.FromId(worldData, 4L), southTown)
 
         CreateChurchEntrance(worldData)
     End Sub

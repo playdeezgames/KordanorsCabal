@@ -34,7 +34,7 @@ Friend Class MapProcessor
         Dim northExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 1L))
         Dim eastExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 2L))
         Dim southExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 3L))
-        Dim westExit = location.HasRoute(Direction.FromId(StaticWorldData.World, West))
+        Dim westExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 4L))
         'upper left
         buffer.PutCell(xy,
                        If(northExit AndAlso westExit, Pattern.ElbowUpLeft,
