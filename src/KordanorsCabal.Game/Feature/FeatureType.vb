@@ -1,5 +1,5 @@
 ﻿Public Class FeatureType
-    ReadOnly Property Id As Long
+    Inherits BaseThingie
     ReadOnly Property Name As String
         Get
             Return StaticWorldData.World.FeatureType.ReadName(Id)
@@ -15,7 +15,7 @@
             Return CType(StaticWorldData.World.FeatureType.ReadInteractionMode(Id).Value, PlayerMode)
         End Get
     End Property
-    Sub New(featureTypeId As Long)
-        Me.Id = featureTypeId
+    Sub New(worldData As WorldData, featureTypeId As Long)
+        MyBase.New(worldData, featureTypeId)
     End Sub
 End Class

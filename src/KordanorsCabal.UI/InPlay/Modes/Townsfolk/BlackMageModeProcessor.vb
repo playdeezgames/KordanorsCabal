@@ -1,4 +1,6 @@
-﻿Friend Class BlackMageModeProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class BlackMageModeProcessor
     Inherits ModeProcessor
 
     Const WelcomeButtonIndex = 0
@@ -50,7 +52,7 @@
                 ShoppeProcessor(Of (ItemType, Long)).ShoppeType = Game.ShoppeType.BlackMage
                 Return UIState.ShoppeBuy
             Case RestoreButtonIndex
-                player.EnqueueMessage($"{New FeatureType(6L).Name} sparks up his {ItemType.Bong.Name} and gives you a hit of {ItemType.Herb.Name}.")
+                player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {ItemType.Bong.Name} and gives you a hit of {ItemType.Herb.Name}.")
                 player.CurrentMana = player.MaximumMana
                 PushUIState(UIState.InPlay)
                 Return UIState.Message

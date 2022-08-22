@@ -1,4 +1,6 @@
-﻿Friend Class TownDrunkModeProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class TownDrunkModeProcessor
     Inherits ModeProcessor
 
     Const WelcomeButtonIndex = 0
@@ -38,7 +40,7 @@
     End Function
 
     Private Function GiveBeer(player As Character) As UIState
-        player.EnqueueMessage($"You give {ItemType.Beer.Name} to {New FeatureType(3L).Name}.", $"{New FeatureType(3L).Name} drinks it all in one swallow, burps, and hands you {ItemType.Bottle.Name}.")
+        player.EnqueueMessage($"You give {ItemType.Beer.Name} to {New FeatureType(StaticWorldData.World, 3L).Name}.", $"{New FeatureType(StaticWorldData.World, 3L).Name} drinks it all in one swallow, burps, and hands you {ItemType.Bottle.Name}.")
         player.Inventory.ItemsOfType(ItemType.Beer).First.Destroy()
         player.Inventory.Add(Item.Create(ItemType.Bottle))
         PushUIState(UIState.InPlay)

@@ -312,7 +312,7 @@ Public Module World
     End Function
     Public ReadOnly Property AllFeatureTypes(worldData As WorldData) As IEnumerable(Of FeatureType)
         Get
-            Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(x))
+            Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(worldData, x))
         End Get
     End Property
     Friend ReadOnly Property AllDungeonLevels(worldData As WorldData) As IReadOnlyList(Of DungeonLevel)

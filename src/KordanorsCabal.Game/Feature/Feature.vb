@@ -13,7 +13,7 @@
 
     ReadOnly Property FeatureType As FeatureType
         Get
-            Return New FeatureType(WorldData.Feature.ReadFeatureType(Id).Value)
+            Return New FeatureType(WorldData, WorldData.Feature.ReadFeatureType(Id).Value)
         End Get
     End Property
 

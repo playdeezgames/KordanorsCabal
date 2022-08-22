@@ -1,4 +1,5 @@
-﻿Imports SPLORR.Game
+﻿Imports KordanorsCabal.Data
+Imports SPLORR.Game
 
 Friend Class ChickenModeProcessor
     Inherits ModeProcessor
@@ -46,14 +47,14 @@ Friend Class ChickenModeProcessor
         If RNG.FromRange(0, 5) = 0 Then
             Select Case itemType
                 Case ItemType.Food
-                    player.EnqueueMessage($"{New FeatureType(4L).Name} eats the food and then a {ItemType.MagicEgg.Name} pops out!")
+                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {ItemType.MagicEgg.Name} pops out!")
                     player.Inventory.Add(Item.Create(ItemType.MagicEgg))
                 Case ItemType.RottenFood
-                    player.EnqueueMessage($"{New FeatureType(4L).Name} eats the rotten food and then a {ItemType.RottenEgg.Name} pops out!")
+                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {ItemType.RottenEgg.Name} pops out!")
                     player.Inventory.Add(Item.Create(ItemType.RottenEgg))
             End Select
         Else
-            player.EnqueueMessage($"{New FeatureType(4L).Name} eats the food, and gives a satified ""moo"" in return.")
+            player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food, and gives a satified ""moo"" in return.")
         End If
         PushUIState(UIState.InPlay)
         Return UIState.Message
