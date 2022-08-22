@@ -104,8 +104,8 @@ Public MustInherit Class ModeProcessor
             buffer.PutCell((14, 17), Pattern.DownwardDiagonal, False, Hue.Black)
         End If
 
-        If location.HasRoute(Direction.FromId(StaticWorldData.World, Outward)) Then
-            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(StaticWorldData.World, Outward)).RouteType.Sprite)
+        If location.HasRoute(Direction.FromId(StaticWorldData.World, 8L)) Then
+            ShowSprite(buffer, (5, 5), location.Routes(Direction.FromId(StaticWorldData.World, 8L)).RouteType.Sprite)
         End If
 
         If location.HasRoute(Direction.FromId(StaticWorldData.World, 7L)) Then
