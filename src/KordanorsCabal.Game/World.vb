@@ -105,7 +105,7 @@ Public Module World
         PopulateLocations(locations, bossKeyType, bossRouteType, dungeonLevel)
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount > 1))
         Route.Create(fromLocation, Direction.FromId(worldData, Down), RouteType.Stairs, startingLocation)
-        Route.Create(startingLocation, Direction.FromId(worldData, Up), RouteType.Stairs, fromLocation)
+        Route.Create(startingLocation, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
         PopulateCharacters(locations, dungeonLevel)
         Return locations.Single(Function(x) x.LocationType = LocationType.FromId(StaticWorldData.World, 6L))
     End Function
@@ -200,7 +200,7 @@ Public Module World
     Private Sub CreateCellar(worldData As WorldData, fromLocation As Location)
         Dim cellar = Location.Create(worldData, LocationType.FromId(worldData, 7L))
         Route.Create(fromLocation, Direction.FromId(worldData, Down), RouteType.Stairs, cellar)
-        Route.Create(cellar, Direction.FromId(worldData, Up), RouteType.Stairs, fromLocation)
+        Route.Create(cellar, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
     End Sub
 
     Private Sub CreatePlayer(worldData As WorldData)
