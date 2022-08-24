@@ -1,4 +1,5 @@
-﻿Imports SPLORR.Data
+﻿Imports KordanorsCabal.Data
+Imports SPLORR.Data
 
 Friend Class LoadGameScreenProcessor
     Inherits MenuProcessor
@@ -19,8 +20,8 @@ Friend Class LoadGameScreenProcessor
     End Sub
 
     Private Shared Function ContinueSlot(slotNumber As Integer) As UIState
-        StaticStore.Store.Load(SaveSlotName(slotNumber))
-        If World.IsValid Then
+        StaticWorldData.World.Load(SaveSlotName(slotNumber))
+        If Game.World.IsValid Then
             Return UIState.InPlay
         End If
         Return TitleScreenProcessor.StartGame()
@@ -43,8 +44,8 @@ Friend Class LoadGameScreenProcessor
     End Sub
 
     Private Sub ValidateSlot(slotNumber As Integer)
-        StaticStore.Store.Load(SaveSlotName(slotNumber))
-        If World.IsValid Then
+        StaticWorldData.World.Load(SaveSlotName(slotNumber))
+        If Game.World.IsValid Then
             UpdateMenuItemText(slotNumber, $"Slot {slotNumber}")
         Else
             UpdateMenuItemText(slotNumber, "(empty)")

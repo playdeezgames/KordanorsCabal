@@ -1,4 +1,7 @@
-﻿Public Class WorldData
+﻿Imports Microsoft.Data.Sqlite
+
+Public Class WorldData
+    Private ReadOnly Store As Store
     Public ReadOnly Character As CharacterData
     Public ReadOnly CharacterEquipSlot As CharacterEquipSlotData
     Public ReadOnly CharacterLocation As CharacterLocationData
@@ -14,7 +17,6 @@
     Public ReadOnly CharacterTypeInitialStatistic As CharacterTypeInitialStatisticData
     Public ReadOnly CharacterTypeLoot As CharacterTypeLootData
     Public ReadOnly CharacterTypePartingShot As CharacterTypePartingShotData
-    Public ReadOnly CharacterTypeSpawnCount As CharacterTypeSpawnCountData
     Public ReadOnly CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData
     Public ReadOnly Direction As DirectionData
     Public ReadOnly DungeonLevel As DungeonLevelData
@@ -33,6 +35,7 @@
     Public ReadOnly Route As RouteData
 
     Public Sub New(store As Store)
+        Me.Store = store
         Character = New CharacterData(store, Me)
         CharacterEquipSlot = New CharacterEquipSlotData(store, Me)
         CharacterLocation = New CharacterLocationData(store, Me)
@@ -65,5 +68,27 @@
         LocationStatistic = New LocationStatisticData(store, Me)
         Player = New PlayerData(store, Me)
         Route = New RouteData(store, Me)
+    End Sub
+
+    Public Sub Save(filename As String)
+        Store.Save(filename)
+    End Sub
+
+    Public Sub Load(filename As String)
+        Store.Load(filename)
+    End Sub
+
+    Public Sub Reset()
+        Store.Reset()
+    End Sub
+
+    Public Function Renew() As Microsoft.Data.Sqlite.SqliteConnection
+        Return Store.Renew()
+    End Function
+
+    Public ReadOnly CharacterTypeSpawnCount As CharacterTypeSpawnCountData
+
+    Public Sub Restore(oldConnection As SqliteConnection)
+        Store.Restore(oldConnection)
     End Sub
 End Class

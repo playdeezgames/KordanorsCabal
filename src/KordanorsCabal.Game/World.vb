@@ -1,6 +1,6 @@
 Public Module World
     Public Sub Start(worldData As WorldData)
-        StaticStore.Store.Reset()
+        worldData.Reset()
         CreateTown(worldData)
         CreateDungeon(worldData, Location.FromLocationType(worldData, LocationType.FromId(worldData, 3L)).First)
         CreateMoon(worldData)

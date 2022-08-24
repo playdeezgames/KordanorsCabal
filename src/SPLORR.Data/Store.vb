@@ -51,7 +51,7 @@ Public Class Store
         Next
         Return command
     End Function
-    Private Function MakeParameter(Of TParameter)(name As String, value As TParameter) As SqliteParameter
+    Private Shared Function MakeParameter(Of TParameter)(name As String, value As TParameter) As SqliteParameter
         Return New SqliteParameter(name, value)
     End Function
     Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As SqliteParameter)

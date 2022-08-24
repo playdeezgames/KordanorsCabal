@@ -18,7 +18,7 @@ Friend Class DeadProcessor
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
         Select Case command
             Case Command.Green, Command.Blue
-                StaticStore.Store.Reset()
+                StaticWorldData.World.Reset()
                 Return UIState.TitleScreen
             Case Else
                 Return UIState.Dead
