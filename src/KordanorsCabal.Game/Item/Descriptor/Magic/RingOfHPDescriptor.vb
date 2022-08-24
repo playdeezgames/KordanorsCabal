@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             ItemType.RingOfHP,
-            "Ring Of HP",,,, MakeList(EquipSlot.FromId(7L), EquipSlot.FromId(8L)),
+            "Ring Of HP",,,, MakeList(EquipSlot.FromId(StaticWorldData.World, 7L), EquipSlot.FromId(StaticWorldData.World, 8L)),
             New Dictionary(Of Long, Long) From {{6, 1}})
     End Sub
 End Class

@@ -4,12 +4,12 @@
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const CharacterTypeColumn = "CharacterType"
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
 
     Friend Sub Initialize()
-        StaticWorldData.World.Location.Initialize()
+        World.Location.Initialize()
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}]
         (
             [{CharacterIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,14 +59,14 @@
     End Function
 
     Public Sub Clear(characterId As Long)
-        StaticWorldData.World.CharacterQuest.ClearForCharacter(characterId)
-        StaticWorldData.World.CharacterQuestCompletion.ClearForCharacter(characterId)
-        StaticWorldData.World.CharacterEquipSlot.ClearForCharacter(characterId)
-        StaticWorldData.World.Inventory.ClearForCharacter(characterId)
-        StaticWorldData.World.CharacterLocation.ClearForCharacter(characterId)
-        StaticWorldData.World.CharacterStatistic.ClearForCharacter(characterId)
-        StaticWorldData.World.Player.ClearForCharacter(characterId)
-        StaticWorldData.World.CharacterSpell.ClearForCharacter(characterId)
+        World.CharacterQuest.ClearForCharacter(characterId)
+        World.CharacterQuestCompletion.ClearForCharacter(characterId)
+        World.CharacterEquipSlot.ClearForCharacter(characterId)
+        World.Inventory.ClearForCharacter(characterId)
+        World.CharacterLocation.ClearForCharacter(characterId)
+        World.CharacterStatistic.ClearForCharacter(characterId)
+        World.Player.ClearForCharacter(characterId)
+        World.CharacterSpell.ClearForCharacter(characterId)
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,

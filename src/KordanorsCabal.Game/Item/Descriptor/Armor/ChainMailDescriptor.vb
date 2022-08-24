@@ -13,7 +13,7 @@
                 (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L))),
                 (5L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L)))),
             MakeDictionary((1L, "1d6")),
-            MakeList(EquipSlot.FromId(4L)),,,,
+            MakeList(EquipSlot.FromId(StaticWorldData.World, 4L)),,,,
             2,
             25,,
             10,

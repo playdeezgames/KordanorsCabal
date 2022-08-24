@@ -15,7 +15,7 @@
             MakeDictionary(
                 (2L, "2d6"),
                 (3L, "1d6")),
-                MakeList(EquipSlot.FromId(1L)),,
+                MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
                 6,
                 3,,
                 40,,

@@ -6,7 +6,7 @@
             ItemType.Bottle,
             "Empty Bottle",
             1,,,
-            MakeList(EquipSlot.FromId(1L)), ,
+            MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)), ,
             2,
             1,,
             3,,,,,,,,,

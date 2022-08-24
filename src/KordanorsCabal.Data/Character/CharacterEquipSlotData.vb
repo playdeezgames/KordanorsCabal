@@ -5,13 +5,13 @@
     Friend Const EquipSlotColumn = "EquipSlot"
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
 
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
 
     Friend Sub Initialize()
-        StaticWorldData.World.Character.Initialize()
-        StaticWorldData.World.Item.Initialize()
+        World.Character.Initialize()
+        World.Item.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

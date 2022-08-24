@@ -7,12 +7,12 @@
     Friend Const RouteTypeColumn = "RouteType"
     Friend Const ToLocationIdColumn = "To" + LocationData.LocationIdColumn
 
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
 
     Friend Sub Initialize()
-        StaticWorldData.World.Location.Initialize()
+        World.Location.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

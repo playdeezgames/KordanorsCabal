@@ -10,7 +10,7 @@
                 (6L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 8L)))),
             MakeDictionary(
                 (6L, "1d1")),
-            MakeList(EquipSlot.FromId(1L)),,
+            MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             10,
             5,,
             100)

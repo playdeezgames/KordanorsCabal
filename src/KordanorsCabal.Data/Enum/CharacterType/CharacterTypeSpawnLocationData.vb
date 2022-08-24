@@ -99,8 +99,8 @@
                 FROM [cte];")
     End Sub
 
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
 
     Public Function Read(characterTypeId As Long, dungeonLevel As Long, locationType As Long) As Boolean

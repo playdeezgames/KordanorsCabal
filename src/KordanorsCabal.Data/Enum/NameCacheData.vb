@@ -1,7 +1,7 @@
 ﻿Public MustInherit Class NameCacheData
     Inherits BaseData
-    Protected Sub New(store As Store)
-        MyBase.New(store)
+    Protected Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
     Private ReadOnly nameLookUp As New Dictionary(Of String, Long)
     Protected lookUpByName As Func(Of String, Long?)

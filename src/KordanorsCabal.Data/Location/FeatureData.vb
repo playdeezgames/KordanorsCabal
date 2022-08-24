@@ -5,8 +5,8 @@
     Friend Const FeatureTypeColumn = "FeatureType"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
 
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
 
     Friend Sub Initialize()

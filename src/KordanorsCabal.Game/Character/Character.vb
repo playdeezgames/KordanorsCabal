@@ -371,7 +371,7 @@
     End Property
     ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot)
         Get
-            Return WorldData.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(x))
+            Return WorldData.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(WorldData, x))
         End Get
     End Property
     Friend Function AddXP(xp As Long) As Boolean
@@ -592,7 +592,7 @@
     End Property
     Public Property Direction As Direction
         Get
-            Return New Direction(StaticWorldData.World, WorldData.Player.ReadDirection().Value)
+            Return New Direction(WorldData, WorldData.Player.ReadDirection().Value)
         End Get
         Set(value As Direction)
             WorldData.Player.WriteDirection(value.Id)
@@ -762,7 +762,7 @@
     End Function
     Public Sub Run()
         If CanFight Then
-            Direction = RNG.FromEnumerable(CardinalDirections(StaticWorldData.World))
+            Direction = RNG.FromEnumerable(CardinalDirections(WorldData))
             If CanMove(Direction) Then
                 EnqueueMessage("You successfully ran!") 'TODO: sfx
                 Move(Direction)

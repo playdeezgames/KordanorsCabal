@@ -56,8 +56,8 @@
             (LocationTypeIdColumn, locationTypeId)), 0) > 0
     End Function
 
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
         lookUpByName = Function(name) store.ReadColumnValue(Of String, Long)(
             AddressOf Initialize,
             TableName,

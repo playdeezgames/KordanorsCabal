@@ -4,8 +4,8 @@
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeColumn = "ItemType"
 
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
 
     Friend Sub Initialize()
@@ -32,9 +32,9 @@
     End Function
 
     Public Sub Clear(itemId As Long)
-        StaticWorldData.World.CharacterEquipSlot.ClearForItem(itemId)
-        StaticWorldData.World.InventoryItem.ClearForItem(itemId)
-        StaticWorldData.World.ItemStatistic.ClearForItem(itemId)
+        World.CharacterEquipSlot.ClearForItem(itemId)
+        World.InventoryItem.ClearForItem(itemId)
+        World.ItemStatistic.ClearForItem(itemId)
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,

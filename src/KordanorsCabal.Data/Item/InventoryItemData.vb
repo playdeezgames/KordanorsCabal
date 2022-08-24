@@ -4,13 +4,13 @@
     Friend Const InventoryIdColumn = InventoryData.InventoryIdColumn
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
 
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
 
     Friend Sub Initialize()
-        StaticWorldData.World.Item.Initialize()
-        StaticWorldData.World.Inventory.Initialize()
+        World.Item.Initialize()
+        World.Inventory.Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

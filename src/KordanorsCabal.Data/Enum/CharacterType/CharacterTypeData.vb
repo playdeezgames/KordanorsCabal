@@ -58,8 +58,8 @@
             (CharacterTypeIdColumn, characterTypeId))
     End Function
 
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
 
     Public Function ReadMoneyDropDice(characterTypeId As Long) As String

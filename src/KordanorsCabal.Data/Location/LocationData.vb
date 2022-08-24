@@ -4,8 +4,8 @@
     Public Const LocationIdColumn = "LocationId"
     Friend Const LocationTypeColumn = "LocationType"
 
-    Public Sub New(store As Store)
-        MyBase.New(store)
+    Public Sub New(store As Store, world As WorldData)
+        MyBase.New(store, world)
     End Sub
 
     Public Sub Initialize()
