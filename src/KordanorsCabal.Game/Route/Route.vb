@@ -1,29 +1,29 @@
 ﻿Public Class Route
-    Public ReadOnly Id As Long
-    Public Sub New(routeId As Long)
-        Id = routeId
+    Inherits BaseThingie
+    Public Sub New(worldData As WorldData, routeId As Long)
+        MyBase.New(worldData, routeId)
     End Sub
-    Public Shared Function FromId(routeId As Long?) As Route
-        Return If(routeId.HasValue, New Route(routeId.Value), Nothing)
+    Public Shared Function FromId(worldData As WorldData, routeId As Long?) As Route
+        Return If(routeId.HasValue, New Route(worldData, routeId.Value), Nothing)
     End Function
-    Public Shared Function Create(location As Location, direction As Direction, routeType As RouteType, toLocation As Location) As Route
-        Return FromId(StaticWorldData.World.Route.Create(location.Id, direction.Id, routeType, toLocation.Id))
+    Public Shared Function Create(worldData As WorldData, location As Location, direction As Direction, routeType As RouteType, toLocation As Location) As Route
+        Return FromId(worldData, worldData.Route.Create(location.Id, direction.Id, routeType, toLocation.Id))
     End Function
     Friend ReadOnly Property ToLocation As Location
         Get
-            Return Location.FromId(StaticWorldData.World, StaticWorldData.World.Route.ReadToLocation(Id))
+            Return Location.FromId(WorldData, WorldData.Route.ReadToLocation(Id))
         End Get
     End Property
     Property RouteType As RouteType
         Get
-            Return CType(StaticWorldData.World.Route.ReadRouteType(Id), RouteType)
+            Return CType(WorldData.Route.ReadRouteType(Id), RouteType)
         End Get
         Set(value As RouteType)
-            StaticWorldData.World.Route.WriteRouteType(Id, value)
+            WorldData.Route.WriteRouteType(Id, value)
         End Set
     End Property
     Friend Sub Destroy()
-        StaticWorldData.World.Route.Clear(Id)
+        WorldData.Route.Clear(Id)
     End Sub
     ReadOnly Property IsLocked As Boolean
         Get

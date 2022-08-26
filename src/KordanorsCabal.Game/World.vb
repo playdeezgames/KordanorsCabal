@@ -30,10 +30,10 @@ Public Module World
                 Dim southLocation = locations(CInt(column + ((row + 1) Mod MoonRows) * MoonColumns))
                 Dim eastLocation = locations(CInt(((column + 1) Mod MoonColumns) + row * MoonColumns))
                 Dim westLocation = locations(CInt(((column + MoonColumns - 1) Mod MoonColumns) + row * MoonColumns))
-                Route.Create(moonLocation, north, RouteType.MoonPath, northLocation)
-                Route.Create(moonLocation, south, RouteType.MoonPath, southLocation)
-                Route.Create(moonLocation, east, RouteType.MoonPath, eastLocation)
-                Route.Create(moonLocation, west, RouteType.MoonPath, westLocation)
+                Route.Create(StaticWorldData.World, moonLocation, north, RouteType.MoonPath, northLocation)
+                Route.Create(StaticWorldData.World, moonLocation, south, RouteType.MoonPath, southLocation)
+                Route.Create(StaticWorldData.World, moonLocation, east, RouteType.MoonPath, eastLocation)
+                Route.Create(StaticWorldData.World, moonLocation, west, RouteType.MoonPath, westLocation)
             Next
         Next
         PopulateCharacters(worldData, locations, DungeonLevel.FromId(worldData, 6L))
@@ -90,7 +90,7 @@ Public Module World
                         Dim nextColumn = MazeDirections(direction).DeltaX + column
                         Dim nextRow = MazeDirections(direction).DeltaY + row
                         Dim nextLocation = locations(CInt(nextColumn + nextRow * maze.Columns))
-                        Route.Create(dungeonLocation, Game.Direction.FromId(worldData, direction), RouteType.Passageway, nextLocation)
+                        Route.Create(StaticWorldData.World, dungeonLocation, Game.Direction.FromId(worldData, direction), RouteType.Passageway, nextLocation)
                     End If
                 Next
             Next
@@ -104,8 +104,8 @@ Public Module World
         Dim locations = CreateLocations(worldData, maze, dungeonLevel)
         PopulateLocations(worldData, locations, bossKeyType, bossRouteType, dungeonLevel)
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount > 1))
-        Route.Create(fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, startingLocation)
-        Route.Create(startingLocation, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
+        Route.Create(StaticWorldData.World, fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, startingLocation)
+        Route.Create(StaticWorldData.World, startingLocation, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
         PopulateCharacters(worldData, locations, dungeonLevel)
         Return locations.Single(Function(x) x.LocationType = LocationType.FromId(worldData, 6L))
     End Function
@@ -199,8 +199,8 @@ Public Module World
 
     Private Sub CreateCellar(worldData As WorldData, fromLocation As Location)
         Dim cellar = Location.Create(worldData, LocationType.FromId(worldData, 7L))
-        Route.Create(fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, cellar)
-        Route.Create(cellar, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
+        Route.Create(StaticWorldData.World, fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, cellar)
+        Route.Create(StaticWorldData.World, cellar, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
     End Sub
 
     Private Sub CreatePlayer(worldData As WorldData)
@@ -251,8 +251,8 @@ Public Module World
     End Sub
 
     Private Sub StitchTown(fromLocation As Location, direction As Direction, toLocation As Location)
-        Route.Create(fromLocation, direction, RouteType.Road, toLocation)
-        Route.Create(toLocation, direction.Opposite, RouteType.Road, fromLocation)
+        Route.Create(StaticWorldData.World, fromLocation, direction, RouteType.Road, toLocation)
+        Route.Create(StaticWorldData.World, toLocation, direction.Opposite, RouteType.Road, fromLocation)
     End Sub
 
     Private Sub RollUpPlayerCharacter(worldData As WorldData)

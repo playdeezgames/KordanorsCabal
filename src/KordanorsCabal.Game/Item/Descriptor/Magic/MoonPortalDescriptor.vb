@@ -15,8 +15,8 @@
                 location.DestroyRoute(outDirection)
                 Dim destination = RNG.FromEnumerable(Game.Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 8L)))
                 destination.DestroyRoute(inDirection)
-                Route.Create(location, outDirection, RouteType.Portal, destination)
-                Route.Create(destination, inDirection, RouteType.Portal, location)
+                Route.Create(StaticWorldData.World, location, outDirection, RouteType.Portal, destination)
+                Route.Create(StaticWorldData.World, destination, inDirection, RouteType.Portal, location)
                 character.EnqueueMessage("A portal opens before you!")
             End Sub)
     End Sub
