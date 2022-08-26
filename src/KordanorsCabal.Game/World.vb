@@ -30,14 +30,14 @@ Public Module World
                 Dim southLocation = locations(CInt(column + ((row + 1) Mod MoonRows) * MoonColumns))
                 Dim eastLocation = locations(CInt(((column + 1) Mod MoonColumns) + row * MoonColumns))
                 Dim westLocation = locations(CInt(((column + MoonColumns - 1) Mod MoonColumns) + row * MoonColumns))
-                Route.Create(StaticWorldData.World, moonLocation, north, RouteType.MoonPath, northLocation)
-                Route.Create(StaticWorldData.World, moonLocation, south, RouteType.MoonPath, southLocation)
-                Route.Create(StaticWorldData.World, moonLocation, east, RouteType.MoonPath, eastLocation)
-                Route.Create(StaticWorldData.World, moonLocation, west, RouteType.MoonPath, westLocation)
+                Route.Create(worldData, moonLocation, north, RouteType.MoonPath, northLocation)
+                Route.Create(worldData, moonLocation, south, RouteType.MoonPath, southLocation)
+                Route.Create(worldData, moonLocation, east, RouteType.MoonPath, eastLocation)
+                Route.Create(worldData, moonLocation, west, RouteType.MoonPath, westLocation)
             Next
         Next
         PopulateCharacters(worldData, locations, DungeonLevel.FromId(worldData, 6L))
-        PopulateItems(locations, DungeonLevel.FromId(worldData, 6L))
+        PopulateItems(worldData, locations, DungeonLevel.FromId(worldData, 6L))
     End Sub
 
     Private Sub CreateDungeon(worldData As WorldData, location As Location)
@@ -104,8 +104,8 @@ Public Module World
         Dim locations = CreateLocations(worldData, maze, dungeonLevel)
         PopulateLocations(worldData, locations, bossKeyType, bossRouteType, dungeonLevel)
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount > 1))
-        Route.Create(StaticWorldData.World, fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, startingLocation)
-        Route.Create(StaticWorldData.World, startingLocation, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
+        Route.Create(worldData, fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, startingLocation)
+        Route.Create(worldData, startingLocation, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
         PopulateCharacters(worldData, locations, dungeonLevel)
         Return locations.Single(Function(x) x.LocationType = LocationType.FromId(worldData, 6L))
     End Function
@@ -151,25 +151,25 @@ Public Module World
         partitions(deadEndId).Remove(bossLocation)
         partitions.Add(dungeonBossId, New List(Of Location) From {bossLocation})
         For Each itemType In itemTypes
-            SpawnItem(locations, dungeonLevel, itemType)
+            SpawnItem(worldData, locations, dungeonLevel, itemType)
         Next
-        PopulateItems(locations, dungeonLevel)
+        PopulateItems(worldData, locations, dungeonLevel)
     End Sub
 
-    Private Sub SpawnItem(locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel, itemType As ItemType)
+    Private Sub SpawnItem(worldData As WorldData, locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel, itemType As ItemType)
         Dim locationTypes = itemType.SpawnLocationTypes(dungeonLevel.Id)
         If locationTypes.Any Then
             Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Select(Function(y) y.Id).Contains(x.LocationType.Id)))
-            spawnLocation.Inventory.Add(Item.Create(StaticWorldData.World, itemType))
+            spawnLocation.Inventory.Add(Item.Create(worldData, itemType))
         End If
     End Sub
 
-    Private Sub PopulateItems(locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel)
+    Private Sub PopulateItems(worldData As WorldData, locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel)
         For Each itemType In AllItemTypes
             Dim itemCount As Long = itemType.RollSpawnCount(dungeonLevel.Id)
             While itemCount > 0
                 itemCount -= 1
-                SpawnItem(locations, dungeonLevel, itemType)
+                SpawnItem(worldData, locations, dungeonLevel, itemType)
             End While
         Next
     End Sub
@@ -199,8 +199,8 @@ Public Module World
 
     Private Sub CreateCellar(worldData As WorldData, fromLocation As Location)
         Dim cellar = Location.Create(worldData, LocationType.FromId(worldData, 7L))
-        Route.Create(StaticWorldData.World, fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, cellar)
-        Route.Create(StaticWorldData.World, cellar, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
+        Route.Create(worldData, fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, cellar)
+        Route.Create(worldData, cellar, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
     End Sub
 
     Private Sub CreatePlayer(worldData As WorldData)
@@ -223,22 +223,22 @@ Public Module World
         Dim westTown = Location.Create(worldData, townLocationType)
         Dim northWestTown = Location.Create(worldData, townLocationType)
 
-        StitchTown(centerTown, Direction.FromId(worldData, 1L), northTown)
-        StitchTown(centerTown, Direction.FromId(worldData, 2L), eastTown)
-        StitchTown(centerTown, Direction.FromId(worldData, 3L), southTown)
-        StitchTown(centerTown, Direction.FromId(worldData, 4L), westTown)
+        StitchTown(worldData, centerTown, Direction.FromId(worldData, 1L), northTown)
+        StitchTown(worldData, centerTown, Direction.FromId(worldData, 2L), eastTown)
+        StitchTown(worldData, centerTown, Direction.FromId(worldData, 3L), southTown)
+        StitchTown(worldData, centerTown, Direction.FromId(worldData, 4L), westTown)
 
-        StitchTown(northWestTown, Direction.FromId(worldData, 2L), northTown)
-        StitchTown(northWestTown, Direction.FromId(worldData, 3L), westTown)
+        StitchTown(worldData, northWestTown, Direction.FromId(worldData, 2L), northTown)
+        StitchTown(worldData, northWestTown, Direction.FromId(worldData, 3L), westTown)
 
-        StitchTown(southWestTown, Direction.FromId(worldData, 2L), southTown)
-        StitchTown(southWestTown, Direction.FromId(worldData, 1L), westTown)
+        StitchTown(worldData, southWestTown, Direction.FromId(worldData, 2L), southTown)
+        StitchTown(worldData, southWestTown, Direction.FromId(worldData, 1L), westTown)
 
-        StitchTown(northEastTown, Direction.FromId(worldData, 4L), northTown)
-        StitchTown(northEastTown, Direction.FromId(worldData, 3L), eastTown)
+        StitchTown(worldData, northEastTown, Direction.FromId(worldData, 4L), northTown)
+        StitchTown(worldData, northEastTown, Direction.FromId(worldData, 3L), eastTown)
 
-        StitchTown(southEastTown, Direction.FromId(worldData, 1L), eastTown)
-        StitchTown(southEastTown, Direction.FromId(worldData, 4L), southTown)
+        StitchTown(worldData, southEastTown, Direction.FromId(worldData, 1L), eastTown)
+        StitchTown(worldData, southEastTown, Direction.FromId(worldData, 4L), southTown)
 
         CreateChurchEntrance(worldData)
     End Sub
@@ -247,12 +247,12 @@ Public Module World
         Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(worldData, LocationType.FromId(worldData, 2L)))
         Dim entrance = Location.Create(worldData, LocationType.FromId(worldData, 3L))
         Dim direction = RNG.FromEnumerable(AllDirections(worldData).Where(Function(x) x.IsCardinal AndAlso Not townLocation.HasRoute(x)))
-        StitchTown(townLocation, direction, entrance)
+        StitchTown(worldData, townLocation, direction, entrance)
     End Sub
 
-    Private Sub StitchTown(fromLocation As Location, direction As Direction, toLocation As Location)
-        Route.Create(StaticWorldData.World, fromLocation, direction, RouteType.Road, toLocation)
-        Route.Create(StaticWorldData.World, toLocation, direction.Opposite, RouteType.Road, fromLocation)
+    Private Sub StitchTown(worldData As WorldData, fromLocation As Location, direction As Direction, toLocation As Location)
+        Route.Create(worldData, fromLocation, direction, RouteType.Road, toLocation)
+        Route.Create(worldData, toLocation, direction.Opposite, RouteType.Road, fromLocation)
     End Sub
 
     Private Sub RollUpPlayerCharacter(worldData As WorldData)
