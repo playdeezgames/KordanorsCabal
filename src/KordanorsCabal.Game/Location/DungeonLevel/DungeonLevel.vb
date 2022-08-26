@@ -2,7 +2,7 @@
     Inherits BaseThingie
     ReadOnly Property Name As String
         Get
-            Return StaticWorldData.World.DungeonLevel.ReadName(Id)
+            Return WorldData.DungeonLevel.ReadName(Id)
         End Get
     End Property
     Sub New(worldData As WorldData, dungeonLevelId As Long)
