@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.BrodeSode,
-            "BrodeSode",
             10,
             MakeDictionary(
                 (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L))),

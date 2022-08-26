@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.Helmet,
-            "Helmet",
             2,
             MakeDictionary(
                 (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L), LocationType.FromId(StaticWorldData.World, 5L))),

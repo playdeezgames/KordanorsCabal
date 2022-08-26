@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.Lotion,
-            "Lotion",
             2,,,,,,,,
             5,,,,
             25,

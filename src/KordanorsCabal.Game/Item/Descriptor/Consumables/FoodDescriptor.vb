@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Food,
-            "Food",,,,,,,,,,,,,
+            ItemType.Food,,,,,,,,,,,,,
             2,
             MakeList(ShoppeType.InnKeeper),,,,
             Function(character) True,

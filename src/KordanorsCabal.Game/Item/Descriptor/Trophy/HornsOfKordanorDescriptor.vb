@@ -4,7 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.HornsOfKordanor,
-            "Horns of Kordanor")
+            ItemType.HornsOfKordanor)
     End Sub
 End Class

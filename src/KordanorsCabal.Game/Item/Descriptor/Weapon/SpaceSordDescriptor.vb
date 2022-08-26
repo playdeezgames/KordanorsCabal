@@ -5,8 +5,7 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.SpaceSord,
-            "SpaceSord",
-                   5,
+            5,
             MakeDictionary(
                 (6L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 8L)))),
             MakeDictionary(

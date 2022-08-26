@@ -27,6 +27,7 @@ Public Class WorldData
     Public ReadOnly InventoryItem As InventoryItemData
     Public ReadOnly Item As ItemData
     Public ReadOnly ItemStatistic As ItemStatisticData
+    Public ReadOnly ItemType As ItemTypeData
     Public ReadOnly Location As LocationData
     Public ReadOnly LocationDungeonLevel As LocationDungeonLevelData
     Public ReadOnly LocationStatistic As LocationStatisticData
@@ -62,6 +63,7 @@ Public Class WorldData
         InventoryItem = New InventoryItemData(store, Me)
         Item = New ItemData(store, Me)
         ItemStatistic = New ItemStatisticData(store, Me)
+        ItemType = New ItemTypeData(store, Me)
         Location = New LocationData(store, Me)
         LocationType = New LocationTypeData(store, Me)
         LocationDungeonLevel = New LocationDungeonLevelData(store, Me)

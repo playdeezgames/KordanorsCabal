@@ -4,7 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.ElementalOrb,
-            "Elemental Orb")
+            ItemType.ElementalOrb)
     End Sub
 End Class

@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Herb,
-            """Herb""",,,,,,,,,,,,,
+            ItemType.Herb,,,,,,,,,,,,,
             5,
             MakeList(ShoppeType.BlackMage),,,,
             Function(character) character.Inventory.ItemsOfType(ItemType.Bong).Any,

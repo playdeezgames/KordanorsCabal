@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.IronKey,
-            "FE Key",,
+            ItemType.IronKey,,
             MakeDictionary(
                 (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L))),
                 (2L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L))),

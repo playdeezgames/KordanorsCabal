@@ -3,8 +3,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.FireShard,
-            "Fire Shard",,
+            ItemType.FireShard,,
             MakeDictionary(
                 (3L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 6L)))),
             MakeDictionary(

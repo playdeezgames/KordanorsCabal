@@ -4,7 +4,6 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.PlateMail,
-            "Platemail",
             40,
             MakeDictionary(
                 (2L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L))),

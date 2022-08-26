@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.RottenEgg,
-            "Rotten Egg",,,,,,,,,,,,,,,,,,
+            ItemType.RottenEgg,,,,,,,,,,,,,,,,,,
             Function(character)
                 Dim enemy = character.Location.Enemy(character)
                 Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.RottenEgg))

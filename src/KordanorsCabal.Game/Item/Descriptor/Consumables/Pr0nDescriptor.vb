@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Pr0n,
-            "Pr0n Scroll",,,,,,,,,,,,,
+            ItemType.Pr0n,,,,,,,,,,,,,
             10,
             MakeList(ShoppeType.BlackMarket),,,,
             Function(character)

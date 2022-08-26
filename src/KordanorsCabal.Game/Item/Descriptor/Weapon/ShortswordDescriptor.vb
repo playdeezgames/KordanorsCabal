@@ -5,8 +5,7 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.Shortsword,
-            "Shortsword",
-                   5,
+            5,
             MakeDictionary(
                 (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L))),
                 (2L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L))),

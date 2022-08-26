@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.Bottle,
-            "Empty Bottle",
             1,,,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)), ,
             2,

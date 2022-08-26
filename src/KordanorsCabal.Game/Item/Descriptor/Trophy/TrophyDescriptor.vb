@@ -2,7 +2,6 @@
     Inherits ItemTypeDescriptor
     Sub New(
            itemTypeId As Long,
-           name As String,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
@@ -12,6 +11,6 @@
            Optional purify As Action(Of Item) = Nothing,
            Optional canUse As Func(Of Character, Boolean) = Nothing,
            Optional use As Action(Of Character) = Nothing)
-        MyBase.New(StaticWorldData.World, itemTypeId, name, , , , , , , , , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purify, canUse, use)
+        MyBase.New(StaticWorldData.World, itemTypeId, , , , , , , , , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purify, canUse, use)
     End Sub
 End Class

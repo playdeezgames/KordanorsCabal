@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.WaterShard,
-            "Water Shard",,
+            ItemType.WaterShard,,
             MakeDictionary(
                 (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 6L)))),
             MakeDictionary(

@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.ChainMail,
-            "Chainmail",
             20,
             MakeDictionary(
                 (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L))),
