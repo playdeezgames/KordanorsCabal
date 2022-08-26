@@ -362,11 +362,11 @@
         CharacterType.DropLoot(Location)
     End Sub
     Function Equipment(equipSlot As EquipSlot) As Item
-        Return Item.FromId(WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
+        Return Item.FromId(WorldData, WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
     End Function
     ReadOnly Property EquippedItems As IEnumerable(Of Item)
         Get
-            Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(x))
+            Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
         End Get
     End Property
     ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot)

@@ -160,7 +160,7 @@ Public Module World
         Dim locationTypes = itemType.SpawnLocationTypes(dungeonLevel.Id)
         If locationTypes.Any Then
             Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Select(Function(y) y.Id).Contains(x.LocationType.Id)))
-            spawnLocation.Inventory.Add(Item.Create(itemType))
+            spawnLocation.Inventory.Add(Item.Create(StaticWorldData.World, itemType))
         End If
     End Sub
 

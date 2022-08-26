@@ -48,10 +48,10 @@ Friend Class ChickenModeProcessor
             Select Case itemType
                 Case ItemType.Food
                     player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {ItemType.MagicEgg.Name} pops out!")
-                    player.Inventory.Add(Item.Create(ItemType.MagicEgg))
+                    player.Inventory.Add(Item.Create(StaticWorldData.World, ItemType.MagicEgg))
                 Case ItemType.RottenFood
                     player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {ItemType.RottenEgg.Name} pops out!")
-                    player.Inventory.Add(Item.Create(ItemType.RottenEgg))
+                    player.Inventory.Add(Item.Create(StaticWorldData.World, ItemType.RottenEgg))
             End Select
         Else
             player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food, and gives a satified ""moo"" in return.")

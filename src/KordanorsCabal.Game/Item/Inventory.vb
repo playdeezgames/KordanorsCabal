@@ -14,7 +14,7 @@
 
     ReadOnly Property Items As IReadOnlyList(Of Item)
         Get
-            Return StaticWorldData.World.InventoryItem.ReadItems(Id).Select(AddressOf Item.FromId).ToList
+            Return StaticWorldData.World.InventoryItem.ReadItems(Id).Select(Function(x) Item.FromId(StaticWorldData.World, x)).ToList
         End Get
     End Property
 

@@ -37,7 +37,7 @@
                     If lotionItem.Durability = 0 Then
                         lines.Add($"You ran out that bottle of {ItemType.Lotion.Name}.")
                         lotionItem.Destroy()
-                        character.Inventory.Add(Item.Create(ItemType.Bottle))
+                        character.Inventory.Add(Item.Create(StaticWorldData.World, ItemType.Bottle))
                     End If
                 End If
 

@@ -1,17 +1,17 @@
 ﻿Public Class Item
-    ReadOnly Property Id As Long
-    Sub New(itemId As Long)
-        Id = itemId
+    Inherits BaseThingie
+    Sub New(worldData As WorldData, itemId As Long)
+        MyBase.New(worldData, itemId)
     End Sub
-    Shared Function FromId(itemId As Long?) As Item
-        Return If(itemId.HasValue, New Item(itemId.Value), Nothing)
+    Shared Function FromId(worldData As WorldData, itemId As Long?) As Item
+        Return If(itemId.HasValue, New Item(worldData, itemId.Value), Nothing)
     End Function
-    Shared Function Create(itemType As ItemType) As Item
-        Return FromId(StaticWorldData.World.Item.Create(itemType))
+    Shared Function Create(worldData As WorldData, itemType As ItemType) As Item
+        Return FromId(worldData, worldData.Item.Create(itemType))
     End Function
     Public ReadOnly Property ItemType As ItemType
         Get
-            Return CType(StaticWorldData.World.Item.ReadItemType(Id).Value, ItemType)
+            Return CType(WorldData.Item.ReadItemType(Id).Value, ItemType)
         End Get
     End Property
     Public ReadOnly Property Name As String
@@ -43,7 +43,7 @@
     End Sub
 
     Public Sub Destroy()
-        StaticWorldData.World.Item.Clear(Id)
+        WorldData.Item.Clear(Id)
     End Sub
     Public Function Encumbrance() As Long
         Return ItemType.Encumbrance
@@ -85,10 +85,10 @@
     End Sub
 
     Private Function GetStatistic(statisticType As ItemStatisticType) As Long
-        Return If(StaticWorldData.World.ItemStatistic.Read(Id, statisticType), statisticType.DefaultValue)
+        Return If(WorldData.ItemStatistic.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
     Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
-        StaticWorldData.World.ItemStatistic.Write(Id, statisticType, value)
+        WorldData.ItemStatistic.Write(Id, statisticType, value)
     End Sub
 
     Public ReadOnly Property NeedsRepair As Boolean

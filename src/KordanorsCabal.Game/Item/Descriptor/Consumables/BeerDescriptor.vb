@@ -21,7 +21,7 @@
                 End If
                 character.CurrentMP = character.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 7)).Value
                 character.Drunkenness += 10
-                character.Inventory.Add(Game.Item.Create(ItemType.Bottle))
+                character.Inventory.Add(Game.Item.Create(StaticWorldData.World, ItemType.Bottle))
                 character.EnqueueMessage("You drink the beer, and suddenly feel braver!")
             End Sub)
     End Sub

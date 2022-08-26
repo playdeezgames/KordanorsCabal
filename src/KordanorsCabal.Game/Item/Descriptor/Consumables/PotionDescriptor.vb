@@ -24,7 +24,7 @@
             Sub(character)
                 Dim healRoll = RNG.RollDice("2d4")
                 character.ChangeStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 12L), -healRoll)
-                character.Inventory.Add(Item.Create(ItemType.Bottle))
+                character.Inventory.Add(Item.Create(StaticWorldData.World, ItemType.Bottle))
                 character.EnqueueMessage(
                 $"Potion heals up to {healRoll} HP!",
                 $"You now have {character.CurrentHP} HP!")

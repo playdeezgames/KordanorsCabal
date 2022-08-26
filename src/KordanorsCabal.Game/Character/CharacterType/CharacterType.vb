@@ -51,7 +51,7 @@
         End If
         Dim itemType = CType(RNG.FromGenerator(lootTable), ItemType)
         If itemType <> ItemType.None Then
-            location.Inventory.Add(Item.Create(itemType))
+            location.Inventory.Add(Item.Create(WorldData, itemType))
         End If
     End Sub
     Function CanBeBribedWith(itemType As ItemType) As Boolean
