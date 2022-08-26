@@ -48,7 +48,7 @@ Friend Class SaveGameScreenProcessor
 
     Private Sub ValidateSlot(slotNumber As Integer)
         StaticWorldData.World.Load(SaveSlotName(slotNumber))
-        If Game.World.IsValid Then
+        If Game.World.IsValid(StaticWorldData.World) Then
             UpdateMenuItemText(slotNumber, $"Slot {slotNumber}")
         Else
             UpdateMenuItemText(slotNumber, "(empty)")

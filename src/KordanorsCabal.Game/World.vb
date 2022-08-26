@@ -61,9 +61,9 @@ Public Module World
             {4, New MazeDirection(Of Long)(2, -1, 0)}
         }
 
-    Public ReadOnly Property IsValid As Boolean
+    Public ReadOnly Property IsValid(worldData As WorldData) As Boolean
         Get
-            Return StaticWorldData.World.Player.Read.HasValue
+            Return worldData.Player.Read.HasValue
         End Get
     End Property
 
