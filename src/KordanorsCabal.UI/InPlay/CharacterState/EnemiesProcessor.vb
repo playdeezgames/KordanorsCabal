@@ -1,11 +1,13 @@
-﻿Friend Class EnemiesProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class EnemiesProcessor
     Implements IProcessor
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Enemies", True, Hue.Blue)
-        Dim player = World.PlayerCharacter
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
         Dim enemies = player.Location.Enemies(player)
         Dim row = 1
         For Each enemy In enemies

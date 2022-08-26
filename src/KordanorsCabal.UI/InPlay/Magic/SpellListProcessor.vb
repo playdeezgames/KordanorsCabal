@@ -1,4 +1,6 @@
-﻿Friend Class SpellListProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class SpellListProcessor
     Implements IProcessor
 
     Private items As List(Of (SpellType, Long))
@@ -11,7 +13,7 @@
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Spell List", True, Hue.Blue)
-        Dim player = World.PlayerCharacter
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
         For row = ListStartRow To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
             If itemIndex >= 0 AndAlso itemIndex < items.Count Then
@@ -27,7 +29,7 @@
 
     Public Sub Initialize() Implements IProcessor.Initialize
         currentItemIndex = 0
-        items = World.PlayerCharacter.Spells.Select(Function(x) (x.Key, x.Value)).ToList
+        items = Game.World.PlayerCharacter(StaticWorldData.World).Spells.Select(Function(x) (x.Key, x.Value)).ToList
     End Sub
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
@@ -45,7 +47,7 @@
     End Function
 
     Private Function CastSpell() As UIState
-        World.PlayerCharacter.Cast(items(currentItemIndex).Item1)
+        Game.World.PlayerCharacter(StaticWorldData.World).Cast(items(currentItemIndex).Item1)
         PushUIState(UIState.SpellList)
         Return UIState.Message
     End Function

@@ -262,11 +262,11 @@ Public Module World
     End Sub
 
     Private Sub SecondRoll(worldData As WorldData)
-        Dim dice = PlayerCharacter.GetStatistic(CharacterStatisticType.FromId(worldData, 9L))
-        PlayerCharacter.SetStatistic(CharacterStatisticType.FromId(worldData, 9L), 0)
+        Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, 9L))
+        PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, 9L), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(SecondRollTable)
-            PlayerCharacter.ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
+            PlayerCharacter(worldData).ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
             dice -= 1
         End While
     End Sub
@@ -293,18 +293,18 @@ Public Module World
         }
 
     Private Sub FirstRoll(worldData As WorldData)
-        Dim dice = PlayerCharacter.GetStatistic(CharacterStatisticType.FromId(worldData, 9L))
-        PlayerCharacter.SetStatistic(CharacterStatisticType.FromId(worldData, 9L), 0)
+        Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, 9L))
+        PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, 9L), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(FirstRollTable)
-            PlayerCharacter.ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
+            PlayerCharacter(worldData).ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
             dice -= 1
         End While
     End Sub
 
-    Public ReadOnly Property PlayerCharacter As Character
+    Public ReadOnly Property PlayerCharacter(worldData As WorldData) As Character
         Get
-            Return New PlayerCharacter(StaticWorldData.World)
+            Return New PlayerCharacter(worldData)
         End Get
     End Property
     Function AllCharacterTypes(worldData As WorldData) As IEnumerable(Of CharacterType)

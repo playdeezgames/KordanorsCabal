@@ -1,11 +1,13 @@
-﻿Friend Class ShoppeRepairProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class ShoppeRepairProcessor
     Inherits ShoppeProcessor(Of Item)
 
     Public Overrides Sub UpdateBuffer(buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, $"Repair", True, Hue.Blue)
-        buffer.WriteTextCentered(1, $"Money: {World.PlayerCharacter.Money}", False, Hue.Black)
+        buffer.WriteTextCentered(1, $"Money: {Game.World.PlayerCharacter(StaticWorldData.World).Money}", False, Hue.Black)
 
         For row = ListStartRow + 1 To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
@@ -22,7 +24,7 @@
     Public Overrides Sub Initialize()
         currentItemIndex = 0
         Dim repairs = ShoppeType.Repairs
-        items = World.PlayerCharacter.ItemsToRepair(ShoppeType).Where(Function(x) repairs.ContainsKey(x.ItemType)).ToList
+        items = Game.World.PlayerCharacter(StaticWorldData.World).ItemsToRepair(ShoppeType).Where(Function(x) repairs.ContainsKey(x.ItemType)).ToList
     End Sub
 
     Public Overrides Function ProcessCommand(command As Command) As UIState
@@ -49,10 +51,10 @@
         End If
         Dim item = items(currentItemIndex)
         Dim repairCost = item.RepairCost(ShoppeType.Blacksmith)
-        If World.PlayerCharacter.Money < repairCost Then
+        If Game.World.PlayerCharacter(StaticWorldData.World).Money < repairCost Then
             Return UIState.ShoppeRepair
         End If
-        World.PlayerCharacter.Money -= repairCost
+        Game.World.PlayerCharacter(StaticWorldData.World).Money -= repairCost
         item.Repair()
         Dim oldIndex = currentItemIndex
         Initialize()

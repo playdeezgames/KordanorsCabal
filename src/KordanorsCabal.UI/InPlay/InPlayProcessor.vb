@@ -1,4 +1,6 @@
-﻿Friend Class InPlayProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class InPlayProcessor
     Implements IProcessor
 
     Private ReadOnly _modeProcessors As IReadOnlyDictionary(Of PlayerMode, ModeProcessor) =
@@ -21,8 +23,8 @@
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Blue)
-        Dim modeProcessor = _modeProcessors(World.PlayerCharacter.Mode)
-        Dim player = World.PlayerCharacter
+        Dim modeProcessor = _modeProcessors(Game.World.PlayerCharacter(StaticWorldData.World).Mode)
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
         modeProcessor.UpdateBuffer(player, buffer)
         For Each button In ModeProcessor.Buttons
             button.Clear()
@@ -44,7 +46,7 @@
         Dim nextState = UIState.InPlay
         Select Case command
             Case Command.Green, Command.Blue
-                nextState = _modeProcessors(World.PlayerCharacter.Mode).HandleButton(World.PlayerCharacter, ModeProcessor.Buttons(ModeProcessor.CurrentButtonIndex))
+                nextState = _modeProcessors(Game.World.PlayerCharacter(StaticWorldData.World).Mode).HandleButton(Game.World.PlayerCharacter(StaticWorldData.World), ModeProcessor.Buttons(ModeProcessor.CurrentButtonIndex))
             Case Command.Down
                 ModeProcessor.CurrentButtonIndex = (ModeProcessor.CurrentButtonIndex + 1) Mod ModeProcessor.Buttons.Count
             Case Command.Up
@@ -52,7 +54,7 @@
             Case Command.Left, Command.Right
                 ModeProcessor.CurrentButtonIndex = (ModeProcessor.CurrentButtonIndex + ModeProcessor.Buttons.Count \ 2) Mod ModeProcessor.Buttons.Count
             Case Command.Red
-                nextState = _modeProcessors(World.PlayerCharacter.Mode).HandleRed(World.PlayerCharacter)
+                nextState = _modeProcessors(Game.World.PlayerCharacter(StaticWorldData.World).Mode).HandleRed(Game.World.PlayerCharacter(StaticWorldData.World))
         End Select
         Return nextState
     End Function

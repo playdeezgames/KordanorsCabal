@@ -1,4 +1,6 @@
-﻿Friend Class MessageProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class MessageProcessor
     Implements IProcessor
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
@@ -26,7 +28,7 @@
                 If messages.Any Then
                     Return UIState.Message
                 End If
-                If World.PlayerCharacter.IsDead Then
+                If Game.World.PlayerCharacter(StaticWorldData.World).IsDead Then
                     Return UIState.Dead
                 End If
                 Return PopUIState()

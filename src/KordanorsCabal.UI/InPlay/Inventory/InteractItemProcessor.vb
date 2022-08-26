@@ -1,4 +1,6 @@
-﻿Friend Class InteractItemProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class InteractItemProcessor
     Inherits MenuProcessor
 
     Const CancelMenuItem = "Cancel"
@@ -21,25 +23,25 @@
     End Sub
 
     Private Shared Function EquipItem() As UIState
-        World.PlayerCharacter.Equip(InteractItem)
+        Game.World.PlayerCharacter(StaticWorldData.World).Equip(InteractItem)
         MainProcessor.PushUIState(UIState.Inventory)
         Return UIState.Message
     End Function
 
     Private Shared Function UseItem() As UIState
-        If InteractItem.CanUse(World.PlayerCharacter) Then
-            World.PlayerCharacter.UseItem(InteractItem)
+        If InteractItem.CanUse(Game.World.PlayerCharacter(StaticWorldData.World)) Then
+            Game.World.PlayerCharacter(StaticWorldData.World).UseItem(InteractItem)
             MainProcessor.PushUIState(UIState.Inventory)
             Return UIState.Message
         End If
-        World.PlayerCharacter.EnqueueMessage("You cannot use that now!") 'TODO: shucks!
+        Game.World.PlayerCharacter(StaticWorldData.World).EnqueueMessage("You cannot use that now!") 'TODO: shucks!
         MainProcessor.PushUIState(UIState.InteractItem)
         Return UIState.Message
     End Function
 
     Private Shared Function DropItem() As UIState
-        World.PlayerCharacter.Location.Inventory.Add(InteractItem)
-        If World.PlayerCharacter.Inventory.IsEmpty Then
+        Game.World.PlayerCharacter(StaticWorldData.World).Location.Inventory.Add(InteractItem)
+        If Game.World.PlayerCharacter(StaticWorldData.World).Inventory.IsEmpty Then
             Return UIState.InPlay
         End If
         Return UIState.Inventory

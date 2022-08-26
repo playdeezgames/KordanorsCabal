@@ -1,4 +1,5 @@
-﻿Imports SPLORR.Game
+﻿Imports KordanorsCabal.Data
+Imports SPLORR.Game
 
 Friend Class InventoryProcessor
     Implements IProcessor
@@ -13,7 +14,7 @@ Friend Class InventoryProcessor
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Inventory", True, Hue.Blue)
-        Dim player = World.PlayerCharacter
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
         buffer.WriteTextCentered(1, $"Encumbrance: {player.Encumbrance}/{player.MaximumEncumbrance}", False, Hue.Red)
         For row = ListStartRow To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
@@ -30,7 +31,7 @@ Friend Class InventoryProcessor
         currentItemIndex = 0
         items = New List(Of (String, IEnumerable(Of Item)))
         Dim table As New Dictionary(Of String, List(Of Item))
-        For Each item In World.PlayerCharacter.Inventory.Items.OrderBy(Function(x) x.Name)
+        For Each item In Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Items.OrderBy(Function(x) x.Name)
             If Not table.ContainsKey(item.Name) Then
                 table(item.Name) = New List(Of Item)
             End If

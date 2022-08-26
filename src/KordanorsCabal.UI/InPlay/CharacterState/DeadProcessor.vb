@@ -7,7 +7,7 @@ Friend Class DeadProcessor
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.WriteText((0, 0), "yer dead!", False, Hue.Red)
-        If Game.World.PlayerCharacter.Equipment(EquipSlot.FromId(StaticWorldData.World, 5L)) IsNot Nothing Then
+        If Game.World.PlayerCharacter(StaticWorldData.World).Equipment(EquipSlot.FromId(StaticWorldData.World, 5L)) IsNot Nothing Then
             buffer.WriteText((0, 2), "But at least you died with dignity!", False, Hue.Black)
         End If
     End Sub

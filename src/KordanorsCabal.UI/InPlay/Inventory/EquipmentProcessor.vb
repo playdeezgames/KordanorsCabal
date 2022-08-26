@@ -1,4 +1,6 @@
-﻿Friend Class EquipmentProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class EquipmentProcessor
     Implements IProcessor
 
     Private rowIndex As Integer = 0
@@ -10,7 +12,7 @@
         buffer.WriteTextCentered(0, "Equipment", True, Hue.Blue)
         buffer.WriteText((0, 1), "Go Back", rowIndex = 0, Hue.Black)
         Dim row As Integer = 1
-        Dim player = World.PlayerCharacter
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
         For Each entry In player.EquippedSlots
             Dim slotName = $"{entry.Name}: "
             buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
@@ -28,7 +30,7 @@
         table.Clear()
         table(0) = Nothing
         Dim row As Integer = 1
-        For Each entry In World.PlayerCharacter.EquippedSlots
+        For Each entry In Game.World.PlayerCharacter(StaticWorldData.World).EquippedSlots
             table(row) = entry
             row += 1
         Next

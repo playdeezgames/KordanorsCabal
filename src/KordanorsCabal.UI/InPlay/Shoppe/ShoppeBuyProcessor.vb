@@ -7,7 +7,7 @@ Friend Class ShoppeBuyProcessor
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, $"Buy", True, Hue.Blue)
-        buffer.WriteTextCentered(1, $"Money: {Game.World.PlayerCharacter.Money}", False, Hue.Black)
+        buffer.WriteTextCentered(1, $"Money: {Game.World.PlayerCharacter(StaticWorldData.World).Money}", False, Hue.Black)
 
         For row = ListStartRow + 1 To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
@@ -22,7 +22,7 @@ Friend Class ShoppeBuyProcessor
 
     Public Overrides Sub Initialize()
         currentItemIndex = 0
-        Dim money = Game.World.PlayerCharacter.Money
+        Dim money = Game.World.PlayerCharacter(StaticWorldData.World).Money
         items = ShoppeType.Prices.Where(Function(x) x.Value <= money).Select(Function(x) (x.Key, x.Value)).ToList
     End Sub
 
@@ -49,8 +49,8 @@ Friend Class ShoppeBuyProcessor
             Return UIState.InPlay
         End If
         Dim itemType = items(currentItemIndex)
-        Game.World.PlayerCharacter.Money -= itemType.Item2
-        Game.World.PlayerCharacter.Inventory.Add(Game.Item.Create(StaticWorldData.World, itemType.Item1))
+        Game.World.PlayerCharacter(StaticWorldData.World).Money -= itemType.Item2
+        Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Add(Game.Item.Create(StaticWorldData.World, itemType.Item1))
         Dim oldIndex = currentItemIndex
         Initialize()
         If Not items.Any Then

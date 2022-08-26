@@ -1,4 +1,6 @@
-﻿Friend Class GroundInventoryProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class GroundInventoryProcessor
     Implements IProcessor
 
     Private groundItems As List(Of Item)
@@ -25,7 +27,7 @@
 
     Public Sub Initialize() Implements IProcessor.Initialize
         currentItemIndex = 0
-        groundItems = World.PlayerCharacter.Location.Inventory.Items.ToList
+        groundItems = Game.World.PlayerCharacter(StaticWorldData.World).Location.Inventory.Items.ToList
     End Sub
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
@@ -43,8 +45,8 @@
     End Function
 
     Private Function PickUpItem() As UIState
-        World.PlayerCharacter.Inventory.Add(groundItems(currentItemIndex))
-        groundItems = World.PlayerCharacter.Location.Inventory.Items.ToList
+        Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Add(groundItems(currentItemIndex))
+        groundItems = Game.World.PlayerCharacter(StaticWorldData.World).Location.Inventory.Items.ToList
         If Not groundItems.Any Then
             Return UIState.InPlay
         End If

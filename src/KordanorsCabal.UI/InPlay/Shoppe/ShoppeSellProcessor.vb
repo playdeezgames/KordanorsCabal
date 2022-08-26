@@ -1,11 +1,13 @@
-﻿Friend Class ShoppeSellProcessor
+﻿Imports KordanorsCabal.Data
+
+Friend Class ShoppeSellProcessor
     Inherits ShoppeProcessor(Of Item)
 
     Public Overrides Sub UpdateBuffer(buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, $"Sell", True, Hue.Blue)
-        buffer.WriteTextCentered(1, $"Money: {World.PlayerCharacter.Money}", False, Hue.Black)
+        buffer.WriteTextCentered(1, $"Money: {Game.World.PlayerCharacter(StaticWorldData.World).Money}", False, Hue.Black)
 
         For row = ListStartRow + 1 To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
@@ -21,7 +23,7 @@
     Public Overrides Sub Initialize()
         currentItemIndex = 0
         Dim offers = ShoppeType.Offers
-        items = World.PlayerCharacter.Inventory.Items.Where(Function(x) offers.ContainsKey(x.ItemType)).ToList
+        items = Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Items.Where(Function(x) offers.ContainsKey(x.ItemType)).ToList
     End Sub
 
     Public Overrides Function ProcessCommand(command As Command) As UIState
@@ -37,7 +39,7 @@
                     currentItemIndex = (currentItemIndex + items.Count - 1) Mod items.Count
                 End If
             Case Command.Green, Command.Blue
-                Return SellItem
+                Return SellItem()
         End Select
         Return UIState.ShoppeSell
     End Function
@@ -47,7 +49,7 @@
             Return UIState.InPlay
         End If
         Dim item = items(currentItemIndex)
-        World.PlayerCharacter.Money += ShoppeType.Offers(item.ItemType)
+        Game.World.PlayerCharacter(StaticWorldData.World).Money += ShoppeType.Offers(item.ItemType)
         item.Destroy()
         Dim oldIndex = currentItemIndex
         Initialize()
