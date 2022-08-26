@@ -28,6 +28,11 @@
     End Sub
 
     Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of String, Integer)
-        Throw New NotImplementedException()
+        Return Store.ReadRecordsWithColumnValue(Of Long, String, Long)(
+            AddressOf Initialize,
+            TableName,
+            (PartingShotColumn, WeightColumn),
+            (CharacterTypeIdColumn, characterTypeId)).
+            ToDictionary(Function(x) x.Item1, Function(x) CInt(x.Item2))
     End Function
 End Class
