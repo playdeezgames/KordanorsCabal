@@ -47,7 +47,7 @@
         End Get
     End Property
     Public Function Routes(direction As Direction) As Route
-        Return Route.FromId(StaticWorldData.World, WorldData.Route.ReadForLocationDirection(Id, direction.Id))
+        Return Route.FromId(WorldData, WorldData.Route.ReadForLocationDirection(Id, direction.Id))
     End Function
     Public Function HasRoute(direction As Direction) As Boolean
         Return Routes(direction) IsNot Nothing
