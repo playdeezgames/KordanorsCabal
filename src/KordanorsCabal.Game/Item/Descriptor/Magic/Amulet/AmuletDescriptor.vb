@@ -8,6 +8,7 @@
                   Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType)) = Nothing,
                   Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing)
         MyBase.New(
+            StaticWorldData.World,
             itemTypeId,
             $"Amulet of {New CharacterStatisticType(StaticWorldData.World, itemTypeId).Abbreviation}", ,
             spawnLocationTypes,

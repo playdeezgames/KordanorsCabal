@@ -1,6 +1,6 @@
 ﻿Public Class ItemTypeDescriptor
+    Inherits BaseThingie
     '[ItemTypes]([ItemTypeId],[ItemTypeName],[Encumbrance])
-    ReadOnly Property Id As Long
     ReadOnly Property Name As String
     ReadOnly Property Encumbrance As Long
     ReadOnly Property IsConsumed As Boolean
@@ -64,6 +64,7 @@
         Return repairedAt.Contains(shoppeType)
     End Function
     Sub New(
+           worldData As WorldData,
            itemTypeId As Long,
            name As String,
            Optional encumbrance As Long = 0,
@@ -85,7 +86,7 @@
            Optional purify As Action(Of Item) = Nothing,
            Optional canUse As Func(Of Character, Boolean) = Nothing,
            Optional use As Action(Of Character) = Nothing)
-        Me.Id = itemTypeId
+        MyBase.New(worldData, itemTypeId)
         Me.Name = name
         Me.Encumbrance = encumbrance
         If spawnLocationTypes Is Nothing Then
@@ -145,6 +146,7 @@ Public Module ItemTypeDescriptorUtility
                     (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 6L)))),
                 MakeDictionary((4L, "1d1")))},
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
+                StaticWorldData.World,
                 ItemType.AmuletOfYendor,
                 "Amulet of Yendor",,,,
                 MakeList(EquipSlot.FromId(StaticWorldData.World, 6L)),,,,,,,,,
@@ -154,13 +156,16 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Beer, New BeerDescriptor},
             {ItemType.Bong, New TrophyDescriptor(ItemType.Bong, "Bong", , , 25, MakeList(ShoppeType.BlackMage))},
             {ItemType.BookOfHolyBolt, New ItemTypeDescriptor(
+                    StaticWorldData.World,
                     ItemType.BookOfHolyBolt,
                     $"Book of {SpellType.HolyBolt.Name}",,,,,,,,,,,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.HolyBolt),
                     Sub(character) character.Learn(SpellType.HolyBolt))},
-            {ItemType.BookOfPurify, New ItemTypeDescriptor(ItemType.BookOfPurify,
+            {ItemType.BookOfPurify, New ItemTypeDescriptor(
+                    StaticWorldData.World,
+                    ItemType.BookOfPurify,
                     $"Book of {SpellType.Purify.Name}",,,,,,,,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,

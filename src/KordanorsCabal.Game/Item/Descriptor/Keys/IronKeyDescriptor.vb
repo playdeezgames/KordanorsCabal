@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            StaticWorldData.World,
             ItemType.IronKey,
             "FE Key",,
             MakeDictionary(

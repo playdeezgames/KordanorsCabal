@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            StaticWorldData.World,
             ItemType.Food,
             "Food",,,,,,,,,,,,,
             2,

@@ -3,6 +3,7 @@
 
     Sub New()
         MyBase.New(
+            StaticWorldData.World,
             ItemType.Trousers,
             "Trousers",,,,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 5L)),,,,,,,,,

@@ -2,6 +2,7 @@
     Inherits ItemTypeDescriptor
     Sub New()
         MyBase.New(
+            StaticWorldData.World,
             ItemType.EarthShard,
             "Earth Shard",,
             MakeDictionary(
