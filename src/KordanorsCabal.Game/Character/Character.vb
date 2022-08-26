@@ -147,7 +147,7 @@
             If Not inventoryId.HasValue Then
                 inventoryId = WorldData.Inventory.CreateForCharacter(Id)
             End If
-            Return New Inventory(inventoryId.Value)
+            Return New Inventory(WorldData, inventoryId.Value)
         End Get
     End Property
     ReadOnly Property IsEncumbered As Boolean

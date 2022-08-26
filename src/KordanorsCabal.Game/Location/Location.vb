@@ -71,7 +71,7 @@
             If Not inventoryId.HasValue Then
                 inventoryId = WorldData.Inventory.CreateForLocation(Id)
             End If
-            Return New Inventory(inventoryId.Value)
+            Return New Inventory(WorldData, inventoryId.Value)
         End Get
     End Property
     Public ReadOnly Property RouteDirections As IEnumerable(Of Direction)

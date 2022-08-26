@@ -1,10 +1,10 @@
 ﻿Public Class Inventory
-    ReadOnly Property Id As Long
-    Sub New(inventoryId As Long)
-        Id = inventoryId
+    Inherits BaseThingie
+    Sub New(worldData As WorldData, inventoryId As Long)
+        MyBase.New(worldData, inventoryId)
     End Sub
-    Shared Function FromId(inventoryId As Long) As Inventory
-        Return New Inventory(inventoryId)
+    Shared Function FromId(worldData As WorldData, inventoryId As Long) As Inventory
+        Return New Inventory(worldData, inventoryId)
     End Function
     ReadOnly Property IsEmpty As Boolean
         Get
