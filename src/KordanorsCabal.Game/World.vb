@@ -90,7 +90,7 @@ Public Module World
                         Dim nextColumn = MazeDirections(direction).DeltaX + column
                         Dim nextRow = MazeDirections(direction).DeltaY + row
                         Dim nextLocation = locations(CInt(nextColumn + nextRow * maze.Columns))
-                        Route.Create(StaticWorldData.World, dungeonLocation, Game.Direction.FromId(worldData, direction), RouteType.Passageway, nextLocation)
+                        Route.Create(worldData, dungeonLocation, Game.Direction.FromId(worldData, direction), RouteType.Passageway, nextLocation)
                     End If
                 Next
             Next
