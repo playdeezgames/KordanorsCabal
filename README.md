@@ -60,6 +60,22 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 048 - 20220814
 * 049 - 20220831
 
+## What's Taking So Long?
+
+* World.Start: 18.44
+  * worldData.Reset: 0.06
+  * CreateTown: 0.03
+  * CreateDungeon: 16.38
+      * Level 1: 2.79
+	  * Level 2: 3.86
+	  * Level 3: 4.39
+	  * Level 4: 3.42
+	  * Level 5: 2.23
+  * CreateMoon: 1.66
+  * CreateFeatures: 0.003
+  * CreatePlayer: 0.01
+ 
+
 ## Credit Due
 
 * Kordanor

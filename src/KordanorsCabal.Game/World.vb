@@ -1,11 +1,13 @@
 Public Module World
     Public Sub Start(worldData As WorldData)
+        Dim start = DateTimeOffset.Now
         worldData.Reset()
         CreateTown(worldData)
         CreateDungeon(worldData, Location.FromLocationType(worldData, LocationType.FromId(worldData, 3L)).First)
         CreateMoon(worldData)
         CreateFeatures(worldData)
         CreatePlayer(worldData)
+        Dim elapse = DateTimeOffset.Now - start
     End Sub
 
     Private Sub CreateMoon(worldData As WorldData)
@@ -99,6 +101,8 @@ Public Module World
     End Function
 
     Private Function CreateDungeonLevel(worldData As WorldData, fromLocation As Location, dungeonLevel As DungeonLevel, bossKeyType As ItemType, bossRouteType As RouteType) As Location
+        Dim start = DateTimeOffset.Now
+        Dim elapsed = DateTimeOffset.Now - start
         Dim maze = New Maze(Of Long)(MazeColumns, MazeRows, MazeDirections)
         maze.Generate()
         Dim locations = CreateLocations(worldData, maze, dungeonLevel)
@@ -111,7 +115,6 @@ Public Module World
     End Function
 
     Private Sub PopulateCharacters(worldData As WorldData, locations As IEnumerable(Of Location), dungeonLevel As DungeonLevel)
-        Dim start = DateTimeOffset.Now
         For Each characterType In AllCharacterTypes(worldData)
             Dim characterCount = characterType.SpawnCount(dungeonLevel)
             Dim candidates = locations.Where(Function(x) characterType.CanSpawn(x.LocationType, dungeonLevel))
@@ -122,8 +125,6 @@ Public Module World
                 characterCount -= 1
             End While
         Next
-        Dim elapsed = DateTimeOffset.Now - start
-        Debug.Print($"{dungeonLevel.Name}: {elapsed}")
     End Sub
 
     Private Sub PopulateLocations(worldData As WorldData, locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType, dungeonLevel As DungeonLevel)
