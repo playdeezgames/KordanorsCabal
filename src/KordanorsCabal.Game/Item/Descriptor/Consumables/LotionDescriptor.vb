@@ -6,7 +6,7 @@
             StaticWorldData.World,
             ItemType.Lotion,
             2,,,,,,,,
-            5,,,,
+            5,,,
             25,
             MakeList(ShoppeType.BlackMarket))
     End Sub

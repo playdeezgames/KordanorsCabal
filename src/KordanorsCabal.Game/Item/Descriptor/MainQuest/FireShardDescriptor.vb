@@ -8,7 +8,7 @@
                 (3L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 6L)))),
             MakeDictionary(
                 (3L, "1d1")),,,,,, ,
-            False,,,,,,,,
+            ,,,,,,,
             Function(character)
                 Dim location = character.Location
                 Return location.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0

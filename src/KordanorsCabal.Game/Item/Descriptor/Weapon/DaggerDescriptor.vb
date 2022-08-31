@@ -18,7 +18,7 @@
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             2,
             1,,
-            10,,
+            10,
             1,
             MakeList(ShoppeType.Blacksmith),
             5,

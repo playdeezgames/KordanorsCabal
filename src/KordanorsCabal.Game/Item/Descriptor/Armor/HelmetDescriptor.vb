@@ -15,7 +15,7 @@
                 MakeDictionary((1L, "3d6")),
                 MakeList(EquipSlot.FromId(StaticWorldData.World, 3L)),,,,
                 2,
-                10,,
+                10,
                 2,
                 MakeList(ShoppeType.Blacksmith),
                 10,

@@ -17,7 +17,7 @@
                 (2L, "3d6"),
                 (3L, "3d6"),
                 (4L, "3d6"),
-                (5L, "3d6")),,,,,,,,,,
+                (5L, "3d6")),,,,,,,,,
             15,
             MakeList(ShoppeType.Healer),,,,
             Function(character) True,

@@ -9,7 +9,7 @@
                 (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 6L)))),
             MakeDictionary(
                 (1L, "1d1")),,,,,, ,
-            False,,,,,,,,
+            ,,,,,,,
             Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
             Sub(character)
                 character.CurrentMana -= 1
