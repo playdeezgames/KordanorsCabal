@@ -7,12 +7,6 @@
             ItemType.BrodeSode,
             10,
             MakeDictionary(
-                (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L))),
-                (2L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L))),
-                (3L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L))),
-                (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L))),
-                (5L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 4L)))),
-            MakeDictionary(
                 (2L, "2d6"),
                 (3L, "1d6")),
                 MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,

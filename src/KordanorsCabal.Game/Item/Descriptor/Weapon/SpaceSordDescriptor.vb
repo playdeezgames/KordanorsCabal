@@ -7,8 +7,6 @@
             ItemType.SpaceSord,
             5,
             MakeDictionary(
-                (6L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 8L)))),
-            MakeDictionary(
                 (6L, "1d1")),
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             10,

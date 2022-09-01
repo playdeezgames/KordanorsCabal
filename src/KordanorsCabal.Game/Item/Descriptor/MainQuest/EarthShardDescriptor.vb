@@ -5,8 +5,6 @@
             StaticWorldData.World,
             ItemType.EarthShard,,
             MakeDictionary(
-                (2L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 6L)))),
-            MakeDictionary(
                 (2L, "1d1")),,,,,, ,
             ,,,,,,,
             Function(character)

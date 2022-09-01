@@ -12,7 +12,6 @@
     End Property
 
     '[ItemTypeSpawnLocationTypes]([ItemTypeId],[DungeonLevelId],[LocationTypeId])
-    ReadOnly Property OldSpawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType))
     ReadOnly Property SpawnLocationTypes(dungeonLevel As DungeonLevel) As HashSet(Of LocationType)
         Get
             Return New HashSet(Of LocationType)(WorldData.ItemTypeSpawnLocationType.ReadAll(Id, dungeonLevel.Id).Select(Function(x) LocationType.FromId(WorldData, x)))
@@ -80,7 +79,6 @@
            worldData As WorldData,
            itemTypeId As Long,
            Optional encumbrance As Long = 0,
-           Optional spawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType)) = Nothing,
            Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional buffs As IReadOnlyDictionary(Of Long, Long) = Nothing,
@@ -99,17 +97,6 @@
            Optional use As Action(Of Character) = Nothing)
         MyBase.New(worldData, itemTypeId)
         Me.Encumbrance = encumbrance
-        If spawnLocationTypes Is Nothing Then
-            Me.OldSpawnLocationTypes =
-                AllDungeonLevels(StaticWorldData.World).ToDictionary(
-                Function(x) x.Id,
-                Function(x) New HashSet(Of LocationType))
-        Else
-            Me.OldSpawnLocationTypes =
-                AllDungeonLevels(StaticWorldData.World).ToDictionary(
-                Function(x) x.Id,
-                Function(x) If(spawnLocationTypes.ContainsKey(x.Id), spawnLocationTypes(x.Id), New HashSet(Of LocationType)))
-        End If
         Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
         Me.spawnCounts = spawnCounts
         Me.Offer = offer
@@ -138,25 +125,17 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AmuletOfDEX, New AmuletDescriptor(ItemType.AmuletOfDEX, 2)},
             {ItemType.AmuletOfHP, New AmuletDescriptor(ItemType.AmuletOfHP,
                 6,
-                MakeDictionary(
-                    (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 6L)))),
                 MakeDictionary((1L, "1d1")))},
             {ItemType.AmuletOfMana, New AmuletDescriptor(ItemType.AmuletOfMana,
                 8,
-                MakeDictionary(
-                    (2L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 6L)))),
                 MakeDictionary((2L, "1d1")))},
             {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, 5,
-                MakeDictionary(
-                    (3L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 6L)))),
                 MakeDictionary((3L, "1d1")))},
             {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, 1,
-                MakeDictionary(
-                    (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 6L)))),
                 MakeDictionary((4L, "1d1")))},
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
                 StaticWorldData.World,
-                ItemType.AmuletOfYendor,,,,
+                ItemType.AmuletOfYendor,,,
                 MakeList(EquipSlot.FromId(StaticWorldData.World, 6L)),,,,,,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
@@ -165,14 +144,14 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Bong, New TrophyDescriptor(ItemType.Bong, , , 25, MakeList(ShoppeType.BlackMage))},
             {ItemType.BookOfHolyBolt, New ItemTypeDescriptor(
                     StaticWorldData.World,
-                    ItemType.BookOfHolyBolt,,,,,,,,,,,,
+                    ItemType.BookOfHolyBolt,,,,,,,,,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.HolyBolt),
                     Sub(character) character.Learn(SpellType.HolyBolt))},
             {ItemType.BookOfPurify, New ItemTypeDescriptor(
                     StaticWorldData.World,
-                    ItemType.BookOfPurify,,,,,,,,,,,,
+                    ItemType.BookOfPurify,,,,,,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.Purify),

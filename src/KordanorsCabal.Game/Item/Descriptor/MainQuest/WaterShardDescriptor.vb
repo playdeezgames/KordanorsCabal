@@ -6,8 +6,6 @@
             StaticWorldData.World,
             ItemType.WaterShard,,
             MakeDictionary(
-                (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 6L)))),
-            MakeDictionary(
                 (4L, "1d1")),,,,,, ,
             ,,,,,,,
             Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,

@@ -4,8 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.PlatinumKey,,
-            MakeDictionary(
-                (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L)))))
+            ItemType.PlatinumKey)
     End Sub
 End Class

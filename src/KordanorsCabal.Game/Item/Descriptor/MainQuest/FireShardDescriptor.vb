@@ -5,8 +5,6 @@
             StaticWorldData.World,
             ItemType.FireShard,,
             MakeDictionary(
-                (3L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 6L)))),
-            MakeDictionary(
                 (3L, "1d1")),,,,,, ,
             ,,,,,,,
             Function(character)

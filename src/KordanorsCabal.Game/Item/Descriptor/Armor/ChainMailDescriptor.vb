@@ -6,12 +6,6 @@
             StaticWorldData.World,
             ItemType.ChainMail,
             20,
-            MakeDictionary(
-                (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L))),
-                (2L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L))),
-                (3L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L))),
-                (4L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L))),
-                (5L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 5L), LocationType.FromId(StaticWorldData.World, 4L)))),
             MakeDictionary((1L, "1d6")),
             MakeList(EquipSlot.FromId(StaticWorldData.World, 4L)),,,
             2,

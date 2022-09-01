@@ -6,8 +6,6 @@
             StaticWorldData.World,
             ItemType.AirShard,,
             MakeDictionary(
-                (1L, MakeHashSet(LocationType.FromId(StaticWorldData.World, 6L)))),
-            MakeDictionary(
                 (1L, "1d1")),,,,,, ,
             ,,,,,,,
             Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
