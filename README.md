@@ -59,22 +59,7 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * 047 - 20220813
 * 048 - 20220814
 * 049 - 20220831
-
-## What's Taking So Long?
-
-* World.Start: 18.44
-  * worldData.Reset: 0.06
-  * CreateTown: 0.03
-  * CreateDungeon: 16.38
-      * Level 1: 2.79
-	  * Level 2: 3.86
-	  * Level 3: 4.39
-	  * Level 4: 3.42
-	  * Level 5: 2.23
-  * CreateMoon: 1.66
-  * CreateFeatures: 0.003
-  * CreatePlayer: 0.01
- 
+* 050 - 20220901 
 
 ## Credit Due
 
@@ -89,157 +74,19 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * Fire  = Damage    , Level 3
 * Water = Heal      , Level 4
 
-# Universal Tables for all SPLORR!! SQLite based games
 
-## CharacterEquipSlots
+| **KC Table** | **Purpose** | **Note** |
+|:---|:---|:---|
+| CharacterEquipSlots | Items equipped on a character in an equip slot. |  |
+| CharacterLocations | Locations known to a character. | Perhaps a visit count should also be tracked? |
+| CharacterSpells | Tracks knowledge levels for spells for a character. | Perhaps a little specific? Can spells be considered skills or some other sort of statistic? |
+| CharacterStatisticTypes | Metadata about Character Statistic Types. | Should I combine different statistic types into a single table? |
+| CharacterStatistics | Associates a statistic value with a character for a particular statistic. |  |
+| CharacterTypeEnemies | This is a very "us or them" table. A record present means a one sided enmity exists. | Perhaps a faction mechanism and some way to store a non-binary relationship level. |
+| CharacterTypeInitialStaticis | Gives the initial values for a given character type with the statistics in question. |  |
+| CharacterTypeSpawnCounts | Tells me how many of what thing shows up on a given dungeon level. | Move to more of a biome mechanism. |
 
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| CharacterId | INT | FK Characters |
-| EquipSlot | INT | Implementation Specific |
-| ItemId | INT | FK Items |
-
-## CharacterLocations
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| CharacterId | INT | FK Characters |
-| LocationId | INT | FK Locations |
-
-## CharacterStatistics
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| CharacterId | INT | FK Characters |
-| StatisticType | INT | Implementation Specific |
-| StatisticValue | INT | Statistic Value |
-
-## Characters
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| CharacterId | INT | PK |
-| LocationId | INT | FK to Locations |
-| CharacterType | INT | Implementation Specific |
-
-## Inventories
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| InventoryId | INT | PK |
-| CharacterId | INT? | FK Characters |
-| LocationId | INT? | FK Locations |
-
-CK CharacterId IS NULL OR LocationId IS NULL, but not both!
-
-## InventoryItems
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| InventoryId | INT | FK Inventories |
-| ItemId | INT | FK Items |
-
-## ItemStatistics
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| ItemId | INT | FK Items |
-| StatisticType | INT | Implementation Specific |
-| StatisticValue | INT | Statististic Value |
-
-## Items
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| ItemId | INT | PK |
-| ItemType | INT | Implementation Specific |
-
-## LocationStatistics
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| LocationId | INT | FK Locations |
-| StatisticType | INT | Implementation Specific |
-| StatisticValue | INT | Statistic Value |
-
-## Locations
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| LocationId | INT | PK |
-| LocationType | INT | Implementation Specific |
-
-## Players
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| PlayerId | INT | CK=1 |
-| CharacterId | INT | FK Characters |
-
-## Routes
-
-| Column Name | Type | Purpose |
-| --- | --- | --- |
-| RouteId | INT | PK |
-| FromLocationId | INT | FK Locations |
-| ToLocationId | INT | FK Locations |
-| RouteType | INT | Implementation Specific |
-| Direction | INT | Implementation Specific |
-
-# Useful Queries
-
-## Creatures By Level
-
-```
-SELECT 
-	COUNT(c.CharacterId), ls.StatisticValue
-FROM 
-	Characters c
-	JOIN Locations l ON c.LocationId=l.LocationId
-	JOIN LocationStatistics ls ON ls.LocationId=l.LocationId AND ls.StatisticType=1
-GROUP BY
-	ls.StatisticValue
-```
 
 # Notes
 
 https://www.aardwolf.com/
-
-# Entity Count
-
-```
-struct Item {
-	unsigned char item_type;
-	unsigned char wear;
-};
-struct Route {
-	unsigned char route_type: 4;
-	unsigned short destination;
-};
-struct Location {//41 bytes
-	unsigned char location_type:4;
-	unsigned char feature_type:4;
-	unsigned char level:3;
-	Route routes[8];//3*8=24
-	Item items[8];//2*8=16
-};
-struct World{
-	Location locations[750];//30,750 bytes
-};
-```
-
-* Location: 750
-    * Type
-    * Feature (0..1)
-	* Routes (1..8)
-    	* Type
-		* Destination
-	* Inventory (0..?)
-* Characters: 1200
-    * Type
-    * Statististics (?..23)
-	* Equipment (0..8)
-	* Inventory (0..?)
-* Items: 500
-    * Type
-    * Statistics (0..1)
