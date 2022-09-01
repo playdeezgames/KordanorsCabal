@@ -333,9 +333,9 @@
         Return result
     End Function
     Private Function WearOneWeapon() As ItemType?
-        Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsWeapon)
+        Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsWeapon).ToList
         If items.Any Then
-            Dim item = RNG.FromEnumerable(items)
+            Dim item = RNG.FromList(items)
             item.ReduceDurability(1)
             If item.IsBroken Then
                 WearOneWeapon = item.ItemType
@@ -344,9 +344,9 @@
         End If
     End Function
     Private Function WearOneArmor() As ItemType?
-        Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsArmor)
+        Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsArmor).ToList
         If items.Any Then
-            Dim item = RNG.FromEnumerable(items)
+            Dim item = RNG.FromList(items)
             item.ReduceDurability(1)
             If item.IsBroken Then
                 WearOneArmor = item.ItemType
