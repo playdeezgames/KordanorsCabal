@@ -1,6 +1,5 @@
 ﻿Public Class ItemTypeSpawnLocationTypeData
     Inherits BaseData
-    '[ItemTypeSpawnLocationTypes]([ItemTypeId],[DungeonLevelId],[LocationTypeId])
     Friend Const TableName = "ItemTypeSpawnLocationTypes"
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
     Friend Const DungeonLevelIdColumn = DungeonLevelData.DungeonLevelIdColumn
