@@ -12,7 +12,13 @@
     End Property
 
     '[ItemTypeSpawnLocationTypes]([ItemTypeId],[DungeonLevelId],[LocationTypeId])
-    ReadOnly Property SpawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType))
+    ReadOnly Property OldSpawnLocationTypes As IReadOnlyDictionary(Of Long, HashSet(Of LocationType))
+    ReadOnly Property SpawnLocationTypes(dungeonLevel As DungeonLevel) As HashSet(Of LocationType)
+        Get
+            Return New HashSet(Of LocationType)(WorldData.ItemTypeSpawnLocationType.ReadAll(Id, dungeonLevel.Id).Select(Function(x) LocationType.FromId(WorldData, x)))
+        End Get
+    End Property
+    '[ItemTypeSpawnCounts]([ItemTypeId],[DungeonLevelId],[SpawnDice])
     Private ReadOnly spawnCounts As IReadOnlyDictionary(Of Long, String)
 
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
@@ -94,12 +100,12 @@
         MyBase.New(worldData, itemTypeId)
         Me.Encumbrance = encumbrance
         If spawnLocationTypes Is Nothing Then
-            Me.SpawnLocationTypes =
+            Me.OldSpawnLocationTypes =
                 AllDungeonLevels(StaticWorldData.World).ToDictionary(
                 Function(x) x.Id,
                 Function(x) New HashSet(Of LocationType))
         Else
-            Me.SpawnLocationTypes =
+            Me.OldSpawnLocationTypes =
                 AllDungeonLevels(StaticWorldData.World).ToDictionary(
                 Function(x) x.Id,
                 Function(x) If(spawnLocationTypes.ContainsKey(x.Id), spawnLocationTypes(x.Id), New HashSet(Of LocationType)))

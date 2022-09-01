@@ -58,7 +58,7 @@ End Enum
 Public Module ItemTypeExtensions
     <Extension>
     Function SpawnLocationTypes(itemType As ItemType, level As Long) As HashSet(Of LocationType)
-        Return ItemTypeDescriptors(itemType).SpawnLocationTypes(level)
+        Return ItemTypeDescriptors(itemType).OldSpawnLocationTypes(level)
     End Function
     <Extension>
     Function Name(itemType As ItemType) As String
