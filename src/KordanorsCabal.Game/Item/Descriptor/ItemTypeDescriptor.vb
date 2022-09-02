@@ -22,14 +22,14 @@
     End Property
 
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
-    ReadOnly Property Encumbrance As Long
-    ReadOnly Property AttackDice As Long
-    ReadOnly Property MaximumDamage As Long?
-    ReadOnly Property DefendDice As Long
-    ReadOnly Property MaximumDurability As Long?
-    Friend ReadOnly Property Offer As Long
-    Friend ReadOnly Property Price As Long
-    Friend ReadOnly Property RepairPrice As Long
+    ReadOnly Property Encumbrance As Long 'ItemTypeStatisticType
+    ReadOnly Property AttackDice As Long 'ItemTypeStatisticType
+    ReadOnly Property MaximumDamage As Long? 'ItemTypeStatisticType
+    ReadOnly Property DefendDice As Long 'ItemTypeStatisticType
+    ReadOnly Property MaximumDurability As Long? 'ItemTypeStatisticType
+    Friend ReadOnly Property Offer As Long 'ItemTypeStatisticType
+    Friend ReadOnly Property Price As Long 'ItemTypeStatisticType
+    Friend ReadOnly Property RepairPrice As Long 'ItemTypeStatisticType
 
     '[ItemTypeEquipSlots]([ItemTypeId],[EquipSlotId])
     ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
