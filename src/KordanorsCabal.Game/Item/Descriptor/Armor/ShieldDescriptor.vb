@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.Shield,
-            5,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 2L)),,,,
             2,
             10,

@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.RottenFood,,,,,,,,,,,,,,
+            ItemType.RottenFood,,,,,,,,,,,,,
             Sub(item)
                 StaticWorldData.World.Item.WriteItemType(item.Id, ItemType.Food)
             End Sub,

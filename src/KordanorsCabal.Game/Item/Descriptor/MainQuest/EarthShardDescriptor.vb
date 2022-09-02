@@ -4,7 +4,7 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.EarthShard,,
-            ,,,,, ,
+            ,,,, ,
             ,,,,,,,
             Function(character)
                 Dim location = character.Location

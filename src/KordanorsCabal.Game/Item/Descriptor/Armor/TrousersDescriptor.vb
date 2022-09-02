@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Trousers,,
+            ItemType.Trousers,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 5L)),,,,,,,,
             100,
             MakeList(ShoppeType.BlackMarket))

@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.BrodeSode,
-            10,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             6,
             3,,

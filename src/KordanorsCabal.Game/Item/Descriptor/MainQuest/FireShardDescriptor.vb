@@ -3,7 +3,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.FireShard,,,,,,,,,,,,,,,
+            ItemType.FireShard,,,,,,,,,,,,,,
             Function(character)
                 Dim location = character.Location
                 Return location.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0

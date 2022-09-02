@@ -5,7 +5,7 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.Potion,
-            2,,,,,,,,,
+            ,,,,,,,,
             15,
             MakeList(ShoppeType.Healer),,,,
             Function(character) True,

@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.Shortsword,
-            5,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             4,
             2,,

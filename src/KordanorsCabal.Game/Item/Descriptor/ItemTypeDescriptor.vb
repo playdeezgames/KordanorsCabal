@@ -20,9 +20,18 @@
             Return WorldData.ItemTypeSpawnCount.Read(Id, dungeonLevel.Id)
         End Get
     End Property
+    Private ReadOnly Property ItemTypeStatistic(itemTypeStatisticType As ItemTypeStatisticType) As Long?
+        Get
+            Return WorldData.ItemTypeStatistic.Read(Id, itemTypeStatisticType.Id)
+        End Get
+    End Property
+    ReadOnly Property Encumbrance As Long
+        Get
+            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 1)), 0)
+        End Get
+    End Property
 
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
-    ReadOnly Property Encumbrance As Long 'ItemTypeStatisticType
     ReadOnly Property AttackDice As Long 'ItemTypeStatisticType
     ReadOnly Property MaximumDamage As Long? 'ItemTypeStatisticType
     ReadOnly Property DefendDice As Long 'ItemTypeStatisticType
@@ -72,7 +81,6 @@
     Sub New(
            worldData As WorldData,
            itemTypeId As Long,
-           Optional encumbrance As Long = 0,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional buffs As IReadOnlyDictionary(Of Long, Long) = Nothing,
            Optional attackDice As Long = 0,
@@ -89,7 +97,6 @@
            Optional canUse As Func(Of Character, Boolean) = Nothing,
            Optional use As Action(Of Character) = Nothing)
         MyBase.New(worldData, itemTypeId)
-        Me.Encumbrance = encumbrance
         Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
         Me.Offer = offer
         Me.Price = price
@@ -123,7 +130,7 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, 1)},
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
                 StaticWorldData.World,
-                ItemType.AmuletOfYendor,,
+                ItemType.AmuletOfYendor,
                 MakeList(EquipSlot.FromId(StaticWorldData.World, 6L)),,,,,,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
@@ -132,14 +139,14 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Bong, New TrophyDescriptor(ItemType.Bong, , , 25, MakeList(ShoppeType.BlackMage))},
             {ItemType.BookOfHolyBolt, New ItemTypeDescriptor(
                     StaticWorldData.World,
-                    ItemType.BookOfHolyBolt,,,,,,,,,,
+                    ItemType.BookOfHolyBolt,,,,,,,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.HolyBolt),
                     Sub(character) character.Learn(SpellType.HolyBolt))},
             {ItemType.BookOfPurify, New ItemTypeDescriptor(
                     StaticWorldData.World,
-                    ItemType.BookOfPurify,,,,,,,,,,
+                    ItemType.BookOfPurify,,,,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.Purify),
