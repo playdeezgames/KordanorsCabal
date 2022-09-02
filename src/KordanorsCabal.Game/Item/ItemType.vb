@@ -77,8 +77,8 @@ Public Module ItemTypeExtensions
         ItemTypeDescriptors(itemType).Use.Invoke(character)
     End Sub
     <Extension>
-    Public Function RollSpawnCount(itemType As ItemType, level As Long) As Long
-        Return ItemTypeDescriptors(itemType).RollSpawnCount(level)
+    Public Function RollSpawnCount(itemType As ItemType, dungeonLevel As DungeonLevel) As Long
+        Return ItemTypeDescriptors(itemType).RollSpawnCount(dungeonLevel)
     End Function
     <Extension>
     Public Function EquipSlots(itemType As ItemType) As IEnumerable(Of EquipSlot)

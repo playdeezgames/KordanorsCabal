@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.MoonPortal,,,,,,,,,,,
+            ItemType.MoonPortal,,,,,,,,,,
             5000,
             MakeList(ShoppeType.BlackMage),,,,
             Function(character) character.Location.IsDungeon,

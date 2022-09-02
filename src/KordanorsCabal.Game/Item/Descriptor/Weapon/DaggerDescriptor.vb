@@ -6,9 +6,6 @@
             StaticWorldData.World,
             ItemType.Dagger,
             1,
-            MakeDictionary(
-                (1L, "4d6"),
-                (2L, "2d6")),
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             2,
             1,,

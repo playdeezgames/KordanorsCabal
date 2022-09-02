@@ -6,7 +6,6 @@
             StaticWorldData.World,
             ItemType.Helmet,
             2,
-            MakeDictionary((1L, "3d6")),
             MakeList(EquipSlot.FromId(StaticWorldData.World, 3L)),,,,
             2,
             10,

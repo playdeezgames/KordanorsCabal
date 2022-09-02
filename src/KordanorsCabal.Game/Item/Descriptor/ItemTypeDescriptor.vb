@@ -15,7 +15,6 @@
             Return New HashSet(Of LocationType)(WorldData.ItemTypeSpawnLocationType.ReadAll(Id, dungeonLevel.Id).Select(Function(x) LocationType.FromId(WorldData, x)))
         End Get
     End Property
-    Private ReadOnly oldSpawnCounts As IReadOnlyDictionary(Of Long, String)
     Private ReadOnly Property SpawnCounts(dungeonLevel As DungeonLevel) As String
         Get
             Return WorldData.ItemTypeSpawnCount.Read(Id, dungeonLevel.Id)
@@ -58,15 +57,8 @@
         End If
         Return Nothing
     End Function
-    Function RollSpawnCount(level As Long) As Long
-        If oldSpawnCounts Is Nothing Then
-            Return 0
-        End If
-        Dim dice As String = ""
-        If oldSpawnCounts.TryGetValue(level, dice) Then
-            Return RNG.RollDice(dice)
-        End If
-        Return 0
+    Function RollSpawnCount(dungeonLevel As DungeonLevel) As Long
+        Return RNG.RollDice(SpawnCounts(dungeonLevel))
     End Function
     Friend Function HasOffer(shoppeType As ShoppeType) As Boolean
         Return boughtAt.Contains(shoppeType)
@@ -81,7 +73,6 @@
            worldData As WorldData,
            itemTypeId As Long,
            Optional encumbrance As Long = 0,
-           Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional buffs As IReadOnlyDictionary(Of Long, Long) = Nothing,
            Optional attackDice As Long = 0,
@@ -100,7 +91,6 @@
         MyBase.New(worldData, itemTypeId)
         Me.Encumbrance = encumbrance
         Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
-        Me.oldSpawnCounts = spawnCounts
         Me.Offer = offer
         Me.Price = price
         Me.RepairPrice = repairPrice
@@ -126,18 +116,14 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.AirShard, New AirShardDescriptor},
             {ItemType.AmuletOfDEX, New AmuletDescriptor(ItemType.AmuletOfDEX, 2)},
             {ItemType.AmuletOfHP, New AmuletDescriptor(ItemType.AmuletOfHP,
-                6,
-                MakeDictionary((1L, "1d1")))},
+                6)},
             {ItemType.AmuletOfMana, New AmuletDescriptor(ItemType.AmuletOfMana,
-                8,
-                MakeDictionary((2L, "1d1")))},
-            {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, 5,
-                MakeDictionary((3L, "1d1")))},
-            {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, 1,
-                MakeDictionary((4L, "1d1")))},
+                8)},
+            {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, 5)},
+            {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, 1)},
             {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
                 StaticWorldData.World,
-                ItemType.AmuletOfYendor,,,
+                ItemType.AmuletOfYendor,,
                 MakeList(EquipSlot.FromId(StaticWorldData.World, 6L)),,,,,,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
@@ -146,14 +132,14 @@ Public Module ItemTypeDescriptorUtility
             {ItemType.Bong, New TrophyDescriptor(ItemType.Bong, , , 25, MakeList(ShoppeType.BlackMage))},
             {ItemType.BookOfHolyBolt, New ItemTypeDescriptor(
                     StaticWorldData.World,
-                    ItemType.BookOfHolyBolt,,,,,,,,,,,
+                    ItemType.BookOfHolyBolt,,,,,,,,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.HolyBolt),
                     Sub(character) character.Learn(SpellType.HolyBolt))},
             {ItemType.BookOfPurify, New ItemTypeDescriptor(
                     StaticWorldData.World,
-                    ItemType.BookOfPurify,,,,,,,,,,,
+                    ItemType.BookOfPurify,,,,,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.Purify),

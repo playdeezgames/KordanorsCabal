@@ -4,12 +4,10 @@
 
     Public Sub New(
                   itemTypeId As Long,
-                  statisticType As Long,
-                  Optional spawnCounts As IReadOnlyDictionary(Of Long, String) = Nothing)
+                  statisticType As Long)
         MyBase.New(
             StaticWorldData.World,
             itemTypeId, ,
-            spawnCounts,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 6L)),
             New Dictionary(Of Long, Long) From {{statisticType, 1}})
         buffedStatisticType = statisticType

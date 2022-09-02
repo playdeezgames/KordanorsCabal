@@ -6,7 +6,6 @@
             StaticWorldData.World,
             ItemType.Shield,
             5,
-            MakeDictionary((1L, "3d6")),
             MakeList(EquipSlot.FromId(StaticWorldData.World, 2L)),,,,
             2,
             10,

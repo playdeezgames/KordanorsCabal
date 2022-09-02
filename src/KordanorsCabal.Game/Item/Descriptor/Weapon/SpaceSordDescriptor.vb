@@ -6,8 +6,6 @@
             StaticWorldData.World,
             ItemType.SpaceSord,
             5,
-            MakeDictionary(
-                (6L, "1d1")),
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             10,
             5,,

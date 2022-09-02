@@ -5,9 +5,7 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.WaterShard,,
-            MakeDictionary(
-                (4L, "1d1")),,,,,, ,
-            ,,,,,,,
+            ,,,,,,,,,,,,,
             Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
             Sub(character)
                 character.CurrentMana -= 1

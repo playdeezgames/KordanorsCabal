@@ -5,7 +5,6 @@
             StaticWorldData.World,
             ItemType.PlateMail,
             40,
-            MakeDictionary((2L, "1d6")),
             MakeList(EquipSlot.FromId(StaticWorldData.World, 4L)),,,,
             4,
             50,

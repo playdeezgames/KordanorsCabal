@@ -132,7 +132,7 @@ Public Class Store
                 [{tableName}] 
             WHERE 
                 [{firstInputColumnValue.Item1}]=@{firstInputColumnValue.Item1} 
-                [{secondInputColumnValue.Item1}]=@{secondInputColumnValue.Item1};",
+                AND [{secondInputColumnValue.Item1}]=@{secondInputColumnValue.Item1};",
             MakeParameter($"@{firstInputColumnValue.Item1}", firstInputColumnValue.Item2),
             MakeParameter($"@{secondInputColumnValue.Item1}", secondInputColumnValue.Item2))
     End Function

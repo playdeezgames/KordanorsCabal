@@ -170,7 +170,7 @@ Public Module World
 
     Private Sub PopulateItems(worldData As WorldData, locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel)
         For Each itemType In AllItemTypes
-            Dim itemCount As Long = itemType.RollSpawnCount(dungeonLevel.Id)
+            Dim itemCount As Long = itemType.RollSpawnCount(dungeonLevel)
             While itemCount > 0
                 itemCount -= 1
                 SpawnItem(worldData, locations, dungeonLevel, itemType)

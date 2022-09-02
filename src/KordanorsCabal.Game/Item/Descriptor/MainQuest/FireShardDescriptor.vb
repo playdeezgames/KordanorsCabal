@@ -3,10 +3,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.FireShard,,
-            MakeDictionary(
-                (3L, "1d1")),,,,,, ,
-            ,,,,,,,
+            ItemType.FireShard,,,,,,,,,,,,,,,
             Function(character)
                 Dim location = character.Location
                 Return location.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0

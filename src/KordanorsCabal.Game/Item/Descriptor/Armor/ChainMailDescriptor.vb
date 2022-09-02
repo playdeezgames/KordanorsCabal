@@ -6,7 +6,6 @@
             StaticWorldData.World,
             ItemType.ChainMail,
             20,
-            MakeDictionary((1L, "1d6")),
             MakeList(EquipSlot.FromId(StaticWorldData.World, 4L)),,,
             2,
             2,,

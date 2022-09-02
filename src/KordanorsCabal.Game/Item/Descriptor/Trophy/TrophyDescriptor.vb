@@ -11,6 +11,6 @@
            Optional purify As Action(Of Item) = Nothing,
            Optional canUse As Func(Of Character, Boolean) = Nothing,
            Optional use As Action(Of Character) = Nothing)
-        MyBase.New(StaticWorldData.World, itemTypeId, , , , , , , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purify, canUse, use)
+        MyBase.New(StaticWorldData.World, itemTypeId, , , , , , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purify, canUse, use)
     End Sub
 End Class

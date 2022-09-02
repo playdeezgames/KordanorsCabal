@@ -5,13 +5,7 @@
         MyBase.New(
             StaticWorldData.World,
             ItemType.Potion,
-            2,
-            MakeDictionary(
-                (1L, "3d6"),
-                (2L, "3d6"),
-                (3L, "3d6"),
-                (4L, "3d6"),
-                (5L, "3d6")),,,,,,,,,
+            2,,,,,,,,,
             15,
             MakeList(ShoppeType.Healer),,,,
             Function(character) True,

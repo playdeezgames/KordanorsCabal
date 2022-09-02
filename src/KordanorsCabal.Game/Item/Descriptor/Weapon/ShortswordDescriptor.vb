@@ -6,9 +6,6 @@
             StaticWorldData.World,
             ItemType.Shortsword,
             5,
-            MakeDictionary(
-                (1L, "2d6"),
-                (2L, "1d6")),
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             4,
             2,,
