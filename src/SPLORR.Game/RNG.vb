@@ -71,6 +71,9 @@ Public Module RNG
         Return tally
     End Function
     Public Function MaximumRoll(diceText As String) As Integer
+        If String.IsNullOrWhiteSpace(diceText) Then
+            Return 0
+        End If
         Dim diceSets = diceText.Split("+")
         Dim tally = 0
         For Each diceSet In diceSets
