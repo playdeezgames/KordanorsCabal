@@ -28,6 +28,7 @@ Public Class WorldData
     Public ReadOnly Item As ItemData
     Public ReadOnly ItemStatistic As ItemStatisticData
     Public ReadOnly ItemType As ItemTypeData
+    Public ReadOnly ItemTypeSpawnCount As ItemTypeSpawnCountData
     Public ReadOnly ItemTypeSpawnLocationType As ItemTypeSpawnLocationTypeData
     Public ReadOnly Location As LocationData
     Public ReadOnly LocationDungeonLevel As LocationDungeonLevelData
@@ -65,6 +66,7 @@ Public Class WorldData
         Item = New ItemData(store, Me)
         ItemStatistic = New ItemStatisticData(store, Me)
         ItemType = New ItemTypeData(store, Me)
+        ItemTypeSpawnCount = New ItemTypeSpawnCountData(store, Me)
         ItemTypeSpawnLocationType = New ItemTypeSpawnLocationTypeData(store, Me)
         Location = New LocationData(store, Me)
         LocationType = New LocationTypeData(store, Me)

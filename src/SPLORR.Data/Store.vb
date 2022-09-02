@@ -122,7 +122,21 @@ Public Class Store
             MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2),
             MakeParameter($"@{thirdColumnValue.Item1}", thirdColumnValue.Item2))
     End Function
-    Public Function ReadColumnString(initializer As Action, tableName As String, outputColumnName As String, inputColumnValue As (String, Long)) As String
+    Public Function ReadColumnString(Of TFirst, TSecond)(initializer As Action, tableName As String, outputColumnName As String, firstInputColumnValue As (String, TFirst), secondInputColumnValue As (String, TSecond)) As String
+        initializer()
+        Return ExecuteScalar(
+            Function(o) If(o Is Nothing OrElse TypeOf o Is DBNull, Nothing, CStr(o)),
+            $"SELECT 
+                [{outputColumnName}] 
+            FROM 
+                [{tableName}] 
+            WHERE 
+                [{firstInputColumnValue.Item1}]=@{firstInputColumnValue.Item1} 
+                [{secondInputColumnValue.Item1}]=@{secondInputColumnValue.Item1};",
+            MakeParameter($"@{firstInputColumnValue.Item1}", firstInputColumnValue.Item2),
+            MakeParameter($"@{secondInputColumnValue.Item1}", secondInputColumnValue.Item2))
+    End Function
+    Public Function ReadColumnString(Of TInput)(initializer As Action, tableName As String, outputColumnName As String, inputColumnValue As (String, TInput)) As String
         initializer()
         Return ExecuteScalar(
             Function(o) If(o Is Nothing OrElse TypeOf o Is DBNull, Nothing, CStr(o)),

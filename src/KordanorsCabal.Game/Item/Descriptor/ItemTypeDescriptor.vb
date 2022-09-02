@@ -15,8 +15,12 @@
             Return New HashSet(Of LocationType)(WorldData.ItemTypeSpawnLocationType.ReadAll(Id, dungeonLevel.Id).Select(Function(x) LocationType.FromId(WorldData, x)))
         End Get
     End Property
-    '[ItemTypeSpawnCounts]([ItemTypeId],[DungeonLevelId],[SpawnDice])
-    Private ReadOnly spawnCounts As IReadOnlyDictionary(Of Long, String)
+    Private ReadOnly oldSpawnCounts As IReadOnlyDictionary(Of Long, String)
+    Private ReadOnly Property SpawnCounts(dungeonLevel As DungeonLevel) As String
+        Get
+            Return WorldData.ItemTypeSpawnCount.Read(Id, dungeonLevel.Id)
+        End Get
+    End Property
 
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
     ReadOnly Property Encumbrance As Long
@@ -55,11 +59,11 @@
         Return Nothing
     End Function
     Function RollSpawnCount(level As Long) As Long
-        If spawnCounts Is Nothing Then
+        If oldSpawnCounts Is Nothing Then
             Return 0
         End If
         Dim dice As String = ""
-        If spawnCounts.TryGetValue(level, dice) Then
+        If oldSpawnCounts.TryGetValue(level, dice) Then
             Return RNG.RollDice(dice)
         End If
         Return 0
@@ -96,7 +100,7 @@
         MyBase.New(worldData, itemTypeId)
         Me.Encumbrance = encumbrance
         Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
-        Me.spawnCounts = spawnCounts
+        Me.oldSpawnCounts = spawnCounts
         Me.Offer = offer
         Me.Price = price
         Me.RepairPrice = repairPrice
