@@ -1,5 +1,6 @@
 ﻿Public Class CharacterQuestCompletionData
     Inherits BaseData
+    Implements ICharacterQuestCompletionData
     Friend Const TableName = "CharacterQuestCompletions"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const QuestColumn = "Quest"
@@ -21,7 +22,7 @@
                 FOREIGN KEY([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
-    Sub Write(characterId As Long, quest As Long, completions As Long)
+    Sub Write(characterId As Long, quest As Long, completions As Long) Implements ICharacterQuestCompletionData.Write
         Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
@@ -29,7 +30,7 @@
             (QuestColumn, quest),
             (CompletionsColumn, completions))
     End Sub
-    Function Read(characterId As Long, quest As Long) As Long?
+    Function Read(characterId As Long, quest As Long) As Long? Implements ICharacterQuestCompletionData.Read
         Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -38,7 +39,7 @@
             (QuestColumn, quest))
     End Function
 
-    Friend Sub ClearForCharacter(characterId As Long)
+    Friend Sub ClearForCharacter(characterId As Long) Implements ICharacterQuestCompletionData.ClearForCharacter
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,

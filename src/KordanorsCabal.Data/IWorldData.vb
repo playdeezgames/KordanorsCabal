@@ -2,7 +2,7 @@
     ReadOnly Property Character As ICharacterData
     ReadOnly Property CharacterEquipSlot As ICharacterEquipSlotData
     ReadOnly Property CharacterLocation As ICharacterLocationData
-    ReadOnly Property CharacterQuestCompletion As CharacterQuestCompletionData
+    ReadOnly Property CharacterQuestCompletion As ICharacterQuestCompletionData
     ReadOnly Property CharacterQuest As CharacterQuestData
     ReadOnly Property CharacterSpell As CharacterSpellData
     ReadOnly Property CharacterStatistic As CharacterStatisticData
