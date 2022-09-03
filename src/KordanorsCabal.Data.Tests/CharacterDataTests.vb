@@ -79,4 +79,18 @@
                                  (Columns.CharacterId, characterId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldUpdateTheLocationOfAGivenCharacter()
+        WithCharacterData(
+            Sub(store, subject)
+                Dim characterId = 1L
+                Dim locationId = 2L
+                subject.WriteLocation(characterId, locationId)
+                store.Verify(Sub(x) x.WriteColumnValue(
+                                 It.IsAny(Of Action),
+                                 Tables.Characters,
+                                 (Columns.LocationId, locationId),
+                                 (Columns.CharacterId, characterId)))
+            End Sub)
+    End Sub
 End Class
