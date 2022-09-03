@@ -1,5 +1,6 @@
 Public Class PlayerData
     Inherits BaseData
+    Implements IPlayerData
     Friend Const TableName = "Players"
     Friend Const PlayerIdColumn = "PlayerId"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
@@ -24,7 +25,7 @@ Public Class PlayerData
             );")
     End Sub
 
-    Public Sub WriteDirection(direction As Long)
+    Public Sub WriteDirection(direction As Long) Implements IPlayerData.WriteDirection
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
@@ -32,14 +33,14 @@ Public Class PlayerData
             (PlayerIdColumn, FixedPlayerId))
     End Sub
 
-    Public Function ReadMode() As Long?
+    Public Function ReadMode() As Long? Implements IPlayerData.ReadMode
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName, ModeColumn,
             (PlayerIdColumn, FixedPlayerId))
     End Function
 
-    Public Sub WriteMode(mode As Long)
+    Public Sub WriteMode(mode As Long) Implements IPlayerData.WriteMode
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
@@ -47,7 +48,7 @@ Public Class PlayerData
             (PlayerIdColumn, FixedPlayerId))
     End Sub
 
-    Public Function ReadDirection() As Long?
+    Public Function ReadDirection() As Long? Implements IPlayerData.ReadDirection
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -55,7 +56,7 @@ Public Class PlayerData
             (PlayerIdColumn, FixedPlayerId))
     End Function
 
-    Public Function Read() As Long?
+    Public Function Read() As Long? Implements IPlayerData.Read
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -63,7 +64,7 @@ Public Class PlayerData
             (PlayerIdColumn, FixedPlayerId))
     End Function
 
-    Public Sub Write(characterId As Long, direction As Long, mode As Long)
+    Public Sub Write(characterId As Long, direction As Long, mode As Long) Implements IPlayerData.Write
         Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
@@ -73,7 +74,7 @@ Public Class PlayerData
             (ModeColumn, mode))
     End Sub
 
-    Friend Sub ClearForCharacter(characterId As Long)
+    Friend Sub ClearForCharacter(characterId As Long) Implements IPlayerData.ClearForCharacter
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,

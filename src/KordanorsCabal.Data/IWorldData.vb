@@ -34,6 +34,6 @@
     ReadOnly Property LocationDungeonLevel As LocationDungeonLevelData
     ReadOnly Property LocationStatistic As LocationStatisticData
     ReadOnly Property LocationType As LocationTypeData
-    ReadOnly Property Player As PlayerData
+    ReadOnly Property Player As IPlayerData
     ReadOnly Property Route As RouteData
 End Interface
