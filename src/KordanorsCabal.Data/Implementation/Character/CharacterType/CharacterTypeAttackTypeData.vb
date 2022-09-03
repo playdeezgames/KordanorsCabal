@@ -1,5 +1,6 @@
 ﻿Public Class CharacterTypeAttackTypeData
     Inherits BaseData
+    Implements ICharacterTypeAttackTypeData
     Friend Const TableName = "CharacterTypeAttackTypes"
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Const AttackTypeColumn = "AttackType"
@@ -40,7 +41,7 @@
         MyBase.New(store, world)
     End Sub
 
-    Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of Long, Integer)
+    Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of Long, Integer) Implements ICharacterTypeAttackTypeData.Read
         Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,

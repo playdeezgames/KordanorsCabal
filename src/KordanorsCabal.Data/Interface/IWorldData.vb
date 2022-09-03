@@ -8,7 +8,7 @@
     ReadOnly Property CharacterStatistic As CharacterStatisticData
     ReadOnly Property CharacterStatisticType As CharacterStatisticTypeData
     ReadOnly Property CharacterType As ICharacterTypeData
-    ReadOnly Property CharacterTypeAttackType As CharacterTypeAttackTypeData
+    ReadOnly Property CharacterTypeAttackType As ICharacterTypeAttackTypeData
     ReadOnly Property CharacterTypeBribe As CharacterTypeBribeData
     ReadOnly Property CharacterTypeEnemy As CharacterTypeEnemyData
     ReadOnly Property CharacterTypeInitialStatistic As CharacterTypeInitialStatisticData
