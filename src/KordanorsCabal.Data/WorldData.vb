@@ -1,7 +1,7 @@
 ﻿Imports Microsoft.Data.Sqlite
 
 Public Class WorldData
-    Private ReadOnly Store As Store
+    Private ReadOnly Store As IStore
     Public ReadOnly Character As CharacterData
     Public ReadOnly CharacterEquipSlot As CharacterEquipSlotData
     Public ReadOnly CharacterLocation As CharacterLocationData
@@ -39,7 +39,7 @@ Public Class WorldData
     Public ReadOnly Player As PlayerData
     Public ReadOnly Route As RouteData
 
-    Public Sub New(store As Store)
+    Public Sub New(store As IStore)
         Me.Store = store
         Character = New CharacterData(store, Me)
         CharacterEquipSlot = New CharacterEquipSlotData(store, Me)

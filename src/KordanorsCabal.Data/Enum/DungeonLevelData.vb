@@ -29,7 +29,7 @@
     End Function
     Private ReadOnly nameLookUp As New Dictionary(Of String, Long)
 
-    Public Sub New(store As Store, world As WorldData)
+    Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
         Me.lookUpByName =
             Function(name) store.ReadColumnValue(Of String, Long)(

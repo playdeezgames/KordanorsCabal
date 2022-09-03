@@ -5,7 +5,7 @@
     Friend Const EquipSlotColumn = "EquipSlot"
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
 
-    Public Sub New(store As Store, world As WorldData)
+    Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
     End Sub
 

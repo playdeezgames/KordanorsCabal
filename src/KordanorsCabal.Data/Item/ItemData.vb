@@ -4,7 +4,7 @@
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeColumn = "ItemType"
 
-    Public Sub New(store As Store, world As WorldData)
+    Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
     End Sub
 

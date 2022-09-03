@@ -4,7 +4,7 @@
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const CharacterTypeColumn = "CharacterType"
-    Public Sub New(store As Store, world As WorldData)
+    Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
     End Sub
 
