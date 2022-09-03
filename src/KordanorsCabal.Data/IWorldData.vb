@@ -1,6 +1,6 @@
 ﻿Public Interface IWorldData
     ReadOnly Property Character As ICharacterData
-    ReadOnly Property CharacterEquipSlot As CharacterEquipSlotData
+    ReadOnly Property CharacterEquipSlot As ICharacterEquipSlotData
     ReadOnly Property CharacterLocation As CharacterLocationData
     ReadOnly Property CharacterQuestCompletion As CharacterQuestCompletionData
     ReadOnly Property CharacterQuest As CharacterQuestData
