@@ -6,7 +6,7 @@
             StaticWorldData.World,
             ItemType.WaterShard,
             ,,,,,,,,,,,,,
-            Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
+            "CanUseWaterShard",
             "UseWaterShard")
     End Sub
 End Class

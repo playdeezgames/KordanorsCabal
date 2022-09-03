@@ -8,7 +8,7 @@
             ,,,,,,,,
             15,
             MakeList(ShoppeType.Healer),,,,
-            Function(character) True,
+            "AlwaysTrue",
             "DrinkPotion")
     End Sub
 End Class

@@ -7,7 +7,7 @@
             ItemType.Food,,,,,,,,,
             2,
             MakeList(ShoppeType.InnKeeper),,,,
-            Function(character) True,
+            "AlwaysTrue",
             "EatFood")
     End Sub
 End Class

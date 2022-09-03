@@ -76,6 +76,16 @@
     Private ReadOnly Property UseActionName As String
 
     ReadOnly Property CanUse As Func(Of Character, Boolean)
+        Get
+            Dim result As Func(Of Character, Boolean) = Nothing
+            If CanUseFunctions.TryGetValue(CanUseFunctionName, result) Then
+                Return result
+            End If
+            Return Function(c) False
+        End Get
+    End Property
+    Private ReadOnly CanUseFunctionName As String
+
 
     Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
         If buffs Is Nothing Then
@@ -115,7 +125,7 @@
            Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional purifyActionName As String = Nothing,
-           Optional canUse As Func(Of Character, Boolean) = Nothing,
+           Optional canUseFunctionName As String = Nothing,
            Optional useActionName As String = Nothing)
         MyBase.New(worldData, itemTypeId)
         Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
@@ -131,7 +141,7 @@
         Me.MaximumDurability = maximumDurability
         Me.buffs = buffs
         Me.PurifyActionName = purifyActionName
-        Me.CanUse = If(canUse, Function(character) False)
+        Me.CanUseFunctionName = canUseFunctionName
         Me.UseActionName = useActionName
     End Sub
 End Class
@@ -161,14 +171,14 @@ Public Module ItemTypeDescriptorUtility
                     ItemType.BookOfHolyBolt,,,,,,,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
-                    Function(character) character.CanLearn(SpellType.HolyBolt),
+                    "CanLearnHolyBolt",
                     "LearnHolyBolt")},
             {ItemType.BookOfPurify, New ItemTypeDescriptor(
                     StaticWorldData.World,
                     ItemType.BookOfPurify,,,,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
-                    Function(character) character.CanLearn(SpellType.Purify),
+                    "CanLearnPurify",
                     "LearnPurify")},
             {ItemType.Bottle, New BottleDescriptor},
             {ItemType.BrodeSode, New BrodeSodeDescriptor},

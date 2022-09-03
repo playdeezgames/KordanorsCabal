@@ -226,4 +226,40 @@
                     End If
                 End Sub}
         }
+    Friend ReadOnly CanUseFunctions As IReadOnlyDictionary(Of String, Func(Of Character, Boolean)) =
+        New Dictionary(Of String, Func(Of Character, Boolean)) From
+        {
+            {"CanLearnHolyBolt", Function(character) character.CanLearn(SpellType.HolyBolt)},
+            {"CanUseBeer", Function(character)
+                               Dim enemy = character.Location.Enemy(character)
+                               Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.Beer)
+                           End Function},
+            {"IsInDungeon", Function(character) character.Location.IsDungeon},
+            {"AlwaysTrue", Function(character) True},
+            {"IsFightingUndead", Function(character) character.CanFight AndAlso character.Location.Enemy(character).IsUndead},
+            {"CanUseRottenEgg", Function(character)
+                                    Dim enemy = character.Location.Enemy(character)
+                                    Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.RottenEgg))
+                                End Function},
+            {"HasBong", Function(character) character.Inventory.ItemsOfType(ItemType.Bong).Any},
+            {"CanUseAirShard", Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},
+            {"CanUseEarthShard", Function(character)
+                                     Dim location = character.Location
+                                     Return location.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0
+                                 End Function},
+            {"CanUsePr0n", Function(character)
+                               Dim enemy = character.Location.Enemy(character)
+                               Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.Pr0n)) OrElse enemy Is Nothing
+                           End Function},
+            {"CanUseFireShard", Function(character)
+                                    Dim location = character.Location
+                                    Return location.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0
+                                End Function},
+            {"CanUseWaterShard", Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},
+            {"CanUseBottle", Function(character)
+                                 Dim enemy = character.Location.Enemy(character)
+                                 Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.Bottle)
+                             End Function},
+            {"CanLearnPurify", Function(character) character.CanLearn(SpellType.Purify)}
+        }
 End Module

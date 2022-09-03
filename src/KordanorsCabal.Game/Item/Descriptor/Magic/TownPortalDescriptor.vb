@@ -7,7 +7,7 @@
             ItemType.TownPortal,,,,,,,,,
             50,
             MakeList(ShoppeType.BlackMage),,,,
-            Function(character) character.Location.IsDungeon,
+            "IsInDungeon",
             "UseTownPortal")
     End Sub
 End Class

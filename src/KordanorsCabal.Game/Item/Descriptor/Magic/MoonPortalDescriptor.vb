@@ -7,7 +7,7 @@
             ItemType.MoonPortal,,,,,,,,,
             5000,
             MakeList(ShoppeType.BlackMage),,,,
-            Function(character) character.Location.IsDungeon,
+            "IsInDungeon",
             "UseMoonPortal")
     End Sub
 End Class

@@ -6,7 +6,7 @@
             StaticWorldData.World,
             ItemType.RottenFood,,,,,,,,,,,,,
             "PurifyFood",
-            Function(character) True,
+            "AlwaysTrue",
             "UseRottenFood")
     End Sub
 End Class

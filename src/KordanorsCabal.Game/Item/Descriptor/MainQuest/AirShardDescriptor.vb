@@ -6,7 +6,7 @@
             StaticWorldData.World,
             ItemType.AirShard,
             ,,,,,,,,,,,,,
-            Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
+            "CanUseAirShard",
             "UseAirShard")
     End Sub
 End Class

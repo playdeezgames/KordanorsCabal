@@ -25,7 +25,7 @@
             ItemType.MagicEgg,
             100,
             MakeList(ShoppeType.BlackMage),,,,,,
-            Function(character) True,
+            "AlwaysTrue",
             "UseMagicEgg")
     End Sub
 End Class

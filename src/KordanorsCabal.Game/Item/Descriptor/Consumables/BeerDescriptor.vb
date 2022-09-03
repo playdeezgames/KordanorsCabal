@@ -8,10 +8,7 @@
             ,,,,,,,,
             5,
             MakeList(ShoppeType.InnKeeper),,,,
-            Function(character)
-                Dim enemy = character.Location.Enemy(character)
-                Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.Beer)
-            End Function,
+            "CanUseBeer",
             "UseBeer")
     End Sub
 End Class

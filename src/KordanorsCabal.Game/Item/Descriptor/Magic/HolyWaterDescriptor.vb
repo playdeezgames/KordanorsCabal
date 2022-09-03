@@ -7,7 +7,7 @@
             ItemType.HolyWater,,,,,,,,,
             10,
             MakeList(ShoppeType.Healer),,,,
-            Function(character) character.CanFight AndAlso character.Location.Enemy(character).IsUndead,
+            "IsFightingUndead",
             "UseHolyWater")
     End Sub
 End Class

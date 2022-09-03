@@ -9,8 +9,8 @@
            Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional purifyActionName As String = Nothing,
-           Optional canUse As Func(Of Character, Boolean) = Nothing,
+           Optional canUseFunctionName As String = Nothing,
            Optional useActionName As String = Nothing)
-        MyBase.New(StaticWorldData.World, itemTypeId, , , , , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purifyActionName, canUse, useActionName)
+        MyBase.New(StaticWorldData.World, itemTypeId, , , , , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purifyActionName, canUseFunctionName, useActionName)
     End Sub
 End Class

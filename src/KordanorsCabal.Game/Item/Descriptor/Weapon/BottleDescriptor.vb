@@ -9,10 +9,7 @@
             2,
             1,,
             3,,,,,,,,
-            Function(character)
-                Dim enemy = character.Location.Enemy(character)
-                Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.Bottle)
-            End Function,
+            "CanUseBottle",
             "UseBotttle")
     End Sub
 End Class

@@ -7,7 +7,7 @@
             ItemType.Herb,,,,,,,,,
             5,
             MakeList(ShoppeType.BlackMage),,,,
-            Function(character) character.Inventory.ItemsOfType(ItemType.Bong).Any,
+            "HasBong",
             "UseHerb")
     End Sub
 End Class
