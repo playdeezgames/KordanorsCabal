@@ -15,7 +15,7 @@
             Return If(WorldData.CharacterType.ReadIsUndead(Id), 0) > 0
         End Get
     End Property
-    Sub New(worldData As WorldData, characterTypeId As Long)
+    Friend Sub New(worldData As IWorldData, characterTypeId As Long)
         MyBase.New(worldData, characterTypeId)
     End Sub
     Function InitialStatistics(worldData As WorldData) As IReadOnlyList(Of (CharacterStatisticType, Long))
@@ -23,7 +23,7 @@
             CharacterTypeInitialStatistic.ReadAllForCharacterType(Id).
             Select(Function(x) (CharacterStatisticType.FromId(worldData, x.Item1), x.Item2)).ToList
     End Function
-    Function MaximumEncumbrance(worldData As WorldData, character As Character) As Long
+    Function MaximumEncumbrance(worldData As IWorldData, character As Character) As Long
         Return If(
             character.GetStatistic(CharacterStatisticType.FromId(worldData, 24L)), 0) +
             If(
@@ -66,7 +66,7 @@
     Function SpawnCount(level As DungeonLevel) As Long
         Return If(WorldData.CharacterTypeSpawnCount.ReadSpawnCount(Id, level.Id), 0)
     End Function
-    Shared Function FromId(worldData As WorldData, characterTypeId As Long) As CharacterType
+    Shared Function FromId(worldData As IWorldData, characterTypeId As Long) As CharacterType
         Return New CharacterType(worldData, characterTypeId)
     End Function
 End Class

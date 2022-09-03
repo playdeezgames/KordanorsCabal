@@ -1,6 +1,6 @@
 ﻿Public Class Character
     Inherits BaseThingie
-    Sub New(worldData As WorldData, characterId As Long)
+    Sub New(worldData As IWorldData, characterId As Long)
         MyBase.New(worldData, characterId)
     End Sub
     ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
@@ -128,7 +128,7 @@
             WorldData.CharacterLocation.Write(Id, value.Id)
         End Set
     End Property
-    Shared Function FromId(worldData As WorldData, characterId As Long) As Character
+    Shared Function FromId(worldData As IWorldData, characterId As Long) As Character
         Return New Character(worldData, characterId)
     End Function
     Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?

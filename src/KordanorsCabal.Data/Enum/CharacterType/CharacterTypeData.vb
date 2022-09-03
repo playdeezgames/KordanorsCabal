@@ -1,5 +1,6 @@
 ﻿Public Class CharacterTypeData
     Inherits BaseData
+    Implements ICharacterTypeData
     Friend Const TableName = "CharacterTypes"
     Friend Const CharacterTypeIdColumn = "CharacterTypeId"
     Friend Const CharacterTypeNameColumn = "CharacterTypeName"
@@ -42,7 +43,7 @@
                 FROM [cte];")
     End Sub
 
-    Public Function ReadIsUndead(characterTypeId As Long) As Long?
+    Public Function ReadIsUndead(characterTypeId As Long) As Long? Implements ICharacterTypeData.ReadIsUndead
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -50,7 +51,7 @@
             (CharacterTypeIdColumn, characterTypeId))
     End Function
 
-    Public Function ReadXPValue(characterTypeId As Long) As Long?
+    Public Function ReadXPValue(characterTypeId As Long) As Long? Implements ICharacterTypeData.ReadXPValue
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -62,7 +63,7 @@
         MyBase.New(store, world)
     End Sub
 
-    Public Function ReadMoneyDropDice(characterTypeId As Long) As String
+    Public Function ReadMoneyDropDice(characterTypeId As Long) As String Implements ICharacterTypeData.ReadMoneyDropDice
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,
@@ -70,7 +71,7 @@
             (CharacterTypeIdColumn, characterTypeId))
     End Function
 
-    Public Function ReadName(characterTypeId As Long) As String
+    Public Function ReadName(characterTypeId As Long) As String Implements ICharacterTypeData.ReadName
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,
@@ -78,7 +79,7 @@
             (CharacterTypeIdColumn, characterTypeId))
     End Function
 
-    Public Function ReadAll() As IEnumerable(Of Long)
+    Public Function ReadAll() As IEnumerable(Of Long) Implements ICharacterTypeData.ReadAll
         Return Store.ReadRecords(Of Long)(
             AddressOf Initialize,
             TableName,

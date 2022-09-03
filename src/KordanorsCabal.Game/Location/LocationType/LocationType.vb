@@ -1,9 +1,9 @@
 ﻿Public Class LocationType
     Inherits BaseThingie
-    Sub New(worldData As WorldData, locationTypeId As Long)
+    Sub New(worldData As IWorldData, locationTypeId As Long)
         MyBase.New(worldData, locationTypeId)
     End Sub
-    Private Sub New(worldData As WorldData, name As String)
+    Private Sub New(worldData As IWorldData, name As String)
         Me.New(worldData, worldData.LocationType.ReadForName(name).Value)
     End Sub
     ReadOnly Property Name As String
@@ -26,7 +26,7 @@
             Return WorldData.LocationType.ReadRequiresMP(Id)
         End Get
     End Property
-    Shared Function FromId(worldData As WorldData, locationTypeId As Long?) As LocationType
+    Shared Function FromId(worldData As IWorldData, locationTypeId As Long?) As LocationType
         Return If(locationTypeId.HasValue, New LocationType(worldData, locationTypeId.Value), Nothing)
     End Function
     Public Shared Operator =(first As LocationType, second As LocationType) As Boolean

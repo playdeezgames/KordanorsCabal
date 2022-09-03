@@ -1,6 +1,6 @@
 ﻿Public Class Location
     Inherits BaseThingie
-    Public Sub New(worldData As WorldData, locationId As Long)
+    Public Sub New(worldData As IWorldData, locationId As Long)
         MyBase.New(worldData, locationId)
     End Sub
     Property LocationType As LocationType
@@ -12,7 +12,7 @@
         End Set
     End Property
 
-    Friend Shared Function FromLocationType(worldData As WorldData, locationType As LocationType) As IEnumerable(Of Location)
+    Friend Shared Function FromLocationType(worldData As IWorldData, locationType As LocationType) As IEnumerable(Of Location)
         Return worldData.Location.ReadForLocationType(locationType.Id).Select(Function(x) FromId(worldData, x))
     End Function
     Shared Function Create(worldData As WorldData, locationType As LocationType) As Location
@@ -38,7 +38,7 @@
     Public Function HasStairs() As Boolean
         Return WorldData.Route.ReadForLocationRouteType(Id, RouteType.Stairs).Any()
     End Function
-    Shared Function FromId(worldData As WorldData, locationId As Long?) As Location
+    Shared Function FromId(worldData As IWorldData, locationId As Long?) As Location
         Return If(locationId.HasValue, New Location(worldData, locationId.Value), Nothing)
     End Function
     ReadOnly Property Name As String

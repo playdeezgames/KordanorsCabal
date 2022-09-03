@@ -28,6 +28,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stuff", "Stuff", "{D804FB32
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KordanorsCabal.Data.Tests", "KordanorsCabal.Data.Tests\KordanorsCabal.Data.Tests.vbproj", "{F46D9E73-2E95-41ED-9511-9E2BC744EA70}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FB9CA904-159A-4AEE-A831-15FDB7B890A1}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KordanorsCabal.Game.Tests", "KordanorsCabal.Game.Tests\KordanorsCabal.Game.Tests.vbproj", "{B2C33B22-8784-4920-B8DF-E6D6898C529A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +70,10 @@ Global
 		{F46D9E73-2E95-41ED-9511-9E2BC744EA70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F46D9E73-2E95-41ED-9511-9E2BC744EA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F46D9E73-2E95-41ED-9511-9E2BC744EA70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C33B22-8784-4920-B8DF-E6D6898C529A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C33B22-8784-4920-B8DF-E6D6898C529A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C33B22-8784-4920-B8DF-E6D6898C529A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C33B22-8784-4920-B8DF-E6D6898C529A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +82,8 @@ Global
 		{CBCCBA1F-C0C1-4D5C-85AC-E32DBA7010B4} = {73A8B05A-0657-49EA-982D-9D80F071DE33}
 		{F39F467C-5FE7-4C7E-B508-3FE05F415162} = {73A8B05A-0657-49EA-982D-9D80F071DE33}
 		{E9FA3BA7-C4C2-4E97-B796-122B55D85FA4} = {73A8B05A-0657-49EA-982D-9D80F071DE33}
+		{F46D9E73-2E95-41ED-9511-9E2BC744EA70} = {FB9CA904-159A-4AEE-A831-15FDB7B890A1}
+		{B2C33B22-8784-4920-B8DF-E6D6898C529A} = {FB9CA904-159A-4AEE-A831-15FDB7B890A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {741B6EED-D48D-475D-97FF-93E40E8C524A}

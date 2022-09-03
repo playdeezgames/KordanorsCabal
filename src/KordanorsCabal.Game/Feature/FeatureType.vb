@@ -15,7 +15,7 @@
             Return CType(WorldData.FeatureType.ReadInteractionMode(Id).Value, PlayerMode)
         End Get
     End Property
-    Sub New(worldData As WorldData, featureTypeId As Long)
+    Sub New(worldData As IWorldData, featureTypeId As Long)
         MyBase.New(worldData, featureTypeId)
     End Sub
 End Class

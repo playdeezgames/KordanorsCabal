@@ -1,12 +1,12 @@
 ﻿Public Class Route
     Inherits BaseThingie
-    Public Sub New(worldData As WorldData, routeId As Long)
+    Public Sub New(worldData As IWorldData, routeId As Long)
         MyBase.New(worldData, routeId)
     End Sub
-    Public Shared Function FromId(worldData As WorldData, routeId As Long?) As Route
+    Public Shared Function FromId(worldData As IWorldData, routeId As Long?) As Route
         Return If(routeId.HasValue, New Route(worldData, routeId.Value), Nothing)
     End Function
-    Public Shared Function Create(worldData As WorldData, location As Location, direction As Direction, routeType As RouteType, toLocation As Location) As Route
+    Public Shared Function Create(worldData As IWorldData, location As Location, direction As Direction, routeType As RouteType, toLocation As Location) As Route
         Return FromId(worldData, worldData.Route.Create(location.Id, direction.Id, routeType, toLocation.Id))
     End Function
     Friend ReadOnly Property ToLocation As Location

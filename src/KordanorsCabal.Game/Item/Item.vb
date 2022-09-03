@@ -1,12 +1,12 @@
 ﻿Public Class Item
     Inherits BaseThingie
-    Sub New(worldData As WorldData, itemId As Long)
+    Sub New(worldData As IWorldData, itemId As Long)
         MyBase.New(worldData, itemId)
     End Sub
-    Shared Function FromId(worldData As WorldData, itemId As Long?) As Item
+    Shared Function FromId(worldData As IWorldData, itemId As Long?) As Item
         Return If(itemId.HasValue, New Item(worldData, itemId.Value), Nothing)
     End Function
-    Shared Function Create(worldData As WorldData, itemType As ItemType) As Item
+    Shared Function Create(worldData As IWorldData, itemType As ItemType) As Item
         Return FromId(worldData, worldData.Item.Create(itemType))
     End Function
     Public ReadOnly Property ItemType As ItemType

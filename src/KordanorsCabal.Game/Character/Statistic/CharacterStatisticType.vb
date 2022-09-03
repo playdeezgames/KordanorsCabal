@@ -1,12 +1,12 @@
 ﻿Public Class CharacterStatisticType
     Inherits BaseThingie
-    Sub New(worldData As WorldData, characterStatisticTypeId As Long)
+    Sub New(worldData As IWorldData, characterStatisticTypeId As Long)
         MyBase.New(worldData, characterStatisticTypeId)
     End Sub
-    Private Sub New(worldData As WorldData, characterStatisticTypeName As String)
+    Private Sub New(worldData As IWorldData, characterStatisticTypeName As String)
         Me.New(worldData, worldData.CharacterStatisticType.ReadForName(characterStatisticTypeName).Value)
     End Sub
-    Public Shared Function FromId(worldData As WorldData, statisticTypeId As Long) As CharacterStatisticType
+    Public Shared Function FromId(worldData As IWorldData, statisticTypeId As Long) As CharacterStatisticType
         Return New CharacterStatisticType(worldData, statisticTypeId)
     End Function
     ReadOnly Property DefaultValue As Long?

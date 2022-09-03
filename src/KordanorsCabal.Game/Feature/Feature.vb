@@ -1,13 +1,13 @@
 ﻿Public Class Feature
     Inherits BaseThingie
-    Sub New(worldData As WorldData, featureId As Long)
+    Sub New(worldData As IWorldData, featureId As Long)
         MyBase.New(worldData, featureId)
     End Sub
-    Shared Function FromId(worldData As WorldData, featureId As Long?) As Feature
+    Shared Function FromId(worldData As IWorldData, featureId As Long?) As Feature
         Return If(featureId.HasValue, New Feature(worldData, featureId.Value), Nothing)
     End Function
 
-    Friend Shared Function Create(worldData As WorldData, featureType As FeatureType, location As Location) As Feature
+    Friend Shared Function Create(worldData As IWorldData, featureType As FeatureType, location As Location) As Feature
         Return FromId(worldData, worldData.Feature.Create(featureType.Id, location.Id))
     End Function
 

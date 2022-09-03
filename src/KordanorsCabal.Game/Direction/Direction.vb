@@ -1,12 +1,12 @@
 ﻿Public Class Direction
     Inherits BaseThingie
-    Sub New(worldData As WorldData, directionId As Long)
+    Sub New(worldData As IWorldData, directionId As Long)
         MyBase.New(worldData, directionId)
     End Sub
-    Private Sub New(worldData As WorldData, directionName As String)
+    Private Sub New(worldData As IWorldData, directionName As String)
         Me.New(worldData, worldData.Direction.ReadForName(directionName).Value)
     End Sub
-    Shared Function FromId(worldData As WorldData, directionId As Long?) As Direction
+    Shared Function FromId(worldData As IWorldData, directionId As Long?) As Direction
         Return If(directionId.HasValue, New Direction(worldData, directionId.Value), Nothing)
     End Function
     ReadOnly Property Name As String

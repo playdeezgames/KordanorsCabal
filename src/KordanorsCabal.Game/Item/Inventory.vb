@@ -1,9 +1,9 @@
 ﻿Public Class Inventory
     Inherits BaseThingie
-    Sub New(worldData As WorldData, inventoryId As Long)
+    Sub New(worldData As IWorldData, inventoryId As Long)
         MyBase.New(worldData, inventoryId)
     End Sub
-    Shared Function FromId(worldData As WorldData, inventoryId As Long) As Inventory
+    Shared Function FromId(worldData As IWorldData, inventoryId As Long) As Inventory
         Return New Inventory(worldData, inventoryId)
     End Function
     ReadOnly Property IsEmpty As Boolean

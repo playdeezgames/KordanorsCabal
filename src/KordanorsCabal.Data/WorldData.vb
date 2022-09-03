@@ -1,44 +1,45 @@
 ﻿Imports Microsoft.Data.Sqlite
 
 Public Class WorldData
+    Implements IWorldData
     Private ReadOnly Store As IStore
-    Public ReadOnly Character As CharacterData
-    Public ReadOnly CharacterEquipSlot As CharacterEquipSlotData
-    Public ReadOnly CharacterLocation As CharacterLocationData
-    Public ReadOnly CharacterQuestCompletion As CharacterQuestCompletionData
-    Public ReadOnly CharacterQuest As CharacterQuestData
-    Public ReadOnly CharacterSpell As CharacterSpellData
-    Public ReadOnly CharacterStatistic As CharacterStatisticData
-    Public ReadOnly CharacterStatisticType As CharacterStatisticTypeData
-    Public ReadOnly CharacterType As CharacterTypeData
-    Public ReadOnly CharacterTypeAttackType As CharacterTypeAttackTypeData
-    Public ReadOnly CharacterTypeBribe As CharacterTypeBribeData
-    Public ReadOnly CharacterTypeEnemy As CharacterTypeEnemyData
-    Public ReadOnly CharacterTypeInitialStatistic As CharacterTypeInitialStatisticData
-    Public ReadOnly CharacterTypeLoot As CharacterTypeLootData
-    Public ReadOnly CharacterTypePartingShot As CharacterTypePartingShotData
-    Public ReadOnly CharacterTypeSpawnCount As CharacterTypeSpawnCountData
-    Public ReadOnly CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData
-    Public ReadOnly Direction As DirectionData
-    Public ReadOnly DungeonLevel As DungeonLevelData
-    Public ReadOnly EquipSlot As EquipSlotData
-    Public ReadOnly Feature As FeatureData
-    Public ReadOnly FeatureType As FeatureTypeData
-    Public ReadOnly Inventory As InventoryData
-    Public ReadOnly InventoryItem As InventoryItemData
-    Public ReadOnly Item As ItemData
-    Public ReadOnly ItemStatistic As ItemStatisticData
-    Public ReadOnly ItemType As ItemTypeData
-    Public ReadOnly ItemTypeSpawnCount As ItemTypeSpawnCountData
-    Public ReadOnly ItemTypeSpawnLocationType As ItemTypeSpawnLocationTypeData
-    Public ReadOnly ItemTypeStatistic As ItemTypeStatisticData
-    Public ReadOnly ItemTypeStatisticType As ItemTypeStatisticTypeData
-    Public ReadOnly Location As LocationData
-    Public ReadOnly LocationDungeonLevel As LocationDungeonLevelData
-    Public ReadOnly LocationStatistic As LocationStatisticData
-    Public ReadOnly LocationType As LocationTypeData
-    Public ReadOnly Player As PlayerData
-    Public ReadOnly Route As RouteData
+    Public ReadOnly Property Character As CharacterData Implements IWorldData.Character
+    Public ReadOnly Property CharacterEquipSlot As CharacterEquipSlotData Implements IWorldData.CharacterEquipSlot
+    Public ReadOnly Property CharacterLocation As CharacterLocationData Implements IWorldData.CharacterLocation
+    Public ReadOnly Property CharacterQuestCompletion As CharacterQuestCompletionData Implements IWorldData.CharacterQuestCompletion
+    Public ReadOnly Property CharacterQuest As CharacterQuestData Implements IWorldData.CharacterQuest
+    Public ReadOnly Property CharacterSpell As CharacterSpellData Implements IWorldData.CharacterSpell
+    Public ReadOnly Property CharacterStatistic As CharacterStatisticData Implements IWorldData.CharacterStatistic
+    Public ReadOnly Property CharacterStatisticType As CharacterStatisticTypeData Implements IWorldData.CharacterStatisticType
+    Public ReadOnly Property CharacterType As ICharacterTypeData Implements IWorldData.CharacterType
+    Public ReadOnly Property CharacterTypeAttackType As CharacterTypeAttackTypeData Implements IWorldData.CharacterTypeAttackType
+    Public ReadOnly Property CharacterTypeBribe As CharacterTypeBribeData Implements IWorldData.CharacterTypeBribe
+    Public ReadOnly Property CharacterTypeEnemy As CharacterTypeEnemyData Implements IWorldData.CharacterTypeEnemy
+    Public ReadOnly Property CharacterTypeInitialStatistic As CharacterTypeInitialStatisticData Implements IWorldData.CharacterTypeInitialStatistic
+    Public ReadOnly Property CharacterTypeLoot As CharacterTypeLootData Implements IWorldData.CharacterTypeLoot
+    Public ReadOnly Property CharacterTypePartingShot As CharacterTypePartingShotData Implements IWorldData.CharacterTypePartingShot
+    Public ReadOnly Property CharacterTypeSpawnCount As CharacterTypeSpawnCountData Implements IWorldData.CharacterTypeSpawnCount
+    Public ReadOnly Property CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData Implements IWorldData.CharacterTypeSpawnLocation
+    Public ReadOnly Property Direction As DirectionData Implements IWorldData.Direction
+    Public ReadOnly Property DungeonLevel As DungeonLevelData Implements IWorldData.DungeonLevel
+    Public ReadOnly Property EquipSlot As EquipSlotData Implements IWorldData.EquipSlot
+    Public ReadOnly Property Feature As FeatureData Implements IWorldData.Feature
+    Public ReadOnly Property FeatureType As FeatureTypeData Implements IWorldData.FeatureType
+    Public ReadOnly Property Inventory As InventoryData Implements IWorldData.Inventory
+    Public ReadOnly Property InventoryItem As InventoryItemData Implements IWorldData.InventoryItem
+    Public ReadOnly Property Item As ItemData Implements IWorldData.Item
+    Public ReadOnly Property ItemStatistic As ItemStatisticData Implements IWorldData.ItemStatistic
+    Public ReadOnly Property ItemType As ItemTypeData Implements IWorldData.ItemType
+    Public ReadOnly Property ItemTypeSpawnCount As ItemTypeSpawnCountData Implements IWorldData.ItemTypeSpawnCount
+    Public ReadOnly Property ItemTypeSpawnLocationType As ItemTypeSpawnLocationTypeData Implements IWorldData.ItemTypeSpawnLocationType
+    Public ReadOnly Property ItemTypeStatistic As ItemTypeStatisticData Implements IWorldData.ItemTypeStatistic
+    Public ReadOnly Property ItemTypeStatisticType As ItemTypeStatisticTypeData Implements IWorldData.ItemTypeStatisticType
+    Public ReadOnly Property Location As LocationData Implements IWorldData.Location
+    Public ReadOnly Property LocationDungeonLevel As LocationDungeonLevelData Implements IWorldData.LocationDungeonLevel
+    Public ReadOnly Property LocationStatistic As LocationStatisticData Implements IWorldData.LocationStatistic
+    Public ReadOnly Property LocationType As LocationTypeData Implements IWorldData.LocationType
+    Public ReadOnly Property Player As PlayerData Implements IWorldData.Player
+    Public ReadOnly Property Route As RouteData Implements IWorldData.Route
 
     Public Sub New(store As IStore)
         Me.Store = store
