@@ -13,7 +13,7 @@ Public Class WorldData
     Public ReadOnly Property CharacterStatisticType As CharacterStatisticTypeData Implements IWorldData.CharacterStatisticType
     Public ReadOnly Property CharacterType As ICharacterTypeData Implements IWorldData.CharacterType
     Public ReadOnly Property CharacterTypeAttackType As ICharacterTypeAttackTypeData Implements IWorldData.CharacterTypeAttackType
-    Public ReadOnly Property CharacterTypeBribe As CharacterTypeBribeData Implements IWorldData.CharacterTypeBribe
+    Public ReadOnly Property CharacterTypeBribe As ICharacterTypeBribeData Implements IWorldData.CharacterTypeBribe
     Public ReadOnly Property CharacterTypeEnemy As CharacterTypeEnemyData Implements IWorldData.CharacterTypeEnemy
     Public ReadOnly Property CharacterTypeInitialStatistic As CharacterTypeInitialStatisticData Implements IWorldData.CharacterTypeInitialStatistic
     Public ReadOnly Property CharacterTypeLoot As CharacterTypeLootData Implements IWorldData.CharacterTypeLoot

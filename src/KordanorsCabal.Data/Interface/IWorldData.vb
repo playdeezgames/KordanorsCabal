@@ -9,7 +9,7 @@
     ReadOnly Property CharacterStatisticType As CharacterStatisticTypeData
     ReadOnly Property CharacterType As ICharacterTypeData
     ReadOnly Property CharacterTypeAttackType As ICharacterTypeAttackTypeData
-    ReadOnly Property CharacterTypeBribe As CharacterTypeBribeData
+    ReadOnly Property CharacterTypeBribe As ICharacterTypeBribeData
     ReadOnly Property CharacterTypeEnemy As CharacterTypeEnemyData
     ReadOnly Property CharacterTypeInitialStatistic As CharacterTypeInitialStatisticData
     ReadOnly Property CharacterTypeLoot As CharacterTypeLootData
