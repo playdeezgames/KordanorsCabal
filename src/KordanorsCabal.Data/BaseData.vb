@@ -1,7 +1,7 @@
 ﻿Public MustInherit Class BaseData
-    Protected ReadOnly Store As SPLORR.Data.Store
+    Protected ReadOnly Store As IStore
     Protected ReadOnly World As WorldData
-    Sub New(store As Store, world As WorldData)
+    Sub New(store As IStore, world As WorldData)
         Me.Store = store
         Me.World = world
     End Sub
