@@ -1,5 +1,6 @@
 ﻿Public Class CharacterQuestData
     Inherits BaseData
+    Implements ICharacterQuestData
     Friend Const TableName = "CharacterQuests"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const QuestColumn = "Quest"
@@ -20,7 +21,7 @@
             );")
     End Sub
 
-    Public Sub Clear(characterId As Long, quest As Long)
+    Public Sub Clear(characterId As Long, quest As Long) Implements ICharacterQuestData.Clear
         Store.ClearForColumnValues(
             AddressOf Initialize,
             TableName,
@@ -28,7 +29,7 @@
             (QuestColumn, quest))
     End Sub
 
-    Public Function Exists(characterId As Long, quest As Long) As Boolean
+    Public Function Exists(characterId As Long, quest As Long) As Boolean Implements ICharacterQuestData.Exists
         Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -37,7 +38,7 @@
             (QuestColumn, quest)).Any
     End Function
 
-    Public Sub Write(characterId As Long, quest As Long)
+    Public Sub Write(characterId As Long, quest As Long) Implements ICharacterQuestData.Write
         Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
@@ -45,7 +46,7 @@
             (QuestColumn, quest))
     End Sub
 
-    Friend Sub ClearForCharacter(characterId As Long)
+    Friend Sub ClearForCharacter(characterId As Long) Implements ICharacterQuestData.ClearForCharacter
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
