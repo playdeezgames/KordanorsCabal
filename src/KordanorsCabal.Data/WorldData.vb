@@ -17,6 +17,7 @@ Public Class WorldData
     Public ReadOnly CharacterTypeInitialStatistic As CharacterTypeInitialStatisticData
     Public ReadOnly CharacterTypeLoot As CharacterTypeLootData
     Public ReadOnly CharacterTypePartingShot As CharacterTypePartingShotData
+    Public ReadOnly CharacterTypeSpawnCount As CharacterTypeSpawnCountData
     Public ReadOnly CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData
     Public ReadOnly Direction As DirectionData
     Public ReadOnly DungeonLevel As DungeonLevelData
@@ -96,7 +97,6 @@ Public Class WorldData
         Return Store.Renew()
     End Function
 
-    Public ReadOnly CharacterTypeSpawnCount As CharacterTypeSpawnCountData
 
     Public Sub Restore(oldConnection As SqliteConnection)
         Store.Restore(oldConnection)

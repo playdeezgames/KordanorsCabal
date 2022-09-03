@@ -19,6 +19,7 @@ Namespace KordanorsCabal.Data.Tests
             worldData.CharacterTypeInitialStatistic.ShouldNotBeNull
             worldData.CharacterTypeLoot.ShouldNotBeNull
             worldData.CharacterTypePartingShot.ShouldNotBeNull
+            worldData.CharacterTypeSpawnCount.ShouldNotBeNull
             worldData.CharacterTypeSpawnLocation.ShouldNotBeNull
             worldData.Direction.ShouldNotBeNull
             worldData.DungeonLevel.ShouldNotBeNull
