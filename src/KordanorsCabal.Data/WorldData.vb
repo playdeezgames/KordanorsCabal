@@ -8,7 +8,7 @@ Public Class WorldData
     Public ReadOnly Property CharacterLocation As ICharacterLocationData Implements IWorldData.CharacterLocation
     Public ReadOnly Property CharacterQuestCompletion As ICharacterQuestCompletionData Implements IWorldData.CharacterQuestCompletion
     Public ReadOnly Property CharacterQuest As ICharacterQuestData Implements IWorldData.CharacterQuest
-    Public ReadOnly Property CharacterSpell As CharacterSpellData Implements IWorldData.CharacterSpell
+    Public ReadOnly Property CharacterSpell As ICharacterSpellData Implements IWorldData.CharacterSpell
     Public ReadOnly Property CharacterStatistic As CharacterStatisticData Implements IWorldData.CharacterStatistic
     Public ReadOnly Property CharacterStatisticType As CharacterStatisticTypeData Implements IWorldData.CharacterStatisticType
     Public ReadOnly Property CharacterType As ICharacterTypeData Implements IWorldData.CharacterType
