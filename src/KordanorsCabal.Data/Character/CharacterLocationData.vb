@@ -1,5 +1,6 @@
 ﻿Public Class CharacterLocationData
     Inherits BaseData
+    Implements ICharacterLocationData
     Friend Const TableName = "CharacterLocations"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
@@ -21,7 +22,7 @@
                 FOREIGN KEY([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
     End Sub
-    Public Sub Write(characterId As Long, locationId As Long)
+    Public Sub Write(characterId As Long, locationId As Long) Implements ICharacterLocationData.Write
         Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
@@ -29,7 +30,7 @@
             (LocationIdColumn, locationId))
     End Sub
 
-    Public Function Read(characterId As Long, locationId As Long) As Boolean
+    Public Function Read(characterId As Long, locationId As Long) As Boolean Implements ICharacterLocationData.Read
         Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -38,7 +39,7 @@
             (LocationIdColumn, locationId)).HasValue
     End Function
 
-    Friend Sub ClearForCharacter(characterId As Long)
+    Public Sub ClearForCharacter(characterId As Long) Implements ICharacterLocationData.ClearForCharacter
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
