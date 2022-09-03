@@ -1,5 +1,6 @@
 ﻿Public Class CharacterData
     Inherits BaseData
+    Implements ICharacterData
     Friend Const TableName = "Characters"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
@@ -18,7 +19,7 @@
             FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
         );")
     End Sub
-    Public Function ReadCharacterType(characterId As Long) As Long?
+    Public Function ReadCharacterType(characterId As Long) As Long? Implements ICharacterData.ReadCharacterType
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -26,7 +27,7 @@
             (CharacterIdColumn, characterId))
     End Function
 
-    Public Function Create(characterType As Long, locationId As Long) As Long
+    Public Function Create(characterType As Long, locationId As Long) As Long Implements ICharacterData.Create
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
@@ -34,7 +35,7 @@
             (LocationIdColumn, locationId))
     End Function
 
-    Public Function ReadLocation(characterId As Long) As Long?
+    Public Function ReadLocation(characterId As Long) As Long? Implements ICharacterData.ReadLocation
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -42,7 +43,7 @@
             (CharacterIdColumn, characterId))
     End Function
 
-    Public Sub WriteLocation(characterId As Long, locationId As Long)
+    Public Sub WriteLocation(characterId As Long, locationId As Long) Implements ICharacterData.WriteLocation
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
@@ -50,7 +51,7 @@
             (CharacterIdColumn, characterId))
     End Sub
 
-    Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)
+    Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long) Implements ICharacterData.ReadForLocation
         Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -58,7 +59,7 @@
             (LocationIdColumn, locationId))
     End Function
 
-    Public Sub Clear(characterId As Long)
+    Public Sub Clear(characterId As Long) Implements ICharacterData.Clear
         World.CharacterQuest.ClearForCharacter(characterId)
         World.CharacterQuestCompletion.ClearForCharacter(characterId)
         World.CharacterEquipSlot.ClearForCharacter(characterId)

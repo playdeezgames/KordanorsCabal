@@ -10,7 +10,7 @@
     End Sub
 
     Friend Sub Initialize()
-        World.Character.Initialize()
+        CType(World.Character, CharacterData).Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (

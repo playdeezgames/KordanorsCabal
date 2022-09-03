@@ -1,5 +1,5 @@
 ﻿Public Class CharacterDataTests
-    Private Shared Sub WithCharacterData(stuffToDo As Action(Of Mock(Of IStore), CharacterData))
+    Private Shared Sub WithCharacterData(stuffToDo As Action(Of Mock(Of IStore), ICharacterData))
         Dim store As New Mock(Of IStore)
         Dim worldData As New WorldData(store.Object)
         Dim subject = worldData.Character

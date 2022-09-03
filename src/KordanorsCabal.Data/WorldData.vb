@@ -3,7 +3,7 @@
 Public Class WorldData
     Implements IWorldData
     Private ReadOnly Store As IStore
-    Public ReadOnly Property Character As CharacterData Implements IWorldData.Character
+    Public ReadOnly Property Character As ICharacterData Implements IWorldData.Character
     Public ReadOnly Property CharacterEquipSlot As CharacterEquipSlotData Implements IWorldData.CharacterEquipSlot
     Public ReadOnly Property CharacterLocation As CharacterLocationData Implements IWorldData.CharacterLocation
     Public ReadOnly Property CharacterQuestCompletion As CharacterQuestCompletionData Implements IWorldData.CharacterQuestCompletion
