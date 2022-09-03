@@ -1,6 +1,6 @@
 ﻿Public Class CharacterData
     Inherits BaseData
-    Public Const TableName = "Characters"
+    Friend Const TableName = "Characters"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const CharacterTypeColumn = "CharacterType"
