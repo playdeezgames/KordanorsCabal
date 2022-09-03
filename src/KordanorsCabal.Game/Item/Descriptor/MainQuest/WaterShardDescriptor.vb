@@ -7,10 +7,6 @@
             ItemType.WaterShard,
             ,,,,,,,,,,,,,
             Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
-            Sub(character)
-                character.CurrentMana -= 1
-                character.Heal()
-                character.EnqueueMessage($"You use {ItemType.WaterShard.Name} to heal yer wounds!")
-            End Sub)
+            "UseWaterShard")
     End Sub
 End Class

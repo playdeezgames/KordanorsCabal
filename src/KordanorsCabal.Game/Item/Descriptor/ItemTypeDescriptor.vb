@@ -53,7 +53,28 @@
 
     '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName],[ItemActionFilterName])
     ReadOnly Property Purify As Action(Of Item)
+        Get
+            Dim result As Action(Of Item) = Nothing
+            If PurifyActions.TryGetValue(PurifyActionName, result) Then
+                Return result
+            End If
+            Return Sub(i)
+                   End Sub
+        End Get
+    End Property
+    Private ReadOnly Property PurifyActionName As String
     ReadOnly Property Use As Action(Of Character)
+        Get
+            Dim result As Action(Of Character) = Nothing
+            If UseActions.TryGetValue(UseActionName, result) Then
+                Return result
+            End If
+            Return Sub(c)
+                   End Sub
+        End Get
+    End Property
+    Private ReadOnly Property UseActionName As String
+
     ReadOnly Property CanUse As Func(Of Character, Boolean)
 
     Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
@@ -93,9 +114,9 @@
            Optional soldAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
-           Optional purify As Action(Of Item) = Nothing,
+           Optional purifyActionName As String = Nothing,
            Optional canUse As Func(Of Character, Boolean) = Nothing,
-           Optional use As Action(Of Character) = Nothing)
+           Optional useActionName As String = Nothing)
         MyBase.New(worldData, itemTypeId)
         Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
         Me.Offer = offer
@@ -109,11 +130,9 @@
         Me.DefendDice = defendDice
         Me.MaximumDurability = maximumDurability
         Me.buffs = buffs
-        Me.Purify = If(purify, Sub(item)
-                               End Sub)
+        Me.PurifyActionName = purifyActionName
         Me.CanUse = If(canUse, Function(character) False)
-        Me.Use = If(use, Sub(character)
-                         End Sub)
+        Me.UseActionName = useActionName
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility
@@ -143,14 +162,14 @@ Public Module ItemTypeDescriptorUtility
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.HolyBolt),
-                    Sub(character) character.Learn(SpellType.HolyBolt))},
+                    "LearnHolyBolt")},
             {ItemType.BookOfPurify, New ItemTypeDescriptor(
                     StaticWorldData.World,
                     ItemType.BookOfPurify,,,,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
                     Function(character) character.CanLearn(SpellType.Purify),
-                    Sub(character) character.Learn(SpellType.Purify))},
+                    "LearnPurify")},
             {ItemType.Bottle, New BottleDescriptor},
             {ItemType.BrodeSode, New BrodeSodeDescriptor},
             {ItemType.ChainMail, New ChainMailDescriptor},

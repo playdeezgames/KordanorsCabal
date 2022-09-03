@@ -26,10 +26,6 @@
             100,
             MakeList(ShoppeType.BlackMage),,,,,,
             Function(character) True,
-            Sub(character)
-                Dim item = Game.Item.Create(StaticWorldData.World, RNG.FromGenerator(table))
-                character.EnqueueMessage($"You crack open the {ItemType.MagicEgg.Name} and find {item.Name} inside!")
-                character.Inventory.Add(item)
-            End Sub)
+            "UseMagicEgg")
     End Sub
 End Class

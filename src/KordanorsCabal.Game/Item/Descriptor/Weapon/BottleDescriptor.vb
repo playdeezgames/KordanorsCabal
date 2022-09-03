@@ -13,10 +13,6 @@
                 Dim enemy = character.Location.Enemy(character)
                 Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.Bottle)
             End Function,
-            Sub(character)
-                Dim enemy = character.Location.Enemy(character)
-                character.EnqueueMessage($"You give the {ItemType.Bottle.Name} to the {enemy.Name}, and it wanders off happily.")
-                enemy.Destroy()
-            End Sub)
+            "UseBotttle")
     End Sub
 End Class

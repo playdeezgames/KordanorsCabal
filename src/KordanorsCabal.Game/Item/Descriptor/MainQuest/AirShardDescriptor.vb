@@ -7,12 +7,6 @@
             ItemType.AirShard,
             ,,,,,,,,,,,,,
             Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0,
-            Sub(character)
-                character.CurrentMana -= 1
-                Dim level = character.Location.DungeonLevel
-                Dim locations = Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 4L)).Where(Function(x) x.DungeonLevel.Id = level.Id)
-                character.Location = RNG.FromEnumerable(locations)
-                character.EnqueueMessage($"You use the {ItemType.AirShard.Name} and suddenly find yerself somewhere else!")
-            End Sub)
+            "UseAirShard")
     End Sub
 End Class
