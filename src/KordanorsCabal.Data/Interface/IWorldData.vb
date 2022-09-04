@@ -28,7 +28,7 @@
     ReadOnly Property ItemType As IItemTypeData
     ReadOnly Property ItemTypeSpawnCount As IItemTypeSpawnCountData
     ReadOnly Property ItemTypeSpawnLocationType As IItemTypeSpawnLocationTypeData
-    ReadOnly Property ItemTypeStatistic As ItemTypeStatisticData
+    ReadOnly Property ItemTypeStatistic As IItemTypeStatisticData
     ReadOnly Property ItemTypeStatisticType As ItemTypeStatisticTypeData
     ReadOnly Property Location As LocationData
     ReadOnly Property LocationDungeonLevel As LocationDungeonLevelData

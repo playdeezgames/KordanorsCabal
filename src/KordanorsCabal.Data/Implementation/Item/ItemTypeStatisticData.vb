@@ -1,5 +1,6 @@
 ﻿Public Class ItemTypeStatisticData
     Inherits BaseData
+    Implements IItemTypeStatisticData
     Friend Const TableName = "ItemTypeStatistics"
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
     Friend Const ItemTypeStatisticTypeIdColumn = ItemTypeStatisticTypeData.ItemTypeStatisticTypeIdColumn
@@ -35,7 +36,7 @@
         MyBase.New(store, world)
     End Sub
 
-    Public Function Read(itemTypeId As Long, itemTypeStatisticTypeId As Long) As Long?
+    Public Function Read(itemTypeId As Long, itemTypeStatisticTypeId As Long) As Long? Implements IItemTypeStatisticData.Read
         Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
