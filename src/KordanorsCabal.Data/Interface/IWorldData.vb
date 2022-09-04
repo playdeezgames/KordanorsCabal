@@ -31,7 +31,7 @@
     ReadOnly Property ItemTypeStatistic As IItemTypeStatisticData
     ReadOnly Property ItemTypeStatisticType As IItemTypeStatisticTypeData
     ReadOnly Property Location As ILocationData
-    ReadOnly Property LocationDungeonLevel As LocationDungeonLevelData
+    ReadOnly Property LocationDungeonLevel As ILocationDungeonLevelData
     ReadOnly Property LocationStatistic As LocationStatisticData
     ReadOnly Property LocationType As LocationTypeData
     ReadOnly Property Player As IPlayerData

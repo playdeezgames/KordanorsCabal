@@ -1,5 +1,6 @@
 ﻿Public Class LocationDungeonLevelData
     Inherits BaseData
+    Implements ILocationDungeonLevelData
     Friend Const TableName = "LocationDungeonLevels"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const DungeonLevelColumn = "DungeonLevel"
@@ -17,7 +18,7 @@
                 [{DungeonLevelColumn}] INT NOT NULL
             );")
     End Sub
-    Public Function Read(locationId As Long) As Long?
+    Public Function Read(locationId As Long) As Long? Implements ILocationDungeonLevelData.Read
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -25,7 +26,7 @@
             (LocationIdColumn, locationId))
     End Function
 
-    Public Sub Write(locationId As Long, dungeonLevel As Long)
+    Public Sub Write(locationId As Long, dungeonLevel As Long) Implements ILocationDungeonLevelData.Write
         Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
@@ -33,7 +34,7 @@
             (DungeonLevelColumn, dungeonLevel))
     End Sub
 
-    Public Function ReadForDungeonLevel(dungeonLevel As Long) As IEnumerable(Of Long)
+    Public Function ReadForDungeonLevel(dungeonLevel As Long) As IEnumerable(Of Long) Implements ILocationDungeonLevelData.ReadForDungeonLevel
         Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
