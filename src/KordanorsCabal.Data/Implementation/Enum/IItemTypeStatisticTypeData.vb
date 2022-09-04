@@ -1,0 +1,2 @@
+﻿Public Interface IItemTypeStatisticTypeData
+End Interface

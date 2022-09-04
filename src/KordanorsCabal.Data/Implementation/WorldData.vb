@@ -33,7 +33,7 @@ Public Class WorldData
     Public ReadOnly Property ItemTypeSpawnCount As IItemTypeSpawnCountData Implements IWorldData.ItemTypeSpawnCount
     Public ReadOnly Property ItemTypeSpawnLocationType As IItemTypeSpawnLocationTypeData Implements IWorldData.ItemTypeSpawnLocationType
     Public ReadOnly Property ItemTypeStatistic As IItemTypeStatisticData Implements IWorldData.ItemTypeStatistic
-    Public ReadOnly Property ItemTypeStatisticType As ItemTypeStatisticTypeData Implements IWorldData.ItemTypeStatisticType
+    Public ReadOnly Property ItemTypeStatisticType As IItemTypeStatisticTypeData Implements IWorldData.ItemTypeStatisticType
     Public ReadOnly Property Location As LocationData Implements IWorldData.Location
     Public ReadOnly Property LocationDungeonLevel As LocationDungeonLevelData Implements IWorldData.LocationDungeonLevel
     Public ReadOnly Property LocationStatistic As LocationStatisticData Implements IWorldData.LocationStatistic

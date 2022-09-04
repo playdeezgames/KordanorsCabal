@@ -1,5 +1,6 @@
 ﻿Public Class ItemTypeStatisticTypeData
     Inherits BaseData
+    Implements IItemTypeStatisticTypeData
     Friend Const TableName = "ItemTypeStatisticTypes"
     Friend Const ItemTypeStatisticTypeIdColumn = "ItemTypeStatisticTypeId"
     Friend Const ItemTypeStatisticTypeNameColumn = "ItemTypeStatisticTypeName"
