@@ -28,7 +28,7 @@ Public Class WorldData
     Public ReadOnly Property Inventory As IInventoryData Implements IWorldData.Inventory
     Public ReadOnly Property InventoryItem As IInventoryItemData Implements IWorldData.InventoryItem
     Public ReadOnly Property Item As IItemData Implements IWorldData.Item
-    Public ReadOnly Property ItemStatistic As ItemStatisticData Implements IWorldData.ItemStatistic
+    Public ReadOnly Property ItemStatistic As IItemStatisticData Implements IWorldData.ItemStatistic
     Public ReadOnly Property ItemType As ItemTypeData Implements IWorldData.ItemType
     Public ReadOnly Property ItemTypeSpawnCount As ItemTypeSpawnCountData Implements IWorldData.ItemTypeSpawnCount
     Public ReadOnly Property ItemTypeSpawnLocationType As ItemTypeSpawnLocationTypeData Implements IWorldData.ItemTypeSpawnLocationType

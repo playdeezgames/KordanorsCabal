@@ -1,5 +1,6 @@
 ﻿Public Class ItemStatisticData
     Inherits BaseData
+    Implements IItemStatisticData
     Friend Const TableName = "ItemStatistics"
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
@@ -21,7 +22,7 @@
                 FOREIGN KEY ([{ItemIdColumn}]) REFERENCES [{ItemData.TableName}]([{ItemData.ItemIdColumn}])
             );")
     End Sub
-    Public Function Read(itemId As Long, statisticType As Long) As Long?
+    Public Function Read(itemId As Long, statisticType As Long) As Long? Implements IItemStatisticData.Read
         Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -30,7 +31,7 @@
             (StatisticTypeColumn, statisticType))
     End Function
 
-    Public Sub Write(itemId As Long, statisticType As Long, value As Long)
+    Public Sub Write(itemId As Long, statisticType As Long, value As Long) Implements IItemStatisticData.Write
         Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
@@ -39,7 +40,7 @@
             (StatisticValueColumn, value))
     End Sub
 
-    Friend Sub ClearForItem(itemId As Long)
+    Public Sub ClearForItem(itemId As Long) Implements IItemStatisticData.ClearForItem
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
