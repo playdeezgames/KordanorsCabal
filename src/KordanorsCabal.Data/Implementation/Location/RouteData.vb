@@ -1,5 +1,6 @@
 ﻿Public Class RouteData
     Inherits BaseData
+    Implements IRouteData
     Friend Const TableName = "Routes"
     Friend Const RouteIdColumn = "RouteId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
@@ -27,14 +28,14 @@
             );")
     End Sub
 
-    Public Sub Clear(routeId As Long)
+    Public Sub Clear(routeId As Long) Implements IRouteData.Clear
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (RouteIdColumn, routeId))
     End Sub
 
-    Public Sub WriteRouteType(routeId As Long, routeType As Long)
+    Public Sub WriteRouteType(routeId As Long, routeType As Long) Implements IRouteData.WriteRouteType
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
@@ -42,7 +43,7 @@
             (RouteIdColumn, routeId))
     End Sub
 
-    Public Function ReadRouteType(routeId As Long) As Long?
+    Public Function ReadRouteType(routeId As Long) As Long? Implements IRouteData.ReadRouteType
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -50,7 +51,7 @@
             (RouteIdColumn, routeId))
     End Function
 
-    Public Function ReadToLocation(routeId As Long) As Long?
+    Public Function ReadToLocation(routeId As Long) As Long? Implements IRouteData.ReadToLocation
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -58,7 +59,7 @@
             (RouteIdColumn, routeId))
     End Function
 
-    Public Function ReadForLocationRouteType(locationId As Long, routeType As Long) As IEnumerable(Of Long)
+    Public Function ReadForLocationRouteType(locationId As Long, routeType As Long) As IEnumerable(Of Long) Implements IRouteData.ReadForLocationRouteType
         Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -67,7 +68,7 @@
             (RouteTypeColumn, routeType))
     End Function
 
-    Public Function ReadDirectionRouteForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long))
+    Public Function ReadDirectionRouteForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long)) Implements IRouteData.ReadDirectionRouteForLocation
         Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -75,7 +76,7 @@
             (LocationIdColumn, locationId))
     End Function
 
-    Public Function ReadDirectionRouteTypeForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long))
+    Public Function ReadDirectionRouteTypeForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long)) Implements IRouteData.ReadDirectionRouteTypeForLocation
         Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -83,7 +84,7 @@
             (LocationIdColumn, locationId))
     End Function
 
-    Public Function ReadForLocationDirection(locationId As Long, direction As Long) As Long?
+    Public Function ReadForLocationDirection(locationId As Long, direction As Long) As Long? Implements IRouteData.ReadForLocationDirection
         Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -92,7 +93,7 @@
             (DirectionColumn, direction))
     End Function
 
-    Public Function Create(locationId As Long, direction As Long, routeType As Long, toLocationId As Long) As Long
+    Public Function Create(locationId As Long, direction As Long, routeType As Long, toLocationId As Long) As Long Implements IRouteData.Create
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
@@ -102,7 +103,7 @@
             (ToLocationIdColumn, toLocationId))
     End Function
 
-    Public Function ReadCountForLocation(locationId As Long) As Long
+    Public Function ReadCountForLocation(locationId As Long) As Long Implements IRouteData.ReadCountForLocation
         Return Store.ReadCountForColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId))
     End Function
 End Class

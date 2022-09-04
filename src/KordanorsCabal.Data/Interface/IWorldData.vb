@@ -35,5 +35,5 @@
     ReadOnly Property LocationStatistic As ILocationStatisticData
     ReadOnly Property LocationType As ILocationTypeData
     ReadOnly Property Player As IPlayerData
-    ReadOnly Property Route As RouteData
+    ReadOnly Property Route As IRouteData
 End Interface

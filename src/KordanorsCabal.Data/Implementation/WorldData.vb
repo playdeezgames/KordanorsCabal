@@ -39,7 +39,7 @@ Public Class WorldData
     Public ReadOnly Property LocationStatistic As ILocationStatisticData Implements IWorldData.LocationStatistic
     Public ReadOnly Property LocationType As ILocationTypeData Implements IWorldData.LocationType
     Public ReadOnly Property Player As IPlayerData Implements IWorldData.Player
-    Public ReadOnly Property Route As RouteData Implements IWorldData.Route
+    Public ReadOnly Property Route As IRouteData Implements IWorldData.Route
 
     Public Sub New(store As IStore)
         Me.Store = store
