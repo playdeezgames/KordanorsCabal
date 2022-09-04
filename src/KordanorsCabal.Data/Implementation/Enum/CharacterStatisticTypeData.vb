@@ -1,5 +1,6 @@
 ﻿Public Class CharacterStatisticTypeData
     Inherits NameCacheData
+    Implements ICharacterStatisticTypeData
     Friend Const TableName = "CharacterStatisticTypes"
     Friend Const CharacterStatisticTypeIdColumn = "CharacterStatisticTypeId"
     Friend Const CharacterStatisticTypeNameColumn = "CharacterStatisticTypeName"
@@ -8,7 +9,7 @@
     Friend Const DefaultValueColumn = "DefaultValue"
     Friend Const MaximumValueColumn = "MaximumValue"
 
-    Public Function ReadDefaultValue(statisticTypeId As Long) As Long?
+    Public Function ReadDefaultValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadDefaultValue
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -17,7 +18,7 @@
     End Function
 
 
-    Public Function ReadName(statisticTypeId As Long) As String
+    Public Function ReadName(statisticTypeId As Long) As String Implements ICharacterStatisticTypeData.ReadName
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,
@@ -71,7 +72,7 @@
                 FROM [cte];")
     End Sub
 
-    Public Function ReadMaximumValue(statisticTypeId As Long) As Long?
+    Public Function ReadMaximumValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadMaximumValue
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -79,7 +80,7 @@
             (CharacterStatisticTypeIdColumn, statisticTypeId))
     End Function
 
-    Public Function ReadMinimumValue(statisticTypeId As Long) As Long?
+    Public Function ReadMinimumValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadMinimumValue
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -87,7 +88,7 @@
             (CharacterStatisticTypeIdColumn, statisticTypeId))
     End Function
 
-    Public Function ReadAbbreviation(statisticTypeId As Long) As String
+    Public Function ReadAbbreviation(statisticTypeId As Long) As String Implements ICharacterStatisticTypeData.ReadAbbreviation
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,

@@ -132,7 +132,8 @@
         Return New Character(worldData, characterId)
     End Function
     Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
-        Dim result = If(WorldData.CharacterStatistic.Read(Id, statisticType.Id), statisticType.DefaultValue)
+        Dim result = If(WorldData.CharacterStatistic.Read(Id,
+                                                          statisticType.Id), statisticType.DefaultValue)
         If result.HasValue Then
             For Each item In EquippedItems
                 Dim buff As Long = If(item.EquippedBuff(statisticType), 0)

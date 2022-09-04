@@ -5,8 +5,8 @@
     ReadOnly Property CharacterQuestCompletion As ICharacterQuestCompletionData
     ReadOnly Property CharacterQuest As ICharacterQuestData
     ReadOnly Property CharacterSpell As ICharacterSpellData
-    ReadOnly Property CharacterStatistic As CharacterStatisticData
-    ReadOnly Property CharacterStatisticType As CharacterStatisticTypeData
+    ReadOnly Property CharacterStatistic As ICharacterStatisticData
+    ReadOnly Property CharacterStatisticType As ICharacterStatisticTypeData
     ReadOnly Property CharacterType As ICharacterTypeData
     ReadOnly Property CharacterTypeAttackType As ICharacterTypeAttackTypeData
     ReadOnly Property CharacterTypeBribe As ICharacterTypeBribeData
