@@ -25,7 +25,7 @@
     ReadOnly Property InventoryItem As IInventoryItemData
     ReadOnly Property Item As IItemData
     ReadOnly Property ItemStatistic As IItemStatisticData
-    ReadOnly Property ItemType As ItemTypeData
+    ReadOnly Property ItemType As IItemTypeData
     ReadOnly Property ItemTypeSpawnCount As ItemTypeSpawnCountData
     ReadOnly Property ItemTypeSpawnLocationType As ItemTypeSpawnLocationTypeData
     ReadOnly Property ItemTypeStatistic As ItemTypeStatisticData

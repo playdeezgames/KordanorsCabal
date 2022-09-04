@@ -1,5 +1,6 @@
 ﻿Public Class ItemTypeData
     Inherits BaseData
+    Implements IItemTypeData
     Friend Const TableName = "ItemTypes"
     Friend Const ItemTypeIdColumn = "ItemTypeId"
     Friend Const ItemTypeNameColumn = "ItemTypeName"
@@ -9,7 +10,7 @@
         MyBase.New(store, world)
     End Sub
 
-    Public Function ReadIsConsumed(itemTypeId As Long) As Long?
+    Public Function ReadIsConsumed(itemTypeId As Long) As Long? Implements IItemTypeData.ReadIsConsumed
         Return Store.ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, IsConsumedColumn, (ItemTypeIdColumn, itemTypeId))
     End Function
 
@@ -79,7 +80,7 @@
                     [{IsConsumedColumn}]
                 FROM [cte];")
     End Sub
-    Public Function ReadName(itemTypeId As Long) As String
+    Public Function ReadName(itemTypeId As Long) As String Implements IItemTypeData.ReadName
         Return Store.ReadColumnString(AddressOf Initialize, TableName, ItemTypeNameColumn, (ItemTypeIdColumn, itemTypeId))
     End Function
 
