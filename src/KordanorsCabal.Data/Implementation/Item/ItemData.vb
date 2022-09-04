@@ -1,5 +1,6 @@
 ﻿Public Class ItemData
     Inherits BaseData
+    Implements IItemData
     Friend Const TableName = "Items"
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeColumn = "ItemType"
@@ -16,14 +17,14 @@
                 [{ItemTypeColumn}] INT NOT NULL
             );")
     End Sub
-    Public Function Create(itemType As Long) As Long
+    Public Function Create(itemType As Long) As Long Implements IItemData.Create
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (ItemTypeColumn, itemType))
     End Function
 
-    Public Function ReadItemType(itemId As Long) As Long?
+    Public Function ReadItemType(itemId As Long) As Long? Implements IItemData.ReadItemType
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -31,7 +32,7 @@
             (ItemIdColumn, itemId))
     End Function
 
-    Public Sub Clear(itemId As Long)
+    Public Sub Clear(itemId As Long) Implements IItemData.Clear
         World.CharacterEquipSlot.ClearForItem(itemId)
         World.InventoryItem.ClearForItem(itemId)
         World.ItemStatistic.ClearForItem(itemId)
@@ -41,7 +42,7 @@
             (ItemIdColumn, itemId))
     End Sub
 
-    Public Sub WriteItemType(itemId As Long, itemType As Long)
+    Public Sub WriteItemType(itemId As Long, itemType As Long) Implements IItemData.WriteItemType
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
