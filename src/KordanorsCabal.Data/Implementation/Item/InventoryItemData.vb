@@ -1,5 +1,6 @@
 ﻿Public Class InventoryItemData
     Inherits BaseData
+    Implements IInventoryItemData
     Friend Const TableName = "InventoryItems"
     Friend Const InventoryIdColumn = InventoryData.InventoryIdColumn
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
@@ -18,7 +19,7 @@
                 [{ItemIdColumn}] INT NOT NULL UNIQUE
             );")
     End Sub
-    Public Sub Write(inventoryId As Long, itemId As Long)
+    Public Sub Write(inventoryId As Long, itemId As Long) Implements IInventoryItemData.Write
         Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
@@ -26,7 +27,7 @@
             (ItemIdColumn, itemId))
     End Sub
 
-    Public Function ReadItems(inventoryId As Long) As IEnumerable(Of Long)
+    Public Function ReadItems(inventoryId As Long) As IEnumerable(Of Long) Implements IInventoryItemData.ReadItems
         Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -34,7 +35,7 @@
             (InventoryIdColumn, inventoryId))
     End Function
 
-    Public Sub ClearForItem(itemId As Long)
+    Public Sub ClearForItem(itemId As Long) Implements IInventoryItemData.ClearForItem
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,

@@ -26,7 +26,7 @@ Public Class WorldData
     Public ReadOnly Property Feature As IFeatureData Implements IWorldData.Feature
     Public ReadOnly Property FeatureType As IFeatureTypeData Implements IWorldData.FeatureType
     Public ReadOnly Property Inventory As IInventoryData Implements IWorldData.Inventory
-    Public ReadOnly Property InventoryItem As InventoryItemData Implements IWorldData.InventoryItem
+    Public ReadOnly Property InventoryItem As IInventoryItemData Implements IWorldData.InventoryItem
     Public ReadOnly Property Item As ItemData Implements IWorldData.Item
     Public ReadOnly Property ItemStatistic As ItemStatisticData Implements IWorldData.ItemStatistic
     Public ReadOnly Property ItemType As ItemTypeData Implements IWorldData.ItemType
