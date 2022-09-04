@@ -13,7 +13,7 @@
     ReadOnly Property CharacterTypeEnemy As ICharacterTypeEnemyData
     ReadOnly Property CharacterTypeInitialStatistic As ICharacterTypeInitialStatisticData
     ReadOnly Property CharacterTypeLoot As ICharacterTypeLootData
-    ReadOnly Property CharacterTypePartingShot As CharacterTypePartingShotData
+    ReadOnly Property CharacterTypePartingShot As ICharacterTypePartingShotData
     ReadOnly Property CharacterTypeSpawnCount As CharacterTypeSpawnCountData
     ReadOnly Property CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData
     ReadOnly Property Direction As DirectionData

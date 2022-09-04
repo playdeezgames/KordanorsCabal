@@ -1,5 +1,6 @@
 ﻿Public Class CharacterTypePartingShotData
     Inherits BaseData
+    Implements ICharacterTypePartingShotData
     Friend Const TableName = "CharacterTypePartingShots"
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Const PartingShotColumn = "PartingShot"
@@ -27,7 +28,7 @@
         MyBase.New(store, world)
     End Sub
 
-    Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of String, Integer)
+    Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of String, Integer) Implements ICharacterTypePartingShotData.Read
         Return Store.ReadRecordsWithColumnValue(Of Long, String, Long)(
             AddressOf Initialize,
             TableName,
