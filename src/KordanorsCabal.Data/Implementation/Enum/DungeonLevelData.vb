@@ -1,5 +1,6 @@
 ﻿Public Class DungeonLevelData
     Inherits NameCacheData
+    Implements IDungeonLevelData
     Friend Const TableName = "DungeonLevels"
     Friend Const DungeonLevelIdColumn = "DungeonLevelId"
     Friend Const DungeonLevelNameColumn = "DungeonLevelName"
@@ -21,7 +22,7 @@
                 FROM [cte];")
     End Sub
 
-    Public Function ReadAll() As IEnumerable(Of Long)
+    Public Function ReadAll() As IEnumerable(Of Long) Implements IDungeonLevelData.ReadAll
         Return Store.ReadRecords(Of Long)(
             AddressOf Initialize,
             TableName,
@@ -39,7 +40,7 @@
                 (DungeonLevelNameColumn, name))
     End Sub
 
-    Public Function ReadName(dungeonLevelId As Long) As String
+    Public Function ReadName(dungeonLevelId As Long) As String Implements IDungeonLevelData.ReadName
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,

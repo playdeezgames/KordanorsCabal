@@ -1,5 +1,6 @@
 ﻿Public Class EquipSlotData
     Inherits NameCacheData
+    Implements IEquipSlotData
     Friend Const TableName = "EquipSlots"
     Friend Const EquipSlotIdColumn = "EquipSlotId"
     Friend Const EquipSlotNameColumn = "EquipSlotName"
