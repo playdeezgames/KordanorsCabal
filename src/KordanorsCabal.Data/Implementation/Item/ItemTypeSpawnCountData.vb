@@ -1,6 +1,6 @@
 ﻿Public Class ItemTypeSpawnCountData
     Inherits BaseData
-    '[ItemTypeSpawnCounts]([ItemTypeId],[DungeonLevelId],[SpawnDice])
+    Implements IItemTypeSpawnCountData
     Friend Const TableName = "ItemTypeSpawnCounts"
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
     Friend Const DungeonLevelIdColumn = DungeonLevelData.DungeonLevelIdColumn
@@ -48,7 +48,7 @@
         MyBase.New(store, world)
     End Sub
 
-    Public Function Read(itemTypeId As Long, dungeonLevelId As Long) As String
+    Public Function Read(itemTypeId As Long, dungeonLevelId As Long) As String Implements IItemTypeSpawnCountData.Read
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,
