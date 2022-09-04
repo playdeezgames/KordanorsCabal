@@ -19,7 +19,7 @@
     ReadOnly Property Direction As IDirectionData
     ReadOnly Property DungeonLevel As IDungeonLevelData
     ReadOnly Property EquipSlot As IEquipSlotData
-    ReadOnly Property Feature As FeatureData
+    ReadOnly Property Feature As IFeatureData
     ReadOnly Property FeatureType As FeatureTypeData
     ReadOnly Property Inventory As InventoryData
     ReadOnly Property InventoryItem As InventoryItemData

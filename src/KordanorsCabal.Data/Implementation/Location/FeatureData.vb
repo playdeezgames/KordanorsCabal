@@ -1,5 +1,6 @@
 ﻿Public Class FeatureData
     Inherits BaseData
+    Implements IFeatureData
     Friend Const TableName = "Features"
     Friend Const FeatureIdColumn = "FeatureId"
     Friend Const FeatureTypeColumn = "FeatureType"
@@ -20,7 +21,7 @@
             );")
     End Sub
 
-    Public Function ReadFeatureType(featureId As Long) As Long?
+    Public Function ReadFeatureType(featureId As Long) As Long? Implements IFeatureData.ReadFeatureType
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -28,7 +29,7 @@
             (FeatureIdColumn, featureId))
     End Function
 
-    Public Function Create(featureType As Long, locationId As Long) As Long
+    Public Function Create(featureType As Long, locationId As Long) As Long Implements IFeatureData.Create
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
@@ -36,7 +37,7 @@
             (LocationIdColumn, locationId))
     End Function
 
-    Public Function ReadForLocation(locationId As Long) As Long?
+    Public Function ReadForLocation(locationId As Long) As Long? Implements IFeatureData.ReadForLocation
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
