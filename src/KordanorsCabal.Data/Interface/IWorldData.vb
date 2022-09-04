@@ -15,7 +15,7 @@
     ReadOnly Property CharacterTypeLoot As ICharacterTypeLootData
     ReadOnly Property CharacterTypePartingShot As ICharacterTypePartingShotData
     ReadOnly Property CharacterTypeSpawnCount As ICharacterTypeSpawnCountData
-    ReadOnly Property CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData
+    ReadOnly Property CharacterTypeSpawnLocation As ICharacterTypeSpawnLocationData
     ReadOnly Property Direction As DirectionData
     ReadOnly Property DungeonLevel As DungeonLevelData
     ReadOnly Property EquipSlot As EquipSlotData
