@@ -16,7 +16,7 @@ Public Class WorldData
     Public ReadOnly Property CharacterTypeBribe As ICharacterTypeBribeData Implements IWorldData.CharacterTypeBribe
     Public ReadOnly Property CharacterTypeEnemy As ICharacterTypeEnemyData Implements IWorldData.CharacterTypeEnemy
     Public ReadOnly Property CharacterTypeInitialStatistic As ICharacterTypeInitialStatisticData Implements IWorldData.CharacterTypeInitialStatistic
-    Public ReadOnly Property CharacterTypeLoot As CharacterTypeLootData Implements IWorldData.CharacterTypeLoot
+    Public ReadOnly Property CharacterTypeLoot As ICharacterTypeLootData Implements IWorldData.CharacterTypeLoot
     Public ReadOnly Property CharacterTypePartingShot As CharacterTypePartingShotData Implements IWorldData.CharacterTypePartingShot
     Public ReadOnly Property CharacterTypeSpawnCount As CharacterTypeSpawnCountData Implements IWorldData.CharacterTypeSpawnCount
     Public ReadOnly Property CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData Implements IWorldData.CharacterTypeSpawnLocation

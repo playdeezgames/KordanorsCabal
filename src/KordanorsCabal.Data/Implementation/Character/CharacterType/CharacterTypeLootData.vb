@@ -1,5 +1,6 @@
 ﻿Public Class CharacterTypeLootData
     Inherits BaseData
+    Implements ICharacterTypeLootData
     Friend Const TableName = "CharacterTypeLoots"
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
@@ -55,7 +56,7 @@
         MyBase.New(store, world)
     End Sub
 
-    Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of Long, Integer)
+    Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of Long, Integer) Implements ICharacterTypeLootData.Read
         Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,

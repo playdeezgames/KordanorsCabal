@@ -12,7 +12,7 @@
     ReadOnly Property CharacterTypeBribe As ICharacterTypeBribeData
     ReadOnly Property CharacterTypeEnemy As ICharacterTypeEnemyData
     ReadOnly Property CharacterTypeInitialStatistic As ICharacterTypeInitialStatisticData
-    ReadOnly Property CharacterTypeLoot As CharacterTypeLootData
+    ReadOnly Property CharacterTypeLoot As ICharacterTypeLootData
     ReadOnly Property CharacterTypePartingShot As CharacterTypePartingShotData
     ReadOnly Property CharacterTypeSpawnCount As CharacterTypeSpawnCountData
     ReadOnly Property CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData
