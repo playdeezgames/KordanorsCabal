@@ -1,5 +1,6 @@
 ﻿Public Class InventoryData
     Inherits BaseData
+    Implements IInventoryData
     Friend Const TableName = "Inventories"
     Friend Const InventoryIdColumn = "InventoryId"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
@@ -26,32 +27,32 @@
                 )
             );")
     End Sub
-    Public Function CreateForCharacter(characterId As Long) As Long
+    Public Function CreateForCharacter(characterId As Long) As Long Implements IInventoryData.CreateForCharacter
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))
     End Function
-    Public Function CreateForLocation(locationId As Long) As Long
+    Public Function CreateForLocation(locationId As Long) As Long Implements IInventoryData.CreateForLocation
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId))
     End Function
-    Friend Sub ClearForCharacter(characterId As Long)
+    Sub ClearForCharacter(characterId As Long) Implements IInventoryData.ClearForCharacter
         Store.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
-    Public Function ReadForCharacter(characterId As Long) As Long?
+    Public Function ReadForCharacter(characterId As Long) As Long? Implements IInventoryData.ReadForCharacter
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             InventoryIdColumn,
             (CharacterIdColumn, characterId))
     End Function
-    Public Function ReadForLocation(locationId As Long) As Long?
+    Public Function ReadForLocation(locationId As Long) As Long? Implements IInventoryData.ReadForLocation
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,

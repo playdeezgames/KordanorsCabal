@@ -21,7 +21,7 @@
     ReadOnly Property EquipSlot As IEquipSlotData
     ReadOnly Property Feature As IFeatureData
     ReadOnly Property FeatureType As IFeatureTypeData
-    ReadOnly Property Inventory As InventoryData
+    ReadOnly Property Inventory As IInventoryData
     ReadOnly Property InventoryItem As InventoryItemData
     ReadOnly Property Item As ItemData
     ReadOnly Property ItemStatistic As ItemStatisticData
