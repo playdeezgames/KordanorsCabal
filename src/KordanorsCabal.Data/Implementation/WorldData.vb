@@ -18,7 +18,7 @@ Public Class WorldData
     Public ReadOnly Property CharacterTypeInitialStatistic As ICharacterTypeInitialStatisticData Implements IWorldData.CharacterTypeInitialStatistic
     Public ReadOnly Property CharacterTypeLoot As ICharacterTypeLootData Implements IWorldData.CharacterTypeLoot
     Public ReadOnly Property CharacterTypePartingShot As ICharacterTypePartingShotData Implements IWorldData.CharacterTypePartingShot
-    Public ReadOnly Property CharacterTypeSpawnCount As CharacterTypeSpawnCountData Implements IWorldData.CharacterTypeSpawnCount
+    Public ReadOnly Property CharacterTypeSpawnCount As ICharacterTypeSpawnCountData Implements IWorldData.CharacterTypeSpawnCount
     Public ReadOnly Property CharacterTypeSpawnLocation As CharacterTypeSpawnLocationData Implements IWorldData.CharacterTypeSpawnLocation
     Public ReadOnly Property Direction As DirectionData Implements IWorldData.Direction
     Public ReadOnly Property DungeonLevel As DungeonLevelData Implements IWorldData.DungeonLevel

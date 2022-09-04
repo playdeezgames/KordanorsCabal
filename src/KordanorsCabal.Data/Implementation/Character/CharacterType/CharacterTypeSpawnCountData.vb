@@ -1,5 +1,6 @@
 ﻿Public Class CharacterTypeSpawnCountData
     Inherits BaseData
+    Implements ICharacterTypeSpawnCountData
     Friend Const TableName = "CharacterTypeSpawnCounts"
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Const DungeonLevelIdColumn = DungeonLevelData.DungeonLevelIdColumn
@@ -62,7 +63,7 @@
                 FROM [cte];")
     End Sub
 
-    Public Function ReadSpawnCount(characterTypeId As Long, dungeonLevelId As Long) As Long?
+    Public Function ReadSpawnCount(characterTypeId As Long, dungeonLevelId As Long) As Long? Implements ICharacterTypeSpawnCountData.ReadSpawnCount
         Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
