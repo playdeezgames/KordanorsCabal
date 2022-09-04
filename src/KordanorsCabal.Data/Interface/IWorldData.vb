@@ -32,7 +32,7 @@
     ReadOnly Property ItemTypeStatisticType As IItemTypeStatisticTypeData
     ReadOnly Property Location As ILocationData
     ReadOnly Property LocationDungeonLevel As ILocationDungeonLevelData
-    ReadOnly Property LocationStatistic As LocationStatisticData
+    ReadOnly Property LocationStatistic As ILocationStatisticData
     ReadOnly Property LocationType As LocationTypeData
     ReadOnly Property Player As IPlayerData
     ReadOnly Property Route As RouteData

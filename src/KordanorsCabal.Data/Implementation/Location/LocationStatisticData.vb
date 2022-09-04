@@ -1,5 +1,6 @@
 ﻿Public Class LocationStatisticData
     Inherits BaseData
+    Implements ILocationStatisticData
     Friend Const TableName = "LocationStatistics"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
@@ -30,7 +31,7 @@
             (StatisticValueColumn, statisticValue))
     End Function
 
-    Public Function Read(locationId As Long, statisticType As Long) As Long?
+    Public Function Read(locationId As Long, statisticType As Long) As Long? Implements ILocationStatisticData.Read
         Return Store.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -39,7 +40,7 @@
             (StatisticTypeColumn, statisticType))
     End Function
 
-    Public Sub Write(locationId As Long, statisticType As Long, statisticValue As Long?)
+    Public Sub Write(locationId As Long, statisticType As Long, statisticValue As Long?) Implements ILocationStatisticData.Write
         If Not statisticValue.HasValue Then
             Store.ClearForColumnValues(
                 AddressOf Initialize,
