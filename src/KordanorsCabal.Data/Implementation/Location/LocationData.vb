@@ -1,5 +1,6 @@
 ﻿Public Class LocationData
     Inherits BaseData
+    Implements ILocationData
     Public Const TableName = "Locations"
     Public Const LocationIdColumn = "LocationId"
     Friend Const LocationTypeColumn = "LocationType"
@@ -17,7 +18,7 @@
             );")
     End Sub
 
-    Public Function ReadForLocationType(locationType As Long) As IEnumerable(Of Long)
+    Public Function ReadForLocationType(locationType As Long) As IEnumerable(Of Long) Implements ILocationData.ReadForLocationType
         Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -25,7 +26,7 @@
             (LocationTypeColumn, locationType))
     End Function
 
-    Public Sub WriteLocationType(locationId As Long, locationType As Long)
+    Public Sub WriteLocationType(locationId As Long, locationType As Long) Implements ILocationData.WriteLocationType
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
@@ -33,7 +34,7 @@
             (LocationIdColumn, locationId))
     End Sub
 
-    Public Function ReadLocationType(locationId As Long) As Long?
+    Public Function ReadLocationType(locationId As Long) As Long? Implements ILocationData.ReadLocationType
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -41,7 +42,7 @@
             (LocationIdColumn, locationId))
     End Function
 
-    Public Function Create(locationType As Long) As Long
+    Public Function Create(locationType As Long) As Long Implements ILocationData.Create
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,

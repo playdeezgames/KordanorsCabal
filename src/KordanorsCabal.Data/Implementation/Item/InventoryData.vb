@@ -12,7 +12,7 @@
 
     Friend Sub Initialize()
         CType(World.Character, CharacterData).Initialize()
-        World.Location.Initialize()
+        CType(World.Location, LocationData).Initialize()
         Store.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
