@@ -1,5 +1,6 @@
 ﻿Public Class DirectionData
     Inherits NameCacheData
+    Implements IDirectionData
     Friend Const TableName = "Directions"
     Friend Const DirectionIdColumn = "DirectionId"
     Friend Const DirectionNameColumn = "DirectionName"
@@ -48,14 +49,14 @@
             (DirectionNameColumn, name))
     End Sub
 
-    Public Function ReadName(directionId As Long) As String
+    Public Function ReadName(directionId As Long) As String Implements IDirectionData.ReadName
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,
             DirectionNameColumn,
             (DirectionIdColumn, directionId))
     End Function
-    Public Function ReadAbbreviation(directionId As Long) As String
+    Public Function ReadAbbreviation(directionId As Long) As String Implements IDirectionData.ReadAbbreviation
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,
@@ -63,35 +64,35 @@
             (DirectionIdColumn, directionId))
     End Function
 
-    Public Function ReadAll() As IEnumerable(Of Long)
+    Public Function ReadAll() As IEnumerable(Of Long) Implements IDirectionData.ReadAll
         Return Store.ReadRecords(Of Long)(
             AddressOf Initialize,
             TableName,
             DirectionIdColumn)
     End Function
 
-    Public Function ReadIsCardinal(directionId As Long) As Boolean
+    Public Function ReadIsCardinal(directionId As Long) As Boolean Implements IDirectionData.ReadIsCardinal
         Return If(Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             IsCardinalColumn,
             (DirectionIdColumn, directionId)), 0) > 0
     End Function
-    Public Function ReadOpposite(directionId As Long) As Long?
+    Public Function ReadOpposite(directionId As Long) As Long? Implements IDirectionData.ReadOpposite
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             OppositeDirectionIdColumn,
             (DirectionIdColumn, directionId))
     End Function
-    Public Function ReadNext(directionId As Long) As Long?
+    Public Function ReadNext(directionId As Long) As Long? Implements IDirectionData.ReadNext
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             NextDirectionIdColumn,
             (DirectionIdColumn, directionId))
     End Function
-    Public Function ReadPrevious(directionId As Long) As Long?
+    Public Function ReadPrevious(directionId As Long) As Long? Implements IDirectionData.ReadPrevious
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
