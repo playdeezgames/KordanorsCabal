@@ -22,7 +22,7 @@ Public Class WorldData
     Public ReadOnly Property CharacterTypeSpawnLocation As ICharacterTypeSpawnLocationData Implements IWorldData.CharacterTypeSpawnLocation
     Public ReadOnly Property Direction As IDirectionData Implements IWorldData.Direction
     Public ReadOnly Property DungeonLevel As IDungeonLevelData Implements IWorldData.DungeonLevel
-    Public ReadOnly Property EquipSlot As EquipSlotData Implements IWorldData.EquipSlot
+    Public ReadOnly Property EquipSlot As IEquipSlotData Implements IWorldData.EquipSlot
     Public ReadOnly Property Feature As FeatureData Implements IWorldData.Feature
     Public ReadOnly Property FeatureType As FeatureTypeData Implements IWorldData.FeatureType
     Public ReadOnly Property Inventory As InventoryData Implements IWorldData.Inventory

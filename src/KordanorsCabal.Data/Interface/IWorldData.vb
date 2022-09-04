@@ -18,7 +18,7 @@
     ReadOnly Property CharacterTypeSpawnLocation As ICharacterTypeSpawnLocationData
     ReadOnly Property Direction As IDirectionData
     ReadOnly Property DungeonLevel As IDungeonLevelData
-    ReadOnly Property EquipSlot As EquipSlotData
+    ReadOnly Property EquipSlot As IEquipSlotData
     ReadOnly Property Feature As FeatureData
     ReadOnly Property FeatureType As FeatureTypeData
     ReadOnly Property Inventory As InventoryData
