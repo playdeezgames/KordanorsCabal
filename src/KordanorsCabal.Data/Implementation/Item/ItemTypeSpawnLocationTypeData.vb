@@ -1,5 +1,6 @@
 ﻿Public Class ItemTypeSpawnLocationTypeData
     Inherits BaseData
+    Implements IItemTypeSpawnLocationTypeData
     Friend Const TableName = "ItemTypeSpawnLocationTypes"
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
     Friend Const DungeonLevelIdColumn = DungeonLevelData.DungeonLevelIdColumn
@@ -102,7 +103,7 @@
 
     End Sub
 
-    Public Function ReadAll(itemTypeId As Long, dungeonLevelId As Long) As IEnumerable(Of Long)
+    Public Function ReadAll(itemTypeId As Long, dungeonLevelId As Long) As IEnumerable(Of Long) Implements IItemTypeSpawnLocationTypeData.ReadAll
         Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
