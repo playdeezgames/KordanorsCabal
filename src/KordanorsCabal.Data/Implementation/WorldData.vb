@@ -24,7 +24,7 @@ Public Class WorldData
     Public ReadOnly Property DungeonLevel As IDungeonLevelData Implements IWorldData.DungeonLevel
     Public ReadOnly Property EquipSlot As IEquipSlotData Implements IWorldData.EquipSlot
     Public ReadOnly Property Feature As IFeatureData Implements IWorldData.Feature
-    Public ReadOnly Property FeatureType As FeatureTypeData Implements IWorldData.FeatureType
+    Public ReadOnly Property FeatureType As IFeatureTypeData Implements IWorldData.FeatureType
     Public ReadOnly Property Inventory As InventoryData Implements IWorldData.Inventory
     Public ReadOnly Property InventoryItem As InventoryItemData Implements IWorldData.InventoryItem
     Public ReadOnly Property Item As ItemData Implements IWorldData.Item

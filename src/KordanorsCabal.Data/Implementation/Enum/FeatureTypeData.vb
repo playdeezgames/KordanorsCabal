@@ -1,11 +1,12 @@
 ﻿Public Class FeatureTypeData
     Inherits BaseData
+    Implements IFeatureTypeData
     Friend Const TableName = "FeatureTypes"
     Friend Const FeatureTypeIdColumn = "FeatureTypeId"
     Friend Const FeatureTypeNameColumn = "FeatureTypeName"
 
 
-    Public Function ReadName(featureTypeId As Long) As String
+    Public Function ReadName(featureTypeId As Long) As String Implements IFeatureTypeData.ReadName
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,
@@ -13,7 +14,7 @@
             (FeatureTypeIdColumn, featureTypeId))
     End Function
 
-    Public Function ReadLocationType(featureTypeId As Long) As Long?
+    Public Function ReadLocationType(featureTypeId As Long) As Long? Implements IFeatureTypeData.ReadLocationType
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -21,7 +22,7 @@
             (FeatureTypeIdColumn, featureTypeId))
     End Function
 
-    Public Function ReadInteractionMode(featureTypeId As Long) As Long?
+    Public Function ReadInteractionMode(featureTypeId As Long) As Long? Implements IFeatureTypeData.ReadInteractionMode
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -57,7 +58,7 @@
                 FROM [cte];")
     End Sub
 
-    Public Function ReadAll() As IEnumerable(Of Long)
+    Public Function ReadAll() As IEnumerable(Of Long) Implements IFeatureTypeData.ReadAll
         Return Store.ReadRecords(Of Long)(
             AddressOf Initialize,
             TableName,
