@@ -37,7 +37,7 @@ Public Class WorldData
     Public ReadOnly Property Location As ILocationData Implements IWorldData.Location
     Public ReadOnly Property LocationDungeonLevel As ILocationDungeonLevelData Implements IWorldData.LocationDungeonLevel
     Public ReadOnly Property LocationStatistic As ILocationStatisticData Implements IWorldData.LocationStatistic
-    Public ReadOnly Property LocationType As LocationTypeData Implements IWorldData.LocationType
+    Public ReadOnly Property LocationType As ILocationTypeData Implements IWorldData.LocationType
     Public ReadOnly Property Player As IPlayerData Implements IWorldData.Player
     Public ReadOnly Property Route As RouteData Implements IWorldData.Route
 

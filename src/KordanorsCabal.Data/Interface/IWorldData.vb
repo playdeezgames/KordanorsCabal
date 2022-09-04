@@ -33,7 +33,7 @@
     ReadOnly Property Location As ILocationData
     ReadOnly Property LocationDungeonLevel As ILocationDungeonLevelData
     ReadOnly Property LocationStatistic As ILocationStatisticData
-    ReadOnly Property LocationType As LocationTypeData
+    ReadOnly Property LocationType As ILocationTypeData
     ReadOnly Property Player As IPlayerData
     ReadOnly Property Route As RouteData
 End Interface

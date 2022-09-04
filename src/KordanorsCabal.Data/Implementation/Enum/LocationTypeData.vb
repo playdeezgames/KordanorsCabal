@@ -1,5 +1,6 @@
 ﻿Public Class LocationTypeData
     Inherits NameCacheData
+    Implements ILocationTypeData
     Friend Const TableName = "LocationTypes"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const LocationTypeNameColumn = "LocationTypeName"
@@ -32,7 +33,7 @@
                 FROM [cte];")
     End Sub
 
-    Public Function ReadRequiresMP(locationTypeId As Long) As Boolean
+    Public Function ReadRequiresMP(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadRequiresMP
         Return If(Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -40,7 +41,7 @@
             (LocationTypeIdColumn, locationTypeId)), 0) > 0
     End Function
 
-    Public Function ReadCanMap(locationTypeId As Long) As Boolean
+    Public Function ReadCanMap(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadCanMap
         Return If(Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -48,7 +49,7 @@
             (LocationTypeIdColumn, locationTypeId)), 0) > 0
     End Function
 
-    Public Function ReadIsDungeon(locationTypeId As Long) As Boolean
+    Public Function ReadIsDungeon(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadIsDungeon
         Return If(Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
@@ -65,7 +66,7 @@
             (LocationTypeNameColumn, name))
     End Sub
 
-    Public Function ReadName(locationTypeId As Long) As String
+    Public Function ReadName(locationTypeId As Long) As String Implements ILocationTypeData.ReadName
         Return Store.ReadColumnString(
             AddressOf Initialize,
             TableName,
