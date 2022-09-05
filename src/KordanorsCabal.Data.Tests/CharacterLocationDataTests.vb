@@ -30,4 +30,20 @@
                                 Times.Once)
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldUpdateTheStoreSoThatACharacterIsAssociatedWithALocation()
+        WithSubobject(
+            Function(x) x.CharacterLocation,
+            Sub(store, subject)
+                Const characterId = 1L
+                Const locationId = 2L
+                subject.Write(characterId, locationId)
+                store.Verify(Sub(x) x.ReplaceRecord(Of Long, Long)(
+                                It.IsAny(Of Action),
+                                Tables.CharacterLocations,
+                                (CharacterIdColumn, characterId),
+                                (LocationIdColumn, locationId)),
+                                Times.Once)
+            End Sub)
+    End Sub
 End Class
