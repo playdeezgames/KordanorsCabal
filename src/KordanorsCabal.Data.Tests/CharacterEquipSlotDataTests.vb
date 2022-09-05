@@ -1,17 +1,9 @@
 ﻿Public Class CharacterEquipSlotDataTests
-    Private Shared Sub WithCharacterEquipSlotData(
-                                                 stuffToDo As Action(Of
-                                                 Mock(Of IStore),
-                                                 ICharacterEquipSlotData))
-        Dim store As New Mock(Of IStore)
-        Dim worldData As New WorldData(store.Object)
-        Dim subject = worldData.CharacterEquipSlot
-        stuffToDo(store, subject)
-        store.VerifyNoOtherCalls()
-    End Sub
+    Inherits WorldDataSubobjectTests
     <Fact>
     Public Sub ShouldClearOutDataForAnItem()
-        WithCharacterEquipSlotData(
+        WithSubobject(
+            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const itemId = 1L
                 subject.ClearForItem(itemId)
@@ -24,7 +16,8 @@
     End Sub
     <Fact>
     Public Sub ShouldClearOutDataForACharacter()
-        WithCharacterEquipSlotData(
+        WithSubobject(
+            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 subject.ClearForCharacter(characterId)
@@ -37,7 +30,8 @@
     End Sub
     <Fact>
     Public Sub ShouldClearOutDataForACharactersEquipSlot()
-        WithCharacterEquipSlotData(
+        WithSubobject(
+            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
@@ -52,7 +46,8 @@
     End Sub
     <Fact>
     Public Sub ShouldQueryTheStoreForTheInUseEquipSlotsOfACharacter()
-        WithCharacterEquipSlotData(
+        WithSubobject(
+            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 subject.ReadEquipSlotsForCharacter(characterId).ShouldBeNull
@@ -66,7 +61,8 @@
     End Sub
     <Fact>
     Public Sub ShouldQueryTheStoreForTheContentsOfAnEquipSlotOfACharacter()
-        WithCharacterEquipSlotData(
+        WithSubobject(
+            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
@@ -82,7 +78,8 @@
     End Sub
     <Fact>
     Public Sub ShouldQueryTheStoreForTheEquippedItemsOfACharacter()
-        WithCharacterEquipSlotData(
+        WithSubobject(
+            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 subject.ReadItemsForCharacter(characterId).ShouldBeNull
@@ -96,7 +93,8 @@
     End Sub
     <Fact>
     Public Sub ShouldReplaceTheStoreContentsOfAnEquipSlotOfACharacter()
-        WithCharacterEquipSlotData(
+        WithSubobject(
+            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
