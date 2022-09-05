@@ -29,7 +29,7 @@
             (QuestColumn, quest))
     End Sub
 
-    Public Function Exists(characterId As Long, quest As Long) As Boolean Implements ICharacterQuestData.Exists
+    Public Function Read(characterId As Long, quest As Long) As Boolean Implements ICharacterQuestData.Read
         Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
