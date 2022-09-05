@@ -31,4 +31,17 @@
                                  (SpellTypeColumn, spellType)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForAllSpellLevelsForACharacter()
+        WithSubobject(
+            Sub(store, subject)
+                Dim characterId = 1L
+                subject.ReadForCharacter(characterId).ShouldBeNull
+                store.Verify(Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+                                 It.IsAny(Of Action),
+                                 CharacterSpells,
+                                 (SpellTypeColumn, SpellLevelColumn),
+                                 (CharacterIdColumn, characterId)))
+            End Sub)
+    End Sub
 End Class
