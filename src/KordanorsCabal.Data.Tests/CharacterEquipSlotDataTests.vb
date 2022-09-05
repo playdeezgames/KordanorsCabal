@@ -50,4 +50,18 @@
                              Times.Once)
             End Sub)
     End Sub
+    <Fact>
+    Public Sub ShouldQueryTheStoreForTheInUseEquipSlotsOfACharacter()
+        WithCharacterEquipSlotData(
+            Sub(store, subject)
+                Const characterId = 1L
+                subject.ReadEquipSlotsForCharacter(characterId)
+                store.Verify(Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
+                             It.IsAny(Of Action),
+                             Tables.CharacterEquipSlots,
+                             Columns.EquipSlot,
+                             (Columns.CharacterId, characterId)),
+                             Times.Once)
+            End Sub)
+    End Sub
 End Class
