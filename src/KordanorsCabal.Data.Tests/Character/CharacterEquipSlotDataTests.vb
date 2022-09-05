@@ -1,9 +1,13 @@
 ﻿Public Class CharacterEquipSlotDataTests
     Inherits WorldDataSubobjectTests(Of ICharacterEquipSlotData)
+
+    Public Sub New()
+        MyBase.New(Function(x) x.CharacterEquipSlot)
+    End Sub
+
     <Fact>
     Public Sub ShouldClearOutDataForAnItem()
         WithSubobject(
-            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const itemId = 1L
                 subject.ClearForItem(itemId)
@@ -17,7 +21,6 @@
     <Fact>
     Public Sub ShouldClearOutDataForACharacter()
         WithSubobject(
-            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 subject.ClearForCharacter(characterId)
@@ -31,7 +34,6 @@
     <Fact>
     Public Sub ShouldClearOutDataForACharactersEquipSlot()
         WithSubobject(
-            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
@@ -47,7 +49,6 @@
     <Fact>
     Public Sub ShouldQueryTheStoreForTheInUseEquipSlotsOfACharacter()
         WithSubobject(
-            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 subject.ReadEquipSlotsForCharacter(characterId).ShouldBeNull
@@ -62,7 +63,6 @@
     <Fact>
     Public Sub ShouldQueryTheStoreForTheContentsOfAnEquipSlotOfACharacter()
         WithSubobject(
-            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
@@ -79,7 +79,6 @@
     <Fact>
     Public Sub ShouldQueryTheStoreForTheEquippedItemsOfACharacter()
         WithSubobject(
-            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 subject.ReadItemsForCharacter(characterId).ShouldBeNull
@@ -94,7 +93,6 @@
     <Fact>
     Public Sub ShouldReplaceTheStoreContentsOfAnEquipSlotOfACharacter()
         WithSubobject(
-            Function(x) x.CharacterEquipSlot,
             Sub(store, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L

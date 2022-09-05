@@ -1,9 +1,13 @@
 ﻿Public Class CharacterDataTests
     Inherits WorldDataSubobjectTests(Of ICharacterData)
+
+    Public Sub New()
+        MyBase.New(Function(x) x.Character)
+    End Sub
+
     <Fact>
     Sub ShouldClearOutDataWhenClearIsCalled()
         WithSubobject(
-            Function(x) x.Character,
             Sub(store, subject)
                 Const characterId = 1L
                 subject.Clear(characterId)
@@ -21,7 +25,6 @@
     <Fact>
     Sub ShouldCreateRecordsInTheCharactersTable()
         WithSubobject(
-            Function(x) x.Character,
             Sub(store, subject)
                 Const characterType = 1L
                 Const locationId = 2L
@@ -36,7 +39,6 @@
     <Fact>
     Sub ShouldQueryForTheCharacterTypeOfAGivenCharacter()
         WithSubobject(
-            Function(x) x.Character,
             Sub(store, subject)
                 Dim characterId = 1L
                 subject.ReadCharacterType(characterId)
@@ -51,7 +53,6 @@
     <Fact>
     Sub ShouldQueryForCharactersWithAGivenLocation()
         WithSubobject(
-            Function(x) x.Character,
             Sub(store, subject)
                 Dim locationId = 1L
                 subject.ReadForLocation(locationId)
@@ -66,7 +67,6 @@
     <Fact>
     Sub ShouldQueryForCharacterLocation()
         WithSubobject(
-            Function(x) x.Character,
             Sub(store, subject)
                 Dim characterId = 1L
                 subject.ReadLocation(characterId)
@@ -81,7 +81,6 @@
     <Fact>
     Sub ShouldUpdateTheLocationOfAGivenCharacter()
         WithSubobject(
-            Function(x) x.Character,
             Sub(store, subject)
                 Dim characterId = 1L
                 Dim locationId = 2L

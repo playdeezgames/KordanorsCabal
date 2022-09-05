@@ -1,9 +1,13 @@
 ﻿Public Class CharacterLocationDataTests
     Inherits WorldDataSubobjectTests(Of ICharacterLocationData)
+
+    Public Sub New()
+        MyBase.New(Function(x) x.CharacterLocation)
+    End Sub
+
     <Fact>
     Sub ShouldClearLocationsForACharacter()
         WithSubobject(
-            Function(x) x.CharacterLocation,
             Sub(store, subject)
                 Const characterId = 1L
                 subject.ClearForCharacter(characterId)
@@ -16,7 +20,6 @@
     <Fact>
     Sub ShouldQueryTheStoreForACharacterAndLocationCombination()
         WithSubobject(
-            Function(x) x.CharacterLocation,
             Sub(store, subject)
                 Const characterId = 1L
                 Const locationId = 2L
@@ -33,7 +36,6 @@
     <Fact>
     Sub ShouldUpdateTheStoreSoThatACharacterIsAssociatedWithALocation()
         WithSubobject(
-            Function(x) x.CharacterLocation,
             Sub(store, subject)
                 Const characterId = 1L
                 Const locationId = 2L

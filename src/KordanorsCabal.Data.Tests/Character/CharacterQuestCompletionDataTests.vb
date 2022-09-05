@@ -1,9 +1,13 @@
 ﻿Public Class CharacterQuestCompletionDataTests
     Inherits WorldDataSubobjectTests(Of ICharacterQuestCompletionData)
+
+    Public Sub New()
+        MyBase.New(Function(x) x.CharacterQuestCompletion)
+    End Sub
+
     <Fact>
     Sub ShouldClearTheStoreOfAnyQuestCompletionsAssociatedWithACharacter()
         WithSubobject(
-            Function(x) x.CharacterQuestCompletion,
             Sub(store, subject)
                 Dim characterId = 1L
                 subject.ClearForCharacter(characterId)
@@ -16,7 +20,6 @@
     <Fact>
     Sub ShouldQueryTheStoreForHowManTimesACharacterHasCompletedAQuest()
         WithSubobject(
-            Function(x) x.CharacterQuestCompletion,
             Sub(store, subject)
                 Dim characterId = 1L
                 Dim questId = 2L
@@ -32,7 +35,6 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithHowManyTimesAGivenCharacterHasCompletedAGivenQuest()
         WithSubobject(
-            Function(x) x.CharacterQuestCompletion,
             Sub(store, subject)
                 Dim characterId = 1L
                 Dim questId = 2L
