@@ -55,12 +55,28 @@
         WithCharacterEquipSlotData(
             Sub(store, subject)
                 Const characterId = 1L
-                subject.ReadEquipSlotsForCharacter(characterId)
+                subject.ReadEquipSlotsForCharacter(characterId).ShouldBeNull
                 store.Verify(Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              Columns.EquipSlot,
                              (Columns.CharacterId, characterId)),
+                             Times.Once)
+            End Sub)
+    End Sub
+    <Fact>
+    Public Sub ShouldQueryTheStoreForTheContentsOfAnEquipSlotOfACharacter()
+        WithCharacterEquipSlotData(
+            Sub(store, subject)
+                Const characterId = 1L
+                Const equipSlot = 2L
+                subject.ReadForCharacterEquipSlot(characterId, equipSlot).ShouldBeNull
+                store.Verify(Sub(x) x.ReadColumnValue(Of Long, Long, Long)(
+                             It.IsAny(Of Action),
+                             Tables.CharacterEquipSlots,
+                             Columns.ItemId,
+                             (Columns.CharacterId, characterId),
+                             (Columns.EquipSlot, equipSlot)),
                              Times.Once)
             End Sub)
     End Sub
