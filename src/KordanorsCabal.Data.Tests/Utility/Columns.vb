@@ -6,4 +6,6 @@
     Friend Const ItemIdColumn = "ItemId"
     Friend Const LocationIdColumn = "LocationId"
     Friend Const QuestColumn = "Quest"
+    Friend Const SpellLevelColumn = "SpellLevel"
+    Friend Const SpellTypeColumn = "SpellType"
 End Module
