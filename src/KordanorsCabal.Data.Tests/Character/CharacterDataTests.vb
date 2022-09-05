@@ -1,5 +1,5 @@
 ﻿Public Class CharacterDataTests
-    Inherits WorldDataSubobjectTests
+    Inherits WorldDataSubobjectTests(Of ICharacterData)
     <Fact>
     Sub ShouldClearOutDataWhenClearIsCalled()
         WithSubobject(

@@ -1,5 +1,5 @@
 ﻿Public Class CharacterQuestCompletionDataTests
-    Inherits WorldDataSubobjectTests
+    Inherits WorldDataSubobjectTests(Of ICharacterQuestCompletionData)
     <Fact>
     Sub ShouldClearTheStoreOfAnyQuestCompletionsAssociatedWithACharacter()
         WithSubobject(

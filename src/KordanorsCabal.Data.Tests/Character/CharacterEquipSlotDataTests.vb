@@ -1,5 +1,5 @@
 ﻿Public Class CharacterEquipSlotDataTests
-    Inherits WorldDataSubobjectTests
+    Inherits WorldDataSubobjectTests(Of ICharacterEquipSlotData)
     <Fact>
     Public Sub ShouldClearOutDataForAnItem()
         WithSubobject(

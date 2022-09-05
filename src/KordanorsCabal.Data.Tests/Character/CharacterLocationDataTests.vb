@@ -1,5 +1,5 @@
 ﻿Public Class CharacterLocationDataTests
-    Inherits WorldDataSubobjectTests
+    Inherits WorldDataSubobjectTests(Of ICharacterLocationData)
     <Fact>
     Sub ShouldClearLocationsForACharacter()
         WithSubobject(
