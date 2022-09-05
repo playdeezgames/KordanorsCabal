@@ -1,14 +1,9 @@
 ﻿Public Class CharacterDataTests
-    Private Shared Sub WithCharacterData(stuffToDo As Action(Of Mock(Of IStore), ICharacterData))
-        Dim store As New Mock(Of IStore)
-        Dim worldData As New WorldData(store.Object)
-        Dim subject = worldData.Character
-        stuffToDo(store, subject)
-        store.VerifyNoOtherCalls()
-    End Sub
+    Inherits WorldDataSubobjectTests
     <Fact>
     Sub ShouldClearOutDataWhenClearIsCalled()
-        WithCharacterData(
+        WithSubobject(
+            Function(x) x.Character,
             Sub(store, subject)
                 Const characterId = 1L
                 subject.Clear(characterId)
@@ -25,7 +20,8 @@
     End Sub
     <Fact>
     Sub ShouldCreateRecordsInTheCharactersTable()
-        WithCharacterData(
+        WithSubobject(
+            Function(x) x.Character,
             Sub(store, subject)
                 Const characterType = 1L
                 Const locationId = 2L
@@ -39,7 +35,8 @@
     End Sub
     <Fact>
     Sub ShouldQueryForTheCharacterTypeOfAGivenCharacter()
-        WithCharacterData(
+        WithSubobject(
+            Function(x) x.Character,
             Sub(store, subject)
                 Dim characterId = 1L
                 subject.ReadCharacterType(characterId)
@@ -53,7 +50,8 @@
     End Sub
     <Fact>
     Sub ShouldQueryForCharactersWithAGivenLocation()
-        WithCharacterData(
+        WithSubobject(
+            Function(x) x.Character,
             Sub(store, subject)
                 Dim locationId = 1L
                 subject.ReadForLocation(locationId)
@@ -67,7 +65,8 @@
     End Sub
     <Fact>
     Sub ShouldQueryForCharacterLocation()
-        WithCharacterData(
+        WithSubobject(
+            Function(x) x.Character,
             Sub(store, subject)
                 Dim characterId = 1L
                 subject.ReadLocation(characterId)
@@ -81,7 +80,8 @@
     End Sub
     <Fact>
     Sub ShouldUpdateTheLocationOfAGivenCharacter()
-        WithCharacterData(
+        WithSubobject(
+            Function(x) x.Character,
             Sub(store, subject)
                 Dim characterId = 1L
                 Dim locationId = 2L
