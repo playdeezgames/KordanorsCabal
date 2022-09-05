@@ -13,4 +13,21 @@
                                  (Columns.CharacterIdColumn, characterId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForACharacterAndLocationCombination()
+        WithSubobject(
+            Function(x) x.CharacterLocation,
+            Sub(store, subject)
+                Const characterId = 1L
+                Const locationId = 2L
+                subject.Read(characterId, locationId).ShouldBeFalse
+                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long, Long)(
+                                It.IsAny(Of Action),
+                                Tables.CharacterLocations,
+                                CharacterIdColumn,
+                                (CharacterIdColumn, characterId),
+                                (LocationIdColumn, locationId)),
+                                Times.Once)
+            End Sub)
+    End Sub
 End Class
