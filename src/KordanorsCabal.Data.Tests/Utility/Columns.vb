@@ -1,7 +1,7 @@
 ﻿Module Columns
-    Friend Const CharacterId = "CharacterId"
-    Friend Const CharacterType = "CharacterType"
-    Friend Const EquipSlot = "EquipSlot"
-    Friend Const ItemId = "ItemId"
-    Friend Const LocationId = "LocationId"
+    Friend Const CharacterIdColumn = "CharacterId"
+    Friend Const CharacterTypeColumn = "CharacterType"
+    Friend Const EquipSlotColumn = "EquipSlot"
+    Friend Const ItemIdColumn = "ItemId"
+    Friend Const LocationIdColumn = "LocationId"
 End Module

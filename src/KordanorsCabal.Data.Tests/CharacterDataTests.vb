@@ -7,15 +7,15 @@
             Sub(store, subject)
                 Const characterId = 1L
                 subject.Clear(characterId)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterQuests, (Columns.CharacterId, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterQuestCompletions, (Columns.CharacterId, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterEquipSlots, (Columns.CharacterId, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Inventories, (Columns.CharacterId, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterLocations, (Columns.CharacterId, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterStatistics, (Columns.CharacterId, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Players, (Columns.CharacterId, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterSpells, (Columns.CharacterId, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Characters, (Columns.CharacterId, characterId)), Times.Once)
+                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterQuests, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterQuestCompletions, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterEquipSlots, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Inventories, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterLocations, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterStatistics, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Players, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterSpells, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Characters, (Columns.CharacterIdColumn, characterId)), Times.Once)
             End Sub)
     End Sub
     <Fact>
@@ -29,8 +29,8 @@
                 store.Verify(Function(x) x.CreateRecord(
                      It.IsAny(Of Action),
                      Tables.Characters,
-                     (Columns.CharacterType, characterType),
-                     (Columns.LocationId, locationId)))
+                     (Columns.CharacterTypeColumn, characterType),
+                     (Columns.LocationIdColumn, locationId)))
             End Sub)
     End Sub
     <Fact>
@@ -44,8 +44,8 @@
                              Long)(
                              It.IsAny(Of Action),
                              Tables.Characters,
-                             Columns.CharacterType,
-                             (Columns.CharacterId, characterId)))
+                             Columns.CharacterTypeColumn,
+                             (Columns.CharacterIdColumn, characterId)))
             End Sub)
     End Sub
     <Fact>
@@ -59,8 +59,8 @@
                                  Long)(
                                  It.IsAny(Of Action),
                                  Tables.Characters,
-                                 Columns.CharacterId,
-                                 (Columns.LocationId, locationId)))
+                                 Columns.CharacterIdColumn,
+                                 (Columns.LocationIdColumn, locationId)))
             End Sub)
     End Sub
     <Fact>
@@ -74,8 +74,8 @@
                                  Long)(
                                  It.IsAny(Of Action),
                                  Tables.Characters,
-                                 Columns.LocationId,
-                                 (Columns.CharacterId, characterId)))
+                                 Columns.LocationIdColumn,
+                                 (Columns.CharacterIdColumn, characterId)))
             End Sub)
     End Sub
     <Fact>
@@ -89,8 +89,8 @@
                 store.Verify(Sub(x) x.WriteColumnValue(
                                  It.IsAny(Of Action),
                                  Tables.Characters,
-                                 (Columns.LocationId, locationId),
-                                 (Columns.CharacterId, characterId)))
+                                 (Columns.LocationIdColumn, locationId),
+                                 (Columns.CharacterIdColumn, characterId)))
             End Sub)
     End Sub
 End Class

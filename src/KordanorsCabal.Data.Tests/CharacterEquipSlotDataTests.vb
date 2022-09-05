@@ -10,7 +10,7 @@
                 store.Verify(Sub(x) x.ClearForColumnValue(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
-                             (Columns.ItemId, itemId)),
+                             (Columns.ItemIdColumn, itemId)),
                              Times.Once)
             End Sub)
     End Sub
@@ -24,7 +24,7 @@
                 store.Verify(Sub(x) x.ClearForColumnValue(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
-                             (Columns.CharacterId, characterId)),
+                             (Columns.CharacterIdColumn, characterId)),
                              Times.Once)
             End Sub)
     End Sub
@@ -39,8 +39,8 @@
                 store.Verify(Sub(x) x.ClearForColumnValues(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
-                             (Columns.CharacterId, characterId),
-                             (Columns.EquipSlot, equipSlot)),
+                             (Columns.CharacterIdColumn, characterId),
+                             (Columns.EquipSlotColumn, equipSlot)),
                              Times.Once)
             End Sub)
     End Sub
@@ -54,8 +54,8 @@
                 store.Verify(Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
-                             Columns.EquipSlot,
-                             (Columns.CharacterId, characterId)),
+                             Columns.EquipSlotColumn,
+                             (Columns.CharacterIdColumn, characterId)),
                              Times.Once)
             End Sub)
     End Sub
@@ -70,9 +70,9 @@
                 store.Verify(Sub(x) x.ReadColumnValue(Of Long, Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
-                             Columns.ItemId,
-                             (Columns.CharacterId, characterId),
-                             (Columns.EquipSlot, equipSlot)),
+                             Columns.ItemIdColumn,
+                             (Columns.CharacterIdColumn, characterId),
+                             (Columns.EquipSlotColumn, equipSlot)),
                              Times.Once)
             End Sub)
     End Sub
@@ -86,8 +86,8 @@
                 store.Verify(Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
-                             Columns.ItemId,
-                             (Columns.CharacterId, characterId)),
+                             Columns.ItemIdColumn,
+                             (Columns.CharacterIdColumn, characterId)),
                              Times.Once)
             End Sub)
     End Sub
@@ -103,9 +103,9 @@
                 store.Verify(Sub(x) x.ReplaceRecord(Of Long, Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
-                             (Columns.CharacterId, characterId),
-                             (Columns.EquipSlot, equipSlot),
-                             (Columns.ItemId, itemId)),
+                             (Columns.CharacterIdColumn, characterId),
+                             (Columns.EquipSlotColumn, equipSlot),
+                             (Columns.ItemIdColumn, itemId)),
                              Times.Once)
             End Sub)
     End Sub

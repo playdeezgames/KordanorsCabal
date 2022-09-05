@@ -10,7 +10,7 @@
                 store.Verify(Sub(x) x.ClearForColumnValue(
                                  It.IsAny(Of Action),
                                  Tables.CharacterLocations,
-                                 (Columns.CharacterId, characterId)))
+                                 (Columns.CharacterIdColumn, characterId)))
             End Sub)
     End Sub
 End Class
