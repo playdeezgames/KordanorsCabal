@@ -30,4 +30,20 @@
                              (StatisticTypeColumn, statisticType)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldUpdateTheStoreWithAStatisticValueForACharacter()
+        WithSubobject(
+            Sub(store, subject)
+                Dim characterId = 1L
+                Dim statisticType = 2L
+                Dim statisticValue = 3L
+                subject.Write(characterId, statisticType, statisticValue)
+                store.Verify(Sub(x) x.ReplaceRecord(
+                             It.IsAny(Of Action),
+                             Tables.CharacterStatistics,
+                             (CharacterIdColumn, characterId),
+                             (StatisticTypeColumn, statisticType),
+                             (StatisticValueColumn, statisticValue)))
+            End Sub)
+    End Sub
 End Class
