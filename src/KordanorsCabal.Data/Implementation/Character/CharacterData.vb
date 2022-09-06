@@ -4,7 +4,7 @@
     Friend Const TableName = "Characters"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
-    Friend Const CharacterTypeColumn = "CharacterType"
+    Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
     End Sub
@@ -15,7 +15,7 @@
         (
             [{CharacterIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
             [{LocationIdColumn}] INT NOT NULL,
-            [{CharacterTypeColumn}] INT NOT NULL,
+            [{CharacterTypeIdColumn}] INT NOT NULL,
             FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
         );")
     End Sub
@@ -23,7 +23,7 @@
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
-            CharacterTypeColumn,
+            CharacterTypeIdColumn,
             (CharacterIdColumn, characterId))
     End Function
 
@@ -31,7 +31,7 @@
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
-            (CharacterTypeColumn, characterType),
+            (CharacterTypeIdColumn, characterType),
             (LocationIdColumn, locationId))
     End Function
 

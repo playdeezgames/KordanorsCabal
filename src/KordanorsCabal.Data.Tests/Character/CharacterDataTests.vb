@@ -32,7 +32,7 @@
                 store.Verify(Function(x) x.CreateRecord(
                      It.IsAny(Of Action),
                      Tables.Characters,
-                     (Columns.CharacterTypeColumn, characterType),
+                     (Columns.CharacterTypeIdColumn, characterType),
                      (Columns.LocationIdColumn, locationId)))
             End Sub)
     End Sub
@@ -46,7 +46,7 @@
                              Long)(
                              It.IsAny(Of Action),
                              Tables.Characters,
-                             Columns.CharacterTypeColumn,
+                             Columns.CharacterTypeIdColumn,
                              (Columns.CharacterIdColumn, characterId)))
             End Sub)
     End Sub
