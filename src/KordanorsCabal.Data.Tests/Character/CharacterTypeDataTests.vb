@@ -40,4 +40,30 @@
                                  (Columns.CharacterTypeIdColumn, characterType)))
             End Sub)
     End Sub
+    <Fact>
+    Public Sub ShouldQueryTheDataStoreToFindACharactersName()
+        WithSubobject(
+            Sub(store, subject)
+                Dim characterType = 1L
+                subject.ReadName(characterType).ShouldBeNull
+                store.Verify(Function(x) x.ReadColumnString(Of Long)(
+                                 It.IsAny(Of Action),
+                                 Tables.CharacterTypes,
+                                 Columns.CharacterTypeNameColumn,
+                                 (Columns.CharacterTypeIdColumn, characterType)))
+            End Sub)
+    End Sub
+    <Fact>
+    Public Sub ShouldQueryTheDataStoreToFindACharactersXPValue()
+        WithSubobject(
+            Sub(store, subject)
+                Dim characterType = 1L
+                subject.ReadXPValue(characterType).ShouldBeNull
+                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(
+                                 It.IsAny(Of Action),
+                                 Tables.CharacterTypes,
+                                 Columns.XPValueColumn,
+                                 (Columns.CharacterTypeIdColumn, characterType)))
+            End Sub)
+    End Sub
 End Class

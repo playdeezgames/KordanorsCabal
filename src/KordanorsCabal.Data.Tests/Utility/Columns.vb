@@ -1,6 +1,7 @@
 ﻿Module Columns
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const CharacterTypeIdColumn = "CharacterTypeId"
+    Friend Const CharacterTypeNameColumn = "CharacterTypeName"
     Friend Const CompletionsColumn = "Completions"
     Friend Const EquipSlotColumn = "EquipSlot"
     Friend Const IsUndeadColumn = "IsUndead"
@@ -12,4 +13,5 @@
     Friend Const SpellTypeColumn = "SpellType"
     Friend Const StatisticValueColumn = "StatisticValue"
     Friend Const StatisticTypeColumn = "StatisticType"
+    Friend Const XPValueColumn = "XPValue"
 End Module
