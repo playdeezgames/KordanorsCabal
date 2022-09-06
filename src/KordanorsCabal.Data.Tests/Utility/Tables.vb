@@ -9,6 +9,7 @@
     Friend Const CharacterTypes = "CharacterTypes"
     Friend Const CharacterTypeAttackTypes = "CharacterTypeAttackTypes"
     Friend Const CharacterTypeBribes = "CharacterTypeBribes"
+    Friend Const CharacterTypeEnemies = "CharacterTypeEnemies"
     Friend Const Inventories = "Inventories"
     Friend Const Players = "Players"
 End Module
