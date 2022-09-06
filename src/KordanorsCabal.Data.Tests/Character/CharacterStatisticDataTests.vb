@@ -1,0 +1,33 @@
+﻿Public Class CharacterStatisticDataTests
+    Inherits WorldDataSubobjectTests(Of ICharacterStatisticData)
+    Public Sub New()
+        MyBase.New(Function(x) x.CharacterStatistic)
+    End Sub
+    <Fact>
+    Sub ShouldRemoveAGivenCharactersStatisticsFromTheStore()
+        WithSubobject(
+            Sub(store, subject)
+                Dim characterId = 1L
+                subject.ClearForCharacter(characterId)
+                store.Verify(Sub(x) x.ClearForColumnValue(
+                             It.IsAny(Of Action),
+                             Tables.CharacterStatistics,
+                             (CharacterIdColumn, characterId)))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForAGivenCharactersStatisticValue()
+        WithSubobject(
+            Sub(store, subject)
+                Dim characterId = 1L
+                Dim statisticType = 2L
+                subject.Read(characterId, statisticType).ShouldBeNull
+                store.Verify(Sub(x) x.ReadColumnValue(Of Long, Long, Long)(
+                             It.IsAny(Of Action),
+                             Tables.CharacterStatistics,
+                             Columns.StatisticValueColumn,
+                             (CharacterIdColumn, characterId),
+                             (StatisticTypeColumn, statisticType)))
+            End Sub)
+    End Sub
+End Class

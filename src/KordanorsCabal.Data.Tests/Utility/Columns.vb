@@ -8,4 +8,6 @@
     Friend Const QuestColumn = "Quest"
     Friend Const SpellLevelColumn = "SpellLevel"
     Friend Const SpellTypeColumn = "SpellType"
+    Friend Const StatisticValueColumn = "StatisticValue"
+    Friend Const StatisticTypeColumn = "StatisticType"
 End Module

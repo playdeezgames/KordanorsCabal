@@ -4,7 +4,7 @@
     Friend Const TableName = "CharacterStatistics"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const StatisticTypeColumn = "StatisticType"
-    Friend Const StatisticValueColumn = "StatisticVolume"
+    Friend Const StatisticValueColumn = "StatisticValue"
 
     Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
