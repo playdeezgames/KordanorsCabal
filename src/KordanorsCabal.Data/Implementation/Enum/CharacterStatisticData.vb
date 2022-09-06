@@ -3,7 +3,7 @@
     Implements ICharacterStatisticData
     Friend Const TableName = "CharacterStatistics"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const StatisticTypeColumn = "StatisticType"
+    Friend Const CharacterStatisticTypeIdColumn = CharacterStatisticTypeData.CharacterStatisticTypeIdColumn
     Friend Const StatisticValueColumn = "StatisticValue"
 
     Public Sub New(store As IStore, world As WorldData)
@@ -16,9 +16,9 @@
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{CharacterIdColumn}] INT NOT NULL,
-                [{StatisticTypeColumn}] INT NOT NULL,
+                [{CharacterStatisticTypeIdColumn}] INT NOT NULL,
                 [{StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{CharacterIdColumn}],[{StatisticTypeColumn}]),
+                UNIQUE([{CharacterIdColumn}],[{CharacterStatisticTypeIdColumn}]),
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
@@ -27,7 +27,7 @@
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),
-            (StatisticTypeColumn, statisticType),
+            (CharacterStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue))
     End Sub
 
@@ -37,7 +37,7 @@
             TableName,
             StatisticValueColumn,
             (CharacterIdColumn, characterId),
-            (StatisticTypeColumn, statisticType))
+            (CharacterStatisticTypeIdColumn, statisticType))
     End Function
 
     Friend Sub ClearForCharacter(characterId As Long) Implements ICharacterStatisticData.ClearForCharacter

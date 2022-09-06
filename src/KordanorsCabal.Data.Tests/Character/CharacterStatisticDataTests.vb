@@ -27,7 +27,7 @@
                              Tables.CharacterStatistics,
                              Columns.StatisticValueColumn,
                              (CharacterIdColumn, characterId),
-                             (StatisticTypeColumn, statisticType)))
+                             (CharacterStatisticTypeIdColumn, statisticType)))
             End Sub)
     End Sub
     <Fact>
@@ -42,7 +42,7 @@
                              It.IsAny(Of Action),
                              Tables.CharacterStatistics,
                              (CharacterIdColumn, characterId),
-                             (StatisticTypeColumn, statisticType),
+                             (CharacterStatisticTypeIdColumn, statisticType),
                              (StatisticValueColumn, statisticValue)))
             End Sub)
     End Sub
