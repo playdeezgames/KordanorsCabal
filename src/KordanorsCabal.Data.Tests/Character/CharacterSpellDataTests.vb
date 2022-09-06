@@ -44,4 +44,20 @@
                                  (CharacterIdColumn, characterId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldUpdateTheStoreWithASpellLevelForACharacter()
+        WithSubobject(
+            Sub(store, subject)
+                Dim characterId = 1L
+                Dim spellType = 2L
+                Dim level = 3L
+                subject.Write(characterId, spellType, level)
+                store.Verify(Sub(x) x.ReplaceRecord(
+                                 It.IsAny(Of Action),
+                                 CharacterSpells,
+                                 (CharacterIdColumn, characterId),
+                                 (SpellTypeColumn, spellType),
+                                 (SpellLevelColumn, level)))
+            End Sub)
+    End Sub
 End Class
