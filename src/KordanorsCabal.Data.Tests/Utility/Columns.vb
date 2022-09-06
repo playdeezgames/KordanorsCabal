@@ -7,6 +7,7 @@
     Friend Const EquipSlotColumn = "EquipSlot"
     Friend Const IsUndeadColumn = "IsUndead"
     Friend Const ItemIdColumn = "ItemId"
+    Friend Const ItemTypeIdColumn = "ItemTypeId"
     Friend Const LocationIdColumn = "LocationId"
     Friend Const MoneyDropDiceColumn = "MoneyDropDice"
     Friend Const QuestColumn = "Quest"
