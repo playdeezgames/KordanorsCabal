@@ -6,6 +6,7 @@
     Friend Const Characters = "Characters"
     Friend Const CharacterSpells = "CharacterSpells"
     Friend Const CharacterStatistics = "CharacterStatistics"
+    Friend Const CharacterTypes = "CharacterTypes"
     Friend Const Inventories = "Inventories"
     Friend Const Players = "Players"
 End Module
