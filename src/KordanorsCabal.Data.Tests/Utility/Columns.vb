@@ -1,11 +1,13 @@
 ﻿Module Columns
     Friend Const AttackTypeColumn = "AttackType"
     Friend Const CharacterIdColumn = "CharacterId"
+    Friend Const CharacterStatisticTypeIdColumn = "CharacterStatisticTypeId"
     Friend Const CharacterTypeIdColumn = "CharacterTypeId"
     Friend Const CharacterTypeNameColumn = "CharacterTypeName"
     Friend Const CompletionsColumn = "Completions"
     Friend Const EnemyCharacterTypeIdColumn = "EnemyCharacterTypeId"
     Friend Const EquipSlotColumn = "EquipSlot"
+    Friend Const InitialValueColumn = "InitialValue"
     Friend Const IsUndeadColumn = "IsUndead"
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeIdColumn = "ItemTypeId"
