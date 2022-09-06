@@ -42,11 +42,15 @@
     End Sub
 
     Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of Long, Integer) Implements ICharacterTypeAttackTypeData.Read
-        Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+        Dim results = Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             (AttackTypeColumn, WeightColumn),
-            (CharacterTypeIdColumn, characterTypeId)).ToDictionary(
+            (CharacterTypeIdColumn, characterTypeId))
+        If results Is Nothing Then
+            Return Nothing
+        End If
+        Return results.ToDictionary(
                 Function(x) x.Item1,
                 Function(x) CInt(x.Item2))
     End Function

@@ -1,4 +1,5 @@
 ﻿Module Columns
+    Friend Const AttackTypeColumn = "AttackType"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const CharacterTypeIdColumn = "CharacterTypeId"
     Friend Const CharacterTypeNameColumn = "CharacterTypeName"
@@ -13,5 +14,6 @@
     Friend Const SpellTypeColumn = "SpellType"
     Friend Const StatisticValueColumn = "StatisticValue"
     Friend Const StatisticTypeColumn = "StatisticType"
+    Friend Const WeightColumn = "Weight"
     Friend Const XPValueColumn = "XPValue"
 End Module
