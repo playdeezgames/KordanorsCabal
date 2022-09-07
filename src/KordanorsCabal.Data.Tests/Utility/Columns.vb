@@ -13,6 +13,7 @@
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeIdColumn = "ItemTypeId"
     Friend Const LocationIdColumn = "LocationId"
+    Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const MoneyDropDiceColumn = "MoneyDropDice"
     Friend Const PartingShotColumn = "PartingShot"
     Friend Const QuestColumn = "Quest"
