@@ -43,4 +43,18 @@
                     (Columns.DirectionIdColumn, direction)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheNameOfADirection()
+        WithSubobject(
+            Sub(store, subject)
+                Dim direction = 1L
+                subject.ReadName(direction).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnString(Of Long)(
+                    It.IsAny(Of Action),
+                    Tables.Directions,
+                    Columns.DirectionNameColumn,
+                    (Columns.DirectionIdColumn, direction)))
+            End Sub)
+    End Sub
 End Class
