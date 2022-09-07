@@ -85,4 +85,18 @@
                     (Columns.DirectionIdColumn, direction)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForPreviousDirection()
+        WithSubobject(
+            Sub(store, subject)
+                Dim direction = 1L
+                subject.ReadPrevious(direction).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Directions,
+                    Columns.PreviousDirectionIdColumn,
+                    (Columns.DirectionIdColumn, direction)))
+            End Sub)
+    End Sub
 End Class

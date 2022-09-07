@@ -3,9 +3,6 @@
     Sub New(worldData As IWorldData, directionId As Long)
         MyBase.New(worldData, directionId)
     End Sub
-    Private Sub New(worldData As IWorldData, directionName As String)
-        Me.New(worldData, worldData.Direction.ReadForName(directionName).Value)
-    End Sub
     Shared Function FromId(worldData As IWorldData, directionId As Long?) As Direction
         Return If(directionId.HasValue, New Direction(worldData, directionId.Value), Nothing)
     End Function
