@@ -71,4 +71,18 @@
                     (Columns.DirectionIdColumn, direction)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForOppositeDirection()
+        WithSubobject(
+            Sub(store, subject)
+                Dim direction = 1L
+                subject.ReadOpposite(direction).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Directions,
+                    Columns.OppositeDirectionIdColumn,
+                    (Columns.DirectionIdColumn, direction)))
+            End Sub)
+    End Sub
 End Class
