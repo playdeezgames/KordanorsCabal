@@ -15,6 +15,7 @@
     Friend Const CharacterTypePartingShots = "CharacterTypePartingShots"
     Friend Const CharacterTypeSpawnCounts = "CharacterTypeSpawnCounts"
     Friend Const CharacterTypeSpawnLocations = "CharacterTypeSpawnLocations"
+    Friend Const Directions = "Directions"
     Friend Const Inventories = "Inventories"
     Friend Const Players = "Players"
 End Module
