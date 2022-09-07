@@ -32,4 +32,18 @@
                     (Columns.FeatureIdColumn, featureId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheFeatureWithinALocation()
+        WithSubobject(
+            Sub(store, subject)
+                Dim locationId = 1L
+                subject.ReadForLocation(locationId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Features,
+                    Columns.FeatureIdColumn,
+                    (Columns.LocationIdColumn, locationId)))
+            End Sub)
+    End Sub
 End Class
