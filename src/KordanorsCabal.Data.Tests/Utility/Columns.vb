@@ -19,6 +19,7 @@
     Friend Const LocationIdColumn = "LocationId"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const MoneyDropDiceColumn = "MoneyDropDice"
+    Friend Const NextDirectionIdColumn = "NextDirectionId"
     Friend Const PartingShotColumn = "PartingShot"
     Friend Const QuestColumn = "Quest"
     Friend Const SpawnCountColumn = "SpawnCount"
