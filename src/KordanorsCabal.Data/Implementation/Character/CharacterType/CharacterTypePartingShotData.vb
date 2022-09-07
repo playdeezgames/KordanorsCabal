@@ -29,11 +29,14 @@
     End Sub
 
     Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of String, Integer) Implements ICharacterTypePartingShotData.Read
-        Return Store.ReadRecordsWithColumnValue(Of Long, String, Long)(
+        Dim results = Store.ReadRecordsWithColumnValue(Of Long, String, Long)(
             AddressOf Initialize,
             TableName,
             (PartingShotColumn, WeightColumn),
-            (CharacterTypeIdColumn, characterTypeId)).
-            ToDictionary(Function(x) x.Item1, Function(x) CInt(x.Item2))
+            (CharacterTypeIdColumn, characterTypeId))
+        If results Is Nothing Then
+            Return Nothing
+        End If
+        Return results.ToDictionary(Function(x) x.Item1, Function(x) CInt(x.Item2))
     End Function
 End Class

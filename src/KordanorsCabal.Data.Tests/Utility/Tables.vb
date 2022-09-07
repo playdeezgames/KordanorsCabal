@@ -12,6 +12,7 @@
     Friend Const CharacterTypeEnemies = "CharacterTypeEnemies"
     Friend Const CharacterTypeInitialStatistics = "CharacterTypeInitialStatistics"
     Friend Const CharacterTypeLoots = "CharacterTypeLoots"
+    Friend Const CharacterTypePartingShots = "CharacterTypePartingShots"
     Friend Const Inventories = "Inventories"
     Friend Const Players = "Players"
 End Module
