@@ -12,6 +12,8 @@
     Friend Const DungeonLevelNameColumn = "DungeonLevelName"
     Friend Const EnemyCharacterTypeIdColumn = "EnemyCharacterTypeId"
     Friend Const EquipSlotColumn = "EquipSlot"
+    Friend Const EquipSlotIdColumn = "EquipSlotId"
+    Friend Const EquipSlotNameColumn = "EquipSlotName"
     Friend Const InitialValueColumn = "InitialValue"
     Friend Const IsCardinalColumn = "IsCardinal"
     Friend Const IsUndeadColumn = "IsUndead"
