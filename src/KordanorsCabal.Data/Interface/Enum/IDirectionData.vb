@@ -1,5 +1,4 @@
 ﻿Public Interface IDirectionData
-    Inherits INameCacheData
     Function ReadAbbreviation(direction As Long) As String
     Function ReadAll() As IEnumerable(Of Long)
     Function ReadIsCardinal(direction As Long) As Boolean

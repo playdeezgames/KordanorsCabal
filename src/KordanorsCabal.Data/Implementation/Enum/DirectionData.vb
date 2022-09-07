@@ -1,5 +1,5 @@
 ﻿Public Class DirectionData
-    Inherits NameCacheData
+    Inherits BaseData
     Implements IDirectionData
     Friend Const TableName = "Directions"
     Friend Const DirectionIdColumn = "DirectionId"
@@ -42,11 +42,6 @@
 
     Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
-        lookUpByName = Function(name) store.ReadColumnValue(Of String, Long)(
-            AddressOf Initialize,
-            TableName,
-            DirectionIdColumn,
-            (DirectionNameColumn, name))
     End Sub
 
     Public Function ReadName(directionId As Long) As String Implements IDirectionData.ReadName
