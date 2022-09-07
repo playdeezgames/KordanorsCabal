@@ -15,4 +15,19 @@
                     Columns.DungeonLevelIdColumn))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheDataStoreForTheNameOfADungeonLevel()
+        WithSubobject(
+            Sub(store, subject)
+                Dim dungeonLevelId = 1L
+                subject.ReadName(dungeonLevelId).ShouldBeNull
+                'IStore.ReadColumnString<long>(Action, "DungeonLevels", "DungeonLevelName", (DungeonLevelId, 1))
+                store.Verify(
+                    Function(x) x.ReadColumnString(Of Long)(
+                    It.IsAny(Of Action),
+                    Tables.DungeonLevels,
+                    Columns.DungeonLevelNameColumn,
+                    (Columns.DungeonLevelIdColumn, dungeonLevelId)))
+            End Sub)
+    End Sub
 End Class

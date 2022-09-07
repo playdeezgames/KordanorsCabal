@@ -9,6 +9,7 @@
     Friend Const DirectionIdColumn = "DirectionId"
     Friend Const DirectionNameColumn = "DirectionName"
     Friend Const DungeonLevelIdColumn = "DungeonLevelId"
+    Friend Const DungeonLevelNameColumn = "DungeonLevelName"
     Friend Const EnemyCharacterTypeIdColumn = "EnemyCharacterTypeId"
     Friend Const EquipSlotColumn = "EquipSlot"
     Friend Const InitialValueColumn = "InitialValue"
