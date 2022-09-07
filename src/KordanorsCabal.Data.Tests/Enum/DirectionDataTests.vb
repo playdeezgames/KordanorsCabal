@@ -17,4 +17,16 @@
                     (Columns.DirectionIdColumn, direction)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForAllDirections()
+        WithSubobject(
+            Sub(store, subject)
+                subject.ReadAll().ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadRecords(Of Long)(
+                    It.IsAny(Of Action),
+                    Tables.Directions,
+                    Columns.DirectionIdColumn))
+            End Sub)
+    End Sub
 End Class
