@@ -14,6 +14,7 @@
     Friend Const EquipSlotColumn = "EquipSlot"
     Friend Const EquipSlotIdColumn = "EquipSlotId"
     Friend Const EquipSlotNameColumn = "EquipSlotName"
+    Friend Const FeatureIdColumn = "FeatureId"
     Friend Const FeatureTypeColumn = "FeatureType"
     Friend Const InitialValueColumn = "InitialValue"
     Friend Const IsCardinalColumn = "IsCardinal"
