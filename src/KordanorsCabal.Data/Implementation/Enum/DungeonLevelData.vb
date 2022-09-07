@@ -1,5 +1,5 @@
 ﻿Public Class DungeonLevelData
-    Inherits NameCacheData
+    Inherits BaseData
     Implements IDungeonLevelData
     Friend Const TableName = "DungeonLevels"
     Friend Const DungeonLevelIdColumn = "DungeonLevelId"
@@ -32,12 +32,6 @@
 
     Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
-        Me.lookUpByName =
-            Function(name) store.ReadColumnValue(Of String, Long)(
-                AddressOf Initialize,
-                TableName,
-                DungeonLevelIdColumn,
-                (DungeonLevelNameColumn, name))
     End Sub
 
     Public Function ReadName(dungeonLevelId As Long) As String Implements IDungeonLevelData.ReadName
