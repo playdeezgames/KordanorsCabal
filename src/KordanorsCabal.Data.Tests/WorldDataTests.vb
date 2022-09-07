@@ -3,7 +3,7 @@ Namespace KordanorsCabal.Data.Tests
         <Fact>
         Sub ShouldConstructAllOfTheDataSubobjects()
             Dim store As New Mock(Of IStore)
-            Dim subject As New WorldData(store.Object)
+            Dim subject As IWorldData = New WorldData(store.Object)
             subject.Character.ShouldNotBeNull
             subject.CharacterEquipSlot.ShouldNotBeNull
             subject.CharacterLocation.ShouldNotBeNull
