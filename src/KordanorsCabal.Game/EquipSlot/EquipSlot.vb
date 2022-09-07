@@ -8,9 +8,6 @@
     Sub New(worldData As IWorldData, equipSlotId As Long)
         MyBase.New(worldData, equipSlotId)
     End Sub
-    Sub New(worldData As IWorldData, name As String)
-        Me.New(worldData, worldData.EquipSlot.ReadForName(name).Value)
-    End Sub
     Public Shared Function FromId(worldData As IWorldData, equipSlotId As Long) As EquipSlot
         Return New EquipSlot(worldData, equipSlotId)
     End Function

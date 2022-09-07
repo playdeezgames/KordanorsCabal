@@ -1,5 +1,5 @@
 ﻿Public Class EquipSlotData
-    Inherits NameCacheData
+    Inherits BaseData
     Implements IEquipSlotData
     Friend Const TableName = "EquipSlots"
     Friend Const EquipSlotIdColumn = "EquipSlotId"
@@ -34,10 +34,5 @@
 
     Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
-        lookUpByName = Function(name) store.ReadColumnValue(Of String, Long)(
-            AddressOf Initialize,
-            TableName,
-            EquipSlotIdColumn,
-            (EquipSlotNameColumn, name))
     End Sub
 End Class
