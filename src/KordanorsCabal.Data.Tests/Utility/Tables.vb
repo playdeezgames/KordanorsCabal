@@ -16,6 +16,7 @@
     Friend Const CharacterTypeSpawnCounts = "CharacterTypeSpawnCounts"
     Friend Const CharacterTypeSpawnLocations = "CharacterTypeSpawnLocations"
     Friend Const Directions = "Directions"
+    Friend Const DungeonLevels = "DungeonLevels"
     Friend Const Inventories = "Inventories"
     Friend Const Players = "Players"
 End Module
