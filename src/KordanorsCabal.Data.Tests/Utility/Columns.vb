@@ -11,6 +11,7 @@
     Friend Const EnemyCharacterTypeIdColumn = "EnemyCharacterTypeId"
     Friend Const EquipSlotColumn = "EquipSlot"
     Friend Const InitialValueColumn = "InitialValue"
+    Friend Const IsCardinalColumn = "IsCardinal"
     Friend Const IsUndeadColumn = "IsUndead"
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeIdColumn = "ItemTypeId"

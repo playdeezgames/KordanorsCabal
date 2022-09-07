@@ -29,4 +29,18 @@
                     Columns.DirectionIdColumn))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForWhetherOrNotADirectionIsCardinal()
+        WithSubobject(
+            Sub(store, subject)
+                Dim direction = 1L
+                subject.ReadIsCardinal(direction).ShouldBeFalse
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Directions,
+                    Columns.IsCardinalColumn,
+                    (Columns.DirectionIdColumn, direction)))
+            End Sub)
+    End Sub
 End Class
