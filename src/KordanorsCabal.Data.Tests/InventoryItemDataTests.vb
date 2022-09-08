@@ -16,4 +16,18 @@
                         (Columns.ItemIdColumn, itemId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForItemsAssociatedWithAGivenInventory()
+        WithSubobject(
+            Sub(store, subject)
+                Dim inventoryId = 1L
+                subject.ReadItems(inventoryId).ShouldBeNull
+                store.Verify(
+                    Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
+                        It.IsAny(Of Action),
+                        Tables.InventoryItems,
+                        Columns.ItemIdColumn,
+                        (Columns.InventoryIdColumn, inventoryId)))
+            End Sub)
+    End Sub
 End Class
