@@ -4,7 +4,8 @@
     Friend Const TableName = "FeatureTypes"
     Friend Const FeatureTypeIdColumn = "FeatureTypeId"
     Friend Const FeatureTypeNameColumn = "FeatureTypeName"
-
+    Friend Const LocationTypeIdColumn = LocationTypeData.LocationTypeIdColumn
+    Friend Const InteractionModeColumn = "InteractionMode"
 
     Public Function ReadName(featureTypeId As Long) As String Implements IFeatureTypeData.ReadName
         Return Store.ReadColumnString(
@@ -18,7 +19,7 @@
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
-            LocationTypeColumn,
+            LocationTypeIdColumn,
             (FeatureTypeIdColumn, featureTypeId))
     End Function
 
@@ -29,15 +30,12 @@
             InteractionModeColumn,
             (FeatureTypeIdColumn, featureTypeId))
     End Function
-
-    Friend Const LocationTypeColumn = "LocationType"
-    Friend Const InteractionModeColumn = "InteractionMode"
     Friend Sub Initialize()
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{FeatureTypeIdColumn}],
                     [{FeatureTypeNameColumn}],
-                    [{LocationTypeColumn}],
+                    [{LocationTypeIdColumn}],
                     [{InteractionModeColumn}]) AS
                 (VALUES
                     (6,'Marcus the Black Mage',2,9),
@@ -53,7 +51,7 @@
                 SELECT 
                     [{FeatureTypeIdColumn}],
                     [{FeatureTypeNameColumn}],
-                    [{LocationTypeColumn}],
+                    [{LocationTypeIdColumn}],
                     [{InteractionModeColumn}]
                 FROM [cte];")
     End Sub

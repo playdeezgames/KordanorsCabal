@@ -39,7 +39,21 @@
                     Function(x) x.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.FeatureTypes,
-                    Columns.LocationTypeColumn,
+                    Columns.LocationTypeIdColumn,
+                    (Columns.FeatureTypeIdColumn, featureType)))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheNameOfAGivenFeatureType()
+        WithSubobject(
+            Sub(store, subject)
+                Dim featureType = 1L
+                subject.ReadName(featureType).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnString(Of Long)(
+                    It.IsAny(Of Action),
+                    Tables.FeatureTypes,
+                    Columns.FeatureTypeNameColumn,
                     (Columns.FeatureTypeIdColumn, featureType)))
             End Sub)
     End Sub
