@@ -26,19 +26,19 @@
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
-            PlayerModeColumn,
+            InteractionModeColumn,
             (FeatureTypeIdColumn, featureTypeId))
     End Function
 
     Friend Const LocationTypeColumn = "LocationType"
-    Friend Const PlayerModeColumn = "PlayerMode"
+    Friend Const InteractionModeColumn = "InteractionMode"
     Friend Sub Initialize()
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{FeatureTypeIdColumn}],
                     [{FeatureTypeNameColumn}],
                     [{LocationTypeColumn}],
-                    [{PlayerModeColumn}]) AS
+                    [{InteractionModeColumn}]) AS
                 (VALUES
                     (6,'Marcus the Black Mage',2,9),
                     (5,'""Honest"" Dan',2,8),
@@ -54,7 +54,7 @@
                     [{FeatureTypeIdColumn}],
                     [{FeatureTypeNameColumn}],
                     [{LocationTypeColumn}],
-                    [{PlayerModeColumn}]
+                    [{InteractionModeColumn}]
                 FROM [cte];")
     End Sub
 

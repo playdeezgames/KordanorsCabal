@@ -15,4 +15,18 @@
                     Columns.FeatureTypeIdColumn))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheInteractionModeOfAGivenFeatureType()
+        WithSubobject(
+            Sub(store, subject)
+                Dim featureType = 1L
+                subject.ReadInteractionMode(featureType).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.FeatureTypes,
+                    Columns.InteractionModeColumn,
+                    (Columns.FeatureTypeIdColumn, featureType)))
+            End Sub)
+    End Sub
 End Class
