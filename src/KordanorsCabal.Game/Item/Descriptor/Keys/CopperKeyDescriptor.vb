@@ -1,9 +1,9 @@
 ﻿Friend Class CopperKeyDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.CopperKey)
+            OldItemType.CopperKey)
     End Sub
 End Class

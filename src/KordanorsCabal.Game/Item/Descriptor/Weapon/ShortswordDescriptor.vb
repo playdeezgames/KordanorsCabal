@@ -1,10 +1,10 @@
 ﻿Friend Class ShortswordDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Shortsword,
+            OldItemType.Shortsword,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             4,
             2,,

@@ -1,10 +1,10 @@
 ﻿Friend Class BeerDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Beer,
+            OldItemType.Beer,
             ,,,,,,,,
             5,
             MakeList(ShoppeType.InnKeeper),,,,

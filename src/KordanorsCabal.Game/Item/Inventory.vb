@@ -21,7 +21,7 @@
     Public Sub Add(item As Item)
         WorldData.InventoryItem.Write(Id, item.Id)
     End Sub
-    ReadOnly Property ItemsOfType(itemType As ItemType) As IEnumerable(Of Item)
+    ReadOnly Property ItemsOfType(itemType As OldItemType) As IEnumerable(Of Item)
         Get
             Return Items.Where(Function(x) x.ItemType = itemType)
         End Get

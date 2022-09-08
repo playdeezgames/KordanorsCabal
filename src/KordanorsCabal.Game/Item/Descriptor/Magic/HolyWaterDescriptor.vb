@@ -1,10 +1,10 @@
 ﻿Friend Class HolyWaterDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.HolyWater,,,,,,,,,
+            OldItemType.HolyWater,,,,,,,,,
             10,
             MakeList(ShoppeType.Healer),,,,
             "IsFightingUndead",

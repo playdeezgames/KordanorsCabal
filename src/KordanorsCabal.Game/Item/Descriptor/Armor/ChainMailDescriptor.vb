@@ -1,10 +1,10 @@
 ﻿Friend Class ChainMailDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.ChainMail,
+            OldItemType.ChainMail,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 4L)),,,
             2,
             2,,

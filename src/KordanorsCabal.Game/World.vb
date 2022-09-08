@@ -43,11 +43,11 @@ Public Module World
     End Sub
 
     Private Sub CreateDungeon(worldData As WorldData, location As Location)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 1L), ItemType.CopperKey, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 2L), ItemType.SilverKey, RouteType.SilverLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 3L), ItemType.GoldKey, RouteType.GoldLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 4L), ItemType.PlatinumKey, RouteType.PlatinumLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 5L), ItemType.ElementalOrb, RouteType.FinalLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 1L), OldItemType.CopperKey, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 2L), OldItemType.SilverKey, RouteType.SilverLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 3L), OldItemType.GoldKey, RouteType.GoldLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 4L), OldItemType.PlatinumKey, RouteType.PlatinumLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 5L), OldItemType.ElementalOrb, RouteType.FinalLock)
     End Sub
 
     Const MazeColumns = 11
@@ -100,7 +100,7 @@ Public Module World
         Return locations
     End Function
 
-    Private Function CreateDungeonLevel(worldData As WorldData, fromLocation As Location, dungeonLevel As DungeonLevel, bossKeyType As ItemType, bossRouteType As RouteType) As Location
+    Private Function CreateDungeonLevel(worldData As WorldData, fromLocation As Location, dungeonLevel As DungeonLevel, bossKeyType As OldItemType, bossRouteType As RouteType) As Location
         Dim start = DateTimeOffset.Now
         Dim elapsed = DateTimeOffset.Now - start
         Dim maze = New Maze(Of Long)(MazeColumns, MazeRows, MazeDirections)
@@ -130,7 +130,7 @@ Public Module World
         Next
     End Sub
 
-    Private Sub PopulateLocations(worldData As WorldData, locations As IReadOnlyList(Of Location), bossKeyType As ItemType, bossRouteType As RouteType, dungeonLevel As DungeonLevel)
+    Private Sub PopulateLocations(worldData As WorldData, locations As IReadOnlyList(Of Location), bossKeyType As OldItemType, bossRouteType As RouteType, dungeonLevel As DungeonLevel)
         Dim deadEndId = LocationType.FromId(worldData, 5L).Id
         Dim dungeonBossId = LocationType.FromId(worldData, 6L).Id
         Dim dungeonId = LocationType.FromId(worldData, 4L).Id
@@ -142,13 +142,13 @@ Public Module World
                         Function(x) x.ToList)
         Dim deadEnds = partitions(deadEndId)
         Dim nonDeadEnds = partitions(dungeonId)
-        Dim itemTypes As New List(Of ItemType)
+        Dim itemTypes As New List(Of OldItemType)
         For Each deadEnd In deadEnds
             Dim direction = deadEnd.RouteDirections.First
             Dim nextLocation = deadEnd.Routes(direction).ToLocation
             Dim route = nextLocation.Routes(direction.Opposite)
             route.RouteType = RouteType.IronLock
-            itemTypes.Add(ItemType.IronKey)
+            itemTypes.Add(OldItemType.IronKey)
         Next
         itemTypes(0) = bossKeyType
         Dim bossLocation = PlaceBossLocation(worldData, deadEnds, bossRouteType)
@@ -160,7 +160,7 @@ Public Module World
         PopulateItems(worldData, locations, dungeonLevel)
     End Sub
 
-    Private Sub SpawnItem(worldData As WorldData, locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel, itemType As ItemType)
+    Private Sub SpawnItem(worldData As WorldData, locations As IReadOnlyList(Of Location), dungeonLevel As DungeonLevel, itemType As OldItemType)
         Dim locationTypes = itemType.SpawnLocationTypes(dungeonLevel)
         If locationTypes.Any Then
             Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Select(Function(y) y.Id).Contains(x.LocationType.Id)))

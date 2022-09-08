@@ -1,10 +1,10 @@
 ﻿Friend Class BottleDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Bottle,
+            OldItemType.Bottle,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)), ,
             2,
             1,,

@@ -6,12 +6,12 @@
     Shared Function FromId(worldData As IWorldData, itemId As Long?) As Item
         Return If(itemId.HasValue, New Item(worldData, itemId.Value), Nothing)
     End Function
-    Shared Function Create(worldData As IWorldData, itemType As ItemType) As Item
+    Shared Function Create(worldData As IWorldData, itemType As OldItemType) As Item
         Return FromId(worldData, worldData.Item.Create(itemType))
     End Function
-    Public ReadOnly Property ItemType As ItemType
+    Public ReadOnly Property ItemType As OldItemType
         Get
-            Return CType(WorldData.Item.ReadItemType(Id).Value, ItemType)
+            Return CType(WorldData.Item.ReadItemType(Id).Value, OldItemType)
         End Get
     End Property
     Public ReadOnly Property Name As String

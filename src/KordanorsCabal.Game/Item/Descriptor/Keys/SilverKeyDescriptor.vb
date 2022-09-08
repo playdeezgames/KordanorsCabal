@@ -1,9 +1,9 @@
 ﻿Friend Class SilverKeyDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.SilverKey)
+            OldItemType.SilverKey)
     End Sub
 End Class

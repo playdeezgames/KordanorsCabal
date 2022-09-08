@@ -1,10 +1,10 @@
 ﻿Friend Class AirShardDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.AirShard,
+            OldItemType.AirShard,
             ,,,,,,,,,,,,,
             "CanUseAirShard",
             "UseAirShard")

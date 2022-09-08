@@ -1,10 +1,10 @@
 ﻿Friend Class BrodeSodeDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.BrodeSode,
+            OldItemType.BrodeSode,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             6,
             3,,

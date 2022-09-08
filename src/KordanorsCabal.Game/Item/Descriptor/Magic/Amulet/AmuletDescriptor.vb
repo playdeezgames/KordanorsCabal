@@ -1,5 +1,5 @@
 ﻿Public Class AmuletDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Public Sub New(
                   itemTypeId As Long,

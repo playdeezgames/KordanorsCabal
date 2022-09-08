@@ -1,10 +1,10 @@
 ﻿Friend Class TrousersDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Trousers,
+            OldItemType.Trousers,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 5L)),,,,,,,,
             100,
             MakeList(ShoppeType.BlackMarket))

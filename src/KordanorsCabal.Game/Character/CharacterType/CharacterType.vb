@@ -49,12 +49,12 @@
         If Not lootTable.Any Then
             Return
         End If
-        Dim itemType = CType(RNG.FromGenerator(lootTable), ItemType)
-        If itemType <> ItemType.None Then
+        Dim itemType = CType(RNG.FromGenerator(lootTable), OldItemType)
+        If itemType <> OldItemType.None Then
             location.Inventory.Add(Item.Create(WorldData, itemType))
         End If
     End Sub
-    Function CanBeBribedWith(itemType As ItemType) As Boolean
+    Function CanBeBribedWith(itemType As OldItemType) As Boolean
         Return WorldData.CharacterTypeBribe.Read(Id, itemType)
     End Function
     Function GenerateAttackType() As AttackType

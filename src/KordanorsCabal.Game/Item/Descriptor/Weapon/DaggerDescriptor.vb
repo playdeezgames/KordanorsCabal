@@ -1,10 +1,10 @@
 ﻿Friend Class DaggerDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Dagger,
+            OldItemType.Dagger,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
             2,
             1,,

@@ -1,5 +1,5 @@
 ﻿Friend Class TrophyDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
     Sub New(
            itemTypeId As Long,
            Optional offer As Long = 0,

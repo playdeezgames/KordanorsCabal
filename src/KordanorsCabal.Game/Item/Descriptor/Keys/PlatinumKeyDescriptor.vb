@@ -1,9 +1,9 @@
 ﻿Friend Class PlatinumKeyDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.PlatinumKey)
+            OldItemType.PlatinumKey)
     End Sub
 End Class

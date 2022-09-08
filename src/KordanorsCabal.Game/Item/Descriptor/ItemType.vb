@@ -1,4 +1,4 @@
-﻿Public Class ItemTypeDescriptor
+﻿Public Class ItemType
     Inherits BaseThingie
     ReadOnly Property Name As String
         Get
@@ -146,82 +146,82 @@
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility
-    Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of ItemType, ItemTypeDescriptor) =
-        New Dictionary(Of ItemType, ItemTypeDescriptor) From
+    Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of OldItemType, ItemType) =
+        New Dictionary(Of OldItemType, ItemType) From
         {
-            {ItemType.AirShard, New AirShardDescriptor},
-            {ItemType.AmuletOfDEX, New AmuletDescriptor(ItemType.AmuletOfDEX, 2)},
-            {ItemType.AmuletOfHP, New AmuletDescriptor(ItemType.AmuletOfHP,
+            {OldItemType.AirShard, New AirShardDescriptor},
+            {OldItemType.AmuletOfDEX, New AmuletDescriptor(OldItemType.AmuletOfDEX, 2)},
+            {OldItemType.AmuletOfHP, New AmuletDescriptor(OldItemType.AmuletOfHP,
                 6)},
-            {ItemType.AmuletOfMana, New AmuletDescriptor(ItemType.AmuletOfMana,
+            {OldItemType.AmuletOfMana, New AmuletDescriptor(OldItemType.AmuletOfMana,
                 8)},
-            {ItemType.AmuletOfPOW, New AmuletDescriptor(ItemType.AmuletOfPOW, 5)},
-            {ItemType.AmuletOfSTR, New AmuletDescriptor(ItemType.AmuletOfSTR, 1)},
-            {ItemType.AmuletOfYendor, New ItemTypeDescriptor(
+            {OldItemType.AmuletOfPOW, New AmuletDescriptor(OldItemType.AmuletOfPOW, 5)},
+            {OldItemType.AmuletOfSTR, New AmuletDescriptor(OldItemType.AmuletOfSTR, 1)},
+            {OldItemType.AmuletOfYendor, New ItemType(
                 StaticWorldData.World,
-                ItemType.AmuletOfYendor,
+                OldItemType.AmuletOfYendor,
                 MakeList(EquipSlot.FromId(StaticWorldData.World, 6L)),,,,,,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
-            {ItemType.BatWing, New TrophyDescriptor(ItemType.BatWing, 3, MakeList(ShoppeType.BlackMage))},
-            {ItemType.Beer, New BeerDescriptor},
-            {ItemType.Bong, New TrophyDescriptor(ItemType.Bong, , , 25, MakeList(ShoppeType.BlackMage))},
-            {ItemType.BookOfHolyBolt, New ItemTypeDescriptor(
+            {OldItemType.BatWing, New TrophyDescriptor(OldItemType.BatWing, 3, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.Beer, New BeerDescriptor},
+            {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong, , , 25, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
-                    ItemType.BookOfHolyBolt,,,,,,,,,
+                    OldItemType.BookOfHolyBolt,,,,,,,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnHolyBolt",
                     "LearnHolyBolt")},
-            {ItemType.BookOfPurify, New ItemTypeDescriptor(
+            {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
-                    ItemType.BookOfPurify,,,,,,,,,
+                    OldItemType.BookOfPurify,,,,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnPurify",
                     "LearnPurify")},
-            {ItemType.Bottle, New BottleDescriptor},
-            {ItemType.BrodeSode, New BrodeSodeDescriptor},
-            {ItemType.ChainMail, New ChainMailDescriptor},
-            {ItemType.CopperKey, New CopperKeyDescriptor},
-            {ItemType.Dagger, New DaggerDescriptor},
-            {ItemType.EarthShard, New EarthShardDescriptor},
-            {ItemType.ElementalOrb, New ElementalOrbDescriptor},
-            {ItemType.FireShard, New FireShardDescriptor},
-            {ItemType.Food, New FoodDescriptor},
-            {ItemType.GoblinEar, New TrophyDescriptor(ItemType.GoblinEar, 5, MakeList(ShoppeType.BlackMage))},
-            {ItemType.GoldKey, New GoldKeyDescriptor},
-            {ItemType.Helmet, New HelmetDescriptor},
-            {ItemType.Herb, New HerbDescriptor},
-            {ItemType.HornsOfKordanor, New HornsOfKordanorDescriptor},
-            {ItemType.HolyWater, New HolyWaterDescriptor},
-            {ItemType.IronKey, New IronKeyDescriptor},
-            {ItemType.Lotion, New LotionDescriptor},
-            {ItemType.MagicEgg, New MagicEggDescriptor},
-            {ItemType.MembershipCard, New TrophyDescriptor(ItemType.MembershipCard, 10)},
-            {ItemType.MoonPortal, New MoonPortalDescriptor},
-            {ItemType.Mushroom, New TrophyDescriptor(ItemType.Mushroom, 25, MakeList(ShoppeType.BlackMage))},
-            {ItemType.PlateMail, New PlateMailDescriptor},
-            {ItemType.PlatinumKey, New PlatinumKeyDescriptor},
-            {ItemType.Potion, New PotionDescriptor},
-            {ItemType.Pr0n, New Pr0nDescriptor},
-            {ItemType.RatTail, New TrophyDescriptor(ItemType.RatTail, 1, MakeList(ShoppeType.BlackMage))},
-            {ItemType.RingOfHP, New RingOfHPDescriptor},
-            {ItemType.RottenEgg, New RottenEggDescriptor},
-            {ItemType.RottenFood, New RottenFoodDescriptor},
-            {ItemType.SilverKey, New SilverKeyDescriptor},
-            {ItemType.Shield, New ShieldDescriptor},
-            {ItemType.ShoeLaces, New TrophyDescriptor(ItemType.ShoeLaces, 0)},
-            {ItemType.Shortsword, New ShortswordDescriptor},
-            {ItemType.SkullFragment, New TrophyDescriptor(ItemType.SkullFragment, 5, MakeList(ShoppeType.BlackMage))},
-            {ItemType.SnakeFang, New TrophyDescriptor(ItemType.SnakeFang, 3, MakeList(ShoppeType.BlackMage))},
-            {ItemType.SpaceSord, New SpaceSordDescriptor},
-            {ItemType.TownPortal, New TownPortalDescriptor},
-            {ItemType.Trousers, New TrousersDescriptor},
-            {ItemType.WaterShard, New WaterShardDescriptor},
-            {ItemType.ZombieTaint, New TrophyDescriptor(ItemType.ZombieTaint, 5, MakeList(ShoppeType.BlackMage))}
+            {OldItemType.Bottle, New BottleDescriptor},
+            {OldItemType.BrodeSode, New BrodeSodeDescriptor},
+            {OldItemType.ChainMail, New ChainMailDescriptor},
+            {OldItemType.CopperKey, New CopperKeyDescriptor},
+            {OldItemType.Dagger, New DaggerDescriptor},
+            {OldItemType.EarthShard, New EarthShardDescriptor},
+            {OldItemType.ElementalOrb, New ElementalOrbDescriptor},
+            {OldItemType.FireShard, New FireShardDescriptor},
+            {OldItemType.Food, New FoodDescriptor},
+            {OldItemType.GoblinEar, New TrophyDescriptor(OldItemType.GoblinEar, 5, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.GoldKey, New GoldKeyDescriptor},
+            {OldItemType.Helmet, New HelmetDescriptor},
+            {OldItemType.Herb, New HerbDescriptor},
+            {OldItemType.HornsOfKordanor, New HornsOfKordanorDescriptor},
+            {OldItemType.HolyWater, New HolyWaterDescriptor},
+            {OldItemType.IronKey, New IronKeyDescriptor},
+            {OldItemType.Lotion, New LotionDescriptor},
+            {OldItemType.MagicEgg, New MagicEggDescriptor},
+            {OldItemType.MembershipCard, New TrophyDescriptor(OldItemType.MembershipCard, 10)},
+            {OldItemType.MoonPortal, New MoonPortalDescriptor},
+            {OldItemType.Mushroom, New TrophyDescriptor(OldItemType.Mushroom, 25, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.PlateMail, New PlateMailDescriptor},
+            {OldItemType.PlatinumKey, New PlatinumKeyDescriptor},
+            {OldItemType.Potion, New PotionDescriptor},
+            {OldItemType.Pr0n, New Pr0nDescriptor},
+            {OldItemType.RatTail, New TrophyDescriptor(OldItemType.RatTail, 1, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.RingOfHP, New RingOfHPDescriptor},
+            {OldItemType.RottenEgg, New RottenEggDescriptor},
+            {OldItemType.RottenFood, New RottenFoodDescriptor},
+            {OldItemType.SilverKey, New SilverKeyDescriptor},
+            {OldItemType.Shield, New ShieldDescriptor},
+            {OldItemType.ShoeLaces, New TrophyDescriptor(OldItemType.ShoeLaces, 0)},
+            {OldItemType.Shortsword, New ShortswordDescriptor},
+            {OldItemType.SkullFragment, New TrophyDescriptor(OldItemType.SkullFragment, 5, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.SnakeFang, New TrophyDescriptor(OldItemType.SnakeFang, 3, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.SpaceSord, New SpaceSordDescriptor},
+            {OldItemType.TownPortal, New TownPortalDescriptor},
+            {OldItemType.Trousers, New TrousersDescriptor},
+            {OldItemType.WaterShard, New WaterShardDescriptor},
+            {OldItemType.ZombieTaint, New TrophyDescriptor(OldItemType.ZombieTaint, 5, MakeList(ShoppeType.BlackMage))}
         }
-    Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)
+    Public ReadOnly Property AllItemTypes As IEnumerable(Of OldItemType)
         Get
             Return ItemTypeDescriptors.Keys
         End Get

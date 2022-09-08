@@ -1,10 +1,10 @@
 ﻿Friend Class PotionDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Potion,
+            OldItemType.Potion,
             ,,,,,,,,
             15,
             MakeList(ShoppeType.Healer),,,,

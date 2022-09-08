@@ -49,10 +49,10 @@ Friend Class BlackMageModeProcessor
                 ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.BlackMage
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (ItemType, Long)).ShoppeType = Game.ShoppeType.BlackMage
+                ShoppeProcessor(Of (OldItemType, Long)).ShoppeType = Game.ShoppeType.BlackMage
                 Return UIState.ShoppeBuy
             Case RestoreButtonIndex
-                player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {ItemType.Bong.Name} and gives you a hit of {ItemType.Herb.Name}.")
+                player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {OldItemType.Bong.Name} and gives you a hit of {OldItemType.Herb.Name}.")
                 player.CurrentMana = player.MaximumMana
                 PushUIState(UIState.InPlay)
                 Return UIState.Message

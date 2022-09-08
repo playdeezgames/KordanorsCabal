@@ -36,8 +36,8 @@
     End Function
 
     Private Function HandleBounties(player As Character) As UIState
-        If player.HasItemType(ItemType.MembershipCard) Then
-            Dim cards = player.Inventory.ItemsOfType(ItemType.MembershipCard)
+        If player.HasItemType(OldItemType.MembershipCard) Then
+            Dim cards = player.Inventory.ItemsOfType(OldItemType.MembershipCard)
             Dim reward As Long = cards.Count * 10
             player.EnqueueMessage($"I'll be certain to file these under evidence. Here's yer reward! {reward} money.")
             player.Money += reward

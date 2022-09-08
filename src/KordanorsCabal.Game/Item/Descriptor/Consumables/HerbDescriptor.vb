@@ -1,10 +1,10 @@
 ﻿Friend Class HerbDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Herb,,,,,,,,,
+            OldItemType.Herb,,,,,,,,,
             5,
             MakeList(ShoppeType.BlackMage),,,,
             "HasBong",

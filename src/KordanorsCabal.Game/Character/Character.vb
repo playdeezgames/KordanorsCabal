@@ -87,7 +87,7 @@
         Return ItemsToRepair(shoppeType).Any
     End Function
 
-    Friend Function CanBeBribedWith(itemType As ItemType) As Boolean
+    Friend Function CanBeBribedWith(itemType As OldItemType) As Boolean
         Return CharacterType.CanBeBribedWith(itemType)
     End Function
     ReadOnly Property IsUndead As Boolean
@@ -311,8 +311,8 @@
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value > 0
         End Get
     End Property
-    Friend Function DoWeaponWear(wear As Long) As IEnumerable(Of ItemType)
-        Dim result As New List(Of ItemType)
+    Friend Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType)
+        Dim result As New List(Of OldItemType)
         While wear > 0
             Dim brokenItemType = WearOneWeapon()
             If brokenItemType.HasValue Then
@@ -322,8 +322,8 @@
         End While
         Return result
     End Function
-    Friend Function DoArmorWear(wear As Long) As IEnumerable(Of ItemType)
-        Dim result As New List(Of ItemType)
+    Friend Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType)
+        Dim result As New List(Of OldItemType)
         While wear > 0
             Dim brokenItemType = WearOneArmor()
             If brokenItemType.HasValue Then
@@ -333,7 +333,7 @@
         End While
         Return result
     End Function
-    Private Function WearOneWeapon() As ItemType?
+    Private Function WearOneWeapon() As OldItemType?
         Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsWeapon).ToList
         If items.Any Then
             Dim item = RNG.FromList(items)
@@ -344,7 +344,7 @@
             End If
         End If
     End Function
-    Private Function WearOneArmor() As ItemType?
+    Private Function WearOneArmor() As OldItemType?
         Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsArmor).ToList
         If items.Any Then
             Dim item = RNG.FromList(items)
@@ -527,7 +527,7 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-    Function HasItemType(itemType As ItemType) As Boolean
+    Function HasItemType(itemType As OldItemType) As Boolean
         Return Inventory.ItemsOfType(itemType).Any
     End Function
     Property Drunkenness As Long
@@ -682,7 +682,7 @@
             Return (Location?.Feature?.Id).HasValue
         End Get
     End Property
-    Public Function GetItemTypeCount(itemType As ItemType) As Integer
+    Public Function GetItemTypeCount(itemType As OldItemType) As Integer
         Return Inventory.Items.Where(Function(x) x.ItemType = itemType).Count
     End Function
     Public Function CanMoveLeft() As Boolean

@@ -1,9 +1,9 @@
 ﻿Friend Class GoldKeyDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.GoldKey)
+            OldItemType.GoldKey)
     End Sub
 End Class

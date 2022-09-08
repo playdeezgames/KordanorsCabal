@@ -1,10 +1,10 @@
 ﻿Friend Class LotionDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Lotion,
+            OldItemType.Lotion,
             ,,,,,,
             5,,
             25,

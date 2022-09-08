@@ -22,7 +22,7 @@ Friend Class ChickenModeProcessor
     Friend Overrides Sub UpdateButtons(player As Character)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
-        If player.HasItemType(ItemType.Food) OrElse player.HasItemType(ItemType.RottenFood) Then
+        If player.HasItemType(OldItemType.Food) OrElse player.HasItemType(OldItemType.RottenFood) Then
             Buttons(FeedButtonIndex).Title = "Feed"
         End If
     End Sub
@@ -33,8 +33,8 @@ Friend Class ChickenModeProcessor
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case FeedButtonIndex
-                If player.HasItemType(ItemType.Food) OrElse player.HasItemType(ItemType.RottenFood) Then
-                    Dim item = RNG.FromEnumerable(player.Inventory.Items.Where(Function(x) x.Name = ItemType.Food.Name))
+                If player.HasItemType(OldItemType.Food) OrElse player.HasItemType(OldItemType.RottenFood) Then
+                    Dim item = RNG.FromEnumerable(player.Inventory.Items.Where(Function(x) x.Name = OldItemType.Food.Name))
                     Return FeedChicken(player, item)
                 End If
         End Select
@@ -46,12 +46,12 @@ Friend Class ChickenModeProcessor
         item.Destroy()
         If RNG.FromRange(0, 5) = 0 Then
             Select Case itemType
-                Case ItemType.Food
-                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {ItemType.MagicEgg.Name} pops out!")
-                    player.Inventory.Add(Item.Create(StaticWorldData.World, ItemType.MagicEgg))
-                Case ItemType.RottenFood
-                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {ItemType.RottenEgg.Name} pops out!")
-                    player.Inventory.Add(Item.Create(StaticWorldData.World, ItemType.RottenEgg))
+                Case OldItemType.Food
+                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {OldItemType.MagicEgg.Name} pops out!")
+                    player.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.MagicEgg))
+                Case OldItemType.RottenFood
+                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {OldItemType.RottenEgg.Name} pops out!")
+                    player.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.RottenEgg))
             End Select
         Else
             player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food, and gives a satified ""moo"" in return.")

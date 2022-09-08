@@ -1,10 +1,10 @@
 ﻿Friend Class ShieldDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Shield,
+            OldItemType.Shield,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 2L)),,,,
             2,
             10,

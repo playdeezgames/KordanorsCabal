@@ -1,9 +1,9 @@
 ﻿Friend Class IronKeyDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.IronKey)
+            OldItemType.IronKey)
     End Sub
 End Class

@@ -1,9 +1,9 @@
 ﻿Friend Class EarthShardDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.EarthShard,,
+            OldItemType.EarthShard,,
             ,,,, ,
             ,,,,,,,
             "CanUseEarthShard",

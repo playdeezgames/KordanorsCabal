@@ -1,10 +1,10 @@
 ﻿Friend Class HelmetDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Helmet,
+            OldItemType.Helmet,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 3L)),,,,
             2,
             10,

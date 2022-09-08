@@ -1,9 +1,9 @@
 ﻿Friend Class FireShardDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.FireShard,,,,,,,,,,,,,,
+            OldItemType.FireShard,,,,,,,,,,,,,,
             "CanUseFireShard",
             "UseFireShard")
     End Sub

@@ -11,7 +11,7 @@
                     Function(x) x.Offer))
     End Sub
 
-    Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of ItemType, Long)
+    Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)
         Get
             Return AllItemTypes.Where(
                 Function(x) x.HasPrice(ShoppeType.Blacksmith)).
@@ -21,7 +21,7 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Repairs As IReadOnlyDictionary(Of ItemType, Long)
+    Public Overrides ReadOnly Property Repairs As IReadOnlyDictionary(Of OldItemType, Long)
         Get
             Return AllItemTypes.Where(
                 Function(x) x.CanRepair(ShoppeType.Blacksmith)).

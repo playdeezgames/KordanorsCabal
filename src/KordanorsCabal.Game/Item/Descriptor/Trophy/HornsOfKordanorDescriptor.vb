@@ -1,9 +1,9 @@
 ﻿Friend Class HornsOfKordanorDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.HornsOfKordanor)
+            OldItemType.HornsOfKordanor)
     End Sub
 End Class

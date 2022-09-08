@@ -1,10 +1,10 @@
 ﻿Friend Class RottenFoodDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.RottenFood,,,,,,,,,,,,,
+            OldItemType.RottenFood,,,,,,,,,,,,,
             "PurifyFood",
             "AlwaysTrue",
             "UseRottenFood")

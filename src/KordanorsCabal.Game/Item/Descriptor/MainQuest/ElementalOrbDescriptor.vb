@@ -1,9 +1,9 @@
 ﻿Friend Class ElementalOrbDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.ElementalOrb)
+            OldItemType.ElementalOrb)
     End Sub
 End Class

@@ -1,10 +1,10 @@
 ﻿Friend Class WaterShardDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.WaterShard,
+            OldItemType.WaterShard,
             ,,,,,,,,,,,,,
             "CanUseWaterShard",
             "UseWaterShard")

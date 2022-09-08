@@ -1,9 +1,9 @@
 ﻿Friend Class PlateMailDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.PlateMail,
+            OldItemType.PlateMail,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 4L)),,,,
             4,
             50,

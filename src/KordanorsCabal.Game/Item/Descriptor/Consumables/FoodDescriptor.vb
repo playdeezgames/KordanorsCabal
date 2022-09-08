@@ -1,10 +1,10 @@
 ﻿Friend Class FoodDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.Food,,,,,,,,,
+            OldItemType.Food,,,,,,,,,
             2,
             MakeList(ShoppeType.InnKeeper),,,,
             "AlwaysTrue",

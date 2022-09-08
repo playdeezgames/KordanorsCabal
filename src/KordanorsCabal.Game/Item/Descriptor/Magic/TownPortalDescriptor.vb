@@ -1,10 +1,10 @@
 ﻿Friend Class TownPortalDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.TownPortal,,,,,,,,,
+            OldItemType.TownPortal,,,,,,,,,
             50,
             MakeList(ShoppeType.BlackMage),,,,
             "IsInDungeon",

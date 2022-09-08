@@ -49,7 +49,7 @@
                 ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.BlackMarket
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (ItemType, Long)).ShoppeType = Game.ShoppeType.BlackMarket
+                ShoppeProcessor(Of (OldItemType, Long)).ShoppeType = Game.ShoppeType.BlackMarket
                 Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay

@@ -14,15 +14,15 @@ Public Module ShoppeTypeExtensions
         Return ShoppeTypeDescriptors(shoppeType).Name
     End Function
     <Extension>
-    Function Offers(shoppeType As ShoppeType) As IReadOnlyDictionary(Of ItemType, Long)
+    Function Offers(shoppeType As ShoppeType) As IReadOnlyDictionary(Of OldItemType, Long)
         Return ShoppeTypeDescriptors(shoppeType).Offers
     End Function
     <Extension>
-    Function Prices(shoppeType As ShoppeType) As IReadOnlyDictionary(Of ItemType, Long)
+    Function Prices(shoppeType As ShoppeType) As IReadOnlyDictionary(Of OldItemType, Long)
         Return ShoppeTypeDescriptors(shoppeType).Prices
     End Function
     <Extension>
-    Function Repairs(shoppeType As ShoppeType) As IReadOnlyDictionary(Of ItemType, Long)
+    Function Repairs(shoppeType As ShoppeType) As IReadOnlyDictionary(Of OldItemType, Long)
         Return ShoppeTypeDescriptors(shoppeType).Repairs
     End Function
 End Module

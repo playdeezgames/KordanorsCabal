@@ -113,7 +113,7 @@ Public MustInherit Class ModeProcessor
         End If
 
         For Each item In player.Location.Inventory.Items
-            Dim itemType As ItemType = item.ItemType
+            Dim itemType As OldItemType = item.ItemType
             If itemType.DisplayPattern.HasValue Then
                 buffer.PutCell(itemType.DisplayXY.Value, itemType.DisplayPattern.Value, False, itemType.DisplayHue.Value)
             End If

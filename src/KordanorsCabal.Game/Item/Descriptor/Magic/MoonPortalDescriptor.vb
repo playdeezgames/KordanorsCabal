@@ -1,10 +1,10 @@
 ﻿Friend Class MoonPortalDescriptor
-    Inherits ItemTypeDescriptor
+    Inherits ItemType
 
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            ItemType.MoonPortal,,,,,,,,,
+            OldItemType.MoonPortal,,,,,,,,,
             5000,
             MakeList(ShoppeType.BlackMage),,,,
             "IsInDungeon",
