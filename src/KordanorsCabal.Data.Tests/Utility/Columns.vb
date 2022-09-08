@@ -23,6 +23,7 @@
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeIdColumn = "ItemTypeId"
     Friend Const LocationIdColumn = "LocationId"
+    Friend Const LocationTypeColumn = "LocationType"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const MoneyDropDiceColumn = "MoneyDropDice"
     Friend Const NextDirectionIdColumn = "NextDirectionId"

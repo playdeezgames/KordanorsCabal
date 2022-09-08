@@ -29,4 +29,18 @@
                     (Columns.FeatureTypeIdColumn, featureType)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheLocationTypeOfAGivenFeatureType()
+        WithSubobject(
+            Sub(store, subject)
+                Dim featureType = 1L
+                subject.ReadLocationType(featureType).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.FeatureTypes,
+                    Columns.LocationTypeColumn,
+                    (Columns.FeatureTypeIdColumn, featureType)))
+            End Sub)
+    End Sub
 End Class
