@@ -19,6 +19,7 @@
     Friend Const DungeonLevels = "DungeonLevels"
     Friend Const EquipSlots = "EquipSlots"
     Friend Const Features = "Features"
+    Friend Const FeatureTypes = "FeatureTypes"
     Friend Const Inventories = "Inventories"
     Friend Const Players = "Players"
 End Module
