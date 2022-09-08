@@ -9,7 +9,6 @@
             Sub(store, subject)
                 Dim itemId = 1L
                 subject.ClearForItem(itemId)
-                'IStore.ClearForColumnValue<long>(Action, "InventoryItems", (ItemId, 1))
                 store.Verify(
                     Sub(x) x.ClearForColumnValue(Of Long)(
                         It.IsAny(Of Action),
