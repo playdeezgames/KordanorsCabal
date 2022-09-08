@@ -30,4 +30,19 @@
                         (Columns.InventoryIdColumn, inventoryId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldAssociateAnItemWithAnInventory()
+        WithSubobject(
+            Sub(store, subject)
+                Dim inventoryId = 1L
+                Dim itemId = 2L
+                subject.Write(inventoryId, itemId)
+                store.Verify(
+                    Sub(x) x.ReplaceRecord(Of Long, Long)(
+                        It.IsAny(Of Action),
+                        Tables.InventoryItems,
+                        (Columns.InventoryIdColumn, inventoryId),
+                        (Columns.ItemIdColumn, itemId)))
+            End Sub)
+    End Sub
 End Class
