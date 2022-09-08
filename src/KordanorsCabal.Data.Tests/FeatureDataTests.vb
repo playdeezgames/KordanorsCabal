@@ -14,7 +14,7 @@
                     Function(x) x.CreateRecord(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Features,
-                    (Columns.FeatureTypeColumn, featureType),
+                    (Columns.FeatureTypeIdColumn, featureType),
                     (Columns.LocationIdColumn, locationId)))
             End Sub)
     End Sub
@@ -28,7 +28,7 @@
                     Function(x) x.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Features,
-                    Columns.FeatureTypeColumn,
+                    Columns.FeatureTypeIdColumn,
                     (Columns.FeatureIdColumn, featureId)))
             End Sub)
     End Sub
