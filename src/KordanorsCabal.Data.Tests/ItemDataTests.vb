@@ -25,7 +25,7 @@
                 Sub(x) x.CreateRecord(
                     It.IsAny(Of Action),
                     Tables.Items,
-                    (Columns.ItemTypeColumn, itemType)))
+                    (Columns.ItemTypeIdColumn, itemType)))
             End Sub)
     End Sub
     <Fact>
@@ -38,7 +38,7 @@
                 Sub(x) x.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Items,
-                    Columns.ItemTypeColumn,
+                    Columns.ItemTypeIdColumn,
                     (Columns.ItemIdColumn, itemId)))
             End Sub)
     End Sub

@@ -3,7 +3,7 @@
     Implements IItemData
     Friend Const TableName = "Items"
     Friend Const ItemIdColumn = "ItemId"
-    Friend Const ItemTypeColumn = "ItemType"
+    Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
 
     Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
@@ -14,21 +14,21 @@
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{ItemIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
-                [{ItemTypeColumn}] INT NOT NULL
+                [{ItemTypeIdColumn}] INT NOT NULL
             );")
     End Sub
     Public Function Create(itemType As Long) As Long Implements IItemData.Create
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
-            (ItemTypeColumn, itemType))
+            (ItemTypeIdColumn, itemType))
     End Function
 
     Public Function ReadItemType(itemId As Long) As Long? Implements IItemData.ReadItemType
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
-            ItemTypeColumn,
+            ItemTypeIdColumn,
             (ItemIdColumn, itemId))
     End Function
 
@@ -46,7 +46,7 @@
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
-            (ItemTypeColumn, itemType),
+            (ItemTypeIdColumn, itemType),
             (ItemIdColumn, itemId))
     End Sub
 End Class
