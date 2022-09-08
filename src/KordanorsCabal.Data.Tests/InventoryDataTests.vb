@@ -42,4 +42,18 @@
                     (Columns.LocationIdColumn, locationId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForInventoryDataForAGivenCharacter()
+        WithSubobject(
+            Sub(store, subject)
+                Dim characterId = 1L
+                subject.ReadForCharacter(characterId).ShouldBeNull
+                store.Verify(
+                Sub(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Inventories,
+                    Columns.InventoryIdColumn,
+                    (Columns.CharacterIdColumn, characterId)))
+            End Sub)
+    End Sub
 End Class

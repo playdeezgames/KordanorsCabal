@@ -19,6 +19,7 @@
     Friend Const FeatureTypeNameColumn = "FeatureTypeName"
     Friend Const InitialValueColumn = "InitialValue"
     Friend Const InteractionModeColumn = "InteractionMode"
+    Friend Const InventoryIdColumn = "InventoryId"
     Friend Const IsCardinalColumn = "IsCardinal"
     Friend Const IsUndeadColumn = "IsUndead"
     Friend Const ItemIdColumn = "ItemId"
