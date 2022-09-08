@@ -28,4 +28,18 @@
                     (Columns.ItemTypeColumn, itemType)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheItemTypeOfAGivenItem()
+        WithSubobject(
+            Sub(store, subject)
+                Dim itemId = 1L
+                subject.ReadItemType(itemId).ShouldBeNull
+                store.Verify(
+                Sub(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Items,
+                    Columns.ItemTypeColumn,
+                    (Columns.ItemIdColumn, itemId)))
+            End Sub)
+    End Sub
 End Class
