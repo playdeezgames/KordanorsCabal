@@ -22,5 +22,7 @@
     Friend Const FeatureTypes = "FeatureTypes"
     Friend Const Inventories = "Inventories"
     Friend Const InventoryItems = "InventoryItems"
+    Friend Const ItemStatistics = "ItemStatistics"
+    Friend Const Items = "Items"
     Friend Const Players = "Players"
 End Module
