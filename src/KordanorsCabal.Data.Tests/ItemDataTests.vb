@@ -15,4 +15,17 @@
                 store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Items, (Columns.ItemIdColumn, itemId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldCreateAnItemOfAGivenItemType()
+        WithSubobject(
+            Sub(store, subject)
+                Dim itemType = 1L
+                subject.Create(itemType).ShouldBe(0)
+                store.Verify(
+                Sub(x) x.CreateRecord(
+                    It.IsAny(Of Action),
+                    Tables.Items,
+                    (Columns.ItemTypeColumn, itemType)))
+            End Sub)
+    End Sub
 End Class
