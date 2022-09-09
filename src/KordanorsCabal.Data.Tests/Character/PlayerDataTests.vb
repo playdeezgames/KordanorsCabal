@@ -92,4 +92,19 @@
                     (Columns.PlayerIdColumn, playerId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldUpdateTheStoreWithAModeForThePlayer()
+        WithSubobject(
+            Sub(store, subject)
+                Dim mode = 2L
+                subject.WritePlayerMode(mode)
+                Dim playerId = 1
+                store.Verify(
+                    Sub(x) x.WriteColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Players,
+                    (Columns.PlayerModeIdColumn, mode),
+                    (Columns.PlayerIdColumn, playerId)))
+            End Sub)
+    End Sub
 End Class
