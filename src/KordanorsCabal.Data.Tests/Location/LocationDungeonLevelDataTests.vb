@@ -17,4 +17,18 @@
                     (Columns.LocationIdColumn, locationId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheLocationsWithinAGivenDungeonLevel()
+        WithSubobject(
+            Sub(store, subject)
+                Dim dungeonLevel = 1L
+                subject.ReadForDungeonLevel(dungeonLevel).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.LocationDungeonLevels,
+                    Columns.LocationIdColumn,
+                    (Columns.DungeonLevelIdColumn, dungeonLevel)))
+            End Sub)
+    End Sub
 End Class
