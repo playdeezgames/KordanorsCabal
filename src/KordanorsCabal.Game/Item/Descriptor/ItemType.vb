@@ -10,7 +10,7 @@
     End Property
     ReadOnly Property IsConsumed As Boolean
         Get
-            Return WorldData.ItemType.ReadIsConsumed(Id).Value > 0
+            Return If(WorldData.ItemType.ReadIsConsumed(Id), 0) > 0
         End Get
     End Property
     ReadOnly Property SpawnLocationTypes(dungeonLevel As DungeonLevel) As HashSet(Of LocationType)

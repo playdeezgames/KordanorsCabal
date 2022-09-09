@@ -16,13 +16,23 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldAttemptToReadTheName()
+    Sub ShouldQueryTheWorldDataForItemTypeName()
         Dim itemTypeId = 1L
         WithExisting(
             itemTypeId,
             Sub(worldData, subject)
                 subject.Name.ShouldBeNull
                 worldData.Verify(Function(x) x.ItemType.ReadName(itemTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryTheWorldDataForItemTypeIsConsumedFlag()
+        Dim itemTypeId = 1L
+        WithExisting(
+            itemTypeId,
+            Sub(worldData, subject)
+                subject.IsConsumed.ShouldBeFalse
+                worldData.Verify(Function(x) x.ItemType.ReadIsConsumed(itemTypeId))
             End Sub)
     End Sub
 End Class
