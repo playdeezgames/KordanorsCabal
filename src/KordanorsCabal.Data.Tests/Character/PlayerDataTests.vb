@@ -77,4 +77,19 @@
                     (Columns.PlayerModeIdColumn, mode)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldUpdateTheStoreWithADirectionForThePlayer()
+        WithSubobject(
+            Sub(store, subject)
+                Dim direction = 2L
+                subject.WriteDirection(direction)
+                Dim playerId = 1
+                store.Verify(
+                    Sub(x) x.WriteColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Players,
+                    (Columns.DirectionIdColumn, direction),
+                    (Columns.PlayerIdColumn, playerId)))
+            End Sub)
+    End Sub
 End Class
