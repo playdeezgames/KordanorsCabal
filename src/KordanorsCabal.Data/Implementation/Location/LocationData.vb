@@ -3,7 +3,7 @@
     Implements ILocationData
     Public Const TableName = "Locations"
     Public Const LocationIdColumn = "LocationId"
-    Friend Const LocationTypeColumn = "LocationType"
+    Friend Const LocationTypeIdColumn = "LocationTypeId"
 
     Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
@@ -14,7 +14,7 @@
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{LocationIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
-                [{LocationTypeColumn}] INT NOT NULL
+                [{LocationTypeIdColumn}] INT NOT NULL
             );")
     End Sub
 
@@ -23,14 +23,14 @@
             AddressOf Initialize,
             TableName,
             LocationIdColumn,
-            (LocationTypeColumn, locationType))
+            (LocationTypeIdColumn, locationType))
     End Function
 
     Public Sub WriteLocationType(locationId As Long, locationType As Long) Implements ILocationData.WriteLocationType
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
-            (LocationTypeColumn, locationType),
+            (LocationTypeIdColumn, locationType),
             (LocationIdColumn, locationId))
     End Sub
 
@@ -38,7 +38,7 @@
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
-            LocationTypeColumn,
+            LocationTypeIdColumn,
             (LocationIdColumn, locationId))
     End Function
 
@@ -46,6 +46,6 @@
         Return Store.CreateRecord(
             AddressOf Initialize,
             TableName,
-            (LocationTypeColumn, locationType))
+            (LocationTypeIdColumn, locationType))
     End Function
 End Class
