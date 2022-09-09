@@ -26,5 +26,6 @@
     Friend Const ItemStatistics = "ItemStatistics"
     Friend Const ItemTypes = "ItemTypes"
     Friend Const ItemTypeSpawnCounts = "ItemTypeSpawnCounts"
+    Friend Const ItemTypeSpawnLocationTypes = "ItemTypeSpawnLocationTypes"
     Friend Const Players = "Players"
 End Module
