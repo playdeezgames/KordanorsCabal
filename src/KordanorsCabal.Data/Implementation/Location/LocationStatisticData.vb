@@ -3,7 +3,7 @@
     Implements ILocationStatisticData
     Friend Const TableName = "LocationStatistics"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
-    Friend Const StatisticTypeColumn = "StatisticType"
+    Friend Const LocationStatisticTypeIdColumn = "LocationStatisticTypeId"
     Friend Const StatisticValueColumn = "StatisticValue"
 
     Public Sub New(store As IStore, world As WorldData)
@@ -16,9 +16,9 @@
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{LocationIdColumn}] INT NOT NULL,
-                [{StatisticTypeColumn}] INT NOT NULL, 
+                [{LocationStatisticTypeIdColumn}] INT NOT NULL, 
                 [{StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{LocationIdColumn}],[{StatisticTypeColumn}]),
+                UNIQUE([{LocationIdColumn}],[{LocationStatisticTypeIdColumn}]),
                 FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
     End Sub
@@ -27,7 +27,7 @@
         Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName, LocationIdColumn,
-            (StatisticTypeColumn, statisticType),
+            (LocationStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue))
     End Function
 
@@ -37,7 +37,7 @@
             TableName,
             StatisticValueColumn,
             (LocationIdColumn, locationId),
-            (StatisticTypeColumn, statisticType))
+            (LocationStatisticTypeIdColumn, statisticType))
     End Function
 
     Public Sub Write(locationId As Long, statisticType As Long, statisticValue As Long?) Implements ILocationStatisticData.Write
@@ -46,14 +46,14 @@
                 AddressOf Initialize,
                 TableName,
                 (LocationIdColumn, locationId),
-                (StatisticTypeColumn, statisticType))
+                (LocationStatisticTypeIdColumn, statisticType))
             Return
         End If
         Store.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),
-            (StatisticTypeColumn, statisticType),
+            (LocationStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue.Value))
     End Sub
 End Class

@@ -16,7 +16,7 @@
                     Tables.LocationStatistics,
                     Columns.StatisticValueColumn,
                     (Columns.LocationIdColumn, locationId),
-                    (Columns.StatisticTypeColumn, statisticType)))
+                    (Columns.LocationStatisticTypeIdColumn, statisticType)))
             End Sub)
     End Sub
 End Class
