@@ -27,6 +27,7 @@
     Friend Const ItemTypeIdColumn = "ItemTypeId"
     Friend Const ItemTypeNameColumn = "ItemTypeName"
     Friend Const ItemTypeStatisticTypeIdColumn = "ItemTypeStatisticTypeId"
+    Friend Const ItemTypeStatisticTypeNameColumn = "ItemTypeStatisticTypeName"
     Friend Const ItemTypeStatisticValueColumn = "ItemTypeStatisticValue"
     Friend Const LocationIdColumn = "LocationId"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
