@@ -92,4 +92,20 @@
                             (Columns.DirectionIdColumn, direction)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForRoutesInAGivenLocationWithAGivenRouteType()
+        WithSubobject(
+            Sub(store, subject)
+                Dim locationId = 1L
+                Dim routeType = 2L
+                subject.ReadForLocationRouteType(locationId, routeType).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+                            It.IsAny(Of Action),
+                            Tables.Routes,
+                            Columns.RouteIdColumn,
+                            (Columns.LocationIdColumn, locationId),
+                            (Columns.RouteTypeIdColumn, routeType)))
+            End Sub)
+    End Sub
 End Class
