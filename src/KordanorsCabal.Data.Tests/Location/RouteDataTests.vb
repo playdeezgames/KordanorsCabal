@@ -35,4 +35,17 @@
                             (Columns.ToLocationIdColumn, toLocationId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForHowManyRoutesAreAtAGivenLocation()
+        WithSubobject(
+            Sub(store, subject)
+                Dim locationId = 1L
+                subject.ReadCountForLocation(locationId).ShouldBe(0)
+                store.Verify(
+                    Function(x) x.ReadCountForColumnValue(
+                            It.IsAny(Of Action),
+                            Tables.Routes,
+                            (Columns.LocationIdColumn, locationId)))
+            End Sub)
+    End Sub
 End Class
