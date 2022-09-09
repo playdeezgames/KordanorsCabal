@@ -33,4 +33,5 @@
     Friend Const Locations = "Locations"
     Friend Const LocationStatistics = "LocationStatistics"
     Friend Const Players = "Players"
+    Friend Const Routes = "Routes"
 End Module
