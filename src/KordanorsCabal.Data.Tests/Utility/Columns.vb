@@ -30,6 +30,7 @@
     Friend Const ItemTypeStatisticTypeNameColumn = "ItemTypeStatisticTypeName"
     Friend Const ItemTypeStatisticValueColumn = "ItemTypeStatisticValue"
     Friend Const LocationIdColumn = "LocationId"
+    Friend Const LocationTypeColumn = "LocationType"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const MoneyDropDiceColumn = "MoneyDropDice"
     Friend Const NextDirectionIdColumn = "NextDirectionId"
