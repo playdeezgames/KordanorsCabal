@@ -31,4 +31,19 @@
                     (Columns.DungeonLevelIdColumn, dungeonLevel)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldUpdateTheStoreWithAnAssociationBetweenAGivenLocationAndAGivenDungeonLevel()
+        WithSubobject(
+            Sub(store, subject)
+                Dim locationId = 1L
+                Dim dungeonLevel = 2L
+                subject.Write(locationId, dungeonLevel)
+                store.Verify(
+                    Sub(x) x.ReplaceRecord(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.LocationDungeonLevels,
+                    (Columns.LocationIdColumn, locationId),
+                    (Columns.DungeonLevelIdColumn, dungeonLevel)))
+            End Sub)
+    End Sub
 End Class
