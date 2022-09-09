@@ -17,4 +17,18 @@
                     (Columns.ItemTypeIdColumn, itemTypeId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheIsConsumedFlagOfAGivenItemType()
+        WithSubobject(
+            Sub(store, subject)
+                Dim itemTypeId = 1L
+                subject.ReadIsConsumed(itemTypeId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.ItemTypes,
+                    Columns.IsConsumedColumn,
+                    (Columns.ItemTypeIdColumn, itemTypeId)))
+            End Sub)
+    End Sub
 End Class
