@@ -4,7 +4,7 @@ Public Class PlayerData
     Friend Const TableName = "Players"
     Friend Const PlayerIdColumn = "PlayerId"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const DirectionColumn = "Direction"
+    Friend Const DirectionIdColumn = "DirectionId"
     Friend Const ModeColumn = "Mode"
     Const FixedPlayerId = 1
 
@@ -19,7 +19,7 @@ Public Class PlayerData
             (
                 [{PlayerIdColumn}] INT NOT NULL UNIQUE CHECK([{PlayerIdColumn}]={FixedPlayerId}),
                 [{CharacterIdColumn}] INT NOT NULL,
-                [{DirectionColumn}] INT NOT NULL,
+                [{DirectionIdColumn}] INT NOT NULL,
                 [{ModeColumn}] INT NOT NULL,
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
@@ -29,7 +29,7 @@ Public Class PlayerData
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
-            (DirectionColumn, direction),
+            (DirectionIdColumn, direction),
             (PlayerIdColumn, FixedPlayerId))
     End Sub
 
@@ -52,7 +52,7 @@ Public Class PlayerData
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
-            DirectionColumn,
+            DirectionIdColumn,
             (PlayerIdColumn, FixedPlayerId))
     End Function
 
@@ -70,7 +70,7 @@ Public Class PlayerData
             TableName,
             (PlayerIdColumn, FixedPlayerId),
             (CharacterIdColumn, characterId),
-            (DirectionColumn, direction),
+            (DirectionIdColumn, direction),
             (ModeColumn, mode))
     End Sub
 

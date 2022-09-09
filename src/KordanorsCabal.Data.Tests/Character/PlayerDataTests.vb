@@ -30,4 +30,18 @@
                     (Columns.PlayerIdColumn, playerId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheAssociatedDirectionOfThePlayer()
+        WithSubobject(
+            Sub(store, subject)
+                subject.ReadDirection().ShouldBeNull
+                Dim playerId = 1
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Players,
+                    Columns.DirectionIdColumn,
+                    (Columns.PlayerIdColumn, playerId)))
+            End Sub)
+    End Sub
 End Class
