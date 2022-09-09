@@ -58,4 +58,23 @@
                     (Columns.PlayerIdColumn, playerId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldUpdateTheStoreWithPlayerInformation()
+        WithSubobject(
+            Sub(store, subject)
+                Dim characterId = 1L
+                Dim direction = 2L
+                Dim mode = 3L
+                subject.Write(characterId, direction, mode)
+                Dim playerId = 1
+                store.Verify(
+                    Sub(x) x.ReplaceRecord(Of Long, Long, Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Players,
+                    (Columns.PlayerIdColumn, playerId),
+                    (Columns.CharacterIdColumn, characterId),
+                    (Columns.DirectionIdColumn, direction),
+                    (Columns.PlayerModeIdColumn, mode)))
+            End Sub)
+    End Sub
 End Class
