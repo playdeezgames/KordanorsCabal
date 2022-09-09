@@ -27,7 +27,7 @@
                     It.IsAny(Of Action),
                     Tables.Locations,
                     Columns.LocationIdColumn,
-                    (Columns.LocationTypeIdColumn, 1)))
+                    (Columns.LocationTypeIdColumn, locationType)))
             End Sub)
     End Sub
     <Fact>
@@ -41,7 +41,22 @@
                     It.IsAny(Of Action),
                     Tables.Locations,
                     Columns.LocationTypeIdColumn,
-                    (Columns.LocationIdColumn, 1)))
+                    (Columns.LocationIdColumn, locationId)))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldUpdateTheStoreWithANewLocationTypeForAGivenLocation()
+        WithSubobject(
+            Sub(store, subject)
+                Dim locationId = 1L
+                Dim locationType = 2L
+                subject.WriteLocationType(locationId, locationType)
+                store.Verify(
+                    Sub(x) x.WriteColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Locations,
+                    (Columns.LocationTypeIdColumn, locationType),
+                    (Columns.LocationIdColumn, locationId)))
             End Sub)
     End Sub
 End Class
