@@ -44,4 +44,18 @@
                     (Columns.PlayerIdColumn, playerId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheAssociatedModeOfThePlayer()
+        WithSubobject(
+            Sub(store, subject)
+                subject.ReadMode().ShouldBeNull
+                Dim playerId = 1
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Players,
+                    Columns.ModeColumn,
+                    (Columns.PlayerIdColumn, playerId)))
+            End Sub)
+    End Sub
 End Class
