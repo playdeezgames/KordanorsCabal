@@ -665,10 +665,10 @@
     End Sub
     Public Property Mode As PlayerMode
         Get
-            Return CType(WorldData.Player.ReadMode().Value, PlayerMode)
+            Return CType(WorldData.Player.ReadPlayerMode().Value, PlayerMode)
         End Get
         Set(value As PlayerMode)
-            WorldData.Player.WriteMode(value)
+            WorldData.Player.WritePlayerMode(value)
         End Set
     End Property
     Public Sub CompleteQuest(quest As Quest)

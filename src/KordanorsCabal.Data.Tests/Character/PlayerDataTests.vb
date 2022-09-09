@@ -48,13 +48,13 @@
     Sub ShouldQueryTheStoreForTheAssociatedModeOfThePlayer()
         WithSubobject(
             Sub(store, subject)
-                subject.ReadMode().ShouldBeNull
+                subject.ReadPlayerMode().ShouldBeNull
                 Dim playerId = 1
                 store.Verify(
                     Function(x) x.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
-                    Columns.ModeColumn,
+                    Columns.PlayerModeIdColumn,
                     (Columns.PlayerIdColumn, playerId)))
             End Sub)
     End Sub

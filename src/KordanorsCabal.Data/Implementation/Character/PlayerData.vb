@@ -5,7 +5,7 @@ Public Class PlayerData
     Friend Const PlayerIdColumn = "PlayerId"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const DirectionIdColumn = "DirectionId"
-    Friend Const ModeColumn = "Mode"
+    Friend Const PlayerModeIdColumn = "PlayerModeId"
     Const FixedPlayerId = 1
 
     Public Sub New(store As IStore, world As WorldData)
@@ -20,7 +20,7 @@ Public Class PlayerData
                 [{PlayerIdColumn}] INT NOT NULL UNIQUE CHECK([{PlayerIdColumn}]={FixedPlayerId}),
                 [{CharacterIdColumn}] INT NOT NULL,
                 [{DirectionIdColumn}] INT NOT NULL,
-                [{ModeColumn}] INT NOT NULL,
+                [{PlayerModeIdColumn}] INT NOT NULL,
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
@@ -33,18 +33,18 @@ Public Class PlayerData
             (PlayerIdColumn, FixedPlayerId))
     End Sub
 
-    Public Function ReadMode() As Long? Implements IPlayerData.ReadMode
+    Public Function ReadPlayerMode() As Long? Implements IPlayerData.ReadPlayerMode
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
-            TableName, ModeColumn,
+            TableName, PlayerModeIdColumn,
             (PlayerIdColumn, FixedPlayerId))
     End Function
 
-    Public Sub WriteMode(mode As Long) Implements IPlayerData.WriteMode
+    Public Sub WritePlayerMode(mode As Long) Implements IPlayerData.WritePlayerMode
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
-            (ModeColumn, mode),
+            (PlayerModeIdColumn, mode),
             (PlayerIdColumn, FixedPlayerId))
     End Sub
 
@@ -71,7 +71,7 @@ Public Class PlayerData
             (PlayerIdColumn, FixedPlayerId),
             (CharacterIdColumn, characterId),
             (DirectionIdColumn, direction),
-            (ModeColumn, mode))
+            (PlayerModeIdColumn, mode))
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long) Implements IPlayerData.ClearForCharacter
