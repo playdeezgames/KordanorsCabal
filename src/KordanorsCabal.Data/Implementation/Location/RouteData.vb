@@ -4,8 +4,8 @@
     Friend Const TableName = "Routes"
     Friend Const RouteIdColumn = "RouteId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
-    Friend Const DirectionColumn = "Direction"
-    Friend Const RouteTypeColumn = "RouteType"
+    Friend Const DirectionIdColumn = "DirectionId"
+    Friend Const RouteTypeIdColumn = "RouteTypeId"
     Friend Const ToLocationIdColumn = "To" + LocationData.LocationIdColumn
 
     Public Sub New(store As IStore, world As WorldData)
@@ -19,10 +19,10 @@
             (
                 [{RouteIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
                 [{LocationIdColumn}] INT NOT NULL,
-                [{DirectionColumn}] INT NOT NULL,
-                [{RouteTypeColumn}] INT NOT NULL,
+                [{DirectionIdColumn}] INT NOT NULL,
+                [{RouteTypeIdColumn}] INT NOT NULL,
                 [{ToLocationIdColumn}] INT NOT NULL,
-                UNIQUE([{LocationIdColumn}],[{DirectionColumn}]),
+                UNIQUE([{LocationIdColumn}],[{DirectionIdColumn}]),
                 FOREIGN KEY([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}]),
                 FOREIGN KEY([{ToLocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
@@ -39,7 +39,7 @@
         Store.WriteColumnValue(
             AddressOf Initialize,
             TableName,
-            (RouteTypeColumn, routeType),
+            (RouteTypeIdColumn, routeType),
             (RouteIdColumn, routeId))
     End Sub
 
@@ -47,7 +47,7 @@
         Return Store.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
-            RouteTypeColumn,
+            RouteTypeIdColumn,
             (RouteIdColumn, routeId))
     End Function
 
@@ -65,14 +65,14 @@
             TableName,
             RouteIdColumn,
             (LocationIdColumn, locationId),
-            (RouteTypeColumn, routeType))
+            (RouteTypeIdColumn, routeType))
     End Function
 
     Public Function ReadDirectionRouteForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long)) Implements IRouteData.ReadDirectionRouteForLocation
         Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
-            (DirectionColumn, RouteIdColumn),
+            (DirectionIdColumn, RouteIdColumn),
             (LocationIdColumn, locationId))
     End Function
 
@@ -80,7 +80,7 @@
         Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
-            (DirectionColumn, RouteTypeColumn),
+            (DirectionIdColumn, RouteTypeIdColumn),
             (LocationIdColumn, locationId))
     End Function
 
@@ -90,7 +90,7 @@
             TableName,
             RouteIdColumn,
             (LocationIdColumn, locationId),
-            (DirectionColumn, direction))
+            (DirectionIdColumn, direction))
     End Function
 
     Public Function Create(locationId As Long, direction As Long, routeType As Long, toLocationId As Long) As Long Implements IRouteData.Create
@@ -98,8 +98,8 @@
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),
-            (DirectionColumn, direction),
-            (RouteTypeColumn, routeType),
+            (DirectionIdColumn, direction),
+            (RouteTypeIdColumn, routeType),
             (ToLocationIdColumn, toLocationId))
     End Function
 
