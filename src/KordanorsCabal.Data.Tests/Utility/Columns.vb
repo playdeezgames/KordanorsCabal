@@ -35,6 +35,7 @@
     Friend Const NextDirectionIdColumn = "NextDirectionId"
     Friend Const OppositeDirectionIdColumn = "OppositeDirectionId"
     Friend Const PartingShotColumn = "PartingShot"
+    Friend Const PlayerIdColumn = "PlayerId"
     Friend Const PreviousDirectionIdColumn = "PreviousDirectionId"
     Friend Const QuestColumn = "Quest"
     Friend Const SpawnCountColumn = "SpawnCount"
