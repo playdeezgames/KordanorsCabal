@@ -35,6 +35,7 @@
     Friend Const PreviousDirectionIdColumn = "PreviousDirectionId"
     Friend Const QuestColumn = "Quest"
     Friend Const SpawnCountColumn = "SpawnCount"
+    Friend Const SpawnDiceColumn = "SpawnDice"
     Friend Const SpellLevelColumn = "SpellLevel"
     Friend Const SpellTypeColumn = "SpellType"
     Friend Const StatisticValueColumn = "StatisticValue"
