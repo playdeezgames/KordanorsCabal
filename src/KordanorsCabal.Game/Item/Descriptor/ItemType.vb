@@ -1,5 +1,8 @@
 ﻿Public Class ItemType
     Inherits BaseThingie
+    Public Shared Function FromId(worlddata As IWorldData, id As Long) As ItemType
+        Return New ItemType(worlddata, id)
+    End Function
     ReadOnly Property Name As String
         Get
             Return WorldData.ItemType.ReadName(Id)
@@ -110,7 +113,7 @@
         Return repairedAt.Contains(shoppeType)
     End Function
     Sub New(
-           worldData As WorldData,
+           worldData As IWorldData,
            itemTypeId As Long,
            Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
            Optional buffs As IReadOnlyDictionary(Of Long, Long) = Nothing,

@@ -1,6 +1,6 @@
 Namespace KordanorsCabal.Game.Tests
     Public Class CharacterTypeTests
-        Private Shared Sub WithExistingCharacterType(characterTypeId As Long, stuffToDo As Action(Of Mock(Of IWorldData), CharacterType))
+        Private Shared Sub WithExisting(characterTypeId As Long, stuffToDo As Action(Of Mock(Of IWorldData), CharacterType))
             Dim worldData As New Mock(Of IWorldData)
             worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
             Dim subject = CharacterType.FromId(worldData.Object, characterTypeId)
@@ -10,7 +10,7 @@ Namespace KordanorsCabal.Game.Tests
         <Fact>
         Sub ShouldConstructFromWorldDataAndACharacterTypeId()
             Const characterTypeId = 1L
-            WithExistingCharacterType(
+            WithExisting(
                 characterTypeId,
                 Sub(worldData, subject)
                     subject.Id.ShouldBe(characterTypeId)
@@ -19,7 +19,7 @@ Namespace KordanorsCabal.Game.Tests
         <Fact>
         Sub ShouldQueryForUndeadStatus()
             Const characterTypeId = 1L
-            WithExistingCharacterType(
+            WithExisting(
                 characterTypeId,
                 Sub(worldData, subject)
                     Dim actual = subject.IsUndead
