@@ -31,5 +31,6 @@
     Friend Const ItemTypeStatisticTypes = "ItemTypeStatisticTypes"
     Friend Const LocationDungeonLevels = "LocationDungeonLevels"
     Friend Const Locations = "Locations"
+    Friend Const LocationStatistics = "LocationStatistics"
     Friend Const Players = "Players"
 End Module

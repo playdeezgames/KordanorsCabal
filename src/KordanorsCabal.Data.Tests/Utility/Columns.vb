@@ -42,6 +42,7 @@
     Friend Const SpellLevelColumn = "SpellLevel"
     Friend Const SpellTypeColumn = "SpellType"
     Friend Const StatisticValueColumn = "StatisticValue"
+    Friend Const StatisticTypeColumn = "StatisticType"
     Friend Const WeightColumn = "Weight"
     Friend Const XPValueColumn = "XPValue"
 End Module
