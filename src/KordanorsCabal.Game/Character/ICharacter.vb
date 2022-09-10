@@ -12,10 +12,13 @@
     ReadOnly Property MaximumHP As Long
     ReadOnly Property Name As String
     ReadOnly Property PartingShot As String
+    Property Statistic(statisticType As CharacterStatisticType) As Long
+    ReadOnly Property HasStatistic(statisticType As CharacterStatisticType) As Boolean
 
     Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As CharacterStatisticType) As Long?
     Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
+
 
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     Sub Destroy()
