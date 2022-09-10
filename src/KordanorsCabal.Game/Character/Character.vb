@@ -40,10 +40,10 @@
             Return Game.CharacterType.FromId(WorldData, WorldData.Character.ReadCharacterType(Id).Value)
         End Get
     End Property
-    Public Function HasQuest(quest As Quest) As Boolean
+    Public Function HasQuest(quest As Quest) As Boolean Implements ICharacter.HasQuest
         Return WorldData.CharacterQuest.Read(Id, quest)
     End Function
-    Property Money As Long
+    Property Money As Long Implements ICharacter.Money
         Get
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 14L)).Value
         End Get
@@ -60,7 +60,7 @@
         EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
         WorldData.CharacterSpell.Write(Id, spellType, nextLevel)
     End Sub
-    Friend Function CanLearn(spellType As SpellType) As Boolean
+    Function CanLearn(spellType As SpellType) As Boolean Implements ICharacter.CanLearn
         Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
         If nextLevel > spellType.MaximumLevel Then
             Return False
@@ -104,7 +104,7 @@
     Overridable Sub EnqueueMessage(ParamArray lines() As String) Implements ICharacter.EnqueueMessage
         'do nothing!
     End Sub
-    ReadOnly Property CanFight As Boolean
+    ReadOnly Property CanFight As Boolean Implements ICharacter.CanFight
         Get
             Return Location.Enemies(Me).Any
         End Get

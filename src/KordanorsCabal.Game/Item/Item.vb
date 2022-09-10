@@ -19,7 +19,7 @@
             Return ItemType.Name
         End Get
     End Property
-    ReadOnly Property CanUse(character As Character) As Boolean
+    ReadOnly Property CanUse(character As ICharacter) As Boolean
         Get
             Return ItemType.CanUse(character)
         End Get
@@ -48,7 +48,7 @@
     Public Function Encumbrance() As Long
         Return ItemType.Encumbrance
     End Function
-    Friend Sub Use(character As Character)
+    Friend Sub Use(character As ICharacter)
         ItemType.Use(character)
     End Sub
     Friend ReadOnly Property EquipSlots() As IEnumerable(Of EquipSlot)

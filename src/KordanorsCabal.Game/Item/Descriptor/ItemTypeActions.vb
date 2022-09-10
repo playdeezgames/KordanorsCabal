@@ -226,8 +226,8 @@
                     End If
                 End Sub}
         }
-    Friend ReadOnly CanUseFunctions As IReadOnlyDictionary(Of String, Func(Of Character, Boolean)) =
-        New Dictionary(Of String, Func(Of Character, Boolean)) From
+    Friend ReadOnly CanUseFunctions As IReadOnlyDictionary(Of String, Func(Of ICharacter, Boolean)) =
+        New Dictionary(Of String, Func(Of ICharacter, Boolean)) From
         {
             {"CanLearnHolyBolt", Function(character) character.CanLearn(SpellType.HolyBolt)},
             {"CanUseBeer", Function(character)

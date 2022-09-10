@@ -104,7 +104,7 @@
     Function Enemy(character As ICharacter) As ICharacter
         Return Enemies(character).FirstOrDefault
     End Function
-    Function Friends(character As Character) As IEnumerable(Of ICharacter)
+    Function Friends(character As ICharacter) As IEnumerable(Of ICharacter)
         Return Characters.Where(Function(x) Not x.IsEnemy(character))
     End Function
     Friend ReadOnly Property CanMap As Boolean

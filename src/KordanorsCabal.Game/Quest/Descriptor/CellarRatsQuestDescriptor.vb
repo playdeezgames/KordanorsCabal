@@ -7,7 +7,7 @@
         End Get
     End Property
 
-    Public Overrides Sub Complete(character As Character)
+    Public Overrides Sub Complete(character As ICharacter)
         If character.HasQuest(Quest.CellarRats) AndAlso CanComplete(character) Then
             character.EnqueueMessage("You complete the quest!")
             Dim ratTails = character.Inventory.ItemsOfType(OldItemType.RatTail).Take(10)
@@ -25,7 +25,7 @@
         character.EnqueueMessage("You cannot complete this quest at this time.")
     End Sub
 
-    Public Overrides Sub Accept(character As Character)
+    Public Overrides Sub Accept(character As ICharacter)
         If CanAccept(character) Then
             character.EnqueueMessage("You accept the quest!")
             StaticWorldData.World.CharacterQuest.Write(character.Id, Quest.CellarRats)
@@ -41,11 +41,11 @@
         character.EnqueueMessage("You cannot accept this quest at this time.")
     End Sub
 
-    Public Overrides Function CanAccept(character As Character) As Boolean
+    Public Overrides Function CanAccept(character As ICharacter) As Boolean
         Return Not character.HasQuest(Quest.CellarRats)
     End Function
 
-    Public Overrides Function CanComplete(character As Character) As Boolean
+    Public Overrides Function CanComplete(character As ICharacter) As Boolean
         Return character.Inventory.ItemsOfType(OldItemType.RatTail).Count >= 1
     End Function
 End Class

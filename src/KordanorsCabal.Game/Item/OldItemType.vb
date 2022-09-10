@@ -65,7 +65,7 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).Name
     End Function
     <Extension>
-    Function CanUse(itemType As OldItemType, character As Character) As Boolean
+    Function CanUse(itemType As OldItemType, character As ICharacter) As Boolean
         Return ItemTypeDescriptors(itemType).CanUse(character)
     End Function
     <Extension>
@@ -73,7 +73,7 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).Encumbrance
     End Function
     <Extension>
-    Public Sub Use(itemType As OldItemType, character As Character)
+    Public Sub Use(itemType As OldItemType, character As ICharacter)
         ItemTypeDescriptors(itemType).Use.Invoke(character)
     End Sub
     <Extension>

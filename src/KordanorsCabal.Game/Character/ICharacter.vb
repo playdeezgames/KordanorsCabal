@@ -23,11 +23,14 @@
     Property CurrentMP As Long
     Property CurrentMana As Long
     Property Chafing As Long
+    Property Money As Long
+    ReadOnly Property CanFight As Boolean
+
     Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As CharacterStatisticType) As Long?
     Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
-
-
+    Function HasQuest(quest As Quest) As Boolean
+    Function CanLearn(spellType As SpellType) As Boolean
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     Sub Destroy()
 

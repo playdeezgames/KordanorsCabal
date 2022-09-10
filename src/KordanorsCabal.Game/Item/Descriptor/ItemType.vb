@@ -82,9 +82,9 @@
     End Property
     Private ReadOnly Property UseActionName As String
 
-    ReadOnly Property CanUse As Func(Of Character, Boolean)
+    ReadOnly Property CanUse As Func(Of ICharacter, Boolean)
         Get
-            Dim result As Func(Of Character, Boolean) = Nothing
+            Dim result As Func(Of ICharacter, Boolean) = Nothing
             If CanUseFunctions.TryGetValue(CanUseFunctionName, result) Then
                 Return result
             End If
