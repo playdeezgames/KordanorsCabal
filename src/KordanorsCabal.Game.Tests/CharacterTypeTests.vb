@@ -5,6 +5,7 @@ Public Class CharacterTypeTests
         worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
+        worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -65,6 +66,15 @@ Public Class CharacterTypeTests
                 Dim actual = subject.GenerateAttackType()
                 actual.ShouldBe(AttackType.None)
                 worldData.Verify(Function(x) x.CharacterTypeAttackType.Read(characterTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryForInitialStatisticsForAGivenCharacterType()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim actual = subject.InitialStatistics(worldData.Object)
+                actual.ShouldBeNull
+                worldData.Verify(Function(x) x.CharacterTypeInitialStatistic.ReadAllForCharacterType(characterTypeId))
             End Sub)
     End Sub
 End Class
