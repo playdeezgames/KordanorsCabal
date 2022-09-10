@@ -4,6 +4,7 @@
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long
     ReadOnly Property IsDead As Boolean
+    ReadOnly Property IsEnemy(character As ICharacter) As Boolean
     ReadOnly Property IsDemoralized As Boolean
     ReadOnly Property IsUndead As Boolean
     Property Location As Location
@@ -13,10 +14,9 @@
 
     Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As CharacterStatisticType) As Long?
-    Function IsEnemy(character As Character) As Boolean
     Function RollWillpower() As Long
     Function RollDefend() As Long
-    Function Kill(killedBy As Character) As (Sfx?, List(Of String))
+    Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     Sub DoDamage(damage As Long)
     Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType)
     Sub Destroy()
@@ -28,4 +28,5 @@
     Function RollInfluence() As Long
     Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType)
     Function DetermineDamage(value As Long) As Long
+    Function AddXP(xp As Long) As Boolean
 End Interface

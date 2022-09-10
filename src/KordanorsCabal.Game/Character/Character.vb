@@ -175,9 +175,11 @@
         Return WorldData.CharacterLocation.Read(Id, location.Id)
     End Function
 
-    Function IsEnemy(character As Character) As Boolean Implements ICharacter.IsEnemy
-        Return CharacterType.IsEnemy(character)
-    End Function
+    ReadOnly Property IsEnemy(character As ICharacter) As Boolean Implements ICharacter.IsEnemy
+        Get
+            Return CharacterType.IsEnemy(character)
+        End Get
+    End Property
     Private Function RollDice(dice As Long) As Long
         Dim result As Long = 0
         While dice > 0
@@ -378,7 +380,7 @@
             Return WorldData.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(WorldData, x))
         End Get
     End Property
-    Friend Function AddXP(xp As Long) As Boolean
+    Function AddXP(xp As Long) As Boolean Implements ICharacter.AddXP
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 16L), xp)
         Dim xpGoal = GetStatistic(CharacterStatisticType.FromId(WorldData, 17L)).Value
         If GetStatistic(CharacterStatisticType.FromId(WorldData, 16L)).Value >= xpGoal Then
@@ -392,7 +394,7 @@
         End If
         Return False
     End Function
-    Function Kill(killedBy As Character) As (Sfx?, List(Of String)) Implements ICharacter.Kill
+    Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String)) Implements ICharacter.Kill
         Dim lines As New List(Of String)
         lines.Add($"You kill {Name}!")
         Dim sfx As Sfx? = Game.Sfx.EnemyDeath
