@@ -93,18 +93,18 @@
     Public Shared Operator <>(first As Location, second As Location) As Boolean
         Return first.Id <> second.Id
     End Operator
-    ReadOnly Property Characters As IEnumerable(Of Character)
+    ReadOnly Property Characters As IEnumerable(Of ICharacter)
         Get
             Return WorldData.Character.ReadForLocation(Id).Select(Function(x) Character.FromId(WorldData, x))
         End Get
     End Property
-    Function Enemies(character As Character) As IEnumerable(Of Character)
+    Function Enemies(character As Character) As IEnumerable(Of ICharacter)
         Return Characters.Where(Function(x) x.IsEnemy(character))
     End Function
-    Function Enemy(character As Character) As Character
+    Function Enemy(character As Character) As ICharacter
         Return Enemies(character).FirstOrDefault
     End Function
-    Function Friends(character As Character) As IEnumerable(Of Character)
+    Function Friends(character As Character) As IEnumerable(Of ICharacter)
         Return Characters.Where(Function(x) Not x.IsEnemy(character))
     End Function
     Friend ReadOnly Property CanMap As Boolean

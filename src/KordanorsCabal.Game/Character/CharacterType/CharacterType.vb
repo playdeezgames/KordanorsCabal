@@ -27,7 +27,7 @@
         Return results.
             Select(Function(x) (CharacterStatisticType.FromId(worldData, x.Item1), x.Item2)).ToList
     End Function
-    Function MaximumEncumbrance(worldData As IWorldData, character As Character) As Long Implements ICharacterType.MaximumEncumbrance
+    Function MaximumEncumbrance(worldData As IWorldData, character As ICharacter) As Long Implements ICharacterType.MaximumEncumbrance
         Return If(
             character.GetStatistic(CharacterStatisticType.FromId(worldData, 24L)), 0) +
             If(
@@ -35,7 +35,7 @@
             If(
                 character.GetStatistic(CharacterStatisticType.FromId(worldData, 1L)), 0)
     End Function
-    Function IsEnemy(character As Character) As Boolean Implements ICharacterType.IsEnemy
+    Function IsEnemy(character As ICharacter) As Boolean Implements ICharacterType.IsEnemy
         Return WorldData.CharacterTypeEnemy.Read(Id, character.CharacterType.Id)
     End Function
     Function CanSpawn(locationType As LocationType, level As DungeonLevel) As Boolean Implements ICharacterType.CanSpawn

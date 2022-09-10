@@ -130,7 +130,7 @@ Public MustInherit Class ModeProcessor
         End If
     End Sub
 
-    Private Sub ShowEnemy(buffer As PatternBuffer, spriteXY As (Integer, Integer), enemy As Character)
+    Private Sub ShowEnemy(buffer As PatternBuffer, spriteXY As (Integer, Integer), enemy As ICharacter)
         ShowSprite(buffer, spriteXY, enemy.CharacterType.Sprite)
     End Sub
 

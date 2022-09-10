@@ -1,5 +1,6 @@
 ﻿Public Class Character
     Inherits BaseThingie
+    Implements ICharacter
     Sub New(worldData As IWorldData, characterId As Long)
         MyBase.New(worldData, characterId)
     End Sub
@@ -34,7 +35,7 @@
             Return Spells.Any
         End Get
     End Property
-    ReadOnly Property CharacterType As ICharacterType
+    ReadOnly Property CharacterType As ICharacterType Implements ICharacter.CharacterType
         Get
             Return Game.CharacterType.FromId(WorldData, WorldData.Character.ReadCharacterType(Id).Value)
         End Get
@@ -67,7 +68,7 @@
         Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) >= spellType.RequiredPower(nextLevel)
     End Function
 
-    Friend Sub DoImmobilization(delta As Long)
+    Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)
     End Sub
 
@@ -87,10 +88,10 @@
         Return ItemsToRepair(shoppeType).Any
     End Function
 
-    Friend Function CanBeBribedWith(itemType As OldItemType) As Boolean
+    Function CanBeBribedWith(itemType As OldItemType) As Boolean Implements ICharacter.CanBeBribedWith
         Return CharacterType.CanBeBribedWith(itemType)
     End Function
-    ReadOnly Property IsUndead As Boolean
+    ReadOnly Property IsUndead As Boolean Implements ICharacter.IsUndead
         Get
             Return CharacterType.IsUndead
         End Get
@@ -106,20 +107,20 @@
             Return Location.Enemies(Me).Any
         End Get
     End Property
-    Friend Shared Function Create(worldData As WorldData, characterType As ICharacterType, location As Location, initialStatistics As IReadOnlyList(Of (CharacterStatisticType, Long))) As Character
+    Friend Shared Function Create(worldData As WorldData, characterType As ICharacterType, location As Location, initialStatistics As IReadOnlyList(Of (CharacterStatisticType, Long))) As ICharacter
         Dim character = FromId(worldData, worldData.Character.Create(characterType.Id, location.Id))
         For Each entry In initialStatistics
             character.SetStatistic(entry.Item1, entry.Item2)
         Next
         Return character
     End Function
-    Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
+    Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long) Implements ICharacter.SetStatistic
         WorldData.CharacterStatistic.Write(Id, statisticType.Id, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
-    Friend Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
+    Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long) Implements ICharacter.ChangeStatistic
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
     End Sub
-    Property Location As Location
+    Property Location As Location Implements ICharacter.Location
         Get
             Return Location.FromId(WorldData, WorldData.Character.ReadLocation(Id).Value)
         End Get
@@ -128,10 +129,10 @@
             WorldData.CharacterLocation.Write(Id, value.Id)
         End Set
     End Property
-    Shared Function FromId(worldData As IWorldData, characterId As Long) As Character
+    Shared Function FromId(worldData As IWorldData, characterId As Long) As ICharacter
         Return New Character(worldData, characterId)
     End Function
-    Public Function GetStatistic(statisticType As CharacterStatisticType) As Long?
+    Public Function GetStatistic(statisticType As CharacterStatisticType) As Long? Implements ICharacter.GetStatistic
         Dim result = If(WorldData.CharacterStatistic.Read(Id,
                                                           statisticType.Id), statisticType.DefaultValue)
         If result.HasValue Then
@@ -174,7 +175,7 @@
         Return WorldData.CharacterLocation.Read(Id, location.Id)
     End Function
 
-    Friend Function IsEnemy(character As Character) As Boolean
+    Function IsEnemy(character As Character) As Boolean Implements ICharacter.IsEnemy
         Return CharacterType.IsEnemy(character)
     End Function
     Private Function RollDice(dice As Long) As Long
@@ -185,7 +186,7 @@
         End While
         Return result
     End Function
-    Friend Function RollDefend() As Long
+    Function RollDefend() As Long Implements ICharacter.RollDefend
         Dim maximumDefend = GetStatistic(CharacterStatisticType.FromId(WorldData, 11L)).Value
         Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
     End Function
@@ -196,16 +197,16 @@
         Next
         Return dice
     End Function
-    Friend Function RollAttack() As Long
+    Function RollAttack() As Long Implements ICharacter.RollAttack
         Return RollDice(GetAttackDice() + NegativeInfluence())
     End Function
     Private Function NegativeInfluence() As Long
         Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
     End Function
-    Friend Function RollInfluence() As Long
+    Function RollInfluence() As Long Implements ICharacter.RollInfluence
         Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 3L)), 0) + NegativeInfluence())
     End Function
-    Friend Function RollWillpower() As Long
+    Function RollWillpower() As Long Implements ICharacter.RollWillpower
         Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)), 0) + NegativeInfluence())
     End Function
     Private Function GetAttackDice() As Long
@@ -215,16 +216,16 @@
         Next
         Return dice
     End Function
-    Friend Function IsDemoralized() As Boolean
+    Function IsDemoralized() As Boolean Implements ICharacter.IsDemoralized
         If GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
             Return CurrentMP <= 0
         End If
         Return False
     End Function
-    Friend Sub AddStress(delta As Long)
+    Sub AddStress(delta As Long) Implements ICharacter.AddStress
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 13L), delta)
     End Sub
-    ReadOnly Property CanIntimidate As Boolean
+    ReadOnly Property CanIntimidate As Boolean Implements ICharacter.CanIntimidate
         Get
             If Not GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
                 Return False
@@ -232,12 +233,12 @@
             Return Location.Friends(Me).Count <= Location.Enemies(Me).Count
         End Get
     End Property
-    ReadOnly Property Name As String
+    ReadOnly Property Name As String Implements ICharacter.Name
         Get
             Return CharacterType.Name
         End Get
     End Property
-    Property CurrentHP As Long
+    Property CurrentHP As Long Implements ICharacter.CurrentHP
         Get
             Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value)
         End Get
@@ -245,12 +246,12 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value - value)
         End Set
     End Property
-    ReadOnly Property MaximumHP As Long
+    ReadOnly Property MaximumHP As Long Implements ICharacter.MaximumHP
         Get
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value
         End Get
     End Property
-    ReadOnly Property PartingShot As String
+    ReadOnly Property PartingShot As String Implements ICharacter.PartingShot
         Get
             Return CharacterType.PartingShot
         End Get
@@ -271,21 +272,21 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 15L), GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - value)
         End Set
     End Property
-    Friend Sub DoDamage(damage As Long)
+    Sub DoDamage(damage As Long) Implements ICharacter.DoDamage
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 12L), damage)
     End Sub
     Friend Sub DoFatigue(fatigue As Long)
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 15L), fatigue)
     End Sub
-    Friend Sub Destroy()
+    Sub Destroy() Implements ICharacter.Destroy
         WorldData.Character.Clear(Id)
     End Sub
-    ReadOnly Property IsDead As Boolean
+    ReadOnly Property IsDead As Boolean Implements ICharacter.IsDead
         Get
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value >= GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value
         End Get
     End Property
-    Function DetermineDamage(value As Long) As Long
+    Function DetermineDamage(value As Long) As Long Implements ICharacter.DetermineDamage
         Dim maximumDamage As Long? = Nothing
         For Each item In EquippedItems
             Dim itemMaximumDamage = item.MaximumDamage
@@ -311,7 +312,7 @@
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value > 0
         End Get
     End Property
-    Friend Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType)
+    Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType) Implements ICharacter.DoWeaponWear
         Dim result As New List(Of OldItemType)
         While wear > 0
             Dim brokenItemType = WearOneWeapon()
@@ -322,7 +323,7 @@
         End While
         Return result
     End Function
-    Friend Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType)
+    Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType) Implements ICharacter.DoArmorWear
         Dim result As New List(Of OldItemType)
         While wear > 0
             Dim brokenItemType = WearOneArmor()
@@ -389,7 +390,7 @@
         End If
         Return False
     End Function
-    Friend Function Kill(killedBy As Character) As (Sfx?, List(Of String))
+    Function Kill(killedBy As Character) As (Sfx?, List(Of String)) Implements ICharacter.Kill
         Dim lines As New List(Of String)
         lines.Add($"You kill {Name}!")
         Dim sfx As Sfx? = Game.Sfx.EnemyDeath
@@ -418,7 +419,7 @@
             enemyIndex += 1
         Next
     End Sub
-    Private Sub DoCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
+    Private Sub DoCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
         If IsDead Then
             Return
         End If
@@ -434,7 +435,7 @@
         End Select
     End Sub
 
-    Private Sub DoImmobilizedTurn(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
+    Private Sub DoImmobilizedTurn(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
         Dim lines As New List(Of String) From {
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
@@ -447,7 +448,7 @@
         Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 23L)), 0) > 0
     End Function
 
-    Private Sub DoMentalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
+    Private Sub DoMentalCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
         Dim lines As New List(Of String) From {
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
@@ -491,7 +492,7 @@
             Location.Inventory.Add(item)
         Next
     End Sub
-    Private Sub DoPhysicalCounterAttack(enemy As Character, enemyIndex As Integer, enemyCount As Integer)
+    Private Sub DoPhysicalCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
         Dim lines As New List(Of String) From {
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
