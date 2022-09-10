@@ -7,6 +7,7 @@ Public Class CharacterTypeTests
         worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
+        worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(characterTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -68,6 +69,21 @@ Public Class CharacterTypeTests
                 Dim actual = subject.InitialStatistics(worldData.Object)
                 actual.ShouldBeNull
                 worldData.Verify(Function(x) x.CharacterTypeInitialStatistic.ReadAllForCharacterType(characterTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryForWhetherAGivenCharacterIsAnEnemyOfAGivenCharacterType()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim otherCharacterTypeId = 2L
+                Dim character As New Mock(Of ICharacter)
+                Dim otherCharacterType As New Mock(Of ICharacterType)
+                otherCharacterType.SetupGet(Function(x) x.Id).Returns(otherCharacterTypeId)
+                character.SetupGet(Function(x) x.CharacterType).Returns(otherCharacterType.Object)
+                subject.IsEnemy(character.Object).ShouldBeFalse
+                character.VerifyGet(Function(x) x.CharacterType.Id)
+                character.VerifyNoOtherCalls()
+                worldData.Verify(Function(x) x.CharacterTypeEnemy.Read(characterTypeId, otherCharacterTypeId))
             End Sub)
     End Sub
 End Class
