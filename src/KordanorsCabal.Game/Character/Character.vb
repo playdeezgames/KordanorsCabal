@@ -4,7 +4,7 @@
     Sub New(worldData As IWorldData, characterId As Long)
         MyBase.New(worldData, characterId)
     End Sub
-    ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
+    ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long) Implements ICharacter.Spells
         Get
             Return WorldData.CharacterSpell.
                 ReadForCharacter(Id).
@@ -12,7 +12,7 @@
         End Get
     End Property
 
-    Public ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of Item)
+    Public ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of Item) Implements ICharacter.ItemsToRepair
         Get
             Dim items As New List(Of Item)
             items.AddRange(Inventory.Items.Where(Function(x) x.NeedsRepair))
@@ -21,7 +21,7 @@
         End Get
     End Property
 
-    Friend Sub PurifyItems()
+    Sub PurifyItems() Implements ICharacter.PurifyItems
         For Each item In Inventory.Items
             item.Purify()
         Next
@@ -30,7 +30,7 @@
         Next
     End Sub
 
-    ReadOnly Property HasSpells As Boolean
+    ReadOnly Property HasSpells As Boolean Implements ICharacter.HasSpells
         Get
             Return Spells.Any
         End Get
@@ -84,7 +84,7 @@
         End Get
     End Property
 
-    Public Function HasItemsToRepair(shoppeType As ShoppeType) As Boolean
+    Public Function HasItemsToRepair(shoppeType As ShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
         Return ItemsToRepair(shoppeType).Any
     End Function
 
@@ -154,12 +154,12 @@
             Return New Inventory(WorldData, inventoryId.Value)
         End Get
     End Property
-    ReadOnly Property IsEncumbered As Boolean
+    ReadOnly Property IsEncumbered As Boolean Implements ICharacter.IsEncumbered
         Get
             Return Encumbrance > MaximumEncumbrance
         End Get
     End Property
-    ReadOnly Property Encumbrance As Long
+    ReadOnly Property Encumbrance As Long Implements ICharacter.Encumbrance
         Get
             Dim result = Inventory.TotalEncumbrance
             For Each item In EquippedItems
@@ -168,12 +168,12 @@
             Return result
         End Get
     End Property
-    ReadOnly Property MaximumEncumbrance As Long
+    ReadOnly Property MaximumEncumbrance As Long Implements ICharacter.MaximumEncumbrance
         Get
             Return CharacterType.MaximumEncumbrance(WorldData, Me)
         End Get
     End Property
-    Public Function HasVisited(location As Location) As Boolean
+    Public Function HasVisited(location As Location) As Boolean Implements ICharacter.HasVisited
         Return WorldData.CharacterLocation.Read(Id, location.Id)
     End Function
 
@@ -313,7 +313,7 @@
             Return CharacterType.XPValue
         End Get
     End Property
-    ReadOnly Property NeedsHealing As Boolean
+    ReadOnly Property NeedsHealing As Boolean Implements ICharacter.NeedsHealing
         Get
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value > 0
         End Get
@@ -369,7 +369,7 @@
         Next
         CharacterType.DropLoot(Location)
     End Sub
-    Function Equipment(equipSlot As EquipSlot) As Item
+    Function Equipment(equipSlot As EquipSlot) As Item Implements ICharacter.Equipment
         Return Item.FromId(WorldData, WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
     End Function
     ReadOnly Property EquippedItems As IEnumerable(Of Item)
@@ -377,7 +377,7 @@
             Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
         End Get
     End Property
-    ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot)
+    ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot) Implements ICharacter.EquippedSlots
         Get
             Return WorldData.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(WorldData, x))
         End Get
@@ -483,7 +483,7 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-    Public Sub Unequip(equipSlot As EquipSlot)
+    Public Sub Unequip(equipSlot As EquipSlot) Implements ICharacter.Unequip
         Dim item = Equipment(equipSlot)
         If item IsNot Nothing Then
             Inventory.Add(item)
@@ -534,7 +534,7 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-    Function HasItemType(itemType As OldItemType) As Boolean
+    Function HasItemType(itemType As OldItemType) As Boolean Implements ICharacter.HasItemType
         Return Inventory.ItemsOfType(itemType).Any
     End Function
     Property Drunkenness As Long Implements ICharacter.Drunkenness
@@ -582,23 +582,23 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 21L), value)
         End Set
     End Property
-    ReadOnly Property IsFullyAssigned As Boolean
+    ReadOnly Property IsFullyAssigned As Boolean Implements ICharacter.IsFullyAssigned
         Get
             Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 9L)), 0) = 0
         End Get
     End Property
-    Public Sub AssignPoint(statisticType As CharacterStatisticType)
+    Public Sub AssignPoint(statisticType As CharacterStatisticType) Implements ICharacter.AssignPoint
         If Not IsFullyAssigned Then
             ChangeStatistic(statisticType, 1)
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), -1)
         End If
     End Sub
-    Public ReadOnly Property CanGamble As Boolean
+    Public ReadOnly Property CanGamble As Boolean Implements ICharacter.CanGamble
         Get
             Return Money >= 5
         End Get
     End Property
-    Public Property Direction As Direction
+    Public Property Direction As Direction Implements ICharacter.Direction
         Get
             Return New Direction(WorldData, WorldData.Player.ReadDirection().Value)
         End Get
@@ -611,10 +611,10 @@
             Return Spells.Keys.Any(Function(x) CanCastSpell(x))
         End Get
     End Property
-    Public Function CanCastSpell(spellType As SpellType) As Boolean
+    Public Function CanCastSpell(spellType As SpellType) As Boolean Implements ICharacter.CanCastSpell
         Return spellType.CanCast(Me)
     End Function
-    Public Sub Gamble()
+    Public Sub Gamble() Implements ICharacter.Gamble
         If Not CanGamble Then
             EnqueueMessage("You cannot gamble at this time!")
             Return
@@ -636,14 +636,14 @@
         'TODO: sound effect
         EnqueueMessage(lines.ToArray)
     End Sub
-    Public Sub Cast(spellType As SpellType)
+    Public Sub Cast(spellType As SpellType) Implements ICharacter.Cast
         If Not CanCastSpell(spellType) Then
             EnqueueMessage($"You cannot cast {spellType.Name} at this time.")
             Return
         End If
         spellType.Cast(Me)
     End Sub
-    Public Sub Equip(item As Item)
+    Public Sub Equip(item As Item) Implements ICharacter.Equip
         If item.CanEquip Then
             WorldData.InventoryItem.ClearForItem(item.Id)
             Dim equipSlots = item.EquipSlots
@@ -659,10 +659,10 @@
         End If
         EnqueueMessage($"You cannot equip {item.Name}!")
     End Sub
-    Public Function CanAcceptQuest(quest As Quest) As Boolean
+    Public Function CanAcceptQuest(quest As Quest) As Boolean Implements ICharacter.CanAcceptQuest
         Return Not HasQuest(quest) AndAlso quest.CanAccept(Me)
     End Function
-    Public Sub UseItem(item As Item)
+    Public Sub UseItem(item As Item) Implements ICharacter.UseItem
         If item.CanUse(Me) Then
             item.Use(Me)
             If item.IsConsumed Then
@@ -670,7 +670,7 @@
             End If
         End If
     End Sub
-    Public Property Mode As PlayerMode
+    Public Property Mode As PlayerMode Implements ICharacter.Mode
         Get
             Return CType(WorldData.Player.ReadPlayerMode().Value, PlayerMode)
         End Get
@@ -678,13 +678,13 @@
             WorldData.Player.WritePlayerMode(value)
         End Set
     End Property
-    Public Sub CompleteQuest(quest As Quest)
+    Public Sub CompleteQuest(quest As Quest) Implements ICharacter.CompleteQuest
         quest.Complete(Me)
     End Sub
-    Public Sub AcceptQuest(quest As Quest)
+    Public Sub AcceptQuest(quest As Quest) Implements ICharacter.AcceptQuest
         quest.Accept(Me)
     End Sub
-    Public ReadOnly Property CanInteract As Boolean
+    Public ReadOnly Property CanInteract As Boolean Implements ICharacter.CanInteract
         Get
             Return (Location?.Feature?.Id).HasValue
         End Get
@@ -692,32 +692,32 @@
     Public Function GetItemTypeCount(itemType As OldItemType) As Integer
         Return Inventory.Items.Where(Function(x) x.ItemType = itemType).Count
     End Function
-    Public Function CanMoveLeft() As Boolean
+    Public Function CanMoveLeft() As Boolean Implements ICharacter.CanMoveLeft
         Return CanMove(Direction.PreviousDirection)
     End Function
-    Public ReadOnly Property CanMap() As Boolean
+    Public ReadOnly Property CanMap() As Boolean Implements ICharacter.CanMap
         Get
             Return Location.CanMap
         End Get
     End Property
-    Public Function CanMoveRight() As Boolean
+    Public Function CanMoveRight() As Boolean Implements ICharacter.CanMoveRight
         Return CanMove(Direction.NextDirection)
     End Function
-    Public Function CanMoveForward() As Boolean
+    Public Function CanMoveForward() As Boolean Implements ICharacter.CanMoveForward
         Return CanMove(Direction)
     End Function
     Public Sub Heal() Implements ICharacter.Heal
         SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
     End Sub
-    Public Function CanMoveBackward() As Boolean
+    Public Function CanMoveBackward() As Boolean Implements ICharacter.CanMoveBackward
         Return CanMove(Direction.Opposite)
     End Function
-    Public Sub Interact()
+    Public Sub Interact() Implements ICharacter.Interact
         If CanInteract Then
             Mode = Location.Feature.InteractionMode()
         End If
     End Sub
-    ReadOnly Property CanDoIntimidation() As Boolean
+    ReadOnly Property CanDoIntimidation() As Boolean Implements ICharacter.CanDoIntimidation
         Get
             If If(GetStatistic(CharacterStatisticType.FromId(WorldData, 3L)), 0) <= 0 Then
                 Return False
@@ -729,7 +729,7 @@
             Return enemy.CanIntimidate
         End Get
     End Property
-    Public Sub DoIntimidation()
+    Public Sub DoIntimidation() Implements ICharacter.DoIntimidation
         If CanDoIntimidation Then
             Dim lines As New List(Of String)
             Dim enemy = Location.Enemies(Me).First
@@ -753,7 +753,7 @@
         End If
         EnqueueMessage("You cannot intimidate at this time!")
     End Sub
-    Public Function CanMove(direction As Direction) As Boolean
+    Public Function CanMove(direction As Direction) As Boolean Implements ICharacter.CanMove
         If IsEncumbered Then
             Return False
         End If
@@ -768,7 +768,7 @@
         End If
         Return True
     End Function
-    Public Sub Run()
+    Public Sub Run() Implements ICharacter.Run
         If CanFight Then
             Direction = RNG.FromEnumerable(CardinalDirections(WorldData))
             If CanMove(Direction) Then
@@ -780,7 +780,7 @@
             DoCounterAttacks()
         End If
     End Sub
-    Public Function Move(direction As Direction) As Boolean
+    Public Function Move(direction As Direction) As Boolean Implements ICharacter.Move
         If CanMove(direction) Then
             Dim hungerRate = Math.Max(Highness \ 2 + FoodPoisoning \ 2, 1)
             Hunger += hungerRate
@@ -797,7 +797,7 @@
         End If
         Return False
     End Function
-    Public Sub Fight()
+    Public Sub Fight() Implements ICharacter.Fight
         If CanFight Then
             DoAttack()
             DoCounterAttacks()
@@ -835,7 +835,7 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-    Public ReadOnly Property HasEquipment As Boolean
+    Public ReadOnly Property HasEquipment As Boolean Implements ICharacter.HasEquipment
         Get
             Return EquippedItems.Any
         End Get

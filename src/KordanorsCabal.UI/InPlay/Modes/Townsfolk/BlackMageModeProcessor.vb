@@ -12,7 +12,7 @@ Friend Class BlackMageModeProcessor
     Const GoodByeButtonIndex = 9
 
 
-    Friend Overrides Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
         ShowHeader(buffer, player.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
@@ -22,7 +22,7 @@ Friend Class BlackMageModeProcessor
         End Select
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As Character)
+    Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(OffersButtonIndex).Title = "Offers"
         Buttons(SellButtonIndex).Title = "Sell"
@@ -34,7 +34,7 @@ Friend Class BlackMageModeProcessor
         End If
     End Sub
 
-    Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
@@ -60,7 +60,7 @@ Friend Class BlackMageModeProcessor
         Return UIState.InPlay
     End Function
 
-    Friend Overrides Function HandleRed(player As Character) As UIState
+    Friend Overrides Function HandleRed(player As ICharacter) As UIState
         player.Mode = PlayerMode.Neutral
         Return UIState.InPlay
     End Function

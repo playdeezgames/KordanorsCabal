@@ -25,7 +25,47 @@
     Property Chafing As Long
     Property Money As Long
     ReadOnly Property CanFight As Boolean
-
+    ReadOnly Property IsEncumbered As Boolean
+    Function HasItemType(itemType As OldItemType) As Boolean
+    ReadOnly Property NeedsHealing As Boolean
+    ReadOnly Property CanInteract As Boolean
+    Sub Interact()
+    ReadOnly Property CanDoIntimidation() As Boolean
+    ReadOnly Property HasSpells As Boolean
+    Function HasItemsToRepair(shoppeType As ShoppeType) As Boolean
+    ReadOnly Property HasEquipment As Boolean
+    Function CanAcceptQuest(quest As Quest) As Boolean
+    Function CanMoveForward() As Boolean
+    Sub UseItem(item As Item)
+    Sub Unequip(equipSlot As EquipSlot)
+    Function HasVisited(location As Location) As Boolean
+    Sub AssignPoint(statisticType As CharacterStatisticType)
+    ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
+    Sub Cast(spellType As SpellType)
+    Function CanCastSpell(spellType As SpellType) As Boolean
+    ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot)
+    Function Equipment(equipSlot As EquipSlot) As Item
+    ReadOnly Property Encumbrance As Long
+    Sub Equip(item As Item)
+    ReadOnly Property MaximumEncumbrance As Long
+    ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of Item)
+    ReadOnly Property CanMap() As Boolean
+    Sub CompleteQuest(quest As Quest)
+    Function CanMoveBackward() As Boolean
+    Sub AcceptQuest(quest As Quest)
+    Function CanMoveRight() As Boolean
+    Function CanMoveLeft() As Boolean
+    Sub Gamble()
+    ReadOnly Property CanGamble As Boolean
+    Sub DoIntimidation()
+    Sub Fight()
+    Sub PurifyItems()
+    Property Direction As Direction
+    Function CanMove(direction As Direction) As Boolean
+    Sub Run()
+    Function Move(direction As Direction) As Boolean
+    Property Mode As PlayerMode
+    ReadOnly Property IsFullyAssigned As Boolean
     Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As CharacterStatisticType) As Long?
     Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)

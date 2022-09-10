@@ -25,7 +25,7 @@
         End Get
     End Property
 
-    Public Overrides ReadOnly Property CanCast(character As Character) As Boolean
+    Public Overrides ReadOnly Property CanCast(character As ICharacter) As Boolean
         Get
             Dim enemy = character.Location.Enemy(character)
             If enemy Is Nothing OrElse Not enemy.IsUndead Then
@@ -35,7 +35,7 @@
         End Get
     End Property
 
-    Public Overrides Sub Cast(character As Character)
+    Public Overrides Sub Cast(character As ICharacter)
         If Not CanCast(character) Then
             character.EnqueueMessage($"You cannot cast {SpellType.HolyBolt.Name} now!")
             Return

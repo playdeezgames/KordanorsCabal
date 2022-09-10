@@ -5,10 +5,10 @@ Public MustInherit Class ModeProcessor
         buffer.WriteText((0, 0), "                      ", True, Hue.Blue)
         buffer.WriteTextCentered(0, title, True, Hue.Blue)
     End Sub
-    Protected Shared Sub ShowFacing(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
+    Protected Shared Sub ShowFacing(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
         buffer.WriteText(xy, $"Facing: {player.Direction.Name}", False, Hue.Black)
     End Sub
-    Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As Character)
+    Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
         Dim exits = String.Join(",", player.Location.RouteDirections.Select(Function(x) x.Abbreviation))
         buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
     End Sub
@@ -18,10 +18,10 @@ Public MustInherit Class ModeProcessor
         CurrentButtonIndex = 0
     End Sub
 
-    Friend MustOverride Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
-    Friend MustOverride Sub UpdateButtons(player As Character)
-    Friend MustOverride Function HandleButton(player As Character, button As Button) As UIState
-    Friend MustOverride Function HandleRed(player As Character) As UIState
+    Friend MustOverride Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
+    Friend MustOverride Sub UpdateButtons(player As ICharacter)
+    Friend MustOverride Function HandleButton(player As ICharacter, button As Button) As UIState
+    Friend MustOverride Function HandleRed(player As ICharacter) As UIState
     Friend Shared Buttons As IReadOnlyList(Of Button) =
         New List(Of Button) From
         {
@@ -49,7 +49,7 @@ Public MustInherit Class ModeProcessor
         End If
         CurrentButtonIndex = 0
     End Sub
-    Protected Sub ShowDungeon(buffer As PatternBuffer, player As Character)
+    Protected Sub ShowDungeon(buffer As PatternBuffer, player As ICharacter)
         buffer.WriteText((0, 0), " ╲                  ╱", False, Hue.Black)
         buffer.WriteText((0, 1), "  ╲                ╱ ", False, Hue.Black)
         buffer.WriteText((0, 2), "   ╲              ╱  ", False, Hue.Black)

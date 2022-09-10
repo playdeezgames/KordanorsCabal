@@ -9,7 +9,7 @@ Friend Class ChickenModeProcessor
     Const FeedButtonIndex = 5
 
 
-    Friend Overrides Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
         ShowHeader(buffer, player.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
@@ -19,7 +19,7 @@ Friend Class ChickenModeProcessor
         End Select
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As Character)
+    Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         If player.HasItemType(OldItemType.Food) OrElse player.HasItemType(OldItemType.RottenFood) Then
@@ -27,7 +27,7 @@ Friend Class ChickenModeProcessor
         End If
     End Sub
 
-    Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
@@ -41,7 +41,7 @@ Friend Class ChickenModeProcessor
         Return UIState.InPlay
     End Function
 
-    Private Function FeedChicken(player As Character, item As Item) As UIState
+    Private Function FeedChicken(player As ICharacter, item As Item) As UIState
         Dim itemType = item.ItemType
         item.Destroy()
         If RNG.FromRange(0, 5) = 0 Then
@@ -60,7 +60,7 @@ Friend Class ChickenModeProcessor
         Return UIState.Message
     End Function
 
-    Friend Overrides Function HandleRed(player As Character) As UIState
+    Friend Overrides Function HandleRed(player As ICharacter) As UIState
         player.Mode = PlayerMode.Neutral
         Return UIState.InPlay
     End Function

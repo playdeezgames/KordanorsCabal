@@ -8,7 +8,7 @@ Friend Class TownDrunkModeProcessor
     Const EnableButtonIndex = 5
 
 
-    Friend Overrides Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
         ShowHeader(buffer, player.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
@@ -18,7 +18,7 @@ Friend Class TownDrunkModeProcessor
         End Select
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As Character)
+    Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         If player.HasItemType(OldItemType.Beer) Then
@@ -26,7 +26,7 @@ Friend Class TownDrunkModeProcessor
         End If
     End Sub
 
-    Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
@@ -39,7 +39,7 @@ Friend Class TownDrunkModeProcessor
         Return UIState.InPlay
     End Function
 
-    Private Function GiveBeer(player As Character) As UIState
+    Private Function GiveBeer(player As ICharacter) As UIState
         player.EnqueueMessage($"You give {OldItemType.Beer.Name} to {New FeatureType(StaticWorldData.World, 3L).Name}.", $"{New FeatureType(StaticWorldData.World, 3L).Name} drinks it all in one swallow, burps, and hands you {OldItemType.Bottle.Name}.")
         player.Inventory.ItemsOfType(OldItemType.Beer).First.Destroy()
         player.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.Bottle))
@@ -47,7 +47,7 @@ Friend Class TownDrunkModeProcessor
         Return UIState.Message
     End Function
 
-    Friend Overrides Function HandleRed(player As Character) As UIState
+    Friend Overrides Function HandleRed(player As ICharacter) As UIState
         player.Mode = PlayerMode.Neutral
         Return UIState.InPlay
     End Function

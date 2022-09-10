@@ -7,7 +7,7 @@
     Const GoodByeButtonIndex = 9
 
 
-    Friend Overrides Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
         ShowHeader(buffer, player.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
@@ -21,14 +21,14 @@
         End Select
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As Character)
+    Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         Buttons(EncourageButtonIndex).Title = "Pep talk"
         Buttons(MainQuestButtonIndex).Title = "The Cabal"
     End Sub
 
-    Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
@@ -39,7 +39,7 @@
         Return UIState.InPlay
     End Function
 
-    Private Function HandleEncouragement(player As Character) As UIState
+    Private Function HandleEncouragement(player As ICharacter) As UIState
         player.EnqueueMessage("Sometimes in our life we all have pain. We all have sorrow. But, if we are wise, we know that there's always tomorrow!")
         If player.CurrentMP < 1 Then
             player.CurrentMP = 1
@@ -48,7 +48,7 @@
         Return UIState.Message
     End Function
 
-    Friend Overrides Function HandleRed(player As Character) As UIState
+    Friend Overrides Function HandleRed(player As ICharacter) As UIState
         player.Mode = PlayerMode.Neutral
         Return UIState.InPlay
     End Function

@@ -306,7 +306,7 @@ Public Module World
         End While
     End Sub
 
-    Public ReadOnly Property PlayerCharacter(worldData As WorldData) As Character
+    Public ReadOnly Property PlayerCharacter(worldData As WorldData) As ICharacter
         Get
             Return New PlayerCharacter(worldData)
         End Get

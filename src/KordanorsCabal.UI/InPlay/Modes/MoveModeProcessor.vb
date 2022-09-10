@@ -13,7 +13,7 @@ Friend Class MoveModeProcessor
     Const DownButtonIndex = 7
     Const OutButtonIndex = 8
 
-    Friend Overrides Sub UpdateBuffer(player As Character, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
         Dim location = player.Location
         If location.LocationType.IsDungeon Then
             ShowDungeon(buffer, player)
@@ -26,7 +26,7 @@ Friend Class MoveModeProcessor
         End If
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As Character)
+    Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(CancelButtonIndex).Title = "Cancel"
         If player.CanMoveLeft Then
             Buttons(LeftButtonIndex).Title = "Left"
@@ -54,7 +54,7 @@ Friend Class MoveModeProcessor
         End If
     End Sub
 
-    Friend Overrides Function HandleButton(player As Character, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
         Select Case button.Index
             Case CancelButtonIndex
                 PopButtonIndex()
@@ -79,7 +79,7 @@ Friend Class MoveModeProcessor
         Return UIState.InPlay
     End Function
 
-    Private Function HandleMove(player As Character, direction As Direction) As UIState
+    Private Function HandleMove(player As ICharacter, direction As Direction) As UIState
         If player.CanMove(direction) Then
             PopButtonIndex()
             player.Mode = PlayerMode.Neutral
@@ -95,7 +95,7 @@ Friend Class MoveModeProcessor
         Return UIState.InPlay
     End Function
 
-    Friend Overrides Function HandleRed(player As Character) As UIState
+    Friend Overrides Function HandleRed(player As ICharacter) As UIState
         player.Mode = PlayerMode.Neutral
         Return UIState.InPlay
     End Function
