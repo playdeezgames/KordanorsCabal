@@ -87,12 +87,6 @@
     Friend Function RouteCount() As Long
         Return WorldData.Route.ReadCountForLocation(Id)
     End Function
-    Public Shared Operator =(first As Location, second As Location) As Boolean
-        Return first.Id = second.Id
-    End Operator
-    Public Shared Operator <>(first As Location, second As Location) As Boolean
-        Return first.Id <> second.Id
-    End Operator
     ReadOnly Property Characters As IEnumerable(Of ICharacter)
         Get
             Return WorldData.Character.ReadForLocation(Id).Select(Function(x) Character.FromId(WorldData, x))

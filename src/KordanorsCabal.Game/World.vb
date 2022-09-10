@@ -111,7 +111,7 @@ Public Module World
         Route.Create(worldData, fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, startingLocation)
         Route.Create(worldData, startingLocation, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
         PopulateCharacters(worldData, locations, dungeonLevel)
-        Return locations.Single(Function(x) x.LocationType = LocationType.FromId(worldData, 6L))
+        Return locations.Single(Function(x) x.LocationType.Id = 6L)
     End Function
 
     Private Sub PopulateCharacters(worldData As WorldData, locations As IEnumerable(Of Location), dungeonLevel As DungeonLevel)

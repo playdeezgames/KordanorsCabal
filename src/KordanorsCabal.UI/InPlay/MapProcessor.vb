@@ -14,7 +14,7 @@ Friend Class MapProcessor
             If level IsNot Nothing Then
                 Dim locations = Location.ByDungeonLevel(StaticWorldData.World, level).Where(Function(x) player.HasVisited(x))
                 For Each location In locations
-                    Dim inverted = (location = playerLocation)
+                    Dim inverted = (location.Id = playerLocation.Id)
                     Dim dungeonColumn = location.GetStatistic(LocationStatisticType.DungeonColumn).Value
                     Dim dungeonRow = location.GetStatistic(LocationStatisticType.DungeonRow).Value
                     Dim displayHue =

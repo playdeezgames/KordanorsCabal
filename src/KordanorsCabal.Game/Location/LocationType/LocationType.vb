@@ -29,10 +29,4 @@
     Shared Function FromId(worldData As IWorldData, locationTypeId As Long?) As LocationType
         Return If(locationTypeId.HasValue, New LocationType(worldData, locationTypeId.Value), Nothing)
     End Function
-    Public Shared Operator =(first As LocationType, second As LocationType) As Boolean
-        Return first.Id = second.Id
-    End Operator
-    Public Shared Operator <>(first As LocationType, second As LocationType) As Boolean
-        Return first.Id <> second.Id
-    End Operator
 End Class
