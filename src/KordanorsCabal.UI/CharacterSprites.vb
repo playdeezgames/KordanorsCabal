@@ -318,7 +318,7 @@ Module CharacterSprites
             }
         }
     <Extension>
-    Function Sprite(characterType As CharacterType) As Sprite
+    Function Sprite(characterType As ICharacterType) As Sprite
         Return characterSprites(characterType.Id)
     End Function
 End Module
