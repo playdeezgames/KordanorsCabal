@@ -122,4 +122,18 @@
                             (Columns.RouteIdColumn, routeId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryTheStoreForTheRouteTypeOfAGivenRoute()
+        WithSubobject(
+            Sub(store, subject)
+                Dim routeId = 1L
+                subject.ReadRouteType(routeId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                            It.IsAny(Of Action),
+                            Tables.Routes,
+                            Columns.RouteTypeIdColumn,
+                            (Columns.RouteIdColumn, routeId)))
+            End Sub)
+    End Sub
 End Class
