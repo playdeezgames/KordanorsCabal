@@ -51,7 +51,7 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 14L), value)
         End Set
     End Property
-    Friend Sub Learn(spellType As SpellType)
+    Sub Learn(spellType As SpellType) Implements ICharacter.Learn
         If Not CanLearn(spellType) Then
             EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
             Return
@@ -72,7 +72,7 @@
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)
     End Sub
 
-    Friend Function RollSpellDice(spellType As SpellType) As Long
+    Function RollSpellDice(spellType As SpellType) As Long Implements ICharacter.RollSpellDice
         If Not Spells.ContainsKey(spellType) Then
             Return 0
         End If
@@ -98,10 +98,10 @@
             Return CharacterType.IsUndead
         End Get
     End Property
-    Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
+    Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String) Implements ICharacter.EnqueueMessage
         'do nothing!
     End Sub
-    Overridable Sub EnqueueMessage(ParamArray lines() As String)
+    Overridable Sub EnqueueMessage(ParamArray lines() As String) Implements ICharacter.EnqueueMessage
         'do nothing!
     End Sub
     ReadOnly Property CanFight As Boolean
@@ -145,7 +145,7 @@
         End If
         Return result
     End Function
-    ReadOnly Property Inventory As Inventory
+    ReadOnly Property Inventory As Inventory Implements ICharacter.Inventory
         Get
             Dim inventoryId As Long? = WorldData.Inventory.ReadForCharacter(Id)
             If Not inventoryId.HasValue Then
@@ -262,7 +262,7 @@
             Return CharacterType.PartingShot
         End Get
     End Property
-    Property CurrentMP As Long
+    Property CurrentMP As Long Implements ICharacter.CurrentMP
         Get
             Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, 13L)).Value)
         End Get
@@ -270,7 +270,7 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 13L), GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - value)
         End Set
     End Property
-    Property CurrentMana As Long
+    Property CurrentMana As Long Implements ICharacter.CurrentMana
         Get
             Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, 15L)).Value)
         End Get
@@ -281,7 +281,7 @@
     Sub DoDamage(damage As Long) Implements ICharacter.DoDamage
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 12L), damage)
     End Sub
-    Friend Sub DoFatigue(fatigue As Long)
+    Sub DoFatigue(fatigue As Long) Implements ICharacter.DoFatigue
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 15L), fatigue)
     End Sub
     Sub Destroy() Implements ICharacter.Destroy
@@ -416,7 +416,7 @@
         Destroy()
         Return (sfx, lines)
     End Function
-    Friend Sub DoCounterAttacks()
+    Sub DoCounterAttacks() Implements ICharacter.DoCounterAttacks
         Dim enemies = Location.Enemies(Me)
         Dim enemyCount = enemies.Count
         Dim enemyIndex = 1
@@ -537,7 +537,7 @@
     Function HasItemType(itemType As OldItemType) As Boolean
         Return Inventory.ItemsOfType(itemType).Any
     End Function
-    Property Drunkenness As Long
+    Property Drunkenness As Long Implements ICharacter.Drunkenness
         Get
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 18L)).Value
         End Get
@@ -545,7 +545,7 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 18L), value)
         End Set
     End Property
-    Property Chafing As Long
+    Property Chafing As Long Implements ICharacter.Chafing
         Get
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 22L)).Value
         End Get
@@ -553,7 +553,7 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 22L), value)
         End Set
     End Property
-    Property Highness As Long
+    Property Highness As Long Implements ICharacter.Highness
         Get
             Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 19L)), 0)
         End Get
@@ -561,7 +561,7 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 19L), value)
         End Set
     End Property
-    Property Hunger As Long
+    Property Hunger As Long Implements ICharacter.Hunger
         Get
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 20L)).Value
         End Get
@@ -569,12 +569,12 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 20L), value)
         End Set
     End Property
-    Public ReadOnly Property MaximumMana As Long
+    Public ReadOnly Property MaximumMana As Long Implements ICharacter.MaximumMana
         Get
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value
         End Get
     End Property
-    Public Property FoodPoisoning As Long
+    Public Property FoodPoisoning As Long Implements ICharacter.FoodPoisoning
         Get
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 21L)).Value
         End Get
@@ -706,7 +706,7 @@
     Public Function CanMoveForward() As Boolean
         Return CanMove(Direction)
     End Function
-    Public Sub Heal()
+    Public Sub Heal() Implements ICharacter.Heal
         SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
     End Sub
     Public Function CanMoveBackward() As Boolean

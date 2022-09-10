@@ -70,9 +70,9 @@
         End Get
     End Property
     Private ReadOnly Property PurifyActionName As String
-    ReadOnly Property Use As Action(Of Character)
+    ReadOnly Property Use As Action(Of ICharacter)
         Get
-            Dim result As Action(Of Character) = Nothing
+            Dim result As Action(Of ICharacter) = Nothing
             If UseActions.TryGetValue(UseActionName, result) Then
                 Return result
             End If

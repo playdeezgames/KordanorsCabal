@@ -12,9 +12,17 @@
     ReadOnly Property MaximumHP As Long
     ReadOnly Property Name As String
     ReadOnly Property PartingShot As String
+    ReadOnly Property MaximumMana As Long
     Property Statistic(statisticType As CharacterStatisticType) As Long
     ReadOnly Property HasStatistic(statisticType As CharacterStatisticType) As Boolean
-
+    ReadOnly Property Inventory As Inventory
+    Property Hunger As Long
+    Property Highness As Long
+    Property FoodPoisoning As Long
+    Property Drunkenness As Long
+    Property CurrentMP As Long
+    Property CurrentMana As Long
+    Property Chafing As Long
     Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As CharacterStatisticType) As Long?
     Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
@@ -31,9 +39,16 @@
     Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType)
     Sub DoImmobilization(delta As Long)
     Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType)
+    Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
+    Sub EnqueueMessage(ParamArray lines() As String)
+    Sub Learn(spellType As SpellType)
+    Sub Heal()
+    Sub DoFatigue(fatigue As Long)
+    Sub DoCounterAttacks()
 
     Function RollWillpower() As Long
     Function RollDefend() As Long
     Function RollAttack() As Long
     Function RollInfluence() As Long
+    Function RollSpellDice(spellType As SpellType) As Long
 End Interface

@@ -6,8 +6,8 @@
                                StaticWorldData.World.Item.WriteItemType(item.Id, OldItemType.Food)
                            End Sub}
         }
-    Friend ReadOnly UseActions As IReadOnlyDictionary(Of String, Action(Of Character)) =
-        New Dictionary(Of String, Action(Of Character)) From
+    Friend ReadOnly UseActions As IReadOnlyDictionary(Of String, Action(Of ICharacter)) =
+        New Dictionary(Of String, Action(Of ICharacter)) From
         {
             {"LearnHolyBolt", Sub(character) character.Learn(SpellType.HolyBolt)},
             {"LearnPurify", Sub(character) character.Learn(SpellType.Purify)},

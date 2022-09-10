@@ -98,10 +98,10 @@
             Return WorldData.Character.ReadForLocation(Id).Select(Function(x) Character.FromId(WorldData, x))
         End Get
     End Property
-    Function Enemies(character As Character) As IEnumerable(Of ICharacter)
+    Function Enemies(character As ICharacter) As IEnumerable(Of ICharacter)
         Return Characters.Where(Function(x) x.IsEnemy(character))
     End Function
-    Function Enemy(character As Character) As ICharacter
+    Function Enemy(character As ICharacter) As ICharacter
         Return Enemies(character).FirstOrDefault
     End Function
     Function Friends(character As Character) As IEnumerable(Of ICharacter)
