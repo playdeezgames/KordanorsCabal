@@ -1,5 +1,6 @@
 Public Class CharacterTypeTests
-    Private Shared Sub WithSpecificCharacterType(characterTypeId As Long, stuffToDo As Action(Of Mock(Of IWorldData), ICharacterType))
+    Private Shared Sub WithAnyCharacterType(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterType))
+        Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
         worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
@@ -7,16 +8,8 @@ Public Class CharacterTypeTests
         worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
-        stuffToDo(worldData, subject)
+        stuffToDo(characterTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
-    End Sub
-    Private Shared Sub WithAnyCharacterType(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterType))
-        Dim characterTypeId = 1
-        WithSpecificCharacterType(
-            characterTypeId,
-            Sub(worldData, characterType)
-                stuffToDo(characterTypeId, worldData, characterType)
-            End Sub)
     End Sub
     <Fact>
     Sub ShouldConstructFromWorldDataAndACharacterTypeId()
