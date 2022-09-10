@@ -4,6 +4,7 @@ Public Class CharacterTypeTests
         worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
+        worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -55,6 +56,15 @@ Public Class CharacterTypeTests
                     characterTypeId,
                     dungeonLevel.Id,
                     locationType.Id))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryForAttackTypeGenerationWeightsAndThenGenerate()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim actual = subject.GenerateAttackType()
+                actual.ShouldBe(AttackType.None)
+                worldData.Verify(Function(x) x.CharacterTypeAttackType.Read(characterTypeId))
             End Sub)
     End Sub
 End Class
