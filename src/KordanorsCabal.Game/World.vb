@@ -311,7 +311,7 @@ Public Module World
             Return New PlayerCharacter(worldData)
         End Get
     End Property
-    Function AllCharacterTypes(worldData As WorldData) As IEnumerable(Of CharacterType)
+    Function AllCharacterTypes(worldData As WorldData) As IEnumerable(Of ICharacterType)
         Return worldData.CharacterType.ReadAll().Select(Function(x) CharacterType.FromId(worldData, x))
     End Function
     Public ReadOnly Property AllFeatureTypes(worldData As WorldData) As IEnumerable(Of FeatureType)
