@@ -136,4 +136,19 @@
                             (Columns.RouteIdColumn, routeId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldUpdateTheStoreAndWriteAGivenRouteTypeToAGivenRoute()
+        WithSubobject(
+            Sub(store, subject)
+                Dim routeId = 1L
+                Dim routeTypeId = 2L
+                subject.WriteRouteType(routeId, routeTypeId)
+                store.Verify(
+                    Sub(x) x.WriteColumnValue(Of Long, Long)(
+                            It.IsAny(Of Action),
+                            Tables.Routes,
+                            (Columns.RouteTypeIdColumn, routeTypeId),
+                            (Columns.RouteIdColumn, routeId)))
+            End Sub)
+    End Sub
 End Class
