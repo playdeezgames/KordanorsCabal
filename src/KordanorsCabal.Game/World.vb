@@ -121,7 +121,7 @@ Public Module World
                 Continue For
             End If
             Dim candidates = locations.Where(Function(x) characterType.CanSpawn(x.LocationType, dungeonLevel)).ToList
-            Dim initialStatistics = characterType.InitialStatistics(worldData)
+            Dim initialStatistics = characterType.InitialStatistics()
             While characterCount > 0
                 Dim location = RNG.FromList(candidates)
                 Character.Create(worldData, characterType, location, initialStatistics)
@@ -209,7 +209,7 @@ Public Module World
 
     Private Sub CreatePlayer(worldData As WorldData)
         Dim startingLocation = Location.FromLocationType(worldData, LocationType.FromId(worldData, 1L)).First
-        Dim playerCharacter = Character.Create(worldData, CharacterType.FromId(worldData, 11), startingLocation, CharacterType.FromId(worldData, 11).InitialStatistics(worldData))
+        Dim playerCharacter = Character.Create(worldData, CharacterType.FromId(worldData, 11), startingLocation, CharacterType.FromId(worldData, 11).InitialStatistics())
         playerCharacter.Location = startingLocation 'to track that this place has been visited
         worldData.Player.Write(playerCharacter.Id, RNG.FromEnumerable(CardinalDirections(worldData)).Id, PlayerMode.Neutral)
         RollUpPlayerCharacter(worldData)

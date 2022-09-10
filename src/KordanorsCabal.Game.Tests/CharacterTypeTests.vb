@@ -66,7 +66,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForInitialStatisticsForAGivenCharacterType()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
-                Dim actual = subject.InitialStatistics(worldData.Object)
+                Dim actual = subject.InitialStatistics()
                 actual.ShouldBeNull
                 worldData.Verify(Function(x) x.CharacterTypeInitialStatistic.ReadAllForCharacterType(characterTypeId))
             End Sub)

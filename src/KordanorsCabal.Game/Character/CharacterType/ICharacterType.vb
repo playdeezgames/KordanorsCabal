@@ -3,7 +3,7 @@
     Function CanBeBribedWith(itemType As OldItemType) As Boolean
     Function CanSpawn(locationType As LocationType, level As DungeonLevel) As Boolean
     Function GenerateAttackType() As AttackType
-    Function InitialStatistics(worldData As IWorldData) As IReadOnlyList(Of (CharacterStatisticType, Long))
+    Function InitialStatistics() As IReadOnlyList(Of (CharacterStatisticType, Long))
     Function IsEnemy(character As ICharacter) As Boolean
     ReadOnly Property IsUndead As Boolean
     Function MaximumEncumbrance(worldData As IWorldData, character As ICharacter) As Long

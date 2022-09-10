@@ -19,13 +19,13 @@
     Friend Sub New(worldData As IWorldData, characterTypeId As Long)
         MyBase.New(worldData, characterTypeId)
     End Sub
-    Function InitialStatistics(worldData As IWorldData) As IReadOnlyList(Of (CharacterStatisticType, Long)) Implements ICharacterType.InitialStatistics
-        Dim results = worldData.CharacterTypeInitialStatistic.ReadAllForCharacterType(Id)
+    Function InitialStatistics() As IReadOnlyList(Of (CharacterStatisticType, Long)) Implements ICharacterType.InitialStatistics
+        Dim results = WorldData.CharacterTypeInitialStatistic.ReadAllForCharacterType(Id)
         If results Is Nothing Then
             Return Nothing
         End If
         Return results.
-            Select(Function(x) (CharacterStatisticType.FromId(worldData, x.Item1), x.Item2)).ToList
+            Select(Function(x) (CharacterStatisticType.FromId(WorldData, x.Item1), x.Item2)).ToList
     End Function
     Function MaximumEncumbrance(worldData As IWorldData, character As ICharacter) As Long Implements ICharacterType.MaximumEncumbrance
         Return If(
