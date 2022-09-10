@@ -1,5 +1,6 @@
 ﻿Public Class CharacterType
     Inherits BaseThingie
+    Implements ICharacterType
     ReadOnly Property Name As String
         Get
             Return WorldData.CharacterType.ReadName(Id)
