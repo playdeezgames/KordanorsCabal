@@ -216,12 +216,14 @@
         Next
         Return dice
     End Function
-    Function IsDemoralized() As Boolean Implements ICharacter.IsDemoralized
-        If GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
-            Return CurrentMP <= 0
-        End If
-        Return False
-    End Function
+    ReadOnly Property IsDemoralized() As Boolean Implements ICharacter.IsDemoralized
+        Get
+            If GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
+                Return CurrentMP <= 0
+            End If
+            Return False
+        End Get
+    End Property
     Sub AddStress(delta As Long) Implements ICharacter.AddStress
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 13L), delta)
     End Sub

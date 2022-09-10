@@ -4,6 +4,7 @@
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long
     ReadOnly Property IsDead As Boolean
+    ReadOnly Property IsDemoralized As Boolean
     ReadOnly Property IsUndead As Boolean
     Property Location As Location
     ReadOnly Property MaximumHP As Long
@@ -16,7 +17,6 @@
     Function RollWillpower() As Long
     Function RollDefend() As Long
     Function Kill(killedBy As Character) As (Sfx?, List(Of String))
-    Function IsDemoralized() As Boolean
     Sub DoDamage(damage As Long)
     Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType)
     Sub Destroy()
