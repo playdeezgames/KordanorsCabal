@@ -1,6 +1,6 @@
 ﻿Public Interface ICharacter
     Inherits IBaseThingie
-    Function CanBeBribedWith(itemType As OldItemType) As Boolean
+    ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean
     ReadOnly Property CanIntimidate As Boolean
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long

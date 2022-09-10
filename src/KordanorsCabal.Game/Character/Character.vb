@@ -88,9 +88,11 @@
         Return ItemsToRepair(shoppeType).Any
     End Function
 
-    Function CanBeBribedWith(itemType As OldItemType) As Boolean Implements ICharacter.CanBeBribedWith
-        Return CharacterType.CanBeBribedWith(itemType)
-    End Function
+    ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean Implements ICharacter.CanBeBribedWith
+        Get
+            Return CharacterType.CanBeBribedWith(itemType)
+        End Get
+    End Property
     ReadOnly Property IsUndead As Boolean Implements ICharacter.IsUndead
         Get
             Return CharacterType.IsUndead
