@@ -2,7 +2,6 @@ Public Class CharacterTypeTests
     Private Shared Sub WithAnyCharacterType(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterType))
         Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
-        worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
@@ -60,6 +59,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForAttackTypeGenerationWeightsAndThenGenerate()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
                 Dim actual = subject.GenerateAttackType()
                 actual.ShouldBe(AttackType.None)
                 worldData.Verify(Function(x) x.CharacterTypeAttackType.Read(characterTypeId))
