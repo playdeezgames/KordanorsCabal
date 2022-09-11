@@ -76,25 +76,12 @@ Public Class CharacterTypeTests
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
                 Dim otherCharacterTypeId = 2L
-                Dim character As New Mock(Of ICharacter)
                 Dim otherCharacterType As New Mock(Of ICharacterType)
                 otherCharacterType.SetupGet(Function(x) x.Id).Returns(otherCharacterTypeId)
-                character.SetupGet(Function(x) x.CharacterType).Returns(otherCharacterType.Object)
-                subject.IsEnemy(character.Object).ShouldBeFalse
-                character.VerifyGet(Function(x) x.CharacterType.Id)
-                character.VerifyNoOtherCalls()
+                subject.IsEnemy(otherCharacterType.Object).ShouldBeFalse
+                otherCharacterType.VerifyGet(Function(x) x.Id)
+                otherCharacterType.VerifyNoOtherCalls()
                 worldData.Verify(Function(x) x.CharacterTypeEnemy.Read(characterTypeId, otherCharacterTypeId))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub ShouldQueryForMaximumEncumbranceForAGivenCharacterType()
-        WithAnyCharacterType(
-            Sub(characterTypeId, worldData, subject)
-                Dim character As New Mock(Of ICharacter)
-                Dim actual = subject.MaximumEncumbrance(character.Object)
-                actual.ShouldBe(0)
-                character.Verify(Function(x) x.GetStatistic(It.IsAny(Of ICharacterStatisticType)))
-                character.VerifyNoOtherCalls()
             End Sub)
     End Sub
     <Fact>

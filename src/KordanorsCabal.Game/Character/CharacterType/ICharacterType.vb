@@ -1,16 +1,18 @@
 ﻿Public Interface ICharacterType
     Inherits IBaseThingie
-    Function CanBeBribedWith(itemType As OldItemType) As Boolean
-    Function CanSpawn(locationType As ILocationType, level As IDungeonLevel) As Boolean
-    Function GenerateAttackType() As AttackType
-    ReadOnly Property InitialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))
-    Function IsEnemy(character As ICharacter) As Boolean
+    'metadata
     ReadOnly Property IsUndead As Boolean
-    Function MaximumEncumbrance(character As ICharacter) As Long
     ReadOnly Property Name As String
+    'spawning
+    Function CanSpawn(locationType As ILocationType, level As IDungeonLevel) As Boolean
+    ReadOnly Property InitialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))
+    Function SpawnCount(level As IDungeonLevel) As Long
+    'combat
+    Function CanBeBribedWith(itemType As OldItemType) As Boolean
+    Sub DropLoot(location As ILocation)
+    Function GenerateAttackType() As AttackType
+    Function IsEnemy(character As ICharacterType) As Boolean
     Function PartingShot() As String
     Function RollMoneyDrop() As Long
-    Function SpawnCount(level As IDungeonLevel) As Long
     ReadOnly Property XPValue As Long
-    Sub DropLoot(location As ILocation)
 End Interface

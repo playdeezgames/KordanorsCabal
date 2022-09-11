@@ -170,7 +170,12 @@
     End Property
     ReadOnly Property MaximumEncumbrance As Long Implements ICharacter.MaximumEncumbrance
         Get
-            Return CharacterType.MaximumEncumbrance(Me)
+            Return If(
+            GetStatistic(CharacterStatisticType.FromId(WorldData, 24L)), 0) +
+            If(
+                GetStatistic(CharacterStatisticType.FromId(WorldData, 25L)), 0) *
+            If(
+                GetStatistic(CharacterStatisticType.FromId(WorldData, 1L)), 0)
         End Get
     End Property
     Public Function HasVisited(location As ILocation) As Boolean Implements ICharacter.HasVisited
@@ -179,7 +184,7 @@
 
     ReadOnly Property IsEnemy(character As ICharacter) As Boolean Implements ICharacter.IsEnemy
         Get
-            Return CharacterType.IsEnemy(character)
+            Return CharacterType.IsEnemy(character.CharacterType)
         End Get
     End Property
     Private Function RollDice(dice As Long) As Long
