@@ -2,7 +2,7 @@ Public Class CharacterTypeTests
     Private Shared Sub WithAnyCharacterType(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterType))
         Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
-        worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
+
         worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
@@ -11,6 +11,7 @@ Public Class CharacterTypeTests
         worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
+
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(characterTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -26,6 +27,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForUndeadStatusOfAGivenCharacterType()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
                 Dim actual = subject.IsUndead
                 actual.ShouldBeFalse
                 worldData.Verify(Function(x) x.CharacterType.ReadIsUndead(characterTypeId), Times.Once)
@@ -104,6 +106,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForNameOfAGivenCharacterType()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
                 Dim actual = subject.Name
                 actual.ShouldBeNull
                 worldData.Verify(Function(x) x.CharacterType.ReadName(characterTypeId))
@@ -122,6 +125,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForMoneyDropOfAGivenCharacterType()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
                 Dim actual = subject.RollMoneyDrop()
                 actual.ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterType.ReadMoneyDropDice(characterTypeId))
@@ -145,6 +149,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForXPValueOfAGivenCharacterType()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
                 Dim actual = subject.XPValue
                 actual.ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterType.ReadXPValue(characterTypeId))
