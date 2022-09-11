@@ -140,6 +140,15 @@ Public Class CharacterTypeTests
                 worldData.Verify(Function(x) x.CharacterTypeSpawnCount.ReadSpawnCount(characterTypeId, dungeonLevelId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryForXPValueOfAGivenCharacterType()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim actual = subject.XPValue
+                actual.ShouldBe(0)
+                worldData.Verify(Function(x) x.CharacterType.ReadXPValue(characterTypeId))
+            End Sub)
+    End Sub
 End Class
 
 
