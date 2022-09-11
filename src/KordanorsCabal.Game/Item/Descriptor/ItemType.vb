@@ -94,7 +94,7 @@
     Private ReadOnly CanUseFunctionName As String
 
 
-    Function EquippedBuff(statisticType As CharacterStatisticType) As Long?
+    Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
         If buffs Is Nothing Then
             Return Nothing
         End If

@@ -5,7 +5,7 @@ Friend Class FinalizeCharacterProcessor
 
     Private prompt As String
 
-    Private Shared Function ApplyPoint(statisticType As CharacterStatisticType, nextState As UIState, currentState As UIState) As UIState
+    Private Shared Function ApplyPoint(statisticType As ICharacterStatisticType, nextState As UIState, currentState As UIState) As UIState
         Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
         player.AssignPoint(statisticType)
         Return If(player.IsFullyAssigned, nextState, currentState)

@@ -39,7 +39,7 @@
     Sub UseItem(item As Item)
     Sub Unequip(equipSlot As EquipSlot)
     Function HasVisited(location As Location) As Boolean
-    Sub AssignPoint(statisticType As CharacterStatisticType)
+    Sub AssignPoint(statisticType As ICharacterStatisticType)
     ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
     Sub Cast(spellType As SpellType)
     Function CanCastSpell(spellType As SpellType) As Boolean
@@ -66,9 +66,9 @@
     Function Move(direction As Direction) As Boolean
     Property Mode As PlayerMode
     ReadOnly Property IsFullyAssigned As Boolean
-    Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long)
-    Function GetStatistic(statisticType As CharacterStatisticType) As Long?
-    Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long)
+    Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long)
+    Function GetStatistic(statisticType As ICharacterStatisticType) As Long?
+    Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long)
     Function HasQuest(quest As Quest) As Boolean
     Function CanLearn(spellType As SpellType) As Boolean
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))

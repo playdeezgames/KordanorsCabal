@@ -19,7 +19,7 @@
     Friend Sub New(worldData As IWorldData, characterTypeId As Long)
         MyBase.New(worldData, characterTypeId)
     End Sub
-    ReadOnly Property InitialStatistics As IReadOnlyList(Of (CharacterStatisticType, Long)) Implements ICharacterType.InitialStatistics
+    ReadOnly Property InitialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long)) Implements ICharacterType.InitialStatistics
         Get
             Dim results = WorldData.CharacterTypeInitialStatistic.ReadAllForCharacterType(Id)
             If results Is Nothing Then

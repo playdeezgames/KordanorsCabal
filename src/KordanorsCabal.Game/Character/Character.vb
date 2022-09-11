@@ -109,17 +109,17 @@
             Return Location.Enemies(Me).Any
         End Get
     End Property
-    Friend Shared Function Create(worldData As WorldData, characterType As ICharacterType, location As Location, initialStatistics As IReadOnlyList(Of (CharacterStatisticType, Long))) As ICharacter
+    Friend Shared Function Create(worldData As WorldData, characterType As ICharacterType, location As Location, initialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))) As ICharacter
         Dim character = FromId(worldData, worldData.Character.Create(characterType.Id, location.Id))
         For Each entry In initialStatistics
             character.SetStatistic(entry.Item1, entry.Item2)
         Next
         Return character
     End Function
-    Public Sub SetStatistic(statisticType As CharacterStatisticType, statisticValue As Long) Implements ICharacter.SetStatistic
+    Public Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long) Implements ICharacter.SetStatistic
         WorldData.CharacterStatistic.Write(Id, statisticType.Id, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
-    Sub ChangeStatistic(statisticType As CharacterStatisticType, delta As Long) Implements ICharacter.ChangeStatistic
+    Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long) Implements ICharacter.ChangeStatistic
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
     End Sub
     Property Location As Location Implements ICharacter.Location
@@ -134,7 +134,7 @@
     Shared Function FromId(worldData As IWorldData, characterId As Long) As ICharacter
         Return New Character(worldData, characterId)
     End Function
-    Public Function GetStatistic(statisticType As CharacterStatisticType) As Long? Implements ICharacter.GetStatistic
+    Public Function GetStatistic(statisticType As ICharacterStatisticType) As Long? Implements ICharacter.GetStatistic
         Dim result = If(WorldData.CharacterStatistic.Read(Id,
                                                           statisticType.Id), statisticType.DefaultValue)
         If result.HasValue Then
@@ -587,7 +587,7 @@
             Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 9L)), 0) = 0
         End Get
     End Property
-    Public Sub AssignPoint(statisticType As CharacterStatisticType) Implements ICharacter.AssignPoint
+    Public Sub AssignPoint(statisticType As ICharacterStatisticType) Implements ICharacter.AssignPoint
         If Not IsFullyAssigned Then
             ChangeStatistic(statisticType, 1)
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), -1)
