@@ -97,6 +97,15 @@ Public Class CharacterTypeTests
                 character.VerifyNoOtherCalls()
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryForNameOfAGivenCharacterType()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim actual = subject.Name
+                actual.ShouldBeNull
+                worldData.Verify(Function(x) x.CharacterType.ReadName(characterTypeId))
+            End Sub)
+    End Sub
 End Class
 
 
