@@ -12,5 +12,5 @@
     Function RollMoneyDrop() As Long
     Function SpawnCount(level As IDungeonLevel) As Long
     ReadOnly Property XPValue As Long
-    Sub DropLoot(location As Location)
+    Sub DropLoot(location As ILocation)
 End Interface

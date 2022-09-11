@@ -6,10 +6,10 @@
     Public Shared Function FromId(worldData As IWorldData, routeId As Long?) As Route
         Return If(routeId.HasValue, New Route(worldData, routeId.Value), Nothing)
     End Function
-    Public Shared Function Create(worldData As IWorldData, location As Location, direction As Direction, routeType As RouteType, toLocation As Location) As Route
+    Public Shared Function Create(worldData As IWorldData, location As ILocation, direction As Direction, routeType As RouteType, toLocation As ILocation) As Route
         Return FromId(worldData, worldData.Route.Create(location.Id, direction.Id, routeType, toLocation.Id))
     End Function
-    Friend ReadOnly Property ToLocation As Location
+    Friend ReadOnly Property ToLocation As ILocation
         Get
             Return Location.FromId(WorldData, WorldData.Route.ReadToLocation(Id))
         End Get
@@ -40,7 +40,7 @@
         End If
         Return True
     End Function
-    Friend Function Move(player As ICharacter) As Location
+    Friend Function Move(player As ICharacter) As ILocation
         If CanMove(player) Then
             If IsLocked Then
                 player.Inventory.ItemsOfType(RouteType.UnlockItem.Value).First.Destroy()

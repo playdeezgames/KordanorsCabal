@@ -50,7 +50,7 @@
         End If
         Return RNG.FromGenerator(partingShotTable)
     End Function
-    Sub DropLoot(location As Location) Implements ICharacterType.DropLoot
+    Sub DropLoot(location As ILocation) Implements ICharacterType.DropLoot
         Dim lootTable = WorldData.CharacterTypeLoot.Read(Id)
         If Not lootTable.Any Then
             Return

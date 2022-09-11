@@ -109,7 +109,7 @@
             Return Location.Enemies(Me).Any
         End Get
     End Property
-    Friend Shared Function Create(worldData As WorldData, characterType As ICharacterType, location As Location, initialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))) As ICharacter
+    Friend Shared Function Create(worldData As IWorldData, characterType As ICharacterType, location As ILocation, initialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))) As ICharacter
         Dim character = FromId(worldData, worldData.Character.Create(characterType.Id, location.Id))
         For Each entry In initialStatistics
             character.SetStatistic(entry.Item1, entry.Item2)
@@ -122,11 +122,11 @@
     Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long) Implements ICharacter.ChangeStatistic
         SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
     End Sub
-    Property Location As Location Implements ICharacter.Location
+    Property Location As ILocation Implements ICharacter.Location
         Get
-            Return Location.FromId(WorldData, WorldData.Character.ReadLocation(Id).Value)
+            Return Game.Location.FromId(WorldData, WorldData.Character.ReadLocation(Id).Value)
         End Get
-        Set(value As Location)
+        Set(value As ILocation)
             WorldData.Character.WriteLocation(Id, value.Id)
             WorldData.CharacterLocation.Write(Id, value.Id)
         End Set
@@ -173,7 +173,7 @@
             Return CharacterType.MaximumEncumbrance(WorldData, Me)
         End Get
     End Property
-    Public Function HasVisited(location As Location) As Boolean Implements ICharacter.HasVisited
+    Public Function HasVisited(location As ILocation) As Boolean Implements ICharacter.HasVisited
         Return WorldData.CharacterLocation.Read(Id, location.Id)
     End Function
 

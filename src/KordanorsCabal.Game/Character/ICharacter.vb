@@ -8,7 +8,7 @@
     ReadOnly Property IsEnemy(character As ICharacter) As Boolean
     ReadOnly Property IsDemoralized As Boolean
     ReadOnly Property IsUndead As Boolean
-    Property Location As Location
+    Property Location As ILocation
     ReadOnly Property MaximumHP As Long
     ReadOnly Property Name As String
     ReadOnly Property PartingShot As String
@@ -38,7 +38,7 @@
     Function CanMoveForward() As Boolean
     Sub UseItem(item As Item)
     Sub Unequip(equipSlot As EquipSlot)
-    Function HasVisited(location As Location) As Boolean
+    Function HasVisited(location As ILocation) As Boolean
     Sub AssignPoint(statisticType As ICharacterStatisticType)
     ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
     Sub Cast(spellType As SpellType)

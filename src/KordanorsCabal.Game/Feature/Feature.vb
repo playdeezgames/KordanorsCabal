@@ -7,7 +7,7 @@
         Return If(featureId.HasValue, New Feature(worldData, featureId.Value), Nothing)
     End Function
 
-    Friend Shared Function Create(worldData As IWorldData, featureType As FeatureType, location As Location) As Feature
+    Friend Shared Function Create(worldData As IWorldData, featureType As FeatureType, location As ILocation) As Feature
         Return FromId(worldData, worldData.Feature.Create(featureType.Id, location.Id))
     End Function
 
