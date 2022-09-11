@@ -86,6 +86,17 @@ Public Class CharacterTypeTests
                 worldData.Verify(Function(x) x.CharacterTypeEnemy.Read(characterTypeId, otherCharacterTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryForMaximumEncumbranceForAGivenCharacterType()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim character As New Mock(Of ICharacter)
+                Dim actual = subject.MaximumEncumbrance(worldData.Object, character.Object)
+                actual.ShouldBe(0)
+                character.Verify(Function(x) x.GetStatistic(It.IsAny(Of ICharacterStatisticType)))
+                character.VerifyNoOtherCalls()
+            End Sub)
+    End Sub
 End Class
 
 
