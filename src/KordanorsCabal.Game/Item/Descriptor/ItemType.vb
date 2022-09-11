@@ -13,7 +13,7 @@
             Return If(WorldData.ItemType.ReadIsConsumed(Id), 0) > 0
         End Get
     End Property
-    ReadOnly Property SpawnLocationTypes(dungeonLevel As DungeonLevel) As HashSet(Of ILocationType)
+    ReadOnly Property SpawnLocationTypes(dungeonLevel As IDungeonLevel) As HashSet(Of ILocationType)
         Get
             Dim results = WorldData.ItemTypeSpawnLocationType.ReadAll(Id, dungeonLevel.Id)
             If results Is Nothing Then
@@ -22,7 +22,7 @@
             Return New HashSet(Of ILocationType)(results.Select(Function(x) LocationType.FromId(WorldData, x)))
         End Get
     End Property
-    Private ReadOnly Property SpawnCounts(dungeonLevel As DungeonLevel) As String
+    Private ReadOnly Property SpawnCounts(dungeonLevel As IDungeonLevel) As String
         Get
             Return WorldData.ItemTypeSpawnCount.Read(Id, dungeonLevel.Id)
         End Get
@@ -104,7 +104,7 @@
         End If
         Return Nothing
     End Function
-    Function RollSpawnCount(dungeonLevel As DungeonLevel) As Long
+    Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long
         Return RNG.RollDice(SpawnCounts(dungeonLevel))
     End Function
     Friend Function HasOffer(shoppeType As ShoppeType) As Boolean

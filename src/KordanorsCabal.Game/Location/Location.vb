@@ -18,7 +18,7 @@
     Shared Function Create(worldData As WorldData, locationType As ILocationType) As Location
         Return FromId(worldData, worldData.Location.Create(locationType.Id))
     End Function
-    Public Shared Function ByDungeonLevel(worldData As WorldData, dungeonLevel As DungeonLevel) As IEnumerable(Of Location)
+    Public Shared Function ByDungeonLevel(worldData As WorldData, dungeonLevel As IDungeonLevel) As IEnumerable(Of Location)
         Return worldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel.Id).Select(Function(x) Location.FromId(worldData, x))
     End Function
     Friend Sub DestroyRoute(direction As Direction)
@@ -106,11 +106,11 @@
             Return LocationType.CanMap
         End Get
     End Property
-    Property DungeonLevel As DungeonLevel
+    Property DungeonLevel As IDungeonLevel
         Get
             Return Game.DungeonLevel.FromId(WorldData, WorldData.LocationDungeonLevel.Read(Id))
         End Get
-        Set(value As DungeonLevel)
+        Set(value As IDungeonLevel)
             WorldData.LocationDungeonLevel.Write(Id, value.Id)
         End Set
     End Property

@@ -40,7 +40,7 @@
     Function IsEnemy(character As ICharacter) As Boolean Implements ICharacterType.IsEnemy
         Return WorldData.CharacterTypeEnemy.Read(Id, character.CharacterType.Id)
     End Function
-    Function CanSpawn(locationType As ILocationType, level As DungeonLevel) As Boolean Implements ICharacterType.CanSpawn
+    Function CanSpawn(locationType As ILocationType, level As IDungeonLevel) As Boolean Implements ICharacterType.CanSpawn
         Return WorldData.CharacterTypeSpawnLocation.Read(Id, level.Id, locationType.Id)
     End Function
     Function PartingShot() As String Implements ICharacterType.PartingShot
@@ -73,7 +73,7 @@
     Function RollMoneyDrop() As Long Implements ICharacterType.RollMoneyDrop
         Return RNG.RollDice(WorldData.CharacterType.ReadMoneyDropDice(Id))
     End Function
-    Function SpawnCount(level As DungeonLevel) As Long Implements ICharacterType.SpawnCount
+    Function SpawnCount(level As IDungeonLevel) As Long Implements ICharacterType.SpawnCount
         Return If(WorldData.CharacterTypeSpawnCount.ReadSpawnCount(Id, level.Id), 0)
     End Function
     Shared Function FromId(worldData As IWorldData, characterTypeId As Long) As ICharacterType
