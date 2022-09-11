@@ -2,16 +2,12 @@ Public Class CharacterTypeTests
     Private Shared Sub WithAnyCharacterType(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterType))
         Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
-
-
-        worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
-
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(characterTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -48,6 +44,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForTheAbilityToSpawnAGivenCharacterTypeAtAGivenLocationTypeAndAGivenDungeonLevel()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
                 Dim locationType = Game.LocationType.FromId(worldData.Object, 2L)
                 Dim dungeonLevel = Game.DungeonLevel.FromId(worldData.Object, 3L)
                 Dim actual = subject.CanSpawn(locationType, dungeonLevel)
