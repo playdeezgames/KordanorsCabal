@@ -66,13 +66,13 @@
             Return Feature.FromId(WorldData, WorldData.Feature.ReadForLocation(Id))
         End Get
     End Property
-    ReadOnly Property Inventory As Inventory Implements ILocation.Inventory
+    ReadOnly Property Inventory As IInventory Implements ILocation.Inventory
         Get
             Dim inventoryId As Long? = WorldData.Inventory.ReadForLocation(Id)
             If Not inventoryId.HasValue Then
                 inventoryId = WorldData.Inventory.CreateForLocation(Id)
             End If
-            Return New Inventory(WorldData, inventoryId.Value)
+            Return Game.Inventory.FromId(WorldData, inventoryId.Value)
         End Get
     End Property
     Public ReadOnly Property RouteDirections As IEnumerable(Of IDirection) Implements ILocation.RouteDirections

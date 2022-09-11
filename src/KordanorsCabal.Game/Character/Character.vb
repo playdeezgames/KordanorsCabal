@@ -145,13 +145,13 @@
         End If
         Return result
     End Function
-    ReadOnly Property Inventory As Inventory Implements ICharacter.Inventory
+    ReadOnly Property Inventory As IInventory Implements ICharacter.Inventory
         Get
             Dim inventoryId As Long? = WorldData.Inventory.ReadForCharacter(Id)
             If Not inventoryId.HasValue Then
                 inventoryId = WorldData.Inventory.CreateForCharacter(Id)
             End If
-            Return New Inventory(WorldData, inventoryId.Value)
+            Return Game.Inventory.FromId(WorldData, inventoryId.Value)
         End Get
     End Property
     ReadOnly Property IsEncumbered As Boolean Implements ICharacter.IsEncumbered
@@ -846,7 +846,7 @@
         End Get
     End Property
 
-    Public Property Statistic(statisticType As CharacterStatisticType) As Long Implements ICharacter.Statistic
+    Public Property Statistic(statisticType As ICharacterStatisticType) As Long Implements ICharacter.Statistic
         Get
             Return GetStatistic(statisticType).Value
         End Get
@@ -855,7 +855,7 @@
         End Set
     End Property
 
-    Public ReadOnly Property HasStatistic(statisticType As CharacterStatisticType) As Boolean Implements ICharacter.HasStatistic
+    Public ReadOnly Property HasStatistic(statisticType As ICharacterStatisticType) As Boolean Implements ICharacter.HasStatistic
         Get
             Return GetStatistic(statisticType).HasValue
         End Get

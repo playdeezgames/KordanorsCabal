@@ -13,9 +13,9 @@
     ReadOnly Property Name As String
     ReadOnly Property PartingShot As String
     ReadOnly Property MaximumMana As Long
-    Property Statistic(statisticType As CharacterStatisticType) As Long
-    ReadOnly Property HasStatistic(statisticType As CharacterStatisticType) As Boolean
-    ReadOnly Property Inventory As Inventory
+    Property Statistic(statisticType As ICharacterStatisticType) As Long
+    ReadOnly Property HasStatistic(statisticType As ICharacterStatisticType) As Boolean
+    ReadOnly Property Inventory As IInventory
     Property Hunger As Long
     Property Highness As Long
     Property FoodPoisoning As Long

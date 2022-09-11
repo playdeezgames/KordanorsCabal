@@ -1,33 +1,34 @@
 ﻿Public Class Inventory
     Inherits BaseThingie
+    Implements IInventory
     Sub New(worldData As IWorldData, inventoryId As Long)
         MyBase.New(worldData, inventoryId)
     End Sub
-    Shared Function FromId(worldData As IWorldData, inventoryId As Long) As Inventory
+    Shared Function FromId(worldData As IWorldData, inventoryId As Long) As IInventory
         Return New Inventory(worldData, inventoryId)
     End Function
-    ReadOnly Property IsEmpty As Boolean
+    ReadOnly Property IsEmpty As Boolean Implements IInventory.IsEmpty
         Get
             Return Not Items.Any
         End Get
     End Property
 
-    ReadOnly Property Items As IReadOnlyList(Of Item)
+    ReadOnly Property Items As IReadOnlyList(Of Item) Implements IInventory.Items
         Get
             Return WorldData.InventoryItem.ReadItems(Id).Select(Function(x) Item.FromId(WorldData, x)).ToList
         End Get
     End Property
 
-    Public Sub Add(item As Item)
+    Public Sub Add(item As Item) Implements IInventory.Add
         WorldData.InventoryItem.Write(Id, item.Id)
     End Sub
-    ReadOnly Property ItemsOfType(itemType As OldItemType) As IEnumerable(Of Item)
+    ReadOnly Property ItemsOfType(itemType As OldItemType) As IEnumerable(Of Item) Implements IInventory.ItemsOfType
         Get
             Return Items.Where(Function(x) x.ItemType = itemType)
         End Get
     End Property
 
-    ReadOnly Property TotalEncumbrance As Long
+    ReadOnly Property TotalEncumbrance As Long Implements IInventory.TotalEncumbrance
         Get
             Return Items.Sum(Function(x) x.Encumbrance)
         End Get

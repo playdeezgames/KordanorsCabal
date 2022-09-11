@@ -1,7 +1,7 @@
 ﻿Public Interface ILocation
     Inherits IBaseThingie
     Function Routes(direction As IDirection) As Route
-    ReadOnly Property Inventory As Inventory
+    ReadOnly Property Inventory As IInventory
     Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
     ReadOnly Property RequiresMP As Boolean
     Function RouteCount() As Long
