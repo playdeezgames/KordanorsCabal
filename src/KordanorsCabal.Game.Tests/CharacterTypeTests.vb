@@ -91,7 +91,7 @@ Public Class CharacterTypeTests
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
                 Dim character As New Mock(Of ICharacter)
-                Dim actual = subject.MaximumEncumbrance(worldData.Object, character.Object)
+                Dim actual = subject.MaximumEncumbrance(character.Object)
                 actual.ShouldBe(0)
                 character.Verify(Function(x) x.GetStatistic(It.IsAny(Of ICharacterStatisticType)))
                 character.VerifyNoOtherCalls()

@@ -6,7 +6,7 @@
     ReadOnly Property InitialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))
     Function IsEnemy(character As ICharacter) As Boolean
     ReadOnly Property IsUndead As Boolean
-    Function MaximumEncumbrance(worldData As IWorldData, character As ICharacter) As Long
+    Function MaximumEncumbrance(character As ICharacter) As Long
     ReadOnly Property Name As String
     Function PartingShot() As String
     Function RollMoneyDrop() As Long

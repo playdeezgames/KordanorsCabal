@@ -29,13 +29,13 @@
             Select(Function(x) (CharacterStatisticType.FromId(WorldData, x.Item1), x.Item2)).ToList
         End Get
     End Property
-    Function MaximumEncumbrance(worldData As IWorldData, character As ICharacter) As Long Implements ICharacterType.MaximumEncumbrance
+    Function MaximumEncumbrance(character As ICharacter) As Long Implements ICharacterType.MaximumEncumbrance
         Return If(
-            character.GetStatistic(CharacterStatisticType.FromId(worldData, 24L)), 0) +
+            character.GetStatistic(CharacterStatisticType.FromId(WorldData, 24L)), 0) +
             If(
-                character.GetStatistic(CharacterStatisticType.FromId(worldData, 25L)), 0) *
+                character.GetStatistic(CharacterStatisticType.FromId(WorldData, 25L)), 0) *
             If(
-                character.GetStatistic(CharacterStatisticType.FromId(worldData, 1L)), 0)
+                character.GetStatistic(CharacterStatisticType.FromId(WorldData, 1L)), 0)
     End Function
     Function IsEnemy(character As ICharacter) As Boolean Implements ICharacterType.IsEnemy
         Return WorldData.CharacterTypeEnemy.Read(Id, character.CharacterType.Id)

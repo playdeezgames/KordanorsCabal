@@ -170,7 +170,7 @@
     End Property
     ReadOnly Property MaximumEncumbrance As Long Implements ICharacter.MaximumEncumbrance
         Get
-            Return CharacterType.MaximumEncumbrance(WorldData, Me)
+            Return CharacterType.MaximumEncumbrance(Me)
         End Get
     End Property
     Public Function HasVisited(location As ILocation) As Boolean Implements ICharacter.HasVisited
