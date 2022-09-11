@@ -79,7 +79,7 @@ Friend Class MoveModeProcessor
         Return UIState.InPlay
     End Function
 
-    Private Function HandleMove(player As ICharacter, direction As Direction) As UIState
+    Private Function HandleMove(player As ICharacter, direction As IDirection) As UIState
         If player.CanMove(direction) Then
             PopButtonIndex()
             player.Mode = PlayerMode.Neutral

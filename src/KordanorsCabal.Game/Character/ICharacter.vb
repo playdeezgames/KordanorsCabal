@@ -60,10 +60,10 @@
     Sub DoIntimidation()
     Sub Fight()
     Sub PurifyItems()
-    Property Direction As Direction
-    Function CanMove(direction As Direction) As Boolean
+    Property Direction As IDirection
+    Function CanMove(direction As IDirection) As Boolean
     Sub Run()
-    Function Move(direction As Direction) As Boolean
+    Function Move(direction As IDirection) As Boolean
     Property Mode As PlayerMode
     ReadOnly Property IsFullyAssigned As Boolean
     Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long)

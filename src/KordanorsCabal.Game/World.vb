@@ -254,7 +254,7 @@ Public Module World
         StitchTown(worldData, townLocation, direction, entrance)
     End Sub
 
-    Private Sub StitchTown(worldData As WorldData, fromLocation As ILocation, direction As Direction, toLocation As ILocation)
+    Private Sub StitchTown(worldData As WorldData, fromLocation As ILocation, direction As IDirection, toLocation As ILocation)
         Route.Create(worldData, fromLocation, direction, RouteType.Road, toLocation)
         Route.Create(worldData, toLocation, direction.Opposite, RouteType.Road, fromLocation)
     End Sub

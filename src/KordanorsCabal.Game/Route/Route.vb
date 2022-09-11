@@ -6,7 +6,7 @@
     Public Shared Function FromId(worldData As IWorldData, routeId As Long?) As Route
         Return If(routeId.HasValue, New Route(worldData, routeId.Value), Nothing)
     End Function
-    Public Shared Function Create(worldData As IWorldData, location As ILocation, direction As Direction, routeType As RouteType, toLocation As ILocation) As Route
+    Public Shared Function Create(worldData As IWorldData, location As ILocation, direction As IDirection, routeType As RouteType, toLocation As ILocation) As Route
         Return FromId(worldData, worldData.Route.Create(location.Id, direction.Id, routeType, toLocation.Id))
     End Function
     Friend ReadOnly Property ToLocation As ILocation

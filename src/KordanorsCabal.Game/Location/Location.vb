@@ -16,13 +16,13 @@
     Friend Shared Function FromLocationType(worldData As IWorldData, locationType As ILocationType) As IEnumerable(Of ILocation)
         Return worldData.Location.ReadForLocationType(locationType.Id).Select(Function(x) FromId(worldData, x))
     End Function
-    Shared Function Create(worldData As WorldData, locationType As ILocationType) As ILocation
+    Shared Function Create(worldData As IWorldData, locationType As ILocationType) As ILocation
         Return FromId(worldData, worldData.Location.Create(locationType.Id))
     End Function
     Public Shared Function ByDungeonLevel(worldData As WorldData, dungeonLevel As IDungeonLevel) As IEnumerable(Of ILocation)
         Return worldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel.Id).Select(Function(x) Location.FromId(worldData, x))
     End Function
-    Sub DestroyRoute(direction As Direction) Implements ILocation.DestroyRoute
+    Sub DestroyRoute(direction As IDirection) Implements ILocation.DestroyRoute
         Routes(direction)?.Destroy()
     End Sub
     Function IsDungeon() As Boolean Implements ILocation.IsDungeon
@@ -47,10 +47,10 @@
             Return LocationType.Name
         End Get
     End Property
-    Public Function Routes(direction As Direction) As Route Implements ILocation.Routes
+    Public Function Routes(direction As IDirection) As Route Implements ILocation.Routes
         Return Route.FromId(WorldData, WorldData.Route.ReadForLocationDirection(Id, direction.Id))
     End Function
-    Public Function HasRoute(direction As Direction) As Boolean Implements ILocation.HasRoute
+    Public Function HasRoute(direction As IDirection) As Boolean Implements ILocation.HasRoute
         Return Routes(direction) IsNot Nothing
     End Function
     Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?) Implements ILocation.SetStatistic
@@ -75,7 +75,7 @@
             Return New Inventory(WorldData, inventoryId.Value)
         End Get
     End Property
-    Public ReadOnly Property RouteDirections As IEnumerable(Of Direction) Implements ILocation.RouteDirections
+    Public ReadOnly Property RouteDirections As IEnumerable(Of IDirection) Implements ILocation.RouteDirections
         Get
             Return WorldData.Route.ReadDirectionRouteForLocation(Id).Select(Function(x) New Direction(WorldData, x.Item1))
         End Get
