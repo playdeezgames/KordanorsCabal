@@ -2,7 +2,6 @@ Public Class CharacterTypeTests
     Private Shared Sub WithAnyCharacterType(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterType))
         Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
-        worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(characterTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -157,6 +156,7 @@ Public Class CharacterTypeTests
     Sub ShouldDropLootForAGivenCharacterTypeOntoAGivenLocation()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
                 Dim location As New Mock(Of ILocation)
                 subject.DropLoot(location.Object)
                 location.VerifyNoOtherCalls()
