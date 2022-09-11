@@ -2,7 +2,6 @@ Public Class CharacterTypeTests
     Private Shared Sub WithAnyCharacterType(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterType))
         Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
-        worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(characterTypeId, worldData, subject)
@@ -133,6 +132,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForSpawnCountOfAGivenCharacterTypeForAGivenDungeonLevel()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
                 Dim dungeonLevel As New Mock(Of IDungeonLevel)
                 Dim dungeonLevelId = 2L
                 dungeonLevel.SetupGet(Function(x) x.Id).Returns(dungeonLevelId)
