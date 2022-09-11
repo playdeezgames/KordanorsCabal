@@ -2,7 +2,6 @@ Public Class CharacterTypeTests
     Private Shared Sub WithAnyCharacterType(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterType))
         Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
-        worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
@@ -69,6 +68,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForInitialStatisticsForAGivenCharacterType()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
                 Dim actual = subject.InitialStatistics()
                 actual.ShouldBeNull
                 worldData.Verify(Function(x) x.CharacterTypeInitialStatistic.ReadAllForCharacterType(characterTypeId))
