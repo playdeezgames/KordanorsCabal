@@ -116,6 +116,15 @@ Public Class CharacterTypeTests
                 worldData.Verify(Function(x) x.CharacterTypePartingShot.Read(characterTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryForMoneyDropOfAGivenCharacterType()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim actual = subject.RollMoneyDrop()
+                actual.ShouldBe(0)
+                worldData.Verify(Function(x) x.CharacterType.ReadMoneyDropDice(characterTypeId))
+            End Sub)
+    End Sub
 End Class
 
 
