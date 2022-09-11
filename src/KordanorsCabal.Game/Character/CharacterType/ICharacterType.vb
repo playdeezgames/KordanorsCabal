@@ -1,7 +1,7 @@
 ﻿Public Interface ICharacterType
     Inherits IBaseThingie
     Function CanBeBribedWith(itemType As OldItemType) As Boolean
-    Function CanSpawn(locationType As LocationType, level As DungeonLevel) As Boolean
+    Function CanSpawn(locationType As ILocationType, level As DungeonLevel) As Boolean
     Function GenerateAttackType() As AttackType
     ReadOnly Property InitialStatistics As IReadOnlyList(Of (CharacterStatisticType, Long))
     Function IsEnemy(character As ICharacter) As Boolean

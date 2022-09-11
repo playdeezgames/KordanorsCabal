@@ -40,7 +40,7 @@
     Function IsEnemy(character As ICharacter) As Boolean Implements ICharacterType.IsEnemy
         Return WorldData.CharacterTypeEnemy.Read(Id, character.CharacterType.Id)
     End Function
-    Function CanSpawn(locationType As LocationType, level As DungeonLevel) As Boolean Implements ICharacterType.CanSpawn
+    Function CanSpawn(locationType As ILocationType, level As DungeonLevel) As Boolean Implements ICharacterType.CanSpawn
         Return WorldData.CharacterTypeSpawnLocation.Read(Id, level.Id, locationType.Id)
     End Function
     Function PartingShot() As String Implements ICharacterType.PartingShot

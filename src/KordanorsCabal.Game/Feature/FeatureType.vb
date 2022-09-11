@@ -5,9 +5,9 @@
             Return WorldData.FeatureType.ReadName(Id)
         End Get
     End Property
-    ReadOnly Property LocationType As LocationType
+    ReadOnly Property LocationType As ILocationType
         Get
-            Return LocationType.FromId(WorldData, WorldData.FeatureType.ReadLocationType(Id))
+            Return Game.LocationType.FromId(WorldData, WorldData.FeatureType.ReadLocationType(Id))
         End Get
     End Property
     ReadOnly Property InteractionMode As PlayerMode

@@ -3,19 +3,19 @@
     Public Sub New(worldData As IWorldData, locationId As Long)
         MyBase.New(worldData, locationId)
     End Sub
-    Property LocationType As LocationType
+    Property LocationType As ILocationType
         Get
             Return New LocationType(WorldData, WorldData.Location.ReadLocationType(Id).Value)
         End Get
-        Set(value As LocationType)
+        Set(value As ILocationType)
             WorldData.Location.WriteLocationType(Id, value.Id)
         End Set
     End Property
 
-    Friend Shared Function FromLocationType(worldData As IWorldData, locationType As LocationType) As IEnumerable(Of Location)
+    Friend Shared Function FromLocationType(worldData As IWorldData, locationType As ILocationType) As IEnumerable(Of Location)
         Return worldData.Location.ReadForLocationType(locationType.Id).Select(Function(x) FromId(worldData, x))
     End Function
-    Shared Function Create(worldData As WorldData, locationType As LocationType) As Location
+    Shared Function Create(worldData As WorldData, locationType As ILocationType) As Location
         Return FromId(worldData, worldData.Location.Create(locationType.Id))
     End Function
     Public Shared Function ByDungeonLevel(worldData As WorldData, dungeonLevel As DungeonLevel) As IEnumerable(Of Location)

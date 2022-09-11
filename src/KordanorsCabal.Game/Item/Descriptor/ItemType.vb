@@ -13,13 +13,13 @@
             Return If(WorldData.ItemType.ReadIsConsumed(Id), 0) > 0
         End Get
     End Property
-    ReadOnly Property SpawnLocationTypes(dungeonLevel As DungeonLevel) As HashSet(Of LocationType)
+    ReadOnly Property SpawnLocationTypes(dungeonLevel As DungeonLevel) As HashSet(Of ILocationType)
         Get
             Dim results = WorldData.ItemTypeSpawnLocationType.ReadAll(Id, dungeonLevel.Id)
             If results Is Nothing Then
-                Return New HashSet(Of LocationType)
+                Return New HashSet(Of ILocationType)
             End If
-            Return New HashSet(Of LocationType)(results.Select(Function(x) LocationType.FromId(WorldData, x)))
+            Return New HashSet(Of ILocationType)(results.Select(Function(x) LocationType.FromId(WorldData, x)))
         End Get
     End Property
     Private ReadOnly Property SpawnCounts(dungeonLevel As DungeonLevel) As String
