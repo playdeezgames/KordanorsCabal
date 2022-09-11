@@ -9,6 +9,7 @@ Public Class CharacterTypeTests
         worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
+        worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(characterTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -123,6 +124,20 @@ Public Class CharacterTypeTests
                 Dim actual = subject.RollMoneyDrop()
                 actual.ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterType.ReadMoneyDropDice(characterTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryForSpawnCountOfAGivenCharacterTypeForAGivenDungeonLevel()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim dungeonLevel As New Mock(Of IDungeonLevel)
+                Dim dungeonLevelId = 2L
+                dungeonLevel.SetupGet(Function(x) x.Id).Returns(dungeonLevelId)
+                Dim actual = subject.SpawnCount(dungeonLevel.Object)
+                actual.ShouldBe(0)
+                dungeonLevel.VerifyGet(Function(x) x.Id)
+                dungeonLevel.VerifyNoOtherCalls()
+                worldData.Verify(Function(x) x.CharacterTypeSpawnCount.ReadSpawnCount(characterTypeId, dungeonLevelId))
             End Sub)
     End Sub
 End Class
