@@ -8,6 +8,7 @@ Public Class CharacterTypeTests
         worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
+        worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(characterTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -104,6 +105,15 @@ Public Class CharacterTypeTests
                 Dim actual = subject.Name
                 actual.ShouldBeNull
                 worldData.Verify(Function(x) x.CharacterType.ReadName(characterTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryForPartingShotOfAGivenCharacterType()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim actual = subject.PartingShot
+                actual.ShouldBeNull
+                worldData.Verify(Function(x) x.CharacterTypePartingShot.Read(characterTypeId))
             End Sub)
     End Sub
 End Class
