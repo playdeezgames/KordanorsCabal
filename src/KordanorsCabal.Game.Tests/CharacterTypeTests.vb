@@ -10,6 +10,7 @@ Public Class CharacterTypeTests
         worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
+        worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
         Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
         stuffToDo(characterTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -147,6 +148,16 @@ Public Class CharacterTypeTests
                 Dim actual = subject.XPValue
                 actual.ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterType.ReadXPValue(characterTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldDropLootForAGivenCharacterTypeOntoAGivenLocation()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                Dim location As New Mock(Of ILocation)
+                subject.DropLoot(location.Object)
+                location.VerifyNoOtherCalls()
+                worldData.Verify(Function(x) x.CharacterTypeLoot.Read(characterTypeId))
             End Sub)
     End Sub
 End Class

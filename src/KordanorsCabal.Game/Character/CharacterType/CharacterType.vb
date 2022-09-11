@@ -55,7 +55,7 @@
     End Function
     Sub DropLoot(location As ILocation) Implements ICharacterType.DropLoot
         Dim lootTable = WorldData.CharacterTypeLoot.Read(Id)
-        If Not lootTable.Any Then
+        If lootTable Is Nothing OrElse Not lootTable.Any Then
             Return
         End If
         Dim itemType = CType(RNG.FromGenerator(lootTable), OldItemType)
