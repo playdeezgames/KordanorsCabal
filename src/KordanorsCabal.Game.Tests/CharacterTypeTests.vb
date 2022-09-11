@@ -3,7 +3,7 @@ Public Class CharacterTypeTests
         Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
 
-        worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
+
         worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
         worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
@@ -37,6 +37,7 @@ Public Class CharacterTypeTests
     Sub ShouldQueryForTheAbilityToBribeAGivenCharacterTypeWitAGivenItemType()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
                 Dim itemTypeId = OldItemType.AirShard
                 Dim actual = subject.CanBeBribedWith(itemTypeId)
                 actual.ShouldBeFalse
