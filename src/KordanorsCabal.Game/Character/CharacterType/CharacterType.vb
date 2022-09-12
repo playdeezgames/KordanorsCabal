@@ -45,16 +45,6 @@
         End If
         Return RNG.FromGenerator(partingShotTable)
     End Function
-    Sub DropLoot(location As ILocation) Implements ICharacterType.DropLoot
-        Dim lootTable = WorldData.CharacterTypeLoot.Read(Id)
-        If lootTable Is Nothing OrElse Not lootTable.Any Then
-            Return
-        End If
-        Dim itemType = CType(RNG.FromGenerator(lootTable), OldItemType)
-        If itemType <> OldItemType.None Then
-            location.Inventory.Add(Item.Create(WorldData, itemType))
-        End If
-    End Sub
     Function GenerateAttackType() As AttackType Implements ICharacterType.GenerateAttackType
         Dim table = WorldData.CharacterTypeAttackType.Read(Id)
         If table Is Nothing Then

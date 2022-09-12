@@ -372,7 +372,7 @@
         For Each item In Inventory.Items
             Location.Inventory.Add(item)
         Next
-        CharacterType.DropLoot(Location)
+        CharacterType.Combat.DropLoot(Location)
     End Sub
     Function Equipment(equipSlot As IEquipSlot) As IItem Implements ICharacter.Equipment
         Return Item.FromId(WorldData, WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))

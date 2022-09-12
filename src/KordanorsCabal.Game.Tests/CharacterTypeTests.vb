@@ -88,17 +88,6 @@ Public Class CharacterTypeTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDropLootForAGivenCharacterTypeOntoAGivenLocation()
-        WithAnyCharacterType(
-            Sub(characterTypeId, worldData, subject)
-                worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
-                Dim location As New Mock(Of ILocation)
-                subject.DropLoot(location.Object)
-                location.VerifyNoOtherCalls()
-                worldData.Verify(Function(x) x.CharacterTypeLoot.Read(characterTypeId))
-            End Sub)
-    End Sub
-    <Fact>
     Sub ShouldRetrieveSpawningSubobjectFromAGivenCharacterType()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)
