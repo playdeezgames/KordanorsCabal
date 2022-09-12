@@ -184,7 +184,7 @@
 
     ReadOnly Property IsEnemy(character As ICharacter) As Boolean Implements ICharacter.IsEnemy
         Get
-            Return CharacterType.IsEnemy(character.CharacterType)
+            Return CharacterType.Combat.IsEnemy(character.CharacterType)
         End Get
     End Property
     Private Function RollDice(dice As Long) As Long

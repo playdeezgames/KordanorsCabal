@@ -38,4 +38,18 @@
                 worldData.Verify(Function(x) x.CharacterTypeAttackType.Read(characterTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryForWhetherAGivenCharacterIsAnEnemyOfAGivenCharacterType()
+        WithAnyCharacterTypeCombat(
+            Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
+                Dim otherCharacterTypeId = 2L
+                Dim otherCharacterType As New Mock(Of ICharacterType)
+                otherCharacterType.SetupGet(Function(x) x.Id).Returns(otherCharacterTypeId)
+                subject.IsEnemy(otherCharacterType.Object).ShouldBeFalse
+                otherCharacterType.VerifyGet(Function(x) x.Id)
+                otherCharacterType.VerifyNoOtherCalls()
+                worldData.Verify(Function(x) x.CharacterTypeEnemy.Read(characterTypeId, otherCharacterTypeId))
+            End Sub)
+    End Sub
 End Class

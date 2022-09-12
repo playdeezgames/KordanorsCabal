@@ -29,4 +29,7 @@
         End If
         Return CType(RNG.FromGenerator(table), AttackType)
     End Function
+    Function IsEnemy(otherCharacterType As ICharacterType) As Boolean Implements ICharacterTypeCombat.IsEnemy
+        Return WorldData.CharacterTypeEnemy.Read(Id, otherCharacterType.Id)
+    End Function
 End Class
