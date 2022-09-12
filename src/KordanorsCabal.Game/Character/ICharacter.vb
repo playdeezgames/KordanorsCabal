@@ -73,10 +73,8 @@
     Function CanLearn(spellType As SpellType) As Boolean
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     Sub Destroy()
-
     Sub AddStress(delta As Long)
     Function AddXP(xp As Long) As Boolean
-
     Function DetermineDamage(value As Long) As Long
     Sub DoDamage(damage As Long)
     Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType)
@@ -88,7 +86,6 @@
     Sub Heal()
     Sub DoFatigue(fatigue As Long)
     Sub DoCounterAttacks()
-
     Function RollWillpower() As Long
     Function RollDefend() As Long
     Function RollAttack() As Long
