@@ -63,4 +63,14 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(9))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhetherOrNotAQuestCanBeAccepted()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterQuest).Returns((New Mock(Of ICharacterQuestData)).Object)
+                Dim quest = Game.Quest.CellarRats
+                subject.CanAcceptQuest(quest).ShouldBeTrue
+                worldData.Verify(Function(x) x.CharacterQuest.Read(1, 1))
+            End Sub)
+    End Sub
 End Class
