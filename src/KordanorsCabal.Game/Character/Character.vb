@@ -106,6 +106,9 @@
     End Sub
     ReadOnly Property CanFight As Boolean Implements ICharacter.CanFight
         Get
+            If Location Is Nothing Then
+                Return False
+            End If
             Return Location.Enemies(Me).Any
         End Get
     End Property
@@ -129,7 +132,11 @@
     End Sub
     Property Location As ILocation Implements ICharacter.Location
         Get
-            Return Game.Location.FromId(WorldData, WorldData.Character.ReadLocation(Id).Value)
+            Dim result = WorldData.Character.ReadLocation(Id)
+            If result Is Nothing Then
+                Return Nothing
+            End If
+            Return Game.Location.FromId(WorldData, result.Value)
         End Get
         Set(value As ILocation)
             WorldData.Character.WriteLocation(Id, value.Id)

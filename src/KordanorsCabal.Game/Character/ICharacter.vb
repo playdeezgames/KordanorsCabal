@@ -1,6 +1,13 @@
 ﻿Public Interface ICharacter
     Inherits IBaseThingie
+    Sub AcceptQuest(quest As Quest)
+    Sub AddStress(delta As Long)
+    Function AddXP(xp As Long) As Boolean
+    Sub AssignPoint(statisticType As ICharacterStatisticType)
+    Function CanAcceptQuest(quest As Quest) As Boolean
     ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean
+    Function CanCastSpell(spellType As SpellType) As Boolean
+    ReadOnly Property CanDoIntimidation() As Boolean
     ReadOnly Property CanIntimidate As Boolean
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long
@@ -30,19 +37,15 @@
     ReadOnly Property NeedsHealing As Boolean
     ReadOnly Property CanInteract As Boolean
     Sub Interact()
-    ReadOnly Property CanDoIntimidation() As Boolean
     ReadOnly Property HasSpells As Boolean
     Function HasItemsToRepair(shoppeType As ShoppeType) As Boolean
     ReadOnly Property HasEquipment As Boolean
-    Function CanAcceptQuest(quest As Quest) As Boolean
     Function CanMoveForward() As Boolean
     Sub UseItem(item As IItem)
     Sub Unequip(equipSlot As IEquipSlot)
     Function HasVisited(location As ILocation) As Boolean
-    Sub AssignPoint(statisticType As ICharacterStatisticType)
     ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
     Sub Cast(spellType As SpellType)
-    Function CanCastSpell(spellType As SpellType) As Boolean
     ReadOnly Property EquippedSlots As IEnumerable(Of IEquipSlot)
     Function Equipment(equipSlot As IEquipSlot) As IItem
     ReadOnly Property Encumbrance As Long
@@ -52,7 +55,6 @@
     ReadOnly Property CanMap() As Boolean
     Sub CompleteQuest(quest As Quest)
     Function CanMoveBackward() As Boolean
-    Sub AcceptQuest(quest As Quest)
     Function CanMoveRight() As Boolean
     Function CanMoveLeft() As Boolean
     Sub Gamble()
@@ -73,8 +75,6 @@
     Function CanLearn(spellType As SpellType) As Boolean
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     Sub Destroy()
-    Sub AddStress(delta As Long)
-    Function AddXP(xp As Long) As Boolean
     Function DetermineDamage(value As Long) As Long
     Sub DoDamage(damage As Long)
     Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType)

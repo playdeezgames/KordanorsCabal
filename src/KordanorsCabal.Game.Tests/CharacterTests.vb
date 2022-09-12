@@ -146,4 +146,15 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhenAGivenCharacterCanFight()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
+
+                subject.CanFight().ShouldBeFalse
+
+                worldData.Verify(Function(x) x.Character.ReadLocation(id))
+            End Sub)
+    End Sub
 End Class
