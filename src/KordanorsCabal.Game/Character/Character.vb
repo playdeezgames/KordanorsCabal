@@ -281,7 +281,9 @@
     End Property
     Property CurrentMana As Long Implements ICharacter.CurrentMana
         Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, 15L)).Value)
+            Dim maximumMana = GetStatistic(CharacterStatisticType.FromId(WorldData, 8L))
+            Dim fatigue = GetStatistic(CharacterStatisticType.FromId(WorldData, 15L))
+            Return Math.Max(0, If(maximumMana, 0L) - If(fatigue, 0L))
         End Get
         Set(value As Long)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 15L), GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - value)

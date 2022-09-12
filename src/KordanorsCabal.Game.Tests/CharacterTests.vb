@@ -97,4 +97,21 @@
                 worldData.Verify(Function(x) x.CharacterTypeBribe.Read(characterTypeId, itemTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhetherAGiveCharacterCanCastAGivenSpell()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Dim spellType = Game.SpellType.Purify
+                Dim spellTypeId = CType(spellType, Long)
+                Dim statisticTypeId = 8L
+                Dim otherStatisticTypeId = 15L
+                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                subject.CanCastSpell(spellType).ShouldBeFalse
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, otherStatisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(otherStatisticTypeId))
+            End Sub)
+    End Sub
 End Class
