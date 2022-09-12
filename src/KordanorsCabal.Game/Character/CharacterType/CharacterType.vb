@@ -29,6 +29,13 @@
             Select(Function(x) (CharacterStatisticType.FromId(WorldData, x.Item1), x.Item2)).ToList
         End Get
     End Property
+
+    Public ReadOnly Property Spawning As ICharacterTypeSpawning Implements ICharacterType.Spawning
+        Get
+            Return CharacterTypeSpawning.FromId(WorldData, Id)
+        End Get
+    End Property
+
     Function IsEnemy(otherCharacterType As ICharacterType) As Boolean Implements ICharacterType.IsEnemy
         Return WorldData.CharacterTypeEnemy.Read(Id, otherCharacterType.Id)
     End Function

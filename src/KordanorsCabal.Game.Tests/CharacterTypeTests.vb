@@ -150,6 +150,13 @@ Public Class CharacterTypeTests
                 worldData.Verify(Function(x) x.CharacterTypeLoot.Read(characterTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldRetrieveSpawningSubobjectFromAGivenCharacterType()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                subject.Spawning.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class
 
 
