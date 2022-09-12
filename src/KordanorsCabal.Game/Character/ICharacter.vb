@@ -8,6 +8,7 @@
     ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean
     Function CanCastSpell(spellType As SpellType) As Boolean
     ReadOnly Property CanDoIntimidation() As Boolean
+    ReadOnly Property CanGamble As Boolean
     ReadOnly Property CanIntimidate As Boolean
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long
@@ -58,7 +59,6 @@
     Function CanMoveRight() As Boolean
     Function CanMoveLeft() As Boolean
     Sub Gamble()
-    ReadOnly Property CanGamble As Boolean
     Sub DoIntimidation()
     Sub Fight()
     Sub PurifyItems()
