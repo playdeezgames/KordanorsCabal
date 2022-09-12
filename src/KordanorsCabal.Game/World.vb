@@ -120,7 +120,7 @@ Public Module World
             If characterCount = 0 Then
                 Continue For
             End If
-            Dim candidates = locations.Where(Function(x) characterType.CanSpawn(x.LocationType, dungeonLevel)).ToList
+            Dim candidates = locations.Where(Function(x) characterType.Spawning.CanSpawn(x.LocationType, dungeonLevel)).ToList
             Dim initialStatistics = characterType.InitialStatistics()
             While characterCount > 0
                 Dim location = RNG.FromList(candidates)

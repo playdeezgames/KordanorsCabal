@@ -35,22 +35,6 @@ Public Class CharacterTypeTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForTheAbilityToSpawnAGivenCharacterTypeAtAGivenLocationTypeAndAGivenDungeonLevel()
-        WithAnyCharacterType(
-            Sub(characterTypeId, worldData, subject)
-                worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
-                Dim locationType = Game.LocationType.FromId(worldData.Object, 2L)
-                Dim dungeonLevel = Game.DungeonLevel.FromId(worldData.Object, 3L)
-                Dim actual = subject.CanSpawn(locationType, dungeonLevel)
-                actual.ShouldBeFalse
-                worldData.Verify(
-                    Function(x) x.CharacterTypeSpawnLocation.Read(
-                    characterTypeId,
-                    dungeonLevel.Id,
-                    locationType.Id))
-            End Sub)
-    End Sub
-    <Fact>
     Sub ShouldQueryForAttackTypeGenerationWeightsAndThenGenerate()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)

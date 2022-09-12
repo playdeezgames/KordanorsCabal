@@ -5,7 +5,6 @@
     ReadOnly Property Name As String
     'spawning
     ReadOnly Property Spawning As ICharacterTypeSpawning
-    Function CanSpawn(locationType As ILocationType, level As IDungeonLevel) As Boolean
     ReadOnly Property InitialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))
     Function SpawnCount(level As IDungeonLevel) As Long
     'combat

@@ -39,9 +39,6 @@
     Function IsEnemy(otherCharacterType As ICharacterType) As Boolean Implements ICharacterType.IsEnemy
         Return WorldData.CharacterTypeEnemy.Read(Id, otherCharacterType.Id)
     End Function
-    Function CanSpawn(locationType As ILocationType, level As IDungeonLevel) As Boolean Implements ICharacterType.CanSpawn
-        Return WorldData.CharacterTypeSpawnLocation.Read(Id, level.Id, locationType.Id)
-    End Function
     Function PartingShot() As String Implements ICharacterType.PartingShot
         Dim partingShotTable = WorldData.CharacterTypePartingShot.Read(Id)
         If partingShotTable Is Nothing Then
