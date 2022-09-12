@@ -1,11 +1,10 @@
 ﻿Public Class CharacterTypeCombatTests
-    Private Shared Sub WithAnySubject(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterTypeCombat))
-        Dim characterTypeId = 1
-        Dim worldData As New Mock(Of IWorldData)
-        Dim subject As ICharacterTypeCombat = CharacterTypeCombat.FromId(worldData.Object, characterTypeId)
-        stuffToDo(characterTypeId, worldData, subject)
-        worldData.VerifyNoOtherCalls()
+    Inherits BaseThingieTests(Of ICharacterTypeCombat)
+
+    Public Sub New()
+        MyBase.New(AddressOf CharacterTypeCombat.FromId)
     End Sub
+
     <Fact>
     Sub ShouldQueryForTheAbilityToBribeAGivenCharacterTypeWitAGivenItemType()
         WithAnySubject(
