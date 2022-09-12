@@ -16,12 +16,24 @@
                 worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
                 worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
                 subject.AcceptQuest(Quest.CellarRats)
-                worldData.Verify(Function(x) x.CharacterQuest.Read(1, 1))
-                worldData.Verify(Sub(x) x.CharacterQuest.Write(1, 1))
-                worldData.Verify(Sub(x) x.CharacterQuestCompletion.Read(1, 1))
-                worldData.Verify(Function(x) x.Location.ReadForLocationType(7))
-                worldData.Verify(Function(x) x.CharacterTypeInitialStatistic.ReadAllForCharacterType(13))
-                worldData.Verify(Function(x) x.Character.Create(13, 2))
+                worldData.Verify(Function(x) x.CharacterQuest.Read(1, 1)) 'TODO: magic numbers!
+                worldData.Verify(Sub(x) x.CharacterQuest.Write(1, 1)) 'TODO: magic numbers!
+                worldData.Verify(Sub(x) x.CharacterQuestCompletion.Read(1, 1)) 'TODO: magic numbers!
+                worldData.Verify(Function(x) x.Location.ReadForLocationType(7)) 'TODO: magic numbers!
+                worldData.Verify(Function(x) x.CharacterTypeInitialStatistic.ReadAllForCharacterType(13)) 'TODO: magic numbers!
+                worldData.Verify(Function(x) x.Character.Create(13, 2)) 'TODO: magic numbers!
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldAttemptToChangeValuesAssociatedWithCurrentMP()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Dim stress = 2L
+                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                subject.AddStress(stress)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 13)) 'TODO: magic numbers
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(13)) 'TODO: magic numbers
             End Sub)
     End Sub
 End Class

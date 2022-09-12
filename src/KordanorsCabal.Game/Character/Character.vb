@@ -122,7 +122,10 @@
         WorldData.CharacterStatistic.Write(Id, statisticType.Id, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
     Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long) Implements ICharacter.ChangeStatistic
-        SetStatistic(statisticType, GetStatistic(statisticType).Value + delta)
+        Dim current = GetStatistic(statisticType)
+        If current IsNot Nothing Then
+            SetStatistic(statisticType, current.Value + delta)
+        End If
     End Sub
     Property Location As ILocation Implements ICharacter.Location
         Get
