@@ -41,17 +41,17 @@ Friend Class ChickenModeProcessor
         Return UIState.InPlay
     End Function
 
-    Private Function FeedChicken(player As ICharacter, item As Item) As UIState
+    Private Function FeedChicken(player As ICharacter, item As IItem) As UIState
         Dim itemType = item.ItemType
         item.Destroy()
         If RNG.FromRange(0, 5) = 0 Then
             Select Case itemType
                 Case OldItemType.Food
                     player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {OldItemType.MagicEgg.Name} pops out!")
-                    player.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.MagicEgg))
+                    player.Inventory.Add(Game.Item.Create(StaticWorldData.World, OldItemType.MagicEgg))
                 Case OldItemType.RottenFood
                     player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {OldItemType.RottenEgg.Name} pops out!")
-                    player.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.RottenEgg))
+                    player.Inventory.Add(Game.Item.Create(StaticWorldData.World, OldItemType.RottenEgg))
             End Select
         Else
             player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food, and gives a satified ""moo"" in return.")

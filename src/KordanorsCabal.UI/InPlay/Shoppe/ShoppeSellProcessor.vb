@@ -1,7 +1,7 @@
 ﻿Imports KordanorsCabal.Data
 
 Friend Class ShoppeSellProcessor
-    Inherits ShoppeProcessor(Of Item)
+    Inherits ShoppeProcessor(Of IItem)
 
     Public Overrides Sub UpdateBuffer(buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)

@@ -13,16 +13,16 @@
         End Get
     End Property
 
-    ReadOnly Property Items As IReadOnlyList(Of Item) Implements IInventory.Items
+    ReadOnly Property Items As IReadOnlyList(Of IItem) Implements IInventory.Items
         Get
             Return WorldData.InventoryItem.ReadItems(Id).Select(Function(x) Item.FromId(WorldData, x)).ToList
         End Get
     End Property
 
-    Public Sub Add(item As Item) Implements IInventory.Add
+    Public Sub Add(item As IItem) Implements IInventory.Add
         WorldData.InventoryItem.Write(Id, item.Id)
     End Sub
-    ReadOnly Property ItemsOfType(itemType As OldItemType) As IEnumerable(Of Item) Implements IInventory.ItemsOfType
+    ReadOnly Property ItemsOfType(itemType As OldItemType) As IEnumerable(Of IItem) Implements IInventory.ItemsOfType
         Get
             Return Items.Where(Function(x) x.ItemType = itemType)
         End Get

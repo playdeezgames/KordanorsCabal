@@ -47,7 +47,7 @@ Friend Class InteractItemProcessor
         Return UIState.Inventory
     End Function
 
-    Public Shared Property InteractItem As Item
+    Public Shared Property InteractItem As IItem
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)

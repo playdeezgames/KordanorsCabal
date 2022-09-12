@@ -3,7 +3,7 @@
 Friend Class GroundInventoryProcessor
     Implements IProcessor
 
-    Private groundItems As List(Of Item)
+    Private groundItems As List(Of IItem)
     Private currentItemIndex As Integer = 0
     Const ListStartRow = 1
     Const ListHiliteRow = 10

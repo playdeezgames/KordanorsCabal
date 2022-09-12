@@ -12,9 +12,9 @@
         End Get
     End Property
 
-    Public ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of Item) Implements ICharacter.ItemsToRepair
+    Public ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of IItem) Implements ICharacter.ItemsToRepair
         Get
-            Dim items As New List(Of Item)
+            Dim items As New List(Of IItem)
             items.AddRange(Inventory.Items.Where(Function(x) x.NeedsRepair))
             items.AddRange(EquippedItems.Where(Function(x) x.NeedsRepair))
             Return items.Where(Function(x) shoppeType.Repairs.ContainsKey(x.ItemType))
@@ -374,10 +374,10 @@
         Next
         CharacterType.DropLoot(Location)
     End Sub
-    Function Equipment(equipSlot As EquipSlot) As Item Implements ICharacter.Equipment
+    Function Equipment(equipSlot As EquipSlot) As IItem Implements ICharacter.Equipment
         Return Item.FromId(WorldData, WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
     End Function
-    ReadOnly Property EquippedItems As IEnumerable(Of Item)
+    ReadOnly Property EquippedItems As IEnumerable(Of IItem)
         Get
             Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
         End Get
@@ -648,7 +648,7 @@
         End If
         spellType.Cast(Me)
     End Sub
-    Public Sub Equip(item As Item) Implements ICharacter.Equip
+    Public Sub Equip(item As IItem) Implements ICharacter.Equip
         If item.CanEquip Then
             WorldData.InventoryItem.ClearForItem(item.Id)
             Dim equipSlots = item.EquipSlots
@@ -667,7 +667,7 @@
     Public Function CanAcceptQuest(quest As Quest) As Boolean Implements ICharacter.CanAcceptQuest
         Return Not HasQuest(quest) AndAlso quest.CanAccept(Me)
     End Function
-    Public Sub UseItem(item As Item) Implements ICharacter.UseItem
+    Public Sub UseItem(item As IItem) Implements ICharacter.UseItem
         If item.CanUse(Me) Then
             item.Use(Me)
             If item.IsConsumed Then

@@ -4,7 +4,7 @@ Imports SPLORR.Game
 Friend Class InventoryProcessor
     Implements IProcessor
 
-    Private items As List(Of (String, IEnumerable(Of Item)))
+    Private items As List(Of (String, IEnumerable(Of IItem)))
     Private currentItemIndex As Integer = 0
     Const ListStartRow = 2
     Const ListHiliteRow = 10
@@ -29,11 +29,11 @@ Friend Class InventoryProcessor
 
     Public Sub Initialize() Implements IProcessor.Initialize
         currentItemIndex = 0
-        items = New List(Of (String, IEnumerable(Of Item)))
-        Dim table As New Dictionary(Of String, List(Of Item))
+        items = New List(Of (String, IEnumerable(Of IItem)))
+        Dim table As New Dictionary(Of String, List(Of IItem))
         For Each item In Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Items.OrderBy(Function(x) x.Name)
             If Not table.ContainsKey(item.Name) Then
-                table(item.Name) = New List(Of Item)
+                table(item.Name) = New List(Of IItem)
             End If
             table(item.Name).Add(item)
         Next

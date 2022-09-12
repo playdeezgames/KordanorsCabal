@@ -36,7 +36,7 @@
     ReadOnly Property HasEquipment As Boolean
     Function CanAcceptQuest(quest As Quest) As Boolean
     Function CanMoveForward() As Boolean
-    Sub UseItem(item As Item)
+    Sub UseItem(item As IItem)
     Sub Unequip(equipSlot As EquipSlot)
     Function HasVisited(location As ILocation) As Boolean
     Sub AssignPoint(statisticType As ICharacterStatisticType)
@@ -44,11 +44,11 @@
     Sub Cast(spellType As SpellType)
     Function CanCastSpell(spellType As SpellType) As Boolean
     ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot)
-    Function Equipment(equipSlot As EquipSlot) As Item
+    Function Equipment(equipSlot As EquipSlot) As IItem
     ReadOnly Property Encumbrance As Long
-    Sub Equip(item As Item)
+    Sub Equip(item As IItem)
     ReadOnly Property MaximumEncumbrance As Long
-    ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of Item)
+    ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of IItem)
     ReadOnly Property CanMap() As Boolean
     Sub CompleteQuest(quest As Quest)
     Function CanMoveBackward() As Boolean
