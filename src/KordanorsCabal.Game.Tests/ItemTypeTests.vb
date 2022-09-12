@@ -2,7 +2,6 @@
     Private Shared Sub WithAnySubject(stuffToDo As Action(Of Long, Mock(Of IWorldData), IItemType))
         Dim itemTypeId = 1L
         Dim worldData As New Mock(Of IWorldData)
-        worldData.SetupGet(Function(x) x.ItemTypeSpawnLocationType).Returns((New Mock(Of IItemTypeSpawnLocationTypeData)).Object)
         Dim subject As IItemType = ItemType.FromId(worldData.Object, itemTypeId)
         stuffToDo(itemTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
@@ -37,6 +36,7 @@
         Dim dungeonLevelId = 2L
         WithAnySubject(
             Sub(itemTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.ItemTypeSpawnLocationType).Returns((New Mock(Of IItemTypeSpawnLocationTypeData)).Object)
                 Dim dungeonLevel = New DungeonLevel(worldData.Object, dungeonLevelId)
                 subject.SpawnLocationTypes(dungeonLevel).ShouldBeEmpty
                 worldData.Verify(Function(x) x.ItemTypeSpawnLocationType.ReadAll(itemTypeId, dungeonLevelId))
