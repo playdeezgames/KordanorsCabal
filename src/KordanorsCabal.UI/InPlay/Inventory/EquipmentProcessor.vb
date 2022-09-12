@@ -4,7 +4,7 @@ Friend Class EquipmentProcessor
     Implements IProcessor
 
     Private rowIndex As Integer = 0
-    Private table As New Dictionary(Of Integer, EquipSlot)
+    Private table As New Dictionary(Of Integer, IEquipSlot)
 
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         buffer.Fill(Pattern.Space, False, Hue.Black)
@@ -50,7 +50,7 @@ Friend Class EquipmentProcessor
         Return UIState.Equipment
     End Function
 
-    Private Function InteractEquipSlot(equipSlot As EquipSlot) As UIState
+    Private Function InteractEquipSlot(equipSlot As IEquipSlot) As UIState
         If equipSlot Is Nothing Then
             Return UIState.InPlay
         End If

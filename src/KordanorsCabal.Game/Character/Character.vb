@@ -382,7 +382,7 @@
             Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
         End Get
     End Property
-    ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot) Implements ICharacter.EquippedSlots
+    ReadOnly Property EquippedSlots As IEnumerable(Of IEquipSlot) Implements ICharacter.EquippedSlots
         Get
             Return WorldData.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(WorldData, x))
         End Get
@@ -488,7 +488,7 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-    Public Sub Unequip(equipSlot As EquipSlot) Implements ICharacter.Unequip
+    Public Sub Unequip(equipSlot As IEquipSlot) Implements ICharacter.Unequip
         Dim item = Equipment(equipSlot)
         If item IsNot Nothing Then
             Inventory.Add(item)

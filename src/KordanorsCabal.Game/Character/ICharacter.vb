@@ -37,13 +37,13 @@
     Function CanAcceptQuest(quest As Quest) As Boolean
     Function CanMoveForward() As Boolean
     Sub UseItem(item As IItem)
-    Sub Unequip(equipSlot As EquipSlot)
+    Sub Unequip(equipSlot As IEquipSlot)
     Function HasVisited(location As ILocation) As Boolean
     Sub AssignPoint(statisticType As ICharacterStatisticType)
     ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
     Sub Cast(spellType As SpellType)
     Function CanCastSpell(spellType As SpellType) As Boolean
-    ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot)
+    ReadOnly Property EquippedSlots As IEnumerable(Of IEquipSlot)
     Function Equipment(equipSlot As IEquipSlot) As IItem
     ReadOnly Property Encumbrance As Long
     Sub Equip(item As IItem)
