@@ -1,12 +1,8 @@
 ﻿Public Interface ICharacterType
     Inherits IBaseThingie
-    'metadata
     ReadOnly Property IsUndead As Boolean
     ReadOnly Property Name As String
-    'spawning
     ReadOnly Property Spawning As ICharacterTypeSpawning
-    ReadOnly Property InitialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))
-    Function SpawnCount(level As IDungeonLevel) As Long
     'combat
     Function CanBeBribedWith(itemType As OldItemType) As Boolean
     Sub DropLoot(location As ILocation)

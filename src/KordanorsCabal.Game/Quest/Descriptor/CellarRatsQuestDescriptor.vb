@@ -31,7 +31,7 @@
             StaticWorldData.World.CharacterQuest.Write(character.Id, Quest.CellarRats)
             Dim ratCount = If(StaticWorldData.World.CharacterQuestCompletion.Read(character.Id, Quest.CellarRats), 0) + 1
             Dim location = Game.Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 7L)).Single
-            Dim initialStatistics = CharacterType.FromId(StaticWorldData.World, 13).InitialStatistics()
+            Dim initialStatistics = CharacterType.FromId(StaticWorldData.World, 13).Spawning.InitialStatistics()
             While ratCount > 0
                 Game.Character.Create(StaticWorldData.World, CharacterType.FromId(StaticWorldData.World, 13), location, initialStatistics)
                 ratCount -= 1

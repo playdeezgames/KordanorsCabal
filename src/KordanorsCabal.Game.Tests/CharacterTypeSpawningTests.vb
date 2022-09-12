@@ -22,5 +22,29 @@
                     locationType.Id))
             End Sub)
     End Sub
-
+    <Fact>
+    Sub ShouldQueryForSpawnCountOfAGivenCharacterTypeForAGivenDungeonLevel()
+        WithAnyCharacterTypeSpawning(
+            Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
+                Dim dungeonLevel As New Mock(Of IDungeonLevel)
+                Dim dungeonLevelId = 2L
+                dungeonLevel.SetupGet(Function(x) x.Id).Returns(dungeonLevelId)
+                Dim actual = subject.SpawnCount(dungeonLevel.Object)
+                actual.ShouldBe(0)
+                dungeonLevel.VerifyGet(Function(x) x.Id)
+                dungeonLevel.VerifyNoOtherCalls()
+                worldData.Verify(Function(x) x.CharacterTypeSpawnCount.ReadSpawnCount(characterTypeId, dungeonLevelId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryForInitialStatisticsForAGivenCharacterType()
+        WithAnyCharacterTypeSpawning(
+            Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
+                Dim actual = subject.InitialStatistics()
+                actual.ShouldBeNull
+                worldData.Verify(Function(x) x.CharacterTypeInitialStatistic.ReadAllForCharacterType(characterTypeId))
+            End Sub)
+    End Sub
 End Class

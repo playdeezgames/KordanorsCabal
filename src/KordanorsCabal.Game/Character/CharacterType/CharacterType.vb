@@ -19,16 +19,6 @@
     Friend Sub New(worldData As IWorldData, characterTypeId As Long)
         MyBase.New(worldData, characterTypeId)
     End Sub
-    ReadOnly Property InitialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long)) Implements ICharacterType.InitialStatistics
-        Get
-            Dim results = WorldData.CharacterTypeInitialStatistic.ReadAllForCharacterType(Id)
-            If results Is Nothing Then
-                Return Nothing
-            End If
-            Return results.
-            Select(Function(x) (CharacterStatisticType.FromId(WorldData, x.Item1), x.Item2)).ToList
-        End Get
-    End Property
 
     Public ReadOnly Property Spawning As ICharacterTypeSpawning Implements ICharacterType.Spawning
         Get
@@ -71,9 +61,6 @@
     End Function
     Function RollMoneyDrop() As Long Implements ICharacterType.RollMoneyDrop
         Return RNG.RollDice(WorldData.CharacterType.ReadMoneyDropDice(Id))
-    End Function
-    Function SpawnCount(level As IDungeonLevel) As Long Implements ICharacterType.SpawnCount
-        Return If(WorldData.CharacterTypeSpawnCount.ReadSpawnCount(Id, level.Id), 0)
     End Function
     Shared Function FromId(worldData As IWorldData, characterTypeId As Long) As ICharacterType
         Return New CharacterType(worldData, characterTypeId)
