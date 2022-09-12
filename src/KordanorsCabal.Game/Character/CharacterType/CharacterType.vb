@@ -55,9 +55,6 @@
             location.Inventory.Add(Item.Create(WorldData, itemType))
         End If
     End Sub
-    Function CanBeBribedWith(itemType As OldItemType) As Boolean Implements ICharacterType.CanBeBribedWith
-        Return WorldData.CharacterTypeBribe.Read(Id, itemType)
-    End Function
     Function GenerateAttackType() As AttackType Implements ICharacterType.GenerateAttackType
         Dim table = WorldData.CharacterTypeAttackType.Read(Id)
         If table Is Nothing Then

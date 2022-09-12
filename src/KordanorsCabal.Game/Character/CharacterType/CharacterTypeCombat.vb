@@ -6,7 +6,10 @@
         MyBase.New(worldData, id)
     End Sub
 
-    Friend Shared Function FromId(worldData As IWorldData, id As Long) As ICharacterTypeCombat
+    Shared Function FromId(worldData As IWorldData, id As Long) As ICharacterTypeCombat
         Return New CharacterTypeCombat(worldData, id)
+    End Function
+    Function CanBeBribedWith(itemType As OldItemType) As Boolean Implements ICharacterTypeCombat.CanBeBribedWith
+        Return WorldData.CharacterTypeBribe.Read(Id, itemType)
     End Function
 End Class
