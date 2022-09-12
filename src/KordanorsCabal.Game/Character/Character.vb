@@ -394,10 +394,13 @@
     End Property
     Function AddXP(xp As Long) As Boolean Implements ICharacter.AddXP
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 16L), xp)
-        Dim xpGoal = GetStatistic(CharacterStatisticType.FromId(WorldData, 17L)).Value
+        Dim xpGoal = GetStatistic(CharacterStatisticType.FromId(WorldData, 17L))
+        If Not xpGoal.HasValue Then
+            Return False
+        End If
         If GetStatistic(CharacterStatisticType.FromId(WorldData, 16L)).Value >= xpGoal Then
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 16L), -xpGoal)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 17L), xpGoal)
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 16L), -xpGoal.Value)
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 17L), xpGoal.Value)
             ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), 1)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 13L), 0)

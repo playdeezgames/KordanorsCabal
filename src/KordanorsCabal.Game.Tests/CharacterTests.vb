@@ -36,4 +36,18 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(13)) 'TODO: magic numbers
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldAttemptToAddXP()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                Dim xp = 2L
+                subject.AddXP(xp).ShouldBeFalse
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 16))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 17))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(16))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(17))
+            End Sub)
+    End Sub
 End Class
