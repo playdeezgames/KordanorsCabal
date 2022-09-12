@@ -1,19 +1,20 @@
 ﻿Public Class ItemType
     Inherits BaseThingie
-    Public Shared Function FromId(worlddata As IWorldData, id As Long) As ItemType
+    Implements IItemType
+    Public Shared Function FromId(worlddata As IWorldData, id As Long) As IItemType
         Return New ItemType(worlddata, id)
     End Function
-    ReadOnly Property Name As String
+    ReadOnly Property Name As String Implements IItemType.Name
         Get
             Return WorldData.ItemType.ReadName(Id)
         End Get
     End Property
-    ReadOnly Property IsConsumed As Boolean
+    ReadOnly Property IsConsumed As Boolean Implements IItemType.IsConsumed
         Get
             Return If(WorldData.ItemType.ReadIsConsumed(Id), 0) > 0
         End Get
     End Property
-    ReadOnly Property SpawnLocationTypes(dungeonLevel As IDungeonLevel) As HashSet(Of ILocationType)
+    ReadOnly Property SpawnLocationTypes(dungeonLevel As IDungeonLevel) As HashSet(Of ILocationType) Implements IItemType.SpawnLocationTypes
         Get
             Dim results = WorldData.ItemTypeSpawnLocationType.ReadAll(Id, dungeonLevel.Id)
             If results Is Nothing Then
