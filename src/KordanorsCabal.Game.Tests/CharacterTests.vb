@@ -44,10 +44,10 @@
                 worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
                 Dim xp = 2L
                 subject.AddXP(xp).ShouldBeFalse
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 16))
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 17))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(16))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(17))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 16)) 'TODO: magic numbers!
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 17)) 'TODO: magic numbers!
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(16)) 'TODO: magic numbers!
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(17)) 'TODO: magic numbers!
             End Sub)
     End Sub
     <Fact>
@@ -59,8 +59,8 @@
                 Dim statisticType As New Mock(Of ICharacterStatisticType)
                 subject.AssignPoint(statisticType.Object)
                 statisticType.VerifyNoOtherCalls()
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 9))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(9))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 9)) 'TODO: magic numbers!
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(9)) 'TODO: magic numbers!
             End Sub)
     End Sub
     <Fact>
@@ -70,7 +70,7 @@
                 worldData.SetupGet(Function(x) x.CharacterQuest).Returns((New Mock(Of ICharacterQuestData)).Object)
                 Dim quest = Game.Quest.CellarRats
                 subject.CanAcceptQuest(quest).ShouldBeTrue
-                worldData.Verify(Function(x) x.CharacterQuest.Read(1, 1))
+                worldData.Verify(Function(x) x.CharacterQuest.Read(1, 1)) 'TODO: magic numbers!
             End Sub)
     End Sub
 End Class

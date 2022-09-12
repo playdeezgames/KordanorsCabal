@@ -67,11 +67,9 @@
         End If
         Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) >= spellType.RequiredPower(nextLevel)
     End Function
-
     Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)
     End Sub
-
     Function RollSpellDice(spellType As SpellType) As Long Implements ICharacter.RollSpellDice
         If Not Spells.ContainsKey(spellType) Then
             Return 0
@@ -83,11 +81,9 @@
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)).Value
         End Get
     End Property
-
     Public Function HasItemsToRepair(shoppeType As ShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
         Return ItemsToRepair(shoppeType).Any
     End Function
-
     ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean Implements ICharacter.CanBeBribedWith
         Get
             Return CharacterType.Combat.CanBeBribedWith(itemType)
@@ -186,7 +182,6 @@
     Public Function HasVisited(location As ILocation) As Boolean Implements ICharacter.HasVisited
         Return WorldData.CharacterLocation.Read(Id, location.Id)
     End Function
-
     ReadOnly Property IsEnemy(character As ICharacter) As Boolean Implements ICharacter.IsEnemy
         Get
             Return CharacterType.Combat.IsEnemy(character.CharacterType)
