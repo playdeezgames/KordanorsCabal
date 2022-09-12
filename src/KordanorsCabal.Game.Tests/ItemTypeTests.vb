@@ -1,10 +1,7 @@
 ﻿Public Class ItemTypeTests
-    Private Shared Sub WithAnySubject(stuffToDo As Action(Of Long, Mock(Of IWorldData), IItemType))
-        Dim itemTypeId = 1L
-        Dim worldData As New Mock(Of IWorldData)
-        Dim subject As IItemType = ItemType.FromId(worldData.Object, itemTypeId)
-        stuffToDo(itemTypeId, worldData, subject)
-        worldData.VerifyNoOtherCalls()
+    Inherits BaseThingieTests(Of IItemType)
+    Sub New()
+        MyBase.New(AddressOf ItemType.FromId)
     End Sub
     <Fact>
     Sub ShouldConstructFromWorldDataAndAnItemTypeId()

@@ -1,8 +1,8 @@
 ﻿Public Class ItemType
     Inherits BaseThingie
     Implements IItemType
-    Public Shared Function FromId(worlddata As IWorldData, id As Long) As IItemType
-        Return New ItemType(worlddata, id)
+    Public Shared Function FromId(worlddata As IWorldData, id As Long?) As IItemType
+        Return If(id.HasValue, New ItemType(worlddata, id.Value), Nothing)
     End Function
     ReadOnly Property Name As String Implements IItemType.Name
         Get
