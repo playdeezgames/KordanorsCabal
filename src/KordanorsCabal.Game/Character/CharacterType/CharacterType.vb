@@ -26,7 +26,7 @@
             Return CharacterTypeCombat.FromId(WorldData, Id)
         End Get
     End Property
-    Shared Function FromId(worldData As IWorldData, characterTypeId As Long) As ICharacterType
-        Return New CharacterType(worldData, characterTypeId)
+    Shared Function FromId(worldData As IWorldData, characterTypeId As Long?) As ICharacterType
+        Return If(characterTypeId.HasValue, New CharacterType(worldData, characterTypeId.Value), Nothing)
     End Function
 End Class

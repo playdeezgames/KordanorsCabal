@@ -1,11 +1,10 @@
 Public Class CharacterTypeTests
-    Private Shared Sub WithAnySubject(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterType))
-        Dim characterTypeId = 1
-        Dim worldData As New Mock(Of IWorldData)
-        Dim subject As ICharacterType = CharacterType.FromId(worldData.Object, characterTypeId)
-        stuffToDo(characterTypeId, worldData, subject)
-        worldData.VerifyNoOtherCalls()
+    Inherits BaseThingieTests(Of ICharacterType)
+
+    Public Sub New()
+        MyBase.New(AddressOf CharacterType.FromId)
     End Sub
+
     <Fact>
     Sub ShouldConstructFromWorldDataAndACharacterTypeId()
         WithAnySubject(
