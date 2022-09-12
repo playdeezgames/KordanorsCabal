@@ -34,16 +34,6 @@ Public Class CharacterTypeTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForXPValueOfAGivenCharacterType()
-        WithAnySubject(
-            Sub(characterTypeId, worldData, subject)
-                worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
-                Dim actual = subject.XPValue
-                actual.ShouldBe(0)
-                worldData.Verify(Function(x) x.CharacterType.ReadXPValue(characterTypeId))
-            End Sub)
-    End Sub
-    <Fact>
     Sub ShouldRetrieveSpawningSubobjectFromAGivenCharacterType()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)

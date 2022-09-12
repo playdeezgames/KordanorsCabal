@@ -6,4 +6,5 @@
     Function IsEnemy(character As ICharacterType) As Boolean
     Function PartingShot() As String
     Function RollMoneyDrop() As Long
+    ReadOnly Property XPValue As Long
 End Interface

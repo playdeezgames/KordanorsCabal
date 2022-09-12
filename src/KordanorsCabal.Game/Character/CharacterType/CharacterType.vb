@@ -6,11 +6,6 @@
             Return WorldData.CharacterType.ReadName(Id)
         End Get
     End Property
-    ReadOnly Property XPValue As Long Implements ICharacterType.XPValue
-        Get
-            Return If(WorldData.CharacterType.ReadXPValue(Id), 0L)
-        End Get
-    End Property
     ReadOnly Property IsUndead As Boolean Implements ICharacterType.IsUndead
         Get
             Return If(WorldData.CharacterType.ReadIsUndead(Id), 0) > 0

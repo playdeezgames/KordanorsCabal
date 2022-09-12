@@ -1,11 +1,9 @@
 ﻿Public Class CharacterTypeCombat
     Inherits BaseThingie
     Implements ICharacterTypeCombat
-
     Public Sub New(worldData As IWorldData, id As Long)
         MyBase.New(worldData, id)
     End Sub
-
     Shared Function FromId(worldData As IWorldData, id As Long) As ICharacterTypeCombat
         Return New CharacterTypeCombat(worldData, id)
     End Function
@@ -45,4 +43,9 @@
     Function RollMoneyDrop() As Long Implements ICharacterTypeCombat.RollMoneyDrop
         Return RNG.RollDice(WorldData.CharacterType.ReadMoneyDropDice(Id))
     End Function
+    ReadOnly Property XPValue As Long Implements ICharacterTypeCombat.XPValue
+        Get
+            Return If(WorldData.CharacterType.ReadXPValue(Id), 0L)
+        End Get
+    End Property
 End Class
