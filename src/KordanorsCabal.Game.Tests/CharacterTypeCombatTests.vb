@@ -28,4 +28,14 @@
                 worldData.Verify(Function(x) x.CharacterTypeLoot.Read(characterTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryForAttackTypeGenerationWeightsAndThenGenerate()
+        WithAnyCharacterTypeCombat(
+            Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
+                Dim actual = subject.GenerateAttackType()
+                actual.ShouldBe(AttackType.None)
+                worldData.Verify(Function(x) x.CharacterTypeAttackType.Read(characterTypeId))
+            End Sub)
+    End Sub
 End Class

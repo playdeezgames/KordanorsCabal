@@ -22,4 +22,11 @@
             location.Inventory.Add(Item.Create(WorldData, itemType))
         End If
     End Sub
+    Function GenerateAttackType() As AttackType Implements ICharacterTypeCombat.GenerateAttackType
+        Dim table = WorldData.CharacterTypeAttackType.Read(Id)
+        If table Is Nothing Then
+            Return AttackType.None
+        End If
+        Return CType(RNG.FromGenerator(table), AttackType)
+    End Function
 End Class

@@ -45,13 +45,6 @@
         End If
         Return RNG.FromGenerator(partingShotTable)
     End Function
-    Function GenerateAttackType() As AttackType Implements ICharacterType.GenerateAttackType
-        Dim table = WorldData.CharacterTypeAttackType.Read(Id)
-        If table Is Nothing Then
-            Return AttackType.None
-        End If
-        Return CType(RNG.FromGenerator(table), AttackType)
-    End Function
     Function RollMoneyDrop() As Long Implements ICharacterType.RollMoneyDrop
         Return RNG.RollDice(WorldData.CharacterType.ReadMoneyDropDice(Id))
     End Function

@@ -4,7 +4,6 @@
     ReadOnly Property Name As String
     ReadOnly Property Spawning As ICharacterTypeSpawning
     ReadOnly Property Combat As ICharacterTypeCombat
-    Function GenerateAttackType() As AttackType
     Function IsEnemy(character As ICharacterType) As Boolean
     Function PartingShot() As String
     Function RollMoneyDrop() As Long
