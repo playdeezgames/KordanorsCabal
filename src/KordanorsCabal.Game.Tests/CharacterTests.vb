@@ -73,4 +73,19 @@
                 worldData.Verify(Function(x) x.CharacterQuest.Read(1, 1)) 'TODO: magic numbers!
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhetherOrNotAGivenItemTypeCanBribeAGivenCharacter()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Dim itemType = OldItemType.AirShard
+                Dim characterData = New Mock(Of ICharacterData)
+                Const characterTypeId = 2L
+                characterData.Setup(Function(x) x.ReadCharacterType(It.IsAny(Of Long))).Returns(characterTypeId)
+                worldData.SetupGet(Function(x) x.Character).Returns(characterData.Object)
+                worldData.SetupGet(Function(X) X.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
+                subject.CanBeBribedWith(itemType).ShouldBeFalse
+                characterData.Verify(Function(x) x.ReadCharacterType(id))
+                worldData.Verify(Function(x) x.CharacterTypeBribe.Read(characterTypeId, 14L)) 'TODO: magic numbers
+            End Sub)
+    End Sub
 End Class

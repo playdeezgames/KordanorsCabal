@@ -37,7 +37,11 @@
     End Property
     ReadOnly Property CharacterType As ICharacterType Implements ICharacter.CharacterType
         Get
-            Return Game.CharacterType.FromId(WorldData, WorldData.Character.ReadCharacterType(Id).Value)
+            Dim result = WorldData.Character.ReadCharacterType(Id)
+            If result Is Nothing Then
+                Return Nothing
+            End If
+            Return Game.CharacterType.FromId(WorldData, result.Value)
         End Get
     End Property
     Public Function HasQuest(quest As Quest) As Boolean Implements ICharacter.HasQuest
