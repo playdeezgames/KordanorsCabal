@@ -1,5 +1,5 @@
 ﻿Public Class CharacterTypeSpawningTests
-    Private Shared Sub WithAnyCharacterTypeSpawning(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterTypeSpawning))
+    Private Shared Sub WithAnySubject(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterTypeSpawning))
         Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
         Dim subject As ICharacterTypeSpawning = CharacterTypeSpawning.FromId(worldData.Object, characterTypeId)
@@ -8,7 +8,7 @@
     End Sub
     <Fact>
     Sub ShouldQueryForTheAbilityToSpawnAGivenCharacterTypeAtAGivenLocationTypeAndAGivenDungeonLevel()
-        WithAnyCharacterTypeSpawning(
+        WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
                 Dim locationType = Game.LocationType.FromId(worldData.Object, 2L)
@@ -24,7 +24,7 @@
     End Sub
     <Fact>
     Sub ShouldQueryForSpawnCountOfAGivenCharacterTypeForAGivenDungeonLevel()
-        WithAnyCharacterTypeSpawning(
+        WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
                 Dim dungeonLevel As New Mock(Of IDungeonLevel)
@@ -39,7 +39,7 @@
     End Sub
     <Fact>
     Sub ShouldQueryForInitialStatisticsForAGivenCharacterType()
-        WithAnyCharacterTypeSpawning(
+        WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
                 Dim actual = subject.InitialStatistics()
