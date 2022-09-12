@@ -52,7 +52,7 @@
     Friend Sub Use(character As ICharacter) Implements IItem.Use
         ItemType.Use(character)
     End Sub
-    ReadOnly Property EquipSlots() As IEnumerable(Of EquipSlot) Implements IItem.EquipSlots
+    ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot) Implements IItem.EquipSlots
         Get
             Return ItemType.EquipSlots
         End Get

@@ -374,7 +374,7 @@
         Next
         CharacterType.DropLoot(Location)
     End Sub
-    Function Equipment(equipSlot As EquipSlot) As IItem Implements ICharacter.Equipment
+    Function Equipment(equipSlot As IEquipSlot) As IItem Implements ICharacter.Equipment
         Return Item.FromId(WorldData, WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
     End Function
     ReadOnly Property EquippedItems As IEnumerable(Of IItem)

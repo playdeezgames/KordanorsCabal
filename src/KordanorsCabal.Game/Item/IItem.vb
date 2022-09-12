@@ -12,7 +12,7 @@
     ReadOnly Property IsArmor() As Boolean
     ReadOnly Property IsConsumed As Boolean
     ReadOnly Property IsBroken As Boolean
-    ReadOnly Property EquipSlots() As IEnumerable(Of EquipSlot)
+    ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot)
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
     Sub Destroy()
     Function Encumbrance() As Long

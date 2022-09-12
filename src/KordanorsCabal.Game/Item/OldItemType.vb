@@ -81,7 +81,7 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).RollSpawnCount(dungeonLevel)
     End Function
     <Extension>
-    Public Function EquipSlots(itemType As OldItemType) As IEnumerable(Of EquipSlot)
+    Public Function EquipSlots(itemType As OldItemType) As IEnumerable(Of IEquipSlot)
         Return ItemTypeDescriptors(itemType).EquipSlots
     End Function
     <Extension>

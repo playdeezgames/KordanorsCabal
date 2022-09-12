@@ -48,7 +48,7 @@
     Friend ReadOnly Property RepairPrice As Long 'ItemTypeStatisticType
 
     '[ItemTypeEquipSlots]([ItemTypeId],[EquipSlotId])
-    ReadOnly Property EquipSlots As IEnumerable(Of EquipSlot)
+    ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot)
 
     '[ItemTypeOfferShopTypes]([ItemTypeId],[ShoppeTypeId],[TransactionType])--TransactionType = offer, price, repair
     Private ReadOnly Property boughtAt As IReadOnlyList(Of ShoppeType)
@@ -119,7 +119,7 @@
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long,
-           Optional equipSlots As IEnumerable(Of EquipSlot) = Nothing,
+           Optional equipSlots As IEnumerable(Of IEquipSlot) = Nothing,
            Optional buffs As IReadOnlyDictionary(Of Long, Long) = Nothing,
            Optional attackDice As Long = 0,
            Optional maximumDamage As Long? = Nothing,
@@ -135,7 +135,7 @@
            Optional canUseFunctionName As String = Nothing,
            Optional useActionName As String = Nothing)
         MyBase.New(worldData, itemTypeId)
-        Me.EquipSlots = If(equipSlots, Array.Empty(Of EquipSlot))
+        Me.EquipSlots = If(equipSlots, Array.Empty(Of IEquipSlot))
         Me.Offer = offer
         Me.Price = price
         Me.RepairPrice = repairPrice

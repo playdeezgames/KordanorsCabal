@@ -44,7 +44,7 @@
     Sub Cast(spellType As SpellType)
     Function CanCastSpell(spellType As SpellType) As Boolean
     ReadOnly Property EquippedSlots As IEnumerable(Of EquipSlot)
-    Function Equipment(equipSlot As EquipSlot) As IItem
+    Function Equipment(equipSlot As IEquipSlot) As IItem
     ReadOnly Property Encumbrance As Long
     Sub Equip(item As IItem)
     ReadOnly Property MaximumEncumbrance As Long
