@@ -25,15 +25,15 @@
         character.EnqueueMessage("You cannot complete this quest at this time.")
     End Sub
 
-    Public Overrides Sub Accept(character As ICharacter)
+    Public Overrides Sub Accept(worldData As IWorldData, character As ICharacter)
         If CanAccept(character) Then
             character.EnqueueMessage("You accept the quest!")
-            StaticWorldData.World.CharacterQuest.Write(character.Id, Quest.CellarRats)
-            Dim ratCount = If(StaticWorldData.World.CharacterQuestCompletion.Read(character.Id, Quest.CellarRats), 0) + 1
-            Dim location = Game.Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 7L)).Single
-            Dim initialStatistics = CharacterType.FromId(StaticWorldData.World, 13).Spawning.InitialStatistics()
+            worldData.CharacterQuest.Write(character.Id, Quest.CellarRats)
+            Dim ratCount = If(worldData.CharacterQuestCompletion.Read(character.Id, Quest.CellarRats), 0) + 1
+            Dim location = Game.Location.FromLocationType(worldData, LocationType.FromId(worldData, 7L)).Single
+            Dim initialStatistics = CharacterType.FromId(worldData, 13).Spawning.InitialStatistics()
             While ratCount > 0
-                Game.Character.Create(StaticWorldData.World, CharacterType.FromId(StaticWorldData.World, 13), location, initialStatistics)
+                Game.Character.Create(worldData, CharacterType.FromId(worldData, 13), location, initialStatistics)
                 ratCount -= 1
             End While
             Return

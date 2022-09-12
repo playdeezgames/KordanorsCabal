@@ -14,8 +14,8 @@ Public Module QuestExtensions
         Return QuestDescriptors(quest).CanAccept(character)
     End Function
     <Extension>
-    Sub Accept(quest As Quest, character As ICharacter)
-        QuestDescriptors(quest).Accept(character)
+    Sub Accept(quest As Quest, worldData As IWorldData, character As ICharacter)
+        QuestDescriptors(quest).Accept(worldData, character)
     End Sub
     <Extension>
     Function CanComplete(quest As Quest, character As ICharacter) As Boolean

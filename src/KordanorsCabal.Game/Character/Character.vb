@@ -111,9 +111,11 @@
     End Property
     Friend Shared Function Create(worldData As IWorldData, characterType As ICharacterType, location As ILocation, initialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))) As ICharacter
         Dim character = FromId(worldData, worldData.Character.Create(characterType.Id, location.Id))
-        For Each entry In initialStatistics
-            character.SetStatistic(entry.Item1, entry.Item2)
-        Next
+        If initialStatistics IsNot Nothing Then
+            For Each entry In initialStatistics
+                character.SetStatistic(entry.Item1, entry.Item2)
+            Next
+        End If
         Return character
     End Function
     Public Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long) Implements ICharacter.SetStatistic
@@ -131,8 +133,8 @@
             WorldData.CharacterLocation.Write(Id, value.Id)
         End Set
     End Property
-    Shared Function FromId(worldData As IWorldData, characterId As Long) As ICharacter
-        Return New Character(worldData, characterId)
+    Shared Function FromId(worldData As IWorldData, characterId As Long?) As ICharacter
+        Return If(characterId.HasValue, New Character(worldData, characterId.Value), Nothing)
     End Function
     Public Function GetStatistic(statisticType As ICharacterStatisticType) As Long? Implements ICharacter.GetStatistic
         Dim result = If(WorldData.CharacterStatistic.Read(Id,
@@ -687,7 +689,7 @@
         quest.Complete(Me)
     End Sub
     Public Sub AcceptQuest(quest As Quest) Implements ICharacter.AcceptQuest
-        quest.Accept(Me)
+        quest.Accept(WorldData, Me)
     End Sub
     Public ReadOnly Property CanInteract As Boolean Implements ICharacter.CanInteract
         Get
