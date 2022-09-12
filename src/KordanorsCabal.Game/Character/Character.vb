@@ -49,7 +49,7 @@
     End Function
     Property Money As Long Implements ICharacter.Money
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 14L)).Value
+            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 14L)), 0L)
         End Get
         Set(value As Long)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 14L), value)

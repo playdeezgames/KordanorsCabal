@@ -157,4 +157,19 @@
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhenAGivenCharacterCanGamble()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Const statisticTypeId = 14L
+
+                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+
+                subject.CanGamble.ShouldBeFalse
+
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+            End Sub)
+    End Sub
 End Class
