@@ -310,7 +310,7 @@
     End Function
     ReadOnly Property RollMoneyDrop As Long
         Get
-            Return CharacterType.RollMoneyDrop
+            Return CharacterType.Combat.RollMoneyDrop
         End Get
     End Property
     ReadOnly Property XPValue As Long

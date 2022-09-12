@@ -4,6 +4,5 @@
     ReadOnly Property Name As String
     ReadOnly Property Spawning As ICharacterTypeSpawning
     ReadOnly Property Combat As ICharacterTypeCombat
-    Function RollMoneyDrop() As Long
     ReadOnly Property XPValue As Long
 End Interface

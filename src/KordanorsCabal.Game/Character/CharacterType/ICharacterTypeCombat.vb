@@ -5,5 +5,5 @@
     Function GenerateAttackType() As AttackType
     Function IsEnemy(character As ICharacterType) As Boolean
     Function PartingShot() As String
-
+    Function RollMoneyDrop() As Long
 End Interface

@@ -1,5 +1,5 @@
 ﻿Public Class CharacterTypeCombatTests
-    Private Shared Sub WithAnyCharacterTypeCombat(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterTypeCombat))
+    Private Shared Sub WithAnySubject(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterTypeCombat))
         Dim characterTypeId = 1
         Dim worldData As New Mock(Of IWorldData)
         Dim subject As ICharacterTypeCombat = CharacterTypeCombat.FromId(worldData.Object, characterTypeId)
@@ -8,7 +8,7 @@
     End Sub
     <Fact>
     Sub ShouldQueryForTheAbilityToBribeAGivenCharacterTypeWitAGivenItemType()
-        WithAnyCharacterTypeCombat(
+        WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
                 Dim itemTypeId = OldItemType.AirShard
@@ -19,7 +19,7 @@
     End Sub
     <Fact>
     Sub ShouldDropLootForAGivenCharacterTypeOntoAGivenLocation()
-        WithAnyCharacterTypeCombat(
+        WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
                 Dim location As New Mock(Of ILocation)
@@ -30,7 +30,7 @@
     End Sub
     <Fact>
     Sub ShouldQueryForAttackTypeGenerationWeightsAndThenGenerate()
-        WithAnyCharacterTypeCombat(
+        WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
                 Dim actual = subject.GenerateAttackType()
@@ -40,7 +40,7 @@
     End Sub
     <Fact>
     Sub ShouldQueryForWhetherAGivenCharacterIsAnEnemyOfAGivenCharacterType()
-        WithAnyCharacterTypeCombat(
+        WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
                 Dim otherCharacterTypeId = 2L
@@ -54,12 +54,22 @@
     End Sub
     <Fact>
     Sub ShouldQueryForPartingShotOfAGivenCharacterType()
-        WithAnyCharacterTypeCombat(
+        WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
                 Dim actual = subject.PartingShot
                 actual.ShouldBeNull
                 worldData.Verify(Function(x) x.CharacterTypePartingShot.Read(characterTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldQueryForMoneyDropOfAGivenCharacterType()
+        WithAnySubject(
+            Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
+                Dim actual = subject.RollMoneyDrop()
+                actual.ShouldBe(0)
+                worldData.Verify(Function(x) x.CharacterType.ReadMoneyDropDice(characterTypeId))
             End Sub)
     End Sub
 End Class

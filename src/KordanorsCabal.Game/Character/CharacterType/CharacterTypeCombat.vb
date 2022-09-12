@@ -42,4 +42,7 @@
         End If
         Return RNG.FromGenerator(partingShotTable)
     End Function
+    Function RollMoneyDrop() As Long Implements ICharacterTypeCombat.RollMoneyDrop
+        Return RNG.RollDice(WorldData.CharacterType.ReadMoneyDropDice(Id))
+    End Function
 End Class

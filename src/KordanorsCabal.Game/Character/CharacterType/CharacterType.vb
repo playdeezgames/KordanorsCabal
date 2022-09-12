@@ -31,9 +31,6 @@
             Return CharacterTypeCombat.FromId(WorldData, Id)
         End Get
     End Property
-    Function RollMoneyDrop() As Long Implements ICharacterType.RollMoneyDrop
-        Return RNG.RollDice(WorldData.CharacterType.ReadMoneyDropDice(Id))
-    End Function
     Shared Function FromId(worldData As IWorldData, characterTypeId As Long) As ICharacterType
         Return New CharacterType(worldData, characterTypeId)
     End Function
