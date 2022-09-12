@@ -32,4 +32,14 @@
     Function IsEnemy(otherCharacterType As ICharacterType) As Boolean Implements ICharacterTypeCombat.IsEnemy
         Return WorldData.CharacterTypeEnemy.Read(Id, otherCharacterType.Id)
     End Function
+    Function PartingShot() As String Implements ICharacterTypeCombat.PartingShot
+        Dim partingShotTable = WorldData.CharacterTypePartingShot.Read(Id)
+        If partingShotTable Is Nothing Then
+            Return Nothing
+        End If
+        If Not partingShotTable.Any Then
+            Return ""
+        End If
+        Return RNG.FromGenerator(partingShotTable)
+    End Function
 End Class

@@ -52,4 +52,14 @@
                 worldData.Verify(Function(x) x.CharacterTypeEnemy.Read(characterTypeId, otherCharacterTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldQueryForPartingShotOfAGivenCharacterType()
+        WithAnyCharacterTypeCombat(
+            Sub(characterTypeId, worldData, subject)
+                worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
+                Dim actual = subject.PartingShot
+                actual.ShouldBeNull
+                worldData.Verify(Function(x) x.CharacterTypePartingShot.Read(characterTypeId))
+            End Sub)
+    End Sub
 End Class

@@ -264,7 +264,7 @@
     End Property
     ReadOnly Property PartingShot As String Implements ICharacter.PartingShot
         Get
-            Return CharacterType.PartingShot
+            Return CharacterType.Combat.PartingShot
         End Get
     End Property
     Property CurrentMP As Long Implements ICharacter.CurrentMP

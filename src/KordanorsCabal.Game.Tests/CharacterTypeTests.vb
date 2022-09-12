@@ -34,16 +34,6 @@ Public Class CharacterTypeTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForPartingShotOfAGivenCharacterType()
-        WithAnyCharacterType(
-            Sub(characterTypeId, worldData, subject)
-                worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
-                Dim actual = subject.PartingShot
-                actual.ShouldBeNull
-                worldData.Verify(Function(x) x.CharacterTypePartingShot.Read(characterTypeId))
-            End Sub)
-    End Sub
-    <Fact>
     Sub ShouldQueryForMoneyDropOfAGivenCharacterType()
         WithAnyCharacterType(
             Sub(characterTypeId, worldData, subject)

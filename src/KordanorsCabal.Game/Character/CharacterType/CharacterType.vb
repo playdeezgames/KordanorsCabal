@@ -31,16 +31,6 @@
             Return CharacterTypeCombat.FromId(WorldData, Id)
         End Get
     End Property
-    Function PartingShot() As String Implements ICharacterType.PartingShot
-        Dim partingShotTable = WorldData.CharacterTypePartingShot.Read(Id)
-        If partingShotTable Is Nothing Then
-            Return Nothing
-        End If
-        If Not partingShotTable.Any Then
-            Return ""
-        End If
-        Return RNG.FromGenerator(partingShotTable)
-    End Function
     Function RollMoneyDrop() As Long Implements ICharacterType.RollMoneyDrop
         Return RNG.RollDice(WorldData.CharacterType.ReadMoneyDropDice(Id))
     End Function

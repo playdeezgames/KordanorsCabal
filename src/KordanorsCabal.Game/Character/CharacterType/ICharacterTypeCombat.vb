@@ -4,4 +4,6 @@
     Sub DropLoot(location As ILocation)
     Function GenerateAttackType() As AttackType
     Function IsEnemy(character As ICharacterType) As Boolean
+    Function PartingShot() As String
+
 End Interface
