@@ -1,10 +1,7 @@
 ﻿Public Class CharacterTypeSpawningTests
-    Private Shared Sub WithAnySubject(stuffToDo As Action(Of Long, Mock(Of IWorldData), ICharacterTypeSpawning))
-        Dim characterTypeId = 1
-        Dim worldData As New Mock(Of IWorldData)
-        Dim subject As ICharacterTypeSpawning = CharacterTypeSpawning.FromId(worldData.Object, characterTypeId)
-        stuffToDo(characterTypeId, worldData, subject)
-        worldData.VerifyNoOtherCalls()
+    Inherits BaseThingieTests(Of ICharacterTypeSpawning)
+    Public Sub New()
+        MyBase.New(AddressOf CharacterTypeSpawning.FromId)
     End Sub
     <Fact>
     Sub ShouldQueryForTheAbilityToSpawnAGivenCharacterTypeAtAGivenLocationTypeAndAGivenDungeonLevel()
