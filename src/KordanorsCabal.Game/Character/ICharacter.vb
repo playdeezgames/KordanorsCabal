@@ -8,6 +8,7 @@
     ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean
     Function CanCastSpell(spellType As SpellType) As Boolean
     ReadOnly Property CanDoIntimidation() As Boolean
+    ReadOnly Property CanFight As Boolean
     ReadOnly Property CanGamble As Boolean
     ReadOnly Property CanIntimidate As Boolean
     ReadOnly Property CharacterType As ICharacterType
@@ -32,7 +33,6 @@
     Property CurrentMana As Long
     Property Chafing As Long
     Property Money As Long
-    ReadOnly Property CanFight As Boolean
     ReadOnly Property IsEncumbered As Boolean
     Function HasItemType(itemType As OldItemType) As Boolean
     ReadOnly Property NeedsHealing As Boolean
