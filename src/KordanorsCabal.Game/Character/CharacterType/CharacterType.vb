@@ -26,6 +26,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property Combat As ICharacterTypeCombat Implements ICharacterType.Combat
+        Get
+            Return CharacterTypeCombat.FromId(WorldData, Id)
+        End Get
+    End Property
+
     Function IsEnemy(otherCharacterType As ICharacterType) As Boolean Implements ICharacterType.IsEnemy
         Return WorldData.CharacterTypeEnemy.Read(Id, otherCharacterType.Id)
     End Function

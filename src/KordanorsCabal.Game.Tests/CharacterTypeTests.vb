@@ -116,6 +116,13 @@ Public Class CharacterTypeTests
                 subject.Spawning.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldRetrieveCombatSubobjectFromAGivenCharacterType()
+        WithAnyCharacterType(
+            Sub(characterTypeId, worldData, subject)
+                subject.Combat.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class
 
 
