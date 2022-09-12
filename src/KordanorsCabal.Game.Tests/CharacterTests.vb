@@ -50,4 +50,17 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(17))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldAttemptToAssignPoints()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
+                worldData.Setup(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                Dim statisticType As New Mock(Of ICharacterStatisticType)
+                subject.AssignPoint(statisticType.Object)
+                statisticType.VerifyNoOtherCalls()
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(1, 9))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(9))
+            End Sub)
+    End Sub
 End Class
