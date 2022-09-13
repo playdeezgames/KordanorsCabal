@@ -69,23 +69,14 @@
     End Sub
     <Fact>
     Sub ShouldDetermineWhenAGivenCharacterCanMoveLeft()
-        WithMovementSubject(
-            Sub(direction, worldData, subject)
-                Dim playerData = New Mock(Of IPlayerData)
-                Dim directionData = New Mock(Of IDirectionData)
-                Const directionId = 1L
-                playerData.Setup(Function(x) x.ReadDirection()).Returns(directionId)
-                worldData.SetupGet(Function(x) x.Player).Returns(playerData.Object)
-                worldData.SetupGet(Function(x) x.Direction).Returns(directionData.Object)
-                '
+        WithRelativeMovementSubject(
+            Sub(directionId, directionData, subject)
                 Const previousDirectionId = 2L
                 directionData.Setup(Function(x) x.ReadPrevious(directionId)).Returns(previousDirectionId)
 
                 subject.CanMoveLeft.ShouldBeFalse
 
                 directionData.Verify(Function(x) x.ReadPrevious(directionId))
-                '
-                playerData.Verify(Function(x) x.ReadDirection)
             End Sub)
     End Sub
 End Class
