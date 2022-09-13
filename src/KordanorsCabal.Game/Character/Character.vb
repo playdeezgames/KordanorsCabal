@@ -877,4 +877,10 @@
             Return GetStatistic(statisticType).HasValue
         End Get
     End Property
+
+    Public ReadOnly Property Movement As ICharacterMovement Implements ICharacter.Movement
+        Get
+            Return CharacterMovement.FromId(WorldData, Id)
+        End Get
+    End Property
 End Class

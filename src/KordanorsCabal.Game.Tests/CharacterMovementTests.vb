@@ -1,4 +1,4 @@
-﻿Public Class CharacterMoveTests
+﻿Public Class CharacterMovementTests
     Inherits BaseThingieTests(Of ICharacter)
     Sub New()
         MyBase.New(AddressOf Character.FromId)

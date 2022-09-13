@@ -228,4 +228,11 @@
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldContainTheCharacterMovementSubject()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                subject.Movement.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class
