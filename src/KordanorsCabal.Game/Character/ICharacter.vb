@@ -15,6 +15,9 @@
     Function CanLearn(spellType As SpellType) As Boolean
     ReadOnly Property CanMap() As Boolean
     Function CanMove(direction As IDirection) As Boolean
+    Function CanMoveBackward() As Boolean
+    Function CanMoveLeft() As Boolean
+    Function CanMoveRight() As Boolean
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long
     ReadOnly Property IsDead As Boolean
@@ -57,9 +60,6 @@
     ReadOnly Property MaximumEncumbrance As Long
     ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of IItem)
     Sub CompleteQuest(quest As Quest)
-    Function CanMoveBackward() As Boolean
-    Function CanMoveRight() As Boolean
-    Function CanMoveLeft() As Boolean
     Sub Gamble()
     Sub DoIntimidation()
     Sub Fight()
