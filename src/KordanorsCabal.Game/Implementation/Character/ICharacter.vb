@@ -6,13 +6,13 @@
     Sub AssignPoint(statisticType As ICharacterStatisticType)
     Function CanAcceptQuest(quest As Quest) As Boolean
     ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean
-    Function CanCastSpell(spellType As SpellType) As Boolean
+    Function CanCastSpell(spellType As OldSpellType) As Boolean
     ReadOnly Property CanDoIntimidation() As Boolean
     ReadOnly Property CanFight As Boolean
     ReadOnly Property CanGamble As Boolean
     ReadOnly Property CanInteract As Boolean
     ReadOnly Property CanIntimidate As Boolean
-    Function CanLearn(spellType As SpellType) As Boolean
+    Function CanLearn(spellType As OldSpellType) As Boolean
     ReadOnly Property CanMap() As Boolean
     ReadOnly Property Movement As ICharacterMovement
     ReadOnly Property CharacterType As ICharacterType
@@ -49,8 +49,8 @@
     Sub UseItem(item As IItem)
     Sub Unequip(equipSlot As IEquipSlot)
     Function HasVisited(location As ILocation) As Boolean
-    ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long)
-    Sub Cast(spellType As SpellType)
+    ReadOnly Property Spells As IReadOnlyDictionary(Of OldSpellType, Long)
+    Sub Cast(spellType As OldSpellType)
     ReadOnly Property EquippedSlots As IEnumerable(Of IEquipSlot)
     Function Equipment(equipSlot As IEquipSlot) As IItem
     ReadOnly Property Encumbrance As Long
@@ -79,7 +79,7 @@
     Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType)
     Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
     Sub EnqueueMessage(ParamArray lines() As String)
-    Sub Learn(spellType As SpellType)
+    Sub Learn(spellType As OldSpellType)
     Sub Heal()
     Sub DoFatigue(fatigue As Long)
     Sub DoCounterAttacks()
@@ -87,5 +87,5 @@
     Function RollDefend() As Long
     Function RollAttack() As Long
     Function RollInfluence() As Long
-    Function RollSpellDice(spellType As SpellType) As Long
+    Function RollSpellDice(spellType As OldSpellType) As Long
 End Interface

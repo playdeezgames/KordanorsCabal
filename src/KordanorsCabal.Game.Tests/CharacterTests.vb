@@ -116,7 +116,7 @@
     Sub ShouldDetermineWhetherAGiveCharacterCanCastAGivenSpell()
         WithAnySubject(
             Sub(id, worldData, subject)
-                Const spellType = Game.SpellType.Purify
+                Const spellType = Game.OldSpellType.Purify
                 Const statisticTypeId = 8L
                 Const otherStatisticTypeId = 15L
 
@@ -202,7 +202,7 @@
     Sub ShouldDetermineWhenAGivenCharacterCanLearnAGivenSpell()
         WithAnySubject(
             Sub(id, worldData, subject)
-                Const spellType = Game.SpellType.HolyBolt
+                Const spellType = Game.OldSpellType.HolyBolt
                 Const spellTypeId = CType(spellType, Long)
                 Const statisticTypeId = 5L
 

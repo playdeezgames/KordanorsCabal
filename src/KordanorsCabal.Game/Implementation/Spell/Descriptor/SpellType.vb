@@ -1,4 +1,4 @@
-﻿Public MustInherit Class SpellDescriptor
+﻿Public MustInherit Class SpellType
     MustOverride ReadOnly Property Name As String
 
     MustOverride ReadOnly Property MaximumLevel As Long
@@ -10,10 +10,10 @@
     MustOverride Sub Cast(character As ICharacter)
 End Class
 Friend Module SpellDescriptorUtility
-    Friend ReadOnly SpellDescriptors As IReadOnlyDictionary(Of SpellType, SpellDescriptor) =
-        New Dictionary(Of SpellType, SpellDescriptor) From
+    Friend ReadOnly SpellDescriptors As IReadOnlyDictionary(Of OldSpellType, SpellType) =
+        New Dictionary(Of OldSpellType, SpellType) From
         {
-            {SpellType.HolyBolt, New HolyBoltDescriptor},
-            {SpellType.Purify, New PurifyDescriptor}
+            {OldSpellType.HolyBolt, New HolyBoltDescriptor},
+            {OldSpellType.Purify, New PurifyDescriptor}
         }
 End Module

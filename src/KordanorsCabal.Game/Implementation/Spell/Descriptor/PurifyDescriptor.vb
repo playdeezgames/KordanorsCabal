@@ -1,5 +1,5 @@
 ﻿Friend Class PurifyDescriptor
-    Inherits SpellDescriptor
+    Inherits SpellType
 
     Public Overrides ReadOnly Property Name As String
         Get

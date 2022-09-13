@@ -4,11 +4,11 @@
     Sub New(worldData As IWorldData, characterId As Long)
         MyBase.New(worldData, characterId)
     End Sub
-    ReadOnly Property Spells As IReadOnlyDictionary(Of SpellType, Long) Implements ICharacter.Spells
+    ReadOnly Property Spells As IReadOnlyDictionary(Of OldSpellType, Long) Implements ICharacter.Spells
         Get
             Return WorldData.CharacterSpell.
                 ReadForCharacter(Id).
-                ToDictionary(Function(x) CType(x.Item1, SpellType), Function(x) x.Item2)
+                ToDictionary(Function(x) CType(x.Item1, OldSpellType), Function(x) x.Item2)
         End Get
     End Property
 
@@ -55,7 +55,7 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 14L), value)
         End Set
     End Property
-    Sub Learn(spellType As SpellType) Implements ICharacter.Learn
+    Sub Learn(spellType As OldSpellType) Implements ICharacter.Learn
         If Not CanLearn(spellType) Then
             EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
             Return
@@ -64,7 +64,7 @@
         EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
         WorldData.CharacterSpell.Write(Id, spellType, nextLevel)
     End Sub
-    Function CanLearn(spellType As SpellType) As Boolean Implements ICharacter.CanLearn
+    Function CanLearn(spellType As OldSpellType) As Boolean Implements ICharacter.CanLearn
         Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
         If nextLevel > spellType.MaximumLevel Then
             Return False
@@ -74,11 +74,11 @@
     Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)
     End Sub
-    Function RollSpellDice(spellType As SpellType) As Long Implements ICharacter.RollSpellDice
+    Function RollSpellDice(spellType As OldSpellType) As Long Implements ICharacter.RollSpellDice
         If Not Spells.ContainsKey(spellType) Then
             Return 0
         End If
-        Return RollDice(Power + Spells(SpellType.HolyBolt))
+        Return RollDice(Power + Spells(OldSpellType.HolyBolt))
     End Function
     ReadOnly Property Power As Long
         Get
@@ -632,7 +632,7 @@
             Return Spells.Keys.Any(Function(x) CanCastSpell(x))
         End Get
     End Property
-    Public Function CanCastSpell(spellType As SpellType) As Boolean Implements ICharacter.CanCastSpell
+    Public Function CanCastSpell(spellType As OldSpellType) As Boolean Implements ICharacter.CanCastSpell
         Return spellType.CanCast(Me)
     End Function
     Public Sub Gamble() Implements ICharacter.Gamble
@@ -657,7 +657,7 @@
         'TODO: sound effect
         EnqueueMessage(lines.ToArray)
     End Sub
-    Public Sub Cast(spellType As SpellType) Implements ICharacter.Cast
+    Public Sub Cast(spellType As OldSpellType) Implements ICharacter.Cast
         If Not CanCastSpell(spellType) Then
             EnqueueMessage($"You cannot cast {spellType.Name} at this time.")
             Return

@@ -9,8 +9,8 @@
     Friend ReadOnly UseActions As IReadOnlyDictionary(Of String, Action(Of ICharacter)) =
         New Dictionary(Of String, Action(Of ICharacter)) From
         {
-            {"LearnHolyBolt", Sub(character) character.Learn(SpellType.HolyBolt)},
-            {"LearnPurify", Sub(character) character.Learn(SpellType.Purify)},
+            {"LearnHolyBolt", Sub(character) character.Learn(OldSpellType.HolyBolt)},
+            {"LearnPurify", Sub(character) character.Learn(OldSpellType.Purify)},
             {"EatFood",
                 Sub(character)
                     Dim healRoll = 1
@@ -190,7 +190,7 @@
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You use {OldItemType.EarthShard.Name} on {enemy.Name}!")
-                    Dim immobilization As Long = character.RollSpellDice(SpellType.HolyBolt)
+                    Dim immobilization As Long = character.RollSpellDice(OldSpellType.HolyBolt)
                     lines.Add($"You immobilize {enemy.Name} for {immobilization} turns!")
                     enemy.DoImmobilization(immobilization)
                     character.EnqueueMessage(sfx, lines.ToArray)
@@ -229,7 +229,7 @@
     Friend ReadOnly CanUseFunctions As IReadOnlyDictionary(Of String, Func(Of ICharacter, Boolean)) =
         New Dictionary(Of String, Func(Of ICharacter, Boolean)) From
         {
-            {"CanLearnHolyBolt", Function(character) character.CanLearn(SpellType.HolyBolt)},
+            {"CanLearnHolyBolt", Function(character) character.CanLearn(OldSpellType.HolyBolt)},
             {"CanUseBeer", Function(character)
                                Dim enemy = character.Location.Enemy(character)
                                Return enemy Is Nothing OrElse enemy.CanBeBribedWith(OldItemType.Beer)
@@ -260,6 +260,6 @@
                                  Dim enemy = character.Location.Enemy(character)
                                  Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Bottle)
                              End Function},
-            {"CanLearnPurify", Function(character) character.CanLearn(SpellType.Purify)}
+            {"CanLearnPurify", Function(character) character.CanLearn(OldSpellType.Purify)}
         }
 End Module

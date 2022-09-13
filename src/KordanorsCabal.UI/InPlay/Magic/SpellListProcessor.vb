@@ -3,7 +3,7 @@
 Friend Class SpellListProcessor
     Implements IProcessor
 
-    Private items As List(Of (SpellType, Long))
+    Private items As List(Of (OldSpellType, Long))
     Private currentItemIndex As Integer = 0
     Const ListStartRow = 2
     Const ListHiliteRow = 10

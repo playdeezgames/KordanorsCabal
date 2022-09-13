@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Item\Descriptor\Book\" />
+    <Folder Include="Implementation\Item\Descriptor\Book\" />
   </ItemGroup>
 
 </Project>
