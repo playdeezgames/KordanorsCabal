@@ -15,10 +15,6 @@
     Function CanLearn(spellType As SpellType) As Boolean
     ReadOnly Property CanMap() As Boolean
     ReadOnly Property Movement As ICharacterMovement
-    Function CanMove(direction As IDirection) As Boolean
-    Function CanMoveBackward() As Boolean
-    Function CanMoveLeft() As Boolean
-    Function CanMoveRight() As Boolean
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long
     ReadOnly Property IsDead As Boolean

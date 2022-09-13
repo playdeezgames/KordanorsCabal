@@ -28,28 +28,28 @@ Friend Class MoveModeProcessor
 
     Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(CancelButtonIndex).Title = "Cancel"
-        If player.CanMoveLeft Then
+        If player.Movement.CanMoveLeft Then
             Buttons(LeftButtonIndex).Title = "Left"
         End If
-        If player.CanMoveRight Then
+        If player.Movement.CanMoveRight Then
             Buttons(RightButtonIndex).Title = "Right"
         End If
         If player.CanMoveForward Then
             Buttons(ForwardButtonIndex).Title = "Forward"
         End If
-        If player.CanMoveBackward Then
+        If player.Movement.CanMoveBackward Then
             Buttons(BackwardButtonIndex).Title = "Backward"
         End If
-        If player.CanMove(Direction.FromId(StaticWorldData.World, 5L)) Then
+        If player.Movement.CanMove(Direction.FromId(StaticWorldData.World, 5L)) Then
             Buttons(UpButtonIndex).Title = "Up"
         End If
-        If player.CanMove(Direction.FromId(StaticWorldData.World, 6L)) Then
+        If player.Movement.CanMove(Direction.FromId(StaticWorldData.World, 6L)) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
-        If player.CanMove(Direction.FromId(StaticWorldData.World, 7L)) Then
+        If player.Movement.CanMove(Direction.FromId(StaticWorldData.World, 7L)) Then
             Buttons(InButtonIndex).Title = "In"
         End If
-        If player.CanMove(Direction.FromId(StaticWorldData.World, 8L)) Then
+        If player.Movement.CanMove(Direction.FromId(StaticWorldData.World, 8L)) Then
             Buttons(OutButtonIndex).Title = "Out"
         End If
     End Sub
@@ -80,7 +80,7 @@ Friend Class MoveModeProcessor
     End Function
 
     Private Function HandleMove(player As ICharacter, direction As IDirection) As UIState
-        If player.CanMove(direction) Then
+        If player.Movement.CanMove(direction) Then
             PopButtonIndex()
             player.Mode = PlayerMode.Neutral
             If player.Move(direction) Then

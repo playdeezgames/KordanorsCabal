@@ -1,9 +1,9 @@
 ﻿Public Class CharacterMovementTests
-    Inherits BaseThingieTests(Of ICharacter)
+    Inherits BaseThingieTests(Of ICharacterMovement)
     Sub New()
-        MyBase.New(AddressOf Character.FromId)
+        MyBase.New(AddressOf CharacterMovement.FromId)
     End Sub
-    Private Sub WithMovementSubject(stuffToDo As Action(Of IDirection, Mock(Of IWorldData), ICharacter))
+    Private Sub WithMovementSubject(stuffToDo As Action(Of IDirection, Mock(Of IWorldData), ICharacterMovement))
         WithAnySubject(
             Sub(id, worldData, subject)
                 Dim direction As New Mock(Of IDirection)
@@ -42,7 +42,7 @@
                 subject.CanMove(direction).ShouldBeFalse
             End Sub)
     End Sub
-    Private Sub WithRelativeMovementSubject(stuffToDo As Action(Of Long, Mock(Of IDirectionData), ICharacter))
+    Private Sub WithRelativeMovementSubject(stuffToDo As Action(Of Long, Mock(Of IDirectionData), ICharacterMovement))
         WithMovementSubject(
             Sub(direction, worldData, subject)
                 Dim playerData = New Mock(Of IPlayerData)
@@ -89,6 +89,13 @@
                 subject.CanMoveRight.ShouldBeFalse
 
                 directionData.Verify(Function(x) x.ReadNext(directionId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldAllowAccessToCharacteSubobject()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                subject.Character.ShouldNotBeNull
             End Sub)
     End Sub
 End Class
