@@ -79,4 +79,16 @@
                 directionData.Verify(Function(x) x.ReadPrevious(directionId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhenAGivenCharacterCanMoveRight()
+        WithRelativeMovementSubject(
+            Sub(directionId, directionData, subject)
+                Const nextDirectionId = 2L
+                directionData.Setup(Function(x) x.ReadNext(directionId)).Returns(nextDirectionId)
+
+                subject.CanMoveRight.ShouldBeFalse
+
+                directionData.Verify(Function(x) x.ReadNext(directionId))
+            End Sub)
+    End Sub
 End Class
