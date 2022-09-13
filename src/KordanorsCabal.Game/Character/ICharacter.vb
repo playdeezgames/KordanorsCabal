@@ -16,14 +16,15 @@
     ReadOnly Property CanMap() As Boolean
     ReadOnly Property Movement As ICharacterMovement
     ReadOnly Property CharacterType As ICharacterType
+    Property Location As ILocation
+    ReadOnly Property Name As String
+
     Property CurrentHP As Long
     ReadOnly Property IsDead As Boolean
     ReadOnly Property IsEnemy(character As ICharacter) As Boolean
     ReadOnly Property IsDemoralized As Boolean
     ReadOnly Property IsUndead As Boolean
-    Property Location As ILocation
     ReadOnly Property MaximumHP As Long
-    ReadOnly Property Name As String
     ReadOnly Property PartingShot As String
     ReadOnly Property MaximumMana As Long
     Property Statistic(statisticType As ICharacterStatisticType) As Long
