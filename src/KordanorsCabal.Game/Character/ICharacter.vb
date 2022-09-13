@@ -19,9 +19,9 @@
     Property Location As ILocation
     ReadOnly Property Name As String
     Property CurrentHP As Long
-
     ReadOnly Property IsDead As Boolean
     ReadOnly Property IsEnemy(character As ICharacter) As Boolean
+
     ReadOnly Property IsDemoralized As Boolean
     ReadOnly Property IsUndead As Boolean
     ReadOnly Property MaximumHP As Long

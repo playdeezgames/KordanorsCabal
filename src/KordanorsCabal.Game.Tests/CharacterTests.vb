@@ -314,4 +314,25 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(secondStatisticTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhetherAGivenCharacterIsTheEnemyOfAnotherCharacter()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Const otherCharacterId = 1L
+                Const characterTypeId = 2L
+                Const otherCharacterTypeId = 3L
+                Dim otherCharacter = Character.FromId(worldData.Object, otherCharacterId)
+                Dim characterData = FreshMock(Of ICharacterData)()
+                characterData.Setup(Function(x) x.ReadCharacterType(id)).Returns(characterTypeId)
+                characterData.Setup(Function(x) x.ReadCharacterType(otherCharacterId)).Returns(otherCharacterTypeId)
+                worldData.SetupGet(Function(x) x.Character).Returns(characterData.Object)
+                worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns(FreshMock(Of ICharacterTypeEnemyData).Object)
+
+                subject.IsEnemy(otherCharacter).ShouldBeFalse
+
+                worldData.Verify(Function(x) x.Character.ReadCharacterType(id))
+                worldData.Verify(Function(x) x.Character.ReadCharacterType(otherCharacterId))
+                worldData.Verify(Function(x) x.CharacterTypeEnemy.Read(characterTypeId, otherCharacterTypeId))
+            End Sub)
+    End Sub
 End Class

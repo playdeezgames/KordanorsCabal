@@ -10,4 +10,7 @@
         stuffToDo(itemTypeId, worldData, subject)
         worldData.VerifyNoOtherCalls()
     End Sub
+    Protected Function FreshMock(Of TMock As Class)() As Mock(Of TMock)
+        Return New Mock(Of TMock)()
+    End Function
 End Class
