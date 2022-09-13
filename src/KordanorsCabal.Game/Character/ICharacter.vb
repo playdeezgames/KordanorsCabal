@@ -12,6 +12,8 @@
     ReadOnly Property CanGamble As Boolean
     ReadOnly Property CanInteract As Boolean
     ReadOnly Property CanIntimidate As Boolean
+    Function CanLearn(spellType As SpellType) As Boolean
+    ReadOnly Property CanMap() As Boolean
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long
     ReadOnly Property IsDead As Boolean
@@ -53,7 +55,6 @@
     Sub Equip(item As IItem)
     ReadOnly Property MaximumEncumbrance As Long
     ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of IItem)
-    ReadOnly Property CanMap() As Boolean
     Sub CompleteQuest(quest As Quest)
     Function CanMoveBackward() As Boolean
     Function CanMoveRight() As Boolean
@@ -72,7 +73,6 @@
     Function GetStatistic(statisticType As ICharacterStatisticType) As Long?
     Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long)
     Function HasQuest(quest As Quest) As Boolean
-    Function CanLearn(spellType As SpellType) As Boolean
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     Sub Destroy()
     Function DetermineDamage(value As Long) As Long

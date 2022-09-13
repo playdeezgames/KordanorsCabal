@@ -198,4 +198,34 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhenAGivenCharacterCanLearnAGivenSpell()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Const spellType = Game.SpellType.HolyBolt
+                Const spellTypeId = CType(spellType, Long)
+                Const statisticTypeId = 5L
+
+                worldData.SetupGet(Function(x) x.CharacterSpell).Returns((New Mock(Of ICharacterSpellData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+
+                subject.CanLearn(spellType).ShouldBeFalse
+
+                worldData.Verify(Function(x) x.CharacterSpell.Read(id, spellTypeId))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldDetermineWhenAGivenCharacterCanMap()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
+
+                subject.CanMap.ShouldBeFalse
+
+                worldData.Verify(Function(x) x.Character.ReadLocation(id))
+            End Sub)
+    End Sub
 End Class

@@ -718,7 +718,8 @@
     End Function
     Public ReadOnly Property CanMap() As Boolean Implements ICharacter.CanMap
         Get
-            Return Location.CanMap
+            Dim result = Location
+            Return If(result IsNot Nothing, result.CanMap, False)
         End Get
     End Property
     Public Function CanMoveRight() As Boolean Implements ICharacter.CanMoveRight
