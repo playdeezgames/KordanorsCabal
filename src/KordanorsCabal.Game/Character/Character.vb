@@ -262,7 +262,7 @@
     End Property
     Property CurrentHP As Long Implements ICharacter.CurrentHP
         Get
-            Return Math.Max(0, MaximumHP - GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value)
+            Return Math.Max(0, MaximumHP - If(GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)), 0))
         End Get
         Set(value As Long)
             SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value - value)
@@ -270,7 +270,7 @@
     End Property
     ReadOnly Property MaximumHP As Long Implements ICharacter.MaximumHP
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value
+            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)), 0)
         End Get
     End Property
     ReadOnly Property PartingShot As String Implements ICharacter.PartingShot

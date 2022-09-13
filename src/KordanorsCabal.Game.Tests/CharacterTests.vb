@@ -280,4 +280,21 @@
                 worldData.Verify(Function(x) x.CharacterType.ReadName(characterTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineAGiveCharactersCurrentHPBasedOnThatCharactersMaximumHPAndWounds()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Const firstStatisticTypeId = 6L
+                Const secondStatisticTypeId = 12L
+                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+
+                subject.CurrentHP.ShouldBe(0)
+
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, firstStatisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, secondStatisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(firstStatisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(secondStatisticTypeId))
+            End Sub)
+    End Sub
 End Class
