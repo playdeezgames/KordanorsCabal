@@ -183,4 +183,19 @@
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhenAGivenCharacterCanIntimidate()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Const statisticTypeId = 4L
+
+                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+
+                subject.CanIntimidate.ShouldBeFalse
+
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+            End Sub)
+    End Sub
 End Class

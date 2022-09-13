@@ -10,6 +10,7 @@
     ReadOnly Property CanDoIntimidation() As Boolean
     ReadOnly Property CanFight As Boolean
     ReadOnly Property CanGamble As Boolean
+    ReadOnly Property CanInteract As Boolean
     ReadOnly Property CanIntimidate As Boolean
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long
@@ -36,7 +37,6 @@
     ReadOnly Property IsEncumbered As Boolean
     Function HasItemType(itemType As OldItemType) As Boolean
     ReadOnly Property NeedsHealing As Boolean
-    ReadOnly Property CanInteract As Boolean
     Sub Interact()
     ReadOnly Property HasSpells As Boolean
     Function HasItemsToRepair(shoppeType As ShoppeType) As Boolean
