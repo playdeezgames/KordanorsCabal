@@ -14,6 +14,7 @@
     ReadOnly Property CanIntimidate As Boolean
     Function CanLearn(spellType As SpellType) As Boolean
     ReadOnly Property CanMap() As Boolean
+    Function CanMove(direction As IDirection) As Boolean
     ReadOnly Property CharacterType As ICharacterType
     Property CurrentHP As Long
     ReadOnly Property IsDead As Boolean
@@ -64,7 +65,6 @@
     Sub Fight()
     Sub PurifyItems()
     Property Direction As IDirection
-    Function CanMove(direction As IDirection) As Boolean
     Sub Run()
     Function Move(direction As IDirection) As Boolean
     Property Mode As PlayerMode

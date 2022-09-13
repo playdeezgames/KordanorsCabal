@@ -779,7 +779,7 @@
         If IsEncumbered Then
             Return False
         End If
-        If Not Location.HasRoute(direction) Then
+        If Location Is Nothing OrElse Not Location.HasRoute(direction) Then
             Return False
         End If
         If Not Location.Routes(direction).CanMove(Me) Then

@@ -228,4 +228,37 @@
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldDetermineWhenAGivenCharacterCanMoveInAGivenDirection()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Dim direction As New Mock(Of IDirection)
+                Dim createdInventoryId = 1L
+                Dim inventory = New Mock(Of IInventoryData)
+                Const firstStatisticId = 24
+                Const secondStatisticId = 25
+                Const thirdStatisticId = 1
+                inventory.Setup(Function(x) x.CreateForCharacter(It.IsAny(Of Long))).Returns(createdInventoryId)
+                worldData.SetupGet(Function(x) x.Inventory).Returns(inventory.Object)
+                worldData.SetupGet(Function(x) x.InventoryItem).Returns((New Mock(Of IInventoryItemData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterEquipSlot).Returns((New Mock(Of ICharacterEquipSlotData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
+
+                subject.CanMove(direction.Object).ShouldBeFalse
+
+                worldData.Verify(Function(x) x.Inventory.ReadForCharacter(id))
+                worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
+                worldData.Verify(Function(x) x.InventoryItem.ReadItems(createdInventoryId))
+                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, firstStatisticId))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, secondStatisticId))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, thirdStatisticId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(firstStatisticId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(secondStatisticId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(thirdStatisticId))
+                worldData.Verify(Function(x) x.Character.ReadLocation(id))
+            End Sub)
+    End Sub
 End Class
