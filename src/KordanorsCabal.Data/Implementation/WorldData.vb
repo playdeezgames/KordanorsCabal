@@ -40,6 +40,7 @@ Public Class WorldData
     Public ReadOnly Property LocationType As ILocationTypeData Implements IWorldData.LocationType
     Public ReadOnly Property Player As IPlayerData Implements IWorldData.Player
     Public ReadOnly Property Route As IRouteData Implements IWorldData.Route
+    Public ReadOnly Property SpellType As ISpellTypeData Implements IWorldData.SpellType
 
     Public Sub New(store As IStore)
         Me.Store = store
@@ -80,6 +81,7 @@ Public Class WorldData
         LocationStatistic = New LocationStatisticData(store, Me)
         Player = New PlayerData(store, Me)
         Route = New RouteData(store, Me)
+        SpellType = New SpellTypeData(store, Me)
     End Sub
 
     Public Sub Save(filename As String)

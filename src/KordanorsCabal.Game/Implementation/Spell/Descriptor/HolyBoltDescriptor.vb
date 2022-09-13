@@ -5,17 +5,6 @@
         MyBase.New(worldData, id)
     End Sub
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Holy Bolt"
-        End Get
-    End Property
-    Public Overrides ReadOnly Property MaximumLevel As Long
-        Get
-            Return 1
-        End Get
-    End Property
-
     Public Overrides ReadOnly Property RequiredPower(level As Long) As Long
         Get
             Select Case level
@@ -41,13 +30,13 @@
 
     Public Overrides Sub Cast(character As ICharacter)
         If Not CanCast(character) Then
-            character.EnqueueMessage($"You cannot cast {OldSpellType.HolyBolt.Name} now!")
+            character.EnqueueMessage($"You cannot cast {OldSpellType.HolyBolt.Name(WorldData)} now!")
             Return
         End If
         Dim enemy = character.Location.Enemy(character)
         Dim lines As New List(Of String)
         Dim sfx As Sfx? = Nothing
-        lines.Add($"You cast {OldSpellType.HolyBolt.Name} on {enemy.Name}!")
+        lines.Add($"You cast {OldSpellType.HolyBolt.Name(WorldData)} on {enemy.Name}!")
         character.DoFatigue(1)
         Dim damage As Long = character.RollSpellDice(OldSpellType.HolyBolt)
         lines.Add($"You do {damage} damage!")

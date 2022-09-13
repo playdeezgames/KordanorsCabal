@@ -20,7 +20,7 @@ Friend Class SpellListProcessor
                 Dim spellType = items(itemIndex).Item1
                 Dim rowHue = If(player.CanCastSpell(spellType), Hue.Black, Hue.Red)
                 buffer.FillCells((0, row), (buffer.Columns, 1), Pattern.Space, itemIndex = currentItemIndex, rowHue)
-                buffer.WriteTextCentered(row, $"{spellType.Name}(Lvl{items(itemIndex).Item2})", itemIndex = currentItemIndex, rowHue)
+                buffer.WriteTextCentered(row, $"{spellType.Name(StaticWorldData.World)}(Lvl{items(itemIndex).Item2})", itemIndex = currentItemIndex, rowHue)
             End If
         Next
 

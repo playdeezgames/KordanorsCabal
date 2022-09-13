@@ -6,9 +6,17 @@
         MyBase.New(worldData, id)
     End Sub
 
-    MustOverride ReadOnly Property Name As String Implements ISpellType.Name
+    ReadOnly Property Name As String Implements ISpellType.Name
+        Get
+            Return WorldData.SpellType.ReadName(Id)
+        End Get
+    End Property
 
-    MustOverride ReadOnly Property MaximumLevel As Long Implements ISpellType.MaximumLevel
+    ReadOnly Property MaximumLevel As Long Implements ISpellType.MaximumLevel
+        Get
+            Return If(WorldData.SpellType.ReadMaximumLevel(Id), 0)
+        End Get
+    End Property
 
     MustOverride ReadOnly Property RequiredPower(level As Long) As Long Implements ISpellType.RequiredPower
 
@@ -17,10 +25,10 @@
     MustOverride Sub Cast(character As ICharacter) Implements ISpellType.Cast
 End Class
 Friend Module SpellDescriptorUtility
-    Friend ReadOnly SpellDescriptors As IReadOnlyDictionary(Of OldSpellType, SpellType) =
-        New Dictionary(Of OldSpellType, SpellType) From
+    Friend ReadOnly SpellDescriptors As IReadOnlyDictionary(Of OldSpellType, Func(Of IWorldData, SpellType)) =
+        New Dictionary(Of OldSpellType, Func(Of IWorldData, SpellType)) From
         {
-            {OldSpellType.HolyBolt, New HolyBoltDescriptor(StaticWorldData.World, OldSpellType.HolyBolt)},
-            {OldSpellType.Purify, New PurifyDescriptor(StaticWorldData.World, OldSpellType.Purify)}
+            {OldSpellType.HolyBolt, Function(x) New HolyBoltDescriptor(x, OldSpellType.HolyBolt)},
+            {OldSpellType.Purify, Function(x) New PurifyDescriptor(x, OldSpellType.Purify)}
         }
 End Module

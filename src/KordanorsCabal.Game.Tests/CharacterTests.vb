@@ -204,17 +204,15 @@
             Sub(id, worldData, subject)
                 Const spellType = Game.OldSpellType.HolyBolt
                 Const spellTypeId = CType(spellType, Long)
-                Const statisticTypeId = 5L
+                'Const statisticTypeId = 5L
 
+                worldData.SetupGet(Function(x) x.SpellType).Returns((New Mock(Of ISpellTypeData)).Object)
                 worldData.SetupGet(Function(x) x.CharacterSpell).Returns((New Mock(Of ICharacterSpellData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
 
                 subject.CanLearn(spellType).ShouldBeFalse
 
                 worldData.Verify(Function(x) x.CharacterSpell.Read(id, spellTypeId))
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+                worldData.Verify(Function(x) x.SpellType.ReadMaximumLevel(spellTypeId))
             End Sub)
     End Sub
     <Fact>

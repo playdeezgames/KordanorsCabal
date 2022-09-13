@@ -5,18 +5,6 @@
         MyBase.New(worldData, id)
     End Sub
 
-    Public Overrides ReadOnly Property Name As String
-        Get
-            Return "Purify"
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property MaximumLevel As Long
-        Get
-            Return 1
-        End Get
-    End Property
-
     Public Overrides ReadOnly Property RequiredPower(level As Long) As Long
         Get
             Return 0

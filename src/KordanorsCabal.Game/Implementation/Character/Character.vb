@@ -57,19 +57,19 @@
     End Property
     Sub Learn(spellType As OldSpellType) Implements ICharacter.Learn
         If Not CanLearn(spellType) Then
-            EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
+            EnqueueMessage($"You cannot learn {spellType.Name(WorldData)} at this time!")
             Return
         End If
         Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
-        EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
+        EnqueueMessage($"You now know {spellType.Name(WorldData)} at level {nextLevel}.")
         WorldData.CharacterSpell.Write(Id, spellType, nextLevel)
     End Sub
     Function CanLearn(spellType As OldSpellType) As Boolean Implements ICharacter.CanLearn
         Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
-        If nextLevel > spellType.MaximumLevel Then
+        If nextLevel > spellType.MaximumLevel(WorldData) Then
             Return False
         End If
-        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) >= spellType.RequiredPower(nextLevel)
+        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) >= spellType.RequiredPower(WorldData, nextLevel)
     End Function
     Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)
@@ -633,7 +633,7 @@
         End Get
     End Property
     Public Function CanCastSpell(spellType As OldSpellType) As Boolean Implements ICharacter.CanCastSpell
-        Return spellType.CanCast(Me)
+        Return spellType.CanCast(WorldData, Me)
     End Function
     Public Sub Gamble() Implements ICharacter.Gamble
         If Not CanGamble Then
@@ -659,10 +659,10 @@
     End Sub
     Public Sub Cast(spellType As OldSpellType) Implements ICharacter.Cast
         If Not CanCastSpell(spellType) Then
-            EnqueueMessage($"You cannot cast {spellType.Name} at this time.")
+            EnqueueMessage($"You cannot cast {spellType.Name(WorldData)} at this time.")
             Return
         End If
-        spellType.Cast(Me)
+        spellType.Cast(WorldData, Me)
     End Sub
     Public Sub Equip(item As IItem) Implements ICharacter.Equip
         If item.CanEquip Then

@@ -36,4 +36,5 @@
     ReadOnly Property LocationType As ILocationTypeData
     ReadOnly Property Player As IPlayerData
     ReadOnly Property Route As IRouteData
+    ReadOnly Property SpellType As ISpellTypeData
 End Interface
