@@ -36,7 +36,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanMoveInAGivenDirection()
+    Sub characters_determine_whether_they_can_move_in_a_given_direction()
         WithMovementSubject(
             Sub(direction, worldData, subject)
                 subject.CanMove(direction).ShouldBeFalse
@@ -56,7 +56,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanMoveBackwards()
+    Sub characters_determine_whether_they_can_move_backward()
         WithRelativeMovementSubject(
             Sub(directionId, directionData, subject)
                 Const oppositeDirectionId = 2L
@@ -68,7 +68,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanMoveLeft()
+    Sub characters_determine_whether_they_can_move_left()
         WithRelativeMovementSubject(
             Sub(directionId, directionData, subject)
                 Const previousDirectionId = 2L
@@ -80,7 +80,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanMoveRight()
+    Sub characters_can_determine_whether_they_can_move_right()
         WithRelativeMovementSubject(
             Sub(directionId, directionData, subject)
                 Const nextDirectionId = 2L
@@ -92,14 +92,14 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldAllowAccessToCharacterSubobject()
+    Sub character_movement_can_access_character_subobject()
         WithAnySubject(
             Sub(id, worldData, subject)
-                subject.Character.ShouldNotBeNull
+                subject.Character.Id.ShouldBe(id)
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldAttemptToMoveACharacter()
+    Sub characters_can_move_in_a_given_directions()
         WithMovementSubject(
             Sub(direction, worldData, subject)
                 subject.Move(direction)
