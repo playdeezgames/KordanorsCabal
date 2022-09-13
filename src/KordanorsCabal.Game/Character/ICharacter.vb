@@ -63,7 +63,6 @@
     Sub PurifyItems()
     Property Direction As IDirection
     Sub Run()
-    Function Move(direction As IDirection) As Boolean
     Property Mode As PlayerMode
     ReadOnly Property IsFullyAssigned As Boolean
     Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long)

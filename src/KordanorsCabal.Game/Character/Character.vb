@@ -771,30 +771,13 @@
             Direction = RNG.FromEnumerable(CardinalDirections(WorldData))
             If Movement.CanMove(Direction) Then
                 EnqueueMessage("You successfully ran!") 'TODO: sfx
-                Move(Direction)
+                Movement.Move(Direction)
                 Exit Sub
             End If
             EnqueueMessage("You fail to run!") 'TODO: shucks!
             DoCounterAttacks()
         End If
     End Sub
-    Public Function Move(direction As IDirection) As Boolean Implements ICharacter.Move
-        If Movement.CanMove(direction) Then
-            Dim hungerRate = Math.Max(Highness \ 2 + FoodPoisoning \ 2, 1)
-            Hunger += hungerRate
-            Drunkenness -= 1
-            Highness -= 1
-            FoodPoisoning -= 1
-            Chafing -= 1
-            Location = Location.Routes(direction).Move(Me)
-            If Hunger = CharacterStatisticType.FromId(WorldData, 20L).MaximumValue Then
-                Hunger \= 2
-                CurrentHP -= 1
-                Return True
-            End If
-        End If
-        Return False
-    End Function
     Public Sub Fight() Implements ICharacter.Fight
         If CanFight Then
             DoAttack()

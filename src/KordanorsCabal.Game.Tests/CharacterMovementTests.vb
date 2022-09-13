@@ -92,10 +92,17 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldAllowAccessToCharacteSubobject()
+    Sub ShouldAllowAccessToCharacterSubobject()
         WithAnySubject(
             Sub(id, worldData, subject)
                 subject.Character.ShouldNotBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldAttemptToMoveACharacter()
+        WithMovementSubject(
+            Sub(direction, worldData, subject)
+                subject.Move(direction)
             End Sub)
     End Sub
 End Class

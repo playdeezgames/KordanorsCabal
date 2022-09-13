@@ -5,4 +5,5 @@
     Function CanMoveLeft() As Boolean
     Function CanMoveRight() As Boolean
     ReadOnly Property Character As ICharacter
+    Function Move(direction As IDirection) As Boolean
 End Interface
