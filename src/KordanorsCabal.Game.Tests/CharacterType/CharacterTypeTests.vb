@@ -6,14 +6,14 @@ Public Class CharacterTypeTests
     End Sub
 
     <Fact>
-    Sub ShouldConstructFromWorldDataAndACharacterTypeId()
+    Sub character_types_store_character_type_ids()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 subject.Id.ShouldBe(characterTypeId)
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForUndeadStatusOfAGivenCharacterType()
+    Sub character_types_have_an_undead_flag_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
@@ -23,7 +23,7 @@ Public Class CharacterTypeTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForNameOfAGivenCharacterType()
+    Sub character_types_have_names_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
@@ -33,17 +33,17 @@ Public Class CharacterTypeTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldRetrieveSpawningSubobjectFromAGivenCharacterType()
+    Sub character_types_contain_spawning_subobjects()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
-                subject.Spawning.ShouldNotBeNull
+                subject.Spawning.Id.ShouldBe(characterTypeId)
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldRetrieveCombatSubobjectFromAGivenCharacterType()
+    Sub character_types_contain_combat_subobjects()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
-                subject.Combat.ShouldNotBeNull
+                subject.Combat.Id.ShouldBe(characterTypeId)
             End Sub)
     End Sub
 End Class

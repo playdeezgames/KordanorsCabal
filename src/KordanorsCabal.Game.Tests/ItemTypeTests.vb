@@ -4,14 +4,14 @@
         MyBase.New(AddressOf ItemType.FromId)
     End Sub
     <Fact>
-    Sub ShouldConstructFromWorldDataAndAnItemTypeId()
+    Sub item_types_hold_item_type_ids()
         WithAnySubject(
             Sub(itemTypeId, worldData, subject)
                 subject.Id.ShouldBe(itemTypeId)
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheWorldDataForItemTypeName()
+    Sub item_types_have_names_fetched_from_the_data_store()
         WithAnySubject(
             Sub(itemTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.ItemType).Returns((New Mock(Of IItemTypeData)).Object)
@@ -20,7 +20,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheWorldDataForItemTypeIsConsumedFlag()
+    Sub item_types_have_consumption_flags_fetched_from_the_data_store()
         WithAnySubject(
             Sub(itemTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.ItemType).Returns((New Mock(Of IItemTypeData)).Object)
@@ -29,7 +29,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheWorldDataForItemTypeSpawnLocationTypes()
+    Sub item_types_have_spawn_locations_by_dungeon_level_fetched_from_the_data_store()
         Dim dungeonLevelId = 2L
         WithAnySubject(
             Sub(itemTypeId, worldData, subject)
