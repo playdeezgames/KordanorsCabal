@@ -3,7 +3,7 @@
     Sub New()
         MyBase.New(AddressOf Character.FromId)
     End Sub
-    Private Sub WithCommonSubject(stuffToDo As Action(Of IDirection, Mock(Of IWorldData), ICharacter))
+    Private Sub WithMovementSubject(stuffToDo As Action(Of IDirection, Mock(Of IWorldData), ICharacter))
         WithAnySubject(
             Sub(id, worldData, subject)
                 Dim direction As New Mock(Of IDirection)
@@ -37,27 +37,55 @@
     End Sub
     <Fact>
     Sub ShouldDetermineWhenAGivenCharacterCanMoveInAGivenDirection()
-        WithCommonSubject(
+        WithMovementSubject(
             Sub(direction, worldData, subject)
                 subject.CanMove(direction).ShouldBeFalse
             End Sub)
     End Sub
-    <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanMoveBackwards()
-        WithCommonSubject(
+    Private Sub WithRelativeMovementSubject(stuffToDo As Action(Of Long, Mock(Of IDirectionData), ICharacter))
+        WithMovementSubject(
             Sub(direction, worldData, subject)
                 Dim playerData = New Mock(Of IPlayerData)
                 Dim directionData = New Mock(Of IDirectionData)
                 Const directionId = 1L
-                Const oppositeDirectionId = 2L
                 playerData.Setup(Function(x) x.ReadDirection()).Returns(directionId)
-                directionData.Setup(Function(x) x.ReadOpposite(directionId)).Returns(oppositeDirectionId)
                 worldData.SetupGet(Function(x) x.Player).Returns(playerData.Object)
                 worldData.SetupGet(Function(x) x.Direction).Returns(directionData.Object)
+                stuffToDo(directionId, directionData, subject)
+                playerData.Verify(Function(x) x.ReadDirection)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldDetermineWhenAGivenCharacterCanMoveBackwards()
+        WithRelativeMovementSubject(
+            Sub(directionId, directionData, subject)
+                Const oppositeDirectionId = 2L
+                directionData.Setup(Function(x) x.ReadOpposite(directionId)).Returns(oppositeDirectionId)
 
                 subject.CanMoveBackward.ShouldBeFalse
-                playerData.Verify(Function(x) x.ReadDirection)
+
                 directionData.Verify(Function(x) x.ReadOpposite(directionId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ShouldDetermineWhenAGivenCharacterCanMoveLeft()
+        WithMovementSubject(
+            Sub(direction, worldData, subject)
+                Dim playerData = New Mock(Of IPlayerData)
+                Dim directionData = New Mock(Of IDirectionData)
+                Const directionId = 1L
+                playerData.Setup(Function(x) x.ReadDirection()).Returns(directionId)
+                worldData.SetupGet(Function(x) x.Player).Returns(playerData.Object)
+                worldData.SetupGet(Function(x) x.Direction).Returns(directionData.Object)
+                '
+                Const previousDirectionId = 2L
+                directionData.Setup(Function(x) x.ReadPrevious(directionId)).Returns(previousDirectionId)
+
+                subject.CanMoveLeft.ShouldBeFalse
+
+                directionData.Verify(Function(x) x.ReadPrevious(directionId))
+                '
+                playerData.Verify(Function(x) x.ReadDirection)
             End Sub)
     End Sub
 End Class
