@@ -307,7 +307,7 @@
     End Sub
     ReadOnly Property IsDead As Boolean Implements ICharacter.IsDead
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value >= GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value
+            Return CurrentHP <= 0
         End Get
     End Property
     Function DetermineDamage(value As Long) As Long Implements ICharacter.DetermineDamage
