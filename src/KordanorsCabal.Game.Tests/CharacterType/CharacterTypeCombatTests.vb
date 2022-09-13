@@ -6,7 +6,7 @@
     End Sub
 
     <Fact>
-    Sub ShouldQueryForTheAbilityToBribeAGivenCharacterTypeWitAGivenItemType()
+    Sub character_types_contain_whether_can_be_bribed_with_an_item_type_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
@@ -17,7 +17,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDropLootForAGivenCharacterTypeOntoAGivenLocation()
+    Sub character_types_drop_on_a_location_loot_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
@@ -28,7 +28,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForAttackTypeGenerationWeightsAndThenGenerate()
+    Sub character_types_generate_attack_types_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
@@ -38,7 +38,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForWhetherAGivenCharacterIsAnEnemyOfAGivenCharacterType()
+    Sub character_types_contain_whether_another_character_type_is_an_enemy_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
@@ -52,7 +52,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForPartingShotOfAGivenCharacterType()
+    Sub character_types_generate_a_parting_shot_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
@@ -62,7 +62,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForMoneyDropOfAGivenCharacterType()
+    Sub character_types_generate_a_money_drop_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
@@ -72,7 +72,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForXPValueOfAGivenCharacterType()
+    Sub character_types_contain_xp_values_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)

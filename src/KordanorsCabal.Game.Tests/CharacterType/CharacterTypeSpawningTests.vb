@@ -4,7 +4,7 @@
         MyBase.New(AddressOf CharacterTypeSpawning.FromId)
     End Sub
     <Fact>
-    Sub ShouldQueryForTheAbilityToSpawnAGivenCharacterTypeAtAGivenLocationTypeAndAGivenDungeonLevel()
+    Sub character_types_contains_information_about_spawnability_in_location_types_on_dungeon_levels_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
@@ -20,7 +20,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForSpawnCountOfAGivenCharacterTypeForAGivenDungeonLevel()
+    Sub character_types_contain_per_dungeon_level_spawn_counts_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
@@ -35,7 +35,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForInitialStatisticsForAGivenCharacterType()
+    Sub character_types_contain_initial_statistics_fetched_from_the_data_store()
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
