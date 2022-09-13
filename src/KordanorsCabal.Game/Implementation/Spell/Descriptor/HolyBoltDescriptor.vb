@@ -1,6 +1,10 @@
 ﻿Friend Class HolyBoltDescriptor
     Inherits SpellType
 
+    Public Sub New(worldData As IWorldData, id As Long)
+        MyBase.New(worldData, id)
+    End Sub
+
     Public Overrides ReadOnly Property Name As String
         Get
             Return "Holy Bolt"
