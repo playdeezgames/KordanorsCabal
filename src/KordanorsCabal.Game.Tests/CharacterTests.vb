@@ -235,4 +235,18 @@
                 subject.Movement.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldRetrieveCharacterTypeFromAGivenCharacter()
+        WithAnySubject(
+            Sub(id, worldData, subject)
+                Const characterTypeId = 1L
+                Dim characterData As New Mock(Of ICharacterData)
+                characterData.Setup(Function(x) x.ReadCharacterType(id)).Returns(characterTypeId)
+                worldData.SetupGet(Function(x) x.Character).Returns(characterData.Object)
+
+                subject.CharacterType.ShouldNotBeNull
+
+                worldData.Verify(Function(x) x.Character.ReadCharacterType(id))
+            End Sub)
+    End Sub
 End Class
