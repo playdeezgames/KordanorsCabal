@@ -42,9 +42,11 @@ Public Class WorldData
     Public ReadOnly Property Route As IRouteData Implements IWorldData.Route
     Public ReadOnly Property SpellType As ISpellTypeData Implements IWorldData.SpellType
     Public ReadOnly Property SpellTypeRequiredPower As ISpellTypeRequiredPowerData Implements IWorldData.SpellTypeRequiredPower
+    Public ReadOnly Property Checker As IChecker Implements IWorldData.Checker
 
-    Public Sub New(store As IStore)
+    Public Sub New(store As IStore, checker As IChecker)
         Me.Store = store
+        Me.Checker = checker
         Character = New CharacterData(store, Me)
         CharacterEquipSlot = New CharacterEquipSlotData(store, Me)
         CharacterLocation = New CharacterLocationData(store, Me)
@@ -86,24 +88,24 @@ Public Class WorldData
         SpellTypeRequiredPower = New SpellTypeRequiredPowerData(store, Me)
     End Sub
 
-    Public Sub Save(filename As String)
+    Public Sub Save(filename As String) Implements IWorldData.Save
         Store.Save(filename)
     End Sub
 
-    Public Sub Load(filename As String)
+    Public Sub Load(filename As String) Implements IWorldData.Load
         Store.Load(filename)
     End Sub
 
-    Public Sub Reset()
+    Public Sub Reset() Implements IWorldData.Reset
         Store.Reset()
     End Sub
 
-    Public Function Renew() As Microsoft.Data.Sqlite.SqliteConnection
+    Public Function Renew() As Microsoft.Data.Sqlite.SqliteConnection Implements IWorldData.Renew
         Return Store.Renew()
     End Function
 
 
-    Public Sub Restore(oldConnection As SqliteConnection)
+    Public Sub Restore(oldConnection As SqliteConnection) Implements IWorldData.Restore
         Store.Restore(oldConnection)
     End Sub
 End Class

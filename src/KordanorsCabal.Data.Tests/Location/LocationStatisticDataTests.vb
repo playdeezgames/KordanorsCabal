@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheStatisticValueOfAGivenStatisticAndAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim statisticType = 2L
                 subject.Read(locationId, statisticType).ShouldBeNull
@@ -22,7 +22,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithAStatisticValueForAGivenCombinationOfLocationAndStatisticType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim statisticType = 2L
                 Dim statisticValue = 3L

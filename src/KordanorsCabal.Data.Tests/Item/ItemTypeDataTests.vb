@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheNameOfAGivenItemType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemTypeId = 1L
                 subject.ReadName(itemTypeId).ShouldBeNull
                 store.Verify(
@@ -20,7 +20,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheIsConsumedFlagOfAGivenItemType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemTypeId = 1L
                 subject.ReadIsConsumed(itemTypeId).ShouldBeNull
                 store.Verify(

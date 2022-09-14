@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForLootDataAssociatedWithACharacterType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterType = 1L
                 subject.Read(characterType).ShouldBeNull
                 'IStore.ReadRecordsWithColumnValue<long, long, long>(Action, "CharacterTypeLoots", (ItemTypeId, Weight), (CharacterTypeId, 1))

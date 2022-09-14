@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForASpawnCountOfAParticularCharacterTypeOnAParticularDungeonLevel()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterTypeId = 1L
                 Dim dungeonLevelId = 2L
                 subject.ReadSpawnCount(characterTypeId, dungeonLevelId).ShouldBeNull

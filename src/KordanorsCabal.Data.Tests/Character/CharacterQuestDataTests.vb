@@ -7,7 +7,7 @@
     <Fact>
     Sub ShouldClearAQuestForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim quest = 2L
                 subject.Clear(characterId, quest)
@@ -21,7 +21,7 @@
     <Fact>
     Sub ShouldClearAllQuestsForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ClearForCharacter(characterId)
                 store.Verify(Sub(x) x.ClearForColumnValue(
@@ -33,7 +33,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheExistenceOfAQuestForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim quest = 2L
                 subject.Read(characterId, quest).ShouldBeFalse
@@ -48,7 +48,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithAQuestForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim quest = 2L
                 subject.Write(characterId, quest)

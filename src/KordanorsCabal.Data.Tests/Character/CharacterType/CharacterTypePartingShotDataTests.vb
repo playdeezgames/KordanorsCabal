@@ -8,7 +8,7 @@
     <Fact>
     Sub ShouldReadAPartingShotGeneratorForAGivenCharacterType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterType = 1L
                 subject.Read(characterType).ShouldBeNull
                 store.Verify(

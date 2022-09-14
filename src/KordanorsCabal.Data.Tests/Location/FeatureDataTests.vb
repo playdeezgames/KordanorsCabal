@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldCreateAFeatureInTheStore()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim featureType = 1L
                 Dim locationId = 2L
                 subject.Create(featureType, locationId).ShouldBe(0)
@@ -21,7 +21,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheFeatureTypeOfAGivenFeature()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim featureId = 1L
                 subject.ReadFeatureType(featureId).ShouldBeNull
                 store.Verify(
@@ -35,7 +35,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheFeatureWithinALocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 subject.ReadForLocation(locationId).ShouldBeNull
                 store.Verify(

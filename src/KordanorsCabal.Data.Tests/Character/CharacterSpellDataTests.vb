@@ -7,7 +7,7 @@
     <Fact>
     Sub ShouldRemoveAllSpellLevelsForACharacterFromTheStore()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ClearForCharacter(characterId)
                 store.Verify(Sub(x) x.ClearForColumnValue(
@@ -19,7 +19,7 @@
     <Fact>
     Sub ShouldQueryTheDataStoreForASpellLevelForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim spellType = 2L
                 subject.Read(characterId, spellType).ShouldBeNull
@@ -34,7 +34,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForAllSpellLevelsForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ReadForCharacter(characterId).ShouldBeNull
                 store.Verify(Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long, Long)(
@@ -47,7 +47,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithASpellLevelForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim spellType = 2L
                 Dim level = 3L

@@ -3,7 +3,8 @@ Namespace KordanorsCabal.Data.Tests
         <Fact>
         Sub ShouldConstructAllOfTheDataSubobjects()
             Dim store As New Mock(Of IStore)
-            Dim subject As IWorldData = New WorldData(store.Object)
+            Dim checker As New Mock(Of IChecker)
+            Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             subject.Character.ShouldNotBeNull
             subject.CharacterEquipSlot.ShouldNotBeNull
             subject.CharacterLocation.ShouldNotBeNull
@@ -43,49 +44,61 @@ Namespace KordanorsCabal.Data.Tests
             subject.Route.ShouldNotBeNull
             subject.SpellType.ShouldNotBeNull
             subject.SpellTypeRequiredPower.ShouldNotBeNull
+            subject.Checker.ShouldNotBeNull
             store.VerifyNoOtherCalls()
+            checker.VerifyNoOtherCalls()
         End Sub
         <Fact>
         Sub ShouldSaveToTheStore()
             Dim store As New Mock(Of IStore)
-            Dim subject As New WorldData(store.Object)
+            Dim checker As New Mock(Of IChecker)
+            Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             Const filename = "filename"
             subject.Save(filename)
             store.Verify(Sub(x) x.Save(filename), Times.Once)
             store.VerifyNoOtherCalls()
+            Checker.VerifyNoOtherCalls()
         End Sub
         <Fact>
         Sub ShouldLoadFromTheStore()
             Dim store As New Mock(Of IStore)
-            Dim subject As New WorldData(store.Object)
+            Dim checker As New Mock(Of IChecker)
+            Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             Const filename = "filename"
             subject.Load(filename)
             store.Verify(Sub(x) x.Load(filename), Times.Once)
             store.VerifyNoOtherCalls()
+            Checker.VerifyNoOtherCalls()
         End Sub
         <Fact>
         Sub ShouldResetTheStore()
             Dim store As New Mock(Of IStore)
-            Dim subject As New WorldData(store.Object)
+            Dim checker As New Mock(Of IChecker)
+            Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             subject.Reset()
             store.Verify(Sub(x) x.Reset(), Times.Once)
             store.VerifyNoOtherCalls()
+            Checker.VerifyNoOtherCalls()
         End Sub
         <Fact>
         Sub ShouldRenewTheStore()
             Dim store As New Mock(Of IStore)
-            Dim subject As New WorldData(store.Object)
+            Dim checker As New Mock(Of IChecker)
+            Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             subject.Renew().ShouldBeNull
             store.Verify(Function(x) x.Renew(), Times.Once)
             store.VerifyNoOtherCalls()
+            Checker.VerifyNoOtherCalls()
         End Sub
         <Fact>
         Sub ShouldRestoreTheStore()
             Dim store As New Mock(Of IStore)
-            Dim subject As New WorldData(store.Object)
+            Dim checker As New Mock(Of IChecker)
+            Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             subject.Restore(Nothing)
             store.Verify(Sub(x) x.Restore(Nothing), Times.Once)
             store.VerifyNoOtherCalls()
+            Checker.VerifyNoOtherCalls()
         End Sub
     End Class
 End Namespace

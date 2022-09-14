@@ -7,7 +7,7 @@
 
     <Fact>
     Sub ShouldQueryTheStoreToSeeWhenAnItemTypeCanBribeACharacterType()
-        WithSubobject(Sub(store, subject)
+        WithSubobject(Sub(store, checker, subject)
                           Dim characterTypeId = 1L
                           Dim itemType = 2L
                           subject.Read(characterTypeId, itemType).ShouldBeFalse

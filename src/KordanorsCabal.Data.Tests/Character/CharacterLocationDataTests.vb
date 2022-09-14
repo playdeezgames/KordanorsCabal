@@ -8,7 +8,7 @@
     <Fact>
     Sub ShouldClearLocationsForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 subject.ClearForCharacter(characterId)
                 store.Verify(Sub(x) x.ClearForColumnValue(
@@ -20,7 +20,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForACharacterAndLocationCombination()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 Const locationId = 2L
                 subject.Read(characterId, locationId).ShouldBeFalse
@@ -36,7 +36,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreSoThatACharacterIsAssociatedWithALocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 Const locationId = 2L
                 subject.Write(characterId, locationId)

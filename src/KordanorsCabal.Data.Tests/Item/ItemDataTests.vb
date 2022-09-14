@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldClearItemDataAndAssociatedOtherDataFromTheStore()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemId = 1L
                 subject.Clear(itemId)
                 store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterEquipSlots, (Columns.ItemIdColumn, itemId)))
@@ -18,7 +18,7 @@
     <Fact>
     Sub ShouldCreateAnItemOfAGivenItemType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemType = 1L
                 subject.Create(itemType).ShouldBe(0)
                 store.Verify(
@@ -31,7 +31,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheItemTypeOfAGivenItem()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemId = 1L
                 subject.ReadItemType(itemId).ShouldBeNull
                 store.Verify(

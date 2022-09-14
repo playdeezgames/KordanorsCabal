@@ -8,7 +8,7 @@
     <Fact>
     Public Sub ShouldClearOutDataForAnItem()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const itemId = 1L
                 subject.ClearForItem(itemId)
                 store.Verify(Sub(x) x.ClearForColumnValue(
@@ -21,7 +21,7 @@
     <Fact>
     Public Sub ShouldClearOutDataForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 subject.ClearForCharacter(characterId)
                 store.Verify(Sub(x) x.ClearForColumnValue(
@@ -34,7 +34,7 @@
     <Fact>
     Public Sub ShouldClearOutDataForACharactersEquipSlot()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
                 subject.Clear(characterId, equipSlot)
@@ -49,7 +49,7 @@
     <Fact>
     Public Sub ShouldQueryTheStoreForTheInUseEquipSlotsOfACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 subject.ReadEquipSlotsForCharacter(characterId).ShouldBeNull
                 store.Verify(Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
@@ -63,7 +63,7 @@
     <Fact>
     Public Sub ShouldQueryTheStoreForTheContentsOfAnEquipSlotOfACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
                 subject.ReadForCharacterEquipSlot(characterId, equipSlot).ShouldBeNull
@@ -79,7 +79,7 @@
     <Fact>
     Public Sub ShouldQueryTheStoreForTheEquippedItemsOfACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 subject.ReadItemsForCharacter(characterId).ShouldBeNull
                 store.Verify(Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
@@ -93,7 +93,7 @@
     <Fact>
     Public Sub ShouldReplaceTheStoreContentsOfAnEquipSlotOfACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
                 Const itemId = 3L

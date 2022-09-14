@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheAbbreviationOfADirection()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim direction = 1L
                 subject.ReadAbbreviation(direction).ShouldBeNull
                 store.Verify(
@@ -20,7 +20,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForAllDirections()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 subject.ReadAll().ShouldBeNull
                 store.Verify(
                     Function(x) x.ReadRecords(Of Long)(
@@ -32,7 +32,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForWhetherOrNotADirectionIsCardinal()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim direction = 1L
                 subject.ReadIsCardinal(direction).ShouldBeFalse
                 store.Verify(
@@ -46,7 +46,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheNameOfADirection()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim direction = 1L
                 subject.ReadName(direction).ShouldBeNull
                 store.Verify(
@@ -60,7 +60,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForNextDirection()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim direction = 1L
                 subject.ReadNext(direction).ShouldBeNull
                 store.Verify(
@@ -74,7 +74,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForOppositeDirection()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim direction = 1L
                 subject.ReadOpposite(direction).ShouldBeNull
                 store.Verify(
@@ -88,7 +88,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForPreviousDirection()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim direction = 1L
                 subject.ReadPrevious(direction).ShouldBeNull
                 store.Verify(

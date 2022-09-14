@@ -8,7 +8,7 @@
     <Fact>
     Sub ShouldClearOutDataWhenClearIsCalled()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterId = 1L
                 subject.Clear(characterId)
                 store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterQuests, (Columns.CharacterIdColumn, characterId)), Times.Once)
@@ -25,7 +25,7 @@
     <Fact>
     Sub ShouldCreateRecordsInTheCharactersTable()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const characterType = 1L
                 Const locationId = 2L
                 subject.Create(characterType, locationId)
@@ -39,7 +39,7 @@
     <Fact>
     Sub ShouldQueryForTheCharacterTypeOfAGivenCharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ReadCharacterType(characterId)
                 store.Verify(Function(x) x.ReadColumnValue(Of Long,
@@ -53,7 +53,7 @@
     <Fact>
     Sub ShouldQueryForCharactersWithAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 subject.ReadForLocation(locationId)
                 store.Verify(Function(x) x.ReadRecordsWithColumnValue(Of Long,
@@ -67,7 +67,7 @@
     <Fact>
     Sub ShouldQueryForCharacterLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ReadLocation(characterId)
                 store.Verify(Function(x) x.ReadColumnValue(Of Long,
@@ -81,7 +81,7 @@
     <Fact>
     Sub ShouldUpdateTheLocationOfAGivenCharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim locationId = 2L
                 subject.WriteLocation(characterId, locationId)

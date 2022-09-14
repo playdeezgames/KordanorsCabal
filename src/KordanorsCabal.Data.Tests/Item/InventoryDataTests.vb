@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldClearInventoryDataForAGivenCharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ClearForCharacter(characterId)
                 store.Verify(
@@ -19,7 +19,7 @@
     <Fact>
     Sub ShouldCreateInventoryForAGivenCharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.CreateForCharacter(characterId).ShouldBe(0)
                 store.Verify(
@@ -32,7 +32,7 @@
     <Fact>
     Sub ShouldCreateInventoryForAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 subject.CreateForLocation(locationId).ShouldBe(0)
                 store.Verify(
@@ -45,7 +45,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForInventoryDataForAGivenCharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ReadForCharacter(characterId).ShouldBeNull
                 store.Verify(
@@ -59,7 +59,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForInventoryDataForAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ReadForLocation(characterId).ShouldBeNull
                 store.Verify(

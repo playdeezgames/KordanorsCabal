@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheSpawnCountOfAGivenCombinationOfItemTypeAndDungeonLevel()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemTypeId = 1L
                 Dim dungeonLevelId = 2L
                 subject.Read(itemTypeId, dungeonLevelId).ShouldBeNull

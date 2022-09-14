@@ -8,7 +8,7 @@
     <Fact>
     Sub ShouldClearTheStoreOfAnyQuestCompletionsAssociatedWithACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ClearForCharacter(characterId)
                 store.Verify(Sub(x) x.ClearForColumnValue(
@@ -20,7 +20,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForHowManTimesACharacterHasCompletedAQuest()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim questId = 2L
                 subject.Read(characterId, questId).ShouldBeNull
@@ -35,7 +35,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithHowManyTimesAGivenCharacterHasCompletedAGivenQuest()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim questId = 2L
                 Dim completions = 3L

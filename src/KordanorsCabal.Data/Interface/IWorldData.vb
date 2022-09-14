@@ -38,4 +38,10 @@
     ReadOnly Property Route As IRouteData
     ReadOnly Property SpellType As ISpellTypeData
     ReadOnly Property SpellTypeRequiredPower As ISpellTypeRequiredPowerData
+    ReadOnly Property Checker As IChecker
+    Sub Save(filename As String)
+    Sub Load(filename As String)
+    Sub Reset()
+    Function Renew() As Microsoft.Data.Sqlite.SqliteConnection
+    Sub Restore(p As Microsoft.Data.Sqlite.SqliteConnection)
 End Interface

@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldRemoveAGivenCharactersStatisticsFromTheStore()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ClearForCharacter(characterId)
                 store.Verify(Sub(x) x.ClearForColumnValue(
@@ -18,7 +18,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForAGivenCharactersStatisticValue()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim statisticType = 2L
                 subject.Read(characterId, statisticType).ShouldBeNull
@@ -33,7 +33,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithAStatisticValueForACharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim statisticType = 2L
                 Dim statisticValue = 3L

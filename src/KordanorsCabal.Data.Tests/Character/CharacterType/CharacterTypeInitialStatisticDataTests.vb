@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForInitialStatisticsOfACharacterType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterType = 1L
                 subject.ReadAllForCharacterType(characterType).ShouldBeNull
                 store.Verify(Function(x) x.ReadRecordsWithColumnValue(Of Long, Long, Long)(

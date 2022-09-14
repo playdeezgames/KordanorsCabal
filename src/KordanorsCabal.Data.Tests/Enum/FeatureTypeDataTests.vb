@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForAllFeatureTypes()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 subject.ReadAll().ShouldBeNull
                 store.Verify(
                     Function(x) x.ReadRecords(Of Long)(
@@ -18,7 +18,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheInteractionModeOfAGivenFeatureType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim featureType = 1L
                 subject.ReadInteractionMode(featureType).ShouldBeNull
                 store.Verify(
@@ -32,7 +32,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheLocationTypeOfAGivenFeatureType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim featureType = 1L
                 subject.ReadLocationType(featureType).ShouldBeNull
                 store.Verify(
@@ -46,7 +46,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheNameOfAGivenFeatureType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim featureType = 1L
                 subject.ReadName(featureType).ShouldBeNull
                 store.Verify(

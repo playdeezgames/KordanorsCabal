@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheStatisticValuesOfAGivenItemType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemTypeId = 1L
                 Dim statisticType = 2L
                 subject.Read(itemTypeId, statisticType).ShouldBeNull

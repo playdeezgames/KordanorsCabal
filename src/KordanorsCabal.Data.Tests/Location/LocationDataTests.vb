@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldCreateANewLocationInTheStore()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationType = 1L
                 subject.Create(locationType).ShouldBe(0)
                 store.Verify(
@@ -19,7 +19,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForAListOfLocationsWithAGivenLocationType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationType = 1L
                 subject.ReadForLocationType(locationType).ShouldBeNull
                 store.Verify(
@@ -33,7 +33,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheLocationTypeOfAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 subject.ReadLocationType(locationId).ShouldBeNull
                 store.Verify(
@@ -47,7 +47,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithANewLocationTypeForAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim locationType = 2L
                 subject.WriteLocationType(locationId, locationType)

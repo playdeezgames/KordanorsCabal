@@ -7,7 +7,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForAnAttackTypeGeneratorForACharacterType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterTypeId = 1L
                 subject.Read(characterTypeId).ShouldBeNull
                 store.Verify(Function(x) x.ReadRecordsWithColumnValue(Of Long, Long, Long)(

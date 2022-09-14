@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheNameOfAnItemTypeStatisticType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemTypeStatisticTypeId = 1L
                 subject.ReadName(itemTypeStatisticTypeId).ShouldBeNull
                 store.Verify(

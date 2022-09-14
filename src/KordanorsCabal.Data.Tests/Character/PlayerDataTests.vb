@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldClearTheStoreOfPlayerDataAssociatedWithAGivenCharacter()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 subject.ClearForCharacter(characterId)
                 store.Verify(
@@ -19,7 +19,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheAssociatedCharacterOfThePlayer()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 subject.Read().ShouldBeNull
                 Dim playerId = 1
                 store.Verify(
@@ -33,7 +33,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheAssociatedDirectionOfThePlayer()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 subject.ReadDirection().ShouldBeNull
                 Dim playerId = 1
                 store.Verify(
@@ -47,7 +47,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheAssociatedModeOfThePlayer()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 subject.ReadPlayerMode().ShouldBeNull
                 Dim playerId = 1
                 store.Verify(
@@ -61,7 +61,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithPlayerInformation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim direction = 2L
                 Dim mode = 3L
@@ -80,7 +80,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithADirectionForThePlayer()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim direction = 2L
                 subject.WriteDirection(direction)
                 Dim playerId = 1
@@ -95,7 +95,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithAModeForThePlayer()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim mode = 2L
                 subject.WritePlayerMode(mode)
                 Dim playerId = 1

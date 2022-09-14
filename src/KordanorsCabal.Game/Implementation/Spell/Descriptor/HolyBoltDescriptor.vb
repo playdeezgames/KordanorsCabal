@@ -5,19 +5,6 @@
         MyBase.New(worldData, id)
     End Sub
 
-    'Public Overrides ReadOnly Property RequiredPower(level As Long) As Long
-    '    Get
-    '        Select Case level
-    '            Case 0
-    '                Return 0
-    '            Case 1
-    '                Return 1
-    '            Case Else
-    '                Return Long.MaxValue
-    '        End Select
-    '    End Get
-    'End Property
-
     Public Overrides ReadOnly Property CanCast(character As ICharacter) As Boolean
         Get
             Dim enemy = character.Location.Enemy(character)

@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheDungeonLevelOfAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 subject.Read(locationId).ShouldBeNull
                 store.Verify(
@@ -20,7 +20,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheLocationsWithinAGivenDungeonLevel()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim dungeonLevel = 1L
                 subject.ReadForDungeonLevel(dungeonLevel).ShouldBeNull
                 store.Verify(
@@ -34,7 +34,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreWithAnAssociationBetweenAGivenLocationAndAGivenDungeonLevel()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim dungeonLevel = 2L
                 subject.Write(locationId, dungeonLevel)

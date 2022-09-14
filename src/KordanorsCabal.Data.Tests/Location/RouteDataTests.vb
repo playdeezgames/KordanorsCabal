@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldClearTheStoreOfAGivenRoute()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim routeId = 1L
                 subject.Clear(routeId)
                 store.Verify(
@@ -19,7 +19,7 @@
     <Fact>
     Sub ShouldCreateARoute()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim direction = 2L
                 Dim routeType = 3L
@@ -38,7 +38,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForHowManyRoutesAreAtAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 subject.ReadCountForLocation(locationId).ShouldBe(0)
                 store.Verify(
@@ -51,7 +51,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForDirectionsAndRoutesForAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 subject.ReadDirectionRouteForLocation(locationId).ShouldBeNull
                 store.Verify(
@@ -65,7 +65,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForDirectionsAndRoutesTypesForAGivenLocation()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 subject.ReadDirectionRouteTypeForLocation(locationId).ShouldBeNull
                 store.Verify(
@@ -79,7 +79,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForARouteWithAGivenLocationAndGivenDirection()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim direction = 2L
                 subject.ReadForLocationDirection(locationId, direction).ShouldBeNull
@@ -95,7 +95,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForRoutesInAGivenLocationWithAGivenRouteType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim routeType = 2L
                 subject.ReadForLocationRouteType(locationId, routeType).ShouldBeNull
@@ -111,7 +111,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheToLocationOfAGivenRoute()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim routeId = 1L
                 subject.ReadToLocation(routeId).ShouldBeNull
                 store.Verify(
@@ -125,7 +125,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheRouteTypeOfAGivenRoute()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim routeId = 1L
                 subject.ReadRouteType(routeId).ShouldBeNull
                 store.Verify(
@@ -139,7 +139,7 @@
     <Fact>
     Sub ShouldUpdateTheStoreAndWriteAGivenRouteTypeToAGivenRoute()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim routeId = 1L
                 Dim routeTypeId = 2L
                 subject.WriteRouteType(routeId, routeTypeId)

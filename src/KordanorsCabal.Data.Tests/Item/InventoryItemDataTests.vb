@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldClearInventoryAssociationDataForAGivenItem()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemId = 1L
                 subject.ClearForItem(itemId)
                 store.Verify(
@@ -19,7 +19,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForItemsAssociatedWithAGivenInventory()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim inventoryId = 1L
                 subject.ReadItems(inventoryId).ShouldBeNull
                 store.Verify(
@@ -33,7 +33,7 @@
     <Fact>
     Sub ShouldAssociateAnItemWithAnInventory()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim inventoryId = 1L
                 Dim itemId = 2L
                 subject.Write(inventoryId, itemId)

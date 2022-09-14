@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldReadAllDungeonLevelsFromTheStore()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 subject.ReadAll().ShouldBeNull
                 store.Verify(
                     Function(x) x.ReadRecords(Of Long)(
@@ -18,7 +18,7 @@
     <Fact>
     Sub ShouldQueryTheDataStoreForTheNameOfADungeonLevel()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim dungeonLevelId = 1L
                 subject.ReadName(dungeonLevelId).ShouldBeNull
                 'IStore.ReadColumnString<long>(Action, "DungeonLevels", "DungeonLevelName", (DungeonLevelId, 1))

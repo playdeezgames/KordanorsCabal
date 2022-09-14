@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheNameOfAnEquipSlot()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim equipSlot = 1L
                 subject.ReadName(equipSlot).ShouldBeNull
                 store.Verify(

@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForTheEnemyStatusOfTwoCharacterTypes()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterType = 1L
                 Dim enemyCharacterType = 2L
                 subject.Read(characterType, enemyCharacterType)

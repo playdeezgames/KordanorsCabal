@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForValidCombinationsOfCharacterAndDungeonLevelAndLocationType()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim characterTypeId = 1L
                 Dim dungeonLevel = 2L
                 Dim locationTYpe = 3L

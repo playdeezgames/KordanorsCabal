@@ -6,7 +6,7 @@
     <Fact>
     Sub ShouldQueryTheStoreForAListOfLocationTypesSuitableForSpawningAGivenItemTypeOnAGivenDungeonLevel()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Dim itemTypeId = 1L
                 Dim dungeonLevelId = 2L
                 subject.ReadAll(itemTypeId, dungeonLevelId).ShouldBeNull

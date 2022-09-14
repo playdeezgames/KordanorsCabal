@@ -8,7 +8,7 @@
     <Fact>
     Sub spell_type_required_power_data_associates_a_power_level_with_a_spell_level_for_a_given_spell_type()
         WithSubobject(
-            Sub(store, subject)
+            Sub(store, checker, subject)
                 Const spellTypeId = 1L
                 Const level = 2L
                 subject.Read(spellTypeId, level)
