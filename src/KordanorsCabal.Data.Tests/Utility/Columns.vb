@@ -33,6 +33,7 @@
     Friend Const LocationStatisticTypeIdColumn = "LocationStatisticTypeId"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const PlayerModeIdColumn = "PlayerModeId"
+    Friend Const MaximumLevelColumn = "MaximumLevel"
     Friend Const MoneyDropDiceColumn = "MoneyDropDice"
     Friend Const NextDirectionIdColumn = "NextDirectionId"
     Friend Const OppositeDirectionIdColumn = "OppositeDirectionId"
@@ -45,7 +46,9 @@
     Friend Const SpawnCountColumn = "SpawnCount"
     Friend Const SpawnDiceColumn = "SpawnDice"
     Friend Const SpellLevelColumn = "SpellLevel"
-    Friend Const SpellTypeColumn = "SpellType"
+    Friend Const SpellTypeColumn = "SpellType" 'TODO: fold into SpellTypeIdColumn
+    Friend Const SpellTypeNameColumn = "SpellTypeName"
+    Friend Const SpellTypeIdColumn = "SpellTypeId"
     Friend Const StatisticValueColumn = "StatisticValue"
     Friend Const ToLocationIdColumn = "ToLocationId"
     Friend Const WeightColumn = "Weight"
