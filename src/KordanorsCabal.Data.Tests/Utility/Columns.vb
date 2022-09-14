@@ -39,6 +39,7 @@
     Friend Const OppositeDirectionIdColumn = "OppositeDirectionId"
     Friend Const PartingShotColumn = "PartingShot"
     Friend Const PlayerIdColumn = "PlayerId"
+    Friend Const PowerColumn = "Power"
     Friend Const PreviousDirectionIdColumn = "PreviousDirectionId"
     Friend Const QuestColumn = "Quest"
     Friend Const RouteIdColumn = "RouteId"
@@ -46,7 +47,6 @@
     Friend Const SpawnCountColumn = "SpawnCount"
     Friend Const SpawnDiceColumn = "SpawnDice"
     Friend Const SpellLevelColumn = "SpellLevel"
-    Friend Const SpellTypeColumn = "SpellType" 'TODO: fold into SpellTypeIdColumn
     Friend Const SpellTypeNameColumn = "SpellTypeName"
     Friend Const SpellTypeIdColumn = "SpellTypeId"
     Friend Const StatisticValueColumn = "StatisticValue"

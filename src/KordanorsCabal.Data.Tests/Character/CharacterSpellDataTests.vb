@@ -28,7 +28,7 @@
                                  CharacterSpells,
                                  SpellLevelColumn,
                                  (CharacterIdColumn, characterId),
-                                 (SpellTypeColumn, spellType)))
+                                 (SpellTypeIdColumn, spellType)))
             End Sub)
     End Sub
     <Fact>
@@ -40,7 +40,7 @@
                 store.Verify(Sub(x) x.ReadRecordsWithColumnValue(Of Long, Long, Long)(
                                  It.IsAny(Of Action),
                                  CharacterSpells,
-                                 (SpellTypeColumn, SpellLevelColumn),
+                                 (SpellTypeIdColumn, SpellLevelColumn),
                                  (CharacterIdColumn, characterId)))
             End Sub)
     End Sub
@@ -56,7 +56,7 @@
                                  It.IsAny(Of Action),
                                  CharacterSpells,
                                  (CharacterIdColumn, characterId),
-                                 (SpellTypeColumn, spellType),
+                                 (SpellTypeIdColumn, spellType),
                                  (SpellLevelColumn, level)))
             End Sub)
     End Sub

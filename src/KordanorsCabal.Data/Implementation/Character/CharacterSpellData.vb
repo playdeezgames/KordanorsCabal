@@ -3,7 +3,7 @@
     Implements ICharacterSpellData
     Friend Const TableName = "CharacterSpells"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const SpellTypeColumn = "SpellType"
+    Friend Const SpellTypeIdColumn = SpellTypeData.SpellTypeIdColumn
     Friend Const SpellLevelColumn = "SpellLevel"
 
     Public Sub New(store As IStore, world As WorldData)
@@ -16,9 +16,9 @@
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{CharacterIdColumn}] INT NOT NULL,
-                [{SpellTypeColumn}] INT NOT NULL,
+                [{SpellTypeIdColumn}] INT NOT NULL,
                 [{SpellLevelColumn}] INT NOT NULL,
-                UNIQUE([{CharacterIdColumn}],[{SpellTypeColumn}]),
+                UNIQUE([{CharacterIdColumn}],[{SpellTypeIdColumn}]),
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
@@ -27,7 +27,7 @@
         Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
-            (SpellTypeColumn, SpellLevelColumn),
+            (SpellTypeIdColumn, SpellLevelColumn),
             (CharacterIdColumn, characterId))
     End Function
 
@@ -37,7 +37,7 @@
             TableName,
             SpellLevelColumn,
             (CharacterIdColumn, characterId),
-            (SpellTypeColumn, spellType))
+            (SpellTypeIdColumn, spellType))
     End Function
 
     Public Sub Write(characterId As Long, spellType As Long, spellLevel As Long) Implements ICharacterSpellData.Write
@@ -45,7 +45,7 @@
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),
-            (SpellTypeColumn, spellType),
+            (SpellTypeIdColumn, spellType),
             (SpellLevelColumn, spellLevel))
     End Sub
 

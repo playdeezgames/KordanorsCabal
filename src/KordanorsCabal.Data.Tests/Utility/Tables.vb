@@ -35,4 +35,5 @@
     Friend Const Players = "Players"
     Friend Const Routes = "Routes"
     Friend Const SpellTypes = "SpellTypes"
+    Friend Const SpellTypeRequiredPowers = "SpellTypeRequiredPowers"
 End Module
