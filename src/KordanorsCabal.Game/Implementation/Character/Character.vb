@@ -816,6 +816,7 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
+
     Public ReadOnly Property HasEquipment As Boolean Implements ICharacter.HasEquipment
         Get
             Return EquippedItems.Any
