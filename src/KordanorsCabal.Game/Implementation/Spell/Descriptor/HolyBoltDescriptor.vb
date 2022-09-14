@@ -5,16 +5,6 @@
         MyBase.New(worldData, id)
     End Sub
 
-    Public Overrides ReadOnly Property CanCast(character As ICharacter) As Boolean
-        Get
-            Dim enemy = character.Location.Enemy(character)
-            If enemy Is Nothing OrElse Not enemy.IsUndead Then
-                Return False
-            End If
-            Return character.CurrentMana > 0
-        End Get
-    End Property
-
     Public Overrides Sub Cast(character As ICharacter)
         If Not CanCast(character) Then
             character.EnqueueMessage($"You cannot cast {OldSpellType.HolyBolt.Name(WorldData)} now!")

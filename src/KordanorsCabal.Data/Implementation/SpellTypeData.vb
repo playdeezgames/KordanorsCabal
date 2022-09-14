@@ -5,6 +5,7 @@
     Friend Const SpellTypeIdColumn = "SpellTypeId"
     Friend Const SpellTypeNameColumn = "SpellTypeName"
     Friend Const MaximumLevelColumn = "MaximumLevel"
+    Friend Const CastCheckColumn = "CastCheck"
 
     Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
@@ -15,14 +16,16 @@
                 WITH [cte](
                     [{SpellTypeIdColumn}],
                     [{SpellTypeNameColumn}],
-                    [{MaximumLevelColumn}]) AS
+                    [{MaximumLevelColumn}],
+                    [{CastCheckColumn}]) AS
                 (VALUES
-                    (1,'Holy Bolt', 1),
-                    (2,'Purify', 1))
+                    (1,'Holy Bolt', 1, 'CharacterCanCastHolyBolt'),
+                    (2,'Purify', 1, 'CharacterCanCastPurify'))
                 SELECT 
                     [{SpellTypeIdColumn}],
                     [{SpellTypeNameColumn}],
-                    [{MaximumLevelColumn}]
+                    [{MaximumLevelColumn}],
+                    [{CastCheckColumn}]
                 FROM [cte];")
     End Sub
 
@@ -40,5 +43,9 @@
             TableName,
             MaximumLevelColumn,
             (SpellTypeIdColumn, spellTypeId))
+    End Function
+
+    Public Function ReadCastCheck(spellTypeId As Long) As String Implements ISpellTypeData.ReadCastCheck
+        Return Store.ReadColumnString(AddressOf Initialize, TableName, CastCheckColumn, (SpellTypeIdColumn, spellTypeId))
     End Function
 End Class

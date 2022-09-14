@@ -24,7 +24,11 @@
         End Get
     End Property
 
-    MustOverride ReadOnly Property CanCast(character As ICharacter) As Boolean Implements ISpellType.CanCast
+    ReadOnly Property CanCast(character As ICharacter) As Boolean Implements ISpellType.CanCast
+        Get
+            Return WorldData.Checker.Check(WorldData, WorldData.SpellType.ReadCastCheck(Id), character.Id)
+        End Get
+    End Property
 
     MustOverride Sub Cast(character As ICharacter) Implements ISpellType.Cast
 End Class

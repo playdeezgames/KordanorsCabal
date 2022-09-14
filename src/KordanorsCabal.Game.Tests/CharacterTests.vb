@@ -117,18 +117,14 @@
         WithAnySubject(
             Sub(id, worldData, subject)
                 Const spellType = Game.OldSpellType.Purify
-                Const statisticTypeId = 8L
-                Const otherStatisticTypeId = 15L
-
-                worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                Const spellTypeId = CType(spellType, Long)
+                worldData.SetupGet(Function(x) x.SpellType).Returns((New Mock(Of ISpellTypeData)).Object)
+                worldData.SetupGet(Function(x) x.Checker).Returns((New Mock(Of IChecker)).Object)
 
                 subject.CanCastSpell(spellType).ShouldBeFalse
 
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, otherStatisticTypeId))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(otherStatisticTypeId))
+                worldData.Verify(Function(x) x.SpellType.ReadCastCheck(spellTypeId))
+                worldData.Verify(Function(x) x.Checker.Check(It.IsAny(Of IWorldData), Nothing, id))
             End Sub)
     End Sub
     <Fact>

@@ -1,3 +1,3 @@
 ﻿Public Interface IChecker
-    Function Check(checkType As String, id As Long) As Boolean
+    Function Check(worldData As IWorldData, checkType As String, id As Long) As Boolean
 End Interface
