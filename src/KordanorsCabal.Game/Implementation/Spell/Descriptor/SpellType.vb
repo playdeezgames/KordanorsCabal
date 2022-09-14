@@ -18,7 +18,11 @@
         End Get
     End Property
 
-    MustOverride ReadOnly Property RequiredPower(level As Long) As Long Implements ISpellType.RequiredPower
+    ReadOnly Property RequiredPower(level As Long) As Long Implements ISpellType.RequiredPower
+        Get
+            Return If(WorldData.SpellTypeRequiredPower.Read(Id, level), Long.MaxValue)
+        End Get
+    End Property
 
     MustOverride ReadOnly Property CanCast(character As ICharacter) As Boolean Implements ISpellType.CanCast
 

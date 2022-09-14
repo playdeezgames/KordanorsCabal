@@ -41,6 +41,7 @@ Public Class WorldData
     Public ReadOnly Property Player As IPlayerData Implements IWorldData.Player
     Public ReadOnly Property Route As IRouteData Implements IWorldData.Route
     Public ReadOnly Property SpellType As ISpellTypeData Implements IWorldData.SpellType
+    Public ReadOnly Property SpellTypeRequiredPower As ISpellTypeRequiredPowerData Implements IWorldData.SpellTypeRequiredPower
 
     Public Sub New(store As IStore)
         Me.Store = store
@@ -82,6 +83,7 @@ Public Class WorldData
         Player = New PlayerData(store, Me)
         Route = New RouteData(store, Me)
         SpellType = New SpellTypeData(store, Me)
+        SpellTypeRequiredPower = New SpellTypeRequiredPowerData(store, Me)
     End Sub
 
     Public Sub Save(filename As String)

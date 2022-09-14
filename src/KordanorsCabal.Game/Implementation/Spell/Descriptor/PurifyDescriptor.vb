@@ -5,11 +5,11 @@
         MyBase.New(worldData, id)
     End Sub
 
-    Public Overrides ReadOnly Property RequiredPower(level As Long) As Long
-        Get
-            Return 0
-        End Get
-    End Property
+    'Public Overrides ReadOnly Property RequiredPower(level As Long) As Long
+    '    Get
+    '        Return 0
+    '    End Get
+    'End Property
 
     Public Overrides ReadOnly Property CanCast(character As ICharacter) As Boolean
         Get

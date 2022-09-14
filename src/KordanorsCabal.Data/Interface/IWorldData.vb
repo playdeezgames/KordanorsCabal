@@ -37,4 +37,5 @@
     ReadOnly Property Player As IPlayerData
     ReadOnly Property Route As IRouteData
     ReadOnly Property SpellType As ISpellTypeData
+    ReadOnly Property SpellTypeRequiredPower As ISpellTypeRequiredPowerData
 End Interface

@@ -42,6 +42,7 @@ Namespace KordanorsCabal.Data.Tests
             subject.Player.ShouldNotBeNull
             subject.Route.ShouldNotBeNull
             subject.SpellType.ShouldNotBeNull
+            subject.SpellTypeRequiredPower.ShouldNotBeNull
             store.VerifyNoOtherCalls()
         End Sub
         <Fact>
