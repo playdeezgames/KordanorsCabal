@@ -28,6 +28,7 @@
     Friend Const IsDungeonColumn = "IsDungeon"
     Friend Const IsUndeadColumn = "IsUndead"
     Friend Const ItemIdColumn = "ItemId"
+    Friend Const ItemStatisticTypeIdColumn = "ItemStatisticTypeId"
     Friend Const ItemTypeIdColumn = "ItemTypeId"
     Friend Const ItemTypeNameColumn = "ItemTypeName"
     Friend Const ItemTypeStatisticTypeIdColumn = "ItemTypeStatisticTypeId"

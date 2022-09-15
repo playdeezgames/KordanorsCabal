@@ -3,7 +3,7 @@
     Implements IItemStatisticData
     Friend Const TableName = "ItemStatistics"
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
-    Friend Const StatisticTypeColumn = "StatisticType"
+    Friend Const ItemStatisticTypeIdColumn = "ItemStatisticTypeId"
     Friend Const StatisticValueColumn = "StatisticValue"
 
     Public Sub New(store As IStore, world As WorldData)
@@ -16,9 +16,9 @@
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{ItemIdColumn}] INT NOT NULL,
-                [{StatisticTypeColumn}] INT NOT NULL,
+                [{ItemStatisticTypeIdColumn}] INT NOT NULL,
                 [{StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{ItemIdColumn}],[{StatisticTypeColumn}]),
+                UNIQUE([{ItemIdColumn}],[{ItemStatisticTypeIdColumn}]),
                 FOREIGN KEY ([{ItemIdColumn}]) REFERENCES [{ItemData.TableName}]([{ItemData.ItemIdColumn}])
             );")
     End Sub
@@ -28,7 +28,7 @@
             TableName,
             StatisticValueColumn,
             (ItemIdColumn, itemId),
-            (StatisticTypeColumn, statisticType))
+            (ItemStatisticTypeIdColumn, statisticType))
     End Function
 
     Public Sub Write(itemId As Long, statisticType As Long, value As Long) Implements IItemStatisticData.Write
@@ -36,7 +36,7 @@
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId),
-            (StatisticTypeColumn, statisticType),
+            (ItemStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, value))
     End Sub
 
