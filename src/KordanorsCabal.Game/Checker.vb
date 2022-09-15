@@ -24,16 +24,17 @@
             {"CharacterCastHolyBolt",
                 Sub(worldData, characterId)
                     Dim character = Game.Character.FromId(worldData, characterId)
-                    If Not character.CanCastSpell(SpellType.FromId(worldData, OldSpellType.HolyBolt)) Then
-                        character.EnqueueMessage($"You cannot cast {OldSpellType.HolyBolt.Name(worldData)} now!")
+                    Dim spellType = Game.SpellType.FromId(worldData, 1L)
+                    If Not character.CanCastSpell(spellType) Then
+                        character.EnqueueMessage($"You cannot cast {spellType.Name} now!")
                         Return
                     End If
                     Dim enemy = character.Location.Enemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
-                    lines.Add($"You cast {OldSpellType.HolyBolt.Name(worldData)} on {enemy.Name}!")
+                    lines.Add($"You cast {spellType.Name} on {enemy.Name}!")
                     character.DoFatigue(1)
-                    Dim damage As Long = character.RollSpellDice(OldSpellType.HolyBolt)
+                    Dim damage As Long = character.RollSpellDice(spellType)
                     lines.Add($"You do {damage} damage!")
                     enemy.DoDamage(damage)
                     If enemy.IsDead Then

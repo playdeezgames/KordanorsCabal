@@ -87,5 +87,6 @@
     Function RollDefend() As Long
     Function RollAttack() As Long
     Function RollInfluence() As Long
-    Function RollSpellDice(spellType As OldSpellType) As Long
+    Function RollSpellDice(spellType As ISpellType) As Long
+    Function RollPower() As Long
 End Interface

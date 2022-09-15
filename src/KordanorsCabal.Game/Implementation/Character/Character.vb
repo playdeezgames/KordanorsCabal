@@ -74,8 +74,8 @@
     Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)
     End Sub
-    Function RollSpellDice(spellType As OldSpellType) As Long Implements ICharacter.RollSpellDice
-        If Not Spells.ContainsKey(spellType) Then
+    Function RollSpellDice(spellType As ISpellType) As Long Implements ICharacter.RollSpellDice
+        If Not Spells.ContainsKey(CType(spellType.Id, OldSpellType)) Then
             Return 0
         End If
         Return RollDice(Power + Spells(OldSpellType.HolyBolt))
@@ -816,6 +816,10 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
+
+    Public Function RollPower() As Long Implements ICharacter.RollPower
+        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) + NegativeInfluence())
+    End Function
 
     Public ReadOnly Property HasEquipment As Boolean Implements ICharacter.HasEquipment
         Get

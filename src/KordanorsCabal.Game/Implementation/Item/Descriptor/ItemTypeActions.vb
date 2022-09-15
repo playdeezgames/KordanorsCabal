@@ -190,7 +190,7 @@
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You use {OldItemType.EarthShard.Name} on {enemy.Name}!")
-                    Dim immobilization As Long = character.RollSpellDice(OldSpellType.HolyBolt)
+                    Dim immobilization As Long = character.RollPower()
                     lines.Add($"You immobilize {enemy.Name} for {immobilization} turns!")
                     enemy.DoImmobilization(immobilization)
                     character.EnqueueMessage(sfx, lines.ToArray)
