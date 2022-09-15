@@ -1,5 +1,5 @@
 ﻿Public Class LocationTypeData
-    Inherits NameCacheData
+    Inherits BaseData
     Implements ILocationTypeData
     Friend Const TableName = "LocationTypes"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
@@ -59,11 +59,6 @@
 
     Public Sub New(store As IStore, world As WorldData)
         MyBase.New(store, world)
-        lookUpByName = Function(name) store.ReadColumnValue(Of String, Long)(
-            AddressOf Initialize,
-            TableName,
-            LocationTypeIdColumn,
-            (LocationTypeNameColumn, name))
     End Sub
 
     Public Function ReadName(locationTypeId As Long) As String Implements ILocationTypeData.ReadName
