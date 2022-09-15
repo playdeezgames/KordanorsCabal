@@ -47,6 +47,7 @@
     Friend Const PowerColumn = "Power"
     Friend Const PreviousDirectionIdColumn = "PreviousDirectionId"
     Friend Const QuestColumn = "Quest"
+    Friend Const RequiresMPColumn = "RequiresMP"
     Friend Const RouteIdColumn = "RouteId"
     Friend Const RouteTypeIdColumn = "RouteTypeId"
     Friend Const SpawnCountColumn = "SpawnCount"
