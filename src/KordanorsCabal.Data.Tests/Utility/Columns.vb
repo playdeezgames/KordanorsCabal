@@ -34,6 +34,7 @@
     Friend Const LocationIdColumn = "LocationId"
     Friend Const LocationStatisticTypeIdColumn = "LocationStatisticTypeId"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
+    Friend Const LocationTypeNameColumn = "LocationTypeName"
     Friend Const PlayerModeIdColumn = "PlayerModeId"
     Friend Const MaximumLevelColumn = "MaximumLevel"
     Friend Const MoneyDropDiceColumn = "MoneyDropDice"
