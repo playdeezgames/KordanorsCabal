@@ -657,12 +657,12 @@
         'TODO: sound effect
         EnqueueMessage(lines.ToArray)
     End Sub
-    Public Sub Cast(spellType As OldSpellType) Implements ICharacter.Cast
-        If Not CanCastSpell(Game.SpellType.FromId(WorldData, spellType)) Then
-            EnqueueMessage($"You cannot cast {spellType.Name(WorldData)} at this time.")
+    Public Sub Cast(spellType As ISpellType) Implements ICharacter.Cast
+        If Not CanCastSpell(spellType) Then
+            EnqueueMessage($"You cannot cast {spellType.Name} at this time.")
             Return
         End If
-        spellType.Cast(WorldData, Me)
+        spellType.Cast(Me)
     End Sub
     Public Sub Equip(item As IItem) Implements ICharacter.Equip
         If item.CanEquip Then

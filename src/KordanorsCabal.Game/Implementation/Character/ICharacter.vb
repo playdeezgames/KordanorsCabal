@@ -50,7 +50,7 @@
     Sub Unequip(equipSlot As IEquipSlot)
     Function HasVisited(location As ILocation) As Boolean
     ReadOnly Property Spells As IReadOnlyDictionary(Of OldSpellType, Long)
-    Sub Cast(spellType As OldSpellType)
+    Sub Cast(spellType As ISpellType)
     ReadOnly Property EquippedSlots As IEnumerable(Of IEquipSlot)
     Function Equipment(equipSlot As IEquipSlot) As IItem
     ReadOnly Property Encumbrance As Long

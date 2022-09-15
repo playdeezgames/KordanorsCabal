@@ -47,7 +47,7 @@ Friend Class SpellListProcessor
     End Function
 
     Private Function CastSpell() As UIState
-        Game.World.PlayerCharacter(StaticWorldData.World).Cast(items(currentItemIndex).Item1)
+        Game.World.PlayerCharacter(StaticWorldData.World).Cast(Game.SpellType.FromId(StaticWorldData.World, items(currentItemIndex).Item1))
         PushUIState(UIState.SpellList)
         Return UIState.Message
     End Function
