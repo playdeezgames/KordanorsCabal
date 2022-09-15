@@ -24,7 +24,7 @@
             {"CharacterCastHolyBolt",
                 Sub(worldData, characterId)
                     Dim character = Game.Character.FromId(worldData, characterId)
-                    If Not character.CanCastSpell(OldSpellType.HolyBolt) Then
+                    If Not character.CanCastSpell(SpellType.FromId(worldData, OldSpellType.HolyBolt)) Then
                         character.EnqueueMessage($"You cannot cast {OldSpellType.HolyBolt.Name(worldData)} now!")
                         Return
                     End If

@@ -629,11 +629,11 @@
     End Property
     Public ReadOnly Property CanCast() As Boolean
         Get
-            Return Spells.Keys.Any(Function(x) CanCastSpell(x))
+            Return Spells.Keys.Any(Function(x) CanCastSpell(SpellType.FromId(WorldData, x)))
         End Get
     End Property
-    Public Function CanCastSpell(spellType As OldSpellType) As Boolean Implements ICharacter.CanCastSpell
-        Return spellType.CanCast(WorldData, Me)
+    Public Function CanCastSpell(spellType As ISpellType) As Boolean Implements ICharacter.CanCastSpell
+        Return spellType.CanCast(Me)
     End Function
     Public Sub Gamble() Implements ICharacter.Gamble
         If Not CanGamble Then
@@ -658,7 +658,7 @@
         EnqueueMessage(lines.ToArray)
     End Sub
     Public Sub Cast(spellType As OldSpellType) Implements ICharacter.Cast
-        If Not CanCastSpell(spellType) Then
+        If Not CanCastSpell(Game.SpellType.FromId(WorldData, spellType)) Then
             EnqueueMessage($"You cannot cast {spellType.Name(WorldData)} at this time.")
             Return
         End If

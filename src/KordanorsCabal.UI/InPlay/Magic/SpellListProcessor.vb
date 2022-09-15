@@ -18,7 +18,7 @@ Friend Class SpellListProcessor
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
             If itemIndex >= 0 AndAlso itemIndex < items.Count Then
                 Dim spellType = items(itemIndex).Item1
-                Dim rowHue = If(player.CanCastSpell(spellType), Hue.Black, Hue.Red)
+                Dim rowHue = If(player.CanCastSpell(Game.SpellType.FromId(StaticWorldData.World, spellType)), Hue.Black, Hue.Red)
                 buffer.FillCells((0, row), (buffer.Columns, 1), Pattern.Space, itemIndex = currentItemIndex, rowHue)
                 buffer.WriteTextCentered(row, $"{spellType.Name(StaticWorldData.World)}(Lvl{items(itemIndex).Item2})", itemIndex = currentItemIndex, rowHue)
             End If

@@ -6,7 +6,7 @@
     Sub AssignPoint(statisticType As ICharacterStatisticType)
     Function CanAcceptQuest(quest As Quest) As Boolean
     ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean
-    Function CanCastSpell(spellType As OldSpellType) As Boolean
+    Function CanCastSpell(spellType As ISpellType) As Boolean
     ReadOnly Property CanDoIntimidation() As Boolean
     ReadOnly Property CanFight As Boolean
     ReadOnly Property CanGamble As Boolean

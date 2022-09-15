@@ -116,10 +116,10 @@
     Sub ShouldDetermineWhetherAGiveCharacterCanCastAGivenSpell()
         WithAnySubject(
             Sub(id, worldData, subject)
-                Const spellType = Game.OldSpellType.Purify
-                Const spellTypeId = CType(spellType, Long)
+                Const spellTypeId = 1L
                 worldData.SetupGet(Function(x) x.SpellType).Returns((New Mock(Of ISpellTypeData)).Object)
                 worldData.SetupGet(Function(x) x.Checker).Returns((New Mock(Of IChecker)).Object)
+                Dim spellType = Game.SpellType.FromId(worldData.Object, spellTypeId)
 
                 subject.CanCastSpell(spellType).ShouldBeFalse
 
