@@ -34,4 +34,21 @@
                         (Columns.ItemStatisticTypeIdColumn, statisticTypeId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_statistics_can_write_a_statistic_value_to_a_data_store()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const itemId = 1L
+                Const statisticTypeId = 2L
+                Const statisticValue = 3L
+                subject.Write(itemId, statisticTypeId, statisticValue)
+                store.Verify(
+                    Sub(x) x.ReplaceRecord(Of Long, Long, Long)(
+                        It.IsAny(Of Action),
+                        Tables.ItemStatistics,
+                        (Columns.ItemIdColumn, itemId),
+                        (Columns.ItemStatisticTypeIdColumn, statisticTypeId),
+                        (Columns.StatisticValueColumn, statisticValue)))
+            End Sub)
+    End Sub
 End Class
