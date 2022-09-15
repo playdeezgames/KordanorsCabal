@@ -9,11 +9,25 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const locationTypeId = 1L
-                subject.ReadName(locationTypeId)
+                subject.ReadName(locationTypeId).ShouldBeNull
                 store.Verify(Function(x) x.ReadColumnString(Of Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.LocationTypeNameColumn,
+                                 (Columns.LocationTypeIdColumn, locationTypeId)))
+            End Sub)
+    End Sub
+
+    <Fact>
+    Sub location_types_have_can_map_flag_fetched_from_the_data_store()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const locationTypeId = 1L
+                subject.ReadCanMap(locationTypeId)
+                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(
+                                 It.IsAny(Of Action),
+                                 Tables.LocationTypes,
+                                 Columns.CanMapColumn,
                                  (Columns.LocationTypeIdColumn, locationTypeId)))
             End Sub)
     End Sub
