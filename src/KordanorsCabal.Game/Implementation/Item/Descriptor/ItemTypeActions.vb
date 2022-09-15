@@ -229,7 +229,7 @@
     Friend ReadOnly CanUseFunctions As IReadOnlyDictionary(Of String, Func(Of ICharacter, Boolean)) =
         New Dictionary(Of String, Func(Of ICharacter, Boolean)) From
         {
-            {"CanLearnHolyBolt", Function(character) character.CanLearn(OldSpellType.HolyBolt)},
+            {"CanLearnHolyBolt", Function(character) character.CanLearn(SpellType.FromId(StaticWorldData.World, 1L))},
             {"CanUseBeer", Function(character)
                                Dim enemy = character.Location.Enemy(character)
                                Return enemy Is Nothing OrElse enemy.CanBeBribedWith(OldItemType.Beer)
@@ -260,6 +260,6 @@
                                  Dim enemy = character.Location.Enemy(character)
                                  Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Bottle)
                              End Function},
-            {"CanLearnPurify", Function(character) character.CanLearn(OldSpellType.Purify)}
+            {"CanLearnPurify", Function(character) character.CanLearn(SpellType.FromId(StaticWorldData.World, 2L))}
         }
 End Module

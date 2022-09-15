@@ -12,7 +12,7 @@
     ReadOnly Property CanGamble As Boolean
     ReadOnly Property CanInteract As Boolean
     ReadOnly Property CanIntimidate As Boolean
-    Function CanLearn(spellType As OldSpellType) As Boolean
+    Function CanLearn(spellType As ISpellType) As Boolean
     ReadOnly Property CanMap() As Boolean
     ReadOnly Property Movement As ICharacterMovement
     ReadOnly Property CharacterType As ICharacterType

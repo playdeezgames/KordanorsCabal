@@ -56,7 +56,7 @@
         End Set
     End Property
     Sub Learn(spellType As ISpellType) Implements ICharacter.Learn
-        If Not CanLearn(CType(spellType.Id, OldSpellType)) Then
+        If Not CanLearn(spellType) Then
             EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
             Return
         End If
@@ -64,12 +64,12 @@
         EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
         WorldData.CharacterSpell.Write(Id, spellType.Id, nextLevel)
     End Sub
-    Function CanLearn(spellType As OldSpellType) As Boolean Implements ICharacter.CanLearn
-        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
-        If nextLevel > spellType.MaximumLevel(WorldData) Then
+    Function CanLearn(spellType As ISpellType) As Boolean Implements ICharacter.CanLearn
+        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType.Id), 0) + 1
+        If nextLevel > spellType.MaximumLevel Then
             Return False
         End If
-        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) >= spellType.RequiredPower(WorldData, nextLevel)
+        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) >= spellType.RequiredPower(nextLevel)
     End Function
     Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)

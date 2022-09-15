@@ -198,9 +198,8 @@
     Sub ShouldDetermineWhenAGivenCharacterCanLearnAGivenSpell()
         WithAnySubject(
             Sub(id, worldData, subject)
-                Const spellType = Game.OldSpellType.HolyBolt
-                Const spellTypeId = CType(spellType, Long)
-                'Const statisticTypeId = 5L
+                Const spellTypeId = 1L
+                Dim spellType = Game.SpellType.FromId(worldData.Object, spellTypeId)
 
                 worldData.SetupGet(Function(x) x.SpellType).Returns((New Mock(Of ISpellTypeData)).Object)
                 worldData.SetupGet(Function(x) x.CharacterSpell).Returns((New Mock(Of ICharacterSpellData)).Object)
