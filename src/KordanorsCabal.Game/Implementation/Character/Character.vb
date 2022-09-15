@@ -4,11 +4,11 @@
     Sub New(worldData As IWorldData, characterId As Long)
         MyBase.New(worldData, characterId)
     End Sub
-    ReadOnly Property Spells As IReadOnlyDictionary(Of OldSpellType, Long) Implements ICharacter.Spells
+    ReadOnly Property Spells As IReadOnlyDictionary(Of Long, Long) Implements ICharacter.Spells
         Get
             Return WorldData.CharacterSpell.
                 ReadForCharacter(Id).
-                ToDictionary(Function(x) CType(x.Item1, OldSpellType), Function(x) x.Item2)
+                ToDictionary(Function(x) x.Item1, Function(x) x.Item2)
         End Get
     End Property
 
@@ -75,10 +75,10 @@
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)
     End Sub
     Function RollSpellDice(spellType As ISpellType) As Long Implements ICharacter.RollSpellDice
-        If Not Spells.ContainsKey(CType(spellType.Id, OldSpellType)) Then
+        If Not Spells.ContainsKey(spellType.Id) Then
             Return 0
         End If
-        Return RollDice(Power + Spells(OldSpellType.HolyBolt))
+        Return RollDice(Power + Spells(spellType.Id))
     End Function
     ReadOnly Property Power As Long
         Get

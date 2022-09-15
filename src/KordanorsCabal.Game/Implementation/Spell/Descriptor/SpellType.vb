@@ -38,11 +38,3 @@
         WorldData.Checker.Act(WorldData, WorldData.SpellType.ReadCast(Id), character.Id)
     End Sub
 End Class
-Friend Module SpellDescriptorUtility
-    Friend ReadOnly SpellDescriptors As IReadOnlyDictionary(Of OldSpellType, Func(Of IWorldData, SpellType)) =
-        New Dictionary(Of OldSpellType, Func(Of IWorldData, SpellType)) From
-        {
-            {OldSpellType.HolyBolt, Function(x) New HolyBoltDescriptor(x, OldSpellType.HolyBolt)},
-            {OldSpellType.Purify, Function(x) New PurifyDescriptor(x, OldSpellType.Purify)}
-        }
-End Module
