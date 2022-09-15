@@ -9,8 +9,8 @@
     Friend ReadOnly UseActions As IReadOnlyDictionary(Of String, Action(Of ICharacter)) =
         New Dictionary(Of String, Action(Of ICharacter)) From
         {
-            {"LearnHolyBolt", Sub(character) character.Learn(OldSpellType.HolyBolt)},
-            {"LearnPurify", Sub(character) character.Learn(OldSpellType.Purify)},
+            {"LearnHolyBolt", Sub(character) character.Learn(SpellType.FromId(StaticWorldData.World, 1L))},
+            {"LearnPurify", Sub(character) character.Learn(SpellType.FromId(StaticWorldData.World, 2L))},
             {"EatFood",
                 Sub(character)
                     Dim healRoll = 1

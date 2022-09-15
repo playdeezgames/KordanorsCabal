@@ -79,7 +79,7 @@
     Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType)
     Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
     Sub EnqueueMessage(ParamArray lines() As String)
-    Sub Learn(spellType As OldSpellType)
+    Sub Learn(spellType As ISpellType)
     Sub Heal()
     Sub DoFatigue(fatigue As Long)
     Sub DoCounterAttacks()

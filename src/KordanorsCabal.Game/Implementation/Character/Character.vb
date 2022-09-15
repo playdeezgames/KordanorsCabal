@@ -55,14 +55,14 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 14L), value)
         End Set
     End Property
-    Sub Learn(spellType As OldSpellType) Implements ICharacter.Learn
-        If Not CanLearn(spellType) Then
-            EnqueueMessage($"You cannot learn {spellType.Name(WorldData)} at this time!")
+    Sub Learn(spellType As ISpellType) Implements ICharacter.Learn
+        If Not CanLearn(CType(spellType.Id, OldSpellType)) Then
+            EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
             Return
         End If
-        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1
-        EnqueueMessage($"You now know {spellType.Name(WorldData)} at level {nextLevel}.")
-        WorldData.CharacterSpell.Write(Id, spellType, nextLevel)
+        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType.Id), 0) + 1
+        EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
+        WorldData.CharacterSpell.Write(Id, spellType.Id, nextLevel)
     End Sub
     Function CanLearn(spellType As OldSpellType) As Boolean Implements ICharacter.CanLearn
         Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType), 0) + 1

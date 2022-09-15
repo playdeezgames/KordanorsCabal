@@ -1,4 +1,4 @@
-﻿Friend Interface ISpellType
+﻿Public Interface ISpellType
     Inherits IBaseThingie
     ReadOnly Property Name As String
     ReadOnly Property MaximumLevel As Long

@@ -1,10 +1,14 @@
-﻿Public MustInherit Class SpellType
+﻿Public Class SpellType
     Inherits BaseThingie
     Implements ISpellType
 
     Protected Sub New(worldData As IWorldData, id As Long)
         MyBase.New(worldData, id)
     End Sub
+
+    Public Shared Function FromId(worldData As IWorldData, id As Long) As ISpellType
+        Return New SpellType(worldData, id)
+    End Function
 
     ReadOnly Property Name As String Implements ISpellType.Name
         Get
