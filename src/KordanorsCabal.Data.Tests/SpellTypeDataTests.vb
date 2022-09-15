@@ -46,4 +46,18 @@
                     (Columns.SpellTypeIdColumn, spellTypeId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub spell_type_data_associates_a_cast_with_a_spell_type_in_the_data_store()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const spellTypeId = 1L
+                subject.ReadCast(spellTypeId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnString(Of Long)(
+                    It.IsAny(Of Action),
+                    Tables.SpellTypes,
+                    Columns.CastColumn,
+                    (Columns.SpellTypeIdColumn, spellTypeId)))
+            End Sub)
+    End Sub
 End Class

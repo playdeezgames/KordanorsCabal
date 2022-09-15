@@ -30,7 +30,9 @@
         End Get
     End Property
 
-    MustOverride Sub Cast(character As ICharacter) Implements ISpellType.Cast
+    Sub Cast(character As ICharacter) Implements ISpellType.Cast
+        WorldData.Checker.Act(WorldData, WorldData.SpellType.ReadCast(Id), character.Id)
+    End Sub
 End Class
 Friend Module SpellDescriptorUtility
     Friend ReadOnly SpellDescriptors As IReadOnlyDictionary(Of OldSpellType, Func(Of IWorldData, SpellType)) =

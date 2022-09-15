@@ -2,6 +2,7 @@
     Friend Const AbbreviationColumn = "Abbreviation"
     Friend Const AttackTypeColumn = "AttackType"
     Friend Const CastCheckColumn = "CastCheck"
+    Friend Const CastColumn = "Cast"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const CharacterStatisticTypeIdColumn = "CharacterStatisticTypeId"
     Friend Const CharacterTypeIdColumn = "CharacterTypeId"
