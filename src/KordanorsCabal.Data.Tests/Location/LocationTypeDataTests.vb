@@ -23,11 +23,25 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const locationTypeId = 1L
-                subject.ReadCanMap(locationTypeId)
+                subject.ReadCanMap(locationTypeId).ShouldBeFalse
                 store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.CanMapColumn,
+                                 (Columns.LocationTypeIdColumn, locationTypeId)))
+            End Sub)
+    End Sub
+
+    <Fact>
+    Sub location_types_have_is_dungeon_flag_fetched_from_the_data_store()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const locationTypeId = 1L
+                subject.ReadIsDungeon(locationTypeId).ShouldBeFalse
+                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(
+                                 It.IsAny(Of Action),
+                                 Tables.LocationTypes,
+                                 Columns.IsDungeonColumn,
                                  (Columns.LocationTypeIdColumn, locationTypeId)))
             End Sub)
     End Sub

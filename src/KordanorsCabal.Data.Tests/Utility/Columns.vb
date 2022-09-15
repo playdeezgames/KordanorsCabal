@@ -25,6 +25,7 @@
     Friend Const InteractionModeColumn = "InteractionMode"
     Friend Const InventoryIdColumn = "InventoryId"
     Friend Const IsCardinalColumn = "IsCardinal"
+    Friend Const IsDungeonColumn = "IsDungeon"
     Friend Const IsUndeadColumn = "IsUndead"
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeIdColumn = "ItemTypeId"
