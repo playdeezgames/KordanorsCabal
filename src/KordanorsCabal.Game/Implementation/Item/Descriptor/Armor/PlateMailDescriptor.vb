@@ -4,7 +4,7 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.PlateMail,
-            MakeList(EquipSlot.FromId(StaticWorldData.World, 4L)),,,,
+            MakeList(EquipSlot.FromId(StaticWorldData.World, 4L)),,,
             4,
             50,
             50,

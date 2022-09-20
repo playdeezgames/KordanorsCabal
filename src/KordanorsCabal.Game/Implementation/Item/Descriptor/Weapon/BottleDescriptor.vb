@@ -6,7 +6,6 @@
             StaticWorldData.World,
             OldItemType.Bottle,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)), ,
-            2,
             1,,
             3,,,,,,,,
             "CanUseBottle",

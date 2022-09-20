@@ -5,7 +5,7 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.WaterShard,
-            ,,,,,,,,,,,,,
+            ,,,,,,,,,,,,
             "CanUseWaterShard",
             "UseWaterShard")
     End Sub

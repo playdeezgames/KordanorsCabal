@@ -6,7 +6,6 @@
             StaticWorldData.World,
             OldItemType.Shortsword,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
-            4,
             2,,
             20,
             5,

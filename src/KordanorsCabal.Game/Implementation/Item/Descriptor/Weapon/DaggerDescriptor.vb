@@ -6,7 +6,6 @@
             StaticWorldData.World,
             OldItemType.Dagger,
             MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
-            2,
             1,,
             10,
             1,
