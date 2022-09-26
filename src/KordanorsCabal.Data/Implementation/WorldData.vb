@@ -43,6 +43,7 @@ Public Class WorldData
     Public ReadOnly Property SpellType As ISpellTypeData Implements IWorldData.SpellType
     Public ReadOnly Property SpellTypeRequiredPower As ISpellTypeRequiredPowerData Implements IWorldData.SpellTypeRequiredPower
     Public ReadOnly Property Checker As IChecker Implements IWorldData.Checker
+    Public ReadOnly Property ItemTypeCharacterStatisticBuff As IItemTypeCharacterStatisticBuffData Implements IWorldData.ItemTypeCharacterStatisticBuff
 
     Public Sub New(store As IStore, checker As IChecker)
         Me.Store = store
@@ -74,6 +75,7 @@ Public Class WorldData
         Item = New ItemData(store, Me)
         ItemStatistic = New ItemStatisticData(store, Me)
         ItemType = New ItemTypeData(store, Me)
+        ItemTypeCharacterStatisticBuff = New ItemTypeCharacterStatisticBuffData(store, Me)
         ItemTypeSpawnCount = New ItemTypeSpawnCountData(store, Me)
         ItemTypeSpawnLocationType = New ItemTypeSpawnLocationTypeData(store, Me)
         ItemTypeStatistic = New ItemTypeStatisticData(store, Me)

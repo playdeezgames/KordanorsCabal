@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.BrodeSode,,
+            OldItemType.BrodeSode,
             3,,
             40,
             20,

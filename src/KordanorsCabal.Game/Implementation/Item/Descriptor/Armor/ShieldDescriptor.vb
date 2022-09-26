@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Shield,,,
+            OldItemType.Shield,,
             2,
             10,
             3,

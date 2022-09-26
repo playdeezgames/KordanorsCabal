@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Herb,,,,,,,
+            OldItemType.Herb,,,,,,
             5,
             MakeList(ShoppeType.BlackMage),,,,
             "HasBong",

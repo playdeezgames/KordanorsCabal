@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Shortsword,,
+            OldItemType.Shortsword,
             2,,
             20,
             5,

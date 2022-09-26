@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.ChainMail,,
+            OldItemType.ChainMail,
             2,
             2,,
             10,

@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Dagger,,
+            OldItemType.Dagger,
             1,,
             10,
             1,

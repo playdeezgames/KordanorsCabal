@@ -11,6 +11,6 @@
            Optional purifyActionName As String = Nothing,
            Optional canUseFunctionName As String = Nothing,
            Optional useActionName As String = Nothing)
-        MyBase.New(StaticWorldData.World, itemTypeId, , , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purifyActionName, canUseFunctionName, useActionName)
+        MyBase.New(StaticWorldData.World, itemTypeId, , , , offer, boughtAt, price, soldAt, repairPrice, repairedAt, purifyActionName, canUseFunctionName, useActionName)
     End Sub
 End Class

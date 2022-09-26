@@ -4,7 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.RingOfHP,
-            New Dictionary(Of Long, Long) From {{6, 1}})
+            OldItemType.RingOfHP)
     End Sub
 End Class

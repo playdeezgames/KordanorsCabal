@@ -1,6 +1,7 @@
 ﻿Module Columns
     Friend Const AbbreviationColumn = "Abbreviation"
     Friend Const AttackTypeColumn = "AttackType"
+    Friend Const BuffColumn = "Buff"
     Friend Const CanMapColumn = "CanMap"
     Friend Const CastCheckColumn = "CastCheck"
     Friend Const CastColumn = "Cast"

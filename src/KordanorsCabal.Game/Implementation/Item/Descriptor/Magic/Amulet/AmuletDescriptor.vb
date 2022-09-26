@@ -2,11 +2,9 @@
     Inherits ItemType
 
     Public Sub New(
-                  itemTypeId As Long,
-                  statisticType As Long)
+                  itemTypeId As Long)
         MyBase.New(
             StaticWorldData.World,
-            itemTypeId,
-            New Dictionary(Of Long, Long) From {{statisticType, 1}})
+            itemTypeId)
     End Sub
 End Class

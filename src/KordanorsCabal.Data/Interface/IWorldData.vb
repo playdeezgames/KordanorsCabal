@@ -26,6 +26,7 @@
     ReadOnly Property Item As IItemData
     ReadOnly Property ItemStatistic As IItemStatisticData
     ReadOnly Property ItemType As IItemTypeData
+    ReadOnly Property ItemTypeCharacterStatisticBuff As IItemTypeCharacterStatisticBuffData
     ReadOnly Property ItemTypeSpawnCount As IItemTypeSpawnCountData
     ReadOnly Property ItemTypeSpawnLocationType As IItemTypeSpawnLocationTypeData
     ReadOnly Property ItemTypeStatistic As IItemTypeStatisticData

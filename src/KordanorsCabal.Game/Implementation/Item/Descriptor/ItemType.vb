@@ -63,10 +63,6 @@
     Private ReadOnly Property boughtAt As IReadOnlyList(Of ShoppeType)
     Private ReadOnly Property soldAt As IReadOnlyList(Of ShoppeType)
     Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
-
-    '[ItemTypeCharacterStatisticBuffs]([ItemTypeId],[CharacterStatisticTypeId],[StatisticValue])
-    Private ReadOnly Property buffs As IReadOnlyDictionary(Of Long, Long)
-
     '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName],[ItemActionFilterName])
     ReadOnly Property Purify As Action(Of Item)
         Get
@@ -104,14 +100,7 @@
 
 
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
-        If buffs Is Nothing Then
-            Return Nothing
-        End If
-        Dim result As Long = 0
-        If buffs.TryGetValue(statisticType.Id, result) Then
-            Return result
-        End If
-        Return Nothing
+        Return WorldData.ItemTypeCharacterStatisticBuff.Read(Id, statisticType.Id)
     End Function
     Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long
         Return RNG.RollDice(SpawnCounts(dungeonLevel))
@@ -128,7 +117,6 @@
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long,
-           Optional buffs As IReadOnlyDictionary(Of Long, Long) = Nothing,
            Optional maximumDamage As Long? = Nothing,
            Optional defendDice As Long = 0,
            Optional maximumDurability As Long? = Nothing,
@@ -151,7 +139,6 @@
         Me.MaximumDamage = maximumDamage
         Me.DefendDice = defendDice
         Me.MaximumDurability = maximumDurability
-        Me.buffs = buffs
         Me.PurifyActionName = purifyActionName
         Me.CanUseFunctionName = canUseFunctionName
         Me.UseActionName = useActionName
@@ -162,16 +149,14 @@ Public Module ItemTypeDescriptorUtility
         New Dictionary(Of OldItemType, ItemType) From
         {
             {OldItemType.AirShard, New AirShardDescriptor},
-            {OldItemType.AmuletOfDEX, New AmuletDescriptor(OldItemType.AmuletOfDEX, 2)},
-            {OldItemType.AmuletOfHP, New AmuletDescriptor(OldItemType.AmuletOfHP,
-                6)},
-            {OldItemType.AmuletOfMana, New AmuletDescriptor(OldItemType.AmuletOfMana,
-                8)},
-            {OldItemType.AmuletOfPOW, New AmuletDescriptor(OldItemType.AmuletOfPOW, 5)},
-            {OldItemType.AmuletOfSTR, New AmuletDescriptor(OldItemType.AmuletOfSTR, 1)},
+            {OldItemType.AmuletOfDEX, New AmuletDescriptor(OldItemType.AmuletOfDEX)},
+            {OldItemType.AmuletOfHP, New AmuletDescriptor(OldItemType.AmuletOfHP)},
+            {OldItemType.AmuletOfMana, New AmuletDescriptor(OldItemType.AmuletOfMana)},
+            {OldItemType.AmuletOfPOW, New AmuletDescriptor(OldItemType.AmuletOfPOW)},
+            {OldItemType.AmuletOfSTR, New AmuletDescriptor(OldItemType.AmuletOfSTR)},
             {OldItemType.AmuletOfYendor, New ItemType(
                 StaticWorldData.World,
-                OldItemType.AmuletOfYendor,,,,,,,
+                OldItemType.AmuletOfYendor,,,,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
             {OldItemType.BatWing, New TrophyDescriptor(OldItemType.BatWing, 3, MakeList(ShoppeType.BlackMage))},
@@ -179,14 +164,14 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong, , , 25, MakeList(ShoppeType.BlackMage))},
             {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfHolyBolt,,,,,,,
+                    OldItemType.BookOfHolyBolt,,,,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnHolyBolt",
                     "LearnHolyBolt")},
             {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfPurify,,,,,,,
+                    OldItemType.BookOfPurify,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnPurify",
