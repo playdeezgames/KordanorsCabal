@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.SpaceSord,
-            MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
+            OldItemType.SpaceSord,,
             10,
             5,,
             100)

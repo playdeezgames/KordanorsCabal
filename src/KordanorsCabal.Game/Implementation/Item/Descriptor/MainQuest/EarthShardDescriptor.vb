@@ -3,9 +3,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.EarthShard,,
-            ,,, ,
-            ,,,,,,,
+            OldItemType.EarthShard,,,,,,,,,,,,
             "CanUseEarthShard",
             "UseEarthShard")
     End Sub

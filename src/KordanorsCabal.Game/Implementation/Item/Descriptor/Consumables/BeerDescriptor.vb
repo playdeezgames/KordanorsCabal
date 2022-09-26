@@ -5,7 +5,7 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.Beer,
-            ,,,,,,,
+            ,,,,,,
             5,
             MakeList(ShoppeType.InnKeeper),,,,
             "CanUseBeer",

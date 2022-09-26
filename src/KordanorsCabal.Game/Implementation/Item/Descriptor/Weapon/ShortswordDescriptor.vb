@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Shortsword,
-            MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)),,
+            OldItemType.Shortsword,,
             2,,
             20,
             5,

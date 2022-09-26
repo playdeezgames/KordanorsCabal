@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.ChainMail,
-            MakeList(EquipSlot.FromId(StaticWorldData.World, 4L)),,
+            OldItemType.ChainMail,,
             2,
             2,,
             10,

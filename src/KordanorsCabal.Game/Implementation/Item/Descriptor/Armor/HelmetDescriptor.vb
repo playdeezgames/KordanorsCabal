@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Helmet,
-            MakeList(EquipSlot.FromId(StaticWorldData.World, 3L)),,,
+            OldItemType.Helmet,,,
             2,
             10,
             2,

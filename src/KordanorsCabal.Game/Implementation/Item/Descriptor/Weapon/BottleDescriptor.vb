@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Bottle,
-            MakeList(EquipSlot.FromId(StaticWorldData.World, 1L)), ,
+            OldItemType.Bottle,,
             1,,
             3,,,,,,,,
             "CanUseBottle",

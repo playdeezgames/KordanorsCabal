@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Lotion,
-            ,,,,,
+            OldItemType.Lotion,,,,,
             5,,
             25,
             MakeList(ShoppeType.BlackMarket))

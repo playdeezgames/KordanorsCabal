@@ -54,6 +54,10 @@
 
     '[ItemTypeEquipSlots]([ItemTypeId],[EquipSlotId])
     ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot)
+        Get
+            Throw New NotImplementedException
+        End Get
+    End Property
 
     '[ItemTypeOfferShopTypes]([ItemTypeId],[ShoppeTypeId],[TransactionType])--TransactionType = offer, price, repair
     Private ReadOnly Property boughtAt As IReadOnlyList(Of ShoppeType)
@@ -124,7 +128,6 @@
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long,
-           Optional equipSlots As IEnumerable(Of IEquipSlot) = Nothing,
            Optional buffs As IReadOnlyDictionary(Of Long, Long) = Nothing,
            Optional maximumDamage As Long? = Nothing,
            Optional defendDice As Long = 0,
@@ -139,7 +142,6 @@
            Optional canUseFunctionName As String = Nothing,
            Optional useActionName As String = Nothing)
         MyBase.New(worldData, itemTypeId)
-        Me.EquipSlots = If(equipSlots, Array.Empty(Of IEquipSlot))
         Me.Offer = offer
         Me.Price = price
         Me.RepairPrice = repairPrice
@@ -169,8 +171,7 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.AmuletOfSTR, New AmuletDescriptor(OldItemType.AmuletOfSTR, 1)},
             {OldItemType.AmuletOfYendor, New ItemType(
                 StaticWorldData.World,
-                OldItemType.AmuletOfYendor,
-                MakeList(EquipSlot.FromId(StaticWorldData.World, 6L)),,,,,,,
+                OldItemType.AmuletOfYendor,,,,,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
             {OldItemType.BatWing, New TrophyDescriptor(OldItemType.BatWing, 3, MakeList(ShoppeType.BlackMage))},
@@ -178,14 +179,14 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong, , , 25, MakeList(ShoppeType.BlackMage))},
             {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfHolyBolt,,,,,,,,
+                    OldItemType.BookOfHolyBolt,,,,,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnHolyBolt",
                     "LearnHolyBolt")},
             {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfPurify,,,,,,,,
+                    OldItemType.BookOfPurify,,,,,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnPurify",
