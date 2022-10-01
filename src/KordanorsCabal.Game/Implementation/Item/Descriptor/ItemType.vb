@@ -53,8 +53,12 @@
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 4)), 0)
         End Get
     End Property
+    ReadOnly Property MaximumDurability As Long?
+        Get
+            Return ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 5))
+        End Get
+    End Property
     '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
-    ReadOnly Property MaximumDurability As Long? 'ItemTypeStatisticType
     Friend ReadOnly Property Offer As Long 'ItemTypeStatisticType
     Friend ReadOnly Property Price As Long 'ItemTypeStatisticType
     Friend ReadOnly Property RepairPrice As Long 'ItemTypeStatisticType
@@ -124,7 +128,6 @@
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long,
-           Optional maximumDurability As Long? = Nothing,
            Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
@@ -141,7 +144,6 @@
         Me.boughtAt = If(boughtAt, New List(Of ShoppeType))
         Me.soldAt = If(soldAt, New List(Of ShoppeType))
         Me.repairedAt = If(repairedAt, New List(Of ShoppeType))
-        Me.MaximumDurability = maximumDurability
         Me.PurifyActionName = purifyActionName
         Me.CanUseFunctionName = canUseFunctionName
         Me.UseActionName = useActionName
@@ -159,7 +161,7 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.AmuletOfSTR, New AmuletDescriptor(OldItemType.AmuletOfSTR)},
             {OldItemType.AmuletOfYendor, New ItemType(
                 StaticWorldData.World,
-                OldItemType.AmuletOfYendor,,,,
+                OldItemType.AmuletOfYendor,,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
             {OldItemType.BatWing, New TrophyDescriptor(OldItemType.BatWing, 3, MakeList(ShoppeType.BlackMage))},
@@ -167,14 +169,14 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong, , , 25, MakeList(ShoppeType.BlackMage))},
             {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfHolyBolt,,,,
+                    OldItemType.BookOfHolyBolt,,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnHolyBolt",
                     "LearnHolyBolt")},
             {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfPurify,,,,
+                    OldItemType.BookOfPurify,,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnPurify",

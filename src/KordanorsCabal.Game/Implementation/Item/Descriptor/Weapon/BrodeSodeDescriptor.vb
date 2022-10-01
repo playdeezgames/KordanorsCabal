@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.BrodeSode,
-            40,
             20,
             MakeList(ShoppeType.Blacksmith),
             100,
