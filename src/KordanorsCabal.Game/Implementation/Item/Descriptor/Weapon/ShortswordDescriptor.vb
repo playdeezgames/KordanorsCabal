@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Shortsword,,
+            OldItemType.Shortsword,
             20,
             5,
             MakeList(ShoppeType.Blacksmith),

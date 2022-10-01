@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.HolyWater,,,,,
+            OldItemType.HolyWater,,,,
             10,
             MakeList(ShoppeType.Healer),,,,
             "IsFightingUndead",

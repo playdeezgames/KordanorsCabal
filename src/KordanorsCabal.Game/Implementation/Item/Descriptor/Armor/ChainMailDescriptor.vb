@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.ChainMail,
-            2,,
+            OldItemType.ChainMail,,
             10,
             MakeList(ShoppeType.Blacksmith),
             50,
