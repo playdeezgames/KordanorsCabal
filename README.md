@@ -105,3 +105,23 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 # Notes
 
 https://www.aardwolf.com/
+
+
+Ways of setting up the DB:
+* CREATE TABLE IF NOT EXISTS (Kordanor)
+    * Pro
+        * allows starting completely blank
+    * Con
+        * Building up things can take a little time
+* Stock DB (Jern Jam)
+    * Pro
+        * there is a starting point
+    * Con
+        * everything is done by ID, which is hard to track in different tables
+        * sqlite doesn't allow adding foreign keys
+* Scaffolder: part stock db, part lazy db
+    * Pro
+        * deterministic scaffolding
+        * scaffolding should be human readable
+    * Con
+        * its an extra step to the process
