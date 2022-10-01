@@ -3,7 +3,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.PlateMail,,
+            OldItemType.PlateMail,
             4,
             50,
             50,
