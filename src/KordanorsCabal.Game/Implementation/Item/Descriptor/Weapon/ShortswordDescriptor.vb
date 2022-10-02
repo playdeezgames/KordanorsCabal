@@ -6,7 +6,6 @@
             StaticWorldData.World,
             OldItemType.Shortsword,
             MakeList(ShoppeType.Blacksmith),
-            25,
             MakeList(ShoppeType.Blacksmith),
             10,
             MakeList(ShoppeType.Blacksmith))

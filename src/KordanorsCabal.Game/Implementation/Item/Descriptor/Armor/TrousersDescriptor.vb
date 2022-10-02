@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.Trousers,,
-            100,
             MakeList(ShoppeType.BlackMarket))
     End Sub
 

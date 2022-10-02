@@ -6,7 +6,6 @@
             StaticWorldData.World,
             OldItemType.ChainMail,
             MakeList(ShoppeType.Blacksmith),
-            50,
             MakeList(ShoppeType.Blacksmith),
             20,
             MakeList(ShoppeType.Blacksmith))

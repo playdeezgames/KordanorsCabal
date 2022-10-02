@@ -6,7 +6,6 @@
             StaticWorldData.World,
             OldItemType.BrodeSode,
             MakeList(ShoppeType.Blacksmith),
-            100,
             MakeList(ShoppeType.Blacksmith),
             40,
             MakeList(ShoppeType.Blacksmith))
