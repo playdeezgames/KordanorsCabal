@@ -23,7 +23,7 @@
     Public Sub New()
         MyBase.New(
             OldItemType.MagicEgg,
-            MakeList(ShoppeType.BlackMage),,,,,
+            MakeList(ShoppeType.BlackMage),,,,
             "AlwaysTrue",
             "UseMagicEgg")
     End Sub

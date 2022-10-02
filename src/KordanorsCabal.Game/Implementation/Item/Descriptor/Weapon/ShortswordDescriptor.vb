@@ -7,7 +7,6 @@
             OldItemType.Shortsword,
             MakeList(ShoppeType.Blacksmith),
             MakeList(ShoppeType.Blacksmith),
-            10,
             MakeList(ShoppeType.Blacksmith))
     End Sub
 End Class

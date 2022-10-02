@@ -141,7 +141,6 @@
            itemTypeId As Long,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional soldAt As IReadOnlyList(Of ShoppeType) = Nothing,
-           Optional repairPrice As Long = 0,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional purifyActionName As String = Nothing,
            Optional canUseFunctionName As String = Nothing,
@@ -175,13 +174,13 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
                     OldItemType.BookOfHolyBolt,,
-                    MakeList(ShoppeType.BlackMage),,,,
+                    MakeList(ShoppeType.BlackMage),,,
                     "CanLearnHolyBolt",
                     "LearnHolyBolt")},
             {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
                     OldItemType.BookOfPurify,,
-                    MakeList(ShoppeType.BlackMage),,,,
+                    MakeList(ShoppeType.BlackMage),,,
                     "CanLearnPurify",
                     "LearnPurify")},
             {OldItemType.Bottle, New BottleDescriptor},

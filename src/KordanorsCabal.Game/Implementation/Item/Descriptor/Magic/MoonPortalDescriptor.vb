@@ -5,7 +5,7 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.MoonPortal,,
-            MakeList(ShoppeType.BlackMage),,,,
+            MakeList(ShoppeType.BlackMage),,,
             "IsInDungeon",
             "UseMoonPortal")
     End Sub

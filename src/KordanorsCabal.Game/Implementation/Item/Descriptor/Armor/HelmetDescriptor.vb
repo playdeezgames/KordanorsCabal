@@ -7,7 +7,6 @@
             OldItemType.Helmet,
             MakeList(ShoppeType.Blacksmith),
             MakeList(ShoppeType.Blacksmith),
-            4,
             MakeList(ShoppeType.Blacksmith))
     End Sub
 End Class
