@@ -64,9 +64,9 @@
     Friend ReadOnly Property RepairPrice As Long 'ItemTypeStatisticType
 
     '[ItemTypeEquipSlots]([ItemTypeId],[EquipSlotId])
-    ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot)
+    ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot) Implements IItemType.EquipSlots
         Get
-            Throw New NotImplementedException
+            Return WorldData.ItemTypeEquipSlot.ReadForItemType(Id).Select(Function(x) EquipSlot.FromId(WorldData, x))
         End Get
     End Property
 

@@ -39,4 +39,13 @@
                 worldData.Verify(Function(x) x.ItemTypeSpawnLocationType.ReadAll(itemTypeId, dungeonLevelId))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_types_have_equip_slots()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeEquipSlot.ReadForItemType(It.IsAny(Of Long)))
+                subject.EquipSlots.ShouldBeEmpty
+                worldData.Verify(Function(x) x.ItemTypeEquipSlot.ReadForItemType(itemTypeId))
+            End Sub)
+    End Sub
 End Class

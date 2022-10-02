@@ -33,6 +33,7 @@ Namespace KordanorsCabal.Data.Tests
             subject.ItemStatistic.ShouldNotBeNull
             subject.ItemType.ShouldNotBeNull
             subject.ItemTypeCharacterStatisticBuff.ShouldNotBeNull
+            subject.ItemTypeEquipSlot.ShouldNotBeNull
             subject.ItemTypeSpawnCount.ShouldNotBeNull
             subject.ItemTypeSpawnLocationType.ShouldNotBeNull
             subject.ItemTypeStatistic.ShouldNotBeNull

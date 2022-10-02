@@ -3,4 +3,5 @@
     ReadOnly Property Name As String
     ReadOnly Property IsConsumed As Boolean
     ReadOnly Property SpawnLocationTypes(dungeonLevel As IDungeonLevel) As HashSet(Of ILocationType)
+    ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot)
 End Interface

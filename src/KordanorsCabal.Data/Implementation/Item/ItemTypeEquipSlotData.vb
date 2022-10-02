@@ -38,4 +38,12 @@
                     [{EquipSlotIdColumn}]
                 FROM [cte];")
     End Sub
+
+    Public Function ReadForItemType(itemTypeId As Long) As IEnumerable(Of Long) Implements IItemTypeEquipSlotData.ReadForItemType
+        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
+            AddressOf Initialize,
+            TableName,
+            EquipSlotIdColumn,
+            (ItemTypeIdColumn, itemTypeId))
+    End Function
 End Class

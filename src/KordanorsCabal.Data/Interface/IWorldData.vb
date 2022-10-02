@@ -40,6 +40,7 @@
     ReadOnly Property SpellType As ISpellTypeData
     ReadOnly Property SpellTypeRequiredPower As ISpellTypeRequiredPowerData
     ReadOnly Property Checker As IChecker
+    ReadOnly Property ItemTypeEquipSlot As IItemTypeEquipSlotData
     Sub Save(filename As String)
     Sub Load(filename As String)
     Sub Reset()
