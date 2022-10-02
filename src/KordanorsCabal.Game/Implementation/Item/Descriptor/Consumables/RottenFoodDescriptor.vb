@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.RottenFood,,,,,,,
+            OldItemType.RottenFood,,,,,,
             "PurifyFood",
             "AlwaysTrue",
             "UseRottenFood")

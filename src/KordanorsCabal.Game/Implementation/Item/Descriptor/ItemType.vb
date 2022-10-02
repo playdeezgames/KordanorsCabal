@@ -58,10 +58,21 @@
             Return ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 5))
         End Get
     End Property
-    '[ItemTypeStatistics]([ItemTypeId],[ItemTypeStatisticType],[StatisticValue])
-    Friend ReadOnly Property Offer As Long 'ItemTypeStatisticType
-    Friend ReadOnly Property Price As Long 'ItemTypeStatisticType
-    Friend ReadOnly Property RepairPrice As Long 'ItemTypeStatisticType
+    Friend ReadOnly Property Offer As Long
+        Get
+            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 6)), 0)
+        End Get
+    End Property
+    Friend ReadOnly Property Price As Long
+        Get
+            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 7)), 0)
+        End Get
+    End Property
+    Friend ReadOnly Property RepairPrice As Long
+        Get
+            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 8)), 0)
+        End Get
+    End Property
 
     '[ItemTypeEquipSlots]([ItemTypeId],[EquipSlotId])
     ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot) Implements IItemType.EquipSlots
@@ -128,7 +139,6 @@
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long,
-           Optional offer As Long = 0,
            Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional price As Long = 0,
            Optional soldAt As IReadOnlyList(Of ShoppeType) = Nothing,
@@ -138,9 +148,6 @@
            Optional canUseFunctionName As String = Nothing,
            Optional useActionName As String = Nothing)
         MyBase.New(worldData, itemTypeId)
-        Me.Offer = offer
-        Me.Price = price
-        Me.RepairPrice = repairPrice
         Me.boughtAt = If(boughtAt, New List(Of ShoppeType))
         Me.soldAt = If(soldAt, New List(Of ShoppeType))
         Me.repairedAt = If(repairedAt, New List(Of ShoppeType))
@@ -161,22 +168,22 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.AmuletOfSTR, New AmuletDescriptor(OldItemType.AmuletOfSTR)},
             {OldItemType.AmuletOfYendor, New ItemType(
                 StaticWorldData.World,
-                OldItemType.AmuletOfYendor,,,
+                OldItemType.AmuletOfYendor,,
                 1000,
                 MakeList(ShoppeType.BlackMarket))},
-            {OldItemType.BatWing, New TrophyDescriptor(OldItemType.BatWing, 3, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.BatWing, New TrophyDescriptor(OldItemType.BatWing, MakeList(ShoppeType.BlackMage))},
             {OldItemType.Beer, New BeerDescriptor},
-            {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong, , , 25, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong, , 25, MakeList(ShoppeType.BlackMage))},
             {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfHolyBolt,,,
+                    OldItemType.BookOfHolyBolt,,
                     100,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnHolyBolt",
                     "LearnHolyBolt")},
             {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfPurify,,,
+                    OldItemType.BookOfPurify,,
                     50,
                     MakeList(ShoppeType.BlackMage),,,,
                     "CanLearnPurify",
@@ -190,7 +197,7 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.ElementalOrb, New ElementalOrbDescriptor},
             {OldItemType.FireShard, New FireShardDescriptor},
             {OldItemType.Food, New FoodDescriptor},
-            {OldItemType.GoblinEar, New TrophyDescriptor(OldItemType.GoblinEar, 5, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.GoblinEar, New TrophyDescriptor(OldItemType.GoblinEar, MakeList(ShoppeType.BlackMage))},
             {OldItemType.GoldKey, New GoldKeyDescriptor},
             {OldItemType.Helmet, New HelmetDescriptor},
             {OldItemType.Herb, New HerbDescriptor},
@@ -199,28 +206,28 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.IronKey, New IronKeyDescriptor},
             {OldItemType.Lotion, New LotionDescriptor},
             {OldItemType.MagicEgg, New MagicEggDescriptor},
-            {OldItemType.MembershipCard, New TrophyDescriptor(OldItemType.MembershipCard, 10)},
+            {OldItemType.MembershipCard, New TrophyDescriptor(OldItemType.MembershipCard)},
             {OldItemType.MoonPortal, New MoonPortalDescriptor},
-            {OldItemType.Mushroom, New TrophyDescriptor(OldItemType.Mushroom, 25, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.Mushroom, New TrophyDescriptor(OldItemType.Mushroom, MakeList(ShoppeType.BlackMage))},
             {OldItemType.PlateMail, New PlateMailDescriptor},
             {OldItemType.PlatinumKey, New PlatinumKeyDescriptor},
             {OldItemType.Potion, New PotionDescriptor},
             {OldItemType.Pr0n, New Pr0nDescriptor},
-            {OldItemType.RatTail, New TrophyDescriptor(OldItemType.RatTail, 1, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.RatTail, New TrophyDescriptor(OldItemType.RatTail, MakeList(ShoppeType.BlackMage))},
             {OldItemType.RingOfHP, New RingOfHPDescriptor},
             {OldItemType.RottenEgg, New RottenEggDescriptor},
             {OldItemType.RottenFood, New RottenFoodDescriptor},
             {OldItemType.SilverKey, New SilverKeyDescriptor},
             {OldItemType.Shield, New ShieldDescriptor},
-            {OldItemType.ShoeLaces, New TrophyDescriptor(OldItemType.ShoeLaces, 0)},
+            {OldItemType.ShoeLaces, New TrophyDescriptor(OldItemType.ShoeLaces)},
             {OldItemType.Shortsword, New ShortswordDescriptor},
-            {OldItemType.SkullFragment, New TrophyDescriptor(OldItemType.SkullFragment, 5, MakeList(ShoppeType.BlackMage))},
-            {OldItemType.SnakeFang, New TrophyDescriptor(OldItemType.SnakeFang, 3, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.SkullFragment, New TrophyDescriptor(OldItemType.SkullFragment, MakeList(ShoppeType.BlackMage))},
+            {OldItemType.SnakeFang, New TrophyDescriptor(OldItemType.SnakeFang, MakeList(ShoppeType.BlackMage))},
             {OldItemType.SpaceSord, New SpaceSordDescriptor},
             {OldItemType.TownPortal, New TownPortalDescriptor},
             {OldItemType.Trousers, New TrousersDescriptor},
             {OldItemType.WaterShard, New WaterShardDescriptor},
-            {OldItemType.ZombieTaint, New TrophyDescriptor(OldItemType.ZombieTaint, 5, MakeList(ShoppeType.BlackMage))}
+            {OldItemType.ZombieTaint, New TrophyDescriptor(OldItemType.ZombieTaint, MakeList(ShoppeType.BlackMage))}
         }
     Public ReadOnly Property AllItemTypes As IEnumerable(Of OldItemType)
         Get

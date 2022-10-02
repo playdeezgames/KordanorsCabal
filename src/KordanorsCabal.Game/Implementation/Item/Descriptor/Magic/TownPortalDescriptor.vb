@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.TownPortal,,,
+            OldItemType.TownPortal,,
             50,
             MakeList(ShoppeType.BlackMage),,,,
             "IsInDungeon",

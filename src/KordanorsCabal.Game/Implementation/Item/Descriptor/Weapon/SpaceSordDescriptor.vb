@@ -4,7 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.SpaceSord,
-            100)
+            OldItemType.SpaceSord)
     End Sub
 End Class

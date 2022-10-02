@@ -4,7 +4,6 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.PlateMail,
-            50,
             MakeList(ShoppeType.Blacksmith),
             250,
             MakeList(ShoppeType.Blacksmith),
