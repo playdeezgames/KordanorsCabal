@@ -78,11 +78,17 @@
             Return WorldData.ItemTypeEquipSlot.ReadForItemType(Id).Select(Function(x) EquipSlot.FromId(WorldData, x))
         End Get
     End Property
-
-    '[ItemTypeOfferShopTypes]([ItemTypeId],[ShoppeTypeId],[TransactionType])--TransactionType = offer, price, repair
-    Private ReadOnly Property boughtAt As IReadOnlyList(Of ShoppeType)
-    Private ReadOnly Property soldAt As IReadOnlyList(Of ShoppeType)
-    Private ReadOnly Property repairedAt As IReadOnlyList(Of ShoppeType)
+    Private Const OfferTransactionTypeId = 1L
+    Private Const PriceTransactionTypeId = 2L
+    Private Const RepairTransactionTypeId = 3L
+    Private ReadOnly Property boughtAt As IEnumerable(Of ShoppeType)
+        Get
+            Return WorldData.ItemTypeShopType.ReadForTransactionType(OfferTransactionTypeId).Select(Function(x) CType(x, ShoppeType))
+        End Get
+    End Property
+    '[ItemTypeShopTypes]([ItemTypeId],[ShoppeTypeId],[TransactionType])--TransactionType = offer, price, repair
+    Private ReadOnly Property soldAt As IEnumerable(Of ShoppeType)
+    Private ReadOnly Property repairedAt As IEnumerable(Of ShoppeType)
     '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName],[ItemActionFilterName])
     ReadOnly Property Purify As Action(Of Item)
         Get
@@ -137,14 +143,13 @@
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long,
-           Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing,
+           Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing, 'TODO: yank
            Optional soldAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional purifyActionName As String = Nothing,
            Optional canUseFunctionName As String = Nothing,
            Optional useActionName As String = Nothing)
         MyBase.New(worldData, itemTypeId)
-        Me.boughtAt = If(boughtAt, New List(Of ShoppeType))
         Me.soldAt = If(soldAt, New List(Of ShoppeType))
         Me.repairedAt = If(repairedAt, New List(Of ShoppeType))
         Me.PurifyActionName = purifyActionName

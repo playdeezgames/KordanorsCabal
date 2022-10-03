@@ -45,6 +45,7 @@ Public Class WorldData
     Public ReadOnly Property Checker As IChecker Implements IWorldData.Checker
     Public ReadOnly Property ItemTypeCharacterStatisticBuff As IItemTypeCharacterStatisticBuffData Implements IWorldData.ItemTypeCharacterStatisticBuff
     Public ReadOnly Property ItemTypeEquipSlot As IItemTypeEquipSlotData Implements IWorldData.ItemTypeEquipSlot
+    Public ReadOnly Property ItemTypeShopType As IItemTypeShopTypeData Implements IWorldData.ItemTypeShopType
 
     Public Sub New(store As IStore, checker As IChecker)
         Me.Store = store
@@ -78,6 +79,7 @@ Public Class WorldData
         ItemType = New ItemTypeData(store, Me)
         ItemTypeCharacterStatisticBuff = New ItemTypeCharacterStatisticBuffData(store, Me)
         ItemTypeEquipSlot = New ItemTypeEquipSlotData(store, Me)
+        ItemTypeShopType = New ItemTypeShopTypeData
         ItemTypeSpawnCount = New ItemTypeSpawnCountData(store, Me)
         ItemTypeSpawnLocationType = New ItemTypeSpawnLocationTypeData(store, Me)
         ItemTypeStatistic = New ItemTypeStatisticData(store, Me)
