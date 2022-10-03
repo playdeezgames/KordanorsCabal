@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Food,,
+            OldItemType.Food,
             MakeList(ShoppeType.InnKeeper),,,
             "AlwaysTrue",
             "EatFood")

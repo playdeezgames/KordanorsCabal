@@ -6,7 +6,6 @@
             StaticWorldData.World,
             OldItemType.BrodeSode,
             MakeList(ShoppeType.Blacksmith),
-            MakeList(ShoppeType.Blacksmith),
             MakeList(ShoppeType.Blacksmith))
     End Sub
 End Class

@@ -17,6 +17,12 @@
                     [{ShopTypeIdColumn}],
                     [{TransactionTypeIdColumn}]) AS
                 (VALUES
+                    (10,2,1),
+                    (15,2,1),
+                    (16,2,1),
+                    (18,2,1),
+                    (19,2,1),
+                    (20,2,1)
                 )
                 SELECT 
                     [{ItemTypeIdColumn}],

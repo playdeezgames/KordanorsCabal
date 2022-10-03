@@ -145,7 +145,6 @@
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long,
-           Optional boughtAt As IReadOnlyList(Of ShoppeType) = Nothing, 'TODO: yank
            Optional soldAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional purifyActionName As String = Nothing,
@@ -178,13 +177,13 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong, , MakeList(ShoppeType.BlackMage))},
             {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfHolyBolt,,
+                    OldItemType.BookOfHolyBolt,
                     MakeList(ShoppeType.BlackMage),,,
                     "CanLearnHolyBolt",
                     "LearnHolyBolt")},
             {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfPurify,,
+                    OldItemType.BookOfPurify,
                     MakeList(ShoppeType.BlackMage),,,
                     "CanLearnPurify",
                     "LearnPurify")},
