@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.HolyWater,,
-            "IsFightingUndead",
-            "UseHolyWater")
+            "IsFightingUndead")
     End Sub
 End Class

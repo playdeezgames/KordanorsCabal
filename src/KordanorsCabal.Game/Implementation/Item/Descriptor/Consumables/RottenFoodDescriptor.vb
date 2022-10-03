@@ -6,7 +6,6 @@
             StaticWorldData.World,
             OldItemType.RottenFood,
             "PurifyFood",
-            "AlwaysTrue",
-            "UseRottenFood")
+            "AlwaysTrue")
     End Sub
 End Class

@@ -164,8 +164,7 @@
            worldData As IWorldData,
            itemTypeId As Long,
            Optional purifyActionName As String = Nothing,
-           Optional canUseFunctionName As String = Nothing,
-           Optional useActionName As String = Nothing)
+           Optional canUseFunctionName As String = Nothing)
         MyBase.New(worldData, itemTypeId)
         Me.PurifyActionName = purifyActionName
         Me.CanUseFunctionName = canUseFunctionName
@@ -190,13 +189,11 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
                     OldItemType.BookOfHolyBolt,,
-                    "CanLearnHolyBolt",
-                    "LearnHolyBolt")},
+                    "CanLearnHolyBolt")},
             {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
                     OldItemType.BookOfPurify,,
-                    "CanLearnPurify",
-                    "LearnPurify")},
+                    "CanLearnPurify")},
             {OldItemType.Bottle, New BottleDescriptor},
             {OldItemType.BrodeSode, New BrodeSodeDescriptor},
             {OldItemType.ChainMail, New ChainMailDescriptor},

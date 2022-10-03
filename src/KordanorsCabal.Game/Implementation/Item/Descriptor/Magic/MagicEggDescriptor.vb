@@ -23,7 +23,6 @@
     Public Sub New()
         MyBase.New(
             OldItemType.MagicEgg,,
-            "AlwaysTrue",
-            "UseMagicEgg")
+            "AlwaysTrue")
     End Sub
 End Class

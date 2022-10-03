@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.MoonPortal,,
-            "IsInDungeon",
-            "UseMoonPortal")
+            "IsInDungeon")
     End Sub
 End Class

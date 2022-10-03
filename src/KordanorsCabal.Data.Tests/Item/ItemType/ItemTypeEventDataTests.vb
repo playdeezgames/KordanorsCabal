@@ -10,6 +10,13 @@
                 Const itemTypeId = 1L
                 Const eventId = 2L
                 subject.Read(itemTypeId, eventId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadColumnString(
+                        It.IsAny(Of Action),
+                        Tables.ItemTypeEvents,
+                        Columns.EventNameColumn,
+                        (Columns.ItemTypeIdColumn, itemTypeId),
+                        (Columns.EventIdColumn, eventId)))
             End Sub)
     End Sub
 End Class

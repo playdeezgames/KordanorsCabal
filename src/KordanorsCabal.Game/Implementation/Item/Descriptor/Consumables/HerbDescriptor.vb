@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.Herb,,
-            "HasBong",
-            "UseHerb")
+            "HasBong")
     End Sub
 End Class

@@ -4,7 +4,6 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.FireShard,,
-            "CanUseFireShard",
-            "UseFireShard")
+            "CanUseFireShard")
     End Sub
 End Class

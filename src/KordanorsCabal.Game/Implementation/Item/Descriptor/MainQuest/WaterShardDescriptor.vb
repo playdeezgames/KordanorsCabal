@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.WaterShard,,
-            "CanUseWaterShard",
-            "UseWaterShard")
+            "CanUseWaterShard")
     End Sub
 End Class
