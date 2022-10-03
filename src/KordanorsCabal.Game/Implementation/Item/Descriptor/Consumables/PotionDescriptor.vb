@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Potion,
-            MakeList(ShoppeType.Healer),,,
+            OldItemType.Potion,,,
             "AlwaysTrue",
             "DrinkPotion")
     End Sub

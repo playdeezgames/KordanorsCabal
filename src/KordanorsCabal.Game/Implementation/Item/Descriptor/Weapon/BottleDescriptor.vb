@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Bottle,,,,
+            OldItemType.Bottle,,,
             "CanUseBottle",
             "UseBotttle")
     End Sub

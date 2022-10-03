@@ -4,8 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Pr0n,
-            MakeList(ShoppeType.BlackMarket),,,
+            OldItemType.Pr0n,,,
             "CanUsePr0n",
             "UsePr0n")
     End Sub

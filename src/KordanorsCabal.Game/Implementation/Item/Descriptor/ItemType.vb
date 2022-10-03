@@ -88,8 +88,14 @@
                 Select(Function(x) CType(x, ShoppeType))
         End Get
     End Property
-    '[ItemTypeShopTypes]([ItemTypeId],[ShoppeTypeId],[TransactionType])--TransactionType = offer, price, repair
     Private ReadOnly Property soldAt As IEnumerable(Of ShoppeType)
+        Get
+            Return WorldData.ItemTypeShopType.
+                ReadForTransactionType(Id, PriceTransactionTypeId).
+                Select(Function(x) CType(x, ShoppeType))
+        End Get
+    End Property
+    '[ItemTypeShopTypes]([ItemTypeId],[ShoppeTypeId],[TransactionType])--TransactionType = offer, price, repair
     Private ReadOnly Property repairedAt As IEnumerable(Of ShoppeType)
     '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName],[ItemActionFilterName])
     ReadOnly Property Purify As Action(Of Item)
@@ -145,13 +151,11 @@
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long,
-           Optional soldAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional repairedAt As IReadOnlyList(Of ShoppeType) = Nothing,
            Optional purifyActionName As String = Nothing,
            Optional canUseFunctionName As String = Nothing,
            Optional useActionName As String = Nothing)
         MyBase.New(worldData, itemTypeId)
-        Me.soldAt = If(soldAt, New List(Of ShoppeType))
         Me.repairedAt = If(repairedAt, New List(Of ShoppeType))
         Me.PurifyActionName = purifyActionName
         Me.CanUseFunctionName = canUseFunctionName
@@ -170,21 +174,18 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.AmuletOfSTR, New AmuletDescriptor(OldItemType.AmuletOfSTR)},
             {OldItemType.AmuletOfYendor, New ItemType(
                 StaticWorldData.World,
-                OldItemType.AmuletOfYendor,,
-                MakeList(ShoppeType.BlackMarket))},
+                OldItemType.AmuletOfYendor)},
             {OldItemType.BatWing, New TrophyDescriptor(OldItemType.BatWing, MakeList(ShoppeType.BlackMage))},
             {OldItemType.Beer, New BeerDescriptor},
-            {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong, , MakeList(ShoppeType.BlackMage))},
+            {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong)},
             {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfHolyBolt,
-                    MakeList(ShoppeType.BlackMage),,,
+                    OldItemType.BookOfHolyBolt,,,
                     "CanLearnHolyBolt",
                     "LearnHolyBolt")},
             {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfPurify,
-                    MakeList(ShoppeType.BlackMage),,,
+                    OldItemType.BookOfPurify,,,
                     "CanLearnPurify",
                     "LearnPurify")},
             {OldItemType.Bottle, New BottleDescriptor},
