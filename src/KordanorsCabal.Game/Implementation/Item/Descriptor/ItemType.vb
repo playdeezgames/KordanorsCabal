@@ -83,7 +83,9 @@
     Private Const RepairTransactionTypeId = 3L
     Private ReadOnly Property boughtAt As IEnumerable(Of ShoppeType)
         Get
-            Return WorldData.ItemTypeShopType.ReadForTransactionType(OfferTransactionTypeId).Select(Function(x) CType(x, ShoppeType))
+            Return WorldData.ItemTypeShopType.
+                ReadForTransactionType(Id, OfferTransactionTypeId).
+                Select(Function(x) CType(x, ShoppeType))
         End Get
     End Property
     '[ItemTypeShopTypes]([ItemTypeId],[ShoppeTypeId],[TransactionType])--TransactionType = offer, price, repair

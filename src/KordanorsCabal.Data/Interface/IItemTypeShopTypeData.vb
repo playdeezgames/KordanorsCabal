@@ -1,3 +1,3 @@
 ﻿Public Interface IItemTypeShopTypeData
-    Function ReadForTransactionType(transationTypeId As Long) As IEnumerable(Of Long)
+    Function ReadForTransactionType(itemTypeId As Long, transationTypeId As Long) As IEnumerable(Of Long)
 End Interface
