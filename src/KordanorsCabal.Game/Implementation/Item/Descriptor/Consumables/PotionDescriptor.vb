@@ -4,7 +4,7 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Potion,,,
+            OldItemType.Potion,,
             "AlwaysTrue",
             "DrinkPotion")
     End Sub

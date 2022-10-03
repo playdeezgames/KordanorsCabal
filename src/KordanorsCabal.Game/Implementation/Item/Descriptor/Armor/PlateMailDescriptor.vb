@@ -3,7 +3,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.PlateMail,
-            MakeList(ShoppeType.Blacksmith))
+            OldItemType.PlateMail)
     End Sub
 End Class

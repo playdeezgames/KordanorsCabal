@@ -4,7 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Helmet,
-            MakeList(ShoppeType.Blacksmith))
+            OldItemType.Helmet)
     End Sub
 End Class
