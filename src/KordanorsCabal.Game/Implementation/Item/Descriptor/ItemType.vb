@@ -73,8 +73,6 @@
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 8)), 0)
         End Get
     End Property
-
-    '[ItemTypeEquipSlots]([ItemTypeId],[EquipSlotId])
     ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot) Implements IItemType.EquipSlots
         Get
             Return WorldData.ItemTypeEquipSlot.ReadForItemType(Id).Select(Function(x) EquipSlot.FromId(WorldData, x))
