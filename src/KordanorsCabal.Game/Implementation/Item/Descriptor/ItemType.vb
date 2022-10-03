@@ -102,7 +102,17 @@
                 Select(Function(x) CType(x, ShoppeType))
         End Get
     End Property
-    '[ItemTypeActions]([ItemTypeId],[ItemActionId],[ItemActionName],[ItemActionFilterName])
+    '[ItemTypeEvents]([ItemTypeId],[EventId],[EventName])
+    Const UseEventId = 3L
+    Const CanUseEventId = 2L
+    Const PurifyEventId = 1L
+    Private ReadOnly Property UseActionName As String
+        Get
+            Return WorldData.ItemTypeEvent.Read(Id, UseEventId)
+        End Get
+    End Property
+    Private ReadOnly CanUseFunctionName As String
+    Private ReadOnly Property PurifyActionName As String
     ReadOnly Property Purify As Action(Of Item)
         Get
             Dim result As Action(Of Item) = Nothing
@@ -113,7 +123,6 @@
                    End Sub
         End Get
     End Property
-    Private ReadOnly Property PurifyActionName As String
     ReadOnly Property Use As Action(Of ICharacter)
         Get
             Dim result As Action(Of ICharacter) = Nothing
@@ -124,7 +133,6 @@
                    End Sub
         End Get
     End Property
-    Private ReadOnly Property UseActionName As String
 
     ReadOnly Property CanUse As Func(Of ICharacter, Boolean)
         Get
@@ -135,7 +143,6 @@
             Return Function(c) False
         End Get
     End Property
-    Private ReadOnly CanUseFunctionName As String
 
 
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
@@ -162,7 +169,6 @@
         MyBase.New(worldData, itemTypeId)
         Me.PurifyActionName = purifyActionName
         Me.CanUseFunctionName = canUseFunctionName
-        Me.UseActionName = useActionName
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility
