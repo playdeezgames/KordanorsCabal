@@ -52,6 +52,7 @@
     Friend Const RequiresMPColumn = "RequiresMP"
     Friend Const RouteIdColumn = "RouteId"
     Friend Const RouteTypeIdColumn = "RouteTypeId"
+    Friend Const ShopTypeIdColumn = "ShopTypeId"
     Friend Const SpawnCountColumn = "SpawnCount"
     Friend Const SpawnDiceColumn = "SpawnDice"
     Friend Const SpellLevelColumn = "SpellLevel"
@@ -59,6 +60,7 @@
     Friend Const SpellTypeIdColumn = "SpellTypeId"
     Friend Const StatisticValueColumn = "StatisticValue"
     Friend Const ToLocationIdColumn = "ToLocationId"
+    Friend Const TransactionTypeIdColumn = "TransactionTypeId"
     Friend Const WeightColumn = "Weight"
     Friend Const XPValueColumn = "XPValue"
 End Module

@@ -9,7 +9,14 @@
             Sub(store, checker, subject)
                 Const itemTypeId = 1L
                 Const transactionTypeId = 2L
-                subject.ReadForTransactionType(itemTypeId, transactionTypeId).ShouldBeEmpty
+                subject.ReadForTransactionType(itemTypeId, transactionTypeId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+                        It.IsAny(Of Action),
+                        Tables.ItemTypeShopTypes,
+                        Columns.ShopTypeIdColumn,
+                        (Columns.ItemTypeIdColumn, itemTypeId),
+                        (Columns.TransactionTypeIdColumn, transactionTypeId)))
             End Sub)
     End Sub
 End Class

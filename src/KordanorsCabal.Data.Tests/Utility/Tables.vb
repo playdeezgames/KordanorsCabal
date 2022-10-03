@@ -27,6 +27,7 @@
     Friend Const ItemTypeCharacterStatisticBuffs = "ItemTypeCharacterStatisticBuffs"
     Friend Const ItemTypeEquipSlots = "ItemTypeEquipSlots"
     Friend Const ItemTypes = "ItemTypes"
+    Friend Const ItemTypeShopTypes = "ItemTypeShopTypes"
     Friend Const ItemTypeSpawnCounts = "ItemTypeSpawnCounts"
     Friend Const ItemTypeSpawnLocationTypes = "ItemTypeSpawnLocationTypes"
     Friend Const ItemTypeStatistics = "ItemTypeStatistics"

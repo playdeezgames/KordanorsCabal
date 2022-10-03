@@ -79,7 +79,7 @@ Public Class WorldData
         ItemType = New ItemTypeData(store, Me)
         ItemTypeCharacterStatisticBuff = New ItemTypeCharacterStatisticBuffData(store, Me)
         ItemTypeEquipSlot = New ItemTypeEquipSlotData(store, Me)
-        ItemTypeShopType = New ItemTypeShopTypeData
+        ItemTypeShopType = New ItemTypeShopTypeData(store, Me)
         ItemTypeSpawnCount = New ItemTypeSpawnCountData(store, Me)
         ItemTypeSpawnLocationType = New ItemTypeSpawnLocationTypeData(store, Me)
         ItemTypeStatistic = New ItemTypeStatisticData(store, Me)
