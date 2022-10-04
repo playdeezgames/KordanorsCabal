@@ -19,6 +19,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Implementation\Item\Descriptor\Book\**" />
+    <EmbeddedResource Remove="Implementation\Item\Descriptor\Book\**" />
+    <None Remove="Implementation\Item\Descriptor\Book\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\KordanorsCabal.Data\KordanorsCabal.Data.vbproj" />
     <ProjectReference Include="..\SPLORR.Game\SPLORR.Game.vbproj" />
   </ItemGroup>
@@ -27,10 +33,6 @@
     <Import Include="KordanorsCabal.Data" />
     <Import Include="SPLORR.Data" />
     <Import Include="SPLORR.Game" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Implementation\Item\Descriptor\Book\" />
   </ItemGroup>
 
 </Project>
