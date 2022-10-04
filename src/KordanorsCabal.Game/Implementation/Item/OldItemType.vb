@@ -61,10 +61,6 @@ Public Module ItemTypeExtensions
         Return Game.ItemType.FromId(worldData, itemType)
     End Function
     <Extension>
-    Public Function AttackDice(itemType As OldItemType) As Long
-        Return ItemTypeDescriptors(itemType).AttackDice
-    End Function
-    <Extension>
     Public Function IsWeapon(itemType As OldItemType) As Boolean
         Return ItemTypeDescriptors(itemType).AttackDice > 0
     End Function

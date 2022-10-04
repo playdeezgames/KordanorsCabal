@@ -64,7 +64,7 @@
     End Property
     ReadOnly Property AttackDice As Long Implements IItem.AttackDice
         Get
-            Return ItemType.AttackDice
+            Return ItemType.ToNew(WorldData).AttackDice
         End Get
     End Property
     Public ReadOnly Property MaximumDurability As Long? Implements IItem.MaximumDurability
