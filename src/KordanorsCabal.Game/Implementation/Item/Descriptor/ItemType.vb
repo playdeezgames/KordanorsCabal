@@ -63,7 +63,7 @@
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 6)), 0)
         End Get
     End Property
-    ReadOnly Property Price As Long
+    ReadOnly Property Price As Long Implements IItemType.Price
         Get
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 7)), 0)
         End Get

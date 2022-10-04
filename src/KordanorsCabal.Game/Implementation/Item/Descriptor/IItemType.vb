@@ -11,4 +11,5 @@
     ReadOnly Property DefendDice As Long
     ReadOnly Property MaximumDurability As Long?
     ReadOnly Property Offer As Long
+    ReadOnly Property Price As Long
 End Interface
