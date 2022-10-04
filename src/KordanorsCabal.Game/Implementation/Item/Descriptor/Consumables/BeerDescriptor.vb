@@ -4,7 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Beer,,
-            "CanUseBeer")
+            OldItemType.Beer)
     End Sub
 End Class

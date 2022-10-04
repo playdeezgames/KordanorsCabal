@@ -4,7 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.AirShard,,
-            "CanUseAirShard")
+            OldItemType.AirShard)
     End Sub
 End Class

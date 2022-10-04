@@ -3,7 +3,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.FireShard,,
-            "CanUseFireShard")
+            OldItemType.FireShard)
     End Sub
 End Class

@@ -4,7 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.TownPortal,,
-            "IsInDungeon")
+            OldItemType.TownPortal)
     End Sub
 End Class

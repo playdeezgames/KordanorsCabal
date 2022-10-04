@@ -111,7 +111,11 @@
             Return WorldData.ItemTypeEvent.Read(Id, UseEventId)
         End Get
     End Property
-    Private ReadOnly CanUseFunctionName As String
+    Private ReadOnly Property CanUseFunctionName As String
+        Get
+            Return WorldData.ItemTypeEvent.Read(Id, CanUseEventId)
+        End Get
+    End Property
     Private ReadOnly Property PurifyActionName As String
     ReadOnly Property Purify As Action(Of Item)
         Get
@@ -163,11 +167,9 @@
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long,
-           Optional purifyActionName As String = Nothing,
-           Optional canUseFunctionName As String = Nothing)
+           Optional purifyActionName As String = Nothing)
         MyBase.New(worldData, itemTypeId)
         Me.PurifyActionName = purifyActionName
-        Me.CanUseFunctionName = canUseFunctionName
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility
@@ -188,12 +190,10 @@ Public Module ItemTypeDescriptorUtility
             {OldItemType.Bong, New TrophyDescriptor(OldItemType.Bong)},
             {OldItemType.BookOfHolyBolt, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfHolyBolt,,
-                    "CanLearnHolyBolt")},
+                    OldItemType.BookOfHolyBolt)},
             {OldItemType.BookOfPurify, New ItemType(
                     StaticWorldData.World,
-                    OldItemType.BookOfPurify,,
-                    "CanLearnPurify")},
+                    OldItemType.BookOfPurify)},
             {OldItemType.Bottle, New BottleDescriptor},
             {OldItemType.BrodeSode, New BrodeSodeDescriptor},
             {OldItemType.ChainMail, New ChainMailDescriptor},

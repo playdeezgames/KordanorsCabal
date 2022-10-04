@@ -5,7 +5,6 @@
         MyBase.New(
             StaticWorldData.World,
             OldItemType.RottenFood,
-            "PurifyFood",
-            "AlwaysTrue")
+            "PurifyFood")
     End Sub
 End Class

@@ -4,7 +4,6 @@
     Sub New()
         MyBase.New(
             StaticWorldData.World,
-            OldItemType.Food,,
-            "AlwaysTrue")
+            OldItemType.Food)
     End Sub
 End Class
