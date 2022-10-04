@@ -4,5 +4,6 @@
     ReadOnly Property IsConsumed As Boolean
     ReadOnly Property SpawnLocationTypes(dungeonLevel As IDungeonLevel) As HashSet(Of ILocationType)
     ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot)
-    ReadOnly Property SpawnCounts(dungeonLevel As IDungeonLevel) As String
+    Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long
+    ReadOnly Property AttackDice As Long
 End Interface

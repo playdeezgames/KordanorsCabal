@@ -23,7 +23,7 @@
             Return New HashSet(Of ILocationType)(results.Select(Function(x) LocationType.FromId(WorldData, x)))
         End Get
     End Property
-    Private ReadOnly Property SpawnCounts(dungeonLevel As IDungeonLevel) As String Implements IItemType.SpawnCounts
+    Private ReadOnly Property SpawnCounts(dungeonLevel As IDungeonLevel) As String
         Get
             Return WorldData.ItemTypeSpawnCount.Read(Id, dungeonLevel.Id)
         End Get
@@ -38,7 +38,7 @@
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 1)), 0)
         End Get
     End Property
-    ReadOnly Property AttackDice As Long
+    ReadOnly Property AttackDice As Long Implements IItemType.AttackDice
         Get
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 2)), 0)
         End Get
@@ -154,7 +154,7 @@
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
         Return WorldData.ItemTypeCharacterStatisticBuff.Read(Id, statisticType.Id)
     End Function
-    Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long
+    Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long Implements IItemType.RollSpawnCount
         Return RNG.RollDice(SpawnCounts(dungeonLevel))
     End Function
     Friend Function HasOffer(shoppeType As ShoppeType) As Boolean

@@ -49,13 +49,22 @@
             End Sub)
     End Sub
     <Fact>
-    Sub item_types_have_spawn_counts()
+    Sub item_types_rolls_spawn_counts()
         WithAnySubject(
             Sub(itemTypeId, worldData, subject)
                 Const dungeonLevelId = 2L
                 worldData.Setup(Function(x) x.ItemTypeSpawnCount.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.SpawnCounts(DungeonLevel.FromId(worldData.Object, dungeonLevelId)).ShouldBeNull
+                subject.RollSpawnCount(DungeonLevel.FromId(worldData.Object, dungeonLevelId)).ShouldBe(0L)
                 worldData.Verify(Function(x) x.ItemTypeSpawnCount.Read(itemTypeId, dungeonLevelId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub item_types_have_attack_dice()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.AttackDice.ShouldBe(0L)
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 2))
             End Sub)
     End Sub
 End Class
