@@ -45,7 +45,7 @@ Friend Class ChickenModeProcessor
         Dim itemType = item.ItemType
         item.Destroy()
         If RNG.FromRange(0, 5) = 0 Then
-            Select Case itemType
+            Select Case itemType.Id
                 Case OldItemType.Food
                     player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {OldItemType.MagicEgg.ToNew(StaticWorldData.World).Name} pops out!")
                     player.Inventory.Add(Game.Item.Create(StaticWorldData.World, OldItemType.MagicEgg))

@@ -24,7 +24,7 @@
     End Sub
     ReadOnly Property ItemsOfType(itemType As OldItemType) As IEnumerable(Of IItem) Implements IInventory.ItemsOfType
         Get
-            Return Items.Where(Function(x) x.ItemType = itemType)
+            Return Items.Where(Function(x) x.ItemType.Id = itemType)
         End Get
     End Property
 

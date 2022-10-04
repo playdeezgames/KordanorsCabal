@@ -5,7 +5,7 @@
     Sub Purify()
     ReadOnly Property NeedsRepair As Boolean
     ReadOnly Property Name As String
-    ReadOnly Property ItemType As OldItemType
+    ReadOnly Property ItemType As IItemType
     Sub ReduceDurability(amount As Long)
     ReadOnly Property MaximumDamage As Long?
     Sub Use(character As ICharacter)

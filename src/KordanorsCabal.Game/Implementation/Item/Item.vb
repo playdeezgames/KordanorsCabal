@@ -10,29 +10,29 @@
     Shared Function Create(worldData As IWorldData, itemType As OldItemType) As IItem
         Return FromId(worldData, worldData.Item.Create(itemType))
     End Function
-    Public ReadOnly Property ItemType As OldItemType Implements IItem.ItemType
+    Public ReadOnly Property ItemType As IItemType Implements IItem.ItemType
         Get
-            Return CType(WorldData.Item.ReadItemType(Id).Value, OldItemType)
+            Return Game.ItemType.FromId(WorldData, WorldData.Item.ReadItemType(Id))
         End Get
     End Property
     Public ReadOnly Property Name As String Implements IItem.Name
         Get
-            Return ItemType.ToNew(WorldData).Name
+            Return ItemType.Name
         End Get
     End Property
     ReadOnly Property CanUse(character As ICharacter) As Boolean Implements IItem.CanUse
         Get
-            Return ItemType.ToNew(WorldData).CanUse(character)
+            Return ItemType.CanUse(character)
         End Get
     End Property
     ReadOnly Property CanEquip As Boolean Implements IItem.CanEquip
         Get
-            Return ItemType.ToNew(WorldData).EquipSlots.Any
+            Return ItemType.EquipSlots.Any
         End Get
     End Property
 
     Public Function RepairCost(shoppeType As ShoppeType) As Long Implements IItem.RepairCost
-        Dim fullRepairPrice = shoppeType.Repairs(ItemType)
+        Dim fullRepairPrice = shoppeType.Repairs(CType(ItemType.Id, OldItemType))
         Dim wear = GetStatistic(ItemStatisticType.Wear)
         Dim maximum = MaximumDurability.Value
         Dim remainder = If(wear * fullRepairPrice Mod maximum > 0, 1, 0)
@@ -40,36 +40,36 @@
     End Function
 
     Public Sub Purify() Implements IItem.Purify
-        ItemType.ToNew(WorldData).Purify.Invoke(Me)
+        ItemType.Purify.Invoke(Me)
     End Sub
 
     Public Sub Destroy() Implements IItem.Destroy
         WorldData.Item.Clear(Id)
     End Sub
     Public Function Encumbrance() As Long Implements IItem.Encumbrance
-        Return ItemType.ToNew(WorldData).Encumbrance
+        Return ItemType.Encumbrance
     End Function
     Friend Sub Use(character As ICharacter) Implements IItem.Use
-        ItemType.ToNew(WorldData).Use.Invoke(character)
+        ItemType.Use.Invoke(character)
     End Sub
     ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot) Implements IItem.EquipSlots
         Get
-            Return ItemType.ToNew(WorldData).EquipSlots
+            Return ItemType.EquipSlots
         End Get
     End Property
     ReadOnly Property MaximumDamage As Long? Implements IItem.MaximumDamage
         Get
-            Return ItemType.ToNew(WorldData).MaximumDamage
+            Return ItemType.MaximumDamage
         End Get
     End Property
     ReadOnly Property AttackDice As Long Implements IItem.AttackDice
         Get
-            Return ItemType.ToNew(WorldData).AttackDice
+            Return ItemType.AttackDice
         End Get
     End Property
     Public ReadOnly Property MaximumDurability As Long? Implements IItem.MaximumDurability
         Get
-            Return ItemType.ToNew(WorldData).MaximumDurability
+            Return ItemType.MaximumDurability
         End Get
     End Property
     Public Sub ReduceDurability(amount As Long) Implements IItem.ReduceDurability
@@ -113,26 +113,26 @@
     End Property
     ReadOnly Property DefendDice As Long Implements IItem.DefendDice
         Get
-            Return ItemType.ToNew(WorldData).DefendDice
+            Return ItemType.DefendDice
         End Get
     End Property
     ReadOnly Property IsWeapon() As Boolean Implements IItem.IsWeapon
         Get
-            Return ItemType.ToNew(WorldData).IsWeapon
+            Return ItemType.IsWeapon
         End Get
     End Property
     ReadOnly Property IsArmor() As Boolean Implements IItem.IsArmor
         Get
-            Return ItemType.ToNew(WorldData).IsArmor
+            Return ItemType.IsArmor
         End Get
     End Property
     ReadOnly Property IsConsumed As Boolean Implements IItem.IsConsumed
         Get
-            Return ItemType.ToNew(WorldData).IsConsumed
+            Return ItemType.IsConsumed
         End Get
     End Property
 
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItem.EquippedBuff
-        Return ItemType.ToNew(WorldData).EquippedBuff(statisticType)
+        Return ItemType.EquippedBuff(statisticType)
     End Function
 End Class

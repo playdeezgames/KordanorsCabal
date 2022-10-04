@@ -17,7 +17,7 @@
             Dim items As New List(Of IItem)
             items.AddRange(Inventory.Items.Where(Function(x) x.NeedsRepair))
             items.AddRange(EquippedItems.Where(Function(x) x.NeedsRepair))
-            Return items.Where(Function(x) shoppeType.Repairs.ContainsKey(x.ItemType))
+            Return items.Where(Function(x) shoppeType.Repairs.ContainsKey(CType(x.ItemType.Id, OldItemType)))
         End Get
     End Property
 
@@ -364,7 +364,7 @@
             Dim item = RNG.FromList(items)
             item.ReduceDurability(1)
             If item.IsBroken Then
-                WearOneWeapon = item.ItemType
+                WearOneWeapon = If(item.ItemType IsNot Nothing, CType(item.ItemType.Id, OldItemType), Nothing)
                 item.Destroy()
             End If
         End If
@@ -375,7 +375,7 @@
             Dim item = RNG.FromList(items)
             item.ReduceDurability(1)
             If item.IsBroken Then
-                WearOneArmor = item.ItemType
+                WearOneArmor = If(item.ItemType IsNot Nothing, CType(item.ItemType.Id, OldItemType), Nothing)
                 item.Destroy()
             End If
         End If
@@ -711,7 +711,7 @@
         End Get
     End Property
     Public Function GetItemTypeCount(itemType As OldItemType) As Integer
-        Return Inventory.Items.Where(Function(x) x.ItemType = itemType).Count
+        Return Inventory.Items.Where(Function(x) x.ItemType.Id = itemType).Count
     End Function
     Public ReadOnly Property CanMap() As Boolean Implements ICharacter.CanMap
         Get
