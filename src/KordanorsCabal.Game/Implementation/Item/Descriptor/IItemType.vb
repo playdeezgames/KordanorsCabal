@@ -18,4 +18,8 @@
     ReadOnly Property CanUse As Func(Of ICharacter, Boolean)
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
     ReadOnly Property IsWeapon As Boolean
+    ReadOnly Property IsArmor As Boolean
+    ReadOnly Property HasOffer(shoppeType As ShoppeType) As Boolean
+    ReadOnly Property HasPrice(shoppeType As ShoppeType) As Boolean
+    ReadOnly Property CanRepair(shoppeType As ShoppeType) As Boolean
 End Interface

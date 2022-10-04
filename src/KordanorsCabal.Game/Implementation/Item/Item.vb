@@ -123,7 +123,7 @@
     End Property
     ReadOnly Property IsArmor() As Boolean Implements IItem.IsArmor
         Get
-            Return ItemType.IsArmor
+            Return ItemType.ToNew(WorldData).IsArmor
         End Get
     End Property
     ReadOnly Property IsConsumed As Boolean Implements IItem.IsConsumed

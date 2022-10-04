@@ -160,21 +160,32 @@
         End Get
     End Property
 
+    Public ReadOnly Property IsArmor As Boolean Implements IItemType.IsArmor
+        Get
+            Return DefendDice > 0
+        End Get
+    End Property
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItemType.EquippedBuff
         Return WorldData.ItemTypeCharacterStatisticBuff.Read(Id, statisticType.Id)
     End Function
     Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long Implements IItemType.RollSpawnCount
         Return RNG.RollDice(SpawnCounts(dungeonLevel))
     End Function
-    Friend Function HasOffer(shoppeType As ShoppeType) As Boolean
-        Return boughtAt.Contains(shoppeType)
-    End Function
-    Friend Function HasPrice(shoppeType As ShoppeType) As Boolean
-        Return soldAt.Contains(shoppeType)
-    End Function
-    Friend Function CanRepair(shoppeType As ShoppeType) As Boolean
-        Return repairedAt.Contains(shoppeType)
-    End Function
+    ReadOnly Property HasOffer(shoppeType As ShoppeType) As Boolean Implements IItemType.HasOffer
+        Get
+            Return boughtAt.Contains(shoppeType)
+        End Get
+    End Property
+    ReadOnly Property HasPrice(shoppeType As ShoppeType) As Boolean Implements IItemType.HasPrice
+        Get
+            Return soldAt.Contains(shoppeType)
+        End Get
+    End Property
+    ReadOnly Property CanRepair(shoppeType As ShoppeType) As Boolean Implements IItemType.CanRepair
+        Get
+            Return repairedAt.Contains(shoppeType)
+        End Get
+    End Property
     Sub New(
            worldData As IWorldData,
            itemTypeId As Long)

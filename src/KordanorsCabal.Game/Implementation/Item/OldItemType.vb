@@ -61,10 +61,6 @@ Public Module ItemTypeExtensions
         Return Game.ItemType.FromId(worldData, itemType)
     End Function
     <Extension>
-    Public Function IsArmor(itemType As OldItemType) As Boolean
-        Return ItemTypeDescriptors(itemType).DefendDice > 0
-    End Function
-    <Extension>
     Public Function HasOffer(itemType As OldItemType, shoppeType As ShoppeType) As Boolean
         Return ItemTypeDescriptors(itemType).HasOffer(shoppeType)
     End Function

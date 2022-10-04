@@ -176,4 +176,40 @@
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 2))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_types_has_is_armor_determiner()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.IsArmor.ShouldBeFalse
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub item_types_has_offer_determiner()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeShopType.ReadForTransactionType(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.HasOffer(ShoppeType.None).ShouldBeFalse
+                worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 1))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub item_types_has_price_determiner()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeShopType.ReadForTransactionType(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.HasPrice(ShoppeType.None).ShouldBeFalse
+                worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 2))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub item_types_has_can_repair_determiner()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeShopType.ReadForTransactionType(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.CanRepair(ShoppeType.None).ShouldBeFalse
+                worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 3))
+            End Sub)
+    End Sub
 End Class
