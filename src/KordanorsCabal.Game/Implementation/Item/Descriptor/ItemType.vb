@@ -33,7 +33,7 @@
             Return WorldData.ItemTypeStatistic.Read(Id, itemTypeStatisticType.Id)
         End Get
     End Property
-    ReadOnly Property Encumbrance As Long
+    ReadOnly Property Encumbrance As Long Implements IItemType.Encumbrance
         Get
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 1)), 0)
         End Get

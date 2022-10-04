@@ -6,4 +6,5 @@
     ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot)
     Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long
     ReadOnly Property AttackDice As Long
+    ReadOnly Property Encumbrance As Long
 End Interface

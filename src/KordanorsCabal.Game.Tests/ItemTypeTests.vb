@@ -67,4 +67,13 @@
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 2))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_types_have_encumbrance()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.Encumbrance.ShouldBe(0L)
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 1))
+            End Sub)
+    End Sub
 End Class
