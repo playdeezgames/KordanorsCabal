@@ -61,10 +61,6 @@ Public Module ItemTypeExtensions
         Return Game.ItemType.FromId(worldData, itemType)
     End Function
     <Extension>
-    Function SpawnLocationTypes(itemType As OldItemType, level As IDungeonLevel) As HashSet(Of ILocationType)
-        Return ItemTypeDescriptors(itemType).SpawnLocationTypes(level)
-    End Function
-    <Extension>
     Function CanUse(itemType As OldItemType, character As ICharacter) As Boolean
         Return ItemTypeDescriptors(itemType).CanUse(character)
     End Function
