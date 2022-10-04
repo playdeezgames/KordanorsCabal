@@ -1,8 +1,8 @@
 ﻿Friend Class BlackMarketShoppeDescriptor
     Inherits ShoppeTypeDescriptor
 
-    Sub New()
-        MyBase.New("Black Market")
+    Sub New(worldData As IWorldData)
+        MyBase.New(worldData, "Black Market")
     End Sub
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)

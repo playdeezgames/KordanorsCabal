@@ -1,8 +1,8 @@
 ﻿Friend Class InnkeeperShoppeDescriptor
     Inherits ShoppeTypeDescriptor
 
-    Sub New()
-        MyBase.New("The Inn")
+    Sub New(worldData As IWorldData)
+        MyBase.New(worldData, "The Inn")
     End Sub
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)

@@ -1,17 +1,17 @@
 ﻿Friend Class HealerShoppeDescriptor
     Inherits ShoppeTypeDescriptor
 
-    Sub New()
-        MyBase.New("Healer")
+    Sub New(worldData As IWorldData)
+        MyBase.New(worldData, "Healer")
     End Sub
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)
         Get
             Return AllItemTypes.Where(
-                Function(x) x.ToNew(StaticWorldData.World).HasPrice(ShoppeType.Healer)).
+                Function(x) x.ToNew(WorldData).HasPrice(ShoppeType.Healer)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.ToNew(StaticWorldData.World).Price)
+                    Function(x) x.ToNew(WorldData).Price)
         End Get
     End Property
 End Class
