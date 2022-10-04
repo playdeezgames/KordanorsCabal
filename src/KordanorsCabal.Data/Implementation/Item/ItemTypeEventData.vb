@@ -43,6 +43,7 @@
                     (31,3,'LearnHolyBolt'),
                     (34,2,'HasBong'),
                     (34,3,'UseHerb'),
+                    (35,1,'PurifyFood'),
                     (35,2,'AlwaysTrue'),
                     (35,3,'UseRottenFood'),
                     (37,2,'CanUseRottenEgg'),

@@ -117,6 +117,10 @@
         End Get
     End Property
     Private ReadOnly Property PurifyActionName As String
+        Get
+            Return WorldData.ItemTypeEvent.Read(Id, PurifyEventId)
+        End Get
+    End Property
     ReadOnly Property Purify As Action(Of Item)
         Get
             Dim result As Action(Of Item) = Nothing
@@ -166,10 +170,8 @@
     End Function
     Sub New(
            worldData As IWorldData,
-           itemTypeId As Long,
-           Optional purifyActionName As String = Nothing)
+           itemTypeId As Long)
         MyBase.New(worldData, itemTypeId)
-        Me.PurifyActionName = purifyActionName
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility

@@ -1,8 +1,7 @@
 ﻿Friend Class TrophyDescriptor
     Inherits ItemType
     Sub New(
-           itemTypeId As Long,
-           Optional purifyActionName As String = Nothing)
-        MyBase.New(StaticWorldData.World, itemTypeId, purifyActionName)
+           itemTypeId As Long)
+        MyBase.New(StaticWorldData.World, itemTypeId)
     End Sub
 End Class
