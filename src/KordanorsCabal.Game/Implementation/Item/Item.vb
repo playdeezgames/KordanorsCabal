@@ -128,7 +128,7 @@
     End Property
     ReadOnly Property IsConsumed As Boolean Implements IItem.IsConsumed
         Get
-            Return ItemType.IsConsumed
+            Return ItemType.ToNew(WorldData).IsConsumed
         End Get
     End Property
 
