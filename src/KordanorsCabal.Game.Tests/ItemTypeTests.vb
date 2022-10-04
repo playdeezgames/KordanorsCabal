@@ -76,4 +76,31 @@
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 1))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_types_have_maximum_damage()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.MaximumDamage.ShouldBeNull
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 3))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub item_types_have_defend_dice()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.DefendDice.ShouldBe(0L)
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub item_types_have_maximum_durability()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.MaximumDurability.ShouldBeNull
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5))
+            End Sub)
+    End Sub
 End Class

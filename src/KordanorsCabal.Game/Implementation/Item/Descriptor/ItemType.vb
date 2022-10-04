@@ -43,17 +43,17 @@
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 2)), 0)
         End Get
     End Property
-    ReadOnly Property MaximumDamage As Long?
+    ReadOnly Property MaximumDamage As Long? Implements IItemType.MaximumDamage
         Get
             Return ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 3))
         End Get
     End Property
-    ReadOnly Property DefendDice As Long
+    ReadOnly Property DefendDice As Long Implements IItemType.DefendDice
         Get
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 4)), 0)
         End Get
     End Property
-    ReadOnly Property MaximumDurability As Long?
+    ReadOnly Property MaximumDurability As Long? Implements IItemType.MaximumDurability
         Get
             Return ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 5))
         End Get

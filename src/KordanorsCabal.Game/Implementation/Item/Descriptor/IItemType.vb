@@ -7,4 +7,7 @@
     Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long
     ReadOnly Property AttackDice As Long
     ReadOnly Property Encumbrance As Long
+    ReadOnly Property MaximumDamage As Long?
+    ReadOnly Property DefendDice As Long
+    ReadOnly Property MaximumDurability As Long?
 End Interface
