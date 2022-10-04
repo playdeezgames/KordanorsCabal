@@ -12,4 +12,5 @@
     ReadOnly Property MaximumDurability As Long?
     ReadOnly Property Offer As Long
     ReadOnly Property Price As Long
+    ReadOnly Property RepairPrice As Long
 End Interface

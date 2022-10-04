@@ -68,7 +68,7 @@
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 7)), 0)
         End Get
     End Property
-    ReadOnly Property RepairPrice As Long
+    ReadOnly Property RepairPrice As Long Implements IItemType.RepairPrice
         Get
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 8)), 0)
         End Get

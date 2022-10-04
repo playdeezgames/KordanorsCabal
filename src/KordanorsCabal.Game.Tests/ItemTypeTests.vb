@@ -121,4 +121,13 @@
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 7))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_types_have_repair_price()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.RepairPrice.ShouldBe(0L)
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 8))
+            End Sub)
+    End Sub
 End Class
