@@ -73,10 +73,6 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).HasOffer(shoppeType)
     End Function
     <Extension>
-    Public Function Price(itemType As OldItemType) As Long
-        Return ItemTypeDescriptors(itemType).Price
-    End Function
-    <Extension>
     Public Function HasPrice(itemType As OldItemType, shoppeType As ShoppeType) As Boolean
         Return ItemTypeDescriptors(itemType).HasPrice(shoppeType)
     End Function

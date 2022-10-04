@@ -17,7 +17,7 @@
                 Function(x) x.HasPrice(ShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.Price)
+                    Function(x) x.ToNew(StaticWorldData.World).Price)
         End Get
     End Property
 

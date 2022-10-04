@@ -11,7 +11,7 @@
                 Function(x) x.HasPrice(ShoppeType.InnKeeper)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.Price)
+                    Function(x) x.ToNew(StaticWorldData.World).Price)
         End Get
     End Property
 End Class
