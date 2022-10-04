@@ -17,7 +17,7 @@
     End Property
     Public ReadOnly Property Name As String Implements IItem.Name
         Get
-            Return ItemType.Name
+            Return ItemType.ToNew(WorldData).Name
         End Get
     End Property
     ReadOnly Property CanUse(character As ICharacter) As Boolean Implements IItem.CanUse

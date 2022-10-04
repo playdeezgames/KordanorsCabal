@@ -526,7 +526,7 @@
         Dim attackRoll = enemy.RollAttack()
         lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
         For Each brokenItemType In DoArmorWear(attackRoll)
-            lines.Add($"Yer {brokenItemType.Name} breaks!")
+            lines.Add($"Yer {brokenItemType.ToNew(StaticWorldData.World).Name} breaks!")
         Next
         Dim defendRoll = RollDefend()
         lines.Add($"You roll a defend of {defendRoll}.")
@@ -803,7 +803,7 @@
                 lines.Add($"You do {damage} damage!")
                 enemy.DoDamage(damage)
                 For Each brokenItemType In DoWeaponWear(damage)
-                    lines.Add($"Yer {brokenItemType.Name} breaks!")
+                    lines.Add($"Yer {brokenItemType.ToNew(StaticWorldData.World).Name} breaks!")
                 Next
                 If enemy.IsDead Then
                     Dim killResult = enemy.Kill(Me)

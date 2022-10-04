@@ -19,7 +19,7 @@
 
     Public Overrides Sub Initialize()
         currentItemIndex = 0
-        items = ShoppeType.Offers.Select(Function(x) $"{x.Key.Name}: {x.Value}").ToList
+        items = ShoppeType.Offers.Select(Function(x) $"{x.Key.ToNew(StaticWorldData.World).Name}: {x.Value}").ToList
     End Sub
 
     Public Overrides Function ProcessCommand(command As Command) As UIState

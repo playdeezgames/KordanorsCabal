@@ -13,7 +13,7 @@ Friend Class ShoppeBuyProcessor
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
             If itemIndex >= 0 AndAlso itemIndex < items.Count Then
                 buffer.FillCells((0, row), (buffer.Columns, 1), Pattern.Space, itemIndex = currentItemIndex, Hue.Black)
-                buffer.WriteTextCentered(row, $"{items(itemIndex).Item1.Name}({items(itemIndex).Item2})", itemIndex = currentItemIndex, Hue.Black)
+                buffer.WriteTextCentered(row, $"{items(itemIndex).Item1.ToNew(StaticWorldData.World).Name}({items(itemIndex).Item2})", itemIndex = currentItemIndex, Hue.Black)
             End If
         Next
 

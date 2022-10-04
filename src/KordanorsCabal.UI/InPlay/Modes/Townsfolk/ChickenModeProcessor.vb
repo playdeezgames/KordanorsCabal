@@ -34,7 +34,7 @@ Friend Class ChickenModeProcessor
                 player.Mode = PlayerMode.Neutral
             Case FeedButtonIndex
                 If player.HasItemType(OldItemType.Food) OrElse player.HasItemType(OldItemType.RottenFood) Then
-                    Dim item = RNG.FromEnumerable(player.Inventory.Items.Where(Function(x) x.Name = OldItemType.Food.Name))
+                    Dim item = RNG.FromEnumerable(player.Inventory.Items.Where(Function(x) x.Name = OldItemType.Food.ToNew(StaticWorldData.World).Name))
                     Return FeedChicken(player, item)
                 End If
         End Select
@@ -47,10 +47,10 @@ Friend Class ChickenModeProcessor
         If RNG.FromRange(0, 5) = 0 Then
             Select Case itemType
                 Case OldItemType.Food
-                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {OldItemType.MagicEgg.Name} pops out!")
+                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {OldItemType.MagicEgg.ToNew(StaticWorldData.World).Name} pops out!")
                     player.Inventory.Add(Game.Item.Create(StaticWorldData.World, OldItemType.MagicEgg))
                 Case OldItemType.RottenFood
-                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {OldItemType.RottenEgg.Name} pops out!")
+                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {OldItemType.RottenEgg.ToNew(StaticWorldData.World).Name} pops out!")
                     player.Inventory.Add(Game.Item.Create(StaticWorldData.World, OldItemType.RottenEgg))
             End Select
         Else

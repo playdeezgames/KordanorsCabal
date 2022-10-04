@@ -26,7 +26,7 @@
                     Dim damageRoll = RNG.RollDice("1d4")
                     Dim enemy = character.Location.Enemy(character)
                     Dim lines As New List(Of String) From {
-                        $"{OldItemType.HolyWater.Name} deals {damageRoll} HP to {enemy.Name}!"
+                        $"{OldItemType.HolyWater.ToNew(StaticWorldData.World).Name} deals {damageRoll} HP to {enemy.Name}!"
                     }
                     enemy.DoDamage(damageRoll)
                     If enemy.IsDead Then
@@ -55,13 +55,13 @@
                     Dim level = character.Location.DungeonLevel
                     Dim locations = Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 4L)).Where(Function(x) x.DungeonLevel.Id = level.Id)
                     character.Location = RNG.FromEnumerable(locations)
-                    character.EnqueueMessage($"You use the {OldItemType.AirShard.Name} and suddenly find yerself somewhere else!")
+                    character.EnqueueMessage($"You use the {OldItemType.AirShard.ToNew(StaticWorldData.World).Name} and suddenly find yerself somewhere else!")
                 End Sub},
             {"UseRottenEgg",
                 Sub(character)
                     Dim enemy = character.Location.Enemy(character)
                     If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.RottenEgg) Then
-                        character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.RottenEgg.Name}, and they quickly wander off with a seeming great purpose.")
+                        character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.RottenEgg.ToNew(StaticWorldData.World).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
                         Return
                     End If
@@ -71,7 +71,7 @@
                         Sub(character)
                             Dim enemy = character.Location.Enemy(character)
                             If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Pr0n) Then
-                                character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.Pr0n.Name}, and they quickly wander off with a seeming great purpose.")
+                                character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.Pr0n.ToNew(StaticWorldData.World).Name}, and they quickly wander off with a seeming great purpose.")
                                 enemy.Destroy()
                                 Return
                             End If
@@ -82,17 +82,17 @@
                             Dim healRoll = RNG.RollDice("1d4")
                             character.ChangeStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 13L), -healRoll)
                             Dim lines As New List(Of String)
-                            lines.Add($"You make use of {OldItemType.Pr0n.Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
+                            lines.Add($"You make use of {OldItemType.Pr0n.ToNew(StaticWorldData.World).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
                             lines.Add($"You now have {character.CurrentMP} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
                             Dim lotionItem = character.Inventory.ItemsOfType(OldItemType.Lotion).FirstOrDefault
                             If lotionItem Is Nothing Then
-                                lines.Add($"You also receive 10 {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}. Try {OldItemType.Lotion.Name} next time.")
+                                lines.Add($"You also receive 10 {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}. Try {OldItemType.Lotion.ToNew(StaticWorldData.World).Name} next time.")
                                 character.Chafing = 10
                             Else
-                                lines.Add($"You use a bit of {OldItemType.Lotion.Name} to prevent {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}.")
+                                lines.Add($"You use a bit of {OldItemType.Lotion.ToNew(StaticWorldData.World).Name} to prevent {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}.")
                                 lotionItem.ReduceDurability(1)
                                 If lotionItem.Durability = 0 Then
-                                    lines.Add($"You ran out that bottle of {OldItemType.Lotion.Name}.")
+                                    lines.Add($"You ran out that bottle of {OldItemType.Lotion.ToNew(StaticWorldData.World).Name}.")
                                     lotionItem.Destroy()
                                     character.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.Bottle))
                                 End If
@@ -121,7 +121,7 @@
                             {OldItemType.Trousers, 1}
                         }
                     Dim item = Game.Item.Create(StaticWorldData.World, RNG.FromGenerator(table))
-                    character.EnqueueMessage($"You crack open the {OldItemType.MagicEgg.Name} and find {item.Name} inside!")
+                    character.EnqueueMessage($"You crack open the {OldItemType.MagicEgg.ToNew(StaticWorldData.World).Name} and find {item.Name} inside!")
                     character.Inventory.Add(item)
                 End Sub},
             {"UseBeer",
@@ -129,7 +129,7 @@
                     Dim enemy = character.Location.Enemy(character)
                     If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Beer) Then
                         enemy.Destroy()
-                        character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.Beer.Name}, and they wander off to get drunk.")
+                        character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.Beer.ToNew(StaticWorldData.World).Name}, and they wander off to get drunk.")
                         Return
                     End If
                     character.CurrentMP = character.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 7)).Value
@@ -155,7 +155,7 @@
                     Dim enemy = character.Location.Enemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
-                    lines.Add($"You use {OldItemType.FireShard.Name} on {enemy.Name}!")
+                    lines.Add($"You use {OldItemType.FireShard.ToNew(StaticWorldData.World).Name} on {enemy.Name}!")
                     Dim damage As Long = RNG.RollDice("3d4")
                     lines.Add($"You do {damage} damage!")
                     enemy.DoDamage(damage)
@@ -181,7 +181,7 @@
                     Dim delta = character.MaximumMana - character.CurrentMana
                     character.CurrentMana = character.MaximumMana
                     character.Highness += 10
-                    character.EnqueueMessage($"You use yer {OldItemType.Bong.Name} to smoke yer {OldItemType.Herb.Name}.", $"You gain {delta} {CharacterStatisticType.FromId(StaticWorldData.World, 8L).Name}.")
+                    character.EnqueueMessage($"You use yer {OldItemType.Bong.ToNew(StaticWorldData.World).Name} to smoke yer {OldItemType.Herb.ToNew(StaticWorldData.World).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(StaticWorldData.World, 8L).Name}.")
                 End Sub},
             {"UseEarthShard",
                 Sub(character)
@@ -189,7 +189,7 @@
                     Dim enemy = character.Location.Enemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
-                    lines.Add($"You use {OldItemType.EarthShard.Name} on {enemy.Name}!")
+                    lines.Add($"You use {OldItemType.EarthShard.ToNew(StaticWorldData.World).Name} on {enemy.Name}!")
                     Dim immobilization As Long = character.RollPower()
                     lines.Add($"You immobilize {enemy.Name} for {immobilization} turns!")
                     enemy.DoImmobilization(immobilization)
@@ -200,12 +200,12 @@
                 Sub(character)
                     character.CurrentMana -= 1
                     character.Heal()
-                    character.EnqueueMessage($"You use {OldItemType.WaterShard.Name} to heal yer wounds!")
+                    character.EnqueueMessage($"You use {OldItemType.WaterShard.ToNew(StaticWorldData.World).Name} to heal yer wounds!")
                 End Sub},
             {"UseBottle",
                 Sub(character)
                     Dim enemy = character.Location.Enemy(character)
-                    character.EnqueueMessage($"You give the {OldItemType.Bottle.Name} to the {enemy.Name}, and it wanders off happily.")
+                    character.EnqueueMessage($"You give the {OldItemType.Bottle.ToNew(StaticWorldData.World).Name} to the {enemy.Name}, and it wanders off happily.")
                     enemy.Destroy()
                 End Sub},
             {"UseRottenFood",
