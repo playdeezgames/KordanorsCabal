@@ -133,6 +133,6 @@
     End Property
 
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItem.EquippedBuff
-        Return ItemType.EquippedBuff(statisticType)
+        Return ItemType.ToNew(WorldData).EquippedBuff(statisticType)
     End Function
 End Class

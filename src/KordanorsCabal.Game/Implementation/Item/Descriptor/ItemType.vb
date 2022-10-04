@@ -153,7 +153,7 @@
             Return Function(c) False
         End Get
     End Property
-    Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
+    Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItemType.EquippedBuff
         Return WorldData.ItemTypeCharacterStatisticBuff.Read(Id, statisticType.Id)
     End Function
     Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long Implements IItemType.RollSpawnCount
