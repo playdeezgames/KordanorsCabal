@@ -47,7 +47,7 @@
         WorldData.Item.Clear(Id)
     End Sub
     Public Function Encumbrance() As Long Implements IItem.Encumbrance
-        Return ItemType.Encumbrance
+        Return ItemType.ToNew(WorldData).Encumbrance
     End Function
     Friend Sub Use(character As ICharacter) Implements IItem.Use
         ItemType.Use(character)
