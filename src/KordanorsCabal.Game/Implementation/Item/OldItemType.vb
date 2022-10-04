@@ -61,10 +61,6 @@ Public Module ItemTypeExtensions
         Return Game.ItemType.FromId(worldData, itemType)
     End Function
     <Extension>
-    Public Function EquipSlots(itemType As OldItemType) As IEnumerable(Of IEquipSlot)
-        Return ItemTypeDescriptors(itemType).EquipSlots
-    End Function
-    <Extension>
     Public Function AttackDice(itemType As OldItemType) As Long
         Return ItemTypeDescriptors(itemType).AttackDice
     End Function

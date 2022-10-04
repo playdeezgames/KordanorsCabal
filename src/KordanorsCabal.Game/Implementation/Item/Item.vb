@@ -27,7 +27,7 @@
     End Property
     ReadOnly Property CanEquip As Boolean Implements IItem.CanEquip
         Get
-            Return ItemType.EquipSlots.Any
+            Return ItemType.ToNew(WorldData).EquipSlots.Any
         End Get
     End Property
 
@@ -54,7 +54,7 @@
     End Sub
     ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot) Implements IItem.EquipSlots
         Get
-            Return ItemType.EquipSlots
+            Return ItemType.ToNew(WorldData).EquipSlots
         End Get
     End Property
     ReadOnly Property MaximumDamage As Long? Implements IItem.MaximumDamage
