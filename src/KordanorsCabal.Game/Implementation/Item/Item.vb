@@ -22,7 +22,7 @@
     End Property
     ReadOnly Property CanUse(character As ICharacter) As Boolean Implements IItem.CanUse
         Get
-            Return ItemType.CanUse(character)
+            Return ItemType.ToNew(WorldData).CanUse(character)
         End Get
     End Property
     ReadOnly Property CanEquip As Boolean Implements IItem.CanEquip

@@ -61,10 +61,6 @@ Public Module ItemTypeExtensions
         Return Game.ItemType.FromId(worldData, itemType)
     End Function
     <Extension>
-    Function CanUse(itemType As OldItemType, character As ICharacter) As Boolean
-        Return ItemTypeDescriptors(itemType).CanUse(character)
-    End Function
-    <Extension>
     Function Encumbrance(itemType As OldItemType) As Long
         Return ItemTypeDescriptors(itemType).Encumbrance
     End Function
