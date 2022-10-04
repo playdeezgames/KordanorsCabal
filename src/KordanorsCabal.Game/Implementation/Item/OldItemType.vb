@@ -69,10 +69,6 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).DefendDice > 0
     End Function
     <Extension>
-    Public Function Offer(itemType As OldItemType) As Long
-        Return ItemTypeDescriptors(itemType).Offer
-    End Function
-    <Extension>
     Public Function HasOffer(itemType As OldItemType, shoppeType As ShoppeType) As Boolean
         Return ItemTypeDescriptors(itemType).HasOffer(shoppeType)
     End Function

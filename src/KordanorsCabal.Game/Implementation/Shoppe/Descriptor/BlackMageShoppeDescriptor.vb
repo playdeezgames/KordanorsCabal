@@ -8,7 +8,7 @@
                 Function(x) x.HasOffer(ShoppeType.BlackMage)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.Offer))
+                    Function(x) x.ToNew(StaticWorldData.World).Offer))
     End Sub
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)
