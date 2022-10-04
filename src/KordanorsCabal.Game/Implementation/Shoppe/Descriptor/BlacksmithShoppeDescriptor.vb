@@ -5,7 +5,7 @@
         MyBase.New(
             "Blacksmith",
             AllItemTypes.Where(
-                Function(x) x.HasOffer(ShoppeType.Blacksmith)).
+                Function(x) x.ToNew(StaticWorldData.World).HasOffer(ShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.ToNew(StaticWorldData.World).Offer))
@@ -14,7 +14,7 @@
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)
         Get
             Return AllItemTypes.Where(
-                Function(x) x.HasPrice(ShoppeType.Blacksmith)).
+                Function(x) x.ToNew(StaticWorldData.World).HasPrice(ShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.ToNew(StaticWorldData.World).Price)
@@ -24,7 +24,7 @@
     Public Overrides ReadOnly Property Repairs As IReadOnlyDictionary(Of OldItemType, Long)
         Get
             Return AllItemTypes.Where(
-                Function(x) x.CanRepair(ShoppeType.Blacksmith)).
+                Function(x) x.ToNew(StaticWorldData.World).CanRepair(ShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.ToNew(StaticWorldData.World).RepairPrice)

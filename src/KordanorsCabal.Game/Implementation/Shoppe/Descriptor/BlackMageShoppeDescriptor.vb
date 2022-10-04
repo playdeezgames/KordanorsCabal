@@ -5,7 +5,7 @@
         MyBase.New(
             "Magic",
             AllItemTypes.Where(
-                Function(x) x.HasOffer(ShoppeType.BlackMage)).
+                Function(x) x.ToNew(StaticWorldData.World).HasOffer(ShoppeType.BlackMage)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.ToNew(StaticWorldData.World).Offer))
@@ -14,7 +14,7 @@
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)
         Get
             Return AllItemTypes.Where(
-                Function(x) x.HasPrice(ShoppeType.BlackMage)).
+                Function(x) x.ToNew(StaticWorldData.World).HasPrice(ShoppeType.BlackMage)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.ToNew(StaticWorldData.World).Price)
