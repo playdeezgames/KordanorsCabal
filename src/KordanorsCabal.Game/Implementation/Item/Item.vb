@@ -118,7 +118,7 @@
     End Property
     ReadOnly Property IsWeapon() As Boolean Implements IItem.IsWeapon
         Get
-            Return ItemType.IsWeapon
+            Return ItemType.ToNew(WorldData).IsWeapon
         End Get
     End Property
     ReadOnly Property IsArmor() As Boolean Implements IItem.IsArmor

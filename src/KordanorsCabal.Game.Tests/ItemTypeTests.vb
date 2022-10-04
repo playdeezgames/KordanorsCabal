@@ -167,4 +167,13 @@
                 worldData.Verify(Function(x) x.ItemTypeCharacterStatisticBuff.Read(itemTypeId, statisticTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_types_has_is_weapon_determiner()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.IsWeapon.ShouldBeFalse
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 2))
+            End Sub)
+    End Sub
 End Class

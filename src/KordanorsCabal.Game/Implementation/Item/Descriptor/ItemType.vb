@@ -153,6 +153,13 @@
             Return Function(c) False
         End Get
     End Property
+
+    Public ReadOnly Property IsWeapon As Boolean Implements IItemType.IsWeapon
+        Get
+            Return AttackDice > 0
+        End Get
+    End Property
+
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItemType.EquippedBuff
         Return WorldData.ItemTypeCharacterStatisticBuff.Read(Id, statisticType.Id)
     End Function

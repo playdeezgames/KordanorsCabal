@@ -17,4 +17,5 @@
     ReadOnly Property Use As Action(Of ICharacter)
     ReadOnly Property CanUse As Func(Of ICharacter, Boolean)
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
+    ReadOnly Property IsWeapon As Boolean
 End Interface
