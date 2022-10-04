@@ -120,9 +120,9 @@
             Return WorldData.ItemTypeEvent.Read(Id, PurifyEventId)
         End Get
     End Property
-    ReadOnly Property Purify As Action(Of Item) Implements IItemType.Purify
+    ReadOnly Property Purify As Action(Of IItem) Implements IItemType.Purify
         Get
-            Dim result As Action(Of Item) = Nothing
+            Dim result As Action(Of IItem) = Nothing
             Dim eventName = PurifyActionName
             If eventName IsNot Nothing AndAlso PurifyActions.TryGetValue(eventName, result) Then
                 Return result

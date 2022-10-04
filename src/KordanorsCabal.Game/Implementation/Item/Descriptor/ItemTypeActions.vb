@@ -1,6 +1,6 @@
 ﻿Module ItemTypeActions
-    Friend ReadOnly PurifyActions As IReadOnlyDictionary(Of String, Action(Of Item)) =
-        New Dictionary(Of String, Action(Of Item)) From
+    Friend ReadOnly PurifyActions As IReadOnlyDictionary(Of String, Action(Of IItem)) =
+        New Dictionary(Of String, Action(Of IItem)) From
         {
             {"PurifyFood", Sub(item)
                                StaticWorldData.World.Item.WriteItemType(item.Id, OldItemType.Food)
