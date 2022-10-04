@@ -27,7 +27,7 @@
                 Function(x) x.CanRepair(ShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.RepairPrice)
+                    Function(x) x.ToNew(StaticWorldData.World).RepairPrice)
         End Get
     End Property
 End Class

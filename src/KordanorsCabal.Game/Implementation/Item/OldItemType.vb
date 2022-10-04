@@ -77,10 +77,6 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).HasPrice(shoppeType)
     End Function
     <Extension>
-    Public Function RepairPrice(itemType As OldItemType) As Long
-        Return ItemTypeDescriptors(itemType).RepairPrice
-    End Function
-    <Extension>
     Public Function CanRepair(itemType As OldItemType, shoppeType As ShoppeType) As Boolean
         Return ItemTypeDescriptors(itemType).CanRepair(shoppeType)
     End Function
