@@ -48,4 +48,14 @@
                 worldData.Verify(Function(x) x.ItemTypeEquipSlot.ReadForItemType(itemTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_types_have_spawn_counts()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                Const dungeonLevelId = 2L
+                worldData.Setup(Function(x) x.ItemTypeSpawnCount.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.SpawnCounts(DungeonLevel.FromId(worldData.Object, dungeonLevelId)).ShouldBeNull
+                worldData.Verify(Function(x) x.ItemTypeSpawnCount.Read(itemTypeId, dungeonLevelId))
+            End Sub)
+    End Sub
 End Class

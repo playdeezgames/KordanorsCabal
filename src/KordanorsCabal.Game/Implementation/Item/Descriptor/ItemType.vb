@@ -23,7 +23,7 @@
             Return New HashSet(Of ILocationType)(results.Select(Function(x) LocationType.FromId(WorldData, x)))
         End Get
     End Property
-    Private ReadOnly Property SpawnCounts(dungeonLevel As IDungeonLevel) As String
+    Private ReadOnly Property SpawnCounts(dungeonLevel As IDungeonLevel) As String Implements IItemType.SpawnCounts
         Get
             Return WorldData.ItemTypeSpawnCount.Read(Id, dungeonLevel.Id)
         End Get
@@ -151,8 +151,6 @@
             Return Function(c) False
         End Get
     End Property
-
-
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
         Return WorldData.ItemTypeCharacterStatisticBuff.Read(Id, statisticType.Id)
     End Function
