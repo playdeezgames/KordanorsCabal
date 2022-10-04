@@ -123,17 +123,19 @@
     ReadOnly Property Purify As Action(Of Item) Implements IItemType.Purify
         Get
             Dim result As Action(Of Item) = Nothing
-            If PurifyActionName IsNot Nothing AndAlso PurifyActions.TryGetValue(PurifyActionName, result) Then
+            Dim eventName = PurifyActionName
+            If eventName IsNot Nothing AndAlso PurifyActions.TryGetValue(eventName, result) Then
                 Return result
             End If
             Return Sub(i)
                    End Sub
         End Get
     End Property
-    ReadOnly Property Use As Action(Of ICharacter)
+    ReadOnly Property Use As Action(Of ICharacter) Implements IItemType.Use
         Get
             Dim result As Action(Of ICharacter) = Nothing
-            If UseActions.TryGetValue(UseActionName, result) Then
+            Dim eventName = UseActionName
+            If eventName IsNot Nothing AndAlso UseActions.TryGetValue(eventName, result) Then
                 Return result
             End If
             Return Sub(c)
@@ -141,10 +143,11 @@
         End Get
     End Property
 
-    ReadOnly Property CanUse As Func(Of ICharacter, Boolean)
+    ReadOnly Property CanUse As Func(Of ICharacter, Boolean) Implements IItemType.CanUse
         Get
             Dim result As Func(Of ICharacter, Boolean) = Nothing
-            If CanUseFunctions.TryGetValue(CanUseFunctionName, result) Then
+            Dim eventName = CanUseFunctionName
+            If eventName IsNot Nothing AndAlso CanUseFunctions.TryGetValue(eventName, result) Then
                 Return result
             End If
             Return Function(c) False

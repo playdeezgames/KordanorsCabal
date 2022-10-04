@@ -13,5 +13,7 @@
     ReadOnly Property Offer As Long
     ReadOnly Property Price As Long
     ReadOnly Property RepairPrice As Long
-    ReadOnly Property Purify As Action(Of Item)
+    ReadOnly Property Purify As Action(Of Item) 'TODO: IItem
+    ReadOnly Property Use As Action(Of ICharacter)
+    ReadOnly Property CanUse As Func(Of ICharacter, Boolean)
 End Interface

@@ -139,4 +139,22 @@
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 1))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_types_have_use_actions()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.Use.ShouldNotBeNull
+                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 3))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub item_types_have_can_use_actions()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.CanUse.ShouldNotBeNull
+                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 2))
+            End Sub)
+    End Sub
 End Class
