@@ -69,10 +69,6 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).DefendDice > 0
     End Function
     <Extension>
-    Public Sub Purify(itemType As OldItemType, item As Item)
-        ItemTypeDescriptors(itemType).Purify.Invoke(item)
-    End Sub
-    <Extension>
     Public Function Offer(itemType As OldItemType) As Long
         Return ItemTypeDescriptors(itemType).Offer
     End Function

@@ -40,7 +40,7 @@
     End Function
 
     Public Sub Purify() Implements IItem.Purify
-        ItemType.Purify(Me)
+        ItemType.ToNew(WorldData).Purify.Invoke(Me)
     End Sub
 
     Public Sub Destroy() Implements IItem.Destroy
