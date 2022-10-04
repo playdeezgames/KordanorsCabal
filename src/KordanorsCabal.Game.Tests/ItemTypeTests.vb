@@ -103,4 +103,13 @@
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5))
             End Sub)
     End Sub
+    <Fact>
+    Sub item_types_have_offer()
+        WithAnySubject(
+            Sub(itemTypeId, worldData, subject)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.Offer.ShouldBe(0L)
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 6))
+            End Sub)
+    End Sub
 End Class

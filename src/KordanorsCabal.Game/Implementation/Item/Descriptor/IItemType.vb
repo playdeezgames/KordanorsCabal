@@ -10,4 +10,5 @@
     ReadOnly Property MaximumDamage As Long?
     ReadOnly Property DefendDice As Long
     ReadOnly Property MaximumDurability As Long?
+    ReadOnly Property Offer As Long
 End Interface

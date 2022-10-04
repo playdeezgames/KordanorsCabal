@@ -58,17 +58,17 @@
             Return ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 5))
         End Get
     End Property
-    Friend ReadOnly Property Offer As Long
+    ReadOnly Property Offer As Long Implements IItemType.Offer
         Get
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 6)), 0)
         End Get
     End Property
-    Friend ReadOnly Property Price As Long
+    ReadOnly Property Price As Long
         Get
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 7)), 0)
         End Get
     End Property
-    Friend ReadOnly Property RepairPrice As Long
+    ReadOnly Property RepairPrice As Long
         Get
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 8)), 0)
         End Get
