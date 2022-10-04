@@ -50,7 +50,7 @@
         Return ItemType.ToNew(WorldData).Encumbrance
     End Function
     Friend Sub Use(character As ICharacter) Implements IItem.Use
-        ItemType.Use(character)
+        ItemType.ToNew(WorldData).Use.Invoke(character)
     End Sub
     ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot) Implements IItem.EquipSlots
         Get

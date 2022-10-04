@@ -61,10 +61,6 @@ Public Module ItemTypeExtensions
         Return Game.ItemType.FromId(worldData, itemType)
     End Function
     <Extension>
-    Public Sub Use(itemType As OldItemType, character As ICharacter)
-        ItemTypeDescriptors(itemType).Use.Invoke(character)
-    End Sub
-    <Extension>
     Public Function RollSpawnCount(itemType As OldItemType, dungeonLevel As IDungeonLevel) As Long
         Return ItemTypeDescriptors(itemType).RollSpawnCount(dungeonLevel)
     End Function
