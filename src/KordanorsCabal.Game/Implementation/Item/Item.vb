@@ -69,7 +69,7 @@
     End Property
     Public ReadOnly Property MaximumDurability As Long? Implements IItem.MaximumDurability
         Get
-            Return ItemType.MaximumDurability
+            Return ItemType.ToNew(WorldData).MaximumDurability
         End Get
     End Property
     Public Sub ReduceDurability(amount As Long) Implements IItem.ReduceDurability
