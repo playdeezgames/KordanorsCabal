@@ -59,7 +59,7 @@
     End Property
     ReadOnly Property MaximumDamage As Long? Implements IItem.MaximumDamage
         Get
-            Return ItemType.MaximumDamage
+            Return ItemType.ToNew(WorldData).MaximumDamage
         End Get
     End Property
     ReadOnly Property AttackDice As Long Implements IItem.AttackDice

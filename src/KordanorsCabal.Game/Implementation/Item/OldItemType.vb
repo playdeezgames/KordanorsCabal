@@ -69,10 +69,6 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).DefendDice > 0
     End Function
     <Extension>
-    Public Function MaximumDamage(itemType As OldItemType) As Long?
-        Return ItemTypeDescriptors(itemType).MaximumDamage
-    End Function
-    <Extension>
     Public Function MaximumDurability(itemType As OldItemType) As Long?
         Return ItemTypeDescriptors(itemType).MaximumDurability
     End Function
