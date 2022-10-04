@@ -102,7 +102,6 @@
                 Select(Function(x) CType(x, ShoppeType))
         End Get
     End Property
-    '[ItemTypeEvents]([ItemTypeId],[EventId],[EventName])
     Const UseEventId = 3L
     Const CanUseEventId = 2L
     Const PurifyEventId = 1L
@@ -121,10 +120,10 @@
             Return WorldData.ItemTypeEvent.Read(Id, PurifyEventId)
         End Get
     End Property
-    ReadOnly Property Purify As Action(Of Item)
+    ReadOnly Property Purify As Action(Of Item) Implements IItemType.Purify
         Get
             Dim result As Action(Of Item) = Nothing
-            If PurifyActions.TryGetValue(PurifyActionName, result) Then
+            If PurifyActionName IsNot Nothing AndAlso PurifyActions.TryGetValue(PurifyActionName, result) Then
                 Return result
             End If
             Return Sub(i)

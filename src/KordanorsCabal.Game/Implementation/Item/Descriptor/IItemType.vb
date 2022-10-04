@@ -13,4 +13,5 @@
     ReadOnly Property Offer As Long
     ReadOnly Property Price As Long
     ReadOnly Property RepairPrice As Long
+    ReadOnly Property Purify As Action(Of Item)
 End Interface
