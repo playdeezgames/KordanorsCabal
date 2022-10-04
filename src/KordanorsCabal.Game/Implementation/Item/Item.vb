@@ -113,7 +113,7 @@
     End Property
     ReadOnly Property DefendDice As Long Implements IItem.DefendDice
         Get
-            Return ItemType.DefendDice
+            Return ItemType.ToNew(WorldData).DefendDice
         End Get
     End Property
     ReadOnly Property IsWeapon() As Boolean Implements IItem.IsWeapon

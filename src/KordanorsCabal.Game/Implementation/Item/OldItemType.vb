@@ -65,10 +65,6 @@ Public Module ItemTypeExtensions
         Return ItemTypeDescriptors(itemType).AttackDice > 0
     End Function
     <Extension>
-    Public Function DefendDice(itemType As OldItemType) As Long
-        Return ItemTypeDescriptors(itemType).DefendDice
-    End Function
-    <Extension>
     Public Function IsArmor(itemType As OldItemType) As Boolean
         Return ItemTypeDescriptors(itemType).DefendDice > 0
     End Function
