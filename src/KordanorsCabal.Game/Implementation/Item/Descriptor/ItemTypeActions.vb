@@ -181,7 +181,7 @@
                     Dim delta = character.MaximumMana - character.CurrentMana
                     character.CurrentMana = character.MaximumMana
                     character.Highness += 10
-                    character.EnqueueMessage($"You use yer {OldItemType.Bong.ToNew(StaticWorldData.World).Name} to smoke yer {ItemType.FromId(StaticWorldData.World, 34).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(StaticWorldData.World, 8L).Name}.")
+                    character.EnqueueMessage($"You use yer {ItemType.FromId(StaticWorldData.World, 33).Name} to smoke yer {ItemType.FromId(StaticWorldData.World, 34).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(StaticWorldData.World, 8L).Name}.")
                 End Sub},
             {"UseEarthShard",
                 Sub(character)
@@ -241,7 +241,7 @@
                                     Dim enemy = character.Location.Enemy(character)
                                     Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(StaticWorldData.World, 37)))
                                 End Function},
-            {"HasBong", Function(character) character.Inventory.ItemsOfType(OldItemType.Bong.ToNew(StaticWorldData.World)).Any},
+            {"HasBong", Function(character) character.Inventory.ItemsOfType(ItemType.FromId(StaticWorldData.World, 33)).Any},
             {"CanUseAirShard", Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},
             {"CanUseEarthShard", Function(character)
                                      Dim location = character.Location
