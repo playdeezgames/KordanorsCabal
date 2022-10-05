@@ -340,8 +340,8 @@
         Dim result As New List(Of IItemType)
         While wear > 0
             Dim brokenItemType = WearOneWeapon()
-            If brokenItemType.HasValue Then
-                result.Add(ItemType.FromId(WorldData, brokenItemType.Value))
+            If brokenItemType IsNot Nothing Then
+                result.Add(brokenItemType)
             End If
             wear -= 1
         End While
@@ -358,13 +358,14 @@
         End While
         Return result
     End Function
-    Private Function WearOneWeapon() As OldItemType?
+    Private Function WearOneWeapon() As IItemType
+        WearOneWeapon = Nothing
         Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsWeapon).ToList
         If items.Any Then
             Dim item = RNG.FromList(items)
             item.ReduceDurability(1)
             If item.IsBroken Then
-                WearOneWeapon = If(item.ItemType IsNot Nothing, CType(item.ItemType.Id, OldItemType), Nothing)
+                WearOneWeapon = item.ItemType
                 item.Destroy()
             End If
         End If
