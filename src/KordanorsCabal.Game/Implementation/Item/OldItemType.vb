@@ -37,7 +37,6 @@ Public Enum OldItemType
     Bong
     Herb
     RottenFood
-    Mushroom
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
