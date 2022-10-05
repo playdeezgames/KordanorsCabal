@@ -39,7 +39,7 @@
     Property Chafing As Long
     Property Money As Long
     ReadOnly Property IsEncumbered As Boolean
-    Function HasItemType(itemType As OldItemType) As Boolean
+    Function HasItemType(itemType As IItemType) As Boolean
     ReadOnly Property NeedsHealing As Boolean
     Sub Interact()
     ReadOnly Property HasSpells As Boolean

@@ -555,8 +555,8 @@
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
-    Function HasItemType(itemType As OldItemType) As Boolean Implements ICharacter.HasItemType
-        Return Inventory.ItemsOfType(itemType).Any
+    Function HasItemType(itemType As IItemType) As Boolean Implements ICharacter.HasItemType
+        Return Inventory.ItemsOfType(CType(itemType.Id, OldItemType)).Any
     End Function
     Property Drunkenness As Long Implements ICharacter.Drunkenness
         Get

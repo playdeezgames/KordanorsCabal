@@ -7,8 +7,8 @@
     Shared Function FromId(worldData As IWorldData, id As Long?) As ICharacterTypeCombat
         Return If(id.HasValue, New CharacterTypeCombat(worldData, id.Value), Nothing)
     End Function
-    Function CanBeBribedWith(itemType As OldItemType) As Boolean Implements ICharacterTypeCombat.CanBeBribedWith
-        Return WorldData.CharacterTypeBribe.Read(Id, itemType)
+    Function CanBeBribedWith(itemType As IItemType) As Boolean Implements ICharacterTypeCombat.CanBeBribedWith
+        Return WorldData.CharacterTypeBribe.Read(Id, itemType.Id)
     End Function
     Sub DropLoot(location As ILocation) Implements ICharacterTypeCombat.DropLoot
         Dim lootTable = WorldData.CharacterTypeLoot.Read(Id)

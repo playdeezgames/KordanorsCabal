@@ -35,7 +35,7 @@
         If Not IsLocked Then
             Return True
         End If
-        If Not player.HasItemType(RouteType.UnlockItem.Value) Then
+        If Not player.HasItemType(ItemType.FromId(WorldData, RouteType.UnlockItem)) Then
             Return False
         End If
         Return True

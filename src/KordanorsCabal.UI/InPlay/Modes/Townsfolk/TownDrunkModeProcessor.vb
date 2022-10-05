@@ -21,7 +21,7 @@ Friend Class TownDrunkModeProcessor
     Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
-        If player.HasItemType(OldItemType.Beer) Then
+        If player.HasItemType(ItemType.FromId(StaticWorldData.World, 26)) Then
             Buttons(EnableButtonIndex).Title = "Give Beer"
         End If
     End Sub
@@ -32,7 +32,7 @@ Friend Class TownDrunkModeProcessor
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case EnableButtonIndex
-                If player.HasItemType(OldItemType.Beer) Then
+                If player.HasItemType(ItemType.FromId(StaticWorldData.World, 26)) Then
                     Return GiveBeer(player)
                 End If
         End Select

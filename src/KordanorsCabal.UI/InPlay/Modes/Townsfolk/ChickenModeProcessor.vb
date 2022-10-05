@@ -22,7 +22,7 @@ Friend Class ChickenModeProcessor
     Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
-        If player.HasItemType(OldItemType.Food) OrElse player.HasItemType(OldItemType.RottenFood) Then
+        If player.HasItemType(ItemType.FromId(StaticWorldData.World, 24)) OrElse player.HasItemType(ItemType.FromId(StaticWorldData.World, 35)) Then
             Buttons(FeedButtonIndex).Title = "Feed"
         End If
     End Sub
@@ -33,7 +33,7 @@ Friend Class ChickenModeProcessor
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case FeedButtonIndex
-                If player.HasItemType(OldItemType.Food) OrElse player.HasItemType(OldItemType.RottenFood) Then
+                If player.HasItemType(ItemType.FromId(StaticWorldData.World, 24)) OrElse player.HasItemType(ItemType.FromId(StaticWorldData.World, 35)) Then
                     Dim item = RNG.FromEnumerable(player.Inventory.Items.Where(Function(x) x.Name = OldItemType.Food.ToNew(StaticWorldData.World).Name))
                     Return FeedChicken(player, item)
                 End If
