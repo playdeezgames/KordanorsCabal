@@ -41,7 +41,6 @@ Public Enum OldItemType
     RottenEgg
     ZombieTaint
     Lotion
-    BatWing
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

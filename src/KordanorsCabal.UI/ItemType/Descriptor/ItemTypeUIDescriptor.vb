@@ -19,7 +19,7 @@ Module ItemTypeUIDescriptorUtility
             {50L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Purple)},
             {51L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Orange)},
             {52L, New ItemTypeUIDescriptor(Pattern.Y, (8, 17), Hue.Orange)},
-            {OldItemType.BatWing, New ItemTypeUIDescriptor(Pattern.W, (6, 15), Hue.Black)},
+            {40L, New ItemTypeUIDescriptor(Pattern.W, (6, 15), Hue.Black)},
             {OldItemType.Beer, New ItemTypeUIDescriptor(Pattern.B, (6, 17), Hue.Orange)},
             {OldItemType.Bong, New ItemTypeUIDescriptor(Pattern.Pound, (17, 17), Hue.Cyan)},
             {OldItemType.BookOfHolyBolt, New ItemTypeUIDescriptor(Pattern.Vertical1234, (15, 16), Hue.Orange)},
