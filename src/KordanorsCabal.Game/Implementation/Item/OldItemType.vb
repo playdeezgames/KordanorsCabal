@@ -35,7 +35,6 @@ Public Enum OldItemType
     BookOfHolyBolt
     MembershipCard
     Bong
-    Herb
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

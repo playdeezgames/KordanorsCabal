@@ -181,7 +181,7 @@
                     Dim delta = character.MaximumMana - character.CurrentMana
                     character.CurrentMana = character.MaximumMana
                     character.Highness += 10
-                    character.EnqueueMessage($"You use yer {OldItemType.Bong.ToNew(StaticWorldData.World).Name} to smoke yer {OldItemType.Herb.ToNew(StaticWorldData.World).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(StaticWorldData.World, 8L).Name}.")
+                    character.EnqueueMessage($"You use yer {OldItemType.Bong.ToNew(StaticWorldData.World).Name} to smoke yer {ItemType.FromId(StaticWorldData.World, 34).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(StaticWorldData.World, 8L).Name}.")
                 End Sub},
             {"UseEarthShard",
                 Sub(character)

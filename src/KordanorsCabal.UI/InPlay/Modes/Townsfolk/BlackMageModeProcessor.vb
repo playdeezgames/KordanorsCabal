@@ -52,7 +52,7 @@ Friend Class BlackMageModeProcessor
                 ShoppeProcessor(Of (OldItemType, Long)).ShoppeType = Game.ShoppeType.BlackMage
                 Return UIState.ShoppeBuy
             Case RestoreButtonIndex
-                player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {OldItemType.Bong.ToNew(StaticWorldData.World).Name} and gives you a hit of {OldItemType.Herb.ToNew(StaticWorldData.World).Name}.")
+                player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {OldItemType.Bong.ToNew(StaticWorldData.World).Name} and gives you a hit of {ItemType.FromId(StaticWorldData.World, 34).Name}.")
                 player.CurrentMana = player.MaximumMana
                 PushUIState(UIState.InPlay)
                 Return UIState.Message
