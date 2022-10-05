@@ -44,7 +44,6 @@ Public Enum OldItemType
     BatWing
     SnakeFang
     ShoeLaces
-    SpaceSord
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
