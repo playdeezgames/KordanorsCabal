@@ -31,4 +31,15 @@
                     (Columns.ItemTypeIdColumn, itemTypeId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub ShouldReadAllItemTypesFromTheDataStore()
+        WithSubobject(
+            Sub(store, checker, subject)
+                subject.ReadAll().ShouldBeNull
+                store.Verify(Function(x) x.ReadRecords(Of Long)(
+                                 It.IsAny(Of Action),
+                                 Tables.ItemTypes,
+                                 Columns.ItemTypeIdColumn))
+            End Sub)
+    End Sub
 End Class

@@ -81,7 +81,17 @@
                 FROM [cte];")
     End Sub
     Public Function ReadName(itemTypeId As Long) As String Implements IItemTypeData.ReadName
-        Return Store.ReadColumnString(AddressOf Initialize, TableName, ItemTypeNameColumn, (ItemTypeIdColumn, itemTypeId))
+        Return Store.ReadColumnString(
+            AddressOf Initialize,
+            TableName,
+            ItemTypeNameColumn,
+            (ItemTypeIdColumn, itemTypeId))
     End Function
 
+    Public Function ReadAll() As IEnumerable(Of Long) Implements IItemTypeData.ReadAll
+        Return Store.ReadRecords(Of Long)(
+            AddressOf Initialize,
+            TableName,
+            ItemTypeIdColumn)
+    End Function
 End Class
