@@ -43,7 +43,7 @@
     Friend Function Move(player As ICharacter) As ILocation
         If CanMove(player) Then
             If IsLocked Then
-                player.Inventory.ItemsOfType(RouteType.UnlockItem.Value).First.Destroy()
+                player.Inventory.ItemsOfType(ItemType.FromId(WorldData, RouteType.UnlockItem.Value)).First.Destroy()
                 RouteType = If(RouteType.UnlockedRouteType, RouteType)
                 Play(Sfx.UnlockDoor)
             End If

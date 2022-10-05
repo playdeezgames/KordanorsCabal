@@ -22,9 +22,9 @@
     Public Sub Add(item As IItem) Implements IInventory.Add
         WorldData.InventoryItem.Write(Id, item.Id)
     End Sub
-    ReadOnly Property ItemsOfType(itemType As OldItemType) As IEnumerable(Of IItem) Implements IInventory.ItemsOfType
+    ReadOnly Property ItemsOfType(itemType As IItemType) As IEnumerable(Of IItem) Implements IInventory.ItemsOfType
         Get
-            Return Items.Where(Function(x) x.ItemType.Id = itemType)
+            Return Items.Where(Function(x) x.ItemType.Id = itemType.Id)
         End Get
     End Property
 

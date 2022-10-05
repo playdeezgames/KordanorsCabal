@@ -41,7 +41,7 @@ Friend Class TownDrunkModeProcessor
 
     Private Function GiveBeer(player As ICharacter) As UIState
         player.EnqueueMessage($"You give {OldItemType.Beer.ToNew(StaticWorldData.World).Name} to {New FeatureType(StaticWorldData.World, 3L).Name}.", $"{New FeatureType(StaticWorldData.World, 3L).Name} drinks it all in one swallow, burps, and hands you {OldItemType.Bottle.ToNew(StaticWorldData.World).Name}.")
-        player.Inventory.ItemsOfType(OldItemType.Beer).First.Destroy()
+        player.Inventory.ItemsOfType(OldItemType.Beer.ToNew(StaticWorldData.World)).First.Destroy()
         player.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.Bottle))
         PushUIState(UIState.InPlay)
         Return UIState.Message

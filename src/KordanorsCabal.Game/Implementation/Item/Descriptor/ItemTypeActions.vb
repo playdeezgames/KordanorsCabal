@@ -84,7 +84,7 @@
                             Dim lines As New List(Of String)
                             lines.Add($"You make use of {OldItemType.Pr0n.ToNew(StaticWorldData.World).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
                             lines.Add($"You now have {character.CurrentMP} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
-                            Dim lotionItem = character.Inventory.ItemsOfType(OldItemType.Lotion).FirstOrDefault
+                            Dim lotionItem = character.Inventory.ItemsOfType(OldItemType.Lotion.ToNew(StaticWorldData.World)).FirstOrDefault
                             If lotionItem Is Nothing Then
                                 lines.Add($"You also receive 10 {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}. Try {OldItemType.Lotion.ToNew(StaticWorldData.World).Name} next time.")
                                 character.Chafing = 10
@@ -241,7 +241,7 @@
                                     Dim enemy = character.Location.Enemy(character)
                                     Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.RottenEgg.ToNew(StaticWorldData.World)))
                                 End Function},
-            {"HasBong", Function(character) character.Inventory.ItemsOfType(OldItemType.Bong).Any},
+            {"HasBong", Function(character) character.Inventory.ItemsOfType(OldItemType.Bong.ToNew(StaticWorldData.World)).Any},
             {"CanUseAirShard", Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},
             {"CanUseEarthShard", Function(character)
                                      Dim location = character.Location

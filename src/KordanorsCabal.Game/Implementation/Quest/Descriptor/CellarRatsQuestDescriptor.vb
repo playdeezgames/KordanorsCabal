@@ -10,7 +10,7 @@
     Public Overrides Sub Complete(character As ICharacter)
         If character.HasQuest(Quest.CellarRats) AndAlso CanComplete(character) Then
             character.EnqueueMessage("You complete the quest!")
-            Dim ratTails = character.Inventory.ItemsOfType(OldItemType.RatTail).Take(10)
+            Dim ratTails = character.Inventory.ItemsOfType(OldItemType.RatTail.ToNew(StaticWorldData.World)).Take(10)
             For Each ratTail In ratTails
                 character.Money += 1
                 ratTail.Destroy()
@@ -46,6 +46,6 @@
     End Function
 
     Public Overrides Function CanComplete(character As ICharacter) As Boolean
-        Return character.Inventory.ItemsOfType(OldItemType.RatTail).Count >= 1
+        Return character.Inventory.ItemsOfType(OldItemType.RatTail.ToNew(StaticWorldData.World)).Count >= 1
     End Function
 End Class
