@@ -336,12 +336,12 @@
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value > 0
         End Get
     End Property
-    Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType) Implements ICharacter.DoWeaponWear
-        Dim result As New List(Of OldItemType)
+    Function DoWeaponWear(wear As Long) As IEnumerable(Of IItemType) Implements ICharacter.DoWeaponWear
+        Dim result As New List(Of IItemType)
         While wear > 0
             Dim brokenItemType = WearOneWeapon()
             If brokenItemType.HasValue Then
-                result.Add(brokenItemType.Value)
+                result.Add(ItemType.FromId(WorldData, brokenItemType.Value))
             End If
             wear -= 1
         End While
@@ -803,7 +803,7 @@
                 lines.Add($"You do {damage} damage!")
                 enemy.DoDamage(damage)
                 For Each brokenItemType In DoWeaponWear(damage)
-                    lines.Add($"Yer {brokenItemType.ToNew(StaticWorldData.World).Name} breaks!")
+                    lines.Add($"Yer {brokenItemType.Name} breaks!")
                 Next
                 If enemy.IsDead Then
                     Dim killResult = enemy.Kill(Me)

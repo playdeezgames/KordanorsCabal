@@ -76,7 +76,7 @@
     Sub DoDamage(damage As Long)
     Function DoArmorWear(wear As Long) As IEnumerable(Of IItemType)
     Sub DoImmobilization(delta As Long)
-    Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType)
+    Function DoWeaponWear(wear As Long) As IEnumerable(Of IItemType)
     Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
     Sub EnqueueMessage(ParamArray lines() As String)
     Sub Learn(spellType As ISpellType)
