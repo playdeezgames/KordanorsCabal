@@ -9,15 +9,15 @@
     Overridable ReadOnly Property DisplayHue As Hue?
 End Class
 Module ItemTypeUIDescriptorUtility
-    Friend ReadOnly ItemTypeUIDescriptors As IReadOnlyDictionary(Of OldItemType, ItemTypeUIDescriptor) =
-        New Dictionary(Of OldItemType, ItemTypeUIDescriptor) From
+    Friend ReadOnly ItemTypeUIDescriptors As IReadOnlyDictionary(Of Long, ItemTypeUIDescriptor) =
+        New Dictionary(Of Long, ItemTypeUIDescriptor) From
         {
             {OldItemType.AirShard, New ItemTypeUIDescriptor(Pattern.A, (10, 15), Hue.Cyan)},
             {OldItemType.AmuletOfHP, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Red)},
-            {OldItemType.AmuletOfSTR, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Blue)},
-            {OldItemType.AmuletOfDEX, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Green)},
-            {OldItemType.AmuletOfPOW, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Purple)},
-            {OldItemType.AmuletOfMana, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Orange)},
+            {48L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Blue)},
+            {49L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Green)},
+            {50L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Purple)},
+            {51L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Orange)},
             {OldItemType.BatWing, New ItemTypeUIDescriptor(Pattern.W, (6, 15), Hue.Black)},
             {OldItemType.Beer, New ItemTypeUIDescriptor(Pattern.B, (6, 17), Hue.Orange)},
             {OldItemType.Bong, New ItemTypeUIDescriptor(Pattern.Pound, (17, 17), Hue.Cyan)},
