@@ -84,15 +84,15 @@
                             Dim lines As New List(Of String)
                             lines.Add($"You make use of {OldItemType.Pr0n.ToNew(StaticWorldData.World).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
                             lines.Add($"You now have {character.CurrentMP} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
-                            Dim lotionItem = character.Inventory.ItemsOfType(OldItemType.Lotion.ToNew(StaticWorldData.World)).FirstOrDefault
+                            Dim lotionItem = character.Inventory.ItemsOfType(ItemType.FromId(StaticWorldData.World, 39)).FirstOrDefault
                             If lotionItem Is Nothing Then
-                                lines.Add($"You also receive 10 {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}. Try {OldItemType.Lotion.ToNew(StaticWorldData.World).Name} next time.")
+                                lines.Add($"You also receive 10 {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}. Try {ItemType.FromId(StaticWorldData.World, 39).Name} next time.")
                                 character.Chafing = 10
                             Else
-                                lines.Add($"You use a bit of {OldItemType.Lotion.ToNew(StaticWorldData.World).Name} to prevent {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}.")
+                                lines.Add($"You use a bit of {ItemType.FromId(StaticWorldData.World, 39).Name} to prevent {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}.")
                                 lotionItem.ReduceDurability(1)
                                 If lotionItem.Durability = 0 Then
-                                    lines.Add($"You ran out that bottle of {OldItemType.Lotion.ToNew(StaticWorldData.World).Name}.")
+                                    lines.Add($"You ran out that bottle of {ItemType.FromId(StaticWorldData.World, 39).Name}.")
                                     lotionItem.Destroy()
                                     character.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.Bottle))
                                 End If

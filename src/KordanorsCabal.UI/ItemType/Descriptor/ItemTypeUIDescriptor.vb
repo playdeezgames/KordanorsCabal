@@ -40,7 +40,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.HolyWater, New ItemTypeUIDescriptor(Pattern.H, (16, 15), Hue.Cyan)},
             {44L, New ItemTypeUIDescriptor(Pattern.LessThan, (10, 17), Hue.Red)},
             {OldItemType.IronKey, New ItemTypeUIDescriptor(Pattern.K, (5, 16), Hue.Black)},
-            {OldItemType.Lotion, New ItemTypeUIDescriptor(Pattern.L, (17, 15), Hue.Cyan)},
+            {39, New ItemTypeUIDescriptor(Pattern.L, (17, 15), Hue.Cyan)},
             {OldItemType.MagicEgg, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 15), Hue.Black)},
             {OldItemType.MembershipCard, New ItemTypeUIDescriptor(Pattern.Club, (13, 13), Hue.Orange)},
             {OldItemType.MoonPortal, New ItemTypeUIDescriptor(Pattern.M, (10, 16), Hue.Purple)},
