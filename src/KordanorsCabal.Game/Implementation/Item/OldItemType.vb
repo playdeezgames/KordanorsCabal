@@ -45,7 +45,6 @@ Public Enum OldItemType
     SnakeFang
     ShoeLaces
     SpaceSord
-    HornsOfKordanor
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

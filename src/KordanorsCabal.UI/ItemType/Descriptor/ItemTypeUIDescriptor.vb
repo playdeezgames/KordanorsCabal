@@ -37,7 +37,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.Helmet, New ItemTypeUIDescriptor(Pattern.Spade, (6, 16), Hue.Black)},
             {OldItemType.Herb, New ItemTypeUIDescriptor(Pattern.Asterisk, (7, 16), Hue.Green)},
             {OldItemType.HolyWater, New ItemTypeUIDescriptor(Pattern.H, (16, 15), Hue.Cyan)},
-            {OldItemType.HornsOfKordanor, New ItemTypeUIDescriptor(Pattern.LessThan, (10, 17), Hue.Red)},
+            {44L, New ItemTypeUIDescriptor(Pattern.LessThan, (10, 17), Hue.Red)},
             {OldItemType.IronKey, New ItemTypeUIDescriptor(Pattern.K, (5, 16), Hue.Black)},
             {OldItemType.Lotion, New ItemTypeUIDescriptor(Pattern.L, (17, 15), Hue.Cyan)},
             {OldItemType.MagicEgg, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 15), Hue.Black)},
