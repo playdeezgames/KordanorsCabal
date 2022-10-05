@@ -260,9 +260,9 @@ Public Module ItemTypeDescriptorUtility
         End Get
     End Property
 
-    Public ReadOnly Property AllItemTypes(worldData As IWorldData) As IEnumerable(Of OldItemType)
+    Public ReadOnly Property AllItemTypes(worldData As IWorldData) As IEnumerable(Of IItemType)
         Get
-            Return ItemTypeDescriptors(worldData).Keys
+            Return ItemTypeDescriptors(worldData).Values
         End Get
     End Property
 End Module

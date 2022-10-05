@@ -23,7 +23,9 @@ Friend Class ShoppeSellProcessor
     Public Overrides Sub Initialize()
         currentItemIndex = 0
         Dim offers = ShoppeType.Offers
-        items = Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Items.Where(Function(x) offers.ContainsKey(CType(x.ItemType.Id, OldItemType))).ToList
+        items = Game.World.PlayerCharacter(
+            StaticWorldData.World).Inventory.Items.Where(
+            Function(x) ShoppeType.WillBuy(x.ItemType)).ToList
     End Sub
 
     Public Overrides Function ProcessCommand(command As Command) As UIState
@@ -49,7 +51,7 @@ Friend Class ShoppeSellProcessor
             Return UIState.InPlay
         End If
         Dim item = items(currentItemIndex)
-        Game.World.PlayerCharacter(StaticWorldData.World).Money += ShoppeType.Offers(CType(item.ItemType.Id, OldItemType))
+        Game.World.PlayerCharacter(StaticWorldData.World).Money += If(ShoppeType.BuyPrice(item.ItemType), 0)
         item.Destroy()
         Dim oldIndex = currentItemIndex
         Initialize()

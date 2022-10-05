@@ -1,7 +1,7 @@
 ﻿Imports KordanorsCabal.Data
 
 Friend Class ShoppeBuyProcessor
-    Inherits ShoppeProcessor(Of (OldItemType, Long))
+    Inherits ShoppeProcessor(Of (IItemType, Long))
 
     Public Overrides Sub UpdateBuffer(buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
@@ -13,7 +13,7 @@ Friend Class ShoppeBuyProcessor
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
             If itemIndex >= 0 AndAlso itemIndex < items.Count Then
                 buffer.FillCells((0, row), (buffer.Columns, 1), Pattern.Space, itemIndex = currentItemIndex, Hue.Black)
-                buffer.WriteTextCentered(row, $"{items(itemIndex).Item1.ToNew(StaticWorldData.World).Name}({items(itemIndex).Item2})", itemIndex = currentItemIndex, Hue.Black)
+                buffer.WriteTextCentered(row, $"{items(itemIndex).Item1.Name}({items(itemIndex).Item2})", itemIndex = currentItemIndex, Hue.Black)
             End If
         Next
 
@@ -50,7 +50,7 @@ Friend Class ShoppeBuyProcessor
         End If
         Dim itemType = items(currentItemIndex)
         Game.World.PlayerCharacter(StaticWorldData.World).Money -= itemType.Item2
-        Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Add(Game.Item.Create(StaticWorldData.World, itemType.Item1))
+        Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Add(Game.Item.Create(StaticWorldData.World, CType(itemType.Item1.Id, OldItemType)))
         Dim oldIndex = currentItemIndex
         Initialize()
         If Not items.Any Then

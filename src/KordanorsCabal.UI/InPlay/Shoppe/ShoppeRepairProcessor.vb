@@ -24,7 +24,9 @@ Friend Class ShoppeRepairProcessor
     Public Overrides Sub Initialize()
         currentItemIndex = 0
         Dim repairs = ShoppeType.Repairs
-        items = Game.World.PlayerCharacter(StaticWorldData.World).ItemsToRepair(ShoppeType).Where(Function(x) repairs.ContainsKey(CType(x.ItemType.Id, OldItemType))).ToList
+        items = Game.World.PlayerCharacter(StaticWorldData.World).
+            ItemsToRepair(ShoppeType).
+            Where(Function(x) ShoppeType.WillRepair(x.ItemType)).ToList
     End Sub
 
     Public Overrides Function ProcessCommand(command As Command) As UIState

@@ -6,29 +6,29 @@
             worldData,
             "Blacksmith",
             AllItemTypes(worldData).Where(
-                Function(x) x.ToNew(worldData).HasOffer(ShoppeType.Blacksmith)).
+                Function(x) x.HasOffer(ShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.ToNew(worldData).Offer))
+                    Function(x) x.Offer))
     End Sub
 
-    Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)
+    Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)
         Get
             Return AllItemTypes(WorldData).Where(
-                Function(x) x.ToNew(WorldData).HasPrice(ShoppeType.Blacksmith)).
+                Function(x) x.HasPrice(ShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.ToNew(WorldData).Price)
+                    Function(x) x.Price)
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Repairs As IReadOnlyDictionary(Of OldItemType, Long)
+    Public Overrides ReadOnly Property Repairs As IReadOnlyDictionary(Of IItemType, Long)
         Get
             Return AllItemTypes(WorldData).Where(
-                Function(x) x.ToNew(WorldData).CanRepair(ShoppeType.Blacksmith)).
+                Function(x) x.CanRepair(ShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.ToNew(WorldData).RepairPrice)
+                    Function(x) x.RepairPrice)
         End Get
     End Property
 End Class

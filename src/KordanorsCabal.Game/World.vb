@@ -155,22 +155,22 @@ Public Module World
         partitions(deadEndId).Remove(bossLocation)
         partitions.Add(dungeonBossId, New List(Of ILocation) From {bossLocation})
         For Each itemType In itemTypes
-            SpawnItem(worldData, locations, dungeonLevel, itemType)
+            SpawnItem(worldData, locations, dungeonLevel, Game.ItemType.FromId(worldData, itemType))
         Next
         PopulateItems(worldData, locations, dungeonLevel)
     End Sub
 
-    Private Sub SpawnItem(worldData As WorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel, itemType As OldItemType)
-        Dim locationTypes = itemType.ToNew(worldData).SpawnLocationTypes(dungeonLevel)
+    Private Sub SpawnItem(worldData As WorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel, itemType As IItemType)
+        Dim locationTypes = itemType.SpawnLocationTypes(dungeonLevel)
         If locationTypes.Any Then
             Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Select(Function(y) y.Id).Contains(x.LocationType.Id)))
-            spawnLocation.Inventory.Add(Item.Create(worldData, itemType))
+            spawnLocation.Inventory.Add(Item.Create(worldData, CType(itemType.Id, OldItemType)))
         End If
     End Sub
 
     Private Sub PopulateItems(worldData As WorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel)
         For Each itemType In AllItemTypes(worldData)
-            Dim itemCount As Long = itemType.ToNew(worldData).RollSpawnCount(dungeonLevel)
+            Dim itemCount As Long = itemType.RollSpawnCount(dungeonLevel)
             While itemCount > 0
                 itemCount -= 1
                 SpawnItem(worldData, locations, dungeonLevel, itemType)

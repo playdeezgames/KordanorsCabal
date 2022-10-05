@@ -5,13 +5,13 @@
         MyBase.New(worldData, "Black Market")
     End Sub
 
-    Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)
+    Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)
         Get
             Return AllItemTypes(WorldData).Where(
-                Function(x) x.ToNew(WorldData).HasPrice(ShoppeType.BlackMarket)).
+                Function(x) x.HasPrice(ShoppeType.BlackMarket)).
                 ToDictionary(
                     Function(x) x,
-                    Function(x) x.ToNew(WorldData).Price)
+                    Function(x) x.Price)
         End Get
     End Property
 End Class
