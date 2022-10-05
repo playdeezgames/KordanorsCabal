@@ -74,7 +74,7 @@
     Sub Destroy()
     Function DetermineDamage(value As Long) As Long
     Sub DoDamage(damage As Long)
-    Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType)
+    Function DoArmorWear(wear As Long) As IEnumerable(Of IItemType)
     Sub DoImmobilization(delta As Long)
     Function DoWeaponWear(wear As Long) As IEnumerable(Of OldItemType)
     Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)

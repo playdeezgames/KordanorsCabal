@@ -347,12 +347,12 @@
         End While
         Return result
     End Function
-    Function DoArmorWear(wear As Long) As IEnumerable(Of OldItemType) Implements ICharacter.DoArmorWear
-        Dim result As New List(Of OldItemType)
+    Function DoArmorWear(wear As Long) As IEnumerable(Of IItemType) Implements ICharacter.DoArmorWear
+        Dim result As New List(Of IItemType)
         While wear > 0
             Dim brokenItemType = WearOneArmor()
             If brokenItemType.HasValue Then
-                result.Add(brokenItemType.Value)
+                result.Add(ItemType.FromId(WorldData, brokenItemType.Value))
             End If
             wear -= 1
         End While
@@ -526,7 +526,7 @@
         Dim attackRoll = enemy.RollAttack()
         lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
         For Each brokenItemType In DoArmorWear(attackRoll)
-            lines.Add($"Yer {brokenItemType.ToNew(StaticWorldData.World).Name} breaks!")
+            lines.Add($"Yer {brokenItemType.Name} breaks!")
         Next
         Dim defendRoll = RollDefend()
         lines.Add($"You roll a defend of {defendRoll}.")
