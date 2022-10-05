@@ -60,7 +60,7 @@
             {"UseRottenEgg",
                 Sub(character)
                     Dim enemy = character.Location.Enemy(character)
-                    If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.RottenEgg) Then
+                    If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.RottenEgg.ToNew(StaticWorldData.World)) Then
                         character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.RottenEgg.ToNew(StaticWorldData.World).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
                         Return
@@ -70,7 +70,7 @@
             {"UsePr0n",
                         Sub(character)
                             Dim enemy = character.Location.Enemy(character)
-                            If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Pr0n) Then
+                            If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Pr0n.ToNew(StaticWorldData.World)) Then
                                 character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.Pr0n.ToNew(StaticWorldData.World).Name}, and they quickly wander off with a seeming great purpose.")
                                 enemy.Destroy()
                                 Return
@@ -127,7 +127,7 @@
             {"UseBeer",
                 Sub(character)
                     Dim enemy = character.Location.Enemy(character)
-                    If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Beer) Then
+                    If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Beer.ToNew(StaticWorldData.World)) Then
                         enemy.Destroy()
                         character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.Beer.ToNew(StaticWorldData.World).Name}, and they wander off to get drunk.")
                         Return
@@ -232,14 +232,14 @@
             {"CanLearnHolyBolt", Function(character) character.CanLearn(SpellType.FromId(StaticWorldData.World, 1L))},
             {"CanUseBeer", Function(character)
                                Dim enemy = character.Location.Enemy(character)
-                               Return enemy Is Nothing OrElse enemy.CanBeBribedWith(OldItemType.Beer)
+                               Return enemy Is Nothing OrElse enemy.CanBeBribedWith(OldItemType.Beer.ToNew(StaticWorldData.World))
                            End Function},
             {"IsInDungeon", Function(character) character.Location.IsDungeon},
             {"AlwaysTrue", Function(character) True},
             {"IsFightingUndead", Function(character) character.CanFight AndAlso character.Location.Enemy(character).IsUndead},
             {"CanUseRottenEgg", Function(character)
                                     Dim enemy = character.Location.Enemy(character)
-                                    Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.RottenEgg))
+                                    Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.RottenEgg.ToNew(StaticWorldData.World)))
                                 End Function},
             {"HasBong", Function(character) character.Inventory.ItemsOfType(OldItemType.Bong).Any},
             {"CanUseAirShard", Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},
@@ -249,7 +249,7 @@
                                  End Function},
             {"CanUsePr0n", Function(character)
                                Dim enemy = character.Location.Enemy(character)
-                               Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Pr0n)) OrElse enemy Is Nothing
+                               Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Pr0n.ToNew(StaticWorldData.World))) OrElse enemy Is Nothing
                            End Function},
             {"CanUseFireShard", Function(character)
                                     Dim location = character.Location
@@ -258,7 +258,7 @@
             {"CanUseWaterShard", Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},
             {"CanUseBottle", Function(character)
                                  Dim enemy = character.Location.Enemy(character)
-                                 Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Bottle)
+                                 Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Bottle.ToNew(StaticWorldData.World))
                              End Function},
             {"CanLearnPurify", Function(character) character.CanLearn(SpellType.FromId(StaticWorldData.World, 2L))}
         }

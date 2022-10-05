@@ -88,9 +88,9 @@
     Public Function HasItemsToRepair(shoppeType As ShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
         Return ItemsToRepair(shoppeType).Any
     End Function
-    ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean Implements ICharacter.CanBeBribedWith
+    ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean Implements ICharacter.CanBeBribedWith
         Get
-            Return CharacterType.Combat.CanBeBribedWith(itemType)
+            Return CharacterType.Combat.CanBeBribedWith(CType(itemType.Id, OldItemType))
         End Get
     End Property
     ReadOnly Property IsUndead As Boolean Implements ICharacter.IsUndead

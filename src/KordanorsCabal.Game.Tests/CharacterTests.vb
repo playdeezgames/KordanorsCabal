@@ -105,7 +105,7 @@
                 worldData.SetupGet(Function(x) x.Character).Returns(characterData.Object)
                 worldData.SetupGet(Function(X) X.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
 
-                subject.CanBeBribedWith(itemType).ShouldBeFalse
+                subject.CanBeBribedWith(Game.ItemType.FromId(worldData.Object, itemTypeId)).ShouldBeFalse
 
                 characterData.Verify(Function(x) x.ReadCharacterType(id))
                 worldData.Verify(Function(x) x.CharacterTypeBribe.Read(characterTypeId, itemTypeId))

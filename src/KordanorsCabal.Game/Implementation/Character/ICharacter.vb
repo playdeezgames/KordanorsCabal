@@ -5,7 +5,7 @@
     Function AddXP(xp As Long) As Boolean
     Sub AssignPoint(statisticType As ICharacterStatisticType)
     Function CanAcceptQuest(quest As Quest) As Boolean
-    ReadOnly Property CanBeBribedWith(itemType As OldItemType) As Boolean
+    ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean
     Function CanCastSpell(spellType As ISpellType) As Boolean
     ReadOnly Property CanDoIntimidation() As Boolean
     ReadOnly Property CanFight As Boolean
