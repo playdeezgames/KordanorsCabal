@@ -7,7 +7,7 @@
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of OldItemType, Long)
         Get
-            Return AllItemTypes.Where(
+            Return AllItemTypes(WorldData).Where(
                 Function(x) x.ToNew(WorldData).HasPrice(ShoppeType.Healer)).
                 ToDictionary(
                     Function(x) x,

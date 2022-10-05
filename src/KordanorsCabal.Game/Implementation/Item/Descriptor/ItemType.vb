@@ -193,71 +193,76 @@
     End Sub
 End Class
 Public Module ItemTypeDescriptorUtility
-    Friend ReadOnly ItemTypeDescriptors As IReadOnlyDictionary(Of OldItemType, ItemType) =
-        New Dictionary(Of OldItemType, ItemType) From
+    Friend ReadOnly Property ItemTypeDescriptors(WorldData As IWorldData) As IReadOnlyDictionary(Of OldItemType, ItemType)
+        Get
+
+            Return New Dictionary(Of OldItemType, ItemType) From
         {
-            {OldItemType.AirShard, New ItemType(StaticWorldData.World, OldItemType.AirShard)},
-            {OldItemType.AmuletOfDEX, New ItemType(StaticWorldData.World, OldItemType.AmuletOfDEX)},
-            {OldItemType.AmuletOfHP, New ItemType(StaticWorldData.World, OldItemType.AmuletOfHP)},
-            {OldItemType.AmuletOfMana, New ItemType(StaticWorldData.World, OldItemType.AmuletOfMana)},
-            {OldItemType.AmuletOfPOW, New ItemType(StaticWorldData.World, OldItemType.AmuletOfPOW)},
-            {OldItemType.AmuletOfSTR, New ItemType(StaticWorldData.World, OldItemType.AmuletOfSTR)},
+            {OldItemType.AirShard, New ItemType(WorldData, OldItemType.AirShard)},
+            {OldItemType.AmuletOfDEX, New ItemType(WorldData, OldItemType.AmuletOfDEX)},
+            {OldItemType.AmuletOfHP, New ItemType(WorldData, OldItemType.AmuletOfHP)},
+            {OldItemType.AmuletOfMana, New ItemType(WorldData, OldItemType.AmuletOfMana)},
+            {OldItemType.AmuletOfPOW, New ItemType(WorldData, OldItemType.AmuletOfPOW)},
+            {OldItemType.AmuletOfSTR, New ItemType(WorldData, OldItemType.AmuletOfSTR)},
             {OldItemType.AmuletOfYendor, New ItemType(
-                StaticWorldData.World,
+                WorldData,
                 OldItemType.AmuletOfYendor)},
-            {OldItemType.BatWing, New ItemType(StaticWorldData.World, OldItemType.BatWing)},
-            {OldItemType.Beer, New ItemType(StaticWorldData.World, OldItemType.Beer)},
-            {OldItemType.Bong, New ItemType(StaticWorldData.World, OldItemType.Bong)},
+            {OldItemType.BatWing, New ItemType(WorldData, OldItemType.BatWing)},
+            {OldItemType.Beer, New ItemType(WorldData, OldItemType.Beer)},
+            {OldItemType.Bong, New ItemType(WorldData, OldItemType.Bong)},
             {OldItemType.BookOfHolyBolt, New ItemType(
-                    StaticWorldData.World,
+                    WorldData,
                     OldItemType.BookOfHolyBolt)},
             {OldItemType.BookOfPurify, New ItemType(
-                    StaticWorldData.World,
+                    WorldData,
                     OldItemType.BookOfPurify)},
-            {OldItemType.Bottle, New ItemType(StaticWorldData.World, OldItemType.Bottle)},
-            {OldItemType.BrodeSode, New ItemType(StaticWorldData.World, OldItemType.BrodeSode)},
-            {OldItemType.ChainMail, New ItemType(StaticWorldData.World, OldItemType.ChainMail)},
-            {OldItemType.CopperKey, New ItemType(StaticWorldData.World, OldItemType.CopperKey)},
-            {OldItemType.Dagger, New ItemType(StaticWorldData.World, OldItemType.Dagger)},
-            {OldItemType.EarthShard, New ItemType(StaticWorldData.World, OldItemType.EarthShard)},
-            {OldItemType.ElementalOrb, New ItemType(StaticWorldData.World, OldItemType.ElementalOrb)},
-            {OldItemType.FireShard, New ItemType(StaticWorldData.World, OldItemType.FireShard)},
-            {OldItemType.Food, New ItemType(StaticWorldData.World, OldItemType.Food)},
-            {OldItemType.GoblinEar, New ItemType(StaticWorldData.World, OldItemType.GoblinEar)},
-            {OldItemType.GoldKey, New ItemType(StaticWorldData.World, OldItemType.GoldKey)},
-            {OldItemType.Helmet, New ItemType(StaticWorldData.World, OldItemType.Helmet)},
-            {OldItemType.Herb, New ItemType(StaticWorldData.World, OldItemType.Herb)},
-            {OldItemType.HornsOfKordanor, New ItemType(StaticWorldData.World, OldItemType.HornsOfKordanor)},
-            {OldItemType.HolyWater, New ItemType(StaticWorldData.World, OldItemType.HolyWater)},
-            {OldItemType.IronKey, New ItemType(StaticWorldData.World, OldItemType.IronKey)},
-            {OldItemType.Lotion, New ItemType(StaticWorldData.World, OldItemType.Lotion)},
-            {OldItemType.MagicEgg, New ItemType(StaticWorldData.World, OldItemType.MagicEgg)},
-            {OldItemType.MembershipCard, New ItemType(StaticWorldData.World, OldItemType.MembershipCard)},
-            {OldItemType.MoonPortal, New ItemType(StaticWorldData.World, OldItemType.MoonPortal)},
-            {OldItemType.Mushroom, New ItemType(StaticWorldData.World, OldItemType.Mushroom)},
-            {OldItemType.PlateMail, New ItemType(StaticWorldData.World, OldItemType.PlateMail)},
-            {OldItemType.PlatinumKey, New ItemType(StaticWorldData.World, OldItemType.PlatinumKey)},
-            {OldItemType.Potion, New ItemType(StaticWorldData.World, OldItemType.Potion)},
-            {OldItemType.Pr0n, New ItemType(StaticWorldData.World, OldItemType.Pr0n)},
-            {OldItemType.RatTail, New ItemType(StaticWorldData.World, OldItemType.RatTail)},
-            {OldItemType.RingOfHP, New ItemType(StaticWorldData.World, OldItemType.RingOfHP)},
-            {OldItemType.RottenEgg, New ItemType(StaticWorldData.World, OldItemType.RottenEgg)},
-            {OldItemType.RottenFood, New ItemType(StaticWorldData.World, OldItemType.RottenFood)},
-            {OldItemType.SilverKey, New ItemType(StaticWorldData.World, OldItemType.SilverKey)},
-            {OldItemType.Shield, New ItemType(StaticWorldData.World, OldItemType.Shield)},
-            {OldItemType.ShoeLaces, New ItemType(StaticWorldData.World, OldItemType.ShoeLaces)},
-            {OldItemType.Shortsword, New ItemType(StaticWorldData.World, OldItemType.Shortsword)},
-            {OldItemType.SkullFragment, New ItemType(StaticWorldData.World, OldItemType.SkullFragment)},
-            {OldItemType.SnakeFang, New ItemType(StaticWorldData.World, OldItemType.SnakeFang)},
-            {OldItemType.SpaceSord, New ItemType(StaticWorldData.World, OldItemType.SpaceSord)},
-            {OldItemType.TownPortal, New ItemType(StaticWorldData.World, OldItemType.TownPortal)},
-            {OldItemType.Trousers, New ItemType(StaticWorldData.World, OldItemType.Trousers)},
-            {OldItemType.WaterShard, New ItemType(StaticWorldData.World, OldItemType.WaterShard)},
-            {OldItemType.ZombieTaint, New ItemType(StaticWorldData.World, OldItemType.ZombieTaint)}
+            {OldItemType.Bottle, New ItemType(WorldData, OldItemType.Bottle)},
+            {OldItemType.BrodeSode, New ItemType(WorldData, OldItemType.BrodeSode)},
+            {OldItemType.ChainMail, New ItemType(WorldData, OldItemType.ChainMail)},
+            {OldItemType.CopperKey, New ItemType(WorldData, OldItemType.CopperKey)},
+            {OldItemType.Dagger, New ItemType(WorldData, OldItemType.Dagger)},
+            {OldItemType.EarthShard, New ItemType(WorldData, OldItemType.EarthShard)},
+            {OldItemType.ElementalOrb, New ItemType(WorldData, OldItemType.ElementalOrb)},
+            {OldItemType.FireShard, New ItemType(WorldData, OldItemType.FireShard)},
+            {OldItemType.Food, New ItemType(WorldData, OldItemType.Food)},
+            {OldItemType.GoblinEar, New ItemType(WorldData, OldItemType.GoblinEar)},
+            {OldItemType.GoldKey, New ItemType(WorldData, OldItemType.GoldKey)},
+            {OldItemType.Helmet, New ItemType(WorldData, OldItemType.Helmet)},
+            {OldItemType.Herb, New ItemType(WorldData, OldItemType.Herb)},
+            {OldItemType.HornsOfKordanor, New ItemType(WorldData, OldItemType.HornsOfKordanor)},
+            {OldItemType.HolyWater, New ItemType(WorldData, OldItemType.HolyWater)},
+            {OldItemType.IronKey, New ItemType(WorldData, OldItemType.IronKey)},
+            {OldItemType.Lotion, New ItemType(WorldData, OldItemType.Lotion)},
+            {OldItemType.MagicEgg, New ItemType(WorldData, OldItemType.MagicEgg)},
+            {OldItemType.MembershipCard, New ItemType(WorldData, OldItemType.MembershipCard)},
+            {OldItemType.MoonPortal, New ItemType(WorldData, OldItemType.MoonPortal)},
+            {OldItemType.Mushroom, New ItemType(WorldData, OldItemType.Mushroom)},
+            {OldItemType.PlateMail, New ItemType(WorldData, OldItemType.PlateMail)},
+            {OldItemType.PlatinumKey, New ItemType(WorldData, OldItemType.PlatinumKey)},
+            {OldItemType.Potion, New ItemType(WorldData, OldItemType.Potion)},
+            {OldItemType.Pr0n, New ItemType(WorldData, OldItemType.Pr0n)},
+            {OldItemType.RatTail, New ItemType(WorldData, OldItemType.RatTail)},
+            {OldItemType.RingOfHP, New ItemType(WorldData, OldItemType.RingOfHP)},
+            {OldItemType.RottenEgg, New ItemType(WorldData, OldItemType.RottenEgg)},
+            {OldItemType.RottenFood, New ItemType(WorldData, OldItemType.RottenFood)},
+            {OldItemType.SilverKey, New ItemType(WorldData, OldItemType.SilverKey)},
+            {OldItemType.Shield, New ItemType(WorldData, OldItemType.Shield)},
+            {OldItemType.ShoeLaces, New ItemType(WorldData, OldItemType.ShoeLaces)},
+            {OldItemType.Shortsword, New ItemType(WorldData, OldItemType.Shortsword)},
+            {OldItemType.SkullFragment, New ItemType(WorldData, OldItemType.SkullFragment)},
+            {OldItemType.SnakeFang, New ItemType(WorldData, OldItemType.SnakeFang)},
+            {OldItemType.SpaceSord, New ItemType(WorldData, OldItemType.SpaceSord)},
+            {OldItemType.TownPortal, New ItemType(WorldData, OldItemType.TownPortal)},
+            {OldItemType.Trousers, New ItemType(WorldData, OldItemType.Trousers)},
+            {OldItemType.WaterShard, New ItemType(WorldData, OldItemType.WaterShard)},
+            {OldItemType.ZombieTaint, New ItemType(WorldData, OldItemType.ZombieTaint)}
         }
-    Public ReadOnly Property AllItemTypes As IEnumerable(Of OldItemType)
+        End Get
+    End Property
+
+    Public ReadOnly Property AllItemTypes(worldData As IWorldData) As IEnumerable(Of OldItemType)
         Get
-            Return ItemTypeDescriptors.Keys
+            Return ItemTypeDescriptors(worldData).Keys
         End Get
     End Property
 End Module
