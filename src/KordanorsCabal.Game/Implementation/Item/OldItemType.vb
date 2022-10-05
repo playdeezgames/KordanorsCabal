@@ -36,7 +36,6 @@ Public Enum OldItemType
     MembershipCard
     Bong
     Herb
-    RottenFood
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
