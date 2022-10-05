@@ -63,6 +63,6 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.TownPortal, New ItemTypeUIDescriptor(Pattern.T, (18, 17), Hue.Purple)},
             {OldItemType.Trousers, New ItemTypeUIDescriptor(Pattern.Pi, (3, 16), Hue.Blue)},
             {OldItemType.WaterShard, New ItemTypeUIDescriptor(Pattern.W, (13, 16), Hue.Blue)},
-            {OldItemType.ZombieTaint, New ItemTypeUIDescriptor(Pattern.Octothorpe, (4, 15), Hue.Purple)}
+            {38L, New ItemTypeUIDescriptor(Pattern.Octothorpe, (4, 15), Hue.Purple)}
         }
 End Module
