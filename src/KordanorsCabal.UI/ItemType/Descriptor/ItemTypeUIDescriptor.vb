@@ -58,7 +58,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.Shortsword, New ItemTypeUIDescriptor(Pattern.Minus, (15, 15), Hue.Black)},
             {OldItemType.SilverKey, New ItemTypeUIDescriptor(Pattern.K, (9, 16), Hue.Purple)},
             {OldItemType.SkullFragment, New ItemTypeUIDescriptor(Pattern.Octothorpe, (4, 15), Hue.Blue)},
-            {OldItemType.SnakeFang, New ItemTypeUIDescriptor(Pattern.Comma, (5, 17), Hue.Green)},
+            {41L, New ItemTypeUIDescriptor(Pattern.Comma, (5, 17), Hue.Green)},
             {43L, New ItemTypeUIDescriptor(Pattern.LeftArrow, (19, 17), Hue.Purple)},
             {OldItemType.TownPortal, New ItemTypeUIDescriptor(Pattern.T, (18, 17), Hue.Purple)},
             {OldItemType.Trousers, New ItemTypeUIDescriptor(Pattern.Pi, (3, 16), Hue.Blue)},

@@ -42,7 +42,6 @@ Public Enum OldItemType
     ZombieTaint
     Lotion
     BatWing
-    SnakeFang
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
