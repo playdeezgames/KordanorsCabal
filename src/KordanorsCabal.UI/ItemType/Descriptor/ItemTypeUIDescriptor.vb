@@ -42,7 +42,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.IronKey, New ItemTypeUIDescriptor(Pattern.K, (5, 16), Hue.Black)},
             {39L, New ItemTypeUIDescriptor(Pattern.L, (17, 15), Hue.Cyan)},
             {OldItemType.MagicEgg, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 15), Hue.Black)},
-            {OldItemType.MembershipCard, New ItemTypeUIDescriptor(Pattern.Club, (13, 13), Hue.Orange)},
+            {32, New ItemTypeUIDescriptor(Pattern.Club, (13, 13), Hue.Orange)},
             {OldItemType.MoonPortal, New ItemTypeUIDescriptor(Pattern.M, (10, 16), Hue.Purple)},
             {36L, New ItemTypeUIDescriptor(Pattern.Spade, (3, 17), Hue.Orange)},
             {OldItemType.PlateMail, New ItemTypeUIDescriptor(Pattern.Dither, (4, 16), Hue.Cyan)},
