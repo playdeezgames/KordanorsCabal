@@ -60,8 +60,8 @@
             {"UseRottenEgg",
                 Sub(character)
                     Dim enemy = character.Location.Enemy(character)
-                    If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.RottenEgg.ToNew(StaticWorldData.World)) Then
-                        character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.RottenEgg.ToNew(StaticWorldData.World).Name}, and they quickly wander off with a seeming great purpose.")
+                    If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(StaticWorldData.World, 37)) Then
+                        character.EnqueueMessage($"You give {enemy.Name} the {Game.ItemType.FromId(StaticWorldData.World, 37).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
                         Return
                     End If
@@ -239,7 +239,7 @@
             {"IsFightingUndead", Function(character) character.CanFight AndAlso character.Location.Enemy(character).IsUndead},
             {"CanUseRottenEgg", Function(character)
                                     Dim enemy = character.Location.Enemy(character)
-                                    Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.RottenEgg.ToNew(StaticWorldData.World)))
+                                    Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(StaticWorldData.World, 37)))
                                 End Function},
             {"HasBong", Function(character) character.Inventory.ItemsOfType(OldItemType.Bong.ToNew(StaticWorldData.World)).Any},
             {"CanUseAirShard", Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},

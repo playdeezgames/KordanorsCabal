@@ -51,7 +51,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.Pr0n, New ItemTypeUIDescriptor(Pattern.CrossDiagonals, (15, 17), Hue.Black)},
             {OldItemType.RatTail, New ItemTypeUIDescriptor(Pattern.S, (11, 16), Hue.Black)},
             {46L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (14, 17), Hue.Orange)},
-            {OldItemType.RottenEgg, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 15), Hue.Green)},
+            {37L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 15), Hue.Green)},
             {OldItemType.RottenFood, New ItemTypeUIDescriptor(Pattern.F, (5, 15), Hue.Orange)},
             {OldItemType.Shield, New ItemTypeUIDescriptor(Pattern.FilledCircle, (16, 17), Hue.Black)},
             {42L, New ItemTypeUIDescriptor(Pattern.S, (11, 15), Hue.Orange)},
