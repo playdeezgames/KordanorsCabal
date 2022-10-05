@@ -13,7 +13,7 @@ Module ItemTypeUIDescriptorUtility
         New Dictionary(Of Long, ItemTypeUIDescriptor) From
         {
             {OldItemType.AirShard, New ItemTypeUIDescriptor(Pattern.A, (10, 15), Hue.Cyan)},
-            {OldItemType.AmuletOfHP, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Red)},
+            {45L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Red)},
             {48L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Blue)},
             {49L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Green)},
             {50L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Purple)},
@@ -22,7 +22,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.Beer, New ItemTypeUIDescriptor(Pattern.B, (6, 17), Hue.Orange)},
             {OldItemType.Bong, New ItemTypeUIDescriptor(Pattern.Pound, (17, 17), Hue.Cyan)},
             {OldItemType.BookOfHolyBolt, New ItemTypeUIDescriptor(Pattern.Vertical1234, (15, 16), Hue.Orange)},
-            {OldItemType.BookOfPurify, New ItemTypeUIDescriptor(Pattern.Vertical1234, (15, 16), Hue.Blue)},
+            {47L, New ItemTypeUIDescriptor(Pattern.Vertical1234, (15, 16), Hue.Blue)},
             {OldItemType.Bottle, New ItemTypeUIDescriptor(Pattern.Ampersand, (9, 15), Hue.Black)},
             {OldItemType.BrodeSode, New ItemTypeUIDescriptor(Pattern.Slash, (2, 17), Hue.Black)},
             {OldItemType.ChainMail, New ItemTypeUIDescriptor(Pattern.Dither, (12, 15), Hue.Black)},
@@ -49,7 +49,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.Potion, New ItemTypeUIDescriptor(Pattern.Ampersand, (14, 16), Hue.Red)},
             {OldItemType.Pr0n, New ItemTypeUIDescriptor(Pattern.CrossDiagonals, (15, 17), Hue.Black)},
             {OldItemType.RatTail, New ItemTypeUIDescriptor(Pattern.S, (11, 16), Hue.Black)},
-            {OldItemType.RingOfHP, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (14, 17), Hue.Orange)},
+            {46, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (14, 17), Hue.Orange)},
             {OldItemType.RottenEgg, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 15), Hue.Green)},
             {OldItemType.RottenFood, New ItemTypeUIDescriptor(Pattern.F, (5, 15), Hue.Orange)},
             {OldItemType.Shield, New ItemTypeUIDescriptor(Pattern.FilledCircle, (16, 17), Hue.Black)},

@@ -46,9 +46,6 @@ Public Enum OldItemType
     ShoeLaces
     SpaceSord
     HornsOfKordanor
-    AmuletOfHP
-    RingOfHP
-    BookOfPurify
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
