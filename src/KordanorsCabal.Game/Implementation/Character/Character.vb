@@ -90,7 +90,7 @@
     End Function
     ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean Implements ICharacter.CanBeBribedWith
         Get
-            Return CharacterType.Combat.CanBeBribedWith(CType(itemType.Id, OldItemType))
+            Return CharacterType.Combat.CanBeBribedWith(itemType)
         End Get
     End Property
     ReadOnly Property IsUndead As Boolean Implements ICharacter.IsUndead
