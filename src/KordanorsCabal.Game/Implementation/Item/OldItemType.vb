@@ -43,7 +43,6 @@ Public Enum OldItemType
     Lotion
     BatWing
     SnakeFang
-    ShoeLaces
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
