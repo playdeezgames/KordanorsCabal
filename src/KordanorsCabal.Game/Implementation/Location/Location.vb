@@ -19,7 +19,7 @@
     Shared Function Create(worldData As IWorldData, locationType As ILocationType) As ILocation
         Return FromId(worldData, worldData.Location.Create(locationType.Id))
     End Function
-    Public Shared Function ByDungeonLevel(worldData As WorldData, dungeonLevel As IDungeonLevel) As IEnumerable(Of ILocation)
+    Public Shared Function ByDungeonLevel(worldData As IWorldData, dungeonLevel As IDungeonLevel) As IEnumerable(Of ILocation)
         Return worldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel.Id).Select(Function(x) Location.FromId(worldData, x))
     End Function
     Sub DestroyRoute(direction As IDirection) Implements ILocation.DestroyRoute

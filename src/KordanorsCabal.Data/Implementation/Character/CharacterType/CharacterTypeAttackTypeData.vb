@@ -37,7 +37,7 @@
                 FROM [cte];")
     End Sub
 
-    Public Sub New(store As IStore, world As WorldData)
+    Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
 

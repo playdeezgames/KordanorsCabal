@@ -6,7 +6,7 @@
     Friend Const ItemTypeNameColumn = "ItemTypeName"
     Friend Const IsConsumedColumn = "IsConsumed"
 
-    Public Sub New(store As IStore, world As WorldData)
+    Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
 

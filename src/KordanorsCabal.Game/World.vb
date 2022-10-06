@@ -1,5 +1,5 @@
 Public Module World
-    Public Sub Start(worldData As WorldData)
+    Public Sub Start(worldData As IWorldData)
         Dim start = DateTimeOffset.Now
         worldData.Reset()
         CreateTown(worldData)
@@ -10,7 +10,7 @@ Public Module World
         Dim elapse = DateTimeOffset.Now - start
     End Sub
 
-    Private Sub CreateMoon(worldData As WorldData)
+    Private Sub CreateMoon(worldData As IWorldData)
         Dim locations As New List(Of ILocation)
         For row As Long = 0 To MoonRows - 1
             For column As Long = 0 To MoonColumns - 1
@@ -42,7 +42,7 @@ Public Module World
         PopulateItems(worldData, locations, DungeonLevel.FromId(worldData, 6L))
     End Sub
 
-    Private Sub CreateDungeon(worldData As WorldData, location As ILocation)
+    Private Sub CreateDungeon(worldData As IWorldData, location As ILocation)
         location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 1L), 2L, RouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
         location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 2L), 3L, RouteType.SilverLock)
         location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 3L), 4L, RouteType.GoldLock)
@@ -63,13 +63,13 @@ Public Module World
             {4, New MazeDirection(Of Long)(2, -1, 0)}
         }
 
-    Public ReadOnly Property IsValid(worldData As WorldData) As Boolean
+    Public ReadOnly Property IsValid(worldData As IWorldData) As Boolean
         Get
             Return worldData.Player.Read.HasValue
         End Get
     End Property
 
-    Private Function CreateLocations(worldData As WorldData, maze As Maze(Of Long), dungeonLevel As IDungeonLevel) As IReadOnlyList(Of ILocation)
+    Private Function CreateLocations(worldData As IWorldData, maze As Maze(Of Long), dungeonLevel As IDungeonLevel) As IReadOnlyList(Of ILocation)
         Dim locations As New List(Of ILocation)
         For row As Long = 0 To maze.Rows - 1
             For column As Long = 0 To maze.Columns - 1
@@ -100,7 +100,7 @@ Public Module World
         Return locations
     End Function
 
-    Private Function CreateDungeonLevel(worldData As WorldData, fromLocation As ILocation, dungeonLevel As IDungeonLevel, bossKeyType As Long, bossRouteType As RouteType) As ILocation
+    Private Function CreateDungeonLevel(worldData As IWorldData, fromLocation As ILocation, dungeonLevel As IDungeonLevel, bossKeyType As Long, bossRouteType As RouteType) As ILocation
         Dim start = DateTimeOffset.Now
         Dim elapsed = DateTimeOffset.Now - start
         Dim maze = New Maze(Of Long)(MazeColumns, MazeRows, MazeDirections)
@@ -114,7 +114,7 @@ Public Module World
         Return locations.Single(Function(x) x.LocationType.Id = 6L)
     End Function
 
-    Private Sub PopulateCharacters(worldData As WorldData, locations As IEnumerable(Of ILocation), dungeonLevel As IDungeonLevel)
+    Private Sub PopulateCharacters(worldData As IWorldData, locations As IEnumerable(Of ILocation), dungeonLevel As IDungeonLevel)
         For Each characterType In AllCharacterTypes(worldData)
             Dim characterCount = characterType.Spawning.SpawnCount(dungeonLevel)
             If characterCount = 0 Then
@@ -130,7 +130,7 @@ Public Module World
         Next
     End Sub
 
-    Private Sub PopulateLocations(worldData As WorldData, locations As IReadOnlyList(Of ILocation), bossKeyType As Long, bossRouteType As RouteType, dungeonLevel As IDungeonLevel)
+    Private Sub PopulateLocations(worldData As IWorldData, locations As IReadOnlyList(Of ILocation), bossKeyType As Long, bossRouteType As RouteType, dungeonLevel As IDungeonLevel)
         Dim deadEndId = LocationType.FromId(worldData, 5L).Id
         Dim dungeonBossId = LocationType.FromId(worldData, 6L).Id
         Dim dungeonId = LocationType.FromId(worldData, 4L).Id
@@ -160,7 +160,7 @@ Public Module World
         PopulateItems(worldData, locations, dungeonLevel)
     End Sub
 
-    Private Sub SpawnItem(worldData As WorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel, itemType As IItemType)
+    Private Sub SpawnItem(worldData As IWorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel, itemType As IItemType)
         Dim locationTypes = itemType.SpawnLocationTypes(dungeonLevel)
         If locationTypes.Any Then
             Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Select(Function(y) y.Id).Contains(x.LocationType.Id)))
@@ -168,7 +168,7 @@ Public Module World
         End If
     End Sub
 
-    Private Sub PopulateItems(worldData As WorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel)
+    Private Sub PopulateItems(worldData As IWorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel)
         For Each itemType In AllItemTypes(worldData)
             Dim itemCount As Long = itemType.RollSpawnCount(dungeonLevel)
             While itemCount > 0
@@ -178,7 +178,7 @@ Public Module World
         Next
     End Sub
 
-    Private Function PlaceBossLocation(worldData As WorldData, deadEnds As IEnumerable(Of ILocation), routeType As RouteType) As ILocation
+    Private Function PlaceBossLocation(worldData As IWorldData, deadEnds As IEnumerable(Of ILocation), routeType As RouteType) As ILocation
         Dim bossLocation = RNG.FromEnumerable(deadEnds)
         bossLocation.LocationType = LocationType.FromId(worldData, 6L)
         Dim direction = bossLocation.RouteDirections.First
@@ -187,13 +187,13 @@ Public Module World
         Return bossLocation
     End Function
 
-    Private Sub CreateFeatures(worldData As WorldData)
+    Private Sub CreateFeatures(worldData As IWorldData)
         For Each featureType In AllFeatureTypes(worldData)
             CreateFeature(worldData, featureType)
         Next
     End Sub
 
-    Private Sub CreateFeature(worldData As WorldData, featureType As FeatureType)
+    Private Sub CreateFeature(worldData As IWorldData, featureType As FeatureType)
         Dim featureLocation = RNG.FromEnumerable(Location.FromLocationType(worldData, featureType.LocationType).Where(Function(x) Not x.HasFeature))
         Feature.Create(worldData, featureType, featureLocation)
         If featureType.Id = 2L Then
@@ -201,13 +201,13 @@ Public Module World
         End If
     End Sub
 
-    Private Sub CreateCellar(worldData As WorldData, fromLocation As ILocation)
+    Private Sub CreateCellar(worldData As IWorldData, fromLocation As ILocation)
         Dim cellar = Location.Create(worldData, LocationType.FromId(worldData, 7L))
         Route.Create(worldData, fromLocation, Direction.FromId(worldData, 6L), RouteType.Stairs, cellar)
         Route.Create(worldData, cellar, Direction.FromId(worldData, 5L), RouteType.Stairs, fromLocation)
     End Sub
 
-    Private Sub CreatePlayer(worldData As WorldData)
+    Private Sub CreatePlayer(worldData As IWorldData)
         Dim startingLocation = Location.FromLocationType(worldData, LocationType.FromId(worldData, 1L)).First
         Dim playerCharacter = Character.Create(worldData, CharacterType.FromId(worldData, 11), startingLocation, CharacterType.FromId(worldData, 11).Spawning.InitialStatistics())
         playerCharacter.Location = startingLocation 'to track that this place has been visited
@@ -215,7 +215,7 @@ Public Module World
         RollUpPlayerCharacter(worldData)
     End Sub
 
-    Private Sub CreateTown(worldData As WorldData)
+    Private Sub CreateTown(worldData As IWorldData)
         Dim townLocationType = LocationType.FromId(worldData, 2L)
         Dim centerTown = Location.Create(worldData, LocationType.FromId(worldData, 1L))
         Dim northTown = Location.Create(worldData, townLocationType)
@@ -247,25 +247,25 @@ Public Module World
         CreateChurchEntrance(worldData)
     End Sub
 
-    Private Sub CreateChurchEntrance(worldData As WorldData)
+    Private Sub CreateChurchEntrance(worldData As IWorldData)
         Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(worldData, LocationType.FromId(worldData, 2L)))
         Dim entrance = Location.Create(worldData, LocationType.FromId(worldData, 3L))
         Dim direction = RNG.FromEnumerable(AllDirections(worldData).Where(Function(x) x.IsCardinal AndAlso Not townLocation.HasRoute(x)))
         StitchTown(worldData, townLocation, direction, entrance)
     End Sub
 
-    Private Sub StitchTown(worldData As WorldData, fromLocation As ILocation, direction As IDirection, toLocation As ILocation)
+    Private Sub StitchTown(worldData As IWorldData, fromLocation As ILocation, direction As IDirection, toLocation As ILocation)
         Route.Create(worldData, fromLocation, direction, RouteType.Road, toLocation)
         Route.Create(worldData, toLocation, direction.Opposite, RouteType.Road, fromLocation)
     End Sub
 
-    Private Sub RollUpPlayerCharacter(worldData As WorldData)
+    Private Sub RollUpPlayerCharacter(worldData As IWorldData)
         FirstRoll(worldData)
         SecondRoll(worldData)
         Play(Sfx.CharacterCreation)
     End Sub
 
-    Private Sub SecondRoll(worldData As WorldData)
+    Private Sub SecondRoll(worldData As IWorldData)
         Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, 9L))
         PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, 9L), 0)
         While dice > 0
@@ -296,7 +296,7 @@ Public Module World
             {4, 1}
         }
 
-    Private Sub FirstRoll(worldData As WorldData)
+    Private Sub FirstRoll(worldData As IWorldData)
         Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, 9L))
         PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, 9L), 0)
         While dice > 0
@@ -306,20 +306,20 @@ Public Module World
         End While
     End Sub
 
-    Public ReadOnly Property PlayerCharacter(worldData As WorldData) As ICharacter
+    Public ReadOnly Property PlayerCharacter(worldData As IWorldData) As ICharacter
         Get
             Return New PlayerCharacter(worldData)
         End Get
     End Property
-    Function AllCharacterTypes(worldData As WorldData) As IEnumerable(Of ICharacterType)
+    Function AllCharacterTypes(worldData As IWorldData) As IEnumerable(Of ICharacterType)
         Return worldData.CharacterType.ReadAll().Select(Function(x) CharacterType.FromId(worldData, x))
     End Function
-    Public ReadOnly Property AllFeatureTypes(worldData As WorldData) As IEnumerable(Of FeatureType)
+    Public ReadOnly Property AllFeatureTypes(worldData As IWorldData) As IEnumerable(Of FeatureType)
         Get
             Return worldData.FeatureType.ReadAll().Select(Function(x) New FeatureType(worldData, x))
         End Get
     End Property
-    Friend ReadOnly Property AllDungeonLevels(worldData As WorldData) As IReadOnlyList(Of DungeonLevel)
+    Friend ReadOnly Property AllDungeonLevels(worldData As IWorldData) As IReadOnlyList(Of DungeonLevel)
         Get
             Return worldData.DungeonLevel.ReadAll().Select(Function(x) New DungeonLevel(worldData, x)).ToList
         End Get
