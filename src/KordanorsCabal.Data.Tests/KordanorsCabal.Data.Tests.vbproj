@@ -48,8 +48,4 @@
     <ProjectReference Include="..\KordanorsCabal.Data\KordanorsCabal.Data.vbproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Enum\" />
-  </ItemGroup>
-
 </Project>
