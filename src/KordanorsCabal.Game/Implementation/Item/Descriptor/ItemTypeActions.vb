@@ -106,7 +106,7 @@
                         New Dictionary(Of Long, Integer) From
                         {
                             {26L, 500},
-                            {OldItemType.BrodeSode, 8},
+                            {19L, 8},
                             {OldItemType.ChainMail, 4},
                             {OldItemType.Dagger, 250},
                             {24L, 1000},

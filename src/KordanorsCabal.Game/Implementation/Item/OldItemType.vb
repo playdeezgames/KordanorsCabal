@@ -20,7 +20,6 @@ Public Enum OldItemType
     Helmet
     ChainMail
     Shortsword
-    BrodeSode
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
