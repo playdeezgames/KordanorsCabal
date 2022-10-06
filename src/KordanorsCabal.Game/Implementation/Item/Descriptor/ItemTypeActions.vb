@@ -94,7 +94,7 @@
                                 If lotionItem.Durability = 0 Then
                                     lines.Add($"You ran out that bottle of {ItemType.FromId(StaticWorldData.World, 39).Name}.")
                                     lotionItem.Destroy()
-                                    character.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.Bottle))
+                                    character.Inventory.Add(Item.Create(StaticWorldData.World, 30))
                                 End If
                             End If
 
@@ -134,7 +134,7 @@
                     End If
                     character.CurrentMP = character.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 7)).Value
                     character.Drunkenness += 10
-                    character.Inventory.Add(Game.Item.Create(StaticWorldData.World, OldItemType.Bottle))
+                    character.Inventory.Add(Game.Item.Create(StaticWorldData.World, 30))
                     character.EnqueueMessage("You drink the beer, and suddenly feel braver!")
                 End Sub},
             {"UseMoonPortal",
@@ -171,7 +171,7 @@
                 Sub(character)
                     Dim healRoll = RNG.RollDice("2d4")
                     character.ChangeStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 12L), -healRoll)
-                    character.Inventory.Add(Item.Create(StaticWorldData.World, OldItemType.Bottle))
+                    character.Inventory.Add(Item.Create(StaticWorldData.World, 30))
                     character.EnqueueMessage(
                 $"Potion heals up to {healRoll} HP!",
                 $"You now have {character.CurrentHP} HP!")
@@ -205,7 +205,7 @@
             {"UseBottle",
                 Sub(character)
                     Dim enemy = character.Location.Enemy(character)
-                    character.EnqueueMessage($"You give the {OldItemType.Bottle.ToNew(StaticWorldData.World).Name} to the {enemy.Name}, and it wanders off happily.")
+                    character.EnqueueMessage($"You give the {ItemType.FromId(StaticWorldData.World, 30).Name} to the {enemy.Name}, and it wanders off happily.")
                     enemy.Destroy()
                 End Sub},
             {"UseRottenFood",
@@ -258,7 +258,7 @@
             {"CanUseWaterShard", Function(character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},
             {"CanUseBottle", Function(character)
                                  Dim enemy = character.Location.Enemy(character)
-                                 Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Bottle.ToNew(StaticWorldData.World))
+                                 Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(StaticWorldData.World, 30))
                              End Function},
             {"CanLearnPurify", Function(character) character.CanLearn(SpellType.FromId(StaticWorldData.World, 2L))}
         }

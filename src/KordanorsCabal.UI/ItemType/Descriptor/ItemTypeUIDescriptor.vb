@@ -24,7 +24,7 @@ Module ItemTypeUIDescriptorUtility
             {33L, New ItemTypeUIDescriptor(Pattern.Pound, (17, 17), Hue.Cyan)},
             {31L, New ItemTypeUIDescriptor(Pattern.Vertical1234, (15, 16), Hue.Orange)},
             {47L, New ItemTypeUIDescriptor(Pattern.Vertical1234, (15, 16), Hue.Blue)},
-            {OldItemType.Bottle, New ItemTypeUIDescriptor(Pattern.Ampersand, (9, 15), Hue.Black)},
+            {30L, New ItemTypeUIDescriptor(Pattern.Ampersand, (9, 15), Hue.Black)},
             {OldItemType.BrodeSode, New ItemTypeUIDescriptor(Pattern.Slash, (2, 17), Hue.Black)},
             {OldItemType.ChainMail, New ItemTypeUIDescriptor(Pattern.Dither, (12, 15), Hue.Black)},
             {OldItemType.CopperKey, New ItemTypeUIDescriptor(Pattern.K, (12, 16), Hue.Green)},
