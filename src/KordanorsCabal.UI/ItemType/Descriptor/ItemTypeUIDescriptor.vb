@@ -34,7 +34,7 @@ Module ItemTypeUIDescriptorUtility
             {13L, New ItemTypeUIDescriptor(Pattern.F, (17, 16), Hue.Red)},
             {24L, New ItemTypeUIDescriptor(Pattern.F, (5, 15), Hue.Orange)},
             {8L, New ItemTypeUIDescriptor(Pattern.At, (18, 16), Hue.Green)},
-            {OldItemType.GoldKey, New ItemTypeUIDescriptor(Pattern.K, (14, 15), Hue.Yellow)},
+            {4L, New ItemTypeUIDescriptor(Pattern.K, (14, 15), Hue.Yellow)},
             {16L, New ItemTypeUIDescriptor(Pattern.Spade, (6, 16), Hue.Black)},
             {34L, New ItemTypeUIDescriptor(Pattern.Asterisk, (7, 16), Hue.Green)},
             {22L, New ItemTypeUIDescriptor(Pattern.H, (16, 15), Hue.Cyan)},
