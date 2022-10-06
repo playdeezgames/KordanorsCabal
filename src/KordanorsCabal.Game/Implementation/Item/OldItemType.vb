@@ -32,7 +32,6 @@ Public Enum OldItemType
     Pr0n
     MoonPortal
     Bottle
-    BookOfHolyBolt
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
