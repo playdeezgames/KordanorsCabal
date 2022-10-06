@@ -113,7 +113,7 @@
                             {OldItemType.Helmet, 125},
                             {22L, 64},
                             {29L, 1},
-                            {OldItemType.PlateMail, 2},
+                            {20L, 2},
                             {OldItemType.Potion, 125},
                             {OldItemType.Shield, 64},
                             {OldItemType.Shortsword, 16},

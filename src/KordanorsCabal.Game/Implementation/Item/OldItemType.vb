@@ -21,7 +21,6 @@ Public Enum OldItemType
     ChainMail
     Shortsword
     BrodeSode
-    PlateMail
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
