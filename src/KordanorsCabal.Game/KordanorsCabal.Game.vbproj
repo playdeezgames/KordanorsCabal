@@ -19,9 +19,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Implementation\Item\Descriptor\Book\**" />
-    <EmbeddedResource Remove="Implementation\Item\Descriptor\Book\**" />
-    <None Remove="Implementation\Item\Descriptor\Book\**" />
+    <Compile Remove="Implementation\Item\ItemType\Book\**" />
+    <EmbeddedResource Remove="Implementation\Item\ItemType\Book\**" />
+    <None Remove="Implementation\Item\ItemType\Book\**" />
   </ItemGroup>
 
   <ItemGroup>
