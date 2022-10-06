@@ -105,7 +105,7 @@
                     Dim table As IReadOnlyDictionary(Of Long, Integer) =
                         New Dictionary(Of Long, Integer) From
                         {
-                            {OldItemType.Beer, 500},
+                            {26L, 500},
                             {OldItemType.BrodeSode, 8},
                             {OldItemType.ChainMail, 4},
                             {OldItemType.Dagger, 250},
@@ -127,9 +127,9 @@
             {"UseBeer",
                 Sub(character)
                     Dim enemy = character.Location.Enemy(character)
-                    If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Beer.ToNew(StaticWorldData.World)) Then
+                    If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(StaticWorldData.World, 26)) Then
                         enemy.Destroy()
-                        character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.Beer.ToNew(StaticWorldData.World).Name}, and they wander off to get drunk.")
+                        character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(StaticWorldData.World, 26).Name}, and they wander off to get drunk.")
                         Return
                     End If
                     character.CurrentMP = character.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 7)).Value
@@ -232,7 +232,7 @@
             {"CanLearnHolyBolt", Function(character) character.CanLearn(SpellType.FromId(StaticWorldData.World, 1L))},
             {"CanUseBeer", Function(character)
                                Dim enemy = character.Location.Enemy(character)
-                               Return enemy Is Nothing OrElse enemy.CanBeBribedWith(OldItemType.Beer.ToNew(StaticWorldData.World))
+                               Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.FromId(StaticWorldData.World, 26))
                            End Function},
             {"IsInDungeon", Function(character) character.Location.IsDungeon},
             {"AlwaysTrue", Function(character) True},

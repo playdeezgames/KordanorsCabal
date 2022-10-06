@@ -27,7 +27,6 @@ Public Enum OldItemType
     TownPortal
     Food
     MagicEgg
-    Beer
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
