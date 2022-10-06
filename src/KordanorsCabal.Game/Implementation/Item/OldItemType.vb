@@ -9,7 +9,6 @@ Public Enum OldItemType
     PlatinumKey
     ElementalOrb
     Potion
-    GoblinEar
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
