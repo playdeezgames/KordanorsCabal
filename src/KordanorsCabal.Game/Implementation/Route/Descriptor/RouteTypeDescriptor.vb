@@ -21,7 +21,7 @@ Friend Module RouteTypeDescriptorUtility
             {RouteType.CopperLock, New RouteTypeDescriptor("CU", 2L, RouteType.Passageway, False)},
             {RouteType.FinalLock, New RouteTypeDescriptor("EO", 6L, RouteType.Passageway, False)},
             {RouteType.GoldLock, New RouteTypeDescriptor("AU", 4L, RouteType.Passageway, False)},
-            {RouteType.IronLock, New RouteTypeDescriptor("FE", OldItemType.IronKey, RouteType.Passageway, False)},
+            {RouteType.IronLock, New RouteTypeDescriptor("FE", 1L, RouteType.Passageway, False)},
             {RouteType.MoonPath, New RouteTypeDescriptor},
             {RouteType.Passageway, New RouteTypeDescriptor},
             {RouteType.PlatinumLock, New RouteTypeDescriptor("PT", 5L, RouteType.Passageway, False)},

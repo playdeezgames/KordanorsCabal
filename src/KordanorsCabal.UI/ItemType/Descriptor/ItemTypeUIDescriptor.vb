@@ -39,7 +39,7 @@ Module ItemTypeUIDescriptorUtility
             {34L, New ItemTypeUIDescriptor(Pattern.Asterisk, (7, 16), Hue.Green)},
             {22L, New ItemTypeUIDescriptor(Pattern.H, (16, 15), Hue.Cyan)},
             {44L, New ItemTypeUIDescriptor(Pattern.LessThan, (10, 17), Hue.Red)},
-            {OldItemType.IronKey, New ItemTypeUIDescriptor(Pattern.K, (5, 16), Hue.Black)},
+            {1L, New ItemTypeUIDescriptor(Pattern.K, (5, 16), Hue.Black)},
             {39L, New ItemTypeUIDescriptor(Pattern.L, (17, 15), Hue.Cyan)},
             {25L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 15), Hue.Black)},
             {32L, New ItemTypeUIDescriptor(Pattern.Club, (13, 13), Hue.Orange)},

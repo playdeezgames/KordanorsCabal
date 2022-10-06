@@ -2,7 +2,6 @@
 
 Public Enum OldItemType
     None
-    IronKey
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
