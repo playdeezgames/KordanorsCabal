@@ -121,7 +121,7 @@
                             {27L, 1}
                         }
                     Dim item = Game.Item.Create(StaticWorldData.World, RNG.FromGenerator(table))
-                    character.EnqueueMessage($"You crack open the {OldItemType.MagicEgg.ToNew(StaticWorldData.World).Name} and find {item.Name} inside!")
+                    character.EnqueueMessage($"You crack open the {ItemType.FromId(StaticWorldData.World, 25).Name} and find {item.Name} inside!")
                     character.Inventory.Add(item)
                 End Sub},
             {"UseBeer",

@@ -26,7 +26,6 @@ Public Enum OldItemType
     HolyWater
     TownPortal
     Food
-    MagicEgg
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

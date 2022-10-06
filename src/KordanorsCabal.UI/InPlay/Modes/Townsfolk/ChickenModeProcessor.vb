@@ -47,8 +47,8 @@ Friend Class ChickenModeProcessor
         If RNG.FromRange(0, 5) = 0 Then
             Select Case itemType.Id
                 Case OldItemType.Food
-                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {OldItemType.MagicEgg.ToNew(StaticWorldData.World).Name} pops out!")
-                    player.Inventory.Add(Game.Item.Create(StaticWorldData.World, OldItemType.MagicEgg))
+                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {Game.ItemType.FromId(StaticWorldData.World, 25).Name} pops out!")
+                    player.Inventory.Add(Game.Item.Create(StaticWorldData.World, 25L))
                 Case 35L
                     player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {Game.ItemType.FromId(StaticWorldData.World, 37).Name} pops out!")
                     player.Inventory.Add(Game.Item.Create(StaticWorldData.World, 37))
