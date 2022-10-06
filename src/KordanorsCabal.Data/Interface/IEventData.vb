@@ -1,4 +1,4 @@
 ﻿Public Interface IEventData
-    Function Check(worldData As IWorldData, checkType As String, id As Long) As Boolean
-    Sub Act(worldData As IWorldData, actionType As String, id As Long)
+    Function Test(worldData As IWorldData, eventName As String, ParamArray parms As Long()) As Boolean
+    Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms As Long())
 End Interface

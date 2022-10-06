@@ -123,7 +123,7 @@
                 subject.CanCastSpell(spellType).ShouldBeFalse
 
                 worldData.Verify(Function(x) x.SpellType.ReadCastCheck(spellTypeId))
-                worldData.Verify(Function(x) x.Events.Check(It.IsAny(Of IWorldData), Nothing, id))
+                worldData.Verify(Function(x) x.Events.Test(It.IsAny(Of IWorldData), Nothing, id))
             End Sub)
     End Sub
     <Fact>
