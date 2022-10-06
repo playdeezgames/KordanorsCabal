@@ -26,7 +26,7 @@
                     Dim damageRoll = RNG.RollDice("1d4")
                     Dim enemy = character.Location.Enemy(character)
                     Dim lines As New List(Of String) From {
-                        $"{OldItemType.HolyWater.ToNew(StaticWorldData.World).Name} deals {damageRoll} HP to {enemy.Name}!"
+                        $"{ItemType.FromId(StaticWorldData.World, 22L).Name} deals {damageRoll} HP to {enemy.Name}!"
                     }
                     enemy.DoDamage(damageRoll)
                     If enemy.IsDead Then
@@ -111,7 +111,7 @@
                             {OldItemType.Dagger, 250},
                             {24L, 1000},
                             {OldItemType.Helmet, 125},
-                            {OldItemType.HolyWater, 64},
+                            {22L, 64},
                             {29L, 1},
                             {OldItemType.PlateMail, 2},
                             {OldItemType.Potion, 125},

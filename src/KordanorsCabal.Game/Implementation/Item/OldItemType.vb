@@ -23,7 +23,6 @@ Public Enum OldItemType
     BrodeSode
     PlateMail
     RatTail
-    HolyWater
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
