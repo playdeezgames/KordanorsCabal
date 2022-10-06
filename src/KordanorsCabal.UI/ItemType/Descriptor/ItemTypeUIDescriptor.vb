@@ -47,7 +47,7 @@ Module ItemTypeUIDescriptorUtility
             {36L, New ItemTypeUIDescriptor(Pattern.Spade, (3, 17), Hue.Orange)},
             {20L, New ItemTypeUIDescriptor(Pattern.Dither, (4, 16), Hue.Cyan)},
             {OldItemType.PlatinumKey, New ItemTypeUIDescriptor(Pattern.K, (7, 15), Hue.Cyan)},
-            {OldItemType.Potion, New ItemTypeUIDescriptor(Pattern.Ampersand, (14, 16), Hue.Red)},
+            {7L, New ItemTypeUIDescriptor(Pattern.Ampersand, (14, 16), Hue.Red)},
             {28L, New ItemTypeUIDescriptor(Pattern.CrossDiagonals, (15, 17), Hue.Black)},
             {21L, New ItemTypeUIDescriptor(Pattern.S, (11, 16), Hue.Black)},
             {46L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (14, 17), Hue.Orange)},

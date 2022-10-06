@@ -8,7 +8,6 @@ Public Enum OldItemType
     GoldKey
     PlatinumKey
     ElementalOrb
-    Potion
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
