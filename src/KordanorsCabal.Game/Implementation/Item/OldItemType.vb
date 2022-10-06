@@ -28,7 +28,6 @@ Public Enum OldItemType
     Food
     MagicEgg
     Beer
-    Trousers
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

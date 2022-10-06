@@ -118,7 +118,7 @@
                             {OldItemType.Shield, 64},
                             {OldItemType.Shortsword, 16},
                             {OldItemType.TownPortal, 8},
-                            {OldItemType.Trousers, 1}
+                            {27L, 1}
                         }
                     Dim item = Game.Item.Create(StaticWorldData.World, RNG.FromGenerator(table))
                     character.EnqueueMessage($"You crack open the {OldItemType.MagicEgg.ToNew(StaticWorldData.World).Name} and find {item.Name} inside!")
