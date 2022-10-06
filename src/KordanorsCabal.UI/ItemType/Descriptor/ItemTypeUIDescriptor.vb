@@ -28,7 +28,7 @@ Module ItemTypeUIDescriptorUtility
             {19L, New ItemTypeUIDescriptor(Pattern.Slash, (2, 17), Hue.Black)},
             {17L, New ItemTypeUIDescriptor(Pattern.Dither, (12, 15), Hue.Black)},
             {OldItemType.CopperKey, New ItemTypeUIDescriptor(Pattern.K, (12, 16), Hue.Green)},
-            {OldItemType.Dagger, New ItemTypeUIDescriptor(Pattern.Apostrophe, (8, 16), Hue.Black)},
+            {10L, New ItemTypeUIDescriptor(Pattern.Apostrophe, (8, 16), Hue.Black)},
             {11L, New ItemTypeUIDescriptor(Pattern.E, (4, 17), Hue.Green)},
             {OldItemType.ElementalOrb, New ElementalOrbUIDescriptor},
             {13L, New ItemTypeUIDescriptor(Pattern.F, (17, 16), Hue.Red)},

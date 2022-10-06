@@ -11,7 +11,6 @@ Public Enum OldItemType
     Potion
     GoblinEar
     SkullFragment
-    Dagger
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
