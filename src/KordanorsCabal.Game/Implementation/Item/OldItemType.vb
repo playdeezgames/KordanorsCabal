@@ -6,7 +6,6 @@ Public Enum OldItemType
     CopperKey
     SilverKey
     GoldKey
-    PlatinumKey
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
