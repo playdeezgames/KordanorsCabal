@@ -49,7 +49,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.PlatinumKey, New ItemTypeUIDescriptor(Pattern.K, (7, 15), Hue.Cyan)},
             {OldItemType.Potion, New ItemTypeUIDescriptor(Pattern.Ampersand, (14, 16), Hue.Red)},
             {28L, New ItemTypeUIDescriptor(Pattern.CrossDiagonals, (15, 17), Hue.Black)},
-            {OldItemType.RatTail, New ItemTypeUIDescriptor(Pattern.S, (11, 16), Hue.Black)},
+            {21L, New ItemTypeUIDescriptor(Pattern.S, (11, 16), Hue.Black)},
             {46L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (14, 17), Hue.Orange)},
             {37L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 15), Hue.Green)},
             {35L, New ItemTypeUIDescriptor(Pattern.F, (5, 15), Hue.Orange)},
