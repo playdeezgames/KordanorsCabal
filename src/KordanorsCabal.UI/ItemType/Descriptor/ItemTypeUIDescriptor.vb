@@ -55,7 +55,7 @@ Module ItemTypeUIDescriptorUtility
             {35L, New ItemTypeUIDescriptor(Pattern.F, (5, 15), Hue.Orange)},
             {OldItemType.Shield, New ItemTypeUIDescriptor(Pattern.FilledCircle, (16, 17), Hue.Black)},
             {42L, New ItemTypeUIDescriptor(Pattern.S, (11, 15), Hue.Orange)},
-            {OldItemType.Shortsword, New ItemTypeUIDescriptor(Pattern.Minus, (15, 15), Hue.Black)},
+            {18L, New ItemTypeUIDescriptor(Pattern.Minus, (15, 15), Hue.Black)},
             {OldItemType.SilverKey, New ItemTypeUIDescriptor(Pattern.K, (9, 16), Hue.Purple)},
             {OldItemType.SkullFragment, New ItemTypeUIDescriptor(Pattern.Octothorpe, (4, 15), Hue.Blue)},
             {41L, New ItemTypeUIDescriptor(Pattern.Comma, (5, 17), Hue.Green)},

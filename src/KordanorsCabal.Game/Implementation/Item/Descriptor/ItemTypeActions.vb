@@ -116,7 +116,7 @@
                             {20L, 2},
                             {OldItemType.Potion, 125},
                             {OldItemType.Shield, 64},
-                            {OldItemType.Shortsword, 16},
+                            {18L, 16},
                             {23L, 8},
                             {27L, 1}
                         }

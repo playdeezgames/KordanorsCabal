@@ -19,7 +19,6 @@ Public Enum OldItemType
     Shield
     Helmet
     ChainMail
-    Shortsword
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
