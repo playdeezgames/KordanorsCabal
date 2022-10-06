@@ -117,7 +117,7 @@
                             {OldItemType.Potion, 125},
                             {OldItemType.Shield, 64},
                             {OldItemType.Shortsword, 16},
-                            {OldItemType.TownPortal, 8},
+                            {23L, 8},
                             {27L, 1}
                         }
                     Dim item = Game.Item.Create(StaticWorldData.World, RNG.FromGenerator(table))

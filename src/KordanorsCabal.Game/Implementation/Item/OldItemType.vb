@@ -24,7 +24,6 @@ Public Enum OldItemType
     PlateMail
     RatTail
     HolyWater
-    TownPortal
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
