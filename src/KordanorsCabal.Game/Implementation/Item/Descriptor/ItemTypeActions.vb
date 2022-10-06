@@ -155,7 +155,7 @@
                     Dim enemy = character.Location.Enemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
-                    lines.Add($"You use {OldItemType.FireShard.ToNew(StaticWorldData.World).Name} on {enemy.Name}!")
+                    lines.Add($"You use {ItemType.FromId(StaticWorldData.World, 13).Name} on {enemy.Name}!")
                     Dim damage As Long = RNG.RollDice("3d4")
                     lines.Add($"You do {damage} damage!")
                     enemy.DoDamage(damage)

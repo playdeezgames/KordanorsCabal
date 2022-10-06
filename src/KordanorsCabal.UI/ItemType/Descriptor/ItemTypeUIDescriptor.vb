@@ -31,7 +31,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.Dagger, New ItemTypeUIDescriptor(Pattern.Apostrophe, (8, 16), Hue.Black)},
             {OldItemType.EarthShard, New ItemTypeUIDescriptor(Pattern.E, (4, 17), Hue.Green)},
             {OldItemType.ElementalOrb, New ElementalOrbUIDescriptor},
-            {OldItemType.FireShard, New ItemTypeUIDescriptor(Pattern.F, (17, 16), Hue.Red)},
+            {13L, New ItemTypeUIDescriptor(Pattern.F, (17, 16), Hue.Red)},
             {24L, New ItemTypeUIDescriptor(Pattern.F, (5, 15), Hue.Orange)},
             {OldItemType.GoblinEar, New ItemTypeUIDescriptor(Pattern.At, (18, 16), Hue.Green)},
             {OldItemType.GoldKey, New ItemTypeUIDescriptor(Pattern.K, (14, 15), Hue.Yellow)},

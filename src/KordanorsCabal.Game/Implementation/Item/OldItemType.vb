@@ -14,7 +14,6 @@ Public Enum OldItemType
     Dagger
     EarthShard
     WaterShard
-    FireShard
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
