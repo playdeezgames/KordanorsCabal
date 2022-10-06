@@ -18,7 +18,6 @@ Public Enum OldItemType
     AirShard
     Shield
     Helmet
-    ChainMail
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

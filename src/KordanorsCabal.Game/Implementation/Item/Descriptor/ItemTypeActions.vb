@@ -107,7 +107,7 @@
                         {
                             {26L, 500},
                             {19L, 8},
-                            {OldItemType.ChainMail, 4},
+                            {17L, 4},
                             {OldItemType.Dagger, 250},
                             {24L, 1000},
                             {OldItemType.Helmet, 125},
