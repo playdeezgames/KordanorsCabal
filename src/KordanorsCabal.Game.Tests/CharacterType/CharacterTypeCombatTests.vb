@@ -10,7 +10,7 @@
         WithAnySubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
-                Dim itemTypeId = OldItemType.AirShard
+                Dim itemTypeId = 14L
                 Dim actual = subject.CanBeBribedWith(ItemType.FromId(worldData.Object, itemTypeId))
                 actual.ShouldBeFalse
                 worldData.Verify(Function(x) x.CharacterTypeBribe.Read(characterTypeId, itemTypeId), Times.Once)

@@ -12,7 +12,7 @@ Module ItemTypeUIDescriptorUtility
     Friend ReadOnly ItemTypeUIDescriptors As IReadOnlyDictionary(Of Long, ItemTypeUIDescriptor) =
         New Dictionary(Of Long, ItemTypeUIDescriptor) From
         {
-            {OldItemType.AirShard, New ItemTypeUIDescriptor(Pattern.A, (10, 15), Hue.Cyan)},
+            {14L, New ItemTypeUIDescriptor(Pattern.A, (10, 15), Hue.Cyan)},
             {45L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Red)},
             {48L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Blue)},
             {49L, New ItemTypeUIDescriptor(Pattern.EmptyCircle, (8, 17), Hue.Green)},

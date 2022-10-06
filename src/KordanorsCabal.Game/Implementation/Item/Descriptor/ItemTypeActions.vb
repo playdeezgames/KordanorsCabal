@@ -55,7 +55,7 @@
                     Dim level = character.Location.DungeonLevel
                     Dim locations = Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 4L)).Where(Function(x) x.DungeonLevel.Id = level.Id)
                     character.Location = RNG.FromEnumerable(locations)
-                    character.EnqueueMessage($"You use the {OldItemType.AirShard.ToNew(StaticWorldData.World).Name} and suddenly find yerself somewhere else!")
+                    character.EnqueueMessage($"You use the {ItemType.FromId(StaticWorldData.World, 14L).Name} and suddenly find yerself somewhere else!")
                 End Sub},
             {"UseRottenEgg",
                 Sub(character)

@@ -97,8 +97,7 @@
         WithAnySubject(
             Sub(id, worldData, subject)
                 Const characterTypeId = 2L
-                Const itemType = OldItemType.AirShard
-                Const itemTypeId = CType(itemType, Long)
+                Const itemTypeId = 14L
 
                 Dim characterData = New Mock(Of ICharacterData)
                 characterData.Setup(Function(x) x.ReadCharacterType(It.IsAny(Of Long))).Returns(characterTypeId)
