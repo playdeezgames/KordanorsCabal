@@ -10,7 +10,6 @@ Public Enum OldItemType
     ElementalOrb
     Potion
     GoblinEar
-    SkullFragment
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
