@@ -42,15 +42,15 @@ Public Class WorldData
     Public ReadOnly Property Route As IRouteData Implements IWorldData.Route
     Public ReadOnly Property SpellType As ISpellTypeData Implements IWorldData.SpellType
     Public ReadOnly Property SpellTypeRequiredPower As ISpellTypeRequiredPowerData Implements IWorldData.SpellTypeRequiredPower
-    Public ReadOnly Property Checker As IChecker Implements IWorldData.Checker
+    Public ReadOnly Property Events As IEventData Implements IWorldData.Events
     Public ReadOnly Property ItemTypeCharacterStatisticBuff As IItemTypeCharacterStatisticBuffData Implements IWorldData.ItemTypeCharacterStatisticBuff
     Public ReadOnly Property ItemTypeEquipSlot As IItemTypeEquipSlotData Implements IWorldData.ItemTypeEquipSlot
     Public ReadOnly Property ItemTypeShopType As IItemTypeShopTypeData Implements IWorldData.ItemTypeShopType
     Public ReadOnly Property ItemTypeEvent As IItemTypeEventData Implements IWorldData.ItemTypeEvent
 
-    Public Sub New(store As IStore, checker As IChecker)
+    Public Sub New(store As IStore, events As IEventData)
         Me.Store = store
-        Me.Checker = checker
+        Me.Events = events
         Character = New CharacterData(store, Me)
         CharacterEquipSlot = New CharacterEquipSlotData(store, Me)
         CharacterLocation = New CharacterLocationData(store, Me)

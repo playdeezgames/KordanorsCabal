@@ -117,13 +117,13 @@
             Sub(id, worldData, subject)
                 Const spellTypeId = 1L
                 worldData.SetupGet(Function(x) x.SpellType).Returns((New Mock(Of ISpellTypeData)).Object)
-                worldData.SetupGet(Function(x) x.Checker).Returns((New Mock(Of IChecker)).Object)
+                worldData.SetupGet(Function(x) x.Events).Returns((New Mock(Of IEventData)).Object)
                 Dim spellType = Game.SpellType.FromId(worldData.Object, spellTypeId)
 
                 subject.CanCastSpell(spellType).ShouldBeFalse
 
                 worldData.Verify(Function(x) x.SpellType.ReadCastCheck(spellTypeId))
-                worldData.Verify(Function(x) x.Checker.Check(It.IsAny(Of IWorldData), Nothing, id))
+                worldData.Verify(Function(x) x.Events.Check(It.IsAny(Of IWorldData), Nothing, id))
             End Sub)
     End Sub
     <Fact>

@@ -1,5 +1,5 @@
 ﻿Friend Class Checker
-    Implements IChecker
+    Implements IEventData
     Private ReadOnly checkerTable As IReadOnlyDictionary(Of String, Func(Of IWorldData, Long, Boolean)) =
         New Dictionary(Of String, Func(Of IWorldData, Long, Boolean)) From
         {
@@ -54,11 +54,11 @@
                 End Sub}
         }
 
-    Public Sub Act(worldData As IWorldData, actionType As String, id As Long) Implements IChecker.Act
-        Throw New NotImplementedException()
+    Public Sub Act(worldData As IWorldData, actionType As String, id As Long) Implements IEventData.Act
+        actionTable(actionType)(worldData, id)
     End Sub
 
-    Public Function Check(worldData As IWorldData, checkType As String, id As Long) As Boolean Implements IChecker.Check
+    Public Function Check(worldData As IWorldData, checkType As String, id As Long) As Boolean Implements IEventData.Check
         Return checkerTable(checkType)(worldData, id)
     End Function
 End Class

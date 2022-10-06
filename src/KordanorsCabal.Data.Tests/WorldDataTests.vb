@@ -3,7 +3,7 @@ Namespace KordanorsCabal.Data.Tests
         <Fact>
         Sub ShouldConstructAllOfTheDataSubobjects()
             Dim store As New Mock(Of IStore)
-            Dim checker As New Mock(Of IChecker)
+            Dim checker As New Mock(Of IEventData)
             Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             subject.Character.ShouldNotBeNull
             subject.CharacterEquipSlot.ShouldNotBeNull
@@ -48,14 +48,14 @@ Namespace KordanorsCabal.Data.Tests
             subject.Route.ShouldNotBeNull
             subject.SpellType.ShouldNotBeNull
             subject.SpellTypeRequiredPower.ShouldNotBeNull
-            subject.Checker.ShouldNotBeNull
+            subject.Events.ShouldNotBeNull
             store.VerifyNoOtherCalls()
             checker.VerifyNoOtherCalls()
         End Sub
         <Fact>
         Sub ShouldSaveToTheStore()
             Dim store As New Mock(Of IStore)
-            Dim checker As New Mock(Of IChecker)
+            Dim checker As New Mock(Of IEventData)
             Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             Const filename = "filename"
             subject.Save(filename)
@@ -66,7 +66,7 @@ Namespace KordanorsCabal.Data.Tests
         <Fact>
         Sub ShouldLoadFromTheStore()
             Dim store As New Mock(Of IStore)
-            Dim checker As New Mock(Of IChecker)
+            Dim checker As New Mock(Of IEventData)
             Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             Const filename = "filename"
             subject.Load(filename)
@@ -77,7 +77,7 @@ Namespace KordanorsCabal.Data.Tests
         <Fact>
         Sub ShouldResetTheStore()
             Dim store As New Mock(Of IStore)
-            Dim checker As New Mock(Of IChecker)
+            Dim checker As New Mock(Of IEventData)
             Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             subject.Reset()
             store.Verify(Sub(x) x.Reset(), Times.Once)
@@ -87,7 +87,7 @@ Namespace KordanorsCabal.Data.Tests
         <Fact>
         Sub ShouldRenewTheStore()
             Dim store As New Mock(Of IStore)
-            Dim checker As New Mock(Of IChecker)
+            Dim checker As New Mock(Of IEventData)
             Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             subject.Renew().ShouldBeNull
             store.Verify(Function(x) x.Renew(), Times.Once)
@@ -97,7 +97,7 @@ Namespace KordanorsCabal.Data.Tests
         <Fact>
         Sub ShouldRestoreTheStore()
             Dim store As New Mock(Of IStore)
-            Dim checker As New Mock(Of IChecker)
+            Dim checker As New Mock(Of IEventData)
             Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
             subject.Restore(Nothing)
             store.Verify(Sub(x) x.Restore(Nothing), Times.Once)

@@ -30,11 +30,11 @@
 
     ReadOnly Property CanCast(character As ICharacter) As Boolean Implements ISpellType.CanCast
         Get
-            Return WorldData.Checker.Check(WorldData, WorldData.SpellType.ReadCastCheck(Id), character.Id)
+            Return WorldData.Events.Check(WorldData, WorldData.SpellType.ReadCastCheck(Id), character.Id)
         End Get
     End Property
 
     Sub Cast(character As ICharacter) Implements ISpellType.Cast
-        WorldData.Checker.Act(WorldData, WorldData.SpellType.ReadCast(Id), character.Id)
+        WorldData.Events.Act(WorldData, WorldData.SpellType.ReadCast(Id), character.Id)
     End Sub
 End Class

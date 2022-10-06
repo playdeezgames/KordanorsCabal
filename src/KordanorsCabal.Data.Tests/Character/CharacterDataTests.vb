@@ -1,4 +1,4 @@
-﻿Public Class CharacterDataTests
+﻿Public Class CharacterData_should
     Inherits WorldDataSubobjectTests(Of ICharacterData)
 
     Public Sub New()
@@ -6,7 +6,7 @@
     End Sub
 
     <Fact>
-    Sub ShouldClearOutDataWhenClearIsCalled()
+    Sub clear_out_data_when_clear_is_called()
         WithSubobject(
             Sub(store, checker, subject)
                 Const characterId = 1L
@@ -23,7 +23,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldCreateRecordsInTheCharactersTable()
+    Sub create_records_in_the_characters_table()
         WithSubobject(
             Sub(store, checker, subject)
                 Const characterType = 1L
@@ -37,7 +37,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForTheCharacterTypeOfAGivenCharacter()
+    Sub query_for_the_character_type_of_a_given_character()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
@@ -51,7 +51,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForCharactersWithAGivenLocation()
+    Sub query_for_characters_with_a_given_location()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationId = 1L
@@ -65,7 +65,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryForCharacterLocation()
+    Sub query_for_character_location()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
@@ -79,7 +79,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldUpdateTheLocationOfAGivenCharacter()
+    Sub update_the_location_of_a_given_character()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
