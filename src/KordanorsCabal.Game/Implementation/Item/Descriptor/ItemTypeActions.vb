@@ -200,7 +200,7 @@
                 Sub(character)
                     character.CurrentMana -= 1
                     character.Heal()
-                    character.EnqueueMessage($"You use {OldItemType.WaterShard.ToNew(StaticWorldData.World).Name} to heal yer wounds!")
+                    character.EnqueueMessage($"You use {ItemType.FromId(StaticWorldData.World, 12L).Name} to heal yer wounds!")
                 End Sub},
             {"UseBottle",
                 Sub(character)

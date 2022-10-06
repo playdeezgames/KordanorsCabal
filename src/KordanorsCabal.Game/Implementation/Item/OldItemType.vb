@@ -13,7 +13,6 @@ Public Enum OldItemType
     SkullFragment
     Dagger
     EarthShard
-    WaterShard
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

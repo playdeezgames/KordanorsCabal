@@ -62,7 +62,7 @@ Module ItemTypeUIDescriptorUtility
             {43L, New ItemTypeUIDescriptor(Pattern.LeftArrow, (19, 17), Hue.Purple)},
             {23L, New ItemTypeUIDescriptor(Pattern.T, (18, 17), Hue.Purple)},
             {27L, New ItemTypeUIDescriptor(Pattern.Pi, (3, 16), Hue.Blue)},
-            {OldItemType.WaterShard, New ItemTypeUIDescriptor(Pattern.W, (13, 16), Hue.Blue)},
+            {12L, New ItemTypeUIDescriptor(Pattern.W, (13, 16), Hue.Blue)},
             {38L, New ItemTypeUIDescriptor(Pattern.Octothorpe, (4, 15), Hue.Purple)}
         }
 End Module
