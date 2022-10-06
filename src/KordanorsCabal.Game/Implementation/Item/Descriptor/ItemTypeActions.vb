@@ -110,7 +110,7 @@
                             {17L, 4},
                             {OldItemType.Dagger, 250},
                             {24L, 1000},
-                            {OldItemType.Helmet, 125},
+                            {16L, 125},
                             {22L, 64},
                             {29L, 1},
                             {20L, 2},

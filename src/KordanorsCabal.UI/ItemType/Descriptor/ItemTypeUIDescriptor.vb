@@ -35,7 +35,7 @@ Module ItemTypeUIDescriptorUtility
             {24L, New ItemTypeUIDescriptor(Pattern.F, (5, 15), Hue.Orange)},
             {OldItemType.GoblinEar, New ItemTypeUIDescriptor(Pattern.At, (18, 16), Hue.Green)},
             {OldItemType.GoldKey, New ItemTypeUIDescriptor(Pattern.K, (14, 15), Hue.Yellow)},
-            {OldItemType.Helmet, New ItemTypeUIDescriptor(Pattern.Spade, (6, 16), Hue.Black)},
+            {16L, New ItemTypeUIDescriptor(Pattern.Spade, (6, 16), Hue.Black)},
             {34L, New ItemTypeUIDescriptor(Pattern.Asterisk, (7, 16), Hue.Green)},
             {22L, New ItemTypeUIDescriptor(Pattern.H, (16, 15), Hue.Cyan)},
             {44L, New ItemTypeUIDescriptor(Pattern.LessThan, (10, 17), Hue.Red)},

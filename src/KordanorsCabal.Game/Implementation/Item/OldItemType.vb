@@ -17,7 +17,6 @@ Public Enum OldItemType
     FireShard
     AirShard
     Shield
-    Helmet
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
