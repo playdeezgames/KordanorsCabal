@@ -27,7 +27,7 @@ Friend Module RouteTypeDescriptorUtility
             {RouteType.PlatinumLock, New RouteTypeDescriptor("PT", 5L, RouteType.Passageway, False)},
             {RouteType.Portal, New RouteTypeDescriptor(,,, True)},
             {RouteType.Road, New RouteTypeDescriptor},
-            {RouteType.SilverLock, New RouteTypeDescriptor("AG", OldItemType.SilverKey, RouteType.Passageway, False)},
+            {RouteType.SilverLock, New RouteTypeDescriptor("AG", 3L, RouteType.Passageway, False)},
             {RouteType.Stairs, New RouteTypeDescriptor}
         }
 End Module

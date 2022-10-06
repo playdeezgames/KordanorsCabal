@@ -4,7 +4,6 @@ Public Enum OldItemType
     None
     IronKey
     CopperKey
-    SilverKey
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
