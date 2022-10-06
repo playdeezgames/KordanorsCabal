@@ -29,7 +29,6 @@ Public Enum OldItemType
     MagicEgg
     Beer
     Trousers
-    Pr0n
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

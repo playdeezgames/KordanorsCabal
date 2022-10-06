@@ -70,8 +70,8 @@
             {"UsePr0n",
                         Sub(character)
                             Dim enemy = character.Location.Enemy(character)
-                            If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Pr0n.ToNew(StaticWorldData.World)) Then
-                                character.EnqueueMessage($"You give {enemy.Name} the {OldItemType.Pr0n.ToNew(StaticWorldData.World).Name}, and they quickly wander off with a seeming great purpose.")
+                            If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(StaticWorldData.World, 28)) Then
+                                character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(StaticWorldData.World, 28).Name}, and they quickly wander off with a seeming great purpose.")
                                 enemy.Destroy()
                                 Return
                             End If
@@ -82,7 +82,7 @@
                             Dim healRoll = RNG.RollDice("1d4")
                             character.ChangeStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 13L), -healRoll)
                             Dim lines As New List(Of String)
-                            lines.Add($"You make use of {OldItemType.Pr0n.ToNew(StaticWorldData.World).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
+                            lines.Add($"You make use of {ItemType.FromId(StaticWorldData.World, 28).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
                             lines.Add($"You now have {character.CurrentMP} {CharacterStatisticType.FromId(StaticWorldData.World, 7).Name}.")
                             Dim lotionItem = character.Inventory.ItemsOfType(ItemType.FromId(StaticWorldData.World, 39)).FirstOrDefault
                             If lotionItem Is Nothing Then
@@ -249,7 +249,7 @@
                                  End Function},
             {"CanUsePr0n", Function(character)
                                Dim enemy = character.Location.Enemy(character)
-                               Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(OldItemType.Pr0n.ToNew(StaticWorldData.World))) OrElse enemy Is Nothing
+                               Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(StaticWorldData.World, 28))) OrElse enemy Is Nothing
                            End Function},
             {"CanUseFireShard", Function(character)
                                     Dim location = character.Location
