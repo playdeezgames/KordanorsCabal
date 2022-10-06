@@ -55,7 +55,7 @@
                 ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.InnKeeper
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (OldItemType, Long)).ShoppeType = Game.ShoppeType.InnKeeper
+                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.ShoppeType.InnKeeper
                 Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay

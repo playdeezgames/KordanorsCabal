@@ -50,7 +50,7 @@ Friend Class ShoppeBuyProcessor
         End If
         Dim itemType = items(currentItemIndex)
         Game.World.PlayerCharacter(StaticWorldData.World).Money -= itemType.Item2
-        Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Add(Game.Item.Create(StaticWorldData.World, CType(itemType.Item1.Id, OldItemType)))
+        Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Add(Game.Item.Create(StaticWorldData.World, itemType.Item1.Id))
         Dim oldIndex = currentItemIndex
         Initialize()
         If Not items.Any Then

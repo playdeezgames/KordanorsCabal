@@ -48,7 +48,7 @@
                 ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.Healer
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (OldItemType, Long)).ShoppeType = Game.ShoppeType.Healer
+                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.ShoppeType.Healer
                 Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay

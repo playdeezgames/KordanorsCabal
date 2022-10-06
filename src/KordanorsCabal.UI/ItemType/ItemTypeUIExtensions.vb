@@ -2,15 +2,15 @@
 
 Module ItemTypeUIExtensions
     <Extension>
-    Function DisplayPattern(itemType As OldItemType) As Pattern?
+    Function DisplayPattern(itemType As Long) As Pattern?
         Return ItemTypeUIDescriptors(itemType).DisplayPattern
     End Function
     <Extension>
-    Function DisplayXY(itemType As OldItemType) As (Integer, Integer)?
+    Function DisplayXY(itemType As Long) As (Integer, Integer)?
         Return ItemTypeUIDescriptors(itemType).DisplayXY
     End Function
     <Extension>
-    Function DisplayHue(itemType As OldItemType) As Hue?
+    Function DisplayHue(itemType As Long) As Hue?
         Return ItemTypeUIDescriptors(itemType).DisplayHue
     End Function
 End Module

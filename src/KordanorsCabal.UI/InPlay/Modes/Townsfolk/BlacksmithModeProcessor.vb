@@ -47,7 +47,7 @@
                 ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.Blacksmith
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (OldItemType, Long)).ShoppeType = Game.ShoppeType.Blacksmith
+                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.ShoppeType.Blacksmith
                 Return UIState.ShoppeBuy
             Case RepairButtonIndex
                 If player.HasItemsToRepair(ShoppeType.Blacksmith) Then

@@ -49,7 +49,7 @@ Friend Class BlackMageModeProcessor
                 ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.BlackMage
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (OldItemType, Long)).ShoppeType = Game.ShoppeType.BlackMage
+                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.ShoppeType.BlackMage
                 Return UIState.ShoppeBuy
             Case RestoreButtonIndex
                 player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {ItemType.FromId(StaticWorldData.World, 33).Name} and gives you a hit of {ItemType.FromId(StaticWorldData.World, 34).Name}.")

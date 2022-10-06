@@ -370,13 +370,13 @@
             End If
         End If
     End Function
-    Private Function WearOneArmor() As OldItemType?
+    Private Function WearOneArmor() As Long?
         Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsArmor).ToList
         If items.Any Then
             Dim item = RNG.FromList(items)
             item.ReduceDurability(1)
             If item.IsBroken Then
-                WearOneArmor = If(item.ItemType IsNot Nothing, CType(item.ItemType.Id, OldItemType), Nothing)
+                WearOneArmor = If(item.ItemType IsNot Nothing, item.ItemType.Id, Nothing)
                 item.Destroy()
             End If
         End If
@@ -711,7 +711,7 @@
             Return (Location?.Feature?.Id).HasValue
         End Get
     End Property
-    Public Function GetItemTypeCount(itemType As OldItemType) As Integer
+    Public Function GetItemTypeCount(itemType As Long) As Integer
         Return Inventory.Items.Where(Function(x) x.ItemType.Id = itemType).Count
     End Function
     Public ReadOnly Property CanMap() As Boolean Implements ICharacter.CanMap

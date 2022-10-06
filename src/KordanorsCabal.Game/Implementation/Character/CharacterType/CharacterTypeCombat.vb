@@ -15,8 +15,8 @@
         If lootTable Is Nothing OrElse Not lootTable.Any Then
             Return
         End If
-        Dim itemType = CType(RNG.FromGenerator(lootTable), OldItemType)
-        If itemType <> OldItemType.None Then
+        Dim itemType = RNG.FromGenerator(lootTable)
+        If itemType <> 0L Then
             location.Inventory.Add(Item.Create(WorldData, itemType))
         End If
     End Sub
