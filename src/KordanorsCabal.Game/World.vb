@@ -47,7 +47,7 @@ Public Module World
         location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 2L), OldItemType.SilverKey, RouteType.SilverLock)
         location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 3L), OldItemType.GoldKey, RouteType.GoldLock)
         location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 4L), OldItemType.PlatinumKey, RouteType.PlatinumLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 5L), OldItemType.ElementalOrb, RouteType.FinalLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 5L), 6L, RouteType.FinalLock)
     End Sub
 
     Const MazeColumns = 11
@@ -100,7 +100,7 @@ Public Module World
         Return locations
     End Function
 
-    Private Function CreateDungeonLevel(worldData As WorldData, fromLocation As ILocation, dungeonLevel As IDungeonLevel, bossKeyType As OldItemType, bossRouteType As RouteType) As ILocation
+    Private Function CreateDungeonLevel(worldData As WorldData, fromLocation As ILocation, dungeonLevel As IDungeonLevel, bossKeyType As Long, bossRouteType As RouteType) As ILocation
         Dim start = DateTimeOffset.Now
         Dim elapsed = DateTimeOffset.Now - start
         Dim maze = New Maze(Of Long)(MazeColumns, MazeRows, MazeDirections)
@@ -130,7 +130,7 @@ Public Module World
         Next
     End Sub
 
-    Private Sub PopulateLocations(worldData As WorldData, locations As IReadOnlyList(Of ILocation), bossKeyType As OldItemType, bossRouteType As RouteType, dungeonLevel As IDungeonLevel)
+    Private Sub PopulateLocations(worldData As WorldData, locations As IReadOnlyList(Of ILocation), bossKeyType As Long, bossRouteType As RouteType, dungeonLevel As IDungeonLevel)
         Dim deadEndId = LocationType.FromId(worldData, 5L).Id
         Dim dungeonBossId = LocationType.FromId(worldData, 6L).Id
         Dim dungeonId = LocationType.FromId(worldData, 4L).Id
@@ -142,7 +142,7 @@ Public Module World
                         Function(x) x.ToList)
         Dim deadEnds = partitions(deadEndId)
         Dim nonDeadEnds = partitions(dungeonId)
-        Dim itemTypes As New List(Of OldItemType)
+        Dim itemTypes As New List(Of Long)
         For Each deadEnd In deadEnds
             Dim direction = deadEnd.RouteDirections.First
             Dim nextLocation = deadEnd.Routes(direction).ToLocation

@@ -30,7 +30,7 @@ Module ItemTypeUIDescriptorUtility
             {OldItemType.CopperKey, New ItemTypeUIDescriptor(Pattern.K, (12, 16), Hue.Green)},
             {10L, New ItemTypeUIDescriptor(Pattern.Apostrophe, (8, 16), Hue.Black)},
             {11L, New ItemTypeUIDescriptor(Pattern.E, (4, 17), Hue.Green)},
-            {OldItemType.ElementalOrb, New ElementalOrbUIDescriptor},
+            {6L, New ElementalOrbUIDescriptor},
             {13L, New ItemTypeUIDescriptor(Pattern.F, (17, 16), Hue.Red)},
             {24L, New ItemTypeUIDescriptor(Pattern.F, (5, 15), Hue.Orange)},
             {8L, New ItemTypeUIDescriptor(Pattern.At, (18, 16), Hue.Green)},

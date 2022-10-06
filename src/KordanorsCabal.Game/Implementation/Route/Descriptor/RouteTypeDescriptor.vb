@@ -1,7 +1,7 @@
 ﻿Public Class RouteTypeDescriptor
     Sub New(
            Optional abbreviation As String = "  ",
-           Optional unlockItem As OldItemType? = Nothing,
+           Optional unlockItem As Long? = Nothing,
            Optional unlockedRouteType As RouteType? = Nothing,
            Optional isSingleUse As Boolean = False)
         Me.Abbreviation = abbreviation
@@ -10,7 +10,7 @@
         Me.IsSingleUse = isSingleUse
     End Sub
     ReadOnly Property Abbreviation As String
-    ReadOnly Property UnlockItem As OldItemType?
+    ReadOnly Property UnlockItem As Long?
     ReadOnly Property UnlockedRouteType As RouteType?
     ReadOnly Property IsSingleUse As Boolean
 End Class
@@ -19,7 +19,7 @@ Friend Module RouteTypeDescriptorUtility
         New Dictionary(Of RouteType, RouteTypeDescriptor) From
         {
             {RouteType.CopperLock, New RouteTypeDescriptor("CU", OldItemType.CopperKey, RouteType.Passageway, False)},
-            {RouteType.FinalLock, New RouteTypeDescriptor("EO", OldItemType.ElementalOrb, RouteType.Passageway, False)},
+            {RouteType.FinalLock, New RouteTypeDescriptor("EO", 6L, RouteType.Passageway, False)},
             {RouteType.GoldLock, New RouteTypeDescriptor("AU", OldItemType.GoldKey, RouteType.Passageway, False)},
             {RouteType.IronLock, New RouteTypeDescriptor("FE", OldItemType.IronKey, RouteType.Passageway, False)},
             {RouteType.MoonPath, New RouteTypeDescriptor},

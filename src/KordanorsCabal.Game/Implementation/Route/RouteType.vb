@@ -20,7 +20,7 @@ Public Module RouteTypeExtensions
         Return RouteTypeDescriptors(routeType).Abbreviation
     End Function
     <Extension>
-    Function UnlockItem(routeType As RouteType) As OldItemType?
+    Function UnlockItem(routeType As RouteType) As Long?
         Return RouteTypeDescriptors(routeType).UnlockItem
     End Function
     <Extension>

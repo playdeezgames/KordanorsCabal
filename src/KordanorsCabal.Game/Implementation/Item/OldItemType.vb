@@ -7,7 +7,6 @@ Public Enum OldItemType
     SilverKey
     GoldKey
     PlatinumKey
-    ElementalOrb
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
