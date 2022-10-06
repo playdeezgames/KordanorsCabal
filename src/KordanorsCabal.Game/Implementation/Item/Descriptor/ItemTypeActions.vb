@@ -3,7 +3,7 @@
         New Dictionary(Of String, Action(Of IItem)) From
         {
             {"PurifyFood", Sub(item)
-                               StaticWorldData.World.Item.WriteItemType(item.Id, OldItemType.Food)
+                               StaticWorldData.World.Item.WriteItemType(item.Id, 24L)
                            End Sub}
         }
     Friend ReadOnly UseActions As IReadOnlyDictionary(Of String, Action(Of ICharacter)) =
@@ -109,7 +109,7 @@
                             {OldItemType.BrodeSode, 8},
                             {OldItemType.ChainMail, 4},
                             {OldItemType.Dagger, 250},
-                            {OldItemType.Food, 1000},
+                            {24L, 1000},
                             {OldItemType.Helmet, 125},
                             {OldItemType.HolyWater, 64},
                             {29L, 1},

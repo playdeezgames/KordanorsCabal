@@ -25,7 +25,6 @@ Public Enum OldItemType
     RatTail
     HolyWater
     TownPortal
-    Food
 End Enum
 Public Module ItemTypeExtensions
     <Extension>

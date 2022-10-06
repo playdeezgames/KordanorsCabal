@@ -34,7 +34,7 @@ Friend Class ChickenModeProcessor
                 player.Mode = PlayerMode.Neutral
             Case FeedButtonIndex
                 If player.HasItemType(ItemType.FromId(StaticWorldData.World, 24)) OrElse player.HasItemType(ItemType.FromId(StaticWorldData.World, 35)) Then
-                    Dim item = RNG.FromEnumerable(player.Inventory.Items.Where(Function(x) x.Name = OldItemType.Food.ToNew(StaticWorldData.World).Name))
+                    Dim item = RNG.FromEnumerable(player.Inventory.Items.Where(Function(x) x.Name = ItemType.FromId(StaticWorldData.World, 24L).Name))
                     Return FeedChicken(player, item)
                 End If
         End Select
@@ -46,7 +46,7 @@ Friend Class ChickenModeProcessor
         item.Destroy()
         If RNG.FromRange(0, 5) = 0 Then
             Select Case itemType.Id
-                Case OldItemType.Food
+                Case 24L
                     player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {Game.ItemType.FromId(StaticWorldData.World, 25).Name} pops out!")
                     player.Inventory.Add(Game.Item.Create(StaticWorldData.World, 25L))
                 Case 35L
