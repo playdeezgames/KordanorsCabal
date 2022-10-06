@@ -12,7 +12,6 @@ Public Enum OldItemType
     GoblinEar
     SkullFragment
     Dagger
-    EarthShard
 End Enum
 Public Module ItemTypeExtensions
     <Extension>
