@@ -102,8 +102,8 @@
                         End Sub},
             {"UseMagicEgg",
                 Sub(character)
-                    Dim table As IReadOnlyDictionary(Of OldItemType, Integer) =
-                        New Dictionary(Of OldItemType, Integer) From
+                    Dim table As IReadOnlyDictionary(Of Long, Integer) =
+                        New Dictionary(Of Long, Integer) From
                         {
                             {OldItemType.Beer, 500},
                             {OldItemType.BrodeSode, 8},
@@ -112,7 +112,7 @@
                             {OldItemType.Food, 1000},
                             {OldItemType.Helmet, 125},
                             {OldItemType.HolyWater, 64},
-                            {OldItemType.MoonPortal, 1},
+                            {29L, 1},
                             {OldItemType.PlateMail, 2},
                             {OldItemType.Potion, 125},
                             {OldItemType.Shield, 64},
