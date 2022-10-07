@@ -360,7 +360,7 @@
     End Function
     Private Function WearOneWeapon() As IItemType
         WearOneWeapon = Nothing
-        Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.IsWeapon).ToList
+        Dim items = EquippedItems.Where(Function(x) x.MaximumDurability IsNot Nothing AndAlso x.Weapon.IsWeapon).ToList
         If items.Any Then
             Dim item = RNG.FromList(items)
             item.ReduceDurability(1)

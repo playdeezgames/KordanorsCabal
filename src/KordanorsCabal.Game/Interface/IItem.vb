@@ -4,7 +4,6 @@
     ReadOnly Property ItemType As IItemType
 
     ReadOnly Property Weapon As IWeapon
-    ReadOnly Property IsWeapon() As Boolean
     ReadOnly Property AttackDice As Long
     ReadOnly Property MaximumDamage As Long?
 

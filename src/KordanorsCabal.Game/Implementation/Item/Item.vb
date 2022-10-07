@@ -118,11 +118,6 @@
             Return ItemType.DefendDice
         End Get
     End Property
-    ReadOnly Property IsWeapon() As Boolean Implements IItem.IsWeapon
-        Get
-            Return ItemType.IsWeapon
-        End Get
-    End Property
     ReadOnly Property IsArmor() As Boolean Implements IItem.IsArmor
         Get
             Return ItemType.IsArmor

@@ -31,18 +31,6 @@ Public Class ItemShould
             End Sub)
     End Sub
     <Fact>
-    Sub have_an_is_weapon_property()
-        WithItem(
-            Sub(worldData, itemId, item)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.IsWeapon.ShouldBeFalse
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 2L))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_attack_dice()
         WithItem(
             Sub(worldData, itemId, item)
