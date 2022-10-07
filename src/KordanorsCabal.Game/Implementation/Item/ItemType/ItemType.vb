@@ -131,14 +131,14 @@
                    End Sub
         End Get
     End Property
-    ReadOnly Property Use As Action(Of ICharacter) Implements IItemType.Use
+    ReadOnly Property Use As Action(Of IWorldData, ICharacter) Implements IItemType.Use
         Get
-            Dim result As Action(Of ICharacter) = Nothing
+            Dim result As Action(Of IWorldData, ICharacter) = Nothing
             Dim eventName = UseActionName
             If eventName IsNot Nothing AndAlso UseActions.TryGetValue(eventName, result) Then
                 Return result
             End If
-            Return Sub(c)
+            Return Sub(w, c)
                    End Sub
         End Get
     End Property

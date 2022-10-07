@@ -6,13 +6,13 @@
                                StaticWorldData.World.Item.WriteItemType(item.Id, 24L)
                            End Sub}
         }
-    Friend ReadOnly UseActions As IReadOnlyDictionary(Of String, Action(Of ICharacter)) =
-        New Dictionary(Of String, Action(Of ICharacter)) From
+    Friend ReadOnly UseActions As IReadOnlyDictionary(Of String, Action(Of IWorldData, ICharacter)) =
+        New Dictionary(Of String, Action(Of IWorldData, ICharacter)) From
         {
-            {"LearnHolyBolt", Sub(character) character.Learn(SpellType.FromId(StaticWorldData.World, 1L))},
-            {"LearnPurify", Sub(character) character.Learn(SpellType.FromId(StaticWorldData.World, 2L))},
+            {"LearnHolyBolt", Sub(worldData, character) character.Learn(SpellType.FromId(StaticWorldData.World, 1L))},
+            {"LearnPurify", Sub(worldData, character) character.Learn(SpellType.FromId(StaticWorldData.World, 2L))},
             {"EatFood",
-                Sub(character)
+                Sub(worldData, character)
                     Dim healRoll = 1
                     character.ChangeStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 12L), -healRoll)
                     character.Hunger = 0
@@ -21,7 +21,7 @@
                         $"You now have {character.CurrentHP} HP!")
                 End Sub},
             {"UseHolyWater",
-                Sub(character)
+                Sub(worldData, character)
                     Dim sfx As Sfx? = Nothing
                     Dim damageRoll = RNG.RollDice("1d4")
                     Dim enemy = character.Location.Enemy(character)
@@ -38,7 +38,7 @@
                     character.DoCounterAttacks()
                 End Sub},
             {"UseTownPortal",
-                Sub(character)
+                Sub(worldData, character)
                     Dim location = character.Location
                     Dim outDirection = Direction.FromId(StaticWorldData.World, 8L)
                     Dim inDirection = Direction.FromId(StaticWorldData.World, 7L)
@@ -50,7 +50,7 @@
                     character.EnqueueMessage("A portal opens before you!")
                 End Sub},
             {"UseAirShard",
-                Sub(character)
+                Sub(worldData, character)
                     character.CurrentMana -= 1
                     Dim level = character.Location.DungeonLevel
                     Dim locations = Location.FromLocationType(StaticWorldData.World, LocationType.FromId(StaticWorldData.World, 4L)).Where(Function(x) x.DungeonLevel.Id = level.Id)
@@ -58,7 +58,7 @@
                     character.EnqueueMessage($"You use the {ItemType.FromId(StaticWorldData.World, 14L).Name} and suddenly find yerself somewhere else!")
                 End Sub},
             {"UseRottenEgg",
-                Sub(character)
+                Sub(worldData, character)
                     Dim enemy = character.Location.Enemy(character)
                     If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(StaticWorldData.World, 37)) Then
                         character.EnqueueMessage($"You give {enemy.Name} the {Game.ItemType.FromId(StaticWorldData.World, 37).Name}, and they quickly wander off with a seeming great purpose.")
@@ -68,7 +68,7 @@
                     character.EnqueueMessage($"You cannot use that now!")
                 End Sub},
             {"UsePr0n",
-                        Sub(character)
+                        Sub(worldData, character)
                             Dim enemy = character.Location.Enemy(character)
                             If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(StaticWorldData.World, 28)) Then
                                 character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(StaticWorldData.World, 28).Name}, and they quickly wander off with a seeming great purpose.")
@@ -101,7 +101,7 @@
                             character.EnqueueMessage(lines.ToArray)
                         End Sub},
             {"UseMagicEgg",
-                Sub(character)
+                Sub(worldData, character)
                     Dim table As IReadOnlyDictionary(Of Long, Integer) =
                         New Dictionary(Of Long, Integer) From
                         {
@@ -125,7 +125,7 @@
                     character.Inventory.Add(item)
                 End Sub},
             {"UseBeer",
-                Sub(character)
+                Sub(worldData, character)
                     Dim enemy = character.Location.Enemy(character)
                     If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(StaticWorldData.World, 26)) Then
                         enemy.Destroy()
@@ -138,7 +138,7 @@
                     character.EnqueueMessage("You drink the beer, and suddenly feel braver!")
                 End Sub},
             {"UseMoonPortal",
-                Sub(character)
+                Sub(worldData, character)
                     Dim location = character.Location
                     Dim outDirection = Direction.FromId(StaticWorldData.World, 8L)
                     Dim inDirection = Direction.FromId(StaticWorldData.World, 7L)
@@ -150,7 +150,7 @@
                     character.EnqueueMessage("A portal opens before you!")
                 End Sub},
             {"UseFireShard",
-                Sub(character)
+                Sub(worldData, character)
                     character.DoFatigue(1)
                     Dim enemy = character.Location.Enemy(character)
                     Dim lines As New List(Of String)
@@ -168,7 +168,7 @@
                     character.DoCounterAttacks()
                 End Sub},
             {"DrinkPotion",
-                Sub(character)
+                Sub(worldData, character)
                     Dim healRoll = RNG.RollDice("2d4")
                     character.ChangeStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 12L), -healRoll)
                     character.Inventory.Add(Item.Create(StaticWorldData.World, 30))
@@ -177,14 +177,14 @@
                 $"You now have {character.CurrentHP} HP!")
                 End Sub},
             {"UseHerb",
-                Sub(character)
+                Sub(worldData, character)
                     Dim delta = character.MaximumMana - character.CurrentMana
                     character.CurrentMana = character.MaximumMana
                     character.Highness += 10
                     character.EnqueueMessage($"You use yer {ItemType.FromId(StaticWorldData.World, 33).Name} to smoke yer {ItemType.FromId(StaticWorldData.World, 34).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(StaticWorldData.World, 8L).Name}.")
                 End Sub},
             {"UseEarthShard",
-                Sub(character)
+                Sub(worldData, character)
                     character.DoFatigue(1)
                     Dim enemy = character.Location.Enemy(character)
                     Dim lines As New List(Of String)
@@ -197,19 +197,19 @@
                     character.DoCounterAttacks()
                 End Sub},
             {"UseWaterShard",
-                Sub(character)
+                Sub(worldData, character)
                     character.CurrentMana -= 1
                     character.Heal()
                     character.EnqueueMessage($"You use {ItemType.FromId(StaticWorldData.World, 12L).Name} to heal yer wounds!")
                 End Sub},
             {"UseBottle",
-                Sub(character)
+                Sub(worldData, character)
                     Dim enemy = character.Location.Enemy(character)
                     character.EnqueueMessage($"You give the {ItemType.FromId(StaticWorldData.World, 30).Name} to the {enemy.Name}, and it wanders off happily.")
                     enemy.Destroy()
                 End Sub},
             {"UseRottenFood",
-                Sub(character)
+                Sub(worldData, character)
                     If RNG.RollDice("1d2") = 1 Then
                         character.Hunger \= 2
                         character.FoodPoisoning = 10
