@@ -276,4 +276,11 @@ Public Class ItemShould
                 worldData.Verify(Sub(x) x.Item.Clear(itemId))
             End Sub)
     End Sub
+    <Fact>
+    Sub have_weapon_subobject()
+        WithItem(
+            Sub(worldData, itemId, item)
+                item.Weapon.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class
