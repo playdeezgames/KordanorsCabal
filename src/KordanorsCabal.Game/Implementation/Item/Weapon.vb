@@ -12,4 +12,9 @@
             Return Item.FromId(WorldData, Id).ItemType.IsWeapon
         End Get
     End Property
+    ReadOnly Property AttackDice As Long Implements IWeapon.AttackDice
+        Get
+            Return Item.FromId(WorldData, Id).ItemType.AttackDice
+        End Get
+    End Property
 End Class
