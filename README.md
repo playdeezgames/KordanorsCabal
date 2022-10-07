@@ -1,5 +1,6 @@
 # Kordanor's Cabal
 
+TODO: IItem subobjectification
 
 ## Music
 https://pernyblom.github.io/abundant-music/index.html
