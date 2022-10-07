@@ -133,4 +133,13 @@
                 worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 1L))
             End Sub)
     End Sub
+    <Fact>
+    Sub can_repair()
+        WithItem(
+            Sub(worldData, itemId, item)
+                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                item.Repair()
+                worldData.Verify(Sub(x) x.ItemStatistic.Write(itemId, 1L, 0L))
+            End Sub)
+    End Sub
 End Class
