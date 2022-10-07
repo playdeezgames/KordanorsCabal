@@ -57,7 +57,7 @@ Friend Class ShoppeRepairProcessor
             Return UIState.ShoppeRepair
         End If
         Game.World.PlayerCharacter(StaticWorldData.World).Money -= repairCost
-        item.Repair.DoRepair()
+        item.Repair.Perform()
         Dim oldIndex = currentItemIndex
         Initialize()
         If Not items.Any Then

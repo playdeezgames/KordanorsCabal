@@ -1,5 +1,5 @@
 ﻿Public Interface IRepair
     Inherits IBaseThingie
-    ReadOnly Property NeedsRepair As Boolean
-    Sub DoRepair()
+    ReadOnly Property IsNeeded As Boolean
+    Sub Perform()
 End Interface

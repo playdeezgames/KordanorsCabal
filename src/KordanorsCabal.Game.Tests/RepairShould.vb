@@ -14,7 +14,7 @@
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(2L)
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
-                item.NeedsRepair.ShouldBeTrue
+                item.IsNeeded.ShouldBeTrue
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
                 worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 1L))
@@ -25,7 +25,7 @@
         WithSubject(
             Sub(worldData, itemId, item)
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.DoRepair()
+                item.Perform()
                 worldData.Verify(Sub(x) x.ItemStatistic.Write(itemId, 1L, 0L))
             End Sub)
     End Sub
