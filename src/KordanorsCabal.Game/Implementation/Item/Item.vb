@@ -86,16 +86,16 @@
 
     Public ReadOnly Property NeedsRepair As Boolean Implements IItem.NeedsRepair
         Get
-            Return MaximumDurability.HasValue AndAlso Durability.Value < MaximumDurability.Value
+            Return MaximumDurability.HasValue AndAlso CurrentDurability.Value < MaximumDurability.Value
         End Get
     End Property
 
     ReadOnly Property IsBroken As Boolean Implements IItem.IsBroken
         Get
-            Return MaximumDurability.HasValue AndAlso Durability.Value <= 0
+            Return MaximumDurability.HasValue AndAlso CurrentDurability.Value <= 0
         End Get
     End Property
-    ReadOnly Property Durability As Long? Implements IItem.Durability
+    ReadOnly Property CurrentDurability As Long? Implements IItem.CurrentDurability
         Get
             If MaximumDurability.HasValue Then
                 Return MaximumDurability.Value - GetStatistic(ItemStatisticType.Wear)
