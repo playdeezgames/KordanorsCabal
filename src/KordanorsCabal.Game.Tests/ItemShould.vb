@@ -1,7 +1,7 @@
 ﻿Imports SQLitePCL
 
 Public Class ItemShould
-    Private Sub WithItem(stuffToDo As Action(Of Mock(Of IWorldData), Long, IItem))
+    Private Sub WithSubject(stuffToDo As Action(Of Mock(Of IWorldData), Long, IItem))
         Const itemId = 1L
         Dim worldData As New Mock(Of IWorldData)
         Dim item As IItem = Game.Item.FromId(worldData.Object, itemId)
@@ -11,7 +11,7 @@ Public Class ItemShould
 
     <Fact>
     Sub have_a_name()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -23,7 +23,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_an_item_type()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long)))
                 item.ItemType.ShouldBeNull
@@ -31,22 +31,8 @@ Public Class ItemShould
             End Sub)
     End Sub
     <Fact>
-    Sub have_is_broken_flag()
-        WithItem(
-            Sub(worldData, itemId, item)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
-                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.IsBroken.ShouldBeFalse
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
-                worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 1L))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_needs_repair_flag()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -60,7 +46,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub can_repair()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 item.Repair()
@@ -69,7 +55,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_an_is_armor_property()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -81,7 +67,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_defense_dice()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -93,7 +79,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_can_equip_property()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -105,7 +91,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_equip_slots()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -117,7 +103,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_equiped_buff()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 Const statisticTypeId = 3L
@@ -130,7 +116,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_encumbrance()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -142,7 +128,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub purify()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -154,7 +140,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_is_consumed_property()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -166,7 +152,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_can_use_test()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 Const characterId = 3L
@@ -179,7 +165,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub allow_use_by_a_character()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 Const characterId = 3L
@@ -192,7 +178,7 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub allow_destruction()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 worldData.Setup(Sub(x) x.Item.Clear(It.IsAny(Of Long)))
                 item.Destroy()
@@ -201,14 +187,14 @@ Public Class ItemShould
     End Sub
     <Fact>
     Sub have_weapon_subobject()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 item.Weapon.ShouldNotBeNull
             End Sub)
     End Sub
     <Fact>
     Sub have_durability_subobject()
-        WithItem(
+        WithSubject(
             Sub(worldData, itemId, item)
                 item.Durability.ShouldNotBeNull
             End Sub)

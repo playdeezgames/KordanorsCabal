@@ -5,8 +5,6 @@
     ReadOnly Property Weapon As IWeapon
     ReadOnly Property Durability As IDurability
 
-    ReadOnly Property IsBroken As Boolean
-
     ReadOnly Property NeedsRepair As Boolean
     Sub Repair()
 

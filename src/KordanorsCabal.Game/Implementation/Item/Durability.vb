@@ -35,4 +35,9 @@
     Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
         WorldData.ItemStatistic.Write(Id, statisticType, value)
     End Sub
+    ReadOnly Property IsBroken As Boolean Implements IDurability.IsBroken
+        Get
+            Return MaximumDurability.HasValue AndAlso CurrentDurability.Value <= 0
+        End Get
+    End Property
 End Class

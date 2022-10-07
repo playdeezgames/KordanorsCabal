@@ -79,12 +79,6 @@
             Return Durability.MaximumDurability.HasValue AndAlso Durability.CurrentDurability.Value < Durability.MaximumDurability.Value
         End Get
     End Property
-
-    ReadOnly Property IsBroken As Boolean Implements IItem.IsBroken
-        Get
-            Return Durability.MaximumDurability.HasValue AndAlso Durability.CurrentDurability.Value <= 0
-        End Get
-    End Property
     ReadOnly Property DefendDice As Long Implements IItem.DefendDice
         Get
             Return ItemType.DefendDice

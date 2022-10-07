@@ -364,7 +364,7 @@
         If items.Any Then
             Dim item = RNG.FromList(items)
             item.Durability.ReduceDurability(1)
-            If item.IsBroken Then
+            If item.Durability.IsBroken Then
                 WearOneWeapon = item.ItemType
                 item.Destroy()
             End If
@@ -375,7 +375,7 @@
         If items.Any Then
             Dim item = RNG.FromList(items)
             item.Durability.ReduceDurability(1)
-            If item.IsBroken Then
+            If item.Durability.IsBroken Then
                 WearOneArmor = If(item.ItemType IsNot Nothing, item.ItemType.Id, Nothing)
                 item.Destroy()
             End If
