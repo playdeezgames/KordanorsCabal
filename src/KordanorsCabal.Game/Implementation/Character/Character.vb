@@ -360,10 +360,10 @@
     End Function
     Private Function WearOneWeapon() As IItemType
         WearOneWeapon = Nothing
-        Dim items = EquippedItems.Where(Function(x) x.Durability.MaximumDurability IsNot Nothing AndAlso x.Weapon.IsWeapon).ToList
+        Dim items = EquippedItems.Where(Function(x) x.Durability.Maximum IsNot Nothing AndAlso x.Weapon.IsWeapon).ToList
         If items.Any Then
             Dim item = RNG.FromList(items)
-            item.Durability.ReduceDurability(1)
+            item.Durability.Reduce(1)
             If item.Durability.IsBroken Then
                 WearOneWeapon = item.ItemType
                 item.Destroy()
@@ -371,10 +371,10 @@
         End If
     End Function
     Private Function WearOneArmor() As Long?
-        Dim items = EquippedItems.Where(Function(x) x.Durability.MaximumDurability IsNot Nothing AndAlso x.IsArmor).ToList
+        Dim items = EquippedItems.Where(Function(x) x.Durability.Maximum IsNot Nothing AndAlso x.IsArmor).ToList
         If items.Any Then
             Dim item = RNG.FromList(items)
-            item.Durability.ReduceDurability(1)
+            item.Durability.Reduce(1)
             If item.Durability.IsBroken Then
                 WearOneArmor = If(item.ItemType IsNot Nothing, item.ItemType.Id, Nothing)
                 item.Destroy()

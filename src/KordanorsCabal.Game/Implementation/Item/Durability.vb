@@ -8,10 +8,10 @@
     Shared Function FromId(worldData As IWorldData, id As Long?) As IDurability
         Return If(id.HasValue, New Durability(worldData, id.Value), Nothing)
     End Function
-    ReadOnly Property CurrentDurability As Long? Implements IDurability.CurrentDurability
+    ReadOnly Property Current As Long? Implements IDurability.Current
         Get
-            If MaximumDurability.HasValue Then
-                Return MaximumDurability.Value - GetStatistic(ItemStatisticType.Wear)
+            If Maximum.HasValue Then
+                Return Maximum.Value - GetStatistic(ItemStatisticType.Wear)
             End If
             Return Nothing
         End Get
@@ -19,13 +19,13 @@
     Private Function GetStatistic(statisticType As ItemStatisticType) As Long
         Return If(WorldData.ItemStatistic.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
-    Public ReadOnly Property MaximumDurability As Long? Implements IDurability.MaximumDurability
+    Public ReadOnly Property Maximum As Long? Implements IDurability.Maximum
         Get
             Return Item.FromId(WorldData, Id).ItemType.MaximumDurability
         End Get
     End Property
-    Public Sub ReduceDurability(amount As Long) Implements IDurability.ReduceDurability
-        If MaximumDurability.HasValue Then
+    Public Sub Reduce(amount As Long) Implements IDurability.Reduce
+        If Maximum.HasValue Then
             ChangeStatistic(ItemStatisticType.Wear, amount)
         End If
     End Sub
@@ -37,7 +37,7 @@
     End Sub
     ReadOnly Property IsBroken As Boolean Implements IDurability.IsBroken
         Get
-            Return MaximumDurability.HasValue AndAlso CurrentDurability.Value <= 0
+            Return Maximum.HasValue AndAlso Current.Value <= 0
         End Get
     End Property
 End Class

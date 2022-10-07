@@ -14,7 +14,7 @@
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.CurrentDurability.ShouldBe(1L)
+                item.Current.ShouldBe(1L)
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
                 worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 1L))
@@ -27,7 +27,7 @@
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.MaximumDurability.ShouldBeNull
+                item.Maximum.ShouldBeNull
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
             End Sub)
@@ -40,7 +40,7 @@
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.ReduceDurability(1L)
+                item.Reduce(1L)
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
                 worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 1L))

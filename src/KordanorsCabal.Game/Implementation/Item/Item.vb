@@ -34,7 +34,7 @@
     Public Function RepairCost(shoppeType As ShoppeType) As Long Implements IItem.RepairCost
         Dim fullRepairPrice = shoppeType.RepairPrice(ItemType)
         Dim wear = GetStatistic(ItemStatisticType.Wear)
-        Dim maximum = Durability.MaximumDurability.Value
+        Dim maximum = Durability.Maximum.Value
         Dim remainder = If(wear * fullRepairPrice Mod maximum > 0, 1, 0)
         Return wear * If(fullRepairPrice, 0) \ maximum + remainder
     End Function
@@ -76,7 +76,7 @@
 
     Public ReadOnly Property NeedsRepair As Boolean Implements IItem.NeedsRepair
         Get
-            Return Durability.MaximumDurability.HasValue AndAlso Durability.CurrentDurability.Value < Durability.MaximumDurability.Value
+            Return Durability.Maximum.HasValue AndAlso Durability.Current.Value < Durability.Maximum.Value
         End Get
     End Property
     ReadOnly Property DefendDice As Long Implements IItem.DefendDice

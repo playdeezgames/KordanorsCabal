@@ -90,8 +90,8 @@
                                 character.Chafing = 10
                             Else
                                 lines.Add($"You use a bit of {ItemType.FromId(StaticWorldData.World, 39).Name} to prevent {CharacterStatisticType.FromId(StaticWorldData.World, 22L).Name}.")
-                                lotionItem.Durability.ReduceDurability(1)
-                                If lotionItem.Durability.CurrentDurability = 0 Then
+                                lotionItem.Durability.Reduce(1)
+                                If lotionItem.Durability.Current = 0 Then
                                     lines.Add($"You ran out that bottle of {ItemType.FromId(StaticWorldData.World, 39).Name}.")
                                     lotionItem.Destroy()
                                     character.Inventory.Add(Item.Create(StaticWorldData.World, 30))
