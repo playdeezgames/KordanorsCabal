@@ -14,6 +14,7 @@
 
     ReadOnly Property NeedsRepair As Boolean
     Sub Repair()
+    'TODO: RepairCost needs unit test, but ShoppeType needs refactor first
     Function RepairCost(shoppeType As ShoppeType) As Long
 
     ReadOnly Property IsArmor() As Boolean
