@@ -90,4 +90,19 @@
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
             End Sub)
     End Sub
+    <Fact>
+    Sub reduce_durability()
+        WithItem(
+            Sub(worldData, itemId, item)
+                Const itemTypeId = 2L
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
+                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
+                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                item.ReduceDurability(1L)
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
+                worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 1L))
+                worldData.Verify(Sub(x) x.ItemStatistic.Write(itemId, 1L, 1L))
+            End Sub)
+    End Sub
 End Class
