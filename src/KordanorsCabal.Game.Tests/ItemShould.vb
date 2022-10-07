@@ -267,4 +267,13 @@ Public Class ItemShould
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 3L))
             End Sub)
     End Sub
+    <Fact>
+    Sub allow_destruction()
+        WithItem(
+            Sub(worldData, itemId, item)
+                worldData.Setup(Sub(x) x.Item.Clear(It.IsAny(Of Long)))
+                item.Destroy()
+                worldData.Verify(Sub(x) x.Item.Clear(itemId))
+            End Sub)
+    End Sub
 End Class
