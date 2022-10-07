@@ -2,14 +2,9 @@
     Inherits IBaseThingie
     ReadOnly Property Name As String
     ReadOnly Property ItemType As IItemType
-
     ReadOnly Property Weapon As IWeapon
-
     ReadOnly Property Durability As IDurability
 
-    ReadOnly Property CurrentDurability As Long?
-    ReadOnly Property MaximumDurability As Long?
-    Sub ReduceDurability(amount As Long)
     ReadOnly Property IsBroken As Boolean
 
     ReadOnly Property NeedsRepair As Boolean

@@ -34,7 +34,7 @@
     Public Function RepairCost(shoppeType As ShoppeType) As Long Implements IItem.RepairCost
         Dim fullRepairPrice = shoppeType.RepairPrice(ItemType)
         Dim wear = GetStatistic(ItemStatisticType.Wear)
-        Dim maximum = MaximumDurability.Value
+        Dim maximum = Durability.MaximumDurability.Value
         Dim remainder = If(wear * fullRepairPrice Mod maximum > 0, 1, 0)
         Return wear * If(fullRepairPrice, 0) \ maximum + remainder
     End Function
@@ -59,16 +59,6 @@
             Return ItemType.EquipSlots
         End Get
     End Property
-    Public ReadOnly Property MaximumDurability As Long? Implements IItem.MaximumDurability
-        Get
-            Return ItemType.MaximumDurability
-        End Get
-    End Property
-    Public Sub ReduceDurability(amount As Long) Implements IItem.ReduceDurability
-        If MaximumDurability.HasValue Then
-            ChangeStatistic(ItemStatisticType.Wear, amount)
-        End If
-    End Sub
     Private Sub ChangeStatistic(statisticType As ItemStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub
@@ -86,21 +76,13 @@
 
     Public ReadOnly Property NeedsRepair As Boolean Implements IItem.NeedsRepair
         Get
-            Return MaximumDurability.HasValue AndAlso CurrentDurability.Value < MaximumDurability.Value
+            Return Durability.MaximumDurability.HasValue AndAlso Durability.CurrentDurability.Value < Durability.MaximumDurability.Value
         End Get
     End Property
 
     ReadOnly Property IsBroken As Boolean Implements IItem.IsBroken
         Get
-            Return MaximumDurability.HasValue AndAlso CurrentDurability.Value <= 0
-        End Get
-    End Property
-    ReadOnly Property CurrentDurability As Long? Implements IItem.CurrentDurability
-        Get
-            If MaximumDurability.HasValue Then
-                Return MaximumDurability.Value - GetStatistic(ItemStatisticType.Wear)
-            End If
-            Return Nothing
+            Return Durability.MaximumDurability.HasValue AndAlso Durability.CurrentDurability.Value <= 0
         End Get
     End Property
     ReadOnly Property DefendDice As Long Implements IItem.DefendDice
