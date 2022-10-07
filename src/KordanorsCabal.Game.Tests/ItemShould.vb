@@ -31,15 +31,6 @@ Public Class ItemShould
             End Sub)
     End Sub
     <Fact>
-    Sub can_repair()
-        WithSubject(
-            Sub(worldData, itemId, item)
-                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.DoRepair()
-                worldData.Verify(Sub(x) x.ItemStatistic.Write(itemId, 1L, 0L))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_an_is_armor_property()
         WithSubject(
             Sub(worldData, itemId, item)

@@ -15,4 +15,10 @@
             Return durability.Maximum.HasValue AndAlso durability.Current.Value < durability.Maximum.Value
         End Get
     End Property
+    Public Sub DoRepair() Implements IRepair.DoRepair
+        SetStatistic(ItemStatisticType.Wear, 0)
+    End Sub
+    Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
+        WorldData.ItemStatistic.Write(Id, statisticType, value)
+    End Sub
 End Class

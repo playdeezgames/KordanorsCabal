@@ -6,8 +6,6 @@
     ReadOnly Property Durability As IDurability
     ReadOnly Property Repair As IRepair
 
-    Sub DoRepair()
-
     ReadOnly Property IsArmor() As Boolean
     ReadOnly Property DefendDice As Long
 

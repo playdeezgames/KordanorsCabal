@@ -63,10 +63,6 @@
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub
 
-    Public Sub DoRepair() Implements IItem.DoRepair
-        SetStatistic(ItemStatisticType.Wear, 0)
-    End Sub
-
     Private Function GetStatistic(statisticType As ItemStatisticType) As Long
         Return If(WorldData.ItemStatistic.Read(Id, statisticType), statisticType.DefaultValue)
     End Function
