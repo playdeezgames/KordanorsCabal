@@ -166,4 +166,16 @@
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4L))
             End Sub)
     End Sub
+    <Fact>
+    Sub have_can_equip_property()
+        WithItem(
+            Sub(worldData, itemId, item)
+                Const itemTypeId = 2L
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
+                worldData.Setup(Function(x) x.ItemTypeEquipSlot.ReadForItemType(It.IsAny(Of Long)))
+                item.CanEquip.ShouldBeFalse
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.ItemTypeEquipSlot.ReadForItemType(itemTypeId))
+            End Sub)
+    End Sub
 End Class
