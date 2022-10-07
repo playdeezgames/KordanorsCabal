@@ -63,7 +63,7 @@
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub
 
-    Public Sub Repair() Implements IItem.Repair
+    Public Sub DoRepair() Implements IItem.DoRepair
         SetStatistic(ItemStatisticType.Wear, 0)
     End Sub
 
@@ -73,12 +73,6 @@
     Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
         WorldData.ItemStatistic.Write(Id, statisticType, value)
     End Sub
-
-    Public ReadOnly Property NeedsRepair As Boolean Implements IItem.NeedsRepair
-        Get
-            Return Durability.Maximum.HasValue AndAlso Durability.Current.Value < Durability.Maximum.Value
-        End Get
-    End Property
     ReadOnly Property DefendDice As Long Implements IItem.DefendDice
         Get
             Return ItemType.DefendDice
@@ -104,6 +98,12 @@
     Public ReadOnly Property Durability As IDurability Implements IItem.Durability
         Get
             Return Game.Durability.FromId(WorldData, Id)
+        End Get
+    End Property
+
+    Public ReadOnly Property Repair As IRepair Implements IItem.Repair
+        Get
+            Return Game.Repair.FromId(WorldData, Id)
         End Get
     End Property
 

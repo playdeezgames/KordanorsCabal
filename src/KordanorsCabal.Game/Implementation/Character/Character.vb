@@ -15,8 +15,8 @@
     Public ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of IItem) Implements ICharacter.ItemsToRepair
         Get
             Dim items As New List(Of IItem)
-            items.AddRange(Inventory.Items.Where(Function(x) x.NeedsRepair))
-            items.AddRange(EquippedItems.Where(Function(x) x.NeedsRepair))
+            items.AddRange(Inventory.Items.Where(Function(x) x.Repair.NeedsRepair))
+            items.AddRange(EquippedItems.Where(Function(x) x.Repair.NeedsRepair))
             Return items.Where(Function(x) shoppeType.WillRepair(x.ItemType))
         End Get
     End Property

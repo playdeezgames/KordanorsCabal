@@ -1,5 +1,5 @@
 ﻿Public Class WeaponShould
-    Private Sub WithWeapon(stuffToDo As Action(Of Mock(Of IWorldData), Long, IWeapon))
+    Private Sub WithSubject(stuffToDo As Action(Of Mock(Of IWorldData), Long, IWeapon))
         Const itemId = 1L
         Dim worldData As New Mock(Of IWorldData)
         Dim weapon As IWeapon = Game.Weapon.FromId(worldData.Object, itemId)
@@ -8,7 +8,7 @@
     End Sub
     <Fact>
     Sub have_an_is_weapon_property()
-        WithWeapon(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -20,7 +20,7 @@
     End Sub
     <Fact>
     Sub have_attack_dice()
-        WithWeapon(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
@@ -32,7 +32,7 @@
     End Sub
     <Fact>
     Sub have_maximum_damage()
-        WithWeapon(
+        WithSubject(
             Sub(worldData, itemId, item)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)

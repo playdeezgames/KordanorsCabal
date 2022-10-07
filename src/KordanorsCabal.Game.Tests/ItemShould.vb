@@ -31,25 +31,11 @@ Public Class ItemShould
             End Sub)
     End Sub
     <Fact>
-    Sub have_needs_repair_flag()
-        WithSubject(
-            Sub(worldData, itemId, item)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(2L)
-                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
-                item.NeedsRepair.ShouldBeTrue
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
-                worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 1L))
-            End Sub)
-    End Sub
-    <Fact>
     Sub can_repair()
         WithSubject(
             Sub(worldData, itemId, item)
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.Repair()
+                item.DoRepair()
                 worldData.Verify(Sub(x) x.ItemStatistic.Write(itemId, 1L, 0L))
             End Sub)
     End Sub
@@ -197,6 +183,13 @@ Public Class ItemShould
         WithSubject(
             Sub(worldData, itemId, item)
                 item.Durability.ShouldNotBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_repair_subobject()
+        WithSubject(
+            Sub(worldData, itemId, item)
+                item.Repair.ShouldNotBeNull
             End Sub)
     End Sub
 End Class

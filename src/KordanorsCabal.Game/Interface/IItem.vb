@@ -4,9 +4,9 @@
     ReadOnly Property ItemType As IItemType
     ReadOnly Property Weapon As IWeapon
     ReadOnly Property Durability As IDurability
+    ReadOnly Property Repair As IRepair
 
-    ReadOnly Property NeedsRepair As Boolean
-    Sub Repair()
+    Sub DoRepair()
 
     ReadOnly Property IsArmor() As Boolean
     ReadOnly Property DefendDice As Long
