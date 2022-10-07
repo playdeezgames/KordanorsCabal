@@ -22,7 +22,7 @@
     ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot)
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
 
-    Function Encumbrance() As Long
+    ReadOnly Property Encumbrance As Long
     Sub Purify()
 
     Sub Use(character As ICharacter)

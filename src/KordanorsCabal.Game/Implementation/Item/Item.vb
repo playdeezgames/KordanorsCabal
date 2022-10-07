@@ -46,9 +46,11 @@
     Public Sub Destroy() Implements IItem.Destroy
         WorldData.Item.Clear(Id)
     End Sub
-    Public Function Encumbrance() As Long Implements IItem.Encumbrance
-        Return ItemType.Encumbrance
-    End Function
+    Public ReadOnly Property Encumbrance As Long Implements IItem.Encumbrance
+        Get
+            Return ItemType.Encumbrance
+        End Get
+    End Property
     Friend Sub Use(character As ICharacter) Implements IItem.Use
         ItemType.Use.Invoke(WorldData, character)
     End Sub
