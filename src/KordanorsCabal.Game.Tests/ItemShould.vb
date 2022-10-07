@@ -215,4 +215,16 @@
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 1L))
             End Sub)
     End Sub
+    <Fact>
+    Sub purify()
+        WithItem(
+            Sub(worldData, itemId, item)
+                Const itemTypeId = 2L
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
+                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                item.Purify()
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 1L))
+            End Sub)
+    End Sub
 End Class
