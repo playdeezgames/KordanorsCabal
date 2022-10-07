@@ -1,4 +1,6 @@
-﻿Public Class ItemShould
+﻿Imports SQLitePCL
+
+Public Class ItemShould
     Private Sub WithItem(stuffToDo As Action(Of Mock(Of IWorldData), Long, IItem))
         Const itemId = 1L
         Dim worldData As New Mock(Of IWorldData)
@@ -237,6 +239,19 @@
                 item.IsConsumed.ShouldBeFalse
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
                 worldData.Verify(Function(x) x.ItemType.ReadIsConsumed(itemTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_can_use_test()
+        WithItem(
+            Sub(worldData, itemId, item)
+                Const itemTypeId = 2L
+                Const characterId = 3L
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
+                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                item.CanUse(Character.FromId(worldData.Object, characterId)).ShouldBeFalse
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 2L))
             End Sub)
     End Sub
 End Class
