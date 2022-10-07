@@ -227,4 +227,16 @@
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 1L))
             End Sub)
     End Sub
+    <Fact>
+    Sub have_is_consumed_property()
+        WithItem(
+            Sub(worldData, itemId, item)
+                Const itemTypeId = 2L
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
+                worldData.Setup(Function(x) x.ItemType.ReadIsConsumed(It.IsAny(Of Long)))
+                item.IsConsumed.ShouldBeFalse
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.ItemType.ReadIsConsumed(itemTypeId))
+            End Sub)
+    End Sub
 End Class

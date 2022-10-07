@@ -25,9 +25,9 @@
     ReadOnly Property Encumbrance As Long
     Sub Purify()
 
-    Sub Use(character As ICharacter)
     ReadOnly Property IsConsumed As Boolean
     ReadOnly Property CanUse(character As ICharacter) As Boolean
+    Sub Use(character As ICharacter)
 
     Sub Destroy()
 
