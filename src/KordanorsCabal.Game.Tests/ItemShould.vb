@@ -254,4 +254,17 @@ Public Class ItemShould
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 2L))
             End Sub)
     End Sub
+    <Fact>
+    Sub allow_use_by_a_character()
+        WithItem(
+            Sub(worldData, itemId, item)
+                Const itemTypeId = 2L
+                Const characterId = 3L
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
+                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                item.Use(Character.FromId(worldData.Object, characterId))
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 3L))
+            End Sub)
+    End Sub
 End Class
