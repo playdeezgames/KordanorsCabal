@@ -14,8 +14,6 @@
 
     ReadOnly Property NeedsRepair As Boolean
     Sub Repair()
-    'TODO: RepairCost needs unit test, but ShoppeType needs refactor first
-    Function RepairCost(shoppeType As ShoppeType) As Long
 
     ReadOnly Property IsArmor() As Boolean
     ReadOnly Property DefendDice As Long
@@ -32,4 +30,7 @@
     ReadOnly Property CanUse(character As ICharacter) As Boolean
 
     Sub Destroy()
+
+    'TODO: RepairCost needs unit test, but ShoppeType needs refactor first
+    Function RepairCost(shoppeType As ShoppeType) As Long
 End Interface

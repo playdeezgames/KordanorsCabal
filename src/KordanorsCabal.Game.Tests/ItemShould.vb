@@ -178,4 +178,29 @@
                 worldData.Verify(Function(x) x.ItemTypeEquipSlot.ReadForItemType(itemTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub have_equip_slots()
+        WithItem(
+            Sub(worldData, itemId, item)
+                Const itemTypeId = 2L
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
+                worldData.Setup(Function(x) x.ItemTypeEquipSlot.ReadForItemType(It.IsAny(Of Long)))
+                item.EquipSlots.ShouldBeEmpty
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.ItemTypeEquipSlot.ReadForItemType(itemTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_equiped_buff()
+        WithItem(
+            Sub(worldData, itemId, item)
+                Const itemTypeId = 2L
+                Const statisticTypeId = 3L
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
+                worldData.Setup(Function(x) x.ItemTypeCharacterStatisticBuff.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                item.EquippedBuff(CharacterStatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBeNull
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.ItemTypeCharacterStatisticBuff.Read(itemTypeId, statisticTypeId))
+            End Sub)
+    End Sub
 End Class
