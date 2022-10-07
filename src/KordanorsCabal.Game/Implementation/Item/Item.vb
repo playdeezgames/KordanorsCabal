@@ -59,11 +59,6 @@
             Return ItemType.EquipSlots
         End Get
     End Property
-    ReadOnly Property MaximumDamage As Long? Implements IItem.MaximumDamage
-        Get
-            Return ItemType.MaximumDamage
-        End Get
-    End Property
     Public ReadOnly Property MaximumDurability As Long? Implements IItem.MaximumDurability
         Get
             Return ItemType.MaximumDurability

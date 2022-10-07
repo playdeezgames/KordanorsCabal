@@ -31,18 +31,6 @@ Public Class ItemShould
             End Sub)
     End Sub
     <Fact>
-    Sub have_maximum_damage()
-        WithItem(
-            Sub(worldData, itemId, item)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.MaximumDamage.ShouldBeNull
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 3L))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_durability()
         WithItem(
             Sub(worldData, itemId, item)

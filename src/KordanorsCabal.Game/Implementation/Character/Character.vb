@@ -313,7 +313,7 @@
     Function DetermineDamage(value As Long) As Long Implements ICharacter.DetermineDamage
         Dim maximumDamage As Long? = Nothing
         For Each item In EquippedItems
-            Dim itemMaximumDamage = item.MaximumDamage
+            Dim itemMaximumDamage = item.Weapon.MaximumDamage
             If itemMaximumDamage.HasValue Then
                 maximumDamage = If(maximumDamage, 0) + itemMaximumDamage.Value
             End If

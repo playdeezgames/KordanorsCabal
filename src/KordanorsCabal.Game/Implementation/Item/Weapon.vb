@@ -17,4 +17,9 @@
             Return Item.FromId(WorldData, Id).ItemType.AttackDice
         End Get
     End Property
+    ReadOnly Property MaximumDamage As Long? Implements IWeapon.MaximumDamage
+        Get
+            Return Item.FromId(WorldData, Id).ItemType.MaximumDamage
+        End Get
+    End Property
 End Class
