@@ -247,4 +247,11 @@ Public Class ItemShould
                 item.Weapon.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub have_durability_subobject()
+        WithItem(
+            Sub(worldData, itemId, item)
+                item.Durability.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class

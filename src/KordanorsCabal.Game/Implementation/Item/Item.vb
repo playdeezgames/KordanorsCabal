@@ -125,6 +125,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property Durability As IDurability Implements IItem.Durability
+        Get
+            Return Game.Durability.FromId(WorldData, Id)
+        End Get
+    End Property
+
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItem.EquippedBuff
         Return ItemType.EquippedBuff(statisticType)
     End Function
