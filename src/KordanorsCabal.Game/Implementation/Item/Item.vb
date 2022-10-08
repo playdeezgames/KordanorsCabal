@@ -36,11 +36,6 @@
     Public Sub Destroy() Implements IItem.Destroy
         WorldData.Item.Clear(Id)
     End Sub
-    Public ReadOnly Property Encumbrance As Long Implements IItem.Encumbrance
-        Get
-            Return ItemType.Encumbrance
-        End Get
-    End Property
     Private Sub ChangeStatistic(statisticType As ItemStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub

@@ -25,18 +25,6 @@
             End Sub)
     End Sub
     <Fact>
-    Sub have_encumbrance()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.Encumbrance.ShouldBe(0)
-                worldData.Verify(Function(x) x.Item.ReadItemType(id))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 1L))
-            End Sub)
-    End Sub
-    <Fact>
     Sub purify()
         WithSubject(
             Sub(worldData, id, subject)

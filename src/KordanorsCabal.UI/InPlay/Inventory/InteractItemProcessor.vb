@@ -51,7 +51,7 @@ Friend Class InteractItemProcessor
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
-        buffer.WriteTextCentered(1, $"Encumbrance: {InteractItem.Encumbrance}", False, Hue.Black)
+        buffer.WriteTextCentered(1, $"Encumbrance: {InteractItem.ItemType.Encumbrance}", False, Hue.Black)
         buffer.WriteTextCentered(0, InteractItem.Name, True, Hue.Blue)
     End Sub
 
