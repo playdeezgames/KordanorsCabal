@@ -1,12 +1,12 @@
 ﻿Public Class CharacterTests
-    Inherits BaseThingieTests(Of ICharacter)
+    Inherits ThingieShould(Of ICharacter)
     Sub New()
         MyBase.New(AddressOf Character.FromId)
     End Sub
     <Fact>
     Sub ShouldAttemptToPerformQuestAcceptance()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const locationId = 2L
                 Const questId = 1L
                 Const locationTypeId = 7L
@@ -35,7 +35,7 @@
     <Fact>
     Sub ShouldAttemptToChangeValuesAssociatedWithCurrentMP()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const stress = 2L
                 Const statisticTypeId = 13L
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
@@ -48,7 +48,7 @@
     <Fact>
     Sub ShouldAttemptToAddXP()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const xp = 2L
                 Const statisticTypeId = 16L
                 Const otherStatisticTypeId = 17L
@@ -64,7 +64,7 @@
     <Fact>
     Sub ShouldAttemptToAssignPoints()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const statisticTypeId = 9
 
                 Dim statisticType As New Mock(Of ICharacterStatisticType)
@@ -81,7 +81,7 @@
     <Fact>
     Sub ShouldDetermineWhetherOrNotAQuestCanBeAccepted()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const quest = Game.Quest.CellarRats
                 Const questId = CType(quest, Long)
 
@@ -95,7 +95,7 @@
     <Fact>
     Sub ShouldDetermineWhetherOrNotAGivenItemTypeCanBribeAGivenCharacter()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const characterTypeId = 2L
                 Const itemTypeId = 14L
 
@@ -114,7 +114,7 @@
     <Fact>
     Sub ShouldDetermineWhetherAGiveCharacterCanCastAGivenSpell()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const spellTypeId = 1L
                 worldData.SetupGet(Function(x) x.SpellType).Returns((New Mock(Of ISpellTypeData)).Object)
                 worldData.SetupGet(Function(x) x.Events).Returns((New Mock(Of IEventData)).Object)
@@ -129,7 +129,7 @@
     <Fact>
     Sub ShouldDetermineWhenACharacterCanDoIntimitation()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const statisticTypeId = 3
 
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
@@ -144,7 +144,7 @@
     <Fact>
     Sub ShouldDetermineWhenAGivenCharacterCanFight()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
 
                 subject.CanFight().ShouldBeFalse
@@ -155,7 +155,7 @@
     <Fact>
     Sub ShouldDetermineWhenAGivenCharacterCanGamble()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const statisticTypeId = 14L
 
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
@@ -170,7 +170,7 @@
     <Fact>
     Sub ShouldDetermineWhenAGivenCharacterCanInteract()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
 
                 subject.CanInteract().ShouldBeFalse
@@ -181,7 +181,7 @@
     <Fact>
     Sub ShouldDetermineWhenAGivenCharacterCanIntimidate()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const statisticTypeId = 4L
 
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
@@ -196,7 +196,7 @@
     <Fact>
     Sub ShouldDetermineWhenAGivenCharacterCanLearnAGivenSpell()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const spellTypeId = 1L
                 Dim spellType = Game.SpellType.FromId(worldData.Object, spellTypeId)
 
@@ -212,7 +212,7 @@
     <Fact>
     Sub ShouldDetermineWhenAGivenCharacterCanMap()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
 
                 subject.CanMap.ShouldBeFalse
@@ -223,14 +223,14 @@
     <Fact>
     Sub ShouldContainTheCharacterMovementSubject()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 subject.Movement.ShouldNotBeNull
             End Sub)
     End Sub
     <Fact>
     Sub ShouldRetrieveCharacterTypeFromAGivenCharacter()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const characterTypeId = 1L
                 Dim characterData As New Mock(Of ICharacterData)
                 characterData.Setup(Function(x) x.ReadCharacterType(id)).Returns(characterTypeId)
@@ -244,7 +244,7 @@
     <Fact>
     Sub ShouldRetrieveLocationFromAGivenCharacter()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const locationId = 1L
                 Dim characterData As New Mock(Of ICharacterData)
                 characterData.Setup(Function(x) x.ReadLocation(id)).Returns(locationId)
@@ -258,7 +258,7 @@
     <Fact>
     Sub ShouldRetrieveNameFromAGivenCharacter()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const characterTypeId = 1L
                 Dim characterData As New Mock(Of ICharacterData)
                 characterData.Setup(Function(x) x.ReadCharacterType(id)).Returns(characterTypeId)
@@ -275,7 +275,7 @@
     <Fact>
     Sub ShouldDetermineAGiveCharactersCurrentHPBasedOnThatCharactersMaximumHPAndWounds()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const firstStatisticTypeId = 6L
                 Const secondStatisticTypeId = 12L
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
@@ -292,7 +292,7 @@
     <Fact>
     Sub ShouldDetermineThatACharacterIsDeadBasedOnThatCharactersCurrentHP()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Const firstStatisticTypeId = 6L
                 Const secondStatisticTypeId = 12L
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
@@ -309,10 +309,10 @@
     <Fact>
     Sub ShouldDetermineWhetherAGivenCharacterIsTheEnemyOfAnotherCharacter()
         WithSubject(
-            Sub(id, worldData, subject)
-                Const otherCharacterId = 1L
-                Const characterTypeId = 2L
-                Const otherCharacterTypeId = 3L
+            Sub(worldData, id, subject)
+                Const otherCharacterId = 2L
+                Const characterTypeId = 3L
+                Const otherCharacterTypeId = 4L
                 Dim otherCharacter = Character.FromId(worldData.Object, otherCharacterId)
                 Dim characterData = FreshMock(Of ICharacterData)()
                 characterData.Setup(Function(x) x.ReadCharacterType(id)).Returns(characterTypeId)

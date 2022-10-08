@@ -1,11 +1,11 @@
 ﻿Public Class CharacterMovementTests
-    Inherits BaseThingieTests(Of ICharacterMovement)
+    Inherits ThingieShould(Of ICharacterMovement)
     Sub New()
         MyBase.New(AddressOf CharacterMovement.FromId)
     End Sub
     Private Sub WithMovementSubject(stuffToDo As Action(Of IDirection, Mock(Of IWorldData), ICharacterMovement))
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 Dim direction As New Mock(Of IDirection)
                 Dim createdInventoryId = 1L
                 Dim inventory = New Mock(Of IInventoryData)
@@ -94,7 +94,7 @@
     <Fact>
     Sub character_movement_can_access_character_subobject()
         WithSubject(
-            Sub(id, worldData, subject)
+            Sub(worldData, id, subject)
                 subject.Character.Id.ShouldBe(id)
             End Sub)
     End Sub
