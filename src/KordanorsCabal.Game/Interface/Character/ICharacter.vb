@@ -43,7 +43,7 @@
     ReadOnly Property NeedsHealing As Boolean
     Sub Interact()
     ReadOnly Property HasSpells As Boolean
-    Function HasItemsToRepair(shoppeType As ShoppeType) As Boolean
+    Function HasItemsToRepair(shoppeType As OldShoppeType) As Boolean
     ReadOnly Property HasEquipment As Boolean
     Function CanMoveForward() As Boolean
     Sub UseItem(item As IItem)
@@ -56,7 +56,7 @@
     ReadOnly Property Encumbrance As Long
     Sub Equip(item As IItem)
     ReadOnly Property MaximumEncumbrance As Long
-    ReadOnly Property ItemsToRepair(shoppeType As ShoppeType) As IEnumerable(Of IItem)
+    ReadOnly Property ItemsToRepair(shoppeType As OldShoppeType) As IEnumerable(Of IItem)
     Sub CompleteQuest(quest As Quest)
     Sub Gamble()
     Sub DoIntimidation()

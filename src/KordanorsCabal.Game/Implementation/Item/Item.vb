@@ -21,7 +21,7 @@
         End Get
     End Property
 
-    Public Function RepairCost(shoppeType As ShoppeType) As Long Implements IItem.RepairCost
+    Public Function RepairCost(shoppeType As OldShoppeType) As Long Implements IItem.RepairCost
         Dim fullRepairPrice = shoppeType.RepairPrice(ItemType)
         Dim wear = GetStatistic(ItemStatisticType.Wear)
         Dim maximum = Durability.Maximum.Value

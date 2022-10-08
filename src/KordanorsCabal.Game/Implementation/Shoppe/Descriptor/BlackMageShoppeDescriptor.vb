@@ -1,12 +1,13 @@
 ﻿Friend Class BlackMageShoppeDescriptor
-    Inherits ShoppeTypeDescriptor
+    Inherits ShoppeType
 
     Sub New(worldData As IWorldData)
         MyBase.New(
             worldData,
+            OldShoppeType.BlackMage,
             "Magic",
             AllItemTypes(worldData).Where(
-                Function(x) x.HasOffer(ShoppeType.BlackMage)).
+                Function(x) x.HasOffer(OldShoppeType.BlackMage)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.Offer))
@@ -15,7 +16,7 @@
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)
         Get
             Return AllItemTypes(WorldData).Where(
-                Function(x) x.HasPrice(ShoppeType.BlackMage)).
+                Function(x) x.HasPrice(OldShoppeType.BlackMage)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.Price)

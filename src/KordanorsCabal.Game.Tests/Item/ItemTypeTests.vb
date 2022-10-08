@@ -1,4 +1,4 @@
-﻿Public Class ItemTypeSHould
+﻿Public Class ItemTypeShould
     Inherits ThingieShould(Of IItemType)
     Sub New()
         MyBase.New(AddressOf ItemType.FromId)
@@ -190,7 +190,7 @@
         WithSubject(
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeShopType.ReadForTransactionType(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.HasOffer(ShoppeType.None).ShouldBeFalse
+                subject.HasOffer(OldShoppeType.None).ShouldBeFalse
                 worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 1))
             End Sub)
     End Sub
@@ -199,7 +199,7 @@
         WithSubject(
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeShopType.ReadForTransactionType(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.HasPrice(ShoppeType.None).ShouldBeFalse
+                subject.HasPrice(OldShoppeType.None).ShouldBeFalse
                 worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 2))
             End Sub)
     End Sub
@@ -208,7 +208,7 @@
         WithSubject(
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeShopType.ReadForTransactionType(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.CanRepair(ShoppeType.None).ShouldBeFalse
+                subject.CanRepair(OldShoppeType.None).ShouldBeFalse
                 worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 3))
             End Sub)
     End Sub

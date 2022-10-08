@@ -52,7 +52,7 @@ Friend Class ShoppeRepairProcessor
             Return UIState.InPlay
         End If
         Dim item = items(currentItemIndex)
-        Dim repairCost = item.RepairCost(ShoppeType.Blacksmith)
+        Dim repairCost = item.RepairCost(OldShoppeType.Blacksmith)
         If Game.World.PlayerCharacter(StaticWorldData.World).Money < repairCost Then
             Return UIState.ShoppeRepair
         End If

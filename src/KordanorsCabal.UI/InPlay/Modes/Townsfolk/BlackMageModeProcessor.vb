@@ -40,16 +40,16 @@ Friend Class BlackMageModeProcessor
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case OffersButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.BlackMage
+                ShoppeProcessor(Of String).ShoppeType = Game.OldShoppeType.BlackMage
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor(Of Item).ShoppeType = Game.ShoppeType.BlackMage
+                ShoppeProcessor(Of Item).ShoppeType = Game.OldShoppeType.BlackMage
                 Return UIState.ShoppeSell
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.BlackMage
+                ShoppeProcessor(Of String).ShoppeType = Game.OldShoppeType.BlackMage
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.ShoppeType.BlackMage
+                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.OldShoppeType.BlackMage
                 Return UIState.ShoppeBuy
             Case RestoreButtonIndex
                 player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {ItemType.FromId(StaticWorldData.World, 33).Name} and gives you a hit of {ItemType.FromId(StaticWorldData.World, 34).Name}.")

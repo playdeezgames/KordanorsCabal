@@ -27,7 +27,7 @@
         Buttons(SellButtonIndex).Title = "Sell"
         Buttons(PricesButtonIndex).Title = "Prices"
         Buttons(BuyButtonIndex).Title = "Buy"
-        If player.HasItemsToRepair(ShoppeType.Blacksmith) Then
+        If player.HasItemsToRepair(OldShoppeType.Blacksmith) Then
             Buttons(RepairButtonIndex).Title = "Repair"
         End If
     End Sub
@@ -38,20 +38,20 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case OffersButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.Blacksmith
+                ShoppeProcessor(Of String).ShoppeType = Game.OldShoppeType.Blacksmith
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor(Of Item).ShoppeType = Game.ShoppeType.Blacksmith
+                ShoppeProcessor(Of Item).ShoppeType = Game.OldShoppeType.Blacksmith
                 Return UIState.ShoppeSell
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.Blacksmith
+                ShoppeProcessor(Of String).ShoppeType = Game.OldShoppeType.Blacksmith
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.ShoppeType.Blacksmith
+                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.OldShoppeType.Blacksmith
                 Return UIState.ShoppeBuy
             Case RepairButtonIndex
-                If player.HasItemsToRepair(ShoppeType.Blacksmith) Then
-                    ShoppeProcessor(Of Item).ShoppeType = Game.ShoppeType.Blacksmith
+                If player.HasItemsToRepair(OldShoppeType.Blacksmith) Then
+                    ShoppeProcessor(Of Item).ShoppeType = Game.OldShoppeType.Blacksmith
                     Return UIState.ShoppeRepair
                 End If
         End Select

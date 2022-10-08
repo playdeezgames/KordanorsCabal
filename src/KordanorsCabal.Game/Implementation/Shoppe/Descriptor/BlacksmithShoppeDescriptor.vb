@@ -1,12 +1,13 @@
 ﻿Friend Class BlacksmithShoppeDescriptor
-    Inherits ShoppeTypeDescriptor
+    Inherits ShoppeType
 
     Sub New(worldData As IWorldData)
         MyBase.New(
             worldData,
+            OldShoppeType.Blacksmith,
             "Blacksmith",
             AllItemTypes(worldData).Where(
-                Function(x) x.HasOffer(ShoppeType.Blacksmith)).
+                Function(x) x.HasOffer(OldShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.Offer))
@@ -15,7 +16,7 @@
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)
         Get
             Return AllItemTypes(WorldData).Where(
-                Function(x) x.HasPrice(ShoppeType.Blacksmith)).
+                Function(x) x.HasPrice(OldShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.Price)
@@ -25,7 +26,7 @@
     Public Overrides ReadOnly Property Repairs As IReadOnlyDictionary(Of IItemType, Long)
         Get
             Return AllItemTypes(WorldData).Where(
-                Function(x) x.CanRepair(ShoppeType.Blacksmith)).
+                Function(x) x.CanRepair(OldShoppeType.Blacksmith)).
                 ToDictionary(
                     Function(x) x,
                     Function(x) x.RepairPrice)

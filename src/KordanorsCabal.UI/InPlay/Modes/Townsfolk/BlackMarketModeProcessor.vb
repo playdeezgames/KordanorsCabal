@@ -46,10 +46,10 @@
                     Return UIState.Message
                 End If
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = Game.ShoppeType.BlackMarket
+                ShoppeProcessor(Of String).ShoppeType = Game.OldShoppeType.BlackMarket
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.ShoppeType.BlackMarket
+                ShoppeProcessor(Of (Long, Long)).ShoppeType = Game.OldShoppeType.BlackMarket
                 Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay
