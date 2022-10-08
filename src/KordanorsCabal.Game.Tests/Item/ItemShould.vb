@@ -166,4 +166,11 @@ Public Class ItemShould
                 item.Armor.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub have_equipment_subobject()
+        WithSubject(
+            Sub(worldData, itemId, item)
+                item.Equipment.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class

@@ -6,6 +6,7 @@
     ReadOnly Property Durability As IDurability
     ReadOnly Property Repair As IRepair
     ReadOnly Property Armor As IArmor
+    ReadOnly Property Equipment As IEquipment
 
     ReadOnly Property CanEquip As Boolean
     ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot)

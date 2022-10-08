@@ -99,6 +99,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property Equipment As IEquipment Implements IItem.Equipment
+        Get
+            Return Game.Equipment.FromId(WorldData, Id)
+        End Get
+    End Property
+
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItem.EquippedBuff
         Return ItemType.EquippedBuff(statisticType)
     End Function
