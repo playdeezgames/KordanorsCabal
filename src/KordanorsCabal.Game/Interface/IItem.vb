@@ -7,6 +7,7 @@
     ReadOnly Property Repair As IRepair
     ReadOnly Property Armor As IArmor
     ReadOnly Property Equipment As IEquipment
+    ReadOnly Property Usage As IUsage
 
 
     ReadOnly Property IsConsumed As Boolean

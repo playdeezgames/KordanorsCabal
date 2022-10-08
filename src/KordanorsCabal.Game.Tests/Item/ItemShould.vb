@@ -130,4 +130,11 @@
                 subject.Equipment.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub have_usage_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Usage.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class

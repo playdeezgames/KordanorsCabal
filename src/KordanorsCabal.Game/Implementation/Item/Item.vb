@@ -95,4 +95,9 @@
         End Get
     End Property
 
+    Public ReadOnly Property Usage As IUsage Implements IItem.Usage
+        Get
+            Return Game.Usage.FromId(WorldData, Id)
+        End Get
+    End Property
 End Class
