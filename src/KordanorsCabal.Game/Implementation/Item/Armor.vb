@@ -14,4 +14,9 @@
             Return Item.FromId(WorldData, Id).ItemType.IsArmor
         End Get
     End Property
+    ReadOnly Property DefendDice As Long Implements IArmor.DefendDice
+        Get
+            Return Item.FromId(WorldData, Id).ItemType.DefendDice
+        End Get
+    End Property
 End Class

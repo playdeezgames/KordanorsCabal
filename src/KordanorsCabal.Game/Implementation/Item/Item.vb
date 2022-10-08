@@ -69,11 +69,6 @@
     Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
         WorldData.ItemStatistic.Write(Id, statisticType, value)
     End Sub
-    ReadOnly Property DefendDice As Long Implements IItem.DefendDice
-        Get
-            Return ItemType.DefendDice
-        End Get
-    End Property
     ReadOnly Property IsConsumed As Boolean Implements IItem.IsConsumed
         Get
             Return ItemType.IsConsumed

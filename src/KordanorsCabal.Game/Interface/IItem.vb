@@ -7,8 +7,6 @@
     ReadOnly Property Repair As IRepair
     ReadOnly Property Armor As IArmor
 
-    ReadOnly Property DefendDice As Long
-
     ReadOnly Property CanEquip As Boolean
     ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot)
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?

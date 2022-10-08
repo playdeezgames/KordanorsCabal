@@ -213,7 +213,7 @@
     Private Function GetDefendDice() As Long
         Dim dice = GetStatistic(CharacterStatisticType.FromId(WorldData, 2L)).Value
         For Each entry In EquippedItems
-            dice += entry.DefendDice
+            dice += entry.Armor.DefendDice
         Next
         Return dice
     End Function
