@@ -151,7 +151,7 @@
                                                           statisticType.Id), statisticType.DefaultValue)
         If result.HasValue Then
             For Each item In EquippedItems
-                Dim buff As Long = If(item.EquippedBuff(statisticType), 0)
+                Dim buff As Long = If(item.Equipment.EquippedBuff(statisticType), 0)
                 result = result.Value + buff
             Next
         End If
@@ -666,9 +666,9 @@
         spellType.Cast(Me)
     End Sub
     Public Sub Equip(item As IItem) Implements ICharacter.Equip
-        If item.CanEquip Then
+        If item.Equipment.CanEquip Then
             WorldData.InventoryItem.ClearForItem(item.Id)
-            Dim equipSlots = item.EquipSlots
+            Dim equipSlots = item.Equipment.EquipSlots
             Dim availableEquipSlots = equipSlots.Where(Function(x) Equipment(x) Is Nothing)
             Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
             Dim oldItem = Equipment(equipSlot)

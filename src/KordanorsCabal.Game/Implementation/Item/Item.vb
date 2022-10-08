@@ -25,11 +25,6 @@
             Return ItemType.CanUse(character)
         End Get
     End Property
-    ReadOnly Property CanEquip As Boolean Implements IItem.CanEquip
-        Get
-            Return ItemType.EquipSlots.Any
-        End Get
-    End Property
 
     Public Function RepairCost(shoppeType As ShoppeType) As Long Implements IItem.RepairCost
         Dim fullRepairPrice = shoppeType.RepairPrice(ItemType)
@@ -54,11 +49,6 @@
     Friend Sub Use(character As ICharacter) Implements IItem.Use
         ItemType.Use.Invoke(WorldData, character)
     End Sub
-    ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot) Implements IItem.EquipSlots
-        Get
-            Return ItemType.EquipSlots
-        End Get
-    End Property
     Private Sub ChangeStatistic(statisticType As ItemStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub
@@ -105,7 +95,4 @@
         End Get
     End Property
 
-    Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItem.EquippedBuff
-        Return ItemType.EquippedBuff(statisticType)
-    End Function
 End Class

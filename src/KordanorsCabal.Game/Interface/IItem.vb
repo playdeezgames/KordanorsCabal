@@ -8,10 +8,6 @@
     ReadOnly Property Armor As IArmor
     ReadOnly Property Equipment As IEquipment
 
-    ReadOnly Property CanEquip As Boolean
-    ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot)
-    Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
-
 
     ReadOnly Property IsConsumed As Boolean
     ReadOnly Property CanUse(character As ICharacter) As Boolean
