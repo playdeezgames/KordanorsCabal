@@ -6,7 +6,7 @@
         MyBase.New(worldData, id)
     End Sub
 
-    Friend Shared Function FromId(worldData As IWorldData, id As Long?) As IUsage
+    Public Shared Function FromId(worldData As IWorldData, id As Long?) As IUsage
         Return If(id.HasValue, New Usage(worldData, id.Value), Nothing)
     End Function
 End Class
