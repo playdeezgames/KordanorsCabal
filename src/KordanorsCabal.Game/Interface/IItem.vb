@@ -9,11 +9,6 @@
     ReadOnly Property Equipment As IEquipment
     ReadOnly Property Usage As IUsage
 
-
-    ReadOnly Property IsConsumed As Boolean
-    ReadOnly Property CanUse(character As ICharacter) As Boolean
-    Sub Use(character As ICharacter)
-
     ReadOnly Property Encumbrance As Long
     Sub Purify()
     Sub Destroy()

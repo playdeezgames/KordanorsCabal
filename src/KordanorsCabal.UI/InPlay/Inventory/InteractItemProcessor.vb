@@ -29,7 +29,7 @@ Friend Class InteractItemProcessor
     End Function
 
     Private Shared Function UseItem() As UIState
-        If InteractItem.CanUse(Game.World.PlayerCharacter(StaticWorldData.World)) Then
+        If InteractItem.Usage.CanUse(Game.World.PlayerCharacter(StaticWorldData.World)) Then
             Game.World.PlayerCharacter(StaticWorldData.World).UseItem(InteractItem)
             MainProcessor.PushUIState(UIState.Inventory)
             Return UIState.Message

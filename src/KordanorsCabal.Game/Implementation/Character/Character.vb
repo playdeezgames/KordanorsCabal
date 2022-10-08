@@ -685,9 +685,9 @@
         Return Not HasQuest(quest) AndAlso quest.CanAccept(Me)
     End Function
     Public Sub UseItem(item As IItem) Implements ICharacter.UseItem
-        If item.CanUse(Me) Then
-            item.Use(Me)
-            If item.IsConsumed Then
+        If item.Usage.CanUse(Me) Then
+            item.Usage.Use(Me)
+            If item.Usage.IsConsumed Then
                 item.Destroy()
             End If
         End If

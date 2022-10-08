@@ -20,11 +20,6 @@
             Return ItemType.Name
         End Get
     End Property
-    ReadOnly Property CanUse(character As ICharacter) As Boolean Implements IItem.CanUse
-        Get
-            Return ItemType.CanUse(character)
-        End Get
-    End Property
 
     Public Function RepairCost(shoppeType As ShoppeType) As Long Implements IItem.RepairCost
         Dim fullRepairPrice = shoppeType.RepairPrice(ItemType)
@@ -46,9 +41,6 @@
             Return ItemType.Encumbrance
         End Get
     End Property
-    Friend Sub Use(character As ICharacter) Implements IItem.Use
-        ItemType.Use.Invoke(WorldData, character)
-    End Sub
     Private Sub ChangeStatistic(statisticType As ItemStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub
@@ -59,11 +51,6 @@
     Private Sub SetStatistic(statisticType As ItemStatisticType, value As Long)
         WorldData.ItemStatistic.Write(Id, statisticType, value)
     End Sub
-    ReadOnly Property IsConsumed As Boolean Implements IItem.IsConsumed
-        Get
-            Return ItemType.IsConsumed
-        End Get
-    End Property
 
     Public ReadOnly Property Weapon As IWeapon Implements IItem.Weapon
         Get
