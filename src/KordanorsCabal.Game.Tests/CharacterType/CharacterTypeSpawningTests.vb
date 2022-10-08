@@ -5,7 +5,7 @@
     End Sub
     <Fact>
     Sub character_types_contains_information_about_spawnability_in_location_types_on_dungeon_levels_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeSpawnLocation).Returns((New Mock(Of ICharacterTypeSpawnLocationData)).Object)
                 Dim locationType = Game.LocationType.FromId(worldData.Object, 2L)
@@ -21,7 +21,7 @@
     End Sub
     <Fact>
     Sub character_types_contain_per_dungeon_level_spawn_counts_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeSpawnCount).Returns((New Mock(Of ICharacterTypeSpawnCountData)).Object)
                 Dim dungeonLevel As New Mock(Of IDungeonLevel)
@@ -36,7 +36,7 @@
     End Sub
     <Fact>
     Sub character_types_contain_initial_statistics_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
                 Dim actual = subject.InitialStatistics()

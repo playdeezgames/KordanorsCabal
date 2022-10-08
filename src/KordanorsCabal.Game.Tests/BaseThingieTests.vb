@@ -3,11 +3,11 @@
     Sub New(thingieMaker As Func(Of IWorldData, Long?, TThingie))
         Me.ThingieMaker = thingieMaker
     End Sub
-    Protected Sub WithAnySubject(stuffToDo As Action(Of Long, Mock(Of IWorldData), TThingie))
-        Dim itemTypeId = 9999L
+    Protected Sub WithSubject(stuffToDo As Action(Of Long, Mock(Of IWorldData), TThingie))
+        Dim id = 9999L
         Dim worldData As New Mock(Of IWorldData)
-        Dim subject As TThingie = ThingieMaker(worldData.Object, itemTypeId)
-        stuffToDo(itemTypeId, worldData, subject)
+        Dim subject As TThingie = ThingieMaker(worldData.Object, id)
+        stuffToDo(id, worldData, subject)
         worldData.VerifyNoOtherCalls()
     End Sub
     Protected Function FreshMock(Of TMock As Class)() As Mock(Of TMock)

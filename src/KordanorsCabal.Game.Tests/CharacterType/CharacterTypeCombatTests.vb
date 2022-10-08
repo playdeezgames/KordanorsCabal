@@ -7,7 +7,7 @@
 
     <Fact>
     Sub character_types_contain_whether_can_be_bribed_with_an_item_type_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeBribe).Returns((New Mock(Of ICharacterTypeBribeData)).Object)
                 Dim itemTypeId = 14L
@@ -18,7 +18,7 @@
     End Sub
     <Fact>
     Sub character_types_drop_on_a_location_loot_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeLoot).Returns((New Mock(Of ICharacterTypeLootData)).Object)
                 Dim location As New Mock(Of ILocation)
@@ -29,7 +29,7 @@
     End Sub
     <Fact>
     Sub character_types_generate_attack_types_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeAttackType).Returns((New Mock(Of ICharacterTypeAttackTypeData)).Object)
                 Dim actual = subject.GenerateAttackType()
@@ -39,7 +39,7 @@
     End Sub
     <Fact>
     Sub character_types_contain_whether_another_character_type_is_an_enemy_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypeEnemy).Returns((New Mock(Of ICharacterTypeEnemyData)).Object)
                 Dim otherCharacterTypeId = 2L
@@ -53,7 +53,7 @@
     End Sub
     <Fact>
     Sub character_types_generate_a_parting_shot_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterTypePartingShot).Returns((New Mock(Of ICharacterTypePartingShotData)).Object)
                 Dim actual = subject.PartingShot
@@ -63,7 +63,7 @@
     End Sub
     <Fact>
     Sub character_types_generate_a_money_drop_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
                 Dim actual = subject.RollMoneyDrop()
@@ -73,7 +73,7 @@
     End Sub
     <Fact>
     Sub character_types_contain_xp_values_fetched_from_the_data_store()
-        WithAnySubject(
+        WithSubject(
             Sub(characterTypeId, worldData, subject)
                 worldData.SetupGet(Function(x) x.CharacterType).Returns((New Mock(Of ICharacterTypeData)).Object)
                 Dim actual = subject.XPValue

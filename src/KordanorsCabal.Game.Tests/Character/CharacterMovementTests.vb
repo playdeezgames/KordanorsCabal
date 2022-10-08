@@ -4,7 +4,7 @@
         MyBase.New(AddressOf CharacterMovement.FromId)
     End Sub
     Private Sub WithMovementSubject(stuffToDo As Action(Of IDirection, Mock(Of IWorldData), ICharacterMovement))
-        WithAnySubject(
+        WithSubject(
             Sub(id, worldData, subject)
                 Dim direction As New Mock(Of IDirection)
                 Dim createdInventoryId = 1L
@@ -93,7 +93,7 @@
     End Sub
     <Fact>
     Sub character_movement_can_access_character_subobject()
-        WithAnySubject(
+        WithSubject(
             Sub(id, worldData, subject)
                 subject.Character.Id.ShouldBe(id)
             End Sub)
