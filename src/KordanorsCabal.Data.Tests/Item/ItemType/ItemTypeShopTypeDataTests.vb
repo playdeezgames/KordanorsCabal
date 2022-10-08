@@ -14,7 +14,7 @@
                     Function(x) x.ReadRecordsWithColumnValues(Of Long, Long, Long)(
                         It.IsAny(Of Action),
                         Tables.ItemTypeShopTypes,
-                        Columns.ShopTypeIdColumn,
+                        Columns.ShoppeTypeIdColumn,
                         (Columns.ItemTypeIdColumn, itemTypeId),
                         (Columns.TransactionTypeIdColumn, transactionTypeId)))
             End Sub)

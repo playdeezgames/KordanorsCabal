@@ -47,7 +47,7 @@ Public Class WorldData
     Public ReadOnly Property ItemTypeEquipSlot As IItemTypeEquipSlotData Implements IWorldData.ItemTypeEquipSlot
     Public ReadOnly Property ItemTypeShopType As IItemTypeShopTypeData Implements IWorldData.ItemTypeShopType
     Public ReadOnly Property ItemTypeEvent As IItemTypeEventData Implements IWorldData.ItemTypeEvent
-
+    Public ReadOnly Property ShoppeType As IShoppeTypeData Implements IWorldData.ShoppeType
     Public Sub New(store As IStore, events As IEventData)
         Me.Store = store
         Me.Events = events
@@ -92,6 +92,7 @@ Public Class WorldData
         LocationStatistic = New LocationStatisticData(store, Me)
         Player = New PlayerData(store, Me)
         Route = New RouteData(store, Me)
+        ShoppeType = New ShoppeTypeData(store, Me)
         SpellType = New SpellTypeData(store, Me)
         SpellTypeRequiredPower = New SpellTypeRequiredPowerData(store, Me)
     End Sub

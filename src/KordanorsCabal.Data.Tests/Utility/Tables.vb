@@ -39,6 +39,7 @@
     Friend Const LocationTypes = "LocationTypes"
     Friend Const Players = "Players"
     Friend Const Routes = "Routes"
+    Friend Const ShoppeTypes = "ShoppeTypes"
     Friend Const SpellTypes = "SpellTypes"
     Friend Const SpellTypeRequiredPowers = "SpellTypeRequiredPowers"
 End Module

@@ -3,7 +3,7 @@
     Implements IItemTypeShopTypeData
     Friend Const TableName = "ItemTypeShopTypes"
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
-    Friend Const ShopTypeIdColumn = "ShopTypeId"
+    Friend Const ShoppeTypeIdColumn = ShoppeTypeData.ShoppeTypeIdColumn
     Friend Const TransactionTypeIdColumn = "TransactionTypeId"
 
     Public Sub New(store As IStore, world As IWorldData)
@@ -14,7 +14,7 @@
         Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{ItemTypeIdColumn}],
-                    [{ShopTypeIdColumn}],
+                    [{ShoppeTypeIdColumn}],
                     [{TransactionTypeIdColumn}]) AS
                 (VALUES
                     (7,4,2),
@@ -63,7 +63,7 @@
                 )
                 SELECT 
                     [{ItemTypeIdColumn}],
-                    [{ShopTypeIdColumn}],
+                    [{ShoppeTypeIdColumn}],
                     [{TransactionTypeIdColumn}]
                 FROM [cte];")
 
@@ -73,7 +73,7 @@
         Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
-            ShopTypeIdColumn,
+            ShoppeTypeIdColumn,
             (ItemTypeIdColumn, itemTypeId),
             (TransactionTypeIdColumn, transationTypeId))
     End Function

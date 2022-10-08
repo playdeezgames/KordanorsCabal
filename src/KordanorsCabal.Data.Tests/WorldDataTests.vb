@@ -46,6 +46,7 @@ Namespace KordanorsCabal.Data.Tests
             subject.LocationType.ShouldNotBeNull
             subject.Player.ShouldNotBeNull
             subject.Route.ShouldNotBeNull
+            subject.ShoppeType.ShouldNotBeNull
             subject.SpellType.ShouldNotBeNull
             subject.SpellTypeRequiredPower.ShouldNotBeNull
             subject.Events.ShouldNotBeNull

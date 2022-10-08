@@ -2,6 +2,10 @@
     Inherits BaseThingie
     Implements IShoppeType
     ReadOnly Property Name As String Implements IShoppeType.Name
+        Get
+            Return WorldData.ShoppeType.ReadName(Id)
+        End Get
+    End Property
     ReadOnly Property Offers As IReadOnlyDictionary(Of IItemType, Long)
     Overridable ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)
         Get
@@ -19,7 +23,6 @@
            name As String,
            Optional offers As IReadOnlyDictionary(Of IItemType, Long) = Nothing)
         MyBase.New(worldData, id)
-        Me.Name = name
         Me.Offers = If(offers, New Dictionary(Of IItemType, Long))
     End Sub
 

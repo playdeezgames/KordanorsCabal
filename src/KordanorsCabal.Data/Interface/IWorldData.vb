@@ -43,6 +43,7 @@
     ReadOnly Property SpellTypeRequiredPower As ISpellTypeRequiredPowerData
     ReadOnly Property Events As IEventData
     ReadOnly Property ItemTypeEquipSlot As IItemTypeEquipSlotData
+    ReadOnly Property ShoppeType As IShoppeTypeData
     Sub Save(filename As String)
     Sub Load(filename As String)
     Sub Reset()
