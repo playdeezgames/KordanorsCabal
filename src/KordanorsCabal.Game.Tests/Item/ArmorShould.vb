@@ -1,32 +1,29 @@
 ﻿Public Class ArmorShould
-    Private Sub WithSubject(stuffToDo As Action(Of Mock(Of IWorldData), Long, IArmor))
-        Const id = 1L
-        Dim worldData As New Mock(Of IWorldData)
-        Dim subject As IArmor = Game.Armor.FromId(worldData.Object, id)
-        stuffToDo(worldData, id, subject)
-        worldData.VerifyNoOtherCalls()
+    Inherits ThingieShould(Of IArmor)
+    Public Sub New()
+        MyBase.New(AddressOf Armor.FromId)
     End Sub
     <Fact>
     Sub have_an_is_armor_property()
         WithSubject(
-            Sub(worldData, itemId, item)
+            Sub(worldData, id, subject)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.IsArmor.ShouldBeFalse
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                subject.IsArmor.ShouldBeFalse
+                worldData.Verify(Function(x) x.Item.ReadItemType(id))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4L))
             End Sub)
     End Sub
     <Fact>
     Sub have_defense_dice()
         WithSubject(
-            Sub(worldData, itemId, item)
+            Sub(worldData, id, subject)
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.DefendDice.ShouldBe(0)
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                subject.DefendDice.ShouldBe(0)
+                worldData.Verify(Function(x) x.Item.ReadItemType(id))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4L))
             End Sub)
     End Sub
