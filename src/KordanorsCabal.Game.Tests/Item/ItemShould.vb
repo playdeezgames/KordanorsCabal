@@ -31,18 +31,6 @@ Public Class ItemShould
             End Sub)
     End Sub
     <Fact>
-    Sub have_an_is_armor_property()
-        WithSubject(
-            Sub(worldData, itemId, item)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                item.IsArmor.ShouldBeFalse
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4L))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_defense_dice()
         WithSubject(
             Sub(worldData, itemId, item)
@@ -181,6 +169,13 @@ Public Class ItemShould
         WithSubject(
             Sub(worldData, itemId, item)
                 item.Repair.ShouldNotBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_armor_subobject()
+        WithSubject(
+            Sub(worldData, itemId, item)
+                item.Armor.ShouldNotBeNull
             End Sub)
     End Sub
 End Class

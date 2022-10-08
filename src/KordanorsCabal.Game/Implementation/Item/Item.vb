@@ -74,11 +74,6 @@
             Return ItemType.DefendDice
         End Get
     End Property
-    ReadOnly Property IsArmor() As Boolean Implements IItem.IsArmor
-        Get
-            Return ItemType.IsArmor
-        End Get
-    End Property
     ReadOnly Property IsConsumed As Boolean Implements IItem.IsConsumed
         Get
             Return ItemType.IsConsumed
@@ -100,6 +95,12 @@
     Public ReadOnly Property Repair As IRepair Implements IItem.Repair
         Get
             Return Game.Repair.FromId(WorldData, Id)
+        End Get
+    End Property
+
+    Public ReadOnly Property Armor As IArmor Implements IItem.Armor
+        Get
+            Return Game.Armor.FromId(WorldData, Id)
         End Get
     End Property
 

@@ -371,7 +371,7 @@
         End If
     End Function
     Private Function WearOneArmor() As Long?
-        Dim items = EquippedItems.Where(Function(x) x.Durability.Maximum IsNot Nothing AndAlso x.IsArmor).ToList
+        Dim items = EquippedItems.Where(Function(x) x.Durability.Maximum IsNot Nothing AndAlso x.Armor.IsArmor).ToList
         If items.Any Then
             Dim item = RNG.FromList(items)
             item.Durability.Reduce(1)
