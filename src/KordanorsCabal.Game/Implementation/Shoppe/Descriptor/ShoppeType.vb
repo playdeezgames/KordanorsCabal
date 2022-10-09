@@ -53,6 +53,10 @@ Public Class ShoppeType
         End If
         Return Nothing
     End Function
+
+    Public Function WillBuy(itemType As IItemType) As Boolean Implements IShoppeType.WillBuy
+        Return BuyPrice(itemType).HasValue
+    End Function
 End Class
 Module ShopeTypeDescriptorUtility
     Friend ReadOnly AllShoppeTypes As IReadOnlyDictionary(Of OldShoppeType, ShoppeType) =

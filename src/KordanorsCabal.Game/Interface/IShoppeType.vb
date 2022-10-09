@@ -7,7 +7,7 @@ Public Interface IShoppeType
     ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)
     ReadOnly Property Repairs As IReadOnlyDictionary(Of IItemType, Long)
     Function BuyPrice(itemType As IItemType) As Long?
-    'Function WillBuy(shoppeType As OldShoppeType, itemType As IItemType) As Boolean
-    'Function RepairPrice(shoppeType As OldShoppeType, itemType As IItemType) As Long?
-    'Function WillRepair(shoppeType As OldShoppeType, itemType As IItemType) As Boolean
+    Function WillBuy(itemType As IItemType) As Boolean
+    'Function RepairPrice(itemType As IItemType) As Long?
+    'Function WillRepair(itemType As IItemType) As Boolean
 End Interface
