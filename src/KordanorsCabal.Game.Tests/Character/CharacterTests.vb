@@ -21,7 +21,7 @@
                 worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
                 worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
 
-                subject.AcceptQuest(Quest.CellarRats)
+                subject.AcceptQuest(OldQuestType.CellarRats)
 
                 worldData.Verify(Function(x) x.CharacterQuest.Read(id, questId))
                 worldData.Verify(Sub(x) x.CharacterQuest.Write(id, questId))
@@ -82,7 +82,7 @@
     Sub ShouldDetermineWhetherOrNotAQuestCanBeAccepted()
         WithSubject(
             Sub(worldData, id, subject)
-                Const quest = Game.Quest.CellarRats
+                Const quest = Game.OldQuestType.CellarRats
                 Const questId = CType(quest, Long)
 
                 worldData.SetupGet(Function(x) x.CharacterQuest).Returns((New Mock(Of ICharacterQuestData)).Object)

@@ -14,7 +14,7 @@
             Case GoodByeButtonIndex
                 buffer.WriteText((0, 1), "@#$% off, you %$#^!", False, Hue.Black)
             Case QuestButtonIndex
-                If player.HasQuest(Quest.CellarRats) Then
+                If player.HasQuest(OldQuestType.CellarRats) Then
                     buffer.WriteText((0, 1), "How the rat killing going?", False, Hue.Black)
                     Exit Select
                 End If
@@ -33,11 +33,11 @@
     End Sub
 
     Private Sub UpdateQuestButton(player As ICharacter)
-        If player.HasQuest(Quest.CellarRats) Then
+        If player.HasQuest(OldQuestType.CellarRats) Then
             Buttons(QuestButtonIndex).Title = "Quest Done!"
             Return
         End If
-        If player.CanAcceptQuest(Quest.CellarRats) Then
+        If player.CanAcceptQuest(OldQuestType.CellarRats) Then
             Buttons(QuestButtonIndex).Title = "Do Quest!"
             Return
         End If
@@ -62,13 +62,13 @@
     End Function
 
     Private Function HandleQuestButton(player As ICharacter) As UIState
-        If player.HasQuest(Quest.CellarRats) Then
-            player.CompleteQuest(Quest.CellarRats)
+        If player.HasQuest(OldQuestType.CellarRats) Then
+            player.CompleteQuest(OldQuestType.CellarRats)
             PushUIState(UIState.InPlay)
             Return UIState.Message
         End If
-        If player.CanAcceptQuest(Quest.CellarRats) Then
-            player.AcceptQuest(Quest.CellarRats)
+        If player.CanAcceptQuest(OldQuestType.CellarRats) Then
+            player.AcceptQuest(OldQuestType.CellarRats)
             PushUIState(UIState.InPlay)
             Return UIState.Message
         End If

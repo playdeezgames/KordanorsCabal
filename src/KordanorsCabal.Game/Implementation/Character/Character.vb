@@ -44,7 +44,7 @@
             Return Game.CharacterType.FromId(WorldData, result.Value)
         End Get
     End Property
-    Public Function HasQuest(quest As Quest) As Boolean Implements ICharacter.HasQuest
+    Public Function HasQuest(quest As OldQuestType) As Boolean Implements ICharacter.HasQuest
         Return WorldData.CharacterQuest.Read(Id, quest)
     End Function
     Property Money As Long Implements ICharacter.Money
@@ -681,8 +681,8 @@
         End If
         EnqueueMessage($"You cannot equip {item.Name}!")
     End Sub
-    Public Function CanAcceptQuest(quest As Quest) As Boolean Implements ICharacter.CanAcceptQuest
-        Return Not HasQuest(quest) AndAlso quest.CanAccept(Me)
+    Public Function CanAcceptQuest(quest As OldQuestType) As Boolean Implements ICharacter.CanAcceptQuest
+        Return Not HasQuest(quest) AndAlso quest.CanAccept(WorldData, Me)
     End Function
     Public Sub UseItem(item As IItem) Implements ICharacter.UseItem
         If item.Usage.CanUse(Me) Then
@@ -700,10 +700,10 @@
             WorldData.Player.WritePlayerMode(value)
         End Set
     End Property
-    Public Sub CompleteQuest(quest As Quest) Implements ICharacter.CompleteQuest
-        quest.Complete(Me)
+    Public Sub CompleteQuest(quest As OldQuestType) Implements ICharacter.CompleteQuest
+        quest.Complete(WorldData, Me)
     End Sub
-    Public Sub AcceptQuest(quest As Quest) Implements ICharacter.AcceptQuest
+    Public Sub AcceptQuest(quest As OldQuestType) Implements ICharacter.AcceptQuest
         quest.Accept(WorldData, Me)
     End Sub
     Public ReadOnly Property CanInteract As Boolean Implements ICharacter.CanInteract
