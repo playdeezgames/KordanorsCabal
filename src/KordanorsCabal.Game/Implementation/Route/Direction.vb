@@ -19,7 +19,7 @@
     End Property
     ReadOnly Property Opposite As IDirection Implements IDirection.Opposite
         Get
-            Return New Direction(WorldData, WorldData.Direction.ReadOpposite(Id).Value)
+            Return FromId(WorldData, WorldData.Direction.ReadOpposite(Id))
         End Get
     End Property
     ReadOnly Property IsCardinal As Boolean
