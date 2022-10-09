@@ -10,10 +10,6 @@ Public Enum OldShoppeType
 End Enum
 Public Module ShoppeTypeExtensions
     <Extension>
-    Function Name(shoppeType As OldShoppeType) As String
-        Return AllShoppeTypes(shoppeType).Name
-    End Function
-    <Extension>
     Function Offers(shoppeType As OldShoppeType) As IReadOnlyDictionary(Of IItemType, Long)
         Return AllShoppeTypes(shoppeType).Offers
     End Function
