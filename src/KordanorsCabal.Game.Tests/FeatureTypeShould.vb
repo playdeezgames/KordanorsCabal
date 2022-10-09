@@ -1,6 +1,5 @@
 ﻿Public Class FeatureTypeShould
     Inherits ThingieShould(Of IFeatureType)
-
     Public Sub New()
         MyBase.New(AddressOf FeatureType.FromId)
     End Sub
