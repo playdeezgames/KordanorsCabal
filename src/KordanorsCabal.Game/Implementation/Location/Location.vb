@@ -61,9 +61,9 @@
             Return Feature IsNot Nothing
         End Get
     End Property
-    ReadOnly Property Feature As Feature Implements ILocation.Feature
+    ReadOnly Property Feature As IFeature Implements ILocation.Feature
         Get
-            Return Feature.FromId(WorldData, WorldData.Feature.ReadForLocation(Id))
+            Return Game.Feature.FromId(WorldData, WorldData.Feature.ReadForLocation(Id))
         End Get
     End Property
     ReadOnly Property Inventory As IInventory Implements ILocation.Inventory

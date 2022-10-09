@@ -12,7 +12,7 @@
     ReadOnly Property HasFeature As Boolean
     Function HasRoute(direction As IDirection) As Boolean
     Function Friends(character As ICharacter) As IEnumerable(Of ICharacter)
-    ReadOnly Property Feature As Feature
+    ReadOnly Property Feature As IFeature
     Function Enemies(character As ICharacter) As IEnumerable(Of ICharacter)
     Property DungeonLevel As IDungeonLevel
     Sub DestroyRoute(direction As IDirection)
