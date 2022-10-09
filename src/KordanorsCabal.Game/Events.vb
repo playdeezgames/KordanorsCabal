@@ -1,4 +1,4 @@
-﻿Friend Class Events
+﻿Public Class Events
     Implements IEventData
     Private ReadOnly checkerTable As IReadOnlyDictionary(Of String, Func(Of IWorldData, Long(), Boolean)) =
         New Dictionary(Of String, Func(Of IWorldData, Long(), Boolean)) From
