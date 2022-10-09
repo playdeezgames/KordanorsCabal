@@ -27,7 +27,7 @@
         Buttons(SellButtonIndex).Title = "Sell"
         Buttons(PricesButtonIndex).Title = "Prices"
         Buttons(BuyButtonIndex).Title = "Buy"
-        If player.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.World, OldShoppeType.Blacksmith)) Then
+        If player.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.World, 2)) Then
             Buttons(RepairButtonIndex).Title = "Repair"
         End If
     End Sub
@@ -38,20 +38,20 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case OffersButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, Game.OldShoppeType.Blacksmith)
+                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(StaticWorldData.World, Game.OldShoppeType.Blacksmith)
+                ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                 Return UIState.ShoppeSell
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, Game.OldShoppeType.Blacksmith)
+                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (Long, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.World, Game.OldShoppeType.Blacksmith)
+                ShoppeProcessor(Of (Long, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                 Return UIState.ShoppeBuy
             Case RepairButtonIndex
-                If player.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.World, OldShoppeType.Blacksmith)) Then
-                    ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(StaticWorldData.World, Game.OldShoppeType.Blacksmith)
+                If player.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.World, 2)) Then
+                    ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                     Return UIState.ShoppeRepair
                 End If
         End Select
