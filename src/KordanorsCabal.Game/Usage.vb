@@ -11,7 +11,7 @@
     End Function
     ReadOnly Property CanUse(character As ICharacter) As Boolean Implements IUsage.CanUse
         Get
-            Return Item.FromId(WorldData, Id).ItemType.CanUse(character)
+            Return Item.FromId(WorldData, Id).ItemType.CanUse(WorldData, character)
         End Get
     End Property
     ReadOnly Property IsConsumed As Boolean Implements IUsage.IsConsumed
