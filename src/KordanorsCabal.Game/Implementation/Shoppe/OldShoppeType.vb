@@ -3,5 +3,4 @@
     BlackMage
     Blacksmith
     InnKeeper
-    Healer
 End Enum
