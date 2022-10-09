@@ -5,7 +5,6 @@
         MyBase.New(
             worldData,
             OldShoppeType.BlackMage,
-            "Magic",
             AllItemTypes(worldData).Where(
                 Function(x) x.HasOffer(OldShoppeType.BlackMage)).
                 ToDictionary(

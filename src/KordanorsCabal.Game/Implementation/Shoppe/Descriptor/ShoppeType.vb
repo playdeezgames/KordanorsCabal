@@ -20,14 +20,13 @@
     Sub New(
            worldData As IWorldData,
            id As Long,
-           name As String,
            Optional offers As IReadOnlyDictionary(Of IItemType, Long) = Nothing)
         MyBase.New(worldData, id)
         Me.Offers = If(offers, New Dictionary(Of IItemType, Long))
     End Sub
 
     Public Shared Function FromId(worldData As IWorldData, id As Long?) As IShoppeType
-        Return If(id.HasValue, New ShoppeType(worldData, id.Value, ""), Nothing)
+        Return If(id.HasValue, New ShoppeType(worldData, id.Value), Nothing)
     End Function
 End Class
 Module ShopeTypeDescriptorUtility

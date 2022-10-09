@@ -2,7 +2,7 @@
     Inherits ShoppeType
 
     Sub New(worldData As IWorldData)
-        MyBase.New(worldData, OldShoppeType.BlackMarket, "Black Market")
+        MyBase.New(worldData, OldShoppeType.BlackMarket)
     End Sub
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)

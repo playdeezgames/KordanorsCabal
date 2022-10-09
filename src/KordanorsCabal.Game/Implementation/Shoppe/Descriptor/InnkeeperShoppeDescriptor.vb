@@ -2,7 +2,7 @@
     Inherits ShoppeType
 
     Sub New(worldData As IWorldData)
-        MyBase.New(worldData, OldShoppeType.InnKeeper, "The Inn")
+        MyBase.New(worldData, OldShoppeType.InnKeeper)
     End Sub
 
     Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)
