@@ -71,13 +71,16 @@ Public Class ShoppeType
     End Function
 End Class
 Module ShopeTypeDescriptorUtility
-    Friend ReadOnly AllShoppeTypes As IReadOnlyDictionary(Of OldShoppeType, ShoppeType) =
-        New Dictionary(Of OldShoppeType, ShoppeType) From
-        {
-            {OldShoppeType.BlackMage, New BlackMageShoppeDescriptor(StaticWorldData.World)},
-            {OldShoppeType.BlackMarket, New BlackMarketShoppeDescriptor(StaticWorldData.World)},
-            {OldShoppeType.Blacksmith, New BlacksmithShoppeDescriptor(StaticWorldData.World)},
-            {OldShoppeType.Healer, New HealerShoppeDescriptor(StaticWorldData.World)},
-            {OldShoppeType.InnKeeper, New InnkeeperShoppeDescriptor(StaticWorldData.World)}
-        }
+    Friend ReadOnly Property AllShoppeTypes As IReadOnlyDictionary(Of OldShoppeType, ShoppeType)
+        Get
+            Return New Dictionary(Of OldShoppeType, ShoppeType) From
+            {
+                {OldShoppeType.BlackMage, New BlackMageShoppeDescriptor(StaticWorldData.World)},
+                {OldShoppeType.BlackMarket, New BlackMarketShoppeDescriptor(StaticWorldData.World)},
+                {OldShoppeType.Blacksmith, New BlacksmithShoppeDescriptor(StaticWorldData.World)},
+                {OldShoppeType.Healer, New HealerShoppeDescriptor(StaticWorldData.World)},
+                {OldShoppeType.InnKeeper, New InnkeeperShoppeDescriptor(StaticWorldData.World)}
+            }
+        End Get
+    End Property
 End Module

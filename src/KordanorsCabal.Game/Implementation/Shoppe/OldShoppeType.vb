@@ -1,6 +1,4 @@
-﻿Imports System.Runtime.CompilerServices
-
-Public Enum OldShoppeType
+﻿Public Enum OldShoppeType
     None
     BlackMage
     Blacksmith
