@@ -2,5 +2,4 @@
     None
     BlackMage
     Blacksmith
-    InnKeeper
 End Enum

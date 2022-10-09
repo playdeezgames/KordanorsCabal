@@ -52,10 +52,10 @@
             Case QuestButtonIndex
                 Return HandleQuestButton(player)
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, Game.OldShoppeType.InnKeeper)
+                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 3)
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (Long, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.World, Game.OldShoppeType.InnKeeper)
+                ShoppeProcessor(Of (Long, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 3)
                 Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay
