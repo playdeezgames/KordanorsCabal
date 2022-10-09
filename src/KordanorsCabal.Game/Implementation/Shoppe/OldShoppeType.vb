@@ -4,5 +4,4 @@
     Blacksmith
     InnKeeper
     Healer
-    BlackMarket
 End Enum
