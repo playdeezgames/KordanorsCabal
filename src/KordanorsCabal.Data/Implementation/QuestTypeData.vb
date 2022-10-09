@@ -46,4 +46,8 @@
     Public Function ReadCompleteEventName(questTypeId As Long) As String Implements IQuestTypeData.ReadCompleteEventName
         Return Store.ReadColumnString(AddressOf Initialize, TableName, CompleteEventNameColumn, (QuestTypeIdColumn, questTypeId))
     End Function
+
+    Public Function ReadAll() As IEnumerable(Of Long) Implements IQuestTypeData.ReadAll
+        Throw New NotImplementedException()
+    End Function
 End Class

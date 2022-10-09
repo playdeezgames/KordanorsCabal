@@ -59,4 +59,11 @@
                         (Columns.QuestTypeIdColumn, questTypeId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub real_all()
+        WithSubobject(
+            Sub(store, events, subject)
+                subject.ReadAll().ShouldBeEmpty
+            End Sub)
+    End Sub
 End Class

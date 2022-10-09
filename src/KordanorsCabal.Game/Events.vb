@@ -23,7 +23,7 @@
                 Function(worldData, parms)
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
-                    Return Not character.HasQuest(OldQuestType.CellarRats)
+                    Return Not character.HasQuest(QuestType.FromId(worldData, 1L))
                 End Function},
             {"CharacterCanCompleteCellarRatsQuest",
                 Function(worldData, parms)
