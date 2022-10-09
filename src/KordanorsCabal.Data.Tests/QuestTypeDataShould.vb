@@ -60,10 +60,11 @@
             End Sub)
     End Sub
     <Fact>
-    Sub real_all()
+    Sub read_all()
         WithSubobject(
             Sub(store, events, subject)
-                subject.ReadAll().ShouldBeEmpty
+                subject.ReadAll().ShouldBeNull
+                store.Verify(Function(x) x.ReadRecords(Of Long)(It.IsAny(Of Action), Tables.QuestTypes, Columns.QuestTypeIdColumn))
             End Sub)
     End Sub
 End Class

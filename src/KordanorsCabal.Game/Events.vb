@@ -73,8 +73,8 @@
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
                     character.EnqueueMessage("You accept the quest!")
-                    worldData.CharacterQuest.Write(character.Id, OldQuestType.CellarRats)
-                    Dim ratCount = If(worldData.CharacterQuestCompletion.Read(character.Id, OldQuestType.CellarRats), 0) + 1
+                    worldData.CharacterQuest.Write(character.Id, 1L)
+                    Dim ratCount = If(worldData.CharacterQuestCompletion.Read(character.Id, 1L), 0) + 1
                     Dim location = Game.Location.FromLocationType(worldData, LocationType.FromId(worldData, 7L)).Single
                     Dim initialStatistics = CharacterType.FromId(worldData, 13).Spawning.InitialStatistics()
                     While ratCount > 0
@@ -92,11 +92,11 @@
                         character.Money += 1
                         ratTail.Destroy()
                     Next
-                    worldData.CharacterQuest.Clear(character.Id, OldQuestType.CellarRats)
+                    worldData.CharacterQuest.Clear(character.Id, 1L)
                     worldData.CharacterQuestCompletion.Write(
                         character.Id,
-                        OldQuestType.CellarRats,
-                        If(worldData.CharacterQuestCompletion.Read(character.Id, OldQuestType.CellarRats), 0) + 1)
+                        1L,
+                        If(worldData.CharacterQuestCompletion.Read(character.Id, 1L), 0) + 1)
                 End Sub}
         }
     Public Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms() As Long) Implements IEventData.Perform

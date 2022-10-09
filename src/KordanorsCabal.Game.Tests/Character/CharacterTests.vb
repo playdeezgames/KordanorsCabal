@@ -11,8 +11,10 @@ Public Class CharacterTests
             Sub(worldData, id, subject)
                 Const questTypeId = 1L
                 worldData.Setup(Function(x) x.Events.Test(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
+                worldData.Setup(Function(x) x.QuestType.ReadCanAcceptEventName(It.IsAny(Of Long)))
                 subject.AcceptQuest(QuestType.FromId(worldData.Object, questTypeId))
-                worldData.Verify(Function(x) x.Events.Test(worldData.Object, "CharacterCanAcceptCellarRatsQuest", {1L}))
+                worldData.Verify(Function(x) x.Events.Test(worldData.Object, Nothing, {1L}))
+                worldData.Verify(Function(x) x.QuestType.ReadCanAcceptEventName(questTypeId))
             End Sub)
     End Sub
     <Fact>
@@ -68,9 +70,11 @@ Public Class CharacterTests
                 Const questTypeId = 2L
                 worldData.Setup(Function(x) x.CharacterQuest.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.Events.Test(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
+                worldData.Setup(Function(x) x.QuestType.ReadCanAcceptEventName(It.IsAny(Of Long)))
                 subject.CanAcceptQuest(QuestType.FromId(worldData.Object, questTypeId)).ShouldBeFalse
-                worldData.Verify(Function(x) x.CharacterQuest.Read(id, 1))
-                worldData.Verify(Function(x) x.Events.Test(worldData.Object, "CharacterCanAcceptCellarRatsQuest", {1}))
+                worldData.Verify(Function(x) x.CharacterQuest.Read(id, questTypeId))
+                worldData.Verify(Function(x) x.Events.Test(worldData.Object, Nothing, {1}))
+                worldData.Verify(Function(x) x.QuestType.ReadCanAcceptEventName(questTypeId))
             End Sub)
     End Sub
     <Fact>
