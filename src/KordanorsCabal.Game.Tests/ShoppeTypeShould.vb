@@ -50,6 +50,16 @@
             End Sub)
     End Sub
     <Fact>
+    Sub have_repair_prices()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const itemTypeId = 2L
+                worldData.Setup(Function(x) x.ItemType.ReadAll())
+                subject.RepairPrice(ItemType.FromId(worldData.Object, itemTypeId)).ShouldBeNull
+                worldData.Verify(Function(x) x.ItemType.ReadAll())
+            End Sub)
+    End Sub
+    <Fact>
     Sub have_will_buy_determiner()
         WithSubject(
             Sub(worldData, id, subject)

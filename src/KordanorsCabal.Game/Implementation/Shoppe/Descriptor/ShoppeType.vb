@@ -57,6 +57,14 @@ Public Class ShoppeType
     Public Function WillBuy(itemType As IItemType) As Boolean Implements IShoppeType.WillBuy
         Return BuyPrice(itemType).HasValue
     End Function
+
+    Public Function RepairPrice(itemType As IItemType) As Long? Implements IShoppeType.RepairPrice
+        Dim value As Long
+        If Repairs.ToDictionary(Function(x) x.Key.Id, Function(x) x.Value).TryGetValue(itemType.Id, value) Then
+            Return value
+        End If
+        Return Nothing
+    End Function
 End Class
 Module ShopeTypeDescriptorUtility
     Friend ReadOnly AllShoppeTypes As IReadOnlyDictionary(Of OldShoppeType, ShoppeType) =
