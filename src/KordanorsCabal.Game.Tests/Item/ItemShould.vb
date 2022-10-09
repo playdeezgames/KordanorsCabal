@@ -87,21 +87,4 @@
                 subject.Usage.ShouldNotBeNull
             End Sub)
     End Sub
-    <Fact>
-    Sub have_repair_costs()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const shoppeTypeId = 2L
-                Const itemTypeId = 3L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemType.ReadAll())
-                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1)
-                subject.RepairCost(ShoppeType.FromId(worldData.Object, shoppeTypeId)).ShouldBe(0)
-                worldData.Verify(Function(x) x.Item.ReadItemType(id))
-                worldData.Verify(Function(x) x.ItemType.ReadAll())
-                worldData.Verify(Function(x) x.ItemStatistic.Read(id, 1L))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5))
-            End Sub)
-    End Sub
 End Class

@@ -11,5 +11,4 @@
 
     Sub Purify()
     Sub Destroy()
-    Function RepairCost(shoppeType As IShoppeType) As Long
 End Interface

@@ -21,14 +21,6 @@
         End Get
     End Property
 
-    Public Function RepairCost(shoppeType As IShoppeType) As Long Implements IItem.RepairCost
-        Dim fullRepairPrice = shoppeType.RepairPrice(ItemType)
-        Dim wear = GetStatistic(ItemStatisticType.Wear)
-        Dim maximum = Durability.Maximum.Value
-        Dim remainder = If(wear * fullRepairPrice Mod maximum > 0, 1, 0)
-        Return wear * If(fullRepairPrice, 0) \ maximum + remainder
-    End Function
-
     Public Sub Purify() Implements IItem.Purify
         ItemType.Purify.Invoke(Me)
     End Sub
