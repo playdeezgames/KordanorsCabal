@@ -12,7 +12,7 @@
         End Get
     End Property
 
-    Public ReadOnly Property ItemsToRepair(shoppeType As OldShoppeType) As IEnumerable(Of IItem) Implements ICharacter.ItemsToRepair
+    Public ReadOnly Property ItemsToRepair(shoppeType As IShoppeType) As IEnumerable(Of IItem) Implements ICharacter.ItemsToRepair
         Get
             Dim items As New List(Of IItem)
             items.AddRange(Inventory.Items.Where(Function(x) x.Repair.IsNeeded))
@@ -85,7 +85,7 @@
             Return GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)).Value
         End Get
     End Property
-    Public Function HasItemsToRepair(shoppeType As OldShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
+    Public Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
         Return ItemsToRepair(shoppeType).Any
     End Function
     ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean Implements ICharacter.CanBeBribedWith

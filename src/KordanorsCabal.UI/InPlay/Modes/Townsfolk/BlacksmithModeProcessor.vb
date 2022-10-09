@@ -27,7 +27,7 @@
         Buttons(SellButtonIndex).Title = "Sell"
         Buttons(PricesButtonIndex).Title = "Prices"
         Buttons(BuyButtonIndex).Title = "Buy"
-        If player.HasItemsToRepair(OldShoppeType.Blacksmith) Then
+        If player.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.World, OldShoppeType.Blacksmith)) Then
             Buttons(RepairButtonIndex).Title = "Repair"
         End If
     End Sub
@@ -50,7 +50,7 @@
                 ShoppeProcessor(Of (Long, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.World, Game.OldShoppeType.Blacksmith)
                 Return UIState.ShoppeBuy
             Case RepairButtonIndex
-                If player.HasItemsToRepair(OldShoppeType.Blacksmith) Then
+                If player.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.World, OldShoppeType.Blacksmith)) Then
                     ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(StaticWorldData.World, Game.OldShoppeType.Blacksmith)
                     Return UIState.ShoppeRepair
                 End If
