@@ -38,6 +38,7 @@
     Friend Const LocationStatistics = "LocationStatistics"
     Friend Const LocationTypes = "LocationTypes"
     Friend Const Players = "Players"
+    Friend Const QuestTypes = "QuestTypes"
     Friend Const Routes = "Routes"
     Friend Const ShoppeTypes = "ShoppeTypes"
     Friend Const SpellTypes = "SpellTypes"

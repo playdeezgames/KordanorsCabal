@@ -10,25 +10,23 @@
     End Function
 
     Overridable Function CanAccept(character As ICharacter) As Boolean
-        Throw New NotImplementedException
+        Return WorldData.Events.Test(WorldData, WorldData.QuestType.ReadCanAcceptEventName(Id), character.Id)
     End Function
     Overridable Function CanComplete(character As ICharacter) As Boolean
-        Throw New NotImplementedException
+        Return WorldData.Events.Test(WorldData, WorldData.QuestType.ReadCanCompleteEventName(Id), character.Id)
     End Function
     Overridable Sub Complete(worldData As IWorldData, character As ICharacter)
-        Throw New NotImplementedException
+        If character.HasQuest(CType(Id, OldQuestType)) AndAlso CanComplete(character) Then
+            worldData.Events.Perform(worldData, worldData.QuestType.ReadCompleteEventName(Id), character.Id)
+            Return
+        End If
+        character.EnqueueMessage("You cannot complete this quest at this time.")
     End Sub
     Overridable Sub Accept(worldData As IWorldData, character As ICharacter)
-        Throw New NotImplementedException
+        If CanAccept(character) Then
+            worldData.Events.Perform(worldData, worldData.QuestType.ReadAcceptEventName(Id), character.Id)
+            Return
+        End If
+        character.EnqueueMessage("You cannot accept this quest at this time.")
     End Sub
 End Class
-Friend Module QuestDescriptorUtility
-    Public ReadOnly Property QuestDescriptors(worldData As IWorldData) As IReadOnlyDictionary(Of OldQuestType, QuestType)
-        Get
-            Return New Dictionary(Of OldQuestType, QuestType) From
-            {
-                {OldQuestType.CellarRats, New CellarRatsQuestDescriptor(worldData)}
-            }
-        End Get
-    End Property
-End Module

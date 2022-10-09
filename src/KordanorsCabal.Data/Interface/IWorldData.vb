@@ -38,6 +38,7 @@
     ReadOnly Property LocationStatistic As ILocationStatisticData
     ReadOnly Property LocationType As ILocationTypeData
     ReadOnly Property Player As IPlayerData
+    ReadOnly Property QuestType As IQuestTypeData
     ReadOnly Property Route As IRouteData
     ReadOnly Property SpellType As ISpellTypeData
     ReadOnly Property SpellTypeRequiredPower As ISpellTypeRequiredPowerData

@@ -48,6 +48,7 @@ Public Class WorldData
     Public ReadOnly Property ItemTypeShopType As IItemTypeShopTypeData Implements IWorldData.ItemTypeShopType
     Public ReadOnly Property ItemTypeEvent As IItemTypeEventData Implements IWorldData.ItemTypeEvent
     Public ReadOnly Property ShoppeType As IShoppeTypeData Implements IWorldData.ShoppeType
+    Public ReadOnly Property QuestType As IQuestTypeData Implements IWorldData.QuestType
     Public Sub New(store As IStore, events As IEventData)
         Me.Store = store
         Me.Events = events
@@ -91,6 +92,7 @@ Public Class WorldData
         LocationDungeonLevel = New LocationDungeonLevelData(store, Me)
         LocationStatistic = New LocationStatisticData(store, Me)
         Player = New PlayerData(store, Me)
+        QuestType = New QuestTypeData(store, Me)
         Route = New RouteData(store, Me)
         ShoppeType = New ShoppeTypeData(store, Me)
         SpellType = New SpellTypeData(store, Me)

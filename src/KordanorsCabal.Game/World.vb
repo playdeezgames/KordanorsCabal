@@ -339,4 +339,12 @@ Public Module World
             Return AllDirections(worldData).Where(Function(x) x.IsCardinal)
         End Get
     End Property
+    Public ReadOnly Property QuestDescriptors(worldData As IWorldData) As IReadOnlyDictionary(Of OldQuestType, QuestType)
+        Get
+            Return New Dictionary(Of OldQuestType, QuestType) From
+            {
+                {OldQuestType.CellarRats, New CellarRatsQuestDescriptor(worldData)}
+            }
+        End Get
+    End Property
 End Module
