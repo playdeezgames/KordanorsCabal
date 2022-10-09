@@ -189,10 +189,3 @@
         MyBase.New(worldData, itemTypeId)
     End Sub
 End Class
-Public Module ItemTypeDescriptorUtility
-    Public ReadOnly Property AllItemTypes(worldData As IWorldData) As IEnumerable(Of IItemType)
-        Get
-            Return worldData.ItemType.ReadAll().Select(Function(x) ItemType.FromId(worldData, x))
-        End Get
-    End Property
-End Module

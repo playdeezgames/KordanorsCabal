@@ -167,6 +167,11 @@ Public Module World
             spawnLocation.Inventory.Add(Item.Create(worldData, itemType.Id))
         End If
     End Sub
+    Public ReadOnly Property AllItemTypes(worldData As IWorldData) As IEnumerable(Of IItemType)
+        Get
+            Return worldData.ItemType.ReadAll().Select(Function(x) ItemType.FromId(worldData, x))
+        End Get
+    End Property
 
     Private Sub PopulateItems(worldData As IWorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel)
         For Each itemType In AllItemTypes(worldData)
