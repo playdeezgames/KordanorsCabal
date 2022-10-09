@@ -45,6 +45,14 @@ Public Class ShoppeType
     Public Shared Function FromId(worldData As IWorldData, id As Long?) As IShoppeType
         Return If(id.HasValue, New ShoppeType(worldData, id.Value), Nothing)
     End Function
+
+    Public Function BuyPrice(itemType As IItemType) As Long? Implements IShoppeType.BuyPrice
+        Dim value As Long
+        If Offers.ToDictionary(Function(x) x.Key.Id, Function(x) x.Value).TryGetValue(itemType.Id, value) Then
+            Return value
+        End If
+        Return Nothing
+    End Function
 End Class
 Module ShopeTypeDescriptorUtility
     Friend ReadOnly AllShoppeTypes As IReadOnlyDictionary(Of OldShoppeType, ShoppeType) =

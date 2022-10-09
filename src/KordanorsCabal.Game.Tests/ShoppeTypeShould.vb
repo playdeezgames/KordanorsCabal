@@ -39,4 +39,14 @@
                 worldData.Verify(Function(x) x.ItemType.ReadAll())
             End Sub)
     End Sub
+    <Fact>
+    Sub have_buy_prices()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const itemTypeId = 2L
+                worldData.Setup(Function(x) x.ItemType.ReadAll())
+                subject.BuyPrice(ItemType.FromId(worldData.Object, itemTypeId)).ShouldBeNull
+                worldData.Verify(Function(x) x.ItemType.ReadAll())
+            End Sub)
+    End Sub
 End Class
