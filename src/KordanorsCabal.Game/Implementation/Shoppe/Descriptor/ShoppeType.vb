@@ -1,4 +1,6 @@
-﻿Public Class ShoppeType
+﻿Imports SQLitePCL
+
+Public Class ShoppeType
     Inherits BaseThingie
     Implements IShoppeType
     ReadOnly Property Name As String Implements IShoppeType.Name
@@ -6,23 +8,38 @@
             Return WorldData.ShoppeType.ReadName(Id)
         End Get
     End Property
-    ReadOnly Property Offers As IReadOnlyDictionary(Of IItemType, Long)
-    Overridable ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)
+    ReadOnly Property Offers As IReadOnlyDictionary(Of IItemType, Long) Implements IShoppeType.Offers
         Get
-            Return New Dictionary(Of IItemType, Long)
+            Return AllItemTypes(WorldData).Where(
+                Function(x) x.HasOffer(Me)).
+                ToDictionary(
+                    Function(x) x,
+                    Function(x) x.Offer)
         End Get
     End Property
-    Overridable ReadOnly Property Repairs() As IReadOnlyDictionary(Of IItemType, Long)
+    ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long) Implements IShoppeType.Prices
         Get
-            Return New Dictionary(Of IItemType, Long)
+            Return AllItemTypes(WorldData).Where(
+                Function(x) x.HasPrice(Me)).
+                ToDictionary(
+                    Function(x) x,
+                    Function(x) x.Price)
         End Get
     End Property
+    ReadOnly Property Repairs As IReadOnlyDictionary(Of IItemType, Long) Implements IShoppeType.Repairs
+        Get
+            Return AllItemTypes(WorldData).Where(
+                Function(x) x.CanRepair(Me)).
+                ToDictionary(
+                    Function(x) x,
+                    Function(x) x.RepairPrice)
+        End Get
+    End Property
+
     Sub New(
            worldData As IWorldData,
-           id As Long,
-           Optional offers As IReadOnlyDictionary(Of IItemType, Long) = Nothing)
+           id As Long)
         MyBase.New(worldData, id)
-        Me.Offers = If(offers, New Dictionary(Of IItemType, Long))
     End Sub
 
     Public Shared Function FromId(worldData As IWorldData, id As Long?) As IShoppeType

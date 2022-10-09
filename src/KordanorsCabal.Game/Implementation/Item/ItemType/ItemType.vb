@@ -81,25 +81,22 @@
     Private Const OfferTransactionTypeId = 1L
     Private Const PriceTransactionTypeId = 2L
     Private Const RepairTransactionTypeId = 3L
-    Private ReadOnly Property boughtAt As IEnumerable(Of OldShoppeType)
+    Private ReadOnly Property boughtAt As IEnumerable(Of Long)
         Get
             Return WorldData.ItemTypeShopType.
-                ReadForTransactionType(Id, OfferTransactionTypeId).
-                Select(Function(x) CType(x, OldShoppeType))
+                ReadForTransactionType(Id, OfferTransactionTypeId)
         End Get
     End Property
-    Private ReadOnly Property soldAt As IEnumerable(Of OldShoppeType)
+    Private ReadOnly Property soldAt As IEnumerable(Of Long)
         Get
             Return WorldData.ItemTypeShopType.
-                ReadForTransactionType(Id, PriceTransactionTypeId).
-                Select(Function(x) CType(x, OldShoppeType))
+                ReadForTransactionType(Id, PriceTransactionTypeId)
         End Get
     End Property
-    Private ReadOnly Property repairedAt As IEnumerable(Of OldShoppeType)
+    Private ReadOnly Property repairedAt As IEnumerable(Of Long)
         Get
             Return WorldData.ItemTypeShopType.
-                ReadForTransactionType(Id, RepairTransactionTypeId).
-                Select(Function(x) CType(x, OldShoppeType))
+                ReadForTransactionType(Id, RepairTransactionTypeId)
         End Get
     End Property
     Const UseEventId = 3L
@@ -171,19 +168,19 @@
     Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long Implements IItemType.RollSpawnCount
         Return RNG.RollDice(SpawnCounts(dungeonLevel))
     End Function
-    ReadOnly Property HasOffer(shoppeType As OldShoppeType) As Boolean Implements IItemType.HasOffer
+    ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean Implements IItemType.HasOffer
         Get
-            Return boughtAt.Contains(shoppeType)
+            Return boughtAt.Contains(shoppeType.Id)
         End Get
     End Property
-    ReadOnly Property HasPrice(shoppeType As OldShoppeType) As Boolean Implements IItemType.HasPrice
+    ReadOnly Property HasPrice(shoppeType As IShoppeType) As Boolean Implements IItemType.HasPrice
         Get
-            Return soldAt.Contains(shoppeType)
+            Return soldAt.Contains(shoppeType.Id)
         End Get
     End Property
-    ReadOnly Property CanRepair(shoppeType As OldShoppeType) As Boolean Implements IItemType.CanRepair
+    ReadOnly Property CanRepair(shoppeType As IShoppeType) As Boolean Implements IItemType.CanRepair
         Get
-            Return repairedAt.Contains(shoppeType)
+            Return repairedAt.Contains(shoppeType.Id)
         End Get
     End Property
     Sub New(

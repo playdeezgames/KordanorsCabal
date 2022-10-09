@@ -12,4 +12,31 @@
                 worldData.Verify(Function(x) x.ShoppeType.ReadName(id))
             End Sub)
     End Sub
+    <Fact>
+    Sub have_offers()
+        WithSubject(
+            Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.ItemType.ReadAll())
+                subject.Offers.ShouldBeEmpty
+                worldData.Verify(Function(x) x.ItemType.ReadAll())
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_prices()
+        WithSubject(
+            Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.ItemType.ReadAll())
+                subject.Prices.ShouldBeEmpty
+                worldData.Verify(Function(x) x.ItemType.ReadAll())
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_repairs()
+        WithSubject(
+            Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.ItemType.ReadAll())
+                subject.Repairs.ShouldBeEmpty
+                worldData.Verify(Function(x) x.ItemType.ReadAll())
+            End Sub)
+    End Sub
 End Class

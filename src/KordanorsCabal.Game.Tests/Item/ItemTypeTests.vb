@@ -189,8 +189,9 @@
     Sub item_types_has_offer_determiner()
         WithSubject(
             Sub(worldData, itemTypeId, subject)
+                Dim shoppeTypeId = 2L
                 worldData.Setup(Function(x) x.ItemTypeShopType.ReadForTransactionType(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.HasOffer(OldShoppeType.None).ShouldBeFalse
+                subject.HasOffer(ShoppeType.FromId(worldData.Object, shoppeTypeId)).ShouldBeFalse
                 worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 1))
             End Sub)
     End Sub
@@ -198,8 +199,9 @@
     Sub item_types_has_price_determiner()
         WithSubject(
             Sub(worldData, itemTypeId, subject)
+                Dim shoppeTypeId = 2L
                 worldData.Setup(Function(x) x.ItemTypeShopType.ReadForTransactionType(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.HasPrice(OldShoppeType.None).ShouldBeFalse
+                subject.HasPrice(ShoppeType.FromId(worldData.Object, shoppeTypeId)).ShouldBeFalse
                 worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 2))
             End Sub)
     End Sub
@@ -207,8 +209,9 @@
     Sub item_types_has_can_repair_determiner()
         WithSubject(
             Sub(worldData, itemTypeId, subject)
+                Dim shoppeTypeId = 2L
                 worldData.Setup(Function(x) x.ItemTypeShopType.ReadForTransactionType(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.CanRepair(OldShoppeType.None).ShouldBeFalse
+                subject.CanRepair(ShoppeType.FromId(worldData.Object, shoppeTypeId)).ShouldBeFalse
                 worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 3))
             End Sub)
     End Sub

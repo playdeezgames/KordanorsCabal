@@ -4,31 +4,6 @@
     Sub New(worldData As IWorldData)
         MyBase.New(
             worldData,
-            OldShoppeType.Blacksmith,
-            AllItemTypes(worldData).Where(
-                Function(x) x.HasOffer(OldShoppeType.Blacksmith)).
-                ToDictionary(
-                    Function(x) x,
-                    Function(x) x.Offer))
+            OldShoppeType.Blacksmith)
     End Sub
-
-    Public Overrides ReadOnly Property Prices As IReadOnlyDictionary(Of IItemType, Long)
-        Get
-            Return AllItemTypes(WorldData).Where(
-                Function(x) x.HasPrice(OldShoppeType.Blacksmith)).
-                ToDictionary(
-                    Function(x) x,
-                    Function(x) x.Price)
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property Repairs As IReadOnlyDictionary(Of IItemType, Long)
-        Get
-            Return AllItemTypes(WorldData).Where(
-                Function(x) x.CanRepair(OldShoppeType.Blacksmith)).
-                ToDictionary(
-                    Function(x) x,
-                    Function(x) x.RepairPrice)
-        End Get
-    End Property
 End Class

@@ -19,7 +19,7 @@
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
     ReadOnly Property IsWeapon As Boolean
     ReadOnly Property IsArmor As Boolean
-    ReadOnly Property HasOffer(shoppeType As OldShoppeType) As Boolean
-    ReadOnly Property HasPrice(shoppeType As OldShoppeType) As Boolean
-    ReadOnly Property CanRepair(shoppeType As OldShoppeType) As Boolean
+    ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean
+    ReadOnly Property HasPrice(shoppeType As IShoppeType) As Boolean
+    ReadOnly Property CanRepair(shoppeType As IShoppeType) As Boolean
 End Interface
