@@ -1,6 +1,4 @@
-﻿Imports SQLitePCL
-
-Public Class ShoppeType
+﻿Public Class ShoppeType
     Inherits BaseThingie
     Implements IShoppeType
     ReadOnly Property Name As String Implements IShoppeType.Name
@@ -70,17 +68,3 @@ Public Class ShoppeType
         Return RepairPrice(itemType).HasValue
     End Function
 End Class
-Module ShopeTypeDescriptorUtility
-    Friend ReadOnly Property AllShoppeTypes As IReadOnlyDictionary(Of OldShoppeType, ShoppeType)
-        Get
-            Return New Dictionary(Of OldShoppeType, ShoppeType) From
-            {
-                {OldShoppeType.BlackMage, New BlackMageShoppeDescriptor(StaticWorldData.World)},
-                {OldShoppeType.BlackMarket, New BlackMarketShoppeDescriptor(StaticWorldData.World)},
-                {OldShoppeType.Blacksmith, New BlacksmithShoppeDescriptor(StaticWorldData.World)},
-                {OldShoppeType.Healer, New HealerShoppeDescriptor(StaticWorldData.World)},
-                {OldShoppeType.InnKeeper, New InnkeeperShoppeDescriptor(StaticWorldData.World)}
-            }
-        End Get
-    End Property
-End Module
