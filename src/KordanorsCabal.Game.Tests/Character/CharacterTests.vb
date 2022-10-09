@@ -1,4 +1,6 @@
-﻿Public Class CharacterTests
+﻿Imports SQLitePCL
+
+Public Class CharacterTests
     Inherits ThingieShould(Of ICharacter)
     Sub New()
         MyBase.New(AddressOf Character.FromId)
@@ -7,29 +9,9 @@
     Sub ShouldAttemptToPerformQuestAcceptance()
         WithSubject(
             Sub(worldData, id, subject)
-                Const locationId = 2L
-                Const questId = 1L
-                Const locationTypeId = 7L
-                Const characterTypeId = 13L
-
-                Dim locationData = New Mock(Of ILocationData)
-
-                worldData.SetupGet(Function(x) x.CharacterQuest).Returns((New Mock(Of ICharacterQuestData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterQuestCompletion).Returns((New Mock(Of ICharacterQuestCompletionData)).Object)
-                worldData.SetupGet(Function(x) x.Location).Returns(locationData.Object)
-                locationData.Setup(Function(x) x.ReadForLocationType(It.IsAny(Of Long))).Returns(New List(Of Long) From {locationId})
-                worldData.SetupGet(Function(x) x.CharacterTypeInitialStatistic).Returns((New Mock(Of ICharacterTypeInitialStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
-
+                worldData.Setup(Function(x) x.Events.Test(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
                 subject.AcceptQuest(OldQuestType.CellarRats)
-
-                worldData.Verify(Function(x) x.CharacterQuest.Read(id, questId))
-                worldData.Verify(Sub(x) x.CharacterQuest.Write(id, questId))
-                worldData.Verify(Sub(x) x.CharacterQuestCompletion.Read(id, questId))
-                worldData.Verify(Function(x) x.Location.ReadForLocationType(locationTypeId))
-                worldData.Verify(Function(x) x.CharacterTypeInitialStatistic.ReadAllForCharacterType(characterTypeId))
-                worldData.Verify(Function(x) x.Character.Create(characterTypeId, locationId))
-                locationData.VerifyNoOtherCalls()
+                worldData.Verify(Function(x) x.Events.Test(worldData.Object, "CharacterCanAcceptCellarRatsQuest", {1L}))
             End Sub)
     End Sub
     <Fact>
@@ -83,13 +65,11 @@
         WithSubject(
             Sub(worldData, id, subject)
                 Const quest = Game.OldQuestType.CellarRats
-                Const questId = CType(quest, Long)
-
-                worldData.SetupGet(Function(x) x.CharacterQuest).Returns((New Mock(Of ICharacterQuestData)).Object)
-
-                subject.CanAcceptQuest(quest).ShouldBeTrue
-
-                worldData.Verify(Function(x) x.CharacterQuest.Read(id, questId))
+                worldData.Setup(Function(x) x.CharacterQuest.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Events.Test(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
+                subject.CanAcceptQuest(quest).ShouldBeFalse
+                worldData.Verify(Function(x) x.CharacterQuest.Read(id, 1))
+                worldData.Verify(Function(x) x.Events.Test(worldData.Object, "CharacterCanAcceptCellarRatsQuest", {1}))
             End Sub)
     End Sub
     <Fact>

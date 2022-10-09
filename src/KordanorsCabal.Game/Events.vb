@@ -18,6 +18,18 @@
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
                     Return character.CurrentMana > 0
+                End Function},
+            {"CharacterCanAcceptCellarRatsQuest",
+                Function(worldData, parms)
+                    Dim characterId = parms(0)
+                    Dim character = Game.Character.FromId(worldData, characterId)
+                    Return Not character.HasQuest(OldQuestType.CellarRats)
+                End Function},
+            {"CharacterCanCompleteCellarRatsQuest",
+                Function(worldData, parms)
+                    Dim characterId = parms(0)
+                    Dim character = Game.Character.FromId(worldData, characterId)
+                    Return character.Inventory.ItemsOfType(ItemType.FromId(worldData, 21L)).Any()
                 End Function}
         }
     Private ReadOnly actionTable As IReadOnlyDictionary(Of String, Action(Of IWorldData, Long())) =
@@ -55,6 +67,36 @@
                     character.PurifyItems()
                     character.DoFatigue(1)
                     character.EnqueueMessage("You purify yer inventory!")
+                End Sub},
+            {"CharacterAcceptCellarRatsQuest",
+                Sub(worldData, parms)
+                    Dim characterId = parms(0)
+                    Dim character = Game.Character.FromId(worldData, characterId)
+                    character.EnqueueMessage("You accept the quest!")
+                    worldData.CharacterQuest.Write(character.Id, OldQuestType.CellarRats)
+                    Dim ratCount = If(worldData.CharacterQuestCompletion.Read(character.Id, OldQuestType.CellarRats), 0) + 1
+                    Dim location = Game.Location.FromLocationType(worldData, LocationType.FromId(worldData, 7L)).Single
+                    Dim initialStatistics = CharacterType.FromId(worldData, 13).Spawning.InitialStatistics()
+                    While ratCount > 0
+                        Game.Character.Create(worldData, CharacterType.FromId(worldData, 13), location, initialStatistics)
+                        ratCount -= 1
+                    End While
+                End Sub},
+            {"CharacterCompleteCellarRatsQuest",
+                Sub(worldData, parms)
+                    Dim characterId = parms(0)
+                    Dim character = Game.Character.FromId(worldData, characterId)
+                    character.EnqueueMessage("You complete the quest!")
+                    Dim ratTails = character.Inventory.ItemsOfType(ItemType.FromId(worldData, 21L)).Take(10)
+                    For Each ratTail In ratTails
+                        character.Money += 1
+                        ratTail.Destroy()
+                    Next
+                    worldData.CharacterQuest.Clear(character.Id, OldQuestType.CellarRats)
+                    worldData.CharacterQuestCompletion.Write(
+                        character.Id,
+                        OldQuestType.CellarRats,
+                        If(worldData.CharacterQuestCompletion.Read(character.Id, OldQuestType.CellarRats), 0) + 1)
                 End Sub}
         }
     Public Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms() As Long) Implements IEventData.Perform

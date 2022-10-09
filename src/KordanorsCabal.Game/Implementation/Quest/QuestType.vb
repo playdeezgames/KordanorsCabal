@@ -9,7 +9,6 @@
         Return If(id.HasValue, New QuestType(worldData, id.Value), Nothing)
     End Function
 
-    Overridable ReadOnly Property Name As String
     Overridable Function CanAccept(character As ICharacter) As Boolean
         Throw New NotImplementedException
     End Function

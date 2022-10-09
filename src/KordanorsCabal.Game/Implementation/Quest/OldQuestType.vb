@@ -6,10 +6,6 @@ Public Enum OldQuestType
 End Enum
 Public Module QuestExtensions
     <Extension>
-    Function Name(worldData As IWorldData, quest As OldQuestType) As String
-        Return QuestDescriptors(worldData)(quest).Name
-    End Function
-    <Extension>
     Function CanAccept(quest As OldQuestType, worldData As IWorldData, character As ICharacter) As Boolean
         Return QuestDescriptors(worldData)(quest).CanAccept(character)
     End Function
