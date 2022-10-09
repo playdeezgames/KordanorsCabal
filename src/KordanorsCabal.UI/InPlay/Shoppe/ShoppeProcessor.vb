@@ -1,7 +1,7 @@
 ﻿MustInherit Class ShoppeProcessor(Of TListItem)
     Implements IProcessor
 
-    Public Shared Property ShoppeType As OldShoppeType
+    Public Shared Property ShoppeType As IShoppeType
 
     Protected items As List(Of TListItem)
     Protected currentItemIndex As Integer = 0
