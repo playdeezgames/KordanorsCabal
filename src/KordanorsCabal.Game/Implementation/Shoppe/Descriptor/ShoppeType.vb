@@ -65,6 +65,10 @@ Public Class ShoppeType
         End If
         Return Nothing
     End Function
+
+    Public Function WillRepair(itemType As IItemType) As Boolean Implements IShoppeType.WillRepair
+        Return RepairPrice(itemType).HasValue
+    End Function
 End Class
 Module ShopeTypeDescriptorUtility
     Friend ReadOnly AllShoppeTypes As IReadOnlyDictionary(Of OldShoppeType, ShoppeType) =

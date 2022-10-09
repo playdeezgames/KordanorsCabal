@@ -9,5 +9,5 @@ Public Interface IShoppeType
     Function BuyPrice(itemType As IItemType) As Long?
     Function WillBuy(itemType As IItemType) As Boolean
     Function RepairPrice(itemType As IItemType) As Long?
-    'Function WillRepair(itemType As IItemType) As Boolean
+    Function WillRepair(itemType As IItemType) As Boolean
 End Interface
