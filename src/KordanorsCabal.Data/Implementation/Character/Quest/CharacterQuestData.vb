@@ -3,7 +3,7 @@
     Implements ICharacterQuestData
     Friend Const TableName = "CharacterQuests"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const QuestColumn = "Quest"
+    Friend Const QuestTypeIdColumn = QuestTypeData.QuestTypeIdColumn
 
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
@@ -15,8 +15,8 @@
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{CharacterIdColumn}] INT NOT NULL,
-                [{QuestColumn}] INT NOT NULL,
-                UNIQUE([{CharacterIdColumn}],[{QuestColumn}]),
+                [{QuestTypeIdColumn}] INT NOT NULL,
+                UNIQUE([{CharacterIdColumn}],[{QuestTypeIdColumn}]),
                 FOREIGN KEY([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
@@ -26,7 +26,7 @@
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),
-            (QuestColumn, quest))
+            (QuestTypeIdColumn, quest))
     End Sub
 
     Public Function Read(characterId As Long, quest As Long) As Boolean Implements ICharacterQuestData.Read
@@ -35,7 +35,7 @@
             TableName,
             CharacterIdColumn,
             (CharacterIdColumn, characterId),
-            (QuestColumn, quest))?.Any, False)
+            (QuestTypeIdColumn, quest))?.Any, False)
     End Function
 
     Public Sub Write(characterId As Long, quest As Long) Implements ICharacterQuestData.Write
@@ -43,7 +43,7 @@
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),
-            (QuestColumn, quest))
+            (QuestTypeIdColumn, quest))
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long) Implements ICharacterQuestData.ClearForCharacter

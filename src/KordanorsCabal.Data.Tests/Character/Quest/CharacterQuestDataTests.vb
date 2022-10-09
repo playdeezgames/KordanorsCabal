@@ -15,7 +15,7 @@
                                  It.IsAny(Of Action),
                                  Tables.CharacterQuests,
                                  (CharacterIdColumn, characterId),
-                                 (QuestColumn, quest)))
+                                 (QuestTypeIdColumn, quest)))
             End Sub)
     End Sub
     <Fact>
@@ -42,7 +42,7 @@
                                  Tables.CharacterQuests,
                                  CharacterIdColumn,
                                  (CharacterIdColumn, characterId),
-                                 (QuestColumn, quest)))
+                                 (QuestTypeIdColumn, quest)))
             End Sub)
     End Sub
     <Fact>
@@ -56,7 +56,7 @@
                                  It.IsAny(Of Action),
                                  Tables.CharacterQuests,
                                  (CharacterIdColumn, characterId),
-                                 (QuestColumn, quest)))
+                                 (QuestTypeIdColumn, quest)))
             End Sub)
     End Sub
 End Class

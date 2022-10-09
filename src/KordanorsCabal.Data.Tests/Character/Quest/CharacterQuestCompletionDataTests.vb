@@ -29,7 +29,7 @@
                                  Tables.CharacterQuestCompletions,
                                  Columns.CompletionsColumn,
                                  (CharacterIdColumn, characterId),
-                                 (QuestColumn, questId)))
+                                 (QuestTypeIdColumn, questId)))
             End Sub)
     End Sub
     <Fact>
@@ -44,7 +44,7 @@
                                  It.IsAny(Of Action),
                                  Tables.CharacterQuestCompletions,
                                  (CharacterIdColumn, characterId),
-                                 (QuestColumn, questId),
+                                 (QuestTypeIdColumn, questId),
                                  (CompletionsColumn, completions)))
             End Sub)
     End Sub
