@@ -13,5 +13,5 @@
     Sub Destroy()
 
     'TODO: RepairCost needs unit test, but ShoppeType needs refactor first
-    Function RepairCost(shoppeType As OldShoppeType) As Long
+    Function RepairCost(shoppeType As IShoppeType) As Long
 End Interface
