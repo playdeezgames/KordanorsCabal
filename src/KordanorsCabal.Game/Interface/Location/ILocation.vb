@@ -17,7 +17,7 @@
     Property DungeonLevel As IDungeonLevel
     Sub DestroyRoute(direction As IDirection)
     ReadOnly Property CanMap As Boolean
-    ReadOnly Property RouteTypes As IEnumerable(Of RouteType)
+    ReadOnly Property RouteTypes As IEnumerable(Of OldRouteType)
     ReadOnly Property Name As String
     Function HasStairs() As Boolean
     Function GetStatistic(statisticType As LocationStatisticType) As Long?
