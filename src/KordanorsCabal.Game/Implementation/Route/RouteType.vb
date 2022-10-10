@@ -14,6 +14,9 @@
         Me.UnlockedRouteType = unlockedRouteType
         Me.IsSingleUse = isSingleUse
     End Sub
+    Shared Function FromId(worldData As IWorldData, id As Long?) As IRouteType
+        Return If(id.HasValue, New RouteType(worldData, id.Value), Nothing)
+    End Function
     ReadOnly Property Abbreviation As String Implements IRouteType.Abbreviation
     ReadOnly Property UnlockItem As Long? Implements IRouteType.UnlockItem
     ReadOnly Property UnlockedRouteType As OldRouteType? Implements IRouteType.UnlockedRouteType
