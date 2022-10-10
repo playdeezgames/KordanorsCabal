@@ -1,7 +1,7 @@
 ﻿Public Class DungeonLevel
     Inherits BaseThingie
     Implements IDungeonLevel
-    ReadOnly Property Name As String
+    ReadOnly Property Name As String Implements IDungeonLevel.Name
         Get
             Return WorldData.DungeonLevel.ReadName(Id)
         End Get
