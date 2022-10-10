@@ -16,19 +16,19 @@ Public Enum OldRouteType
 End Enum
 Public Module RouteTypeExtensions
     <Extension>
-    Function Abbreviation(routeType As OldRouteType) As String
-        Return RouteTypeDescriptors(routeType).Abbreviation
+    Function Abbreviation(routeType As OldRouteType, worldData As IWorldData) As String
+        Return RouteTypeDescriptors(worldData)(routeType).Abbreviation
     End Function
     <Extension>
-    Function UnlockItem(routeType As OldRouteType) As Long?
-        Return RouteTypeDescriptors(routeType).UnlockItem
+    Function UnlockItem(routeType As OldRouteType, worldData As IWorldData) As Long?
+        Return RouteTypeDescriptors(worldData)(routeType).UnlockItem
     End Function
     <Extension>
-    Function UnlockedRouteType(routeType As OldRouteType) As OldRouteType?
-        Return RouteTypeDescriptors(routeType).UnlockedRouteType
+    Function UnlockedRouteType(routeType As OldRouteType, worldData As IWorldData) As OldRouteType?
+        Return RouteTypeDescriptors(worldData)(routeType).UnlockedRouteType
     End Function
     <Extension>
-    Function IsSingleUse(routeType As OldRouteType) As Boolean
-        Return RouteTypeDescriptors(routeType).IsSingleUse
+    Function IsSingleUse(routeType As OldRouteType, worldData As IWorldData) As Boolean
+        Return RouteTypeDescriptors(worldData)(routeType).IsSingleUse
     End Function
 End Module

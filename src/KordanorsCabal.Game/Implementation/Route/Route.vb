@@ -28,7 +28,7 @@
     End Sub
     ReadOnly Property IsLocked As Boolean
         Get
-            Return RouteType.UnlockItem.HasValue
+            Return RouteType.UnlockItem(WorldData).HasValue
         End Get
     End Property
 
@@ -36,7 +36,7 @@
         If Not IsLocked Then
             Return True
         End If
-        If Not player.HasItemType(ItemType.FromId(WorldData, RouteType.UnlockItem)) Then
+        If Not player.HasItemType(ItemType.FromId(WorldData, RouteType.UnlockItem(WorldData))) Then
             Return False
         End If
         Return True
@@ -44,12 +44,12 @@
     Friend Function Move(player As ICharacter) As ILocation Implements IRoute.Move
         If CanMove(player) Then
             If IsLocked Then
-                player.Inventory.ItemsOfType(ItemType.FromId(WorldData, RouteType.UnlockItem.Value)).First.Destroy()
-                RouteType = If(RouteType.UnlockedRouteType, RouteType)
+                player.Inventory.ItemsOfType(ItemType.FromId(WorldData, RouteType.UnlockItem(WorldData).Value)).First.Destroy()
+                RouteType = If(RouteType.UnlockedRouteType(WorldData), RouteType)
                 Play(Sfx.UnlockDoor)
             End If
             Dim destination = ToLocation
-            If RouteType.IsSingleUse Then
+            If RouteType.IsSingleUse(WorldData) Then
                 Destroy()
             End If
             Return destination
