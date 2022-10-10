@@ -7,14 +7,18 @@
     Sub have_an_abbreviation()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.Abbreviation.ShouldBe("  ")
+                worldData.Setup(Function(x) x.RouteType.ReadAbbreviation(It.IsAny(Of Long)))
+                subject.Abbreviation.ShouldBeNull
+                worldData.Verify(Function(x) x.RouteType.ReadAbbreviation(id))
             End Sub)
     End Sub
     <Fact>
     Sub have_is_single_use()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.RouteType.ReadIsSingleUse(It.IsAny(Of Long)))
                 subject.IsSingleUse.ShouldBeFalse
+                worldData.Verify(Function(x) x.RouteType.ReadIsSingleUse(id))
             End Sub)
     End Sub
     <Fact>

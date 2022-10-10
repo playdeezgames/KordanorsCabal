@@ -40,6 +40,7 @@
     Friend Const Players = "Players"
     Friend Const QuestTypes = "QuestTypes"
     Friend Const Routes = "Routes"
+    Friend Const RouteTypes = "RouteTypes"
     Friend Const ShoppeTypes = "ShoppeTypes"
     Friend Const SpellTypes = "SpellTypes"
     Friend Const SpellTypeRequiredPowers = "SpellTypeRequiredPowers"

@@ -50,4 +50,5 @@
     Sub Reset()
     Function Renew() As Microsoft.Data.Sqlite.SqliteConnection
     Sub Restore(p As Microsoft.Data.Sqlite.SqliteConnection)
+    ReadOnly Property RouteType As IRouteTypeData
 End Interface

@@ -33,6 +33,7 @@
     Friend Const InventoryIdColumn = "InventoryId"
     Friend Const IsCardinalColumn = "IsCardinal"
     Friend Const IsDungeonColumn = "IsDungeon"
+    Friend Const IsSingleUseColumn = "IsSingleUse"
     Friend Const IsUndeadColumn = "IsUndead"
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemStatisticTypeIdColumn = "ItemStatisticTypeId"
