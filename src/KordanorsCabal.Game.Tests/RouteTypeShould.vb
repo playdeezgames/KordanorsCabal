@@ -26,7 +26,7 @@
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.Setup(Function(x) x.RouteTypeLock.ReadUnlockedRouteType(It.IsAny(Of Long)))
-                subject.UnlockedRouteType.ShouldBe(OldRouteType.None)
+                subject.UnlockedRouteType.ShouldBeNull
                 worldData.Verify(Function(x) x.RouteTypeLock.ReadUnlockedRouteType(id))
             End Sub)
     End Sub

@@ -1,6 +1,6 @@
 ﻿Public Interface IRoute
     Inherits IBaseThingie
-    Property RouteType As OldRouteType
+    Property RouteType As IRouteType
     Sub Destroy()
     Function CanMove(character As ICharacter) As Boolean
     ReadOnly Property ToLocation As ILocation

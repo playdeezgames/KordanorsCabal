@@ -24,7 +24,7 @@ Public Module RouteTypeExtensions
         Return RouteTypeDescriptors(worldData)(routeType).UnlockItem
     End Function
     <Extension>
-    Function UnlockedRouteType(routeType As OldRouteType, worldData As IWorldData) As OldRouteType?
+    Function UnlockedRouteType(routeType As OldRouteType, worldData As IWorldData) As IRouteType
         Return RouteTypeDescriptors(worldData)(routeType).UnlockedRouteType
     End Function
     <Extension>

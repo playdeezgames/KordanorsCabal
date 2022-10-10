@@ -10,7 +10,7 @@
             Sub(worldData, id, subject)
                 Const routeTypeId = 2L
                 worldData.Setup(Function(x) x.Route.ReadRouteType(It.IsAny(Of Long))).Returns(routeTypeId)
-                subject.RouteType.ShouldBe(OldRouteType.Passageway)
+                subject.RouteType.Id.ShouldBe(OldRouteType.Passageway)
                 worldData.Verify(Function(x) x.Route.ReadRouteType(id))
             End Sub)
     End Sub

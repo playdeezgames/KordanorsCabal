@@ -19,10 +19,9 @@
             Return WorldData.RouteTypeLock.ReadUnlockItem(Id)
         End Get
     End Property
-    ReadOnly Property UnlockedRouteType As OldRouteType? Implements IRouteType.UnlockedRouteType
+    ReadOnly Property UnlockedRouteType As IRouteType Implements IRouteType.UnlockedRouteType
         Get
-            Dim result = WorldData.RouteTypeLock.ReadUnlockedRouteType(Id)
-            Return If(result.HasValue, CType(result.Value, OldRouteType), Nothing)
+            Return RouteType.FromId(WorldData, WorldData.RouteTypeLock.ReadUnlockedRouteType(Id))
         End Get
     End Property
     ReadOnly Property IsSingleUse As Boolean Implements IRouteType.IsSingleUse

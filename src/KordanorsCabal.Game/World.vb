@@ -147,7 +147,7 @@ Public Module World
             Dim direction = deadEnd.RouteDirections.First
             Dim nextLocation = deadEnd.Routes(direction).ToLocation
             Dim route = nextLocation.Routes(direction.Opposite)
-            route.RouteType = OldRouteType.IronLock
+            route.RouteType = RouteType.FromId(worldData, OldRouteType.IronLock)
             itemTypes.Add(1L)
         Next
         itemTypes(0) = bossKeyType
@@ -188,7 +188,7 @@ Public Module World
         bossLocation.LocationType = LocationType.FromId(worldData, 6L)
         Dim direction = bossLocation.RouteDirections.First
         Dim nextLocation = bossLocation.Routes(direction).ToLocation
-        nextLocation.Routes(direction.Opposite).RouteType = routeType
+        nextLocation.Routes(direction.Opposite).RouteType = Game.RouteType.FromId(worldData, routeType)
         Return bossLocation
     End Function
 

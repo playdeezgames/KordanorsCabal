@@ -1,8 +1,8 @@
 ﻿Imports System.Runtime.CompilerServices
 
 Module RouteSprites
-    ReadOnly routeSprites As IReadOnlyDictionary(Of OldRouteType, Sprite) =
-        New Dictionary(Of OldRouteType, Sprite) From
+    ReadOnly routeSprites As IReadOnlyDictionary(Of Long, Sprite) =
+        New Dictionary(Of Long, Sprite) From
         {
             {
                 OldRouteType.Portal,
@@ -25,7 +25,7 @@ Module RouteSprites
             }
         }
     <Extension>
-    Function Sprite(routeType As OldRouteType) As Sprite
-        Return routeSprites(routeType)
+    Function Sprite(routeType As IRouteType) As Sprite
+        Return routeSprites(routeType.Id)
     End Function
 End Module

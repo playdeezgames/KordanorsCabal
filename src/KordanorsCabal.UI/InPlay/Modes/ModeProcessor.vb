@@ -73,7 +73,7 @@ Public MustInherit Class ModeProcessor
             buffer.PutCell((13, 14), Pattern.BottomLeftCorner, False, Hue.Black)
             buffer.PutCell((8, 14), Pattern.BottomRightCorner, False, Hue.Black)
             Dim routeType = location.Routes(player.Direction).RouteType
-            buffer.WriteText((10, 9), routeType.Abbreviation(StaticWorldData.World), False, routeType.TextHue)
+            buffer.WriteText((10, 9), routeType.Abbreviation, False, routeType.TextHue)
         End If
 
         If location.HasRoute(player.Direction.PreviousDirection) Then
@@ -81,7 +81,7 @@ Public MustInherit Class ModeProcessor
             buffer.PutCell((1, 4), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((1, 5), (1, 12), Pattern.Vertical8, False, Hue.Black)
             Dim routeType = location.Routes(player.Direction.PreviousDirection).RouteType
-            buffer.WriteText((0, 9), routeType.Abbreviation(StaticWorldData.World).Substring(1, 1), False, routeType.TextHue)
+            buffer.WriteText((0, 9), routeType.Abbreviation.Substring(1, 1), False, routeType.TextHue)
         End If
 
         If location.HasRoute(player.Direction.NextDirection) Then
@@ -89,7 +89,7 @@ Public MustInherit Class ModeProcessor
             buffer.PutCell((20, 4), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((20, 5), (1, 12), Pattern.Vertical1, False, Hue.Black)
             Dim routeType = location.Routes(player.Direction.NextDirection).RouteType
-            buffer.WriteText((21, 9), routeType.Abbreviation(StaticWorldData.World).Substring(0, 1), False, routeType.TextHue)
+            buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, routeType.TextHue)
         End If
 
         If location.HasRoute(Direction.FromId(StaticWorldData.World, 5L)) Then

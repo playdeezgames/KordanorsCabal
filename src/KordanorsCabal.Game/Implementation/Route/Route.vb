@@ -15,12 +15,12 @@
             Return Location.FromId(WorldData, WorldData.Route.ReadToLocation(Id))
         End Get
     End Property
-    Property RouteType As OldRouteType Implements IRoute.RouteType
+    Property RouteType As IRouteType Implements IRoute.RouteType
         Get
-            Return CType(WorldData.Route.ReadRouteType(Id), OldRouteType)
+            Return Game.RouteType.FromId(WorldData, WorldData.Route.ReadRouteType(Id))
         End Get
-        Set(value As OldRouteType)
-            WorldData.Route.WriteRouteType(Id, value)
+        Set(value As IRouteType)
+            WorldData.Route.WriteRouteType(Id, value.Id)
         End Set
     End Property
     Public Sub Destroy() Implements IRoute.Destroy
@@ -28,7 +28,7 @@
     End Sub
     ReadOnly Property IsLocked As Boolean
         Get
-            Return RouteType.UnlockItem(WorldData).HasValue
+            Return RouteType.UnlockItem.HasValue
         End Get
     End Property
 
@@ -36,7 +36,7 @@
         If Not IsLocked Then
             Return True
         End If
-        If Not player.HasItemType(ItemType.FromId(WorldData, RouteType.UnlockItem(WorldData))) Then
+        If Not player.HasItemType(ItemType.FromId(WorldData, RouteType.UnlockItem)) Then
             Return False
         End If
         Return True
@@ -44,12 +44,12 @@
     Friend Function Move(player As ICharacter) As ILocation Implements IRoute.Move
         If CanMove(player) Then
             If IsLocked Then
-                player.Inventory.ItemsOfType(ItemType.FromId(WorldData, RouteType.UnlockItem(WorldData).Value)).First.Destroy()
-                RouteType = If(RouteType.UnlockedRouteType(WorldData), RouteType)
+                player.Inventory.ItemsOfType(ItemType.FromId(WorldData, RouteType.UnlockItem.Value)).First.Destroy()
+                RouteType = RouteType.UnlockedRouteType
                 Play(Sfx.UnlockDoor)
             End If
             Dim destination = ToLocation
-            If RouteType.IsSingleUse(WorldData) Then
+            If RouteType.IsSingleUse Then
                 Destroy()
             End If
             Return destination
