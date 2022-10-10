@@ -47,7 +47,7 @@
             Return LocationType.Name
         End Get
     End Property
-    Public Function Routes(direction As IDirection) As Route Implements ILocation.Routes
+    Public Function Routes(direction As IDirection) As IRoute Implements ILocation.Routes
         Return Route.FromId(WorldData, WorldData.Route.ReadForLocationDirection(Id, direction.Id))
     End Function
     Public Function HasRoute(direction As IDirection) As Boolean Implements ILocation.HasRoute
