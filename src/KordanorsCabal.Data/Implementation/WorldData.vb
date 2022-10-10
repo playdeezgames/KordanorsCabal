@@ -50,7 +50,7 @@ Public Class WorldData
     Public ReadOnly Property ShoppeType As IShoppeTypeData Implements IWorldData.ShoppeType
     Public ReadOnly Property QuestType As IQuestTypeData Implements IWorldData.QuestType
     Public ReadOnly Property RouteType As IRouteTypeData Implements IWorldData.RouteType
-
+    Public ReadOnly Property RouteTypeLock As IRouteTypeLockData Implements IWorldData.RouteTypeLock
     Public Sub New(store As IStore, events As IEventData)
         Me.Store = store
         Me.Events = events
@@ -97,6 +97,7 @@ Public Class WorldData
         QuestType = New QuestTypeData(store, Me)
         Route = New RouteData(store, Me)
         RouteType = New RouteTypeData(store, Me)
+        RouteTypeLock = New RouteTypeLockData(store, Me)
         ShoppeType = New ShoppeTypeData(store, Me)
         SpellType = New SpellTypeData(store, Me)
         SpellTypeRequiredPower = New SpellTypeRequiredPowerData(store, Me)

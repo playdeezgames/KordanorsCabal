@@ -45,10 +45,11 @@
     ReadOnly Property Events As IEventData
     ReadOnly Property ItemTypeEquipSlot As IItemTypeEquipSlotData
     ReadOnly Property ShoppeType As IShoppeTypeData
+    ReadOnly Property RouteType As IRouteTypeData
+    ReadOnly Property RouteTypeLock As IRouteTypeLockData
     Sub Save(filename As String)
     Sub Load(filename As String)
     Sub Reset()
     Function Renew() As Microsoft.Data.Sqlite.SqliteConnection
     Sub Restore(p As Microsoft.Data.Sqlite.SqliteConnection)
-    ReadOnly Property RouteType As IRouteTypeData
 End Interface

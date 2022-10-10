@@ -25,14 +25,18 @@
     Sub have_an_unlocked_route_type()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.UnlockedRouteType.ShouldBeNull
+                worldData.Setup(Function(x) x.RouteTypeLock.ReadUnlockedRouteType(It.IsAny(Of Long)))
+                subject.UnlockedRouteType.ShouldBe(OldRouteType.None)
+                worldData.Verify(Function(x) x.RouteTypeLock.ReadUnlockedRouteType(id))
             End Sub)
     End Sub
     <Fact>
     Sub have_an_unlock_item()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.RouteTypeLock.ReadUnlockItem(It.IsAny(Of Long)))
                 subject.UnlockItem.ShouldBeNull
+                worldData.Verify(Function(x) x.RouteTypeLock.ReadUnlockItem(id))
             End Sub)
     End Sub
 End Class

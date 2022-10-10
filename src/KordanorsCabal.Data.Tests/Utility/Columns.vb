@@ -69,6 +69,8 @@
     Friend Const StatisticValueColumn = "StatisticValue"
     Friend Const ToLocationIdColumn = "ToLocationId"
     Friend Const TransactionTypeIdColumn = "TransactionTypeId"
+    Friend Const UnlockedRouteTypeIdColumn = "UnlockedRouteTypeId"
+    Friend Const UnlockItemTypeIdColumn = "UnlockItemTypeId"
     Friend Const WeightColumn = "Weight"
     Friend Const XPValueColumn = "XPValue"
 End Module
