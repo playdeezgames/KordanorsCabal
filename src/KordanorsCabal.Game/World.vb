@@ -260,8 +260,8 @@ Public Module World
     End Sub
 
     Private Sub StitchTown(worldData As IWorldData, fromLocation As ILocation, direction As IDirection, toLocation As ILocation)
-        Route.Create(worldData, fromLocation, direction, RouteType.FromId(worldData, OldRouteType.Road), toLocation)
-        Route.Create(worldData, toLocation, direction.Opposite, RouteType.FromId(worldData, OldRouteType.Road), fromLocation)
+        Route.Create(worldData, fromLocation, direction, RouteType.FromId(worldData, 1L), toLocation)
+        Route.Create(worldData, toLocation, direction.Opposite, RouteType.FromId(worldData, 1L), fromLocation)
     End Sub
 
     Private Sub RollUpPlayerCharacter(worldData As IWorldData)

@@ -2,5 +2,4 @@
 
 Public Enum OldRouteType
     None
-    Road
 End Enum
