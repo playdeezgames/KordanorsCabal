@@ -1,5 +1,5 @@
 ﻿Friend Class WearItemStatisticTypeDescriptor
-    Inherits ItemStatisticTypeDescriptor
+    Inherits ItemStatisticType
 
     Public Overrides ReadOnly Property DefaultValue As Long
         Get

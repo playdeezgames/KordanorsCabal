@@ -1,12 +1,10 @@
-﻿Imports System.Runtime.CompilerServices
-
-Public Enum ItemStatisticType
-    None
-    Wear
-End Enum
-Module ItemStatisticTypeExtensions
-    <Extension>
-    Function DefaultValue(statisticType As ItemStatisticType) As Long
-        Return ItemStatisticTypeDescriptors(statisticType).DefaultValue
-    End Function
+﻿Public MustInherit Class ItemStatisticType
+    MustOverride ReadOnly Property DefaultValue As Long
+End Class
+Module ItemStatisticTypeDescriptorUtility
+    Friend ReadOnly ItemStatisticTypeDescriptors As IReadOnlyDictionary(Of OldItemStatisticType, ItemStatisticType) =
+        New Dictionary(Of OldItemStatisticType, ItemStatisticType) From
+        {
+            {OldItemStatisticType.Wear, New WearItemStatisticTypeDescriptor}
+        }
 End Module
