@@ -11,13 +11,13 @@
     ReadOnly Property Current As Long? Implements IDurability.Current
         Get
             If Maximum.HasValue Then
-                Return Maximum.Value - GetStatistic(OldItemStatisticType.Wear)
+                Return Maximum.Value - GetStatistic(ItemStatisticType.FromId(WorldData, 1))
             End If
             Return Nothing
         End Get
     End Property
-    Private Function GetStatistic(statisticType As OldItemStatisticType) As Long
-        Return If(WorldData.ItemStatistic.Read(Id, statisticType), statisticType.DefaultValue)
+    Private Function GetStatistic(statisticType As IItemStatisticType) As Long
+        Return If(WorldData.ItemStatistic.Read(Id, statisticType.id), statisticType.DefaultValue)
     End Function
     Public ReadOnly Property Maximum As Long? Implements IDurability.Maximum
         Get
@@ -26,14 +26,14 @@
     End Property
     Public Sub Reduce(amount As Long) Implements IDurability.Reduce
         If Maximum.HasValue Then
-            ChangeStatistic(OldItemStatisticType.Wear, amount)
+            ChangeStatistic(ItemStatisticType.FromId(WorldData, 1), amount)
         End If
     End Sub
-    Private Sub ChangeStatistic(statisticType As OldItemStatisticType, delta As Long)
+    Private Sub ChangeStatistic(statisticType As IItemStatisticType, delta As Long)
         SetStatistic(statisticType, GetStatistic(statisticType) + delta)
     End Sub
-    Private Sub SetStatistic(statisticType As OldItemStatisticType, value As Long)
-        WorldData.ItemStatistic.Write(Id, statisticType, value)
+    Private Sub SetStatistic(statisticType As IItemStatisticType, value As Long)
+        WorldData.ItemStatistic.Write(Id, statisticType.Id, value)
     End Sub
     ReadOnly Property IsBroken As Boolean Implements IDurability.IsBroken
         Get

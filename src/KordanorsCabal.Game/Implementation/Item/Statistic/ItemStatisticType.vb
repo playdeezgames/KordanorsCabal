@@ -1,10 +1,21 @@
-﻿Public MustInherit Class ItemStatisticType
-    MustOverride ReadOnly Property DefaultValue As Long
+﻿Public Class ItemStatisticType
+    Inherits BaseThingie
+    Implements IItemStatisticType
+    Public Sub New(worldData As IWorldData, id As Long)
+        MyBase.New(worldData, id)
+    End Sub
+    Shared Function FromId(worldData As IWorldData, id As Long?) As IItemStatisticType
+        Return If(id.HasValue, New ItemStatisticType(worldData, id.Value), Nothing)
+    End Function
+    Overridable ReadOnly Property DefaultValue As Long Implements IItemStatisticType.DefaultValue
 End Class
 Module ItemStatisticTypeDescriptorUtility
-    Friend ReadOnly ItemStatisticTypeDescriptors As IReadOnlyDictionary(Of OldItemStatisticType, ItemStatisticType) =
-        New Dictionary(Of OldItemStatisticType, ItemStatisticType) From
-        {
-            {OldItemStatisticType.Wear, New WearItemStatisticTypeDescriptor}
-        }
+    Friend ReadOnly Property ItemStatisticTypeDescriptors(worldData As IWorldData) As IReadOnlyDictionary(Of OldItemStatisticType, ItemStatisticType)
+        Get
+            Return New Dictionary(Of OldItemStatisticType, ItemStatisticType) From
+            {
+                {OldItemStatisticType.Wear, New WearItemStatisticTypeDescriptor(worldData, OldItemStatisticType.Wear)}
+            }
+        End Get
+    End Property
 End Module

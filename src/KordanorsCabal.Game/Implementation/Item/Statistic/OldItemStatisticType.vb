@@ -6,7 +6,7 @@ Public Enum OldItemStatisticType
 End Enum
 Module ItemStatisticTypeExtensions
     <Extension>
-    Function DefaultValue(statisticType As OldItemStatisticType) As Long
-        Return ItemStatisticTypeDescriptors(statisticType).DefaultValue
+    Function DefaultValue(worldData As IWorldData, statisticType As OldItemStatisticType) As Long
+        Return ItemStatisticTypeDescriptors(worldData)(statisticType).DefaultValue
     End Function
 End Module
