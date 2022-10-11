@@ -28,7 +28,7 @@
             Return WorldData.ItemTypeSpawnCount.Read(Id, dungeonLevel.Id)
         End Get
     End Property
-    Private ReadOnly Property ItemTypeStatistic(itemTypeStatisticType As ItemTypeStatisticType) As Long?
+    Private ReadOnly Property ItemTypeStatistic(itemTypeStatisticType As IItemTypeStatisticType) As Long?
         Get
             Return WorldData.ItemTypeStatistic.Read(Id, itemTypeStatisticType.Id)
         End Get

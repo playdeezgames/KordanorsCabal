@@ -1,5 +1,6 @@
 ﻿Public Class ItemTypeStatisticType
     Inherits BaseThingie
+    Implements IItemTypeStatisticType
 
     Public Sub New(worldData As IWorldData, id As Long)
         MyBase.New(worldData, id)
