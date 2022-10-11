@@ -43,8 +43,8 @@ Public Module World
     End Sub
 
     Private Sub CreateDungeon(worldData As IWorldData, location As ILocation)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 1L), 2L, RouteType.FromId(worldData, OldRouteType.CopperLock)) 'TODO: add "reward item type" and "boss character type"
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 2L), 3L, RouteType.FromId(worldData, OldRouteType.SilverLock))
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 1L), 2L, RouteType.FromId(worldData, 5L)) 'TODO: add "reward item type" and "boss character type"
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 2L), 3L, RouteType.FromId(worldData, 6L))
         location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 3L), 4L, RouteType.FromId(worldData, 7L))
         location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 4L), 5L, RouteType.FromId(worldData, 8L))
         location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 5L), 6L, RouteType.FromId(worldData, 9L))

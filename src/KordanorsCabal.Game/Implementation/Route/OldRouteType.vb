@@ -6,6 +6,4 @@ Public Enum OldRouteType
     Passageway
     Stairs
     IronLock
-    CopperLock
-    SilverLock
 End Enum
