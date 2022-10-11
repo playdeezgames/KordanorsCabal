@@ -51,6 +51,8 @@ Public Class WorldData
     Public ReadOnly Property QuestType As IQuestTypeData Implements IWorldData.QuestType
     Public ReadOnly Property RouteType As IRouteTypeData Implements IWorldData.RouteType
     Public ReadOnly Property RouteTypeLock As IRouteTypeLockData Implements IWorldData.RouteTypeLock
+    Public ReadOnly Property ItemStatisticType As IItemStatisticTypeData Implements IWorldData.ItemStatisticType
+
     Public Sub New(store As IStore, events As IEventData)
         Me.Store = store
         Me.Events = events
@@ -80,6 +82,7 @@ Public Class WorldData
         InventoryItem = New InventoryItemData(store, Me)
         Item = New ItemData(store, Me)
         ItemStatistic = New ItemStatisticData(store, Me)
+        ItemStatisticType = New ItemStatisticTypeData(store, Me)
         ItemType = New ItemTypeData(store, Me)
         ItemTypeCharacterStatisticBuff = New ItemTypeCharacterStatisticBuffData(store, Me)
         ItemTypeEquipSlot = New ItemTypeEquipSlotData(store, Me)

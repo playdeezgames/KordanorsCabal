@@ -29,6 +29,6 @@
         Return wear * If(fullRepairPrice, 0) \ maximum + remainder
     End Function
     Private Function GetStatistic(statisticType As IItemStatisticType) As Long
-        Return If(WorldData.ItemStatistic.Read(Id, statisticType.Id), statisticType.DefaultValue)
+        Return If(WorldData.ItemStatistic.Read(Id, statisticType.Id), statisticType.DefaultValue.Value)
     End Function
 End Class

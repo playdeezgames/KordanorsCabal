@@ -16,7 +16,7 @@
         End Get
     End Property
     Private Function GetStatistic(statisticType As IItemStatisticType) As Long
-        Return If(WorldData.ItemStatistic.Read(Id, statisticType.id), statisticType.DefaultValue)
+        Return If(WorldData.ItemStatistic.Read(Id, statisticType.Id), statisticType.DefaultValue.Value)
     End Function
     Public ReadOnly Property Maximum As Long? Implements IDurability.Maximum
         Get

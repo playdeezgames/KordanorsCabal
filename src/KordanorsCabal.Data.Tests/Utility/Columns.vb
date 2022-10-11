@@ -14,6 +14,7 @@
     Friend Const CharacterTypeNameColumn = "CharacterTypeName"
     Friend Const CompleteEventNameColumn = "CompleteEventName"
     Friend Const CompletionsColumn = "Completions"
+    Friend Const DefaultValueColumn = "DefaultValue"
     Friend Const DirectionIdColumn = "DirectionId"
     Friend Const DirectionNameColumn = "DirectionName"
     Friend Const DungeonLevelIdColumn = "DungeonLevelId"

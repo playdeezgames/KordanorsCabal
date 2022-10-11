@@ -13,10 +13,12 @@
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.ItemStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
                 subject.Current.ShouldBe(1L)
                 worldData.Verify(Function(x) x.Item.ReadItemType(id))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
                 worldData.Verify(Function(x) x.ItemStatistic.Read(id, 1L))
+                worldData.Verify(Function(x) x.ItemStatisticType.ReadDefaultValue(1))
             End Sub)
     End Sub
     <Fact>
@@ -39,11 +41,13 @@
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.ItemStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
                 subject.Reduce(1L)
                 worldData.Verify(Function(x) x.Item.ReadItemType(id))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
                 worldData.Verify(Function(x) x.ItemStatistic.Read(id, 1L))
                 worldData.Verify(Sub(x) x.ItemStatistic.Write(id, 1L, 1L))
+                worldData.Verify(Function(x) x.ItemStatisticType.ReadDefaultValue(1))
             End Sub)
     End Sub
     <Fact>
@@ -54,10 +58,12 @@
                 worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.ItemStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
                 subject.IsBroken.ShouldBeFalse
                 worldData.Verify(Function(x) x.Item.ReadItemType(id))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
                 worldData.Verify(Function(x) x.ItemStatistic.Read(id, 1L))
+                worldData.Verify(Function(x) x.ItemStatisticType.ReadDefaultValue(1))
             End Sub)
     End Sub
 End Class

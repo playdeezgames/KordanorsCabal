@@ -1,4 +1,4 @@
-Public Class WorldDataTests
+Public Class WorldDataShould
     <Fact>
     Sub ShouldConstructAllOfTheDataSubobjects()
         Dim store As New Mock(Of IStore)
@@ -30,6 +30,7 @@ Public Class WorldDataTests
         subject.InventoryItem.ShouldNotBeNull
         subject.Item.ShouldNotBeNull
         subject.ItemStatistic.ShouldNotBeNull
+        subject.ItemStatisticType.ShouldNotBeNull
         subject.ItemType.ShouldNotBeNull
         subject.ItemTypeCharacterStatisticBuff.ShouldNotBeNull
         subject.ItemTypeEquipSlot.ShouldNotBeNull
