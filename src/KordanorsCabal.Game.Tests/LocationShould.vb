@@ -117,7 +117,9 @@
         WithSubject(
             Sub(worldData, id, subject)
                 Const characterId = 2L
+                worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
                 subject.Enemies(Character.FromId(worldData.Object, characterId)).ShouldBeEmpty
+                worldData.Verify(Function(x) x.Character.ReadForLocation(id))
             End Sub)
     End Sub
     <Fact>
@@ -142,7 +144,9 @@
         WithSubject(
             Sub(worldData, id, subject)
                 Const characterId = 2L
+                worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
                 subject.Friends(Character.FromId(worldData.Object, characterId)).ShouldBeEmpty
+                worldData.Verify(Function(x) x.Character.ReadForLocation(id))
             End Sub)
     End Sub
     <Fact>
@@ -150,7 +154,9 @@
         WithSubject(
             Sub(worldData, id, subject)
                 Const characterId = 2L
+                worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
                 subject.Enemy(Character.FromId(worldData.Object, characterId)).ShouldBeNull
+                worldData.Verify(Function(x) x.Character.ReadForLocation(id))
             End Sub)
     End Sub
     <Fact>
