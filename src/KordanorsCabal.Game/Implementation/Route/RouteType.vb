@@ -30,23 +30,3 @@
         End Get
     End Property
 End Class
-Friend Module RouteTypeDescriptorUtility
-    ReadOnly Property RouteTypeDescriptors(worldData As IWorldData) As IReadOnlyDictionary(Of OldRouteType, RouteType)
-        Get
-            Return New Dictionary(Of OldRouteType, RouteType) From
-            {
-                {OldRouteType.CopperLock, New RouteType(worldData, OldRouteType.CopperLock)},
-                {OldRouteType.FinalLock, New RouteType(worldData, OldRouteType.FinalLock)},
-                {OldRouteType.GoldLock, New RouteType(worldData, OldRouteType.GoldLock)},
-                {OldRouteType.IronLock, New RouteType(worldData, OldRouteType.IronLock)},
-                {OldRouteType.MoonPath, New RouteType(worldData, OldRouteType.MoonPath)},
-                {OldRouteType.Passageway, New RouteType(worldData, OldRouteType.Passageway)},
-                {OldRouteType.PlatinumLock, New RouteType(worldData, OldRouteType.PlatinumLock)},
-                {OldRouteType.Portal, New RouteType(worldData, OldRouteType.Portal)},
-                {OldRouteType.Road, New RouteType(worldData, OldRouteType.Road)},
-                {OldRouteType.SilverLock, New RouteType(worldData, OldRouteType.SilverLock)},
-                {OldRouteType.Stairs, New RouteType(worldData, OldRouteType.Stairs)}
-            }
-        End Get
-    End Property
-End Module

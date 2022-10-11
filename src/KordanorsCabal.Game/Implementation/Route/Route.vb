@@ -7,8 +7,8 @@
     Public Shared Function FromId(worldData As IWorldData, routeId As Long?) As IRoute
         Return If(routeId.HasValue, New Route(worldData, routeId.Value), Nothing)
     End Function
-    Public Shared Function Create(worldData As IWorldData, location As ILocation, direction As IDirection, routeType As OldRouteType, toLocation As ILocation) As IRoute
-        Return FromId(worldData, worldData.Route.Create(location.Id, direction.Id, routeType, toLocation.Id))
+    Public Shared Function Create(worldData As IWorldData, location As ILocation, direction As IDirection, routeType As IRouteType, toLocation As ILocation) As IRoute
+        Return FromId(worldData, worldData.Route.Create(location.Id, direction.Id, routeType.Id, toLocation.Id))
     End Function
     Public ReadOnly Property ToLocation As ILocation Implements IRoute.ToLocation
         Get
