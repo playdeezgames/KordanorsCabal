@@ -28,7 +28,10 @@
     Sub have_an_inventory()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.Inventory.ShouldBeNull
+                worldData.Setup(Function(x) x.Inventory.ReadForLocation(It.IsAny(Of Long)))
+                subject.Inventory.ShouldNotBeNull
+                worldData.Verify(Function(x) x.Inventory.CreateForLocation(id))
+                worldData.Verify(Function(x) x.Inventory.ReadForLocation(id))
             End Sub)
     End Sub
     <Fact>
