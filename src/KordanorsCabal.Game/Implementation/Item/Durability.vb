@@ -1,7 +1,6 @@
 ﻿Public Class Durability
     Inherits BaseThingie
     Implements IDurability
-
     Public Sub New(worldData As IWorldData, id As Long)
         MyBase.New(worldData, id)
     End Sub
