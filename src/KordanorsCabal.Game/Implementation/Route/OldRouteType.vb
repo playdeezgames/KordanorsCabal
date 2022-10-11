@@ -5,5 +5,4 @@ Public Enum OldRouteType
     Road
     Passageway
     Stairs
-    IronLock
 End Enum
