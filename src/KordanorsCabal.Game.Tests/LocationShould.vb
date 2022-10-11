@@ -139,7 +139,10 @@
     Sub have_a_location_type()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.LocationType.ShouldBeNull
+                Const locationTypeId = 2L
+                worldData.Setup(Function(x) x.Location.ReadLocationType(It.IsAny(Of Long))).Returns(locationTypeId)
+                subject.LocationType.ShouldNotBeNull
+                worldData.Verify(Function(x) x.Location.ReadLocationType(id))
             End Sub)
     End Sub
     <Fact>
