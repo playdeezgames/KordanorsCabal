@@ -10,5 +10,4 @@ Public Enum OldRouteType
     SilverLock
     GoldLock
     PlatinumLock
-    FinalLock
 End Enum

@@ -43,11 +43,11 @@ Public Module World
     End Sub
 
     Private Sub CreateDungeon(worldData As IWorldData, location As ILocation)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 1L), 2L, OldRouteType.CopperLock) 'TODO: add "reward item type" and "boss character type"
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 2L), 3L, OldRouteType.SilverLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 3L), 4L, OldRouteType.GoldLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 4L), 5L, OldRouteType.PlatinumLock)
-        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 5L), 6L, OldRouteType.FinalLock)
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 1L), 2L, RouteType.FromId(worldData, OldRouteType.CopperLock)) 'TODO: add "reward item type" and "boss character type"
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 2L), 3L, RouteType.FromId(worldData, OldRouteType.SilverLock))
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 3L), 4L, RouteType.FromId(worldData, OldRouteType.GoldLock))
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 4L), 5L, RouteType.FromId(worldData, OldRouteType.PlatinumLock))
+        location = CreateDungeonLevel(worldData, location, DungeonLevel.FromId(worldData, 5L), 6L, RouteType.FromId(worldData, 9L))
     End Sub
 
     Const MazeColumns = 11
@@ -100,7 +100,7 @@ Public Module World
         Return locations
     End Function
 
-    Private Function CreateDungeonLevel(worldData As IWorldData, fromLocation As ILocation, dungeonLevel As IDungeonLevel, bossKeyType As Long, bossRouteType As OldRouteType) As ILocation
+    Private Function CreateDungeonLevel(worldData As IWorldData, fromLocation As ILocation, dungeonLevel As IDungeonLevel, bossKeyType As Long, bossRouteType As IRouteType) As ILocation
         Dim start = DateTimeOffset.Now
         Dim elapsed = DateTimeOffset.Now - start
         Dim maze = New Maze(Of Long)(MazeColumns, MazeRows, MazeDirections)
@@ -130,7 +130,7 @@ Public Module World
         Next
     End Sub
 
-    Private Sub PopulateLocations(worldData As IWorldData, locations As IReadOnlyList(Of ILocation), bossKeyType As Long, bossRouteType As OldRouteType, dungeonLevel As IDungeonLevel)
+    Private Sub PopulateLocations(worldData As IWorldData, locations As IReadOnlyList(Of ILocation), bossKeyType As Long, bossRouteType As IRouteType, dungeonLevel As IDungeonLevel)
         Dim deadEndId = LocationType.FromId(worldData, 5L).Id
         Dim dungeonBossId = LocationType.FromId(worldData, 6L).Id
         Dim dungeonId = LocationType.FromId(worldData, 4L).Id
@@ -183,12 +183,12 @@ Public Module World
         Next
     End Sub
 
-    Private Function PlaceBossLocation(worldData As IWorldData, deadEnds As IEnumerable(Of ILocation), routeType As OldRouteType) As ILocation
+    Private Function PlaceBossLocation(worldData As IWorldData, deadEnds As IEnumerable(Of ILocation), routeType As IRouteType) As ILocation
         Dim bossLocation = RNG.FromEnumerable(deadEnds)
         bossLocation.LocationType = LocationType.FromId(worldData, 6L)
         Dim direction = bossLocation.RouteDirections.First
         Dim nextLocation = bossLocation.Routes(direction).ToLocation
-        nextLocation.Routes(direction.Opposite).RouteType = Game.RouteType.FromId(worldData, routeType)
+        nextLocation.Routes(direction.Opposite).RouteType = routeType
         Return bossLocation
     End Function
 
