@@ -89,7 +89,9 @@
     Sub have_a_route_count()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.Route.ReadCountForLocation(It.IsAny(Of Long)))
                 subject.RouteCount.ShouldBe(0)
+                worldData.Verify(Function(x) x.Route.ReadCountForLocation(id))
             End Sub)
     End Sub
     <Fact>
