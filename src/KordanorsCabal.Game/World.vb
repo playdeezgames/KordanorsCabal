@@ -32,10 +32,10 @@ Public Module World
                 Dim southLocation = locations(CInt(column + ((row + 1) Mod MoonRows) * MoonColumns))
                 Dim eastLocation = locations(CInt(((column + 1) Mod MoonColumns) + row * MoonColumns))
                 Dim westLocation = locations(CInt(((column + MoonColumns - 1) Mod MoonColumns) + row * MoonColumns))
-                Route.Create(worldData, moonLocation, north, RouteType.FromId(worldData, OldRouteType.MoonPath), northLocation)
-                Route.Create(worldData, moonLocation, south, RouteType.FromId(worldData, OldRouteType.MoonPath), southLocation)
-                Route.Create(worldData, moonLocation, east, RouteType.FromId(worldData, OldRouteType.MoonPath), eastLocation)
-                Route.Create(worldData, moonLocation, west, RouteType.FromId(worldData, OldRouteType.MoonPath), westLocation)
+                Route.Create(worldData, moonLocation, north, RouteType.FromId(worldData, 11L), northLocation)
+                Route.Create(worldData, moonLocation, south, RouteType.FromId(worldData, 11L), southLocation)
+                Route.Create(worldData, moonLocation, east, RouteType.FromId(worldData, 11L), eastLocation)
+                Route.Create(worldData, moonLocation, west, RouteType.FromId(worldData, 11L), westLocation)
             Next
         Next
         PopulateCharacters(worldData, locations, DungeonLevel.FromId(worldData, 6L))

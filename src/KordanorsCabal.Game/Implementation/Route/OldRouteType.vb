@@ -12,5 +12,4 @@ Public Enum OldRouteType
     PlatinumLock
     FinalLock
     Portal
-    MoonPath
 End Enum
