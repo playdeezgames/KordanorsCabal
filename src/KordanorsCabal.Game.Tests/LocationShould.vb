@@ -8,7 +8,12 @@
     Sub have_a_name()
         WithSubject(
             Sub(worldData, id, subject)
+                Const locationTypeId = 2L
+                worldData.Setup(Function(x) x.Location.ReadLocationType(It.IsAny(Of Long))).Returns(locationTypeId)
+                worldData.Setup(Function(x) x.LocationType.ReadName(It.IsAny(Of Long)))
                 subject.Name.ShouldBeNull
+                worldData.Verify(Function(x) x.Location.ReadLocationType(id))
+                worldData.Verify(Function(x) x.LocationType.ReadName(locationTypeId))
             End Sub)
     End Sub
     <Fact>
