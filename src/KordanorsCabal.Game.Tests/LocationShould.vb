@@ -153,7 +153,9 @@
     Sub have_a_dungeon_level()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.LocationDungeonLevel.Read(It.IsAny(Of Long)))
                 subject.DungeonLevel.ShouldBeNull
+                worldData.Verify(Function(x) x.LocationDungeonLevel.Read(id))
             End Sub)
     End Sub
     <Fact>
