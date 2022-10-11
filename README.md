@@ -101,38 +101,12 @@ XYZ Kordanor's Cabal (A Game in VB.NET About Looking Like a Dungeon Crawler Writ
 * Water = Heal      , Level 4
 
 
-| **KC Table** | **Purpose** | **Note** |
-|:---|:---|:---|
-| CharacterEquipSlots | Items equipped on a character in an equip slot. |  |
-| CharacterLocations | Locations known to a character. | Perhaps a visit count should also be tracked? |
-| CharacterSpells | Tracks knowledge levels for spells for a character. | Perhaps a little specific? Can spells be considered skills or some other sort of statistic? |
-| CharacterStatisticTypes | Metadata about Character Statistic Types. | Should I combine different statistic types into a single table? |
-| CharacterStatistics | Associates a statistic value with a character for a particular statistic. |  |
-| CharacterTypeEnemies | This is a very "us or them" table. A record present means a one sided enmity exists. | Perhaps a faction mechanism and some way to store a non-binary relationship level. |
-| CharacterTypeInitialStaticis | Gives the initial values for a given character type with the statistics in question. |  |
-| CharacterTypeSpawnCounts | Tells me how many of what thing shows up on a given dungeon level. | Move to more of a biome mechanism. |
-
-
 # Notes
 
 https://www.aardwolf.com/
+^ its a mud
 
+## Enum or not Enum?
 
-Ways of setting up the DB:
-* CREATE TABLE IF NOT EXISTS (Kordanor)
-    * Pro
-        * allows starting completely blank
-    * Con
-        * Building up things can take a little time
-* Stock DB (Jern Jam)
-    * Pro
-        * there is a starting point
-    * Con
-        * everything is done by ID, which is hard to track in different tables
-        * sqlite doesn't allow adding foreign keys
-* Scaffolder: part stock db, part lazy db
-    * Pro
-        * deterministic scaffolding
-        * scaffolding should be human readable
-    * Con
-        * its an extra step to the process
+If the enum needs metadata, then dont enum.
+
