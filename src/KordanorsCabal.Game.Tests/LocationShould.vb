@@ -40,7 +40,9 @@
             Sub(worldData, id, subject)
                 Const statisticType = LocationStatisticType.DungeonRow
                 Const statisticValue = 2L
+                worldData.Setup(Sub(x) x.LocationStatistic.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of Long?)))
                 subject.SetStatistic(statisticType, statisticValue)
+                worldData.Verify(Sub(x) x.LocationStatistic.Write(id, statisticType, statisticValue))
             End Sub)
     End Sub
     <Fact>
