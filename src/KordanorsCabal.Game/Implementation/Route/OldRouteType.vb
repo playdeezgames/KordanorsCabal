@@ -8,5 +8,4 @@ Public Enum OldRouteType
     IronLock
     CopperLock
     SilverLock
-    GoldLock
 End Enum

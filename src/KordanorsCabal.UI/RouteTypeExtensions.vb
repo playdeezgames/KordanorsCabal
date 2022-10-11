@@ -4,11 +4,11 @@ Module RouteTypeExtensions
     Private ReadOnly table As IReadOnlyDictionary(Of Long, Hue) =
         New Dictionary(Of Long, Hue) From
         {
-            {OldRouteType.CopperLock, Hue.Green},
-            {OldRouteType.GoldLock, Hue.Yellow},
-            {OldRouteType.IronLock, Hue.Black},
+            {5L, Hue.Green},
+            {7L, Hue.Yellow},
+            {4L, Hue.Black},
             {8L, Hue.Cyan},
-            {OldRouteType.SilverLock, Hue.Purple}
+            {6L, Hue.Purple}
         }
     <Extension>
     Function TextHue(routeType As IRouteType) As Hue
