@@ -7,7 +7,7 @@ Module RouteTypeExtensions
             {OldRouteType.CopperLock, Hue.Green},
             {OldRouteType.GoldLock, Hue.Yellow},
             {OldRouteType.IronLock, Hue.Black},
-            {OldRouteType.PlatinumLock, Hue.Cyan},
+            {8L, Hue.Cyan},
             {OldRouteType.SilverLock, Hue.Purple}
         }
     <Extension>
