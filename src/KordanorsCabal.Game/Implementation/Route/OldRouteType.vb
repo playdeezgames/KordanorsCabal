@@ -4,5 +4,4 @@ Public Enum OldRouteType
     None
     Road
     Passageway
-    Stairs
 End Enum

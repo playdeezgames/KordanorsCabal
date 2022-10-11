@@ -37,7 +37,7 @@
         End Get
     End Property
     Public Function HasStairs() As Boolean Implements ILocation.HasStairs
-        Return WorldData.Route.ReadForLocationRouteType(Id, OldRouteType.Stairs).Any()
+        Return WorldData.Route.ReadForLocationRouteType(Id, 3).Any()
     End Function
     Shared Function FromId(worldData As IWorldData, locationId As Long?) As ILocation
         Return If(locationId.HasValue, New Location(worldData, locationId.Value), Nothing)

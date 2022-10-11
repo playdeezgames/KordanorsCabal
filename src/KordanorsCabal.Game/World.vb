@@ -108,8 +108,8 @@ Public Module World
         Dim locations = CreateLocations(worldData, maze, dungeonLevel)
         PopulateLocations(worldData, locations, bossKeyType, bossRouteType, dungeonLevel)
         Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount > 1))
-        Route.Create(worldData, fromLocation, Direction.FromId(worldData, 6L), RouteType.FromId(worldData, OldRouteType.Stairs), startingLocation)
-        Route.Create(worldData, startingLocation, Direction.FromId(worldData, 5L), RouteType.FromId(worldData, OldRouteType.Stairs), fromLocation)
+        Route.Create(worldData, fromLocation, Direction.FromId(worldData, 6L), RouteType.FromId(worldData, 3), startingLocation)
+        Route.Create(worldData, startingLocation, Direction.FromId(worldData, 5L), RouteType.FromId(worldData, 3), fromLocation)
         PopulateCharacters(worldData, locations, dungeonLevel)
         Return locations.Single(Function(x) x.LocationType.Id = 6L)
     End Function
@@ -208,8 +208,8 @@ Public Module World
 
     Private Sub CreateCellar(worldData As IWorldData, fromLocation As ILocation)
         Dim cellar = Location.Create(worldData, LocationType.FromId(worldData, 7L))
-        Route.Create(worldData, fromLocation, Direction.FromId(worldData, 6L), RouteType.FromId(worldData, OldRouteType.Stairs), cellar)
-        Route.Create(worldData, cellar, Direction.FromId(worldData, 5L), RouteType.FromId(worldData, OldRouteType.Stairs), fromLocation)
+        Route.Create(worldData, fromLocation, Direction.FromId(worldData, 6L), RouteType.FromId(worldData, 3), cellar)
+        Route.Create(worldData, cellar, Direction.FromId(worldData, 5L), RouteType.FromId(worldData, 3), fromLocation)
     End Sub
 
     Private Sub CreatePlayer(worldData As IWorldData)
