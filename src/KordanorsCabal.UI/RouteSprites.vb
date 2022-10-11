@@ -5,7 +5,7 @@ Module RouteSprites
         New Dictionary(Of Long, Sprite) From
         {
             {
-                OldRouteType.Portal,
+                10L,
                 New Sprite(
                         Hue.Purple,
                         LoadPixels(

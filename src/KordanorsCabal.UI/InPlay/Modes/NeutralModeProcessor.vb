@@ -27,7 +27,7 @@
     End Sub
 
     Private Sub ShowTownPortal(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
-        If player.Location.RouteTypes.Any(Function(x) x = OldRouteType.Portal) Then
+        If player.Location.RouteTypes.Any(Function(x) x.Id = 10L) Then
             buffer.WriteText(xy, "There is a portal here!", False, Hue.Purple)
         End If
     End Sub

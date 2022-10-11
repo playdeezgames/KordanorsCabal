@@ -45,8 +45,8 @@
                     location.DestroyRoute(outDirection)
                     Dim destination = Game.Location.FromLocationType(worldData, LocationType.FromId(worldData, 1L)).Single
                     destination.DestroyRoute(inDirection)
-                    Route.Create(worldData, location, outDirection, RouteType.FromId(worldData, OldRouteType.Portal), destination)
-                    Route.Create(worldData, destination, inDirection, RouteType.FromId(worldData, OldRouteType.Portal), location)
+                    Route.Create(worldData, location, outDirection, RouteType.FromId(worldData, 10L), destination)
+                    Route.Create(worldData, destination, inDirection, RouteType.FromId(worldData, 10L), location)
                     character.EnqueueMessage("A portal opens before you!")
                 End Sub},
             {"UseAirShard",
@@ -145,8 +145,8 @@
                     location.DestroyRoute(outDirection)
                     Dim destination = RNG.FromEnumerable(Game.Location.FromLocationType(worldData, LocationType.FromId(worldData, 8L)))
                     destination.DestroyRoute(inDirection)
-                    Route.Create(worldData, location, outDirection, RouteType.FromId(worldData, OldRouteType.Portal), destination)
-                    Route.Create(worldData, destination, inDirection, RouteType.FromId(worldData, OldRouteType.Portal), location)
+                    Route.Create(worldData, location, outDirection, RouteType.FromId(worldData, 10L), destination)
+                    Route.Create(worldData, destination, inDirection, RouteType.FromId(worldData, 10L), location)
                     character.EnqueueMessage("A portal opens before you!")
                 End Sub},
             {"UseFireShard",

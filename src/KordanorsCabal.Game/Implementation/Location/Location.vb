@@ -80,9 +80,9 @@
             Return WorldData.Route.ReadDirectionRouteForLocation(Id).Select(Function(x) New Direction(WorldData, x.Item1))
         End Get
     End Property
-    Public ReadOnly Property RouteTypes As IEnumerable(Of OldRouteType) Implements ILocation.RouteTypes
+    Public ReadOnly Property RouteTypes As IEnumerable(Of IRouteType) Implements ILocation.RouteTypes
         Get
-            Return WorldData.Route.ReadDirectionRouteTypeForLocation(Id).Select(Function(x) CType(x.Item2, OldRouteType))
+            Return WorldData.Route.ReadDirectionRouteTypeForLocation(Id).Select(Function(x) RouteType.FromId(WorldData, x.Item2))
         End Get
     End Property
     Function RouteCount() As Long Implements ILocation.RouteCount

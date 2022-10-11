@@ -11,5 +11,4 @@ Public Enum OldRouteType
     GoldLock
     PlatinumLock
     FinalLock
-    Portal
 End Enum
