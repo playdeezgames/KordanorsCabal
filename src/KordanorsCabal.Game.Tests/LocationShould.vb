@@ -102,7 +102,9 @@
     Sub have_has_feature()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.Feature.ReadForLocation(It.IsAny(Of Long)))
                 subject.HasFeature.ShouldBeFalse
+                worldData.Verify(Function(x) x.Feature.ReadForLocation(id))
             End Sub)
     End Sub
     <Fact>
@@ -182,7 +184,9 @@
     Sub have_feature()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.Feature.ReadForLocation(It.IsAny(Of Long)))
                 subject.Feature.ShouldBeNull
+                worldData.Verify(Function(x) x.Feature.ReadForLocation(id))
             End Sub)
     End Sub
     <Fact>
