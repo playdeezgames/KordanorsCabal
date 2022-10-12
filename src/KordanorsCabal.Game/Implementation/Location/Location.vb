@@ -44,20 +44,6 @@
             Return Game.Inventory.FromId(WorldData, inventoryId.Value)
         End Get
     End Property
-    ReadOnly Property Characters As IEnumerable(Of ICharacter)
-        Get
-            Return WorldData.Character.ReadForLocation(Id).Select(Function(x) Character.FromId(WorldData, x))
-        End Get
-    End Property
-    Function Enemies(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocation.Enemies
-        Return Characters.Where(Function(x) x.IsEnemy(character))
-    End Function
-    Function Enemy(character As ICharacter) As ICharacter Implements ILocation.Enemy
-        Return Enemies(character).FirstOrDefault
-    End Function
-    Function Allies(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocation.Allies
-        Return Characters.Where(Function(x) Not x.IsEnemy(character))
-    End Function
     Property DungeonLevel As IDungeonLevel Implements ILocation.DungeonLevel
         Get
             Return Game.DungeonLevel.FromId(WorldData, WorldData.LocationDungeonLevel.Read(Id))

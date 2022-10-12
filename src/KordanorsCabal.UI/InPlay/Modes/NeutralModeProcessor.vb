@@ -63,7 +63,7 @@
         ElseIf player.CanInteract Then
             Buttons(InteractIntimidateButtonIndex).Title = "Interact..."
         End If
-        Dim enemyCount = player.Location.Enemies(player).Count
+        Dim enemyCount = player.Location.Factions.Enemies(player).Count
         Buttons(GroundEnemiesButtonIndex).Title =
             If(player.CanFight,
                 $"Enemies({enemyCount})",
