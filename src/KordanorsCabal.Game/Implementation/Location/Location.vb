@@ -55,7 +55,7 @@
     Function Enemy(character As ICharacter) As ICharacter Implements ILocation.Enemy
         Return Enemies(character).FirstOrDefault
     End Function
-    Function Friends(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocation.Friends
+    Function Allies(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocation.Allies
         Return Characters.Where(Function(x) Not x.IsEnemy(character))
     End Function
     Property DungeonLevel As IDungeonLevel Implements ILocation.DungeonLevel

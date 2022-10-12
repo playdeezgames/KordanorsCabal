@@ -6,7 +6,7 @@
     ReadOnly Property Routes As IRoutes
     ReadOnly Property Statistics As ILocationStatistics
 
-    Function Friends(character As ICharacter) As IEnumerable(Of ICharacter)
+    Function Allies(character As ICharacter) As IEnumerable(Of ICharacter)
     Function Enemy(character As ICharacter) As ICharacter
     Function Enemies(character As ICharacter) As IEnumerable(Of ICharacter)
 

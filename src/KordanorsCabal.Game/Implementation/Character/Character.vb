@@ -252,7 +252,7 @@
             If Not GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
                 Return False
             End If
-            Return Location.Friends(Me).Count <= Location.Enemies(Me).Count
+            Return Location.Allies(Me).Count <= Location.Enemies(Me).Count
         End Get
     End Property
     ReadOnly Property Name As String Implements ICharacter.Name
