@@ -7,8 +7,8 @@
     Private Sub New(worldData As IWorldData, characterStatisticTypeName As String)
         Me.New(worldData, worldData.CharacterStatisticType.ReadForName(characterStatisticTypeName).Value)
     End Sub
-    Public Shared Function FromId(worldData As IWorldData, statisticTypeId As Long) As ICharacterStatisticType
-        Return New CharacterStatisticType(worldData, statisticTypeId)
+    Public Shared Function FromId(worldData As IWorldData, statisticTypeId As Long?) As ICharacterStatisticType
+        Return If(statisticTypeId.HasValue, New CharacterStatisticType(worldData, statisticTypeId.Value), Nothing)
     End Function
     ReadOnly Property DefaultValue As Long? Implements ICharacterStatisticType.DefaultValue
         Get
