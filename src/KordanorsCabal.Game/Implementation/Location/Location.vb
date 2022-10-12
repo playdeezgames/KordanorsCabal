@@ -101,4 +101,10 @@
             WorldData.LocationDungeonLevel.Write(Id, value.Id)
         End Set
     End Property
+
+    Public ReadOnly Property Routes As IRoutes Implements ILocation.Routes
+        Get
+            Return Game.Routes.FromId(WorldData, Id)
+        End Get
+    End Property
 End Class

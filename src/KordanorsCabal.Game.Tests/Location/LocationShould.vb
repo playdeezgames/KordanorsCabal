@@ -168,4 +168,11 @@
                 worldData.Verify(Function(x) x.Route.ReadForLocationDirection(id, directionId))
             End Sub)
     End Sub
+    <Fact>
+    Sub has_routes_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Routes.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class

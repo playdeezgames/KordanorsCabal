@@ -3,6 +3,7 @@
     Property LocationType As ILocationType
     Property DungeonLevel As IDungeonLevel
     ReadOnly Property Inventory As IInventory
+    ReadOnly Property Routes As IRoutes
 
     Function HasRoute(direction As IDirection) As Boolean
     Function GetRoute(direction As IDirection) As IRoute
