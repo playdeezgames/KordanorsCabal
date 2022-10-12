@@ -13,7 +13,7 @@
     Public Function Exists(direction As IDirection) As Boolean Implements IRoutes.Exists
         Return Find(direction) IsNot Nothing
     End Function
-    Public ReadOnly Property RouteDirections As IEnumerable(Of IDirection) Implements IRoutes.RouteDirections
+    Public ReadOnly Property Directions As IEnumerable(Of IDirection) Implements IRoutes.Directions
         Get
             Return WorldData.Route.ReadDirectionRouteForLocation(Id).Select(Function(x) New Direction(WorldData, x.Item1))
         End Get
@@ -23,7 +23,7 @@
             Return WorldData.Route.ReadDirectionRouteTypeForLocation(Id).Select(Function(x) RouteType.FromId(WorldData, x.Item2))
         End Get
     End Property
-    ReadOnly Property RouteCount As Long Implements IRoutes.RouteCount
+    ReadOnly Property Count As Long Implements IRoutes.Count
         Get
             Return WorldData.Route.ReadCountForLocation(Id)
         End Get
