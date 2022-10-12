@@ -13,13 +13,3 @@
         End Get
     End Property
 End Class
-Module ItemStatisticTypeDescriptorUtility
-    Friend ReadOnly Property ItemStatisticTypeDescriptors(worldData As IWorldData) As IReadOnlyDictionary(Of OldItemStatisticType, ItemStatisticType)
-        Get
-            Return New Dictionary(Of OldItemStatisticType, ItemStatisticType) From
-            {
-                {OldItemStatisticType.Wear, New WearItemStatisticTypeDescriptor(worldData, OldItemStatisticType.Wear)}
-            }
-        End Get
-    End Property
-End Module

@@ -97,6 +97,10 @@
                         character.Id,
                         1L,
                         If(worldData.CharacterQuestCompletion.Read(character.Id, 1L), 0) + 1)
+                End Sub},
+            {"PurifyFood",
+                Sub(worldData, parms)
+                    worldData.Item.WriteItemType(parms(0), 24L)
                 End Sub}
         }
     Public Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms() As Long) Implements IEventData.Perform

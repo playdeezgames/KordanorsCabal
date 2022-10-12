@@ -21,7 +21,7 @@
         End Get
     End Property
     Public Sub Purify() Implements IItem.Purify
-        ItemType.Purify.Invoke(WorldData, Me)
+        ItemType.Purify(Me)
     End Sub
 
     Public Sub Destroy() Implements IItem.Destroy

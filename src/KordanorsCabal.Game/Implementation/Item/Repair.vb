@@ -16,9 +16,9 @@
         End Get
     End Property
     Public Sub Perform() Implements IRepair.Perform
-        SetStatistic(OldItemStatisticType.Wear, 0)
+        SetStatistic(1L, 0)
     End Sub
-    Private Sub SetStatistic(statisticType As OldItemStatisticType, value As Long)
+    Private Sub SetStatistic(statisticType As Long, value As Long)
         WorldData.ItemStatistic.Write(Id, statisticType, value)
     End Sub
     Public Function RepairCost(shoppeType As IShoppeType) As Long Implements IRepair.RepairCost
