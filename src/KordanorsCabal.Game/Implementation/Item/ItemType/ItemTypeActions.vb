@@ -219,40 +219,4 @@
                     End If
                 End Sub}
         }
-    Friend ReadOnly CanUseFunctions As IReadOnlyDictionary(Of String, Func(Of IWorldData, ICharacter, Boolean)) =
-        New Dictionary(Of String, Func(Of IWorldData, ICharacter, Boolean)) From
-        {
-            {"CanLearnHolyBolt", Function(worldData, character) character.CanLearn(SpellType.FromId(worldData, 1L))},
-            {"CanUseBeer", Function(worldData, character)
-                               Dim enemy = character.Location.Factions.FirstEnemy(character)
-                               Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.FromId(worldData, 26))
-                           End Function},
-            {"IsInDungeon", Function(worldData, character) character.Location.LocationType.IsDungeon},
-            {"AlwaysTrue", Function(worldData, character) True},
-            {"IsFightingUndead", Function(worldData, character) character.CanFight AndAlso character.Location.Factions.FirstEnemy(character).IsUndead},
-            {"CanUseRottenEgg", Function(worldData, character)
-                                    Dim enemy = character.Location.Factions.FirstEnemy(character)
-                                    Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)))
-                                End Function},
-            {"HasBong", Function(worldData, character) character.Inventory.ItemsOfType(ItemType.FromId(worldData, 33)).Any},
-            {"CanUseAirShard", Function(worldData, character) character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0},
-            {"CanUseEarthShard", Function(worldData, character)
-                                     Dim location = character.Location
-                                     Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
-                                 End Function},
-            {"CanUsePr0n", Function(worldData, character)
-                               Dim enemy = character.Location.Factions.FirstEnemy(character)
-                               Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 28))) OrElse enemy Is Nothing
-                           End Function},
-            {"CanUseFireShard", Function(worldData, character)
-                                    Dim location = character.Location
-                                    Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
-                                End Function},
-            {"CanUseWaterShard", Function(worldData, character) character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0},
-            {"CanUseBottle", Function(worldData, character)
-                                 Dim enemy = character.Location.Factions.FirstEnemy(character)
-                                 Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 30))
-                             End Function},
-            {"CanLearnPurify", Function(worldData, character) character.CanLearn(SpellType.FromId(worldData, 2L))}
-        }
 End Module

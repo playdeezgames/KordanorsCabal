@@ -30,7 +30,60 @@
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
                     Return character.Inventory.ItemsOfType(ItemType.FromId(worldData, 21L)).Any()
-                End Function}
+                End Function},
+            {"CanLearnHolyBolt", Function(worldData, parms) Character.FromId(worldData, parms(0)).CanLearn(SpellType.FromId(worldData, 1L))},
+            {"CanUseBeer", Function(worldData, parms)
+                               Dim character = Game.Character.FromId(worldData, parms(0))
+                               Dim enemy = character.Location.Factions.FirstEnemy(character)
+                               Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.FromId(worldData, 26))
+                           End Function},
+            {"IsInDungeon", Function(worldData, parms) Character.FromId(worldData, parms(0)).Location.LocationType.IsDungeon},
+            {"AlwaysTrue", Function(worldData, parms) True},
+            {"IsFightingUndead", Function(worldData, parms)
+                                     Dim character = Game.Character.FromId(worldData, parms(0))
+                                     Return character.CanFight AndAlso character.Location.Factions.FirstEnemy(character).IsUndead
+                                 End Function},
+            {"CanUseRottenEgg", Function(worldData, parms)
+                                    Dim character = Game.Character.FromId(worldData, parms(0))
+                                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                                    Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)))
+                                End Function},
+            {"HasBong", Function(worldData, parms)
+                            Dim character = Game.Character.FromId(worldData, parms(0))
+                            Return character.Inventory.ItemsOfType(ItemType.FromId(worldData, 33)).Any
+                        End Function},
+            {"CanUseAirShard", Function(worldData, parms)
+                                   Dim character = Game.Character.FromId(worldData, parms(0))
+                                   Return character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0
+                               End Function},
+            {"CanUseEarthShard", Function(worldData, parms)
+                                     Dim character = Game.Character.FromId(worldData, parms(0))
+                                     Dim location = character.Location
+                                     Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
+                                 End Function},
+            {"CanUsePr0n", Function(worldData, parms)
+                               Dim character = Game.Character.FromId(worldData, parms(0))
+                               Dim enemy = character.Location.Factions.FirstEnemy(character)
+                               Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 28))) OrElse enemy Is Nothing
+                           End Function},
+            {"CanUseFireShard", Function(worldData, parms)
+                                    Dim character = Game.Character.FromId(worldData, parms(0))
+                                    Dim location = character.Location
+                                    Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
+                                End Function},
+            {"CanUseWaterShard", Function(worldData, parms)
+                                     Dim character = Game.Character.FromId(worldData, parms(0))
+                                     Return character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0
+                                 End Function},
+            {"CanUseBottle", Function(worldData, parms)
+                                 Dim character = Game.Character.FromId(worldData, parms(0))
+                                 Dim enemy = character.Location.Factions.FirstEnemy(character)
+                                 Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 30))
+                             End Function},
+            {"CanLearnPurify", Function(worldData, parms)
+                                   Dim character = Game.Character.FromId(worldData, parms(0))
+                                   Return character.CanLearn(SpellType.FromId(worldData, 2L))
+                               End Function}
         }
     Private ReadOnly actionTable As IReadOnlyDictionary(Of String, Action(Of IWorldData, Long())) =
         New Dictionary(Of String, Action(Of IWorldData, Long())) From

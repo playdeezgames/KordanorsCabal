@@ -136,16 +136,13 @@
         End Get
     End Property
 
-    ReadOnly Property CanUse As Func(Of IWorldData, ICharacter, Boolean) Implements IItemType.CanUse
-        Get
-            Dim result As Func(Of IWorldData, ICharacter, Boolean) = Nothing
-            Dim eventName = CanUseFunctionName
-            If eventName IsNot Nothing AndAlso CanUseFunctions.TryGetValue(eventName, result) Then
-                Return result
-            End If
-            Return Function(w, c) False
-        End Get
-    End Property
+    Function CanUse(Character As ICharacter) As Boolean Implements IItemType.CanUse
+        Dim eventName = CanUseFunctionName
+        If eventName IsNot Nothing Then
+            Return WorldData.Events.Test(WorldData, eventName, Character.Id)
+        End If
+        Return False
+    End Function
 
     Public ReadOnly Property IsWeapon As Boolean Implements IItemType.IsWeapon
         Get

@@ -15,7 +15,7 @@
     ReadOnly Property RepairPrice As Long
     Sub Purify(item As IItem)
     ReadOnly Property Use As Action(Of IWorldData, ICharacter)
-    ReadOnly Property CanUse As Func(Of IWorldData, ICharacter, Boolean)
+    Function CanUse(character As ICharacter) As Boolean
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
     ReadOnly Property IsWeapon As Boolean
     ReadOnly Property IsArmor As Boolean
