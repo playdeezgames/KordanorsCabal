@@ -66,50 +66,50 @@ Public MustInherit Class ModeProcessor
         buffer.PutCell((17, 14), Pattern.BottomRightCorner, False, Hue.Black)
 
         Dim location = player.Location
-        If location.Routes.HasRoute(player.Direction) Then
+        If location.Routes.Exists(player.Direction) Then
             buffer.FillCells((9, 6), (4, 1), Pattern.Horizontal1, False, Hue.Black)
             buffer.FillCells((8, 6), (1, 8), Pattern.Vertical8, False, Hue.Black)
             buffer.FillCells((13, 6), (1, 8), Pattern.Vertical1, False, Hue.Black)
             buffer.PutCell((13, 14), Pattern.BottomLeftCorner, False, Hue.Black)
             buffer.PutCell((8, 14), Pattern.BottomRightCorner, False, Hue.Black)
-            Dim routeType = location.Routes.GetRoute(player.Direction).RouteType
+            Dim routeType = location.Routes.Find(player.Direction).RouteType
             buffer.WriteText((10, 9), routeType.Abbreviation, False, routeType.TextHue)
         End If
 
-        If location.Routes.HasRoute(player.Direction.PreviousDirection) Then
+        If location.Routes.Exists(player.Direction.PreviousDirection) Then
             buffer.PutCell((0, 3), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.PutCell((1, 4), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((1, 5), (1, 12), Pattern.Vertical8, False, Hue.Black)
-            Dim routeType = location.Routes.GetRoute(player.Direction.PreviousDirection).RouteType
+            Dim routeType = location.Routes.Find(player.Direction.PreviousDirection).RouteType
             buffer.WriteText((0, 9), routeType.Abbreviation.Substring(1, 1), False, routeType.TextHue)
         End If
 
-        If location.Routes.HasRoute(player.Direction.NextDirection) Then
+        If location.Routes.Exists(player.Direction.NextDirection) Then
             buffer.PutCell((21, 3), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.PutCell((20, 4), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((20, 5), (1, 12), Pattern.Vertical1, False, Hue.Black)
-            Dim routeType = location.Routes.GetRoute(player.Direction.NextDirection).RouteType
+            Dim routeType = location.Routes.Find(player.Direction.NextDirection).RouteType
             buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, routeType.TextHue)
         End If
 
-        If location.Routes.HasRoute(Direction.FromId(StaticWorldData.World, 5L)) Then
+        If location.Routes.Exists(Direction.FromId(StaticWorldData.World, 5L)) Then
             buffer.PutCell((7, 0), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((8, 0), (6, 1), Pattern.Horizontal8, False, Hue.Black)
             buffer.PutCell((14, 0), Pattern.UpwardDiagonal, False, Hue.Black)
         End If
 
-        If location.Routes.HasRoute(Direction.FromId(StaticWorldData.World, 6L)) Then
+        If location.Routes.Exists(Direction.FromId(StaticWorldData.World, 6L)) Then
             buffer.PutCell((7, 17), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((8, 17), (6, 1), Pattern.Horizontal1, False, Hue.Black)
             buffer.PutCell((14, 17), Pattern.DownwardDiagonal, False, Hue.Black)
         End If
 
-        If location.Routes.HasRoute(Direction.FromId(StaticWorldData.World, 8L)) Then
-            ShowSprite(buffer, (5, 5), location.Routes.GetRoute(Direction.FromId(StaticWorldData.World, 8L)).RouteType.Sprite)
+        If location.Routes.Exists(Direction.FromId(StaticWorldData.World, 8L)) Then
+            ShowSprite(buffer, (5, 5), location.Routes.Find(Direction.FromId(StaticWorldData.World, 8L)).RouteType.Sprite)
         End If
 
-        If location.Routes.HasRoute(Direction.FromId(StaticWorldData.World, 7L)) Then
-            ShowSprite(buffer, (5, 5), location.Routes.GetRoute(Direction.FromId(StaticWorldData.World, 7L)).RouteType.Sprite)
+        If location.Routes.Exists(Direction.FromId(StaticWorldData.World, 7L)) Then
+            ShowSprite(buffer, (5, 5), location.Routes.Find(Direction.FromId(StaticWorldData.World, 7L)).RouteType.Sprite)
         End If
 
         For Each item In player.Location.Inventory.Items

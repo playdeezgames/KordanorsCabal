@@ -23,7 +23,7 @@
         Return worldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel.Id).Select(Function(x) Location.FromId(worldData, x))
     End Function
     Sub DestroyRoute(direction As IDirection) Implements ILocation.DestroyRoute
-        Routes.GetRoute(direction)?.Destroy()
+        Routes.Find(direction)?.Destroy()
     End Sub
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long? Implements ILocation.GetStatistic
         Return WorldData.LocationStatistic.Read(Id, statisticType)

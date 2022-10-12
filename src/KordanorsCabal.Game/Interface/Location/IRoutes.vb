@@ -1,5 +1,5 @@
 ﻿Public Interface IRoutes
     Inherits IBaseThingie
-    Function HasRoute(direction As IDirection) As Boolean
-    Function GetRoute(direction As IDirection) As IRoute
+    Function Exists(direction As IDirection) As Boolean
+    Function Find(direction As IDirection) As IRoute
 End Interface

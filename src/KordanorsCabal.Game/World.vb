@@ -145,8 +145,8 @@ Public Module World
         Dim itemTypes As New List(Of Long)
         For Each deadEnd In deadEnds
             Dim direction = deadEnd.RouteDirections.First
-            Dim nextLocation = deadEnd.Routes.GetRoute(direction).ToLocation
-            Dim route = nextLocation.Routes.GetRoute(direction.Opposite)
+            Dim nextLocation = deadEnd.Routes.Find(direction).ToLocation
+            Dim route = nextLocation.Routes.Find(direction.Opposite)
             route.RouteType = RouteType.FromId(worldData, 4L)
             itemTypes.Add(1L)
         Next
@@ -187,8 +187,8 @@ Public Module World
         Dim bossLocation = RNG.FromEnumerable(deadEnds)
         bossLocation.LocationType = LocationType.FromId(worldData, 6L)
         Dim direction = bossLocation.RouteDirections.First
-        Dim nextLocation = bossLocation.Routes.GetRoute(direction).ToLocation
-        nextLocation.Routes.GetRoute(direction.Opposite).RouteType = routeType
+        Dim nextLocation = bossLocation.Routes.Find(direction).ToLocation
+        nextLocation.Routes.Find(direction.Opposite).RouteType = routeType
         Return bossLocation
     End Function
 
@@ -255,7 +255,7 @@ Public Module World
     Private Sub CreateChurchEntrance(worldData As IWorldData)
         Dim townLocation = RNG.FromEnumerable(Location.FromLocationType(worldData, LocationType.FromId(worldData, 2L)))
         Dim entrance = Location.Create(worldData, LocationType.FromId(worldData, 3L))
-        Dim direction = RNG.FromEnumerable(AllDirections(worldData).Where(Function(x) x.IsCardinal AndAlso Not townLocation.Routes.HasRoute(x)))
+        Dim direction = RNG.FromEnumerable(AllDirections(worldData).Where(Function(x) x.IsCardinal AndAlso Not townLocation.Routes.Exists(x)))
         StitchTown(worldData, townLocation, direction, entrance)
     End Sub
 

@@ -28,13 +28,13 @@
         If Character.IsEncumbered Then
             Return False
         End If
-        If Character.Location Is Nothing OrElse Not Character.Location.Routes.HasRoute(direction) Then
+        If Character.Location Is Nothing OrElse Not Character.Location.Routes.Exists(direction) Then
             Return False
         End If
-        If Not Character.Location.Routes.GetRoute(direction).CanMove(Character) Then
+        If Not Character.Location.Routes.Find(direction).CanMove(Character) Then
             Return False
         End If
-        If Character.Location.Routes.GetRoute(direction).ToLocation.LocationType.RequiresMP AndAlso Character.IsDemoralized() Then
+        If Character.Location.Routes.Find(direction).ToLocation.LocationType.RequiresMP AndAlso Character.IsDemoralized() Then
             Return False
         End If
         Return True
@@ -47,7 +47,7 @@
             Character.Highness -= 1
             Character.FoodPoisoning -= 1
             Character.Chafing -= 1
-            Character.Location = Character.Location.Routes.GetRoute(direction).Move(Character)
+            Character.Location = Character.Location.Routes.Find(direction).Move(Character)
             If Character.Hunger = CharacterStatisticType.FromId(WorldData, 20L).MaximumValue Then
                 Character.Hunger \= 2
                 Character.CurrentHP -= 1

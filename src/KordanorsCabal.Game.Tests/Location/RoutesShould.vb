@@ -9,7 +9,7 @@
             Sub(worldData, id, subject)
                 Const directionId = 2L
                 worldData.Setup(Function(x) x.Route.ReadForLocationDirection(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.HasRoute(Direction.FromId(worldData.Object, directionId)).ShouldBeFalse
+                subject.Exists(Direction.FromId(worldData.Object, directionId)).ShouldBeFalse
                 worldData.Verify(Function(x) x.Route.ReadForLocationDirection(id, directionId))
             End Sub)
     End Sub
@@ -19,7 +19,7 @@
             Sub(worldData, id, subject)
                 Const directionId = 2L
                 worldData.Setup(Function(x) x.Route.ReadForLocationDirection(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.GetRoute(Direction.FromId(worldData.Object, directionId))
+                subject.Find(Direction.FromId(worldData.Object, directionId))
                 worldData.Verify(Function(x) x.Route.ReadForLocationDirection(id, directionId))
             End Sub)
     End Sub
