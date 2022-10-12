@@ -1,12 +1,12 @@
 ﻿Imports SQLitePCL
 
-Public Class CharacterTests
+Public Class CharacterShould
     Inherits ThingieShould(Of ICharacter)
     Sub New()
         MyBase.New(AddressOf Character.FromId)
     End Sub
     <Fact>
-    Sub ShouldAttemptToPerformQuestAcceptance()
+    Sub can_accept_quests()
         WithSubject(
             Sub(worldData, id, subject)
                 Const questTypeId = 1L
@@ -18,7 +18,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldAttemptToChangeValuesAssociatedWithCurrentMP()
+    Sub change_current_mp()
         WithSubject(
             Sub(worldData, id, subject)
                 Const stress = 2L
@@ -31,7 +31,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldAttemptToAddXP()
+    Sub add_xp()
         WithSubject(
             Sub(worldData, id, subject)
                 Const xp = 2L
@@ -47,7 +47,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldAttemptToAssignPoints()
+    Sub assign_points()
         WithSubject(
             Sub(worldData, id, subject)
                 Const statisticTypeId = 9
@@ -64,7 +64,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhetherOrNotAQuestCanBeAccepted()
+    Sub have_can_accept_quest()
         WithSubject(
             Sub(worldData, id, subject)
                 Const questTypeId = 2L
@@ -78,7 +78,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhetherOrNotAGivenItemTypeCanBribeAGivenCharacter()
+    Sub have_can_be_bribed_with()
         WithSubject(
             Sub(worldData, id, subject)
                 Const characterTypeId = 2L
@@ -97,7 +97,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhetherAGiveCharacterCanCastAGivenSpell()
+    Sub have_can_cast_spell()
         WithSubject(
             Sub(worldData, id, subject)
                 Const spellTypeId = 1L
@@ -112,7 +112,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenACharacterCanDoIntimitation()
+    Sub have_can_do_intimidation()
         WithSubject(
             Sub(worldData, id, subject)
                 Const statisticTypeId = 3
@@ -127,7 +127,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanFight()
+    Sub have_can_fight()
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
@@ -138,7 +138,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanGamble()
+    Sub have_can_gamble()
         WithSubject(
             Sub(worldData, id, subject)
                 Const statisticTypeId = 14L
@@ -153,7 +153,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanInteract()
+    Sub have_can_interact()
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
@@ -164,7 +164,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanIntimidate()
+    Sub have_can_intimidate()
         WithSubject(
             Sub(worldData, id, subject)
                 Const statisticTypeId = 4L
@@ -179,7 +179,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanLearnAGivenSpell()
+    Sub have_can_learn()
         WithSubject(
             Sub(worldData, id, subject)
                 Const spellTypeId = 1L
@@ -195,7 +195,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhenAGivenCharacterCanMap()
+    Sub have_can_map()
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
@@ -206,14 +206,14 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldContainTheCharacterMovementSubject()
+    Sub have_movement_subobject()
         WithSubject(
             Sub(worldData, id, subject)
                 subject.Movement.ShouldNotBeNull
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldRetrieveCharacterTypeFromAGivenCharacter()
+    Sub have_character_type()
         WithSubject(
             Sub(worldData, id, subject)
                 Const characterTypeId = 1L
@@ -227,7 +227,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldRetrieveLocationFromAGivenCharacter()
+    Sub have_location()
         WithSubject(
             Sub(worldData, id, subject)
                 Const locationId = 1L
@@ -241,7 +241,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldRetrieveNameFromAGivenCharacter()
+    Sub have_name()
         WithSubject(
             Sub(worldData, id, subject)
                 Const characterTypeId = 1L
@@ -258,7 +258,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineAGiveCharactersCurrentHPBasedOnThatCharactersMaximumHPAndWounds()
+    Sub have_current_hp()
         WithSubject(
             Sub(worldData, id, subject)
                 Const firstStatisticTypeId = 6L
@@ -275,7 +275,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineThatACharacterIsDeadBasedOnThatCharactersCurrentHP()
+    Sub have_is_dead()
         WithSubject(
             Sub(worldData, id, subject)
                 Const firstStatisticTypeId = 6L
@@ -292,7 +292,7 @@ Public Class CharacterTests
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldDetermineWhetherAGivenCharacterIsTheEnemyOfAnotherCharacter()
+    Sub have_is_enemy()
         WithSubject(
             Sub(worldData, id, subject)
                 Const otherCharacterId = 2L
