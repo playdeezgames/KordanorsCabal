@@ -25,28 +25,15 @@
     Sub DestroyRoute(direction As IDirection) Implements ILocation.DestroyRoute
         Routes(direction)?.Destroy()
     End Sub
-    Function IsDungeon() As Boolean Implements ILocation.IsDungeon
-        Return LocationType.IsDungeon
-    End Function
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long? Implements ILocation.GetStatistic
         Return WorldData.LocationStatistic.Read(Id, statisticType)
     End Function
-    ReadOnly Property RequiresMP As Boolean Implements ILocation.RequiresMP
-        Get
-            Return LocationType.RequiresMP
-        End Get
-    End Property
     Public Function HasStairs() As Boolean Implements ILocation.HasStairs
         Return WorldData.Route.ReadForLocationRouteType(Id, 3).Any()
     End Function
     Shared Function FromId(worldData As IWorldData, locationId As Long?) As ILocation
         Return If(locationId.HasValue, New Location(worldData, locationId.Value), Nothing)
     End Function
-    ReadOnly Property Name As String Implements ILocation.Name
-        Get
-            Return LocationType.Name
-        End Get
-    End Property
     Public Function Routes(direction As IDirection) As IRoute Implements ILocation.Routes
         Return Route.FromId(WorldData, WorldData.Route.ReadForLocationDirection(Id, direction.Id))
     End Function
@@ -102,11 +89,6 @@
     Function Friends(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocation.Friends
         Return Characters.Where(Function(x) Not x.IsEnemy(character))
     End Function
-    ReadOnly Property CanMap As Boolean Implements ILocation.CanMap
-        Get
-            Return LocationType.CanMap
-        End Get
-    End Property
     Property DungeonLevel As IDungeonLevel Implements ILocation.DungeonLevel
         Get
             Return Game.DungeonLevel.FromId(WorldData, WorldData.LocationDungeonLevel.Read(Id))

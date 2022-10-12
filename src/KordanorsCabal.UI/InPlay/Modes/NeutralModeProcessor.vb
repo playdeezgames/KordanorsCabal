@@ -17,7 +17,7 @@
         If location.LocationType.IsDungeon Then
             ShowDungeon(buffer, player)
         Else
-            ShowHeader(buffer, location.Name)
+            ShowHeader(buffer, location.LocationType.Name)
             ShowFacing(buffer, (0, 1), player)
             ShowExits(buffer, (0, 2), player)
             ShowFeatures(buffer, (0, 3), player)

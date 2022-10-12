@@ -1,11 +1,8 @@
 ﻿Public Interface ILocation
     Inherits IBaseThingie
-    ReadOnly Property Name As String
     Property LocationType As ILocationType
     Property DungeonLevel As IDungeonLevel
-    ReadOnly Property RequiresMP As Boolean
-    Function IsDungeon() As Boolean
-    ReadOnly Property CanMap As Boolean
+    ReadOnly Property Inventory As IInventory
 
     Function HasRoute(direction As IDirection) As Boolean
     Function Routes(direction As IDirection) As IRoute
@@ -15,7 +12,6 @@
     Function HasStairs() As Boolean
     ReadOnly Property RouteTypes As IEnumerable(Of IRouteType)
 
-    ReadOnly Property Inventory As IInventory
 
     Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
     Function GetStatistic(statisticType As LocationStatisticType) As Long?

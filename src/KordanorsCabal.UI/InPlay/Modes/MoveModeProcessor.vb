@@ -18,7 +18,7 @@ Friend Class MoveModeProcessor
         If location.LocationType.IsDungeon Then
             ShowDungeon(buffer, player)
         Else
-            ShowHeader(buffer, player.Location.Name)
+            ShowHeader(buffer, player.Location.LocationType.Name)
             ShowFacing(buffer, (0, 1), player)
             ShowExits(buffer, (0, 2), player)
 

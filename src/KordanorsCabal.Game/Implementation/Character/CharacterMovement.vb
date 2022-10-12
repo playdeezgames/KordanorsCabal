@@ -34,7 +34,7 @@
         If Not Character.Location.Routes(direction).CanMove(Character) Then
             Return False
         End If
-        If Character.Location.Routes(direction).ToLocation.RequiresMP AndAlso Character.IsDemoralized() Then
+        If Character.Location.Routes(direction).ToLocation.LocationType.RequiresMP AndAlso Character.IsDemoralized() Then
             Return False
         End If
         Return True

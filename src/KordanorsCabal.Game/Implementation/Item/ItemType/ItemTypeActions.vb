@@ -234,7 +234,7 @@
                                Dim enemy = character.Location.Enemy(character)
                                Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.FromId(worldData, 26))
                            End Function},
-            {"IsInDungeon", Function(worldData, character) character.Location.IsDungeon},
+            {"IsInDungeon", Function(worldData, character) character.Location.LocationType.IsDungeon},
             {"AlwaysTrue", Function(worldData, character) True},
             {"IsFightingUndead", Function(worldData, character) character.CanFight AndAlso character.Location.Enemy(character).IsUndead},
             {"CanUseRottenEgg", Function(worldData, character)
@@ -242,10 +242,10 @@
                                     Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)))
                                 End Function},
             {"HasBong", Function(worldData, character) character.Inventory.ItemsOfType(ItemType.FromId(worldData, 33)).Any},
-            {"CanUseAirShard", Function(worldData, character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},
+            {"CanUseAirShard", Function(worldData, character) character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0},
             {"CanUseEarthShard", Function(worldData, character)
                                      Dim location = character.Location
-                                     Return location.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0
+                                     Return location.LocationType.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0
                                  End Function},
             {"CanUsePr0n", Function(worldData, character)
                                Dim enemy = character.Location.Enemy(character)
@@ -253,9 +253,9 @@
                            End Function},
             {"CanUseFireShard", Function(worldData, character)
                                     Dim location = character.Location
-                                    Return location.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0
+                                    Return location.LocationType.IsDungeon AndAlso location.Enemies(character).Any AndAlso character.CurrentMana > 0
                                 End Function},
-            {"CanUseWaterShard", Function(worldData, character) character.Location.IsDungeon AndAlso character.CurrentMana > 0},
+            {"CanUseWaterShard", Function(worldData, character) character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0},
             {"CanUseBottle", Function(worldData, character)
                                  Dim enemy = character.Location.Enemy(character)
                                  Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 30))
