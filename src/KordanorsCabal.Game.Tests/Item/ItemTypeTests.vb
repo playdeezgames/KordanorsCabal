@@ -144,8 +144,9 @@
     Sub item_types_have_use_actions()
         WithSubject(
             Sub(worldData, itemTypeId, subject)
+                Const characterId = 2L
                 worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.Use.ShouldNotBeNull
+                subject.Use(Character.FromId(worldData.Object, characterId))
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 3))
             End Sub)
     End Sub

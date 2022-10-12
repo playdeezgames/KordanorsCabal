@@ -124,17 +124,12 @@
             WorldData.Events.Perform(WorldData, eventName, item.Id)
         End If
     End Sub
-    ReadOnly Property Use As Action(Of IWorldData, ICharacter) Implements IItemType.Use
-        Get
-            Dim result As Action(Of IWorldData, ICharacter) = Nothing
-            Dim eventName = UseActionName
-            If eventName IsNot Nothing AndAlso UseActions.TryGetValue(eventName, result) Then
-                Return result
-            End If
-            Return Sub(w, c)
-                   End Sub
-        End Get
-    End Property
+    Sub Use(character As ICharacter) Implements IItemType.Use
+        Dim eventName = UseActionName
+        If eventName IsNot Nothing Then
+            WorldData.Events.Perform(WorldData, eventName, character.Id)
+        End If
+    End Sub
 
     Function CanUse(Character As ICharacter) As Boolean Implements IItemType.CanUse
         Dim eventName = CanUseFunctionName

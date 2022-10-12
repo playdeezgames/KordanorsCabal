@@ -20,6 +20,6 @@
         End Get
     End Property
     Friend Sub Use(character As ICharacter) Implements IUsage.Use
-        Item.FromId(WorldData, Id).ItemType.Use.Invoke(WorldData, character)
+        Item.FromId(WorldData, Id).ItemType.Use(character)
     End Sub
 End Class
