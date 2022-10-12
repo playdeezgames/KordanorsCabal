@@ -31,10 +31,10 @@ Friend Class MapProcessor
     End Sub
 
     Private Sub DrawLocation(buffer As PatternBuffer, xy As (Integer, Integer), location As ILocation, inverted As Boolean, displayHue As Hue)
-        Dim northExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 1L))
-        Dim eastExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 2L))
-        Dim southExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 3L))
-        Dim westExit = location.HasRoute(Direction.FromId(StaticWorldData.World, 4L))
+        Dim northExit = location.Routes.HasRoute(Direction.FromId(StaticWorldData.World, 1L))
+        Dim eastExit = location.Routes.HasRoute(Direction.FromId(StaticWorldData.World, 2L))
+        Dim southExit = location.Routes.HasRoute(Direction.FromId(StaticWorldData.World, 3L))
+        Dim westExit = location.Routes.HasRoute(Direction.FromId(StaticWorldData.World, 4L))
         'upper left
         buffer.PutCell(xy,
                        If(northExit AndAlso westExit, Pattern.ElbowUpLeft,

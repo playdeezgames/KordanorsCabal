@@ -23,7 +23,7 @@
         Return worldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel.Id).Select(Function(x) Location.FromId(worldData, x))
     End Function
     Sub DestroyRoute(direction As IDirection) Implements ILocation.DestroyRoute
-        GetRoute(direction)?.Destroy()
+        Routes.GetRoute(direction)?.Destroy()
     End Sub
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long? Implements ILocation.GetStatistic
         Return WorldData.LocationStatistic.Read(Id, statisticType)
@@ -35,12 +35,6 @@
     End Property
     Shared Function FromId(worldData As IWorldData, locationId As Long?) As ILocation
         Return If(locationId.HasValue, New Location(worldData, locationId.Value), Nothing)
-    End Function
-    Public Function GetRoute(direction As IDirection) As IRoute Implements ILocation.GetRoute
-        Return Route.FromId(WorldData, WorldData.Route.ReadForLocationDirection(Id, direction.Id))
-    End Function
-    Public Function HasRoute(direction As IDirection) As Boolean Implements ILocation.HasRoute
-        Return GetRoute(direction) IsNot Nothing
     End Function
     Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?) Implements ILocation.SetStatistic
         WorldData.LocationStatistic.Write(Id, statisticType, statisticValue)
