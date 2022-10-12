@@ -7,13 +7,13 @@
     Shared Function FromId(worldData As IWorldData, id As Long?) As ILocationFactions
         Return If(id.HasValue, New LocationFactions(worldData, id.Value), Nothing)
     End Function
-    Function Enemies(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocationFactions.Enemies
+    Function EnemiesOf(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocationFactions.EnemiesOf
         Return Characters.Where(Function(x) x.IsEnemy(character))
     End Function
-    Function Enemy(character As ICharacter) As ICharacter Implements ILocationFactions.Enemy
-        Return Enemies(character).FirstOrDefault
+    Function FirstEnemy(character As ICharacter) As ICharacter Implements ILocationFactions.FirstEnemy
+        Return EnemiesOf(character).FirstOrDefault
     End Function
-    Function Allies(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocationFactions.Allies
+    Function AlliesOf(character As ICharacter) As IEnumerable(Of ICharacter) Implements ILocationFactions.AlliesOf
         Return Characters.Where(Function(x) Not x.IsEnemy(character))
     End Function
     Private ReadOnly Property Characters As IEnumerable(Of ICharacter)

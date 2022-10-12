@@ -9,7 +9,7 @@
             Sub(worldData, id, subject)
                 Const characterId = 2L
                 worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
-                subject.Enemy(Character.FromId(worldData.Object, characterId)).ShouldBeNull
+                subject.FirstEnemy(Character.FromId(worldData.Object, characterId)).ShouldBeNull
                 worldData.Verify(Function(x) x.Character.ReadForLocation(id))
             End Sub)
     End Sub
@@ -19,7 +19,7 @@
             Sub(worldData, id, subject)
                 Const characterId = 2L
                 worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
-                subject.Enemies(Character.FromId(worldData.Object, characterId)).ShouldBeEmpty
+                subject.EnemiesOf(Character.FromId(worldData.Object, characterId)).ShouldBeEmpty
                 worldData.Verify(Function(x) x.Character.ReadForLocation(id))
             End Sub)
     End Sub
@@ -29,7 +29,7 @@
             Sub(worldData, id, subject)
                 Const characterId = 2L
                 worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
-                subject.Allies(Character.FromId(worldData.Object, characterId)).ShouldBeEmpty
+                subject.AlliesOf(Character.FromId(worldData.Object, characterId)).ShouldBeEmpty
                 worldData.Verify(Function(x) x.Character.ReadForLocation(id))
             End Sub)
     End Sub

@@ -119,7 +119,7 @@ Public MustInherit Class ModeProcessor
             End If
         Next
 
-        Dim enemy = player.Location.Factions.Enemies(player).FirstOrDefault
+        Dim enemy = player.Location.Factions.EnemiesOf(player).FirstOrDefault
         If enemy IsNot Nothing Then
             ShowEnemy(buffer, (5, 5), enemy)
         End If

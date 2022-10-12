@@ -7,7 +7,7 @@
                 Function(worldData, parms)
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
-                    Dim enemy = character.Location.Factions.Enemy(character)
+                    Dim enemy = character.Location.Factions.FirstEnemy(character)
                     If enemy Is Nothing OrElse Not enemy.IsUndead Then
                         Return False
                     End If
@@ -44,7 +44,7 @@
                         character.EnqueueMessage($"You cannot cast {spellType.Name} now!")
                         Return
                     End If
-                    Dim enemy = character.Location.Factions.Enemy(character)
+                    Dim enemy = character.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You cast {spellType.Name} on {enemy.Name}!")

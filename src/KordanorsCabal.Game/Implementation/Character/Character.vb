@@ -109,7 +109,7 @@
             If Location Is Nothing Then
                 Return False
             End If
-            Return Location.Factions.Enemies(Me).Any
+            Return Location.Factions.EnemiesOf(Me).Any
         End Get
     End Property
     Friend Shared Function Create(worldData As IWorldData, characterType As ICharacterType, location As ILocation, initialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))) As ICharacter
@@ -252,7 +252,7 @@
             If Not GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
                 Return False
             End If
-            Return Location.Factions.Allies(Me).Count <= Location.Factions.Enemies(Me).Count
+            Return Location.Factions.AlliesOf(Me).Count <= Location.Factions.EnemiesOf(Me).Count
         End Get
     End Property
     ReadOnly Property Name As String Implements ICharacter.Name
@@ -439,7 +439,7 @@
         Return (sfx, lines)
     End Function
     Sub DoCounterAttacks() Implements ICharacter.DoCounterAttacks
-        Dim enemies = Location.Factions.Enemies(Me)
+        Dim enemies = Location.Factions.EnemiesOf(Me)
         Dim enemyCount = enemies.Count
         Dim enemyIndex = 1
         For Each enemy In enemies
@@ -736,7 +736,7 @@
             If If(GetStatistic(CharacterStatisticType.FromId(WorldData, 3L)), 0) <= 0 Then
                 Return False
             End If
-            Dim enemy = Location.Factions.Enemies(Me).FirstOrDefault
+            Dim enemy = Location.Factions.EnemiesOf(Me).FirstOrDefault
             If enemy Is Nothing Then
                 Return False
             End If
@@ -746,7 +746,7 @@
     Public Sub DoIntimidation() Implements ICharacter.DoIntimidation
         If CanDoIntimidation Then
             Dim lines As New List(Of String)
-            Dim enemy = Location.Factions.Enemies(Me).First
+            Dim enemy = Location.Factions.EnemiesOf(Me).First
             Dim influenceRoll = RollInfluence()
             lines.Add($"You roll {influenceRoll} influence.")
             Dim willpowerRoll = enemy.RollWillpower()
@@ -788,7 +788,7 @@
     Private Sub DoAttack()
         Dim lines As New List(Of String)
         Dim attackRoll = RollAttack()
-        Dim enemy = Location.Factions.Enemies(Me).First
+        Dim enemy = Location.Factions.EnemiesOf(Me).First
         lines.Add($"You roll an attack of {attackRoll}.")
         Dim defendRoll = enemy.RollDefend()
         lines.Add($"{enemy.Name} rolls a defend of {defendRoll}.")

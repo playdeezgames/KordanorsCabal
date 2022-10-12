@@ -24,7 +24,7 @@
                 Sub(worldData, character)
                     Dim sfx As Sfx? = Nothing
                     Dim damageRoll = RNG.RollDice("1d4")
-                    Dim enemy = character.Location.Factions.Enemy(character)
+                    Dim enemy = character.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String) From {
                         $"{ItemType.FromId(worldData, 22L).Name} deals {damageRoll} HP to {enemy.Name}!"
                     }
@@ -59,7 +59,7 @@
                 End Sub},
             {"UseRottenEgg",
                 Sub(worldData, character)
-                    Dim enemy = character.Location.Factions.Enemy(character)
+                    Dim enemy = character.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)) Then
                         character.EnqueueMessage($"You give {enemy.Name} the {Game.ItemType.FromId(worldData, 37).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
@@ -69,7 +69,7 @@
                 End Sub},
             {"UsePr0n",
                         Sub(worldData, character)
-                            Dim enemy = character.Location.Factions.Enemy(character)
+                            Dim enemy = character.Location.Factions.FirstEnemy(character)
                             If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 28)) Then
                                 character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(worldData, 28).Name}, and they quickly wander off with a seeming great purpose.")
                                 enemy.Destroy()
@@ -126,7 +126,7 @@
                 End Sub},
             {"UseBeer",
                 Sub(worldData, character)
-                    Dim enemy = character.Location.Factions.Enemy(character)
+                    Dim enemy = character.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 26)) Then
                         enemy.Destroy()
                         character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(worldData, 26).Name}, and they wander off to get drunk.")
@@ -152,7 +152,7 @@
             {"UseFireShard",
                 Sub(worldData, character)
                     character.DoFatigue(1)
-                    Dim enemy = character.Location.Factions.Enemy(character)
+                    Dim enemy = character.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You use {ItemType.FromId(worldData, 13).Name} on {enemy.Name}!")
@@ -186,7 +186,7 @@
             {"UseEarthShard",
                 Sub(worldData, character)
                     character.DoFatigue(1)
-                    Dim enemy = character.Location.Factions.Enemy(character)
+                    Dim enemy = character.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You use {ItemType.FromId(worldData, 11).Name} on {enemy.Name}!")
@@ -204,7 +204,7 @@
                 End Sub},
             {"UseBottle",
                 Sub(worldData, character)
-                    Dim enemy = character.Location.Factions.Enemy(character)
+                    Dim enemy = character.Location.Factions.FirstEnemy(character)
                     character.EnqueueMessage($"You give the {ItemType.FromId(worldData, 30).Name} to the {enemy.Name}, and it wanders off happily.")
                     enemy.Destroy()
                 End Sub},
@@ -231,33 +231,33 @@
         {
             {"CanLearnHolyBolt", Function(worldData, character) character.CanLearn(SpellType.FromId(worldData, 1L))},
             {"CanUseBeer", Function(worldData, character)
-                               Dim enemy = character.Location.Factions.Enemy(character)
+                               Dim enemy = character.Location.Factions.FirstEnemy(character)
                                Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.FromId(worldData, 26))
                            End Function},
             {"IsInDungeon", Function(worldData, character) character.Location.LocationType.IsDungeon},
             {"AlwaysTrue", Function(worldData, character) True},
-            {"IsFightingUndead", Function(worldData, character) character.CanFight AndAlso character.Location.Factions.Enemy(character).IsUndead},
+            {"IsFightingUndead", Function(worldData, character) character.CanFight AndAlso character.Location.Factions.FirstEnemy(character).IsUndead},
             {"CanUseRottenEgg", Function(worldData, character)
-                                    Dim enemy = character.Location.Factions.Enemy(character)
+                                    Dim enemy = character.Location.Factions.FirstEnemy(character)
                                     Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)))
                                 End Function},
             {"HasBong", Function(worldData, character) character.Inventory.ItemsOfType(ItemType.FromId(worldData, 33)).Any},
             {"CanUseAirShard", Function(worldData, character) character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0},
             {"CanUseEarthShard", Function(worldData, character)
                                      Dim location = character.Location
-                                     Return location.LocationType.IsDungeon AndAlso location.Factions.Enemies(character).Any AndAlso character.CurrentMana > 0
+                                     Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
                                  End Function},
             {"CanUsePr0n", Function(worldData, character)
-                               Dim enemy = character.Location.Factions.Enemy(character)
+                               Dim enemy = character.Location.Factions.FirstEnemy(character)
                                Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 28))) OrElse enemy Is Nothing
                            End Function},
             {"CanUseFireShard", Function(worldData, character)
                                     Dim location = character.Location
-                                    Return location.LocationType.IsDungeon AndAlso location.Factions.Enemies(character).Any AndAlso character.CurrentMana > 0
+                                    Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
                                 End Function},
             {"CanUseWaterShard", Function(worldData, character) character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0},
             {"CanUseBottle", Function(worldData, character)
-                                 Dim enemy = character.Location.Factions.Enemy(character)
+                                 Dim enemy = character.Location.Factions.FirstEnemy(character)
                                  Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 30))
                              End Function},
             {"CanLearnPurify", Function(worldData, character) character.CanLearn(SpellType.FromId(worldData, 2L))}
