@@ -3,7 +3,6 @@
 Friend Class MapProcessor
     Implements IProcessor
     Private redrawBuffer As Boolean
-
     Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
         If redrawBuffer Then
             redrawBuffer = False
@@ -15,8 +14,8 @@ Friend Class MapProcessor
                 Dim locations = Location.ByDungeonLevel(StaticWorldData.World, level).Where(Function(x) player.HasVisited(x))
                 For Each location In locations
                     Dim inverted = (location.Id = playerLocation.Id)
-                    Dim dungeonColumn = location.GetStatistic(LocationStatisticType.DungeonColumn).Value
-                    Dim dungeonRow = location.GetStatistic(LocationStatisticType.DungeonRow).Value
+                    Dim dungeonColumn = location.Statistics.GetStatistic(LocationStatisticType.DungeonColumn).Value
+                    Dim dungeonRow = location.Statistics.GetStatistic(LocationStatisticType.DungeonRow).Value
                     Dim displayHue =
                         If(location.Enemies(player).Any, Hue.Pink,
                         If(location.Routes.HasStairs, Hue.Green,

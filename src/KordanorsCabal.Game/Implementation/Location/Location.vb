@@ -22,15 +22,9 @@
     Public Shared Function ByDungeonLevel(worldData As IWorldData, dungeonLevel As IDungeonLevel) As IEnumerable(Of ILocation)
         Return worldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel.Id).Select(Function(x) Location.FromId(worldData, x))
     End Function
-    Public Function GetStatistic(statisticType As LocationStatisticType) As Long? Implements ILocation.GetStatistic
-        Return WorldData.LocationStatistic.Read(Id, statisticType)
-    End Function
     Shared Function FromId(worldData As IWorldData, locationId As Long?) As ILocation
         Return If(locationId.HasValue, New Location(worldData, locationId.Value), Nothing)
     End Function
-    Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?) Implements ILocation.SetStatistic
-        WorldData.LocationStatistic.Write(Id, statisticType, statisticValue)
-    End Sub
     ReadOnly Property HasFeature As Boolean Implements ILocation.HasFeature
         Get
             Return Feature IsNot Nothing
@@ -76,6 +70,12 @@
     Public ReadOnly Property Routes As IRoutes Implements ILocation.Routes
         Get
             Return Game.Routes.FromId(WorldData, Id)
+        End Get
+    End Property
+
+    Public ReadOnly Property Statistics As ILocationStatistics Implements ILocation.Statistics
+        Get
+            Return LocationStatistics.FromId(WorldData, Id)
         End Get
     End Property
 End Class
