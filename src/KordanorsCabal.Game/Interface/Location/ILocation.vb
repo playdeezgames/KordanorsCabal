@@ -6,8 +6,5 @@
     ReadOnly Property Routes As IRoutes
     ReadOnly Property Statistics As ILocationStatistics
     ReadOnly Property Factions As ILocationFactions
-
-
-    ReadOnly Property HasFeature As Boolean
     ReadOnly Property Feature As IFeature
 End Interface

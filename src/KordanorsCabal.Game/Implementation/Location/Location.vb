@@ -25,11 +25,6 @@
     Shared Function FromId(worldData As IWorldData, locationId As Long?) As ILocation
         Return If(locationId.HasValue, New Location(worldData, locationId.Value), Nothing)
     End Function
-    ReadOnly Property HasFeature As Boolean Implements ILocation.HasFeature
-        Get
-            Return Feature IsNot Nothing
-        End Get
-    End Property
     ReadOnly Property Feature As IFeature Implements ILocation.Feature
         Get
             Return Game.Feature.FromId(WorldData, WorldData.Feature.ReadForLocation(Id))
