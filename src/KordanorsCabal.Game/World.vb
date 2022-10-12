@@ -107,7 +107,7 @@ Public Module World
         maze.Generate()
         Dim locations = CreateLocations(worldData, maze, dungeonLevel)
         PopulateLocations(worldData, locations, bossKeyType, bossRouteType, dungeonLevel)
-        Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount > 1))
+        Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.Routes.RouteCount > 1))
         Route.Create(worldData, fromLocation, Direction.FromId(worldData, 6L), RouteType.FromId(worldData, 3), startingLocation)
         Route.Create(worldData, startingLocation, Direction.FromId(worldData, 5L), RouteType.FromId(worldData, 3), fromLocation)
         PopulateCharacters(worldData, locations, dungeonLevel)
@@ -136,7 +136,7 @@ Public Module World
         Dim dungeonId = LocationType.FromId(worldData, 4L).Id
         Dim partitions =
             locations.GroupBy(
-                Function(x) x.RouteCount = 1).
+                Function(x) x.Routes.RouteCount = 1).
                     ToDictionary(Of Long, List(Of ILocation))(
                         Function(x) If(x.Key, deadEndId, dungeonId),
                         Function(x) x.ToList)
@@ -144,7 +144,7 @@ Public Module World
         Dim nonDeadEnds = partitions(dungeonId)
         Dim itemTypes As New List(Of Long)
         For Each deadEnd In deadEnds
-            Dim direction = deadEnd.RouteDirections.First
+            Dim direction = deadEnd.Routes.RouteDirections.First
             Dim nextLocation = deadEnd.Routes.Find(direction).ToLocation
             Dim route = nextLocation.Routes.Find(direction.Opposite)
             route.RouteType = RouteType.FromId(worldData, 4L)
@@ -186,7 +186,7 @@ Public Module World
     Private Function PlaceBossLocation(worldData As IWorldData, deadEnds As IEnumerable(Of ILocation), routeType As IRouteType) As ILocation
         Dim bossLocation = RNG.FromEnumerable(deadEnds)
         bossLocation.LocationType = LocationType.FromId(worldData, 6L)
-        Dim direction = bossLocation.RouteDirections.First
+        Dim direction = bossLocation.Routes.RouteDirections.First
         Dim nextLocation = bossLocation.Routes.Find(direction).ToLocation
         nextLocation.Routes.Find(direction.Opposite).RouteType = routeType
         Return bossLocation

@@ -5,13 +5,6 @@
     ReadOnly Property Inventory As IInventory
     ReadOnly Property Routes As IRoutes
 
-    ReadOnly Property RouteCount As Long
-    ReadOnly Property RouteDirections As IEnumerable(Of IDirection)
-    Sub DestroyRoute(direction As IDirection)
-    ReadOnly Property HasStairs As Boolean
-    ReadOnly Property RouteTypes As IEnumerable(Of IRouteType)
-
-
     Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
     Function GetStatistic(statisticType As LocationStatisticType) As Long?
 

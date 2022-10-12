@@ -19,7 +19,7 @@ Friend Class MapProcessor
                     Dim dungeonRow = location.GetStatistic(LocationStatisticType.DungeonRow).Value
                     Dim displayHue =
                         If(location.Enemies(player).Any, Hue.Pink,
-                        If(location.HasStairs, Hue.Green,
+                        If(location.Routes.HasStairs, Hue.Green,
                         If(location.Inventory.IsEmpty, Hue.Black, Hue.Purple)))
                     DrawLocation(buffer, (CInt(dungeonColumn * 2), CInt(dungeonRow * 2)), location, inverted, displayHue)
                 Next

@@ -36,30 +36,12 @@
             End Sub)
     End Sub
     <Fact>
-    Sub have_has_stairs()
-        WithSubject(
-            Sub(worldData, id, subject)
-                worldData.Setup(Function(x) x.Route.ReadForLocationRouteType(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.HasStairs.ShouldBeFalse
-                worldData.Verify(Function(x) x.Route.ReadForLocationRouteType(id, 3))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_has_feature()
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.Setup(Function(x) x.Feature.ReadForLocation(It.IsAny(Of Long)))
                 subject.HasFeature.ShouldBeFalse
                 worldData.Verify(Function(x) x.Feature.ReadForLocation(id))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub have_a_route_count()
-        WithSubject(
-            Sub(worldData, id, subject)
-                worldData.Setup(Function(x) x.Route.ReadCountForLocation(It.IsAny(Of Long)))
-                subject.RouteCount.ShouldBe(0)
-                worldData.Verify(Function(x) x.Route.ReadCountForLocation(id))
             End Sub)
     End Sub
     <Fact>
@@ -70,25 +52,6 @@
                 worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
                 subject.Enemies(Character.FromId(worldData.Object, characterId)).ShouldBeEmpty
                 worldData.Verify(Function(x) x.Character.ReadForLocation(id))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub have_route_types()
-        WithSubject(
-            Sub(worldData, id, subject)
-                worldData.Setup(Function(x) x.Route.ReadDirectionRouteTypeForLocation(It.IsAny(Of Long)))
-                subject.RouteTypes.ShouldBeEmpty
-                worldData.Verify(Function(x) x.Route.ReadDirectionRouteTypeForLocation(id))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub destroys_route()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const directionId = 2L
-                worldData.Setup(Function(x) x.Route.ReadForLocationDirection(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.DestroyRoute(Direction.FromId(worldData.Object, directionid))
-                worldData.Verify(Function(x) x.Route.ReadForLocationDirection(id, directionId))
             End Sub)
     End Sub
     <Fact>
@@ -109,15 +72,6 @@
                 worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
                 subject.Enemy(Character.FromId(worldData.Object, characterId)).ShouldBeNull
                 worldData.Verify(Function(x) x.Character.ReadForLocation(id))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub have_route_directions()
-        WithSubject(
-            Sub(worldData, id, subject)
-                worldData.Setup(Function(x) x.Route.ReadDirectionRouteForLocation(It.IsAny(Of Long)))
-                subject.RouteDirections.ShouldBeEmpty
-                worldData.Verify(Function(x) x.Route.ReadDirectionRouteForLocation(id))
             End Sub)
     End Sub
     <Fact>

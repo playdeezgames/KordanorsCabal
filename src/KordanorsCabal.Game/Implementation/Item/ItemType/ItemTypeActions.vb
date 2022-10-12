@@ -42,9 +42,9 @@
                     Dim location = character.Location
                     Dim outDirection = Direction.FromId(worldData, 8L)
                     Dim inDirection = Direction.FromId(worldData, 7L)
-                    location.DestroyRoute(outDirection)
+                    location.Routes.DestroyRoute(outDirection)
                     Dim destination = Game.Location.FromLocationType(worldData, LocationType.FromId(worldData, 1L)).Single
-                    destination.DestroyRoute(inDirection)
+                    destination.Routes.DestroyRoute(inDirection)
                     Route.Create(worldData, location, outDirection, RouteType.FromId(worldData, 10L), destination)
                     Route.Create(worldData, destination, inDirection, RouteType.FromId(worldData, 10L), location)
                     character.EnqueueMessage("A portal opens before you!")
@@ -142,9 +142,9 @@
                     Dim location = character.Location
                     Dim outDirection = Direction.FromId(worldData, 8L)
                     Dim inDirection = Direction.FromId(worldData, 7L)
-                    location.DestroyRoute(outDirection)
+                    location.Routes.DestroyRoute(outDirection)
                     Dim destination = RNG.FromEnumerable(Game.Location.FromLocationType(worldData, LocationType.FromId(worldData, 8L)))
-                    destination.DestroyRoute(inDirection)
+                    destination.Routes.DestroyRoute(inDirection)
                     Route.Create(worldData, location, outDirection, RouteType.FromId(worldData, 10L), destination)
                     Route.Create(worldData, destination, inDirection, RouteType.FromId(worldData, 10L), location)
                     character.EnqueueMessage("A portal opens before you!")

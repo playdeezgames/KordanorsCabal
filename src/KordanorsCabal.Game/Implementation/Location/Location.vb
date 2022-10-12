@@ -22,17 +22,9 @@
     Public Shared Function ByDungeonLevel(worldData As IWorldData, dungeonLevel As IDungeonLevel) As IEnumerable(Of ILocation)
         Return worldData.LocationDungeonLevel.ReadForDungeonLevel(dungeonLevel.Id).Select(Function(x) Location.FromId(worldData, x))
     End Function
-    Sub DestroyRoute(direction As IDirection) Implements ILocation.DestroyRoute
-        Routes.Find(direction)?.Destroy()
-    End Sub
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long? Implements ILocation.GetStatistic
         Return WorldData.LocationStatistic.Read(Id, statisticType)
     End Function
-    Public ReadOnly Property HasStairs As Boolean Implements ILocation.HasStairs
-        Get
-            Return WorldData.Route.ReadForLocationRouteType(Id, 3).Any()
-        End Get
-    End Property
     Shared Function FromId(worldData As IWorldData, locationId As Long?) As ILocation
         Return If(locationId.HasValue, New Location(worldData, locationId.Value), Nothing)
     End Function
@@ -56,21 +48,6 @@
                 inventoryId = WorldData.Inventory.CreateForLocation(Id)
             End If
             Return Game.Inventory.FromId(WorldData, inventoryId.Value)
-        End Get
-    End Property
-    Public ReadOnly Property RouteDirections As IEnumerable(Of IDirection) Implements ILocation.RouteDirections
-        Get
-            Return WorldData.Route.ReadDirectionRouteForLocation(Id).Select(Function(x) New Direction(WorldData, x.Item1))
-        End Get
-    End Property
-    Public ReadOnly Property RouteTypes As IEnumerable(Of IRouteType) Implements ILocation.RouteTypes
-        Get
-            Return WorldData.Route.ReadDirectionRouteTypeForLocation(Id).Select(Function(x) RouteType.FromId(WorldData, x.Item2))
-        End Get
-    End Property
-    ReadOnly Property RouteCount As Long Implements ILocation.RouteCount
-        Get
-            Return WorldData.Route.ReadCountForLocation(Id)
         End Get
     End Property
     ReadOnly Property Characters As IEnumerable(Of ICharacter)

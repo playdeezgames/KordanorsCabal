@@ -9,7 +9,7 @@ Public MustInherit Class ModeProcessor
         buffer.WriteText(xy, $"Facing: {player.Direction.Name}", False, Hue.Black)
     End Sub
     Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
-        Dim exits = String.Join(",", player.Location.RouteDirections.Select(Function(x) x.Abbreviation))
+        Dim exits = String.Join(",", player.Location.Routes.RouteDirections.Select(Function(x) x.Abbreviation))
         buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
     End Sub
 
