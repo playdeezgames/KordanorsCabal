@@ -145,8 +145,8 @@ Public Module World
         Dim itemTypes As New List(Of Long)
         For Each deadEnd In deadEnds
             Dim direction = deadEnd.RouteDirections.First
-            Dim nextLocation = deadEnd.Routes(direction).ToLocation
-            Dim route = nextLocation.Routes(direction.Opposite)
+            Dim nextLocation = deadEnd.GetRoute(direction).ToLocation
+            Dim route = nextLocation.GetRoute(direction.Opposite)
             route.RouteType = RouteType.FromId(worldData, 4L)
             itemTypes.Add(1L)
         Next
@@ -187,8 +187,8 @@ Public Module World
         Dim bossLocation = RNG.FromEnumerable(deadEnds)
         bossLocation.LocationType = LocationType.FromId(worldData, 6L)
         Dim direction = bossLocation.RouteDirections.First
-        Dim nextLocation = bossLocation.Routes(direction).ToLocation
-        nextLocation.Routes(direction.Opposite).RouteType = routeType
+        Dim nextLocation = bossLocation.GetRoute(direction).ToLocation
+        nextLocation.GetRoute(direction.Opposite).RouteType = routeType
         Return bossLocation
     End Function
 

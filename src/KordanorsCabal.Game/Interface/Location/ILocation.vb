@@ -5,7 +5,7 @@
     ReadOnly Property Inventory As IInventory
 
     Function HasRoute(direction As IDirection) As Boolean
-    Function Routes(direction As IDirection) As IRoute
+    Function GetRoute(direction As IDirection) As IRoute
     Function RouteCount() As Long
     ReadOnly Property RouteDirections As IEnumerable(Of IDirection)
     Sub DestroyRoute(direction As IDirection)

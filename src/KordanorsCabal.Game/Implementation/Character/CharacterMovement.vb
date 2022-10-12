@@ -31,10 +31,10 @@
         If Character.Location Is Nothing OrElse Not Character.Location.HasRoute(direction) Then
             Return False
         End If
-        If Not Character.Location.Routes(direction).CanMove(Character) Then
+        If Not Character.Location.GetRoute(direction).CanMove(Character) Then
             Return False
         End If
-        If Character.Location.Routes(direction).ToLocation.LocationType.RequiresMP AndAlso Character.IsDemoralized() Then
+        If Character.Location.GetRoute(direction).ToLocation.LocationType.RequiresMP AndAlso Character.IsDemoralized() Then
             Return False
         End If
         Return True
@@ -47,7 +47,7 @@
             Character.Highness -= 1
             Character.FoodPoisoning -= 1
             Character.Chafing -= 1
-            Character.Location = Character.Location.Routes(direction).Move(Character)
+            Character.Location = Character.Location.GetRoute(direction).Move(Character)
             If Character.Hunger = CharacterStatisticType.FromId(WorldData, 20L).MaximumValue Then
                 Character.Hunger \= 2
                 Character.CurrentHP -= 1
