@@ -78,4 +78,10 @@
             Return LocationStatistics.FromId(WorldData, Id)
         End Get
     End Property
+
+    Public ReadOnly Property Factions As ILocationFactions Implements ILocation.Factions
+        Get
+            Return LocationFactions.FromId(WorldData, Id)
+        End Get
+    End Property
 End Class

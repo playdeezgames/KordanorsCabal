@@ -5,6 +5,7 @@
     ReadOnly Property Inventory As IInventory
     ReadOnly Property Routes As IRoutes
     ReadOnly Property Statistics As ILocationStatistics
+    ReadOnly Property Factions As ILocationFactions
 
     Function Allies(character As ICharacter) As IEnumerable(Of ICharacter)
     Function Enemy(character As ICharacter) As ICharacter

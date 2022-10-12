@@ -95,4 +95,11 @@
                 subject.Statistics.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub has_factions_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Factions.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class
