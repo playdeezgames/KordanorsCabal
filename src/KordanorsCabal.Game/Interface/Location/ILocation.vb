@@ -6,10 +6,10 @@
 
     Function HasRoute(direction As IDirection) As Boolean
     Function GetRoute(direction As IDirection) As IRoute
-    Function RouteCount() As Long
+    ReadOnly Property RouteCount As Long
     ReadOnly Property RouteDirections As IEnumerable(Of IDirection)
     Sub DestroyRoute(direction As IDirection)
-    Function HasStairs() As Boolean
+    ReadOnly Property HasStairs As Boolean
     ReadOnly Property RouteTypes As IEnumerable(Of IRouteType)
 
 

@@ -28,9 +28,11 @@
     Public Function GetStatistic(statisticType As LocationStatisticType) As Long? Implements ILocation.GetStatistic
         Return WorldData.LocationStatistic.Read(Id, statisticType)
     End Function
-    Public Function HasStairs() As Boolean Implements ILocation.HasStairs
-        Return WorldData.Route.ReadForLocationRouteType(Id, 3).Any()
-    End Function
+    Public ReadOnly Property HasStairs As Boolean Implements ILocation.HasStairs
+        Get
+            Return WorldData.Route.ReadForLocationRouteType(Id, 3).Any()
+        End Get
+    End Property
     Shared Function FromId(worldData As IWorldData, locationId As Long?) As ILocation
         Return If(locationId.HasValue, New Location(worldData, locationId.Value), Nothing)
     End Function
@@ -72,9 +74,11 @@
             Return WorldData.Route.ReadDirectionRouteTypeForLocation(Id).Select(Function(x) RouteType.FromId(WorldData, x.Item2))
         End Get
     End Property
-    Function RouteCount() As Long Implements ILocation.RouteCount
-        Return WorldData.Route.ReadCountForLocation(Id)
-    End Function
+    ReadOnly Property RouteCount As Long Implements ILocation.RouteCount
+        Get
+            Return WorldData.Route.ReadCountForLocation(Id)
+        End Get
+    End Property
     ReadOnly Property Characters As IEnumerable(Of ICharacter)
         Get
             Return WorldData.Character.ReadForLocation(Id).Select(Function(x) Character.FromId(WorldData, x))
