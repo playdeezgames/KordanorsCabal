@@ -715,7 +715,11 @@ Public Class CharacterShould
     Sub do_counter_attacks()
         WithSubject(
             Sub(worldData, id, subject)
+                Const locationId = 2L
+                worldData.Setup(Function(x) x.Character.ReadLocation(It.IsAny(Of Long))).Returns(locationId)
                 subject.DoCounterAttacks()
+                worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Character.ReadForLocation(locationId))
             End Sub)
     End Sub
     <Fact>
