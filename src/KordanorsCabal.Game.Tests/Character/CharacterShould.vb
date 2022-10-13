@@ -745,7 +745,9 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const wear = 2L
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.DoArmorWear(wear).ShouldBeEmpty
+                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
             End Sub)
     End Sub
     <Fact>
