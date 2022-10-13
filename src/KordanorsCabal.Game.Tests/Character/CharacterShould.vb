@@ -345,14 +345,22 @@ Public Class CharacterShould
     Sub have_maximum_hp()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
                 subject.MaximumHP.ShouldBe(0)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 6))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(6))
             End Sub)
     End Sub
     <Fact>
     Sub have_maximum_mana()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.MaximumMana.ShouldBe(0)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 8))
+                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
             End Sub)
     End Sub
     <Fact>
@@ -491,7 +499,11 @@ Public Class CharacterShould
     Sub have_money()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
                 subject.Money.ShouldBe(0)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 6))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(6))
             End Sub)
     End Sub
     <Fact>
