@@ -594,7 +594,11 @@ Public Class CharacterShould
     Sub gamble()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
                 subject.Gamble()
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 14))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(14))
             End Sub)
     End Sub
     <Fact>
