@@ -367,7 +367,12 @@ Public Class CharacterShould
     Sub have_parting_shot()
         WithSubject(
             Sub(worldData, id, subject)
+                Const characterTypeId = 2L
+                worldData.Setup(Function(x) x.Character.ReadCharacterType(It.IsAny(Of Long))).Returns(characterTypeId)
+                worldData.Setup(Function(x) x.CharacterTypePartingShot.Read(It.IsAny(Of Long)))
                 subject.PartingShot.ShouldBeNull
+                worldData.Verify(Function(x) x.Character.ReadCharacterType(id))
+                worldData.Verify(Function(x) x.CharacterTypePartingShot.Read(characterTypeId))
             End Sub)
     End Sub
     <Fact>
