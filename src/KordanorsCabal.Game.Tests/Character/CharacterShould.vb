@@ -646,7 +646,9 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const locationId = 2L
+                worldData.Setup(Function(x) x.CharacterLocation.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.HasVisited(Location.FromId(worldData.Object, locationId))
+                worldData.Verify(Function(x) x.CharacterLocation.Read(id, locationId))
             End Sub)
     End Sub
     <Fact>
