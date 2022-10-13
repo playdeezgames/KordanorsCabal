@@ -502,8 +502,8 @@ Public Class CharacterShould
                 worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
                 subject.Money.ShouldBe(0)
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 6))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(6))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 14))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(14))
             End Sub)
     End Sub
     <Fact>
@@ -808,7 +808,9 @@ Public Class CharacterShould
     Sub have_mode()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.Mode.ShouldBe(PlayerMode.Neutral)
+                worldData.Setup(Function(x) x.Player.ReadPlayerMode()).Returns(0)
+                subject.Mode.ShouldBe(PlayerMode.None)
+                worldData.Verify(Function(x) x.Player.ReadPlayerMode())
             End Sub)
     End Sub
     <Fact>
