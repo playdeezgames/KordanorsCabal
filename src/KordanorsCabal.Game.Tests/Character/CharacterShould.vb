@@ -493,7 +493,12 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const itemTypeId = 2L
+                worldData.Setup(Function(x) x.Inventory.ReadForCharacter(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.InventoryItem.ReadItems(It.IsAny(Of Long)))
                 subject.HasItemType(ItemType.FromId(worldData.Object, itemTypeId)).ShouldBeFalse
+                worldData.Verify(Function(x) x.Inventory.ReadForCharacter(id))
+                worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
+                worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
             End Sub)
     End Sub
     <Fact>
