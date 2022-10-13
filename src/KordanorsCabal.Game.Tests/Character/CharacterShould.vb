@@ -316,7 +316,17 @@ Public Class CharacterShould
     Sub have_is_demoralized()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.IsDemoralized.ShouldBeFalse
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
+                subject.IsDemoralized.ShouldBeTrue
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 4))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 7))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 13))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(4))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(7))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(13))
+                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
             End Sub)
     End Sub
     <Fact>
@@ -371,7 +381,10 @@ Public Class CharacterShould
     Sub have_inventory()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.Inventory.ShouldBeNull
+                worldData.Setup(Function(x) x.Inventory.ReadForCharacter(It.IsAny(Of Long)))
+                subject.Inventory.Id.ShouldBe(0)
+                worldData.Verify(Function(x) x.Inventory.ReadForCharacter(id))
+                worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
             End Sub)
     End Sub
     <Fact>
