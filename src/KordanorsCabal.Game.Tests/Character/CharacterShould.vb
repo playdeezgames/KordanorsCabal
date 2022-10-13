@@ -612,7 +612,9 @@ Public Class CharacterShould
     Sub fight()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.Character.ReadLocation(It.IsAny(Of Long)))
                 subject.Fight()
+                worldData.Verify(Function(x) x.Character.ReadLocation(id))
             End Sub)
     End Sub
     <Fact>
