@@ -578,7 +578,9 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const questTypeId = 2L
+                worldData.Setup(Function(x) x.CharacterQuest.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.CompleteQuest(QuestType.FromId(worldData.Object, questTypeId))
+                worldData.Verify(Function(x) x.CharacterQuest.Read(id, questTypeId))
             End Sub)
     End Sub
     <Fact>
@@ -697,7 +699,9 @@ Public Class CharacterShould
     Sub destroy()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Sub(x) x.Character.Clear(It.IsAny(Of Long)))
                 subject.Destroy()
+                worldData.Verify(Sub(x) x.Character.Clear(id))
             End Sub)
     End Sub
     <Fact>
