@@ -640,7 +640,9 @@ Public Class CharacterShould
     Sub have_equipped_slots()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.EquippedSlots.ShouldBeNull
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadEquipSlotsForCharacter(It.IsAny(Of Long)))
+                subject.EquippedSlots.ShouldBeEmpty
+                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadEquipSlotsForCharacter(id))
             End Sub)
     End Sub
     <Fact>
