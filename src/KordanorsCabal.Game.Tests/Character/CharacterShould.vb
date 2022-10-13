@@ -380,7 +380,13 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const statisticTypeId = 2L
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.Statistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBe(0)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, It.IsAny(Of Long)))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
             End Sub)
     End Sub
     <Fact>
