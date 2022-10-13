@@ -921,7 +921,13 @@ Public Class CharacterShould
     Sub heal()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadMinimumValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadMaximumValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Sub(x) x.CharacterStatistic.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Heal()
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadMinimumValue(12))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadMaximumValue(12))
+                worldData.Verify(Sub(x) x.CharacterStatistic.Write(id, 12, 0))
             End Sub)
     End Sub
     <Fact>
