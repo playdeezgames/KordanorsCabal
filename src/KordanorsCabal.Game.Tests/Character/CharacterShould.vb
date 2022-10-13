@@ -519,7 +519,14 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const itemId = 2L
+                Const itemTypeId = 3L
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
+                worldData.Setup(Function(x) x.ItemTypeEquipSlot.ReadForItemType(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.ItemType.ReadName(It.IsAny(Of Long)))
                 subject.Equip(Item.FromId(worldData.Object, itemId))
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.ItemTypeEquipSlot.ReadForItemType(itemTypeId))
+                worldData.Verify(Function(x) x.ItemType.ReadName(itemTypeId))
             End Sub)
     End Sub
     <Fact>
