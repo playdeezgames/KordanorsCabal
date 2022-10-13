@@ -736,7 +736,9 @@ Public Class CharacterShould
     Sub have_spells()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.Spells.ShouldBeNull
+                worldData.Setup(Function(x) x.CharacterSpell.ReadForCharacter(It.IsAny(Of Long)))
+                subject.Spells.ShouldBeEmpty
+                worldData.Verify(Function(x) x.CharacterSpell.ReadForCharacter(id))
             End Sub)
     End Sub
     <Fact>
