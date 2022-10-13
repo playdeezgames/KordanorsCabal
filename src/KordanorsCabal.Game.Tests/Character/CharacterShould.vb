@@ -905,9 +905,25 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const characterId = 2L
+                Const characterTypeId = 3L
+                worldData.Setup(Function(x) x.Character.ReadCharacterType(It.IsAny(Of Long))).Returns(characterTypeId)
+                worldData.Setup(Function(x) x.CharacterType.ReadName(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Inventory.ReadForCharacter(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.InventoryItem.ReadItems(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterTypeLoot.Read(It.IsAny(Of Long)))
                 Dim actual = subject.Kill(Character.FromId(worldData.Object, characterId))
-                actual.Item1.ShouldBeNull
-                actual.Item2.ShouldBeNull
+                actual.Item1.ShouldBe(Sfx.EnemyDeath)
+                actual.Item2.ShouldNotBeEmpty
+                worldData.Verify(Function(x) x.Character.ReadCharacterType(id))
+                worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Sub(x) x.Character.Clear(id))
+                worldData.Verify(Function(x) x.CharacterType.ReadName(characterTypeId))
+                worldData.Verify(Function(x) x.CharacterType.ReadMoneyDropDice(characterTypeId))
+                worldData.Verify(Function(x) x.CharacterType.ReadXPValue(characterTypeId))
+                worldData.Verify(Function(x) x.Inventory.ReadForCharacter(id))
+                worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
+                worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
+                worldData.Verify(Function(x) x.CharacterTypeLoot.Read(characterTypeId))
             End Sub)
     End Sub
     <Fact>
