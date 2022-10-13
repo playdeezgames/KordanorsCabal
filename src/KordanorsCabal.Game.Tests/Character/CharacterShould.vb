@@ -741,7 +741,11 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const damage = 2L
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
                 subject.DoDamage(damage)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 12))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(12))
             End Sub)
     End Sub
     <Fact>
