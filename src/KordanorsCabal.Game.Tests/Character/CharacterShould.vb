@@ -333,7 +333,12 @@ Public Class CharacterShould
     Sub have_is_undead()
         WithSubject(
             Sub(worldData, id, subject)
+                Const characterTypeId = 2L
+                worldData.Setup(Function(x) x.Character.ReadCharacterType(It.IsAny(Of Long))).Returns(characterTypeId)
+                worldData.Setup(Function(x) x.CharacterType.ReadIsUndead(It.IsAny(Of Long)))
                 subject.IsUndead.ShouldBeFalse
+                worldData.Verify(Function(x) x.Character.ReadCharacterType(id))
+                worldData.Verify(Function(x) x.CharacterType.ReadIsUndead(characterTypeId))
             End Sub)
     End Sub
     <Fact>
