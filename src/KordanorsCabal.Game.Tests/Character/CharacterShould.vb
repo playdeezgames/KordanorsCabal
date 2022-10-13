@@ -777,7 +777,9 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const questTypeId = 2L
+                worldData.Setup(Function(x) x.CharacterQuest.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.HasQuest(QuestType.FromId(worldData.Object, questTypeId)).ShouldBeFalse
+                worldData.Verify(Function(x) x.CharacterQuest.Read(id, questTypeId))
             End Sub)
     End Sub
     <Fact>
