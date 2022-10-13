@@ -312,4 +312,511 @@ Public Class CharacterShould
                 worldData.Verify(Function(x) x.CharacterTypeEnemy.Read(characterTypeId, otherCharacterTypeId))
             End Sub)
     End Sub
+    <Fact>
+    Sub have_is_demoralized()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.IsDemoralized.ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_is_undead()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.IsUndead.ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_maximum_hp()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.MaximumHP.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_maximum_mana()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.MaximumMana.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_parting_shot()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.PartingShot.ShouldBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_statistics()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const statisticTypeId = 2L
+                subject.Statistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_has_statistics()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const statisticTypeId = 2L
+                subject.HasStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_inventory()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Inventory.ShouldBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_hunger()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Hunger.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_highness()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Highness.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_food_poisoning()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.FoodPoisoning.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_drunkenness()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Drunkenness.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_current_mp()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.CurrentMP.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_current_mana()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.CurrentMana.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_chafing()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Chafing.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_money()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Money.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_encumbrance()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Encumbrance.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_maximum_encumbrance()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.MaximumEncumbrance.ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_is_encumbered()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.IsEncumbered.ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_has_item_type()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const itemTypeId = 2L
+                subject.HasItemType(ItemType.FromId(worldData.Object, itemTypeId)).ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_has_items_to_repair()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const shoppeTypeId = 2L
+                subject.HasItemsToRepair(ShoppeType.FromId(worldData.Object, shoppeTypeId)).ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_items_to_repair()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const shoppeTypeId = 2L
+                subject.ItemsToRepair(ShoppeType.FromId(worldData.Object, shoppeTypeId)).ShouldBeEmpty
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_needs_healing()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.NeedsHealing.ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_has_equipment()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.HasEquipment.ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_has_spells()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.HasSpells.ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub interact()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Interact()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_can_move_forward()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.CanMoveForward()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_use_item()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const itemId = 2L
+                subject.UseItem(Item.FromId(worldData.Object, itemId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub equip()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const itemId = 2L
+                subject.Equip(Item.FromId(worldData.Object, itemId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub unequip()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const equipSlotId = 2L
+                subject.Unequip(EquipSlot.FromId(worldData.Object, equipSlotId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub cast()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const spellTypeId = 2L
+                worldData.Setup(Function(x) x.SpellType.ReadCastCheck(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Events.Test(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
+                subject.Cast(SpellType.FromId(worldData.Object, spellTypeId))
+                worldData.Verify(Function(x) x.SpellType.ReadCastCheck(spellTypeId))
+                worldData.Verify(Function(x) x.SpellType.ReadName(spellTypeId))
+                worldData.Verify(Function(x) x.Events.Test(worldData.Object, Nothing, {id}))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_equipment()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const equipSlotId = 2L
+                subject.Equipment(EquipSlot.FromId(worldData.Object, equipSlotId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_has_visited()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const locationId = 2L
+                subject.HasVisited(Location.FromId(worldData.Object, locationId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_spells()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Spells.ShouldBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_equipped_slots()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.EquippedSlots.ShouldBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub complete_quest()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const questTypeId = 2L
+                subject.CompleteQuest(QuestType.FromId(worldData.Object, questTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub gamble()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Gamble()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub do_intimidation()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.DoIntimidation()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub fight()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Fight()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub purify_items()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.PurifyItems()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_direction()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Direction.ShouldBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub run()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Run()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_mode()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Mode.ShouldBe(PlayerMode.Neutral)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_is_fully_assigned()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.IsFullyAssigned.ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub set_statistic()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const statisticTypeId = 2L
+                Const statisticValue = 3L
+                subject.SetStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId), statisticValue)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub change_statistic()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const statisticTypeId = 2L
+                Const delta = 3L
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
+                subject.ChangeStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId), delta)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub get_statistic()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const statisticTypeId = 2L
+                subject.GetStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_has_quest()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const questTypeId = 2L
+                subject.HasQuest(QuestType.FromId(worldData.Object, questTypeId)).ShouldBeFalse
+            End Sub)
+    End Sub
+    <Fact>
+    Sub learn()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const spellTypeId = 2L
+                subject.Learn(SpellType.FromId(worldData.Object, spellTypeId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub kill()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const characterId = 2L
+                Dim actual = subject.Kill(Character.FromId(worldData.Object, characterId))
+                actual.Item1.ShouldBeNull
+                actual.Item2.ShouldBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub destroy()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Destroy()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub heal()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Heal()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub do_counter_attacks()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.DoCounterAttacks()
+            End Sub)
+    End Sub
+    <Fact>
+    Sub determine_damage()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const damage = 2L
+                subject.DetermineDamage(damage).ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub do_damage()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const damage = 2L
+                subject.DoDamage(damage)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub do_armor_wear()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const wear = 2L
+                subject.DoArmorWear(wear).ShouldBeEmpty
+            End Sub)
+    End Sub
+    <Fact>
+    Sub do_weapon_wear()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const wear = 2L
+                subject.DoWeaponWear(wear).ShouldBeEmpty
+            End Sub)
+    End Sub
+    <Fact>
+    Sub do_immobilization()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const wear = 2L
+                subject.DoImmobilization(wear)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub do_fatigue()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const wear = 2L
+                subject.DoFatigue(wear)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub enqueue_messages_without_sfx()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.EnqueueMessage("text")
+            End Sub)
+    End Sub
+    <Fact>
+    Sub enqueue_messages_with_sfx()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.EnqueueMessage(Sfx.Miss, "text")
+            End Sub)
+    End Sub
+    <Fact>
+    Sub roll_willpower()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.RollWillpower().ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub roll_defend()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.RollDefend().ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub roll_attack()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.RollAttack().ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub roll_influence()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.RollInfluence().ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub roll_power()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.RollPower().ShouldBe(0)
+            End Sub)
+    End Sub
+    <Fact>
+    Sub roll_spell_dice()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const spellTypeId = 2L
+                subject.RollSpellDice(SpellType.FromId(worldData.Object, spellTypeId)).ShouldBe(0)
+            End Sub)
+    End Sub
 End Class
