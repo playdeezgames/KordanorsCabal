@@ -771,7 +771,11 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const wear = 2L
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
                 subject.DoImmobilization(wear)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 23))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(23))
             End Sub)
     End Sub
     <Fact>
@@ -779,7 +783,11 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const wear = 2L
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
                 subject.DoFatigue(wear)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 15))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(15))
             End Sub)
     End Sub
     <Fact>
