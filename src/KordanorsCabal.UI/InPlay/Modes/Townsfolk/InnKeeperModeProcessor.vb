@@ -14,7 +14,7 @@
             Case GoodByeButtonIndex
                 buffer.WriteText((0, 1), "@#$% off, you %$#^!", False, Hue.Black)
             Case QuestButtonIndex
-                If player.HasQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
+                If player.Quest.HasQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
                     buffer.WriteText((0, 1), "How the rat killing going?", False, Hue.Black)
                     Exit Select
                 End If
@@ -33,11 +33,11 @@
     End Sub
 
     Private Sub UpdateQuestButton(player As ICharacter)
-        If player.HasQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
+        If player.Quest.HasQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
             Buttons(QuestButtonIndex).Title = "Quest Done!"
             Return
         End If
-        If player.CanAcceptQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
+        If player.Quest.CanAcceptQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
             Buttons(QuestButtonIndex).Title = "Do Quest!"
             Return
         End If
@@ -62,13 +62,13 @@
     End Function
 
     Private Function HandleQuestButton(player As ICharacter) As UIState
-        If player.HasQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
-            player.CompleteQuest(QuestType.FromId(StaticWorldData.World, 1L))
+        If player.Quest.HasQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
+            player.Quest.CompleteQuest(QuestType.FromId(StaticWorldData.World, 1L))
             PushUIState(UIState.InPlay)
             Return UIState.Message
         End If
-        If player.CanAcceptQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
-            player.AcceptQuest(QuestType.FromId(StaticWorldData.World, 1L))
+        If player.Quest.CanAcceptQuest(QuestType.FromId(StaticWorldData.World, 1L)) Then
+            player.Quest.AcceptQuest(QuestType.FromId(StaticWorldData.World, 1L))
             PushUIState(UIState.InPlay)
             Return UIState.Message
         End If

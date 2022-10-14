@@ -16,7 +16,7 @@
         Return WorldData.Events.Test(WorldData, WorldData.QuestType.ReadCanCompleteEventName(Id), character.Id)
     End Function
     Sub Complete(character As ICharacter) Implements IQuestType.Complete
-        If character.HasQuest(Me) AndAlso CanComplete(character) Then
+        If character.Quest.HasQuest(Me) AndAlso CanComplete(character) Then
             WorldData.Events.Perform(WorldData, WorldData.QuestType.ReadCompleteEventName(Id), character.Id)
             Return
         End If

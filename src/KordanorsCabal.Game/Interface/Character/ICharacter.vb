@@ -1,10 +1,15 @@
 ﻿Public Interface ICharacter
     Inherits IBaseThingie
-    Sub AcceptQuest(quest As IQuestType)
+    ReadOnly Property CharacterType As ICharacterType
+    Property Location As ILocation
+
+    ReadOnly Property Movement As ICharacterMovement
+
+    ReadOnly Property Quest As ICharacterQuest
+
     Sub AddStress(delta As Long)
     Function AddXP(xp As Long) As Boolean
     Sub AssignPoint(statisticType As ICharacterStatisticType)
-    Function CanAcceptQuest(quest As IQuestType) As Boolean
     ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean
     Function CanCastSpell(spellType As ISpellType) As Boolean
     ReadOnly Property CanDoIntimidation() As Boolean
@@ -14,9 +19,6 @@
     ReadOnly Property CanIntimidate As Boolean
     Function CanLearn(spellType As ISpellType) As Boolean
     ReadOnly Property CanMap() As Boolean
-    ReadOnly Property Movement As ICharacterMovement
-    ReadOnly Property CharacterType As ICharacterType
-    Property Location As ILocation
     ReadOnly Property Name As String
     Property CurrentHP As Long
     ReadOnly Property IsDead As Boolean
@@ -57,7 +59,6 @@
     Sub Equip(item As IItem)
     ReadOnly Property MaximumEncumbrance As Long
     ReadOnly Property ItemsToRepair(shoppeType As IShoppeType) As IEnumerable(Of IItem)
-    Sub CompleteQuest(quest As IQuestType)
     Sub Gamble()
     Sub DoIntimidation()
     Sub Fight()
@@ -69,7 +70,6 @@
     Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As ICharacterStatisticType) As Long?
     Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long)
-    Function HasQuest(quest As IQuestType) As Boolean
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     Sub Destroy()
     Function DetermineDamage(value As Long) As Long

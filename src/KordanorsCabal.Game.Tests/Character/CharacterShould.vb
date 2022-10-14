@@ -6,18 +6,6 @@ Public Class CharacterShould
         MyBase.New(AddressOf Character.FromId)
     End Sub
     <Fact>
-    Sub can_accept_quests()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const questTypeId = 1L
-                worldData.Setup(Function(x) x.Events.Test(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
-                worldData.Setup(Function(x) x.QuestType.ReadCanAcceptEventName(It.IsAny(Of Long)))
-                subject.AcceptQuest(QuestType.FromId(worldData.Object, questTypeId))
-                worldData.Verify(Function(x) x.Events.Test(worldData.Object, Nothing, {1L}))
-                worldData.Verify(Function(x) x.QuestType.ReadCanAcceptEventName(questTypeId))
-            End Sub)
-    End Sub
-    <Fact>
     Sub change_current_mp()
         WithSubject(
             Sub(worldData, id, subject)
@@ -61,20 +49,6 @@ Public Class CharacterShould
                 statisticType.VerifyNoOtherCalls()
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub have_can_accept_quest()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const questTypeId = 2L
-                worldData.Setup(Function(x) x.CharacterQuest.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                worldData.Setup(Function(x) x.Events.Test(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
-                worldData.Setup(Function(x) x.QuestType.ReadCanAcceptEventName(It.IsAny(Of Long)))
-                subject.CanAcceptQuest(QuestType.FromId(worldData.Object, questTypeId)).ShouldBeFalse
-                worldData.Verify(Function(x) x.CharacterQuest.Read(id, questTypeId))
-                worldData.Verify(Function(x) x.Events.Test(worldData.Object, Nothing, {1}))
-                worldData.Verify(Function(x) x.QuestType.ReadCanAcceptEventName(questTypeId))
             End Sub)
     End Sub
     <Fact>
@@ -766,16 +740,6 @@ Public Class CharacterShould
             End Sub)
     End Sub
     <Fact>
-    Sub complete_quest()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const questTypeId = 2L
-                worldData.Setup(Function(x) x.CharacterQuest.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.CompleteQuest(QuestType.FromId(worldData.Object, questTypeId))
-                worldData.Verify(Function(x) x.CharacterQuest.Read(id, questTypeId))
-            End Sub)
-    End Sub
-    <Fact>
     Sub gamble()
         WithSubject(
             Sub(worldData, id, subject)
@@ -897,16 +861,6 @@ Public Class CharacterShould
                 subject.GetStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBeNull
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub have_has_quest()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const questTypeId = 2L
-                worldData.Setup(Function(x) x.CharacterQuest.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.HasQuest(QuestType.FromId(worldData.Object, questTypeId)).ShouldBeFalse
-                worldData.Verify(Function(x) x.CharacterQuest.Read(id, questTypeId))
             End Sub)
     End Sub
     <Fact>
@@ -1170,6 +1124,13 @@ Public Class CharacterShould
                 worldData.Setup(Function(x) x.CharacterSpell.ReadForCharacter(It.IsAny(Of Long)))
                 subject.RollSpellDice(SpellType.FromId(worldData.Object, spellTypeId)).ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterSpell.ReadForCharacter(id))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_quest_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Quest.ShouldNotBeNull
             End Sub)
     End Sub
 End Class
