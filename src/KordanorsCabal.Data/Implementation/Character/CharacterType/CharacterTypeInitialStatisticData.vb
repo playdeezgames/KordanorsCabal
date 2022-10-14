@@ -204,7 +204,7 @@
     End Sub
 
     Public Function ReadAllForCharacterType(characterTypeId As Long) As List(Of Tuple(Of Long, Long)) Implements ICharacterTypeInitialStatisticData.ReadAllForCharacterType
-        Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             (CharacterStatisticTypeIdColumn, InitialValueColumn),
@@ -225,7 +225,7 @@
     End Function
 
     Public Function ReadForCharacterType(characterTypeId As Long) As IEnumerable(Of Long)
-        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
+        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterStatisticTypeIdColumn,

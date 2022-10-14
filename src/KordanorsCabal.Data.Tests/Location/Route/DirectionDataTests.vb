@@ -22,9 +22,10 @@
     Sub ShouldQueryTheStoreForAllDirections()
         WithSubobject(
             Sub(store, checker, subject)
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadAll().ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadRecords(Of Long)(
+                    Function(x) x.Record.ReadRecords(Of Long)(
                     It.IsAny(Of Action),
                     Tables.Directions,
                     Columns.DirectionIdColumn))

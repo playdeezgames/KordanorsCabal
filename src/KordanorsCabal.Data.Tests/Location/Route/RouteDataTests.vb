@@ -56,9 +56,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationId = 1L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadDirectionRouteForLocation(locationId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long, Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             (Columns.DirectionIdColumn, Columns.RouteIdColumn),
@@ -70,9 +71,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationId = 1L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadDirectionRouteTypeForLocation(locationId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long, Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             (Columns.DirectionIdColumn, Columns.RouteTypeIdColumn),
@@ -102,9 +104,10 @@
             Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim routeType = 2L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadForLocationRouteType(locationId, routeType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+                    Function(x) x.Record.ReadRecordsWithColumnValues(Of Long, Long, Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             Columns.RouteIdColumn,

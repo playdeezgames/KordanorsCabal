@@ -19,7 +19,7 @@
     End Sub
 
     Public Function ReadForLocationType(locationType As Long) As IEnumerable(Of Long) Implements ILocationData.ReadForLocationType
-        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
+        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             LocationIdColumn,

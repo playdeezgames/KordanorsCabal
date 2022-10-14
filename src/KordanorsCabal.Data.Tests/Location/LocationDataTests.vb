@@ -22,9 +22,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationType = 1L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadForLocationType(locationType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
+                    Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Locations,
                     Columns.LocationIdColumn,

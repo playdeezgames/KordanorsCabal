@@ -70,7 +70,7 @@
     End Sub
 
     Public Function ReadForTransactionType(itemTypeId As Long, transationTypeId As Long) As IEnumerable(Of Long) Implements IItemTypeShopTypeData.ReadForTransactionType
-        Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+        Return Store.Record.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             ShoppeTypeIdColumn,

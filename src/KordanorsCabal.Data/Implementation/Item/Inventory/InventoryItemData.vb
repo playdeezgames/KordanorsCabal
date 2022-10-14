@@ -28,7 +28,7 @@
     End Sub
 
     Public Function ReadItems(inventoryId As Long) As IEnumerable(Of Long) Implements IInventoryItemData.ReadItems
-        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
+        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             ItemIdColumn,

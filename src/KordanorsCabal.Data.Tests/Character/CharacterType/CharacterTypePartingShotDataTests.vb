@@ -10,9 +10,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterType = 1L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.Read(characterType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadRecordsWithColumnValue(Of Long, String, Long)(
+                    Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, String, Long)(
                     It.IsAny(Of Action),
                     Tables.CharacterTypePartingShots,
                     (Columns.PartingShotColumn, Columns.WeightColumn),

@@ -52,7 +52,7 @@
     End Sub
 
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long) Implements ICharacterData.ReadForLocation
-        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(
+        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterIdColumn,

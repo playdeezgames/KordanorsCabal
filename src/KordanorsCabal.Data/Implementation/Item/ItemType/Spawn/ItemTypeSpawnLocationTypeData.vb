@@ -104,7 +104,7 @@
     End Sub
 
     Public Function ReadAll(itemTypeId As Long, dungeonLevelId As Long) As IEnumerable(Of Long) Implements IItemTypeSpawnLocationTypeData.ReadAll
-        Return Store.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+        Return Store.Record.ReadRecordsWithColumnValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             LocationTypeIdColumn,

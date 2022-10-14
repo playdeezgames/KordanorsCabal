@@ -25,7 +25,7 @@
             );")
     End Sub
     Public Function Read(characterId As Long) As IEnumerable(Of Tuple(Of Long, Long))
-        Return Store.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             (EquipSlotColumn, ItemIdColumn),
@@ -72,9 +72,9 @@
             (EquipSlotColumn, equipSlotId))
     End Function
     Public Function ReadItemsForCharacter(characterId As Long) As IEnumerable(Of Long) Implements ICharacterEquipSlotData.ReadItemsForCharacter
-        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ItemIdColumn, (CharacterIdColumn, characterId))
+        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ItemIdColumn, (CharacterIdColumn, characterId))
     End Function
     Public Function ReadEquipSlotsForCharacter(characterId As Long) As IEnumerable(Of Long) Implements ICharacterEquipSlotData.ReadEquipSlotsForCharacter
-        Return Store.ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, EquipSlotColumn, (CharacterIdColumn, characterId))
+        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, EquipSlotColumn, (CharacterIdColumn, characterId))
     End Function
 End Class

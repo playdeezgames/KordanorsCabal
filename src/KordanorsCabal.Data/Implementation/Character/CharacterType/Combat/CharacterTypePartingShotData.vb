@@ -29,7 +29,7 @@
     End Sub
 
     Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of String, Integer) Implements ICharacterTypePartingShotData.Read
-        Dim results = Store.ReadRecordsWithColumnValue(Of Long, String, Long)(
+        Dim results = Store.Record.ReadRecordsWithColumnValue(Of Long, String, Long)(
             AddressOf Initialize,
             TableName,
             (PartingShotColumn, WeightColumn),

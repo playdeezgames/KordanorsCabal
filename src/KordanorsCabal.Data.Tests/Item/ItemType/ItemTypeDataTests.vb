@@ -37,8 +37,9 @@
     Sub ShouldReadAllItemTypesFromTheDataStore()
         WithSubobject(
             Sub(store, checker, subject)
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadAll().ShouldBeNull
-                store.Verify(Function(x) x.ReadRecords(Of Long)(
+                store.Verify(Function(x) x.Record.ReadRecords(Of Long)(
                                  It.IsAny(Of Action),
                                  Tables.ItemTypes,
                                  Columns.ItemTypeIdColumn))

@@ -8,9 +8,9 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterType = 1L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.Read(characterType).ShouldBeNull
-                'IStore.ReadRecordsWithColumnValue<long, long, long>(Action, "CharacterTypeLoots", (ItemTypeId, Weight), (CharacterTypeId, 1))
-                store.Verify(Function(x) x.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+                store.Verify(Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterTypeLoots,
                                  (Columns.ItemTypeIdColumn, Columns.WeightColumn),

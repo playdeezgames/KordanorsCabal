@@ -8,9 +8,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const itemTypeId = 1L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadForItemType(itemTypeId)
                 store.Verify(
-                    Function(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
+                    Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long)(
                         It.IsAny(Of Action),
                         Tables.ItemTypeEquipSlots,
                         Columns.EquipSlotIdColumn,

@@ -1,5 +1,5 @@
 ﻿Public Interface IStore
-    Inherits IStoreRecord
+    ReadOnly Property Record As IStoreRecord
     ReadOnly Property Count As IStoreCount
     ReadOnly Property Primitive As IStorePrimitive
     ReadOnly Property Clear As IStoreClear

@@ -23,9 +23,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim dungeonLevel = 1L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadForDungeonLevel(dungeonLevel).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadRecordsWithColumnValue(Of Long, Long)(
+                    Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.LocationDungeonLevels,
                     Columns.LocationIdColumn,

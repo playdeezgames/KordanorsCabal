@@ -9,9 +9,10 @@
             Sub(store, checker, subject)
                 Dim itemTypeId = 1L
                 Dim dungeonLevelId = 2L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadAll(itemTypeId, dungeonLevelId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+                    Function(x) x.Record.ReadRecordsWithColumnValues(Of Long, Long, Long)(
                     It.IsAny(Of Action),
                     Tables.ItemTypeSpawnLocationTypes,
                     Columns.LocationTypeIdColumn,

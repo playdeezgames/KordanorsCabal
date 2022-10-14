@@ -48,6 +48,6 @@
     End Function
 
     Public Function ReadAll() As IEnumerable(Of Long) Implements IQuestTypeData.ReadAll
-        Return Store.ReadRecords(Of Long)(AddressOf Initialize, TableName, QuestTypeIdColumn)
+        Return Store.Record.ReadRecords(Of Long)(AddressOf Initialize, TableName, QuestTypeIdColumn)
     End Function
 End Class
