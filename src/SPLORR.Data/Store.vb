@@ -16,14 +16,14 @@
     End Sub
     Public Function Renew() As IBacker Implements IStore.Renew
         Dim result As IBacker = New Backer()
-        result.Connection = backer.Connection
-        backer.Connection = Nothing
+        result.TakeConnection(backer)
+        backer.Disconnect()
         Reset()
         Return result
     End Function
     Public Sub Restore(oldBacker As IBacker) Implements IStore.Restore
         ShutDown()
-        backer.Connection = oldBacker.Connection
+        backer.TakeConnection(oldBacker)
     End Sub
     Public Sub ShutDown() Implements IStore.ShutDown
         backer.ShutDown()

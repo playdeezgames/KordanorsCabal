@@ -2,7 +2,7 @@
 
 Public Class Backer
     Implements IBacker
-    Public Property Connection As SqliteConnection Implements IBacker.Connection
+    Public Property Connection As SqliteConnection
     Public ReadOnly Property LastInsertRowId As Long Implements IBacker.LastInsertRowId
         Get
             Using command = Connection.CreateCommand()
@@ -13,7 +13,7 @@ Public Class Backer
     End Property
 
     Public Sub BackupTo(other As IBacker) Implements IBacker.BackupTo
-        Connection.BackupDatabase(other.Connection)
+        Connection.BackupDatabase(DirectCast(other, Backer).Connection)
     End Sub
 
     Public Sub Connect(filename As String) Implements IBacker.Connect
@@ -73,4 +73,12 @@ Public Class Backer
             End Using
         End Using
     End Function
+
+    Public Sub TakeConnection(backer As IBacker) Implements IBacker.TakeConnection
+        Connection = DirectCast(backer, Backer).Connection
+    End Sub
+
+    Public Sub Disconnect() Implements IBacker.Disconnect
+        Connection = Nothing
+    End Sub
 End Class
