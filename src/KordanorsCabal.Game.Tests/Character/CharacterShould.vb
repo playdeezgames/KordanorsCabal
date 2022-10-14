@@ -897,7 +897,12 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const spellTypeId = 2L
+                worldData.Setup(Function(x) x.CharacterSpell.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.SpellType.ReadMaximumLevel(It.IsAny(Of Long)))
                 subject.Learn(SpellType.FromId(worldData.Object, spellTypeId))
+                worldData.Verify(Function(x) x.CharacterSpell.Read(id, spellTypeId))
+                worldData.Verify(Function(x) x.SpellType.ReadMaximumLevel(spellTypeId))
+                worldData.Verify(Function(x) x.SpellType.ReadName(spellTypeId))
             End Sub)
     End Sub
     <Fact>
