@@ -1,7 +1,7 @@
 ﻿Public Interface ICharacterQuest
     Inherits IBaseThingie
-    Sub AcceptQuest(quest As IQuestType)
-    Function CanAcceptQuest(quest As IQuestType) As Boolean
-    Sub CompleteQuest(quest As IQuestType)
-    Function HasQuest(quest As IQuestType) As Boolean
+    Sub Accept(quest As IQuestType)
+    Function CanAccept(quest As IQuestType) As Boolean
+    Sub Complete(quest As IQuestType)
+    Function Has(quest As IQuestType) As Boolean
 End Interface

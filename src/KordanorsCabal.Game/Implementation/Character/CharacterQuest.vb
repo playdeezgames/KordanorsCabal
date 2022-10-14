@@ -8,16 +8,16 @@
     Shared Function FromId(worldData As IWorldData, id As Long?) As ICharacterQuest
         Return If(id.HasValue, New CharacterQuest(worldData, id.Value), Nothing)
     End Function
-    Public Function CanAcceptQuest(quest As IQuestType) As Boolean Implements ICharacterQuest.CanAcceptQuest
-        Return Not HasQuest(quest) AndAlso quest.CanAccept(Character.FromId(WorldData, Id))
+    Public Function CanAccept(quest As IQuestType) As Boolean Implements ICharacterQuest.CanAccept
+        Return Not Has(quest) AndAlso quest.CanAccept(Character.FromId(WorldData, Id))
     End Function
-    Public Sub CompleteQuest(quest As IQuestType) Implements ICharacterQuest.CompleteQuest
+    Public Sub Complete(quest As IQuestType) Implements ICharacterQuest.Complete
         quest.Complete(Character.FromId(WorldData, Id))
     End Sub
-    Public Sub AcceptQuest(quest As IQuestType) Implements ICharacterQuest.AcceptQuest
+    Public Sub Accept(quest As IQuestType) Implements ICharacterQuest.Accept
         quest.Accept(Character.FromId(WorldData, Id))
     End Sub
-    Public Function HasQuest(quest As IQuestType) As Boolean Implements ICharacterQuest.HasQuest
+    Public Function Has(quest As IQuestType) As Boolean Implements ICharacterQuest.Has
         Return WorldData.CharacterQuest.Read(Id, quest.Id)
     End Function
 End Class
