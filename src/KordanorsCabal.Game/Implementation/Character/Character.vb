@@ -101,14 +101,6 @@
     Overridable Sub EnqueueMessage(ParamArray lines() As String) Implements ICharacter.EnqueueMessage
         'do nothing!
     End Sub
-    ReadOnly Property CanFight As Boolean Implements ICharacter.CanFight
-        Get
-            If Location Is Nothing Then
-                Return False
-            End If
-            Return Location.Factions.EnemiesOf(Me).Any
-        End Get
-    End Property
     Friend Shared Function Create(worldData As IWorldData, characterType As ICharacterType, location As ILocation, initialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))) As ICharacter
         Dim character = FromId(worldData, worldData.Character.Create(characterType.Id, location.Id))
         If initialStatistics IsNot Nothing Then
@@ -190,11 +182,6 @@
     Public Function HasVisited(location As ILocation) As Boolean Implements ICharacter.HasVisited
         Return WorldData.CharacterLocation.Read(Id, location.Id)
     End Function
-    ReadOnly Property IsEnemy(character As ICharacter) As Boolean Implements ICharacter.IsEnemy
-        Get
-            Return CharacterType.Combat.IsEnemy(character.CharacterType)
-        End Get
-    End Property
     Private Function RollDice(dice As Long) As Long
         Dim result As Long = 0
         While dice > 0
@@ -202,20 +189,6 @@
             dice -= 1
         End While
         Return result
-    End Function
-    Function RollDefend() As Long Implements ICharacter.RollDefend
-        Dim maximumDefend = GetStatistic(CharacterStatisticType.FromId(WorldData, 11L)).Value
-        Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
-    End Function
-    Private Function GetDefendDice() As Long
-        Dim dice = GetStatistic(CharacterStatisticType.FromId(WorldData, 2L)).Value
-        For Each entry In EquippedItems
-            dice += entry.Armor.DefendDice
-        Next
-        Return dice
-    End Function
-    Function RollAttack() As Long Implements ICharacter.RollAttack
-        Return RollDice(GetAttackDice() + NegativeInfluence())
     End Function
     Private Function NegativeInfluence() As Long
         Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
@@ -225,13 +198,6 @@
     End Function
     Function RollWillpower() As Long Implements ICharacter.RollWillpower
         Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)), 0) + NegativeInfluence())
-    End Function
-    Private Function GetAttackDice() As Long
-        Dim dice = GetStatistic(CharacterStatisticType.FromId(WorldData, 1L)).Value
-        For Each entry In EquippedItems
-            dice += entry.Weapon.AttackDice
-        Next
-        Return dice
     End Function
     ReadOnly Property IsDemoralized() As Boolean Implements ICharacter.IsDemoralized
         Get
@@ -257,11 +223,6 @@
             Return CharacterType.Name
         End Get
     End Property
-    ReadOnly Property PartingShot As String Implements ICharacter.PartingShot
-        Get
-            Return CharacterType.Combat.PartingShot
-        End Get
-    End Property
     Property CurrentMP As Long Implements ICharacter.CurrentMP
         Get
             Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, 13L)).Value)
@@ -280,36 +241,12 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, 15L), GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - value)
         End Set
     End Property
-    Sub DoDamage(damage As Long) Implements ICharacter.DoDamage
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 12L), damage)
-    End Sub
     Sub DoFatigue(fatigue As Long) Implements ICharacter.DoFatigue
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, 15L), fatigue)
     End Sub
     Sub Destroy() Implements ICharacter.Destroy
         WorldData.Character.Clear(Id)
     End Sub
-    Function DetermineDamage(value As Long) As Long Implements ICharacter.DetermineDamage
-        Dim maximumDamage As Long? = Nothing
-        For Each item In EquippedItems
-            Dim itemMaximumDamage = item.Weapon.MaximumDamage
-            If itemMaximumDamage.HasValue Then
-                maximumDamage = If(maximumDamage, 0) + itemMaximumDamage.Value
-            End If
-        Next
-        maximumDamage = If(maximumDamage, GetStatistic(CharacterStatisticType.FromId(WorldData, 10L)).Value)
-        Return If(value < 0, 0, If(value > maximumDamage.Value, maximumDamage.Value, value))
-    End Function
-    ReadOnly Property RollMoneyDrop As Long
-        Get
-            Return CharacterType.Combat.RollMoneyDrop
-        End Get
-    End Property
-    ReadOnly Property XPValue As Long
-        Get
-            Return CharacterType.Combat.XPValue
-        End Get
-    End Property
     Function DoWeaponWear(wear As Long) As IEnumerable(Of IItemType) Implements ICharacter.DoWeaponWear
         Dim result As New List(Of IItemType)
         While wear > 0
@@ -355,13 +292,6 @@
             End If
         End If
     End Function
-    Friend Sub DropLoot()
-        'TODO: unequip everything
-        For Each item In Inventory.Items
-            Location.Inventory.Add(item)
-        Next
-        CharacterType.Combat.DropLoot(Location)
-    End Sub
     Function Equipment(equipSlot As IEquipSlot) As IItem Implements ICharacter.Equipment
         Return Item.FromId(WorldData, WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
     End Function
@@ -392,143 +322,12 @@
         End If
         Return False
     End Function
-    Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String)) Implements ICharacter.Kill
-        Dim lines As New List(Of String)
-        lines.Add($"You kill {Name}!")
-        Dim sfx As Sfx? = Game.Sfx.EnemyDeath
-        Dim money As Long = RollMoneyDrop
-        If money > 0 Then
-            lines.Add($"You get {money} money!")
-            killedBy.ChangeStatistic(CharacterStatisticType.FromId(WorldData, 14L), money)
-        End If
-        Dim xp As Long = XPValue
-        If xp > 0 Then
-            lines.Add($"You get {xp} XP!")
-            If killedBy.AddXP(xp) Then
-                lines.Add($"You level up!")
-            End If
-        End If
-        DropLoot()
-        Destroy()
-        Return (sfx, lines)
-    End Function
-    Sub DoCounterAttacks() Implements ICharacter.DoCounterAttacks
-        Dim enemies = Location.Factions.EnemiesOf(Me)
-        Dim enemyCount = enemies.Count
-        Dim enemyIndex = 1
-        For Each enemy In enemies
-            DoCounterAttack(enemy, enemyIndex, enemyCount)
-            enemyIndex += 1
-        Next
-    End Sub
-    Private Sub DoCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
-        If Health.IsDead Then
-            Return
-        End If
-        If IsImmobilized() Then
-            DoImmobilizedTurn(enemy, enemyIndex, enemyCount)
-            Return
-        End If
-        Select Case enemy.CharacterType.Combat.GenerateAttackType
-            Case AttackType.Physical
-                DoPhysicalCounterAttack(enemy, enemyIndex, enemyCount)
-            Case AttackType.Mental
-                DoMentalCounterAttack(enemy, enemyIndex, enemyCount)
-        End Select
-    End Sub
-
-    Private Sub DoImmobilizedTurn(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
-        Dim lines As New List(Of String) From {
-            $"Counter-attack {enemyIndex}/{enemyCount}:"
-        }
-        lines.Add($"{enemy.Name} is immobilized!")
-        enemy.ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), -1)
-        EnqueueMessage(lines.ToArray)
-    End Sub
-
-    Private Function IsImmobilized() As Boolean
-        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 23L)), 0) > 0
-    End Function
-
-    Private Sub DoMentalCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
-        Dim lines As New List(Of String) From {
-            $"Counter-attack {enemyIndex}/{enemyCount}:"
-        }
-        lines.Add($"{enemy.Name} attempts to intimidate you!")
-        Dim influenceRoll = enemy.RollInfluence
-        lines.Add($"{enemy.Name} rolls influence of {influenceRoll}.")
-        Dim willpowerRoll = RollWillpower()
-        lines.Add($"You roll willpower of {willpowerRoll}.")
-        Dim result = influenceRoll - willpowerRoll
-        Dim sfx As Sfx?
-        Select Case result
-            Case Is <= 0
-                lines.Add($"{enemy.Name} fails to intimidate you!")
-                sfx = Game.Sfx.Miss
-            Case Else
-                lines.Add($"{enemy.Name} adds 1 stress!")
-                AddStress(1)
-                If IsDemoralized() Then
-                    lines.Add($"{enemy.Name} completely demoralizes you and you drop everything and run away!")
-                    Panic()
-                    Money \= 2
-                    Location = Game.Location.FromLocationType(WorldData, LocationType.FromId(WorldData, 1L)).Single
-                    Exit Select
-                End If
-                lines.Add($"You have {CurrentMP} MP left.")
-        End Select
-        EnqueueMessage(sfx, lines.ToArray)
-    End Sub
     Public Sub Unequip(equipSlot As IEquipSlot) Implements ICharacter.Unequip
         Dim item = Equipment(equipSlot)
         If item IsNot Nothing Then
             Inventory.Add(item)
             WorldData.CharacterEquipSlot.Clear(Id, equipSlot.Id)
         End If
-    End Sub
-    Private Sub Panic()
-        For Each equipSlot In EquippedSlots
-            Unequip(equipSlot)
-        Next
-        For Each item In Inventory.Items
-            Location.Inventory.Add(item)
-        Next
-    End Sub
-    Private Sub DoPhysicalCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
-        Dim lines As New List(Of String) From {
-            $"Counter-attack {enemyIndex}/{enemyCount}:"
-        }
-        Dim attackRoll = enemy.RollAttack()
-        lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
-        For Each brokenItemType In DoArmorWear(attackRoll)
-            lines.Add($"Yer {brokenItemType.Name} breaks!")
-        Next
-        Dim defendRoll = RollDefend()
-        lines.Add($"You roll a defend of {defendRoll}.")
-        Dim result = attackRoll - defendRoll
-        Dim sfx As Sfx?
-        Select Case result
-            Case Is <= 0
-                lines.Add($"{enemy.Name} misses!")
-                sfx = Game.Sfx.Miss
-            Case Else
-                Dim damage = enemy.DetermineDamage(result)
-                lines.Add($"{enemy.Name} does {damage} damage!")
-                DoDamage(damage)
-                enemy.DoWeaponWear(damage)
-                If Health.IsDead Then
-                    sfx = Game.Sfx.PlayerDeath
-                    lines.Add($"{enemy.Name} kills you!")
-                    Dim partingShot = enemy.PartingShot
-                    If Not String.IsNullOrEmpty(partingShot) Then
-                        lines.Add($"{enemy.Name} says ""{partingShot}""")
-                    End If
-                    Exit Select
-                End If
-                sfx = Game.Sfx.PlayerHit
-                lines.Add($"You have {Health.Current} HP left.")
-        End Select
-        EnqueueMessage(sfx, lines.ToArray)
     End Sub
     Function HasItemType(itemType As IItemType) As Boolean Implements ICharacter.HasItemType
         Return Inventory.ItemsOfType(itemType).Any
@@ -724,60 +523,10 @@
                 lines.Add($"{enemy.Name} is not intimidated.")
             End If
             EnqueueMessage(lines.ToArray)
-            DoCounterAttacks()
+            Combat.DoCounterAttacks()
             Return
         End If
         EnqueueMessage("You cannot intimidate at this time!")
-    End Sub
-    Public Sub Run() Implements ICharacter.Run
-        If CanFight Then
-            Direction = RNG.FromEnumerable(CardinalDirections(WorldData))
-            If Movement.CanMove(Direction) Then
-                EnqueueMessage("You successfully ran!") 'TODO: sfx
-                Movement.Move(Direction)
-                Exit Sub
-            End If
-            EnqueueMessage("You fail to run!") 'TODO: shucks!
-            DoCounterAttacks()
-        End If
-    End Sub
-    Public Sub Fight() Implements ICharacter.Fight
-        If CanFight Then
-            DoAttack()
-            DoCounterAttacks()
-        End If
-    End Sub
-    Private Sub DoAttack()
-        Dim lines As New List(Of String)
-        Dim attackRoll = RollAttack()
-        Dim enemy = Location.Factions.EnemiesOf(Me).First
-        lines.Add($"You roll an attack of {attackRoll}.")
-        Dim defendRoll = enemy.RollDefend()
-        lines.Add($"{enemy.Name} rolls a defend of {defendRoll}.")
-        Dim result = attackRoll - defendRoll
-        Dim sfx As Sfx?
-        enemy.DoArmorWear(attackRoll)
-        Select Case result
-            Case Is <= 0
-                lines.Add("You miss!")
-                sfx = Game.Sfx.Miss
-            Case Else
-                Dim damage = DetermineDamage(result)
-                lines.Add($"You do {damage} damage!")
-                enemy.DoDamage(damage)
-                For Each brokenItemType In DoWeaponWear(damage)
-                    lines.Add($"Yer {brokenItemType.Name} breaks!")
-                Next
-                If enemy.Health.IsDead Then
-                    Dim killResult = enemy.Kill(Me)
-                    sfx = If(killResult.Item1, sfx)
-                    lines.AddRange(killResult.Item2)
-                    Exit Select
-                End If
-                sfx = Game.Sfx.EnemyHit
-                lines.Add($"{enemy.Name} has {enemy.Health.Current} HP left.")
-        End Select
-        EnqueueMessage(sfx, lines.ToArray)
     End Sub
 
     Public Function RollPower() As Long Implements ICharacter.RollPower
@@ -820,6 +569,12 @@
     Public ReadOnly Property Health As ICharacterHealth Implements ICharacter.Health
         Get
             Return CharacterHealth.FromId(WorldData, Id)
+        End Get
+    End Property
+
+    Public ReadOnly Property Combat As ICharacterCombat Implements ICharacter.Combat
+        Get
+            Return CharacterCombat.FromId(WorldData, Me)
         End Get
     End Property
 End Class

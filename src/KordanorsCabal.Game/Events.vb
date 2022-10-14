@@ -41,7 +41,7 @@
             {"AlwaysTrue", Function(worldData, parms) True},
             {"IsFightingUndead", Function(worldData, parms)
                                      Dim character = Game.Character.FromId(worldData, parms(0))
-                                     Return character.CanFight AndAlso character.Location.Factions.FirstEnemy(character).IsUndead
+                                     Return character.Combat.CanFight AndAlso character.Location.Factions.FirstEnemy(character).IsUndead
                                  End Function},
             {"CanUseRottenEgg", Function(worldData, parms)
                                     Dim character = Game.Character.FromId(worldData, parms(0))
@@ -104,14 +104,14 @@
                     character.DoFatigue(1)
                     Dim damage As Long = character.RollSpellDice(spellType)
                     lines.Add($"You do {damage} damage!")
-                    enemy.DoDamage(damage)
+                    enemy.Combat.DoDamage(damage)
                     If enemy.Health.IsDead Then
-                        Dim result = enemy.Kill(character)
+                        Dim result = enemy.Combat.Kill(character)
                         sfx = If(result.Item1, sfx)
                         lines.AddRange(result.Item2)
                     End If
                     character.EnqueueMessage(sfx, lines.ToArray)
-                    character.DoCounterAttacks()
+                    character.Combat.DoCounterAttacks()
                 End Sub},
             {"CharacterCastPurify",
                 Sub(worldData, parms)
@@ -184,14 +184,14 @@
                     Dim lines As New List(Of String) From {
                         $"{ItemType.FromId(worldData, 22L).Name} deals {damageRoll} HP to {enemy.Name}!"
                     }
-                    enemy.DoDamage(damageRoll)
+                    enemy.Combat.DoDamage(damageRoll)
                     If enemy.Health.IsDead Then
-                        Dim result = enemy.Kill(character)
+                        Dim result = enemy.Combat.Kill(character)
                         sfx = If(result.Item1, sfx)
                         lines.AddRange(result.Item2)
                     End If
                     character.EnqueueMessage(sfx, lines.ToArray)
-                    character.DoCounterAttacks()
+                    character.Combat.DoCounterAttacks()
                 End Sub},
             {"UseTownPortal",
                 Sub(worldData, parms)
@@ -321,14 +321,14 @@
                     lines.Add($"You use {ItemType.FromId(worldData, 13).Name} on {enemy.Name}!")
                     Dim damage As Long = RNG.RollDice("3d4")
                     lines.Add($"You do {damage} damage!")
-                    enemy.DoDamage(damage)
+                    enemy.Combat.DoDamage(damage)
                     If enemy.Health.IsDead Then
-                        Dim result = enemy.Kill(character)
+                        Dim result = enemy.Combat.Kill(character)
                         sfx = If(result.Item1, sfx)
                         lines.AddRange(result.Item2)
                     End If
                     character.EnqueueMessage(sfx, lines.ToArray)
-                    character.DoCounterAttacks()
+                    character.Combat.DoCounterAttacks()
                 End Sub},
             {"DrinkPotion",
                 Sub(worldData, parms)
@@ -360,7 +360,7 @@
                     lines.Add($"You immobilize {enemy.Name} for {immobilization} turns!")
                     enemy.DoImmobilization(immobilization)
                     character.EnqueueMessage(sfx, lines.ToArray)
-                    character.DoCounterAttacks()
+                    character.Combat.DoCounterAttacks()
                 End Sub},
             {"UseWaterShard",
                 Sub(worldData, parms)
