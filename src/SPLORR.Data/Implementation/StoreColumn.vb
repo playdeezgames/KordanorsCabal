@@ -59,7 +59,7 @@
     End Function
     Public Sub WriteColumnValue(Of TWhereColumn, TSetColumn)(initializer As Action, tableName As String, setColumn As (String, TSetColumn), whereColumn As (String, TWhereColumn)) Implements IStoreColumn.WriteColumnValue
         initializer()
-        backer.ExecuteNonQuery(
+        backer.Execute(
             $"UPDATE 
                 [{tableName}] 
             SET 

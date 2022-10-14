@@ -3,7 +3,7 @@
 Public Class Backer
     Implements IBacker
     Public Property Connection As SqliteConnection
-    Public ReadOnly Property LastInsertRowId As Long Implements IBacker.LastInsertRowId
+    Public ReadOnly Property LastRowIndex As Long Implements IBacker.LastRowIndex
         Get
             Using command = Connection.CreateCommand()
                 command.CommandText = "SELECT last_insert_rowid();"
@@ -12,11 +12,11 @@ Public Class Backer
         End Get
     End Property
 
-    Public Sub BackupTo(other As IBacker) Implements IBacker.BackupTo
+    Public Sub CopyTo(other As IBacker) Implements IBacker.CopyTo
         Connection.BackupDatabase(DirectCast(other, Backer).Connection)
     End Sub
 
-    Public Sub Connect(filename As String) Implements IBacker.Connect
+    Public Sub Open(filename As String) Implements IBacker.Open
         Connection = New SqliteConnection($"Data Source={filename}")
         Connection.Open()
     End Sub
@@ -28,7 +28,7 @@ Public Class Backer
         End If
     End Sub
 
-    Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As (String, Object)) Implements IBacker.ExecuteNonQuery
+    Public Sub Execute(sql As String, ParamArray parameters() As (String, Object)) Implements IBacker.Execute
         Using command = CreateCommand(sql, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
             command.ExecuteNonQuery()
         End Using
@@ -41,7 +41,7 @@ Public Class Backer
         Return Nothing
     End Function
 
-    Public Function ExecuteScalar(Of TResult As Structure)(query As String, ParamArray parameters() As (String, Object)) As TResult? Implements IBacker.ExecuteScalar
+    Public Function ScalarOf(Of TResult As Structure)(query As String, ParamArray parameters() As (String, Object)) As TResult? Implements IBacker.ScalarOf
         Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
             Return ExecuteScalar(Of TResult)(command)
         End Using
@@ -56,13 +56,13 @@ Public Class Backer
         Return command
     End Function
 
-    Public Function ExecuteScalar(Of TResult As Class)(transform As Func(Of Object, TResult), query As String, ParamArray parameters() As (String, Object)) As TResult Implements IBacker.ExecuteScalar
+    Public Function ScalarOf(Of TResult As Class)(transform As Func(Of Object, TResult), query As String, ParamArray parameters() As (String, Object)) As TResult Implements IBacker.ScalarOf
         Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
             Return transform(command.ExecuteScalar)
         End Using
     End Function
 
-    Public Function ExecuteReader(Of TResult)(transform As Func(Of Func(Of String, Object), TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult) Implements IBacker.ExecuteReader
+    Public Function ReadereOf(Of TResult)(transform As Func(Of Func(Of String, Object), TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult) Implements IBacker.ReadereOf
         Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
             Using reader = command.ExecuteReader
                 Dim result As New List(Of TResult)
@@ -74,11 +74,11 @@ Public Class Backer
         End Using
     End Function
 
-    Public Sub TakeConnection(backer As IBacker) Implements IBacker.TakeConnection
+    Public Sub Clone(backer As IBacker) Implements IBacker.Clone
         Connection = DirectCast(backer, Backer).Connection
     End Sub
 
-    Public Sub Disconnect() Implements IBacker.Disconnect
+    Public Sub Close() Implements IBacker.Close
         Connection = Nothing
     End Sub
 End Class

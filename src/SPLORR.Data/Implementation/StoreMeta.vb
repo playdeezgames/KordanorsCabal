@@ -10,15 +10,15 @@
 
     Public Sub Reset() Implements IStoreMeta.Reset
         ShutDown()
-        backer.Connect(":memory:")
+        backer.Open(":memory:")
         Dim loadBacker As New Backer()
-        loadBacker.Connect(templateFilename)
-        loadBacker.BackupTo(backer)
+        loadBacker.Open(templateFilename)
+        loadBacker.CopyTo(backer)
     End Sub
 
     Public Sub Restore(oldBacker As IBacker) Implements IStoreMeta.Restore
         ShutDown()
-        backer.TakeConnection(oldBacker)
+        backer.Clone(oldBacker)
     End Sub
 
     Public Sub ShutDown() Implements IStoreMeta.ShutDown
@@ -27,8 +27,8 @@
 
     Public Sub Save(filename As String) Implements IStoreMeta.Save
         Dim saveBacker As New Backer
-        saveBacker.Connect(filename)
-        backer.BackupTo(saveBacker)
+        saveBacker.Open(filename)
+        backer.CopyTo(saveBacker)
     End Sub
 
     Public Sub Load(filename As String) Implements IStoreMeta.Load
@@ -40,8 +40,8 @@
 
     Public Function Renew() As IBacker Implements IStoreMeta.Renew
         Dim result As IBacker = New Backer()
-        result.TakeConnection(backer)
-        backer.Disconnect()
+        result.Clone(backer)
+        backer.Close()
         Reset()
         Return result
     End Function

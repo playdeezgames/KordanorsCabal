@@ -7,7 +7,7 @@
     End Sub
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn)) Implements IStoreReplace.ReplaceRecord
         initializer()
-        backer.ExecuteNonQuery(
+        backer.Execute(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -23,7 +23,7 @@
     End Sub
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn)) Implements IStoreReplace.ReplaceRecord
         initializer()
-        backer.ExecuteNonQuery(
+        backer.Execute(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -52,7 +52,7 @@
                                                thirdColumnValue As (String, TThirdColumn),
                                                fourthColumnValue As (String, TFourthColumn)) Implements IStoreReplace.ReplaceRecord
         initializer()
-        backer.ExecuteNonQuery(
+        backer.Execute(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -86,7 +86,7 @@
                                       fourthColumnValue As (String, TFourthColumn),
                                       fifthColumnValue As (String, TFifthColumn)) Implements IStoreReplace.ReplaceRecord
         initializer()
-        backer.ExecuteNonQuery(
+        backer.Execute(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -125,7 +125,7 @@
                                       fifthColumnValue As (String, TFifthColumn),
                                       sixthColumnValue As (String, TSixthColumn)) Implements IStoreReplace.ReplaceRecord
         initializer()
-        backer.ExecuteNonQuery(
+        backer.Execute(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -169,7 +169,7 @@
                                       sixthColumnValue As (String, TSixthColumn),
                                       seventhColumnValue As (String, TSeventhColumn)) Implements IStoreReplace.ReplaceRecord
         initializer()
-        backer.ExecuteNonQuery(
+        backer.Execute(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
