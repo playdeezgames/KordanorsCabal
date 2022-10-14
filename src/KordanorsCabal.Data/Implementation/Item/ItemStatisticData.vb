@@ -32,7 +32,7 @@
     End Function
 
     Public Sub Write(itemId As Long, statisticType As Long, value As Long) Implements IItemStatisticData.Write
-        Store.ReplaceRecord(
+        Store.Replace.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId),

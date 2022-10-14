@@ -41,8 +41,9 @@
             Sub(store, checker, subject)
                 Const characterId = 1L
                 Const locationId = 2L
+                store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(characterId, locationId)
-                store.Verify(Sub(x) x.ReplaceRecord(Of Long, Long)(
+                store.Verify(Sub(x) x.Replace.ReplaceRecord(Of Long, Long)(
                                 It.IsAny(Of Action),
                                 Tables.CharacterLocations,
                                 (CharacterIdColumn, characterId),

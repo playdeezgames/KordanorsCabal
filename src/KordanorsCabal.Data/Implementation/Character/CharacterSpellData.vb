@@ -41,7 +41,7 @@
     End Function
 
     Public Sub Write(characterId As Long, spellType As Long, spellLevel As Long) Implements ICharacterSpellData.Write
-        Store.ReplaceRecord(
+        Store.Replace.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

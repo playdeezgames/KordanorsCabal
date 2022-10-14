@@ -41,7 +41,7 @@
     End Sub
 
     Public Sub Write(characterId As Long, equipSlot As Long, itemId As Long) Implements ICharacterEquipSlotData.Write
-        Store.ReplaceRecord(
+        Store.Replace.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

@@ -39,7 +39,7 @@
     End Function
 
     Public Sub Write(characterId As Long, quest As Long) Implements ICharacterQuestData.Write
-        Store.ReplaceRecord(
+        Store.Replace.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

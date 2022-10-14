@@ -53,8 +53,9 @@
             Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim quest = 2L
+                store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(characterId, quest)
-                store.Verify(Sub(x) x.ReplaceRecord(Of Long, Long)(
+                store.Verify(Sub(x) x.Replace.ReplaceRecord(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterQuests,
                                  (CharacterIdColumn, characterId),

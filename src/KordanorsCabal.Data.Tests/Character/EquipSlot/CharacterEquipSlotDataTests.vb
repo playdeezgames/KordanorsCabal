@@ -1,4 +1,6 @@
-﻿Public Class CharacterEquipSlotDataTests
+﻿Imports SQLitePCL
+
+Public Class CharacterEquipSlotDataTests
     Inherits WorldDataSubobjectTests(Of ICharacterEquipSlotData)
 
     Public Sub New()
@@ -101,8 +103,9 @@
                 Const characterId = 1L
                 Const equipSlot = 2L
                 Const itemId = 3L
+                store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(characterId, equipSlot, itemId)
-                store.Verify(Sub(x) x.ReplaceRecord(Of Long, Long, Long)(
+                store.Verify(Sub(x) x.Replace.ReplaceRecord(Of Long, Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              (Columns.CharacterIdColumn, characterId),

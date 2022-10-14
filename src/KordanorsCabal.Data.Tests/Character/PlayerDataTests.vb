@@ -69,10 +69,11 @@
                 Dim characterId = 1L
                 Dim direction = 2L
                 Dim mode = 3L
+                store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(characterId, direction, mode)
                 Dim playerId = 1
                 store.Verify(
-                    Sub(x) x.ReplaceRecord(Of Long, Long, Long, Long)(
+                    Sub(x) x.Replace.ReplaceRecord(Of Long, Long, Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     (Columns.PlayerIdColumn, playerId),

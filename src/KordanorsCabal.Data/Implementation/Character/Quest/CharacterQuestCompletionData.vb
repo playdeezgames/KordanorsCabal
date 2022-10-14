@@ -23,7 +23,7 @@
             );")
     End Sub
     Sub Write(characterId As Long, quest As Long, completions As Long) Implements ICharacterQuestCompletionData.Write
-        Store.ReplaceRecord(
+        Store.Replace.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

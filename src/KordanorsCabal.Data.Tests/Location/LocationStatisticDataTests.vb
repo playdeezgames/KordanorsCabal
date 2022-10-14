@@ -27,9 +27,10 @@
                 Dim locationId = 1L
                 Dim statisticType = 2L
                 Dim statisticValue = 3L
+                store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(locationId, statisticType, statisticValue)
                 store.Verify(
-                    Sub(x) x.ReplaceRecord(
+                    Sub(x) x.Replace.ReplaceRecord(
                     It.IsAny(Of Action),
                     Tables.LocationStatistics,
                     (Columns.LocationIdColumn, locationId),

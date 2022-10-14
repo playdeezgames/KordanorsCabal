@@ -37,9 +37,10 @@
             Sub(store, checker, subject)
                 Dim inventoryId = 1L
                 Dim itemId = 2L
+                store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(inventoryId, itemId)
                 store.Verify(
-                    Sub(x) x.ReplaceRecord(Of Long, Long)(
+                    Sub(x) x.Replace.ReplaceRecord(Of Long, Long)(
                         It.IsAny(Of Action),
                         Tables.InventoryItems,
                         (Columns.InventoryIdColumn, inventoryId),

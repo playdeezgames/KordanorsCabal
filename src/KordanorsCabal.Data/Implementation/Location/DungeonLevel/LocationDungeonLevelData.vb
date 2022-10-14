@@ -27,7 +27,7 @@
     End Function
 
     Public Sub Write(locationId As Long, dungeonLevel As Long) Implements ILocationDungeonLevelData.Write
-        Store.ReplaceRecord(
+        Store.Replace.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),

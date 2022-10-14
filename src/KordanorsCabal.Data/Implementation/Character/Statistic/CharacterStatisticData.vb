@@ -23,7 +23,7 @@
             );")
     End Sub
     Public Sub Write(characterId As Long, statisticType As Long, statisticValue As Long) Implements ICharacterStatisticData.Write
-        Store.ReplaceRecord(
+        Store.Replace.ReplaceRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),
