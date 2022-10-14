@@ -257,19 +257,6 @@
             Return CharacterType.Name
         End Get
     End Property
-    Property CurrentHP As Long Implements ICharacter.CurrentHP
-        Get
-            Return Math.Max(0, MaximumHP - If(GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)), 0))
-        End Get
-        Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)).Value - value)
-        End Set
-    End Property
-    ReadOnly Property MaximumHP As Long Implements ICharacter.MaximumHP
-        Get
-            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 6L)), 0)
-        End Get
-    End Property
     ReadOnly Property PartingShot As String Implements ICharacter.PartingShot
         Get
             Return CharacterType.Combat.PartingShot
@@ -302,11 +289,6 @@
     Sub Destroy() Implements ICharacter.Destroy
         WorldData.Character.Clear(Id)
     End Sub
-    ReadOnly Property IsDead As Boolean Implements ICharacter.IsDead
-        Get
-            Return CurrentHP <= 0
-        End Get
-    End Property
     Function DetermineDamage(value As Long) As Long Implements ICharacter.DetermineDamage
         Dim maximumDamage As Long? = Nothing
         For Each item In EquippedItems
@@ -326,11 +308,6 @@
     ReadOnly Property XPValue As Long
         Get
             Return CharacterType.Combat.XPValue
-        End Get
-    End Property
-    ReadOnly Property NeedsHealing As Boolean Implements ICharacter.NeedsHealing
-        Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)).Value > 0
         End Get
     End Property
     Function DoWeaponWear(wear As Long) As IEnumerable(Of IItemType) Implements ICharacter.DoWeaponWear
@@ -445,7 +422,7 @@
         Next
     End Sub
     Private Sub DoCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
-        If IsDead Then
+        If Health.IsDead Then
             Return
         End If
         If IsImmobilized() Then
@@ -539,7 +516,7 @@
                 lines.Add($"{enemy.Name} does {damage} damage!")
                 DoDamage(damage)
                 enemy.DoWeaponWear(damage)
-                If IsDead Then
+                If Health.IsDead Then
                     sfx = Game.Sfx.PlayerDeath
                     lines.Add($"{enemy.Name} kills you!")
                     Dim partingShot = enemy.PartingShot
@@ -549,7 +526,7 @@
                     Exit Select
                 End If
                 sfx = Game.Sfx.PlayerHit
-                lines.Add($"You have {CurrentHP} HP left.")
+                lines.Add($"You have {Health.CurrentHP} HP left.")
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
@@ -711,9 +688,6 @@
     Public Function CanMoveForward() As Boolean Implements ICharacter.CanMoveForward
         Return Movement.CanMove(Direction)
     End Function
-    Public Sub Heal() Implements ICharacter.Heal
-        SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
-    End Sub
     Public Sub Interact() Implements ICharacter.Interact
         If CanInteract Then
             Mode = Location.Feature.InteractionMode()
@@ -794,14 +768,14 @@
                 For Each brokenItemType In DoWeaponWear(damage)
                     lines.Add($"Yer {brokenItemType.Name} breaks!")
                 Next
-                If enemy.IsDead Then
+                If enemy.Health.IsDead Then
                     Dim killResult = enemy.Kill(Me)
                     sfx = If(killResult.Item1, sfx)
                     lines.AddRange(killResult.Item2)
                     Exit Select
                 End If
                 sfx = Game.Sfx.EnemyHit
-                lines.Add($"{enemy.Name} has {enemy.CurrentHP} HP left.")
+                lines.Add($"{enemy.Name} has {enemy.Health.CurrentHP} HP left.")
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
@@ -840,6 +814,12 @@
     Public ReadOnly Property Quest As ICharacterQuest Implements ICharacter.Quest
         Get
             Return CharacterQuest.FromId(WorldData, Id)
+        End Get
+    End Property
+
+    Public ReadOnly Property Health As ICharacterHealth Implements ICharacter.Health
+        Get
+            Return CharacterHealth.FromId(WorldData, Id)
         End Get
     End Property
 End Class

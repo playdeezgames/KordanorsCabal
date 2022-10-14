@@ -17,7 +17,7 @@
             Case GoodByeButtonIndex
                 buffer.WriteText((0, 1), "Fare well!", False, Hue.Black)
             Case HealButtonIndex
-                If player.NeedsHealing Then
+                If player.Health.NeedsHealing Then
                     buffer.WriteText((0, 1), "Any time yer ready!", False, Hue.Black)
                 Else
                     buffer.WriteText((0, 1), defaultResponse, False, Hue.Black)
@@ -29,7 +29,7 @@
 
     Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
-        If player.NeedsHealing Then
+        If player.Health.NeedsHealing Then
             Buttons(HealButtonIndex).Title = "Heal me!"
         End If
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
@@ -43,7 +43,7 @@
                 PopButtonIndex()
                 player.Mode = PlayerMode.Neutral
             Case HealButtonIndex
-                player.Heal()
+                player.Health.Heal()
             Case PricesButtonIndex
                 ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 4)
                 Return UIState.ShoppePrices

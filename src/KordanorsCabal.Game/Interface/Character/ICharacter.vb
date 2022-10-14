@@ -4,9 +4,10 @@
     Property Location As ILocation
 
     ReadOnly Property Movement As ICharacterMovement
-
     ReadOnly Property Quest As ICharacterQuest
+    ReadOnly Property Health As ICharacterHealth
 
+    Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     Sub AddStress(delta As Long)
     Function AddXP(xp As Long) As Boolean
     Sub AssignPoint(statisticType As ICharacterStatisticType)
@@ -20,13 +21,9 @@
     Function CanLearn(spellType As ISpellType) As Boolean
     ReadOnly Property CanMap() As Boolean
     ReadOnly Property Name As String
-    Property CurrentHP As Long
-    ReadOnly Property IsDead As Boolean
     ReadOnly Property IsEnemy(character As ICharacter) As Boolean
-
     ReadOnly Property IsDemoralized As Boolean
     ReadOnly Property IsUndead As Boolean
-    ReadOnly Property MaximumHP As Long
     ReadOnly Property PartingShot As String
     ReadOnly Property MaximumMana As Long
     Property Statistic(statisticType As ICharacterStatisticType) As Long
@@ -42,7 +39,6 @@
     Property Money As Long
     ReadOnly Property IsEncumbered As Boolean
     Function HasItemType(itemType As IItemType) As Boolean
-    ReadOnly Property NeedsHealing As Boolean
     Sub Interact()
     ReadOnly Property HasSpells As Boolean
     Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean
@@ -70,7 +66,6 @@
     Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As ICharacterStatisticType) As Long?
     Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long)
-    Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     Sub Destroy()
     Function DetermineDamage(value As Long) As Long
     Sub DoDamage(damage As Long)
@@ -80,7 +75,6 @@
     Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
     Sub EnqueueMessage(ParamArray lines() As String)
     Sub Learn(spellType As ISpellType)
-    Sub Heal()
     Sub DoFatigue(fatigue As Long)
     Sub DoCounterAttacks()
     Function RollWillpower() As Long

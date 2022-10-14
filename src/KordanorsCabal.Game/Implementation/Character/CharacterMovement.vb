@@ -50,7 +50,7 @@
             Character.Location = Character.Location.Routes.Find(direction).Move(Character)
             If Character.Hunger = CharacterStatisticType.FromId(WorldData, 20L).MaximumValue Then
                 Character.Hunger \= 2
-                Character.CurrentHP -= 1
+                Character.Health.CurrentHP -= 1
                 Return True
             End If
         End If

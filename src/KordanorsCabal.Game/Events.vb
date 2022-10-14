@@ -105,7 +105,7 @@
                     Dim damage As Long = character.RollSpellDice(spellType)
                     lines.Add($"You do {damage} damage!")
                     enemy.DoDamage(damage)
-                    If enemy.IsDead Then
+                    If enemy.Health.IsDead Then
                         Dim result = enemy.Kill(character)
                         sfx = If(result.Item1, sfx)
                         lines.AddRange(result.Item2)
@@ -173,7 +173,7 @@
                     character.Hunger = 0
                     character.EnqueueMessage(
                         $"Food heals up to {healRoll} HP!",
-                        $"You now have {character.CurrentHP} HP!")
+                        $"You now have {character.Health.CurrentHP} HP!")
                 End Sub},
             {"UseHolyWater",
                 Sub(worldData, parms)
@@ -185,7 +185,7 @@
                         $"{ItemType.FromId(worldData, 22L).Name} deals {damageRoll} HP to {enemy.Name}!"
                     }
                     enemy.DoDamage(damageRoll)
-                    If enemy.IsDead Then
+                    If enemy.Health.IsDead Then
                         Dim result = enemy.Kill(character)
                         sfx = If(result.Item1, sfx)
                         lines.AddRange(result.Item2)
@@ -322,7 +322,7 @@
                     Dim damage As Long = RNG.RollDice("3d4")
                     lines.Add($"You do {damage} damage!")
                     enemy.DoDamage(damage)
-                    If enemy.IsDead Then
+                    If enemy.Health.IsDead Then
                         Dim result = enemy.Kill(character)
                         sfx = If(result.Item1, sfx)
                         lines.AddRange(result.Item2)
@@ -338,7 +338,7 @@
                     character.Inventory.Add(Item.Create(worldData, 30))
                     character.EnqueueMessage(
                 $"Potion heals up to {healRoll} HP!",
-                $"You now have {character.CurrentHP} HP!")
+                $"You now have {character.Health.CurrentHP} HP!")
                 End Sub},
             {"UseHerb",
                 Sub(worldData, parms)
@@ -366,7 +366,7 @@
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     character.CurrentMana -= 1
-                    character.Heal()
+                    character.Health.Heal()
                     character.EnqueueMessage($"You use {ItemType.FromId(worldData, 12L).Name} to heal yer wounds!")
                 End Sub},
             {"UseBottle",
@@ -391,7 +391,7 @@
                         character.Hunger = 0
                         character.EnqueueMessage(
                         $"Food heals up to {healRoll} HP!",
-                        $"You now have {character.CurrentHP} HP!")
+                        $"You now have {character.Health.CurrentHP} HP!")
                     End If
                 End Sub}
         }

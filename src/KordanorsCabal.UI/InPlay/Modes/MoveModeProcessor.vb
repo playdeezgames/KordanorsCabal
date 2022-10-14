@@ -85,7 +85,7 @@ Friend Class MoveModeProcessor
             player.Mode = PlayerMode.Neutral
             If player.Movement.Move(direction) Then
                 player.EnqueueMessage("You take damage from starvation!")
-                If player.IsDead Then
+                If player.Health.IsDead Then
                     Return UIState.Dead
                 End If
                 PushUIState(UIState.InPlay)
