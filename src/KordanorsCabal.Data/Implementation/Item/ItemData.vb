@@ -36,7 +36,7 @@
         World.CharacterEquipSlot.ClearForItem(itemId)
         World.InventoryItem.ClearForItem(itemId)
         World.ItemStatistic.ClearForItem(itemId)
-        Store.Clear.ClearForColumnValue(
+        Store.Clear.ForValue(
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId))

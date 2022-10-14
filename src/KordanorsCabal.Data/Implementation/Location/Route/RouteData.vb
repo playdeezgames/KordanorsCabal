@@ -29,7 +29,7 @@
     End Sub
 
     Public Sub Clear(routeId As Long) Implements IRouteData.Clear
-        Store.Clear.ClearForColumnValue(
+        Store.Clear.ForValue(
             AddressOf Initialize,
             TableName,
             (RouteIdColumn, routeId))

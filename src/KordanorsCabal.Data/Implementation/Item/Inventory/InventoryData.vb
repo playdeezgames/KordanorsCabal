@@ -40,7 +40,7 @@
             (LocationIdColumn, locationId))
     End Function
     Sub ClearForCharacter(characterId As Long) Implements IInventoryData.ClearForCharacter
-        Store.Clear.ClearForColumnValue(
+        Store.Clear.ForValue(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))

@@ -8,10 +8,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim routeId = 1L
-                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
+                store.Setup(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.Clear(routeId)
                 store.Verify(
-                    Sub(x) x.Clear.ClearForColumnValue(Of Long)(
+                    Sub(x) x.Clear.ForValue(Of Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             (Columns.RouteIdColumn, routeId)))

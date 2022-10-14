@@ -36,7 +36,7 @@
     End Function
 
     Public Sub ClearForItem(itemId As Long) Implements IInventoryItemData.ClearForItem
-        Store.Clear.ClearForColumnValue(
+        Store.Clear.ForValue(
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId))

@@ -8,10 +8,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
-                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
+                store.Setup(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.ClearForCharacter(characterId)
                 store.Verify(
-                    Sub(x) x.Clear.ClearForColumnValue(
+                    Sub(x) x.Clear.ForValue(
                     It.IsAny(Of Action),
                     Tables.Players,
                     (Columns.CharacterIdColumn, characterId)))

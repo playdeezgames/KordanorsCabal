@@ -8,12 +8,12 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const itemId = 1L
-                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
+                store.Setup(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.Clear(itemId)
-                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterEquipSlots, (Columns.ItemIdColumn, itemId)))
-                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.InventoryItems, (Columns.ItemIdColumn, itemId)))
-                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.ItemStatistics, (Columns.ItemIdColumn, itemId)))
-                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.Items, (Columns.ItemIdColumn, itemId)))
+                store.Verify(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), Tables.CharacterEquipSlots, (Columns.ItemIdColumn, itemId)))
+                store.Verify(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), Tables.InventoryItems, (Columns.ItemIdColumn, itemId)))
+                store.Verify(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), Tables.ItemStatistics, (Columns.ItemIdColumn, itemId)))
+                store.Verify(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), Tables.Items, (Columns.ItemIdColumn, itemId)))
             End Sub)
     End Sub
     <Fact>

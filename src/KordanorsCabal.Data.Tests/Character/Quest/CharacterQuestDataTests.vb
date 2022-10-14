@@ -10,9 +10,9 @@
             Sub(store, checker, subject)
                 Dim characterId = 1L
                 Dim quest = 2L
-                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
+                store.Setup(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.Clear(characterId, quest)
-                store.Verify(Sub(x) x.Clear.ClearForColumnValues(
+                store.Verify(Sub(x) x.Clear.ForValues(
                                  It.IsAny(Of Action),
                                  Tables.CharacterQuests,
                                  (CharacterIdColumn, characterId),
@@ -24,9 +24,9 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
-                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
+                store.Setup(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.ClearForCharacter(characterId)
-                store.Verify(Sub(x) x.Clear.ClearForColumnValue(
+                store.Verify(Sub(x) x.Clear.ForValue(
                                  It.IsAny(Of Action),
                                  Tables.CharacterQuests,
                                  (CharacterIdColumn, characterId)))

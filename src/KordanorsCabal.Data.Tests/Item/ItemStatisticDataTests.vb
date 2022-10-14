@@ -10,10 +10,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const itemId = 1L
-                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
+                store.Setup(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.ClearForItem(itemId)
                 store.Verify(
-                    Sub(x) x.Clear.ClearForColumnValue(
+                    Sub(x) x.Clear.ForValue(
                         It.IsAny(Of Action),
                         Tables.ItemStatistics,
                         (Columns.ItemIdColumn, itemId)))

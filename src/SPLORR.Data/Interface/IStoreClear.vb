@@ -1,9 +1,9 @@
 ﻿Public Interface IStoreClear
-    Sub ClearForColumnValue(Of TColumn)(
+    Sub ForValue(Of TColumn)(
                                        initializer As Action,
                                        tableName As String,
                                        columnValue As (String, TColumn))
-    Sub ClearForColumnValues(Of TFirstColumn,
+    Sub ForValues(Of TFirstColumn,
                                  TSecondColumn)(
                                                 initializer As Action,
                                                 tableName As String,
