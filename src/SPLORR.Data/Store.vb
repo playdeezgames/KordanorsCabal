@@ -1,13 +1,16 @@
 ﻿Imports Microsoft.Data.Sqlite
 Public Class Backer
     Implements IBacker
+
     Public Property Connection As SqliteConnection Implements IBacker.Connection
 End Class
 Public Class Store
     Implements IStore
     Private connection As SqliteConnection
+    Private backer As IBacker
     Private templateFilename As String
     Public Sub New(filename As String)
+        Me.backer = New Backer
         Me.templateFilename = filename
     End Sub
 
