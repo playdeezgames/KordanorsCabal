@@ -1,6 +1,9 @@
 ﻿Imports Microsoft.Data.Sqlite
 Public Interface IBacker
     Property Connection As SqliteConnection
+    ReadOnly Property LastInsertRowId() As Long
+    Sub BackupTo(other As IBacker)
+    Sub Connect(filename As String)
 End Interface
 Public Interface IStoreMeta
 

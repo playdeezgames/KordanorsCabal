@@ -12,11 +12,11 @@
                     [{UnlockedRouteTypeIdColumn}],
                     [{UnlockItemTypeId}]) AS
                 (VALUES
-                    (4,2,1)
-                    (5,2,2)
-                    (6,2,3)
-                    (7,2,4)
-                    (8,2,5)
+                    (4,2,1),
+                    (5,2,2),
+                    (6,2,3),
+                    (7,2,4),
+                    (8,2,5),
                     (9,2,6))
                 SELECT 
                     [{RouteTypeIdColumn}],

@@ -1,12 +1,27 @@
 ﻿Imports Microsoft.Data.Sqlite
 Public Class Backer
     Implements IBacker
-
     Public Property Connection As SqliteConnection Implements IBacker.Connection
+    Public ReadOnly Property LastInsertRowId As Long Implements IBacker.LastInsertRowId
+        Get
+            Using command = Connection.CreateCommand()
+                command.CommandText = "SELECT last_insert_rowid();"
+                Return CLng(command.ExecuteScalar())
+            End Using
+        End Get
+    End Property
+
+    Public Sub BackupTo(other As IBacker) Implements IBacker.BackupTo
+        Connection.BackupDatabase(other.Connection)
+    End Sub
+
+    Public Sub Connect(filename As String) Implements IBacker.Connect
+        Connection = New SqliteConnection($"Data Source={filename}")
+        Connection.Open()
+    End Sub
 End Class
 Public Class Store
     Implements IStore
-    Private connection As SqliteConnection
     Private backer As IBacker
     Private templateFilename As String
     Public Sub New(filename As String)
@@ -16,33 +31,33 @@ Public Class Store
 
     Public Sub Reset() Implements IStore.Reset
         ShutDown()
-        connection = New SqliteConnection("Data Source=:memory:")
-        connection.Open()
+        backer.Connection = New SqliteConnection("Data Source=:memory:")
+        backer.Connection.Open()
         Using loadConnection As New SqliteConnection($"Data Source={templateFilename}")
             loadConnection.Open()
-            loadConnection.BackupDatabase(connection)
+            loadConnection.BackupDatabase(backer.Connection)
         End Using
     End Sub
     Public Function Renew() As IBacker Implements IStore.Renew
         Dim result As IBacker = New Backer()
-        result.Connection = connection
-        connection = Nothing
+        result.Connection = backer.Connection
+        backer.Connection = Nothing
         Reset()
         Return result
     End Function
     Public Sub Restore(oldBacker As IBacker) Implements IStore.Restore
         ShutDown()
-        connection = oldBacker.Connection
+        backer.Connection = oldBacker.Connection
     End Sub
     Public Sub ShutDown() Implements IStore.ShutDown
-        If connection IsNot Nothing Then
-            connection.Close()
-            connection = Nothing
+        If backer.Connection IsNot Nothing Then
+            backer.Connection.Close()
+            backer.Connection = Nothing
         End If
     End Sub
     Public Sub Save(filename As String) Implements IStore.Save
         Using saveConnection As New SqliteConnection($"Data Source={filename}")
-            connection.BackupDatabase(saveConnection)
+            backer.Connection.BackupDatabase(saveConnection)
         End Using
     End Sub
     Public Sub Load(filename As String) Implements IStore.Load
@@ -52,15 +67,12 @@ Public Class Store
         templateFilename = oldFilename
     End Sub
     Private Function CreateCommand(query As String, ParamArray parameters() As SqliteParameter) As SqliteCommand
-        Dim command = connection.CreateCommand()
+        Dim command = backer.Connection.CreateCommand()
         command.CommandText = query
         For Each parameter In parameters
             command.Parameters.Add(parameter)
         Next
         Return command
-    End Function
-    Private Shared Function MakeParameter(Of TParameter)(name As String, value As TParameter) As SqliteParameter
-        Return New SqliteParameter(name, value)
     End Function
     Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As (String, Object)) Implements IStore.ExecuteNonQuery
         Using command = CreateCommand(sql, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
@@ -90,10 +102,7 @@ Public Class Store
     End Function
     Private ReadOnly Property LastInsertRowId() As Long
         Get
-            Using command = connection.CreateCommand()
-                command.CommandText = "SELECT last_insert_rowid();"
-                Return CLng(command.ExecuteScalar())
-            End Using
+            Return backer.LastInsertRowId
         End Get
     End Property
     Private Function ExecuteScalar(Of TResult As Structure)(command As SqliteCommand) As TResult?
