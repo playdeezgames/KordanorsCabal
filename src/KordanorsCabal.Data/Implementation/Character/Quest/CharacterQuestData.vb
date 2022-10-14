@@ -22,7 +22,7 @@
     End Sub
 
     Public Sub Clear(characterId As Long, quest As Long) Implements ICharacterQuestData.Clear
-        Store.ClearForColumnValues(
+        Store.Clear.ClearForColumnValues(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),
@@ -47,7 +47,7 @@
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long) Implements ICharacterQuestData.ClearForCharacter
-        Store.ClearForColumnValue(
+        Store.Clear.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))

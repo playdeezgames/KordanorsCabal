@@ -50,7 +50,7 @@
     End Sub
 
     Public Sub ClearForCharacter(characterId As Long) Implements ICharacterSpellData.ClearForCharacter
-        Store.ClearForColumnValue(
+        Store.Clear.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))

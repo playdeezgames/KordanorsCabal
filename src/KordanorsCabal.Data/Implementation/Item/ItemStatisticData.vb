@@ -41,7 +41,7 @@
     End Sub
 
     Public Sub ClearForItem(itemId As Long) Implements IItemStatisticData.ClearForItem
-        Store.ClearForColumnValue(
+        Store.Clear.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId))

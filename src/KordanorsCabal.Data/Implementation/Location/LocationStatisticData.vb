@@ -42,7 +42,7 @@
 
     Public Sub Write(locationId As Long, statisticType As Long, statisticValue As Long?) Implements ILocationStatisticData.Write
         If Not statisticValue.HasValue Then
-            Store.ClearForColumnValues(
+            Store.Clear.ClearForColumnValues(
                 AddressOf Initialize,
                 TableName,
                 (LocationIdColumn, locationId),

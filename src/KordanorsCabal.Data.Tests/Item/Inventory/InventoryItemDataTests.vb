@@ -8,9 +8,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim itemId = 1L
+                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.ClearForItem(itemId)
                 store.Verify(
-                    Sub(x) x.ClearForColumnValue(Of Long)(
+                    Sub(x) x.Clear.ClearForColumnValue(Of Long)(
                         It.IsAny(Of Action),
                         Tables.InventoryItems,
                         (Columns.ItemIdColumn, itemId)))

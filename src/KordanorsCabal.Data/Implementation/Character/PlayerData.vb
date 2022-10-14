@@ -75,7 +75,7 @@ Public Class PlayerData
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long) Implements IPlayerData.ClearForCharacter
-        Store.ClearForColumnValue(
+        Store.Clear.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))

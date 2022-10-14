@@ -10,8 +10,9 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const characterId = 1L
+                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.ClearForCharacter(characterId)
-                store.Verify(Sub(x) x.ClearForColumnValue(
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(
                                  It.IsAny(Of Action),
                                  Tables.CharacterLocations,
                                  (Columns.CharacterIdColumn, characterId)))

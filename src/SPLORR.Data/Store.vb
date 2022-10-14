@@ -57,6 +57,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property Clear As IStoreClear Implements IStore.Clear
+        Get
+            Return New StoreClear(backer)
+        End Get
+    End Property
+
     Public Function ReadColumnValues(Of TOutputColumn)(
                                                       initializer As Action,
                                                       tableName As String,
@@ -160,21 +166,6 @@
             $"SELECT [{outputColumnNames.Item1}],[{outputColumnNames.Item2}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
             ($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
-    Public Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnValue As (String, TColumn)) Implements IStore.ClearForColumnValue
-        initializer()
-        backer.ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnValue.Item1}]=@{columnValue.Item1};", ($"@{columnValue.Item1}", columnValue.Item2))
-    End Sub
-    Public Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(
-                                                                   initializer As Action,
-                                                                   tableName As String,
-                                                                   firstColumnValue As (String, TFirstColumn),
-                                                                   secondColumnValue As (String, TSecondColumn)) Implements IStore.ClearForColumnValues
-        initializer()
-        backer.ExecuteNonQuery(
-            $"DELETE FROM [{tableName}] WHERE [{firstColumnValue.Item1}]=@{firstColumnValue.Item1} AND [{secondColumnValue.Item1}]=@{secondColumnValue.Item1};",
-            ($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
-            ($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
-    End Sub
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn)) Implements IStore.ReplaceRecord
         initializer()
         backer.ExecuteNonQuery(

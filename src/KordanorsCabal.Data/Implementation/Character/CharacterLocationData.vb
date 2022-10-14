@@ -40,7 +40,7 @@
     End Function
 
     Public Sub ClearForCharacter(characterId As Long) Implements ICharacterLocationData.ClearForCharacter
-        Store.ClearForColumnValue(
+        Store.Clear.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))

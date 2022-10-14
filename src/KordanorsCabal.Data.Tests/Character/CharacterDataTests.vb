@@ -10,16 +10,17 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const characterId = 1L
+                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.Clear(characterId)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterQuests, (Columns.CharacterIdColumn, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterQuestCompletions, (Columns.CharacterIdColumn, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterEquipSlots, (Columns.CharacterIdColumn, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Inventories, (Columns.CharacterIdColumn, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterLocations, (Columns.CharacterIdColumn, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterStatistics, (Columns.CharacterIdColumn, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Players, (Columns.CharacterIdColumn, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterSpells, (Columns.CharacterIdColumn, characterId)), Times.Once)
-                store.Verify(Sub(x) x.ClearForColumnValue(It.IsAny(Of Action), Tables.Characters, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterQuests, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterQuestCompletions, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterEquipSlots, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.Inventories, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterLocations, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterStatistics, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.Players, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.CharacterSpells, (Columns.CharacterIdColumn, characterId)), Times.Once)
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), Tables.Characters, (Columns.CharacterIdColumn, characterId)), Times.Once)
             End Sub)
     End Sub
     <Fact>

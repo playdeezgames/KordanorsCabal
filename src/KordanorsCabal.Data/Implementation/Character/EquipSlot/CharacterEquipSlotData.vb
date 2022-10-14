@@ -33,7 +33,7 @@
     End Function
 
     Public Sub Clear(characterId As Long, equipSlot As Long) Implements ICharacterEquipSlotData.Clear
-        Store.ClearForColumnValues(
+        Store.Clear.ClearForColumnValues(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),
@@ -50,14 +50,14 @@
     End Sub
 
     Public Sub ClearForCharacter(characterId As Long) Implements ICharacterEquipSlotData.ClearForCharacter
-        Store.ClearForColumnValue(
+        Store.Clear.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
 
     Public Sub ClearForItem(itemId As Long) Implements ICharacterEquipSlotData.ClearForItem
-        Store.ClearForColumnValue(
+        Store.Clear.ClearForColumnValue(
             AddressOf Initialize,
             TableName,
             (ItemIdColumn, itemId))

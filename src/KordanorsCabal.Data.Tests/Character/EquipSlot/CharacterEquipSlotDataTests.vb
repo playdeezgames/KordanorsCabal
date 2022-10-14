@@ -10,8 +10,9 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const itemId = 1L
+                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.ClearForItem(itemId)
-                store.Verify(Sub(x) x.ClearForColumnValue(
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              (Columns.ItemIdColumn, itemId)),
@@ -23,8 +24,9 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const characterId = 1L
+                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.ClearForCharacter(characterId)
-                store.Verify(Sub(x) x.ClearForColumnValue(
+                store.Verify(Sub(x) x.Clear.ClearForColumnValue(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              (Columns.CharacterIdColumn, characterId)),
@@ -37,8 +39,9 @@
             Sub(store, checker, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
+                store.Setup(Sub(x) x.Clear.ClearForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.Clear(characterId, equipSlot)
-                store.Verify(Sub(x) x.ClearForColumnValues(
+                store.Verify(Sub(x) x.Clear.ClearForColumnValues(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              (Columns.CharacterIdColumn, characterId),
