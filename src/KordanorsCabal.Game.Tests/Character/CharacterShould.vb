@@ -1059,6 +1059,9 @@ Public Class CharacterShould
     Sub roll_willpower()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.RollWillpower().ShouldBe(0)
             End Sub)
     End Sub
@@ -1066,6 +1069,9 @@ Public Class CharacterShould
     Sub roll_defend()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.RollDefend().ShouldBe(0)
             End Sub)
     End Sub
@@ -1073,13 +1079,28 @@ Public Class CharacterShould
     Sub roll_attack()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.RollAttack().ShouldBe(0)
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 1))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 18))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 19))
+                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 22))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(1))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(18))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(19))
+                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(22))
+                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
             End Sub)
     End Sub
     <Fact>
     Sub roll_influence()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.RollInfluence().ShouldBe(0)
             End Sub)
     End Sub
@@ -1087,6 +1108,9 @@ Public Class CharacterShould
     Sub roll_power()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.RollPower().ShouldBe(0)
             End Sub)
     End Sub
