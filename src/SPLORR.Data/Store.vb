@@ -1,5 +1,8 @@
 ﻿Imports Microsoft.Data.Sqlite
-
+Public Class Backer
+    Implements IBacker
+    Public Property Connection As SqliteConnection Implements IBacker.Connection
+End Class
 Public Class Store
     Implements IStore
     Private connection As SqliteConnection
@@ -17,15 +20,16 @@ Public Class Store
             loadConnection.BackupDatabase(connection)
         End Using
     End Sub
-    Public Function Renew() As SqliteConnection Implements IStore.Renew
-        Dim result = connection
+    Public Function Renew() As IBacker Implements IStore.Renew
+        Dim result As IBacker = New Backer()
+        result.Connection = connection
         connection = Nothing
         Reset()
         Return result
     End Function
-    Public Sub Restore(oldConnection As SqliteConnection) Implements IStore.Restore
+    Public Sub Restore(oldBacker As IBacker) Implements IStore.Restore
         ShutDown()
-        connection = oldConnection
+        connection = oldBacker.Connection
     End Sub
     Public Sub ShutDown() Implements IStore.ShutDown
         If connection IsNot Nothing Then

@@ -1,10 +1,13 @@
 ﻿Imports Microsoft.Data.Sqlite
+Public Interface IBacker
+    Property Connection As SqliteConnection
+End Interface
 Public Interface IStoreMeta
 
     Sub Reset()
-    Function Renew() As SqliteConnection
+    Function Renew() As IBacker
     Sub Restore(
-               oldConnection As SqliteConnection)
+               oldBacker As IBacker)
     Sub ShutDown()
     Sub Save(
             filename As String)

@@ -1,6 +1,4 @@
-﻿Imports Microsoft.Data.Sqlite
-
-Public Class WorldData
+﻿Public Class WorldData
     Implements IWorldData
     Private ReadOnly Store As IStore
     Public ReadOnly Property Character As ICharacterData Implements IWorldData.Character
@@ -118,12 +116,12 @@ Public Class WorldData
         Store.Reset()
     End Sub
 
-    Public Function Renew() As Microsoft.Data.Sqlite.SqliteConnection Implements IWorldData.Renew
+    Public Function Renew() As IBacker Implements IWorldData.Renew
         Return Store.Renew()
     End Function
 
 
-    Public Sub Restore(oldConnection As SqliteConnection) Implements IWorldData.Restore
-        Store.Restore(oldConnection)
+    Public Sub Restore(oldBacker As IBacker) Implements IWorldData.Restore
+        Store.Restore(oldBacker)
     End Sub
 End Class

@@ -51,6 +51,6 @@
     Sub Save(filename As String)
     Sub Load(filename As String)
     Sub Reset()
-    Function Renew() As Microsoft.Data.Sqlite.SqliteConnection
-    Sub Restore(p As Microsoft.Data.Sqlite.SqliteConnection)
+    Function Renew() As IBacker
+    Sub Restore(oldBacker As IBacker)
 End Interface
