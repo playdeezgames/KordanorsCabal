@@ -19,6 +19,59 @@ Public Class Backer
         Connection = New SqliteConnection($"Data Source={filename}")
         Connection.Open()
     End Sub
+
+    Public Sub ShutDown() Implements IBacker.ShutDown
+        If Connection IsNot Nothing Then
+            Connection.Close()
+            Connection = Nothing
+        End If
+    End Sub
+
+    Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As (String, Object)) Implements IBacker.ExecuteNonQuery
+        Using command = CreateCommand(sql, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
+    Private Function ExecuteScalar(Of TResult As Structure)(command As SqliteCommand) As TResult?
+        Dim result = command.ExecuteScalar
+        If result IsNot Nothing AndAlso result IsNot DBNull.Value Then
+            Return CType(result, TResult?)
+        End If
+        Return Nothing
+    End Function
+
+    Public Function ExecuteScalar(Of TResult As Structure)(query As String, ParamArray parameters() As (String, Object)) As TResult? Implements IBacker.ExecuteScalar
+        Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
+            Return ExecuteScalar(Of TResult)(command)
+        End Using
+    End Function
+
+    Private Function CreateCommand(query As String, ParamArray parameters() As SqliteParameter) As SqliteCommand
+        Dim command = Connection.CreateCommand()
+        command.CommandText = query
+        For Each parameter In parameters
+            command.Parameters.Add(parameter)
+        Next
+        Return command
+    End Function
+
+    Public Function ExecuteScalar(Of TResult As Class)(transform As Func(Of Object, TResult), query As String, ParamArray parameters() As (String, Object)) As TResult Implements IBacker.ExecuteScalar
+        Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
+            Return transform(command.ExecuteScalar)
+        End Using
+    End Function
+
+    Public Function ExecuteReader(Of TResult)(transform As Func(Of SqliteDataReader, TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult) Implements IBacker.ExecuteReader
+        Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
+            Using reader = command.ExecuteReader
+                Dim result As New List(Of TResult)
+                While reader.Read
+                    result.Add(transform(reader))
+                End While
+                Return result
+            End Using
+        End Using
+    End Function
 End Class
 Public Class Store
     Implements IStore
@@ -31,12 +84,10 @@ Public Class Store
 
     Public Sub Reset() Implements IStore.Reset
         ShutDown()
-        backer.Connection = New SqliteConnection("Data Source=:memory:")
-        backer.Connection.Open()
-        Using loadConnection As New SqliteConnection($"Data Source={templateFilename}")
-            loadConnection.Open()
-            loadConnection.BackupDatabase(backer.Connection)
-        End Using
+        backer.Connect(":memory:")
+        Dim loadBacker As New Backer()
+        loadBacker.Connect(templateFilename)
+        loadBacker.BackupTo(backer)
     End Sub
     Public Function Renew() As IBacker Implements IStore.Renew
         Dim result As IBacker = New Backer()
@@ -50,15 +101,12 @@ Public Class Store
         backer.Connection = oldBacker.Connection
     End Sub
     Public Sub ShutDown() Implements IStore.ShutDown
-        If backer.Connection IsNot Nothing Then
-            backer.Connection.Close()
-            backer.Connection = Nothing
-        End If
+        backer.ShutDown()
     End Sub
     Public Sub Save(filename As String) Implements IStore.Save
-        Using saveConnection As New SqliteConnection($"Data Source={filename}")
-            backer.Connection.BackupDatabase(saveConnection)
-        End Using
+        Dim saveBacker As New Backer
+        saveBacker.Connect(filename)
+        backer.BackupTo(saveBacker)
     End Sub
     Public Sub Load(filename As String) Implements IStore.Load
         Dim oldFilename = templateFilename
@@ -75,43 +123,22 @@ Public Class Store
         Return command
     End Function
     Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As (String, Object)) Implements IStore.ExecuteNonQuery
-        Using command = CreateCommand(sql, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
-            command.ExecuteNonQuery()
-        End Using
+        backer.ExecuteNonQuery(sql, parameters)
     End Sub
     Private Function ExecuteScalar(Of TResult As Structure)(query As String, ParamArray parameters() As (String, Object)) As TResult?
-        Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
-            Return ExecuteScalar(Of TResult)(command)
-        End Using
+        Return backer.ExecuteScalar(Of TResult)(query, parameters)
     End Function
     Private Function ExecuteScalar(Of TResult As Class)(transform As Func(Of Object, TResult), query As String, ParamArray parameters() As (String, Object)) As TResult
-        Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
-            Return transform(command.ExecuteScalar)
-        End Using
+        Return backer.ExecuteScalar(transform, query, parameters)
     End Function
     Private Function ExecuteReader(Of TResult)(transform As Func(Of SqliteDataReader, TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult)
-        Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
-            Using reader = command.ExecuteReader
-                Dim result As New List(Of TResult)
-                While reader.Read
-                    result.Add(transform(reader))
-                End While
-                Return result
-            End Using
-        End Using
+        Return backer.ExecuteReader(transform, query, parameters)
     End Function
     Private ReadOnly Property LastInsertRowId() As Long
         Get
             Return backer.LastInsertRowId
         End Get
     End Property
-    Private Function ExecuteScalar(Of TResult As Structure)(command As SqliteCommand) As TResult?
-        Dim result = command.ExecuteScalar
-        If result IsNot Nothing AndAlso result IsNot DBNull.Value Then
-            Return CType(result, TResult?)
-        End If
-        Return Nothing
-    End Function
     Public Function ReadColumnValues(Of TOutputColumn)(
                                                       initializer As Action,
                                                       tableName As String,

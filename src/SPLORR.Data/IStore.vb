@@ -4,6 +4,11 @@ Public Interface IBacker
     ReadOnly Property LastInsertRowId() As Long
     Sub BackupTo(other As IBacker)
     Sub Connect(filename As String)
+    Sub ShutDown()
+    Sub ExecuteNonQuery(sql As String, ParamArray parameters() As (String, Object))
+    Function ExecuteScalar(Of TResult As Structure)(query As String, ParamArray parameters() As (String, Object)) As TResult?
+    Function ExecuteScalar(Of TResult As Class)(transform As Func(Of Object, TResult), query As String, ParamArray parameters() As (String, Object)) As TResult
+    Function ExecuteReader(Of TResult)(transform As Func(Of SqliteDataReader, TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult)
 End Interface
 Public Interface IStoreMeta
 
