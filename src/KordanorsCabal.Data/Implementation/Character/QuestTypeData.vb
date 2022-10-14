@@ -9,7 +9,7 @@
     Friend Const CompleteEventNameColumn = "CompleteEventName"
 
     Friend Sub Initialize()
-        Store.Primitive.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{QuestTypeIdColumn}],
                     [{CanAcceptEventNameColumn}],

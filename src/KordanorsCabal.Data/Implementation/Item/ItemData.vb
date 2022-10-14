@@ -10,7 +10,7 @@
     End Sub
 
     Friend Sub Initialize()
-        Store.Primitive.ExecuteNonQuery(
+        Store.Primitive.Execute(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{ItemIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,

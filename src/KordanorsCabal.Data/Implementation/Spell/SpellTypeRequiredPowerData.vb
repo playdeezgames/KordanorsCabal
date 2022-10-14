@@ -6,7 +6,7 @@
     Friend Const SpellLevelColumn = "SpellLevel"
     Friend Const PowerColumn = "Power"
     Friend Sub Initialize()
-        Store.Primitive.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{SpellTypeIdColumn}],
                     [{SpellLevelColumn}],

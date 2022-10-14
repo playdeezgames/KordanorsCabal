@@ -14,7 +14,7 @@
 
     Friend Sub Initialize()
         CType(World.Location, LocationData).Initialize()
-        Store.Primitive.ExecuteNonQuery(
+        Store.Primitive.Execute(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{RouteIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,

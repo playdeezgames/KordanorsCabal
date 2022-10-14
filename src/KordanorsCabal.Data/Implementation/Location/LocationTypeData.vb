@@ -8,7 +8,7 @@
     Friend Const CanMapColumn = "CanMap"
     Friend Const RequiresMPColumn = "RequiresMP"
     Friend Sub Initialize()
-        Store.Primitive.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{LocationTypeIdColumn}],
                     [{LocationTypeNameColumn}],

@@ -14,7 +14,7 @@ Public Class PlayerData
 
     Friend Sub Initialize()
         CType(World.Character, CharacterData).Initialize()
-        Store.Primitive.ExecuteNonQuery(
+        Store.Primitive.Execute(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{PlayerIdColumn}] INT NOT NULL UNIQUE CHECK([{PlayerIdColumn}]={FixedPlayerId}),

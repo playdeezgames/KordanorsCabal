@@ -10,7 +10,7 @@
     Friend Const OppositeDirectionIdColumn = "OppositeDirectionId"
     Friend Const NextDirectionIdColumn = "NextDirectionId"
     Friend Sub Initialize()
-        Store.Primitive.ExecuteNonQuery(
+        Store.Primitive.Execute(
             $"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{DirectionIdColumn}],

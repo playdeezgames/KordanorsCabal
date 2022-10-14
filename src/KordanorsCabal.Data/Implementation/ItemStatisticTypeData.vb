@@ -5,7 +5,7 @@
     Friend Const ItemStatisticTypeIdColumn = "ItemStatisticTypeId"
     Friend Const DefaultValueColumn = "DefaultValue"
     Friend Sub Initialize()
-        Store.Primitive.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{ItemStatisticTypeIdColumn}],
                     [{DefaultValueColumn}]) AS

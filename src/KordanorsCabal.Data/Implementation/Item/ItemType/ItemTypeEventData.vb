@@ -7,7 +7,7 @@
     Friend Const EventNameColumn = "EventName"
 
     Friend Sub Initialize()
-        Store.Primitive.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{ItemTypeIdColumn}],
                     [{EventIdColumn}],

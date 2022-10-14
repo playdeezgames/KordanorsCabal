@@ -1,5 +1,5 @@
 ﻿Public Interface IStorePrimitive
-    Sub ExecuteNonQuery(
+    Sub Execute(
                        sql As String,
                        ParamArray parameters() As (String, Object))
 End Interface

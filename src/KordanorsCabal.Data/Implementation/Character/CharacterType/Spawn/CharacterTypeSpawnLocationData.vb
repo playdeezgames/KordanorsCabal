@@ -6,7 +6,7 @@
     Friend Const DungeonLevelIdColumn = DungeonLevelData.DungeonLevelIdColumn
     Friend Const LocationTypeIdColumn = LocationTypeData.LocationTypeIdColumn
     Friend Sub Initialize()
-        Store.Primitive.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{CharacterTypeIdColumn}],
                     [{DungeonLevelIdColumn}],

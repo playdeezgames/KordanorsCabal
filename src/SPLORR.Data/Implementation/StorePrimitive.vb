@@ -6,7 +6,7 @@
         MyBase.New(backer)
     End Sub
 
-    Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As (String, Object)) Implements IStorePrimitive.ExecuteNonQuery
+    Public Sub Execute(sql As String, ParamArray parameters() As (String, Object)) Implements IStorePrimitive.Execute
         backer.Execute(sql, parameters)
     End Sub
 End Class
