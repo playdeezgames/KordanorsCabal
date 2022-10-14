@@ -11,7 +11,7 @@ Friend Class StatusProcessor
 
         buffer.WriteText((0, 1), $"{CharacterStatisticType.FromId(StaticWorldData.World, 1L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 1L))}", False, Hue.Black)
         buffer.WriteText((0, 2), $"{CharacterStatisticType.FromId(StaticWorldData.World, 2L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 2L))}", False, Hue.Black)
-        buffer.WriteText((0, 3), $"{CharacterStatisticType.FromId(StaticWorldData.World, 6L).Abbreviation} {player.Health.CurrentHP}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 6L))}", False, Hue.Black)
+        buffer.WriteText((0, 3), $"{CharacterStatisticType.FromId(StaticWorldData.World, 6L).Abbreviation} {player.Health.Current}/{player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 6L))}", False, Hue.Black)
 
         buffer.WriteText((11, 1), $"{CharacterStatisticType.FromId(StaticWorldData.World, 3L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 3L))}", False, Hue.Black)
         buffer.WriteText((11, 2), $"{CharacterStatisticType.FromId(StaticWorldData.World, 4L).Abbreviation} {player.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 4L))}", False, Hue.Black)

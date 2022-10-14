@@ -526,7 +526,7 @@
                     Exit Select
                 End If
                 sfx = Game.Sfx.PlayerHit
-                lines.Add($"You have {Health.CurrentHP} HP left.")
+                lines.Add($"You have {Health.Current} HP left.")
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub
@@ -775,7 +775,7 @@
                     Exit Select
                 End If
                 sfx = Game.Sfx.EnemyHit
-                lines.Add($"{enemy.Name} has {enemy.Health.CurrentHP} HP left.")
+                lines.Add($"{enemy.Name} has {enemy.Health.Current} HP left.")
         End Select
         EnqueueMessage(sfx, lines.ToArray)
     End Sub

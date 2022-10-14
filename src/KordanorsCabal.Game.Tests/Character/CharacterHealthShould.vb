@@ -20,7 +20,7 @@
             Sub(worldData, id, subject)
                 worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
-                subject.MaximumHP.ShouldBe(0)
+                subject.Maximum.ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 6))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(6))
             End Sub)
@@ -64,7 +64,7 @@
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
                 worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
 
-                subject.CurrentHP.ShouldBe(0)
+                subject.Current.ShouldBe(0)
 
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, firstStatisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, secondStatisticTypeId))

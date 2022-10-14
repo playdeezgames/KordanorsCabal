@@ -173,7 +173,7 @@
                     character.Hunger = 0
                     character.EnqueueMessage(
                         $"Food heals up to {healRoll} HP!",
-                        $"You now have {character.Health.CurrentHP} HP!")
+                        $"You now have {character.Health.Current} HP!")
                 End Sub},
             {"UseHolyWater",
                 Sub(worldData, parms)
@@ -338,7 +338,7 @@
                     character.Inventory.Add(Item.Create(worldData, 30))
                     character.EnqueueMessage(
                 $"Potion heals up to {healRoll} HP!",
-                $"You now have {character.Health.CurrentHP} HP!")
+                $"You now have {character.Health.Current} HP!")
                 End Sub},
             {"UseHerb",
                 Sub(worldData, parms)
@@ -391,7 +391,7 @@
                         character.Hunger = 0
                         character.EnqueueMessage(
                         $"Food heals up to {healRoll} HP!",
-                        $"You now have {character.Health.CurrentHP} HP!")
+                        $"You now have {character.Health.Current} HP!")
                     End If
                 End Sub}
         }
