@@ -61,12 +61,12 @@ Public Class Backer
         End Using
     End Function
 
-    Public Function ExecuteReader(Of TResult)(transform As Func(Of SqliteDataReader, TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult) Implements IBacker.ExecuteReader
+    Public Function ExecuteReader(Of TResult)(transform As Func(Of Func(Of String, Object), TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult) Implements IBacker.ExecuteReader
         Using command = CreateCommand(query, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
             Using reader = command.ExecuteReader
                 Dim result As New List(Of TResult)
                 While reader.Read
-                    result.Add(transform(reader))
+                    result.Add(transform(Function(x) reader(x)))
                 End While
                 Return result
             End Using
@@ -114,14 +114,6 @@ Public Class Store
         Reset()
         templateFilename = oldFilename
     End Sub
-    Private Function CreateCommand(query As String, ParamArray parameters() As SqliteParameter) As SqliteCommand
-        Dim command = backer.Connection.CreateCommand()
-        command.CommandText = query
-        For Each parameter In parameters
-            command.Parameters.Add(parameter)
-        Next
-        Return command
-    End Function
     Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As (String, Object)) Implements IStore.ExecuteNonQuery
         backer.ExecuteNonQuery(sql, parameters)
     End Sub
@@ -131,7 +123,7 @@ Public Class Store
     Private Function ExecuteScalar(Of TResult As Class)(transform As Func(Of Object, TResult), query As String, ParamArray parameters() As (String, Object)) As TResult
         Return backer.ExecuteScalar(transform, query, parameters)
     End Function
-    Private Function ExecuteReader(Of TResult)(transform As Func(Of SqliteDataReader, TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult)
+    Private Function ExecuteReader(Of TResult)(transform As Func(Of Func(Of String, Object), TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult)
         Return backer.ExecuteReader(transform, query, parameters)
     End Function
     Private ReadOnly Property LastInsertRowId() As Long
