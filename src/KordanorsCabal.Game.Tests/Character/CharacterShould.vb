@@ -1157,7 +1157,9 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 Const spellTypeId = 2L
+                worldData.Setup(Function(x) x.CharacterSpell.ReadForCharacter(It.IsAny(Of Long)))
                 subject.RollSpellDice(SpellType.FromId(worldData.Object, spellTypeId)).ShouldBe(0)
+                worldData.Verify(Function(x) x.CharacterSpell.ReadForCharacter(id))
             End Sub)
     End Sub
 End Class
