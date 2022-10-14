@@ -401,11 +401,6 @@
             WorldData.Player.WriteDirection(value.Id)
         End Set
     End Property
-    Public ReadOnly Property CanCast() As Boolean
-        Get
-            Return Spells.Keys.Any(Function(x) CanCastSpell(SpellType.FromId(WorldData, x)))
-        End Get
-    End Property
     Public Function CanCastSpell(spellType As ISpellType) As Boolean Implements ICharacter.CanCastSpell
         Return spellType.CanCast(Me)
     End Function
@@ -475,9 +470,6 @@
             Return (Location?.Feature?.Id).HasValue
         End Get
     End Property
-    Public Function GetItemTypeCount(itemType As Long) As Integer
-        Return Inventory.Items.Where(Function(x) x.ItemType.Id = itemType).Count
-    End Function
     Public ReadOnly Property CanMap() As Boolean Implements ICharacter.CanMap
         Get
             Dim result = Location
