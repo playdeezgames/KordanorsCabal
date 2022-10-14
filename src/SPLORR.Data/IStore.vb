@@ -14,7 +14,7 @@ End Interface
 Public Interface IStorePrimitive
     Sub ExecuteNonQuery(
                        sql As String,
-                       ParamArray parameters() As SqliteParameter)
+                       ParamArray parameters() As (String, Object))
 End Interface
 Public Interface IStoreColumn
     Function ReadColumnValues(Of TOutputColumn)(
