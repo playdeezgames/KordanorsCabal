@@ -25,7 +25,7 @@
                 Dim spellType = 2L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(characterId, spellType).ShouldBeNull
-                store.Verify(Sub(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
+                store.Verify(Sub(x) x.Column.ReadValue(Of Long, Long, Long)(
                                  It.IsAny(Of Action),
                                  CharacterSpells,
                                  SpellLevelColumn,

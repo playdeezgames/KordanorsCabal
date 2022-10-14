@@ -5,7 +5,7 @@
     Public Sub New(backer As IBacker)
         MyBase.New(backer)
     End Sub
-    Public Function ReadCountForColumnValue(Of TInputColumn)(initializer As Action, tableName As String, inputColumnValue As (String, TInputColumn)) As Long Implements IStoreCount.ReadCountForColumnValue
+    Public Function ForValue(Of TInputColumn)(initializer As Action, tableName As String, inputColumnValue As (String, TInputColumn)) As Long Implements IStoreCount.ForValue
         initializer()
         Return ExecuteScalar(Of Long)(
             $"SELECT 

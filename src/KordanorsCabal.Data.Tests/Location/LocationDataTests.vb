@@ -40,7 +40,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadLocationType(locationId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Locations,
                     Columns.LocationTypeIdColumn,
@@ -56,7 +56,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.WriteLocationType(locationId, locationType)
                 store.Verify(
-                    Sub(x) x.Column.WriteColumnValue(Of Long, Long)(
+                    Sub(x) x.Column.Write(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Locations,
                     (Columns.LocationTypeIdColumn, locationType),

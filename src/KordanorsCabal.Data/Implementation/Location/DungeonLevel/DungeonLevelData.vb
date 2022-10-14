@@ -35,7 +35,7 @@
     End Sub
 
     Public Function ReadName(dungeonLevelId As Long) As String Implements IDungeonLevelData.ReadName
-        Return Store.Column.ReadColumnString(
+        Return Store.Column.ReadString(
             AddressOf Initialize,
             TableName,
             DungeonLevelNameColumn,

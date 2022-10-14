@@ -11,7 +11,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadAbbreviation(direction).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.Directions,
                     Columns.AbbreviationColumn,
@@ -39,7 +39,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadIsCardinal(direction).ShouldBeFalse
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Directions,
                     Columns.IsCardinalColumn,
@@ -54,7 +54,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(direction).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.Directions,
                     Columns.DirectionNameColumn,
@@ -69,7 +69,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadNext(direction).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Directions,
                     Columns.NextDirectionIdColumn,
@@ -84,7 +84,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadOpposite(direction).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Directions,
                     Columns.OppositeDirectionIdColumn,
@@ -99,7 +99,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadPrevious(direction).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Directions,
                     Columns.PreviousDirectionIdColumn,

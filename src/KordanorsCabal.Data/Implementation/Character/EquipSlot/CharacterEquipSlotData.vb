@@ -64,7 +64,7 @@
     End Sub
 
     Public Function ReadForCharacterEquipSlot(characterId As Long, equipSlotId As Long) As Long? Implements ICharacterEquipSlotData.ReadForCharacterEquipSlot
-        Return Store.Column.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             ItemIdColumn,

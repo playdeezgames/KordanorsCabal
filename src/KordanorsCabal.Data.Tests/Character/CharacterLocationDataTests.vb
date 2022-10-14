@@ -26,7 +26,7 @@
                 Const locationId = 2L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(characterId, locationId).ShouldBeFalse
-                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
+                store.Verify(Function(x) x.Column.ReadValue(Of Long, Long, Long)(
                                 It.IsAny(Of Action),
                                 Tables.CharacterLocations,
                                 CharacterIdColumn,

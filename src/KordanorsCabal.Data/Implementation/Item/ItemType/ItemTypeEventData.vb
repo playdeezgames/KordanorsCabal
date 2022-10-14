@@ -63,7 +63,7 @@
     End Sub
 
     Public Function Read(itemTypeId As Long, eventId As Long) As String Implements IItemTypeEventData.Read
-        Return Store.Column.ReadColumnString(
+        Return Store.Column.ReadString(
             AddressOf Initialize,
             TableName,
             EventNameColumn,

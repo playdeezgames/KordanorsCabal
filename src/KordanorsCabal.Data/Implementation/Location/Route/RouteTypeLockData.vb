@@ -29,7 +29,7 @@
     End Sub
 
     Public Function ReadUnlockItem(routeTypeId As Long) As Long? Implements IRouteTypeLockData.ReadUnlockItem
-        Return Store.Column.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             UnlockItemTypeId,
@@ -37,7 +37,7 @@
     End Function
 
     Public Function ReadUnlockedRouteType(routeTypeId As Long) As Long? Implements IRouteTypeLockData.ReadUnlockedRouteType
-        Return Store.Column.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             UnlockedRouteTypeIdColumn,

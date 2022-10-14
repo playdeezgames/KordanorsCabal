@@ -8,7 +8,7 @@
     Friend Const InteractionModeColumn = "InteractionMode"
 
     Public Function ReadName(featureTypeId As Long) As String Implements IFeatureTypeData.ReadName
-        Return Store.Column.ReadColumnString(
+        Return Store.Column.ReadString(
             AddressOf Initialize,
             TableName,
             FeatureTypeNameColumn,
@@ -16,7 +16,7 @@
     End Function
 
     Public Function ReadLocationType(featureTypeId As Long) As Long? Implements IFeatureTypeData.ReadLocationType
-        Return Store.Column.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             LocationTypeIdColumn,
@@ -24,7 +24,7 @@
     End Function
 
     Public Function ReadInteractionMode(featureTypeId As Long) As Long? Implements IFeatureTypeData.ReadInteractionMode
-        Return Store.Column.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             InteractionModeColumn,

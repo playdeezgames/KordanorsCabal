@@ -45,7 +45,7 @@
                 Dim characterId = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCharacterType(characterId)
-                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long,
+                store.Verify(Function(x) x.Column.ReadValue(Of Long,
                              Long)(
                              It.IsAny(Of Action),
                              Tables.Characters,
@@ -75,7 +75,7 @@
                 Dim characterId = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadLocation(characterId)
-                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long,
+                store.Verify(Function(x) x.Column.ReadValue(Of Long,
                                  Long)(
                                  It.IsAny(Of Action),
                                  Tables.Characters,
@@ -91,7 +91,7 @@
                 Dim locationId = 2L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.WriteLocation(characterId, locationId)
-                store.Verify(Sub(x) x.Column.WriteColumnValue(
+                store.Verify(Sub(x) x.Column.Write(
                                  It.IsAny(Of Action),
                                  Tables.Characters,
                                  (Columns.LocationIdColumn, locationId),

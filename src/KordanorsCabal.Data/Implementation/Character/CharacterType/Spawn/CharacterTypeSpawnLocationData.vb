@@ -108,7 +108,7 @@
                         characterTypeId As Long,
                         dungeonLevel As Long,
                         locationType As Long) As Boolean Implements ICharacterTypeSpawnLocationData.Read
-        Return Store.Column.ReadColumnValue(Of Long, Long, Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterTypeIdColumn,

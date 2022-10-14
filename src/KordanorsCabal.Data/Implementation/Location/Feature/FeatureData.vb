@@ -22,7 +22,7 @@
     End Sub
 
     Public Function ReadFeatureType(featureId As Long) As Long? Implements IFeatureData.ReadFeatureType
-        Return Store.Column.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             FeatureTypeIdColumn,
@@ -38,7 +38,7 @@
     End Function
 
     Public Function ReadForLocation(locationId As Long) As Long? Implements IFeatureData.ReadForLocation
-        Return Store.Column.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             FeatureIdColumn,

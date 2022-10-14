@@ -1,17 +1,17 @@
 ﻿Public Interface IStoreColumn
-    Function ReadColumnValues(Of TOutputColumn)(
+    Function ReadValues(Of TOutputColumn)(
                                                initializer As Action,
                                                tableName As String,
                                                outputColumnName As String
                                                ) As IEnumerable(Of TOutputColumn)
-    Function ReadColumnValue(Of TInputColumn,
+    Function ReadValue(Of TInputColumn,
                                  TOutputColumn As Structure)(
                                                             initializer As Action,
                                                             tableName As String,
                                                             outputColumnName As String,
                                                             inputColumnValue As (String, TInputColumn)
                                                             ) As TOutputColumn?
-    Function ReadColumnValue(Of TFirstInputColumn,
+    Function ReadValue(Of TFirstInputColumn,
                                  TSecondInputColumn,
                                  TOutputColumn As Structure)(
                                                             initializer As Action,
@@ -20,7 +20,7 @@
                                                             firstColumnValue As (String, TFirstInputColumn),
                                                             secondColumnValue As (String, TSecondInputColumn)
                                                             ) As TOutputColumn?
-    Function ReadColumnValue(Of TFirstInputColumn,
+    Function ReadValue(Of TFirstInputColumn,
                                  TSecondInputColumn,
                                  TThirdInputColumn,
                                  TOutputColumn As Structure)(
@@ -31,7 +31,7 @@
                                                             secondColumnValue As (String, TSecondInputColumn),
                                                             thirdColumnValue As (String, TThirdInputColumn)
                                                             ) As TOutputColumn?
-    Function ReadColumnString(Of TFirst,
+    Function ReadString(Of TFirst,
                                   TSecond)(
                                           initializer As Action,
                                           tableName As String,
@@ -39,13 +39,13 @@
                                           firstInputColumnValue As (String, TFirst),
                                           secondInputColumnValue As (String, TSecond)
                                           ) As String
-    Function ReadColumnString(Of TInput)(
+    Function ReadString(Of TInput)(
                                         initializer As Action,
                                         tableName As String,
                                         outputColumnName As String,
                                         inputColumnValue As (String, TInput)
                                         ) As String
-    Sub WriteColumnValue(Of TWhereColumn,
+    Sub Write(Of TWhereColumn,
                              TSetColumn)(
                                         initializer As Action,
                                         tableName As String,

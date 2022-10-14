@@ -31,7 +31,7 @@
     End Sub
 
     Public Function Read(itemTypeId As Long, characterStatisticTypeId As Long) As Long? Implements IItemTypeCharacterStatisticBuffData.Read
-        Return Store.Column.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             BuffColumn,

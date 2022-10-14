@@ -11,7 +11,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCanAcceptEventName(questTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(
+                    Function(x) x.Column.ReadString(
                         It.IsAny(Of Action),
                         Tables.QuestTypes,
                         Columns.CanAcceptEventNameColumn,
@@ -26,7 +26,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadAcceptEventName(questTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(
+                    Function(x) x.Column.ReadString(
                         It.IsAny(Of Action),
                         Tables.QuestTypes,
                         Columns.AcceptEventNameColumn,
@@ -41,7 +41,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCanCompleteEventName(questTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(
+                    Function(x) x.Column.ReadString(
                         It.IsAny(Of Action),
                         Tables.QuestTypes,
                         Columns.CanCompleteEventNameColumn,
@@ -56,7 +56,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCompleteEventName(questTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(
+                    Function(x) x.Column.ReadString(
                         It.IsAny(Of Action),
                         Tables.QuestTypes,
                         Columns.CompleteEventNameColumn,

@@ -32,7 +32,7 @@
     End Function
 
     Public Function Read(characterId As Long, spellType As Long) As Long? Implements ICharacterSpellData.Read
-        Return Store.Column.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             SpellLevelColumn,

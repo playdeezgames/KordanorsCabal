@@ -24,7 +24,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadInteractionMode(featureType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.FeatureTypes,
                     Columns.InteractionModeColumn,
@@ -39,7 +39,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadLocationType(featureType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.FeatureTypes,
                     Columns.LocationTypeIdColumn,
@@ -54,7 +54,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(featureType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.FeatureTypes,
                     Columns.FeatureTypeNameColumn,

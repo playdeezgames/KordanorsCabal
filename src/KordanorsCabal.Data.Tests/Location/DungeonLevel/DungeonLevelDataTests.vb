@@ -24,7 +24,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(dungeonLevelId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.DungeonLevels,
                     Columns.DungeonLevelNameColumn,

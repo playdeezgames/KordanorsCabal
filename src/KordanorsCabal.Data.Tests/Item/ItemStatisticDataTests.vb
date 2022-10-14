@@ -28,7 +28,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(itemId, statisticTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long, Long)(
                         It.IsAny(Of Action),
                         Tables.ItemStatistics,
                         Columns.StatisticValueColumn,

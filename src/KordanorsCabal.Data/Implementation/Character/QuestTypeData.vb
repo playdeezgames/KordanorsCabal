@@ -32,19 +32,19 @@
     End Sub
 
     Public Function ReadCanAcceptEventName(questTypeId As Long) As String Implements IQuestTypeData.ReadCanAcceptEventName
-        Return Store.Column.ReadColumnString(AddressOf Initialize, TableName, CanAcceptEventNameColumn, (QuestTypeIdColumn, questTypeId))
+        Return Store.Column.ReadString(AddressOf Initialize, TableName, CanAcceptEventNameColumn, (QuestTypeIdColumn, questTypeId))
     End Function
 
     Public Function ReadCanCompleteEventName(questTypeId As Long) As String Implements IQuestTypeData.ReadCanCompleteEventName
-        Return Store.Column.ReadColumnString(AddressOf Initialize, TableName, CanCompleteEventNameColumn, (QuestTypeIdColumn, questTypeId))
+        Return Store.Column.ReadString(AddressOf Initialize, TableName, CanCompleteEventNameColumn, (QuestTypeIdColumn, questTypeId))
     End Function
 
     Public Function ReadAcceptEventName(questTypeId As Long) As String Implements IQuestTypeData.ReadAcceptEventName
-        Return Store.Column.ReadColumnString(AddressOf Initialize, TableName, AcceptEventNameColumn, (QuestTypeIdColumn, questTypeId))
+        Return Store.Column.ReadString(AddressOf Initialize, TableName, AcceptEventNameColumn, (QuestTypeIdColumn, questTypeId))
     End Function
 
     Public Function ReadCompleteEventName(questTypeId As Long) As String Implements IQuestTypeData.ReadCompleteEventName
-        Return Store.Column.ReadColumnString(AddressOf Initialize, TableName, CompleteEventNameColumn, (QuestTypeIdColumn, questTypeId))
+        Return Store.Column.ReadString(AddressOf Initialize, TableName, CompleteEventNameColumn, (QuestTypeIdColumn, questTypeId))
     End Function
 
     Public Function ReadAll() As IEnumerable(Of Long) Implements IQuestTypeData.ReadAll

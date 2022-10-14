@@ -27,7 +27,7 @@
     End Function
 
     Public Sub WriteLocationType(locationId As Long, locationType As Long) Implements ILocationData.WriteLocationType
-        Store.Column.WriteColumnValue(
+        Store.Column.Write(
             AddressOf Initialize,
             TableName,
             (LocationTypeIdColumn, locationType),
@@ -35,7 +35,7 @@
     End Sub
 
     Public Function ReadLocationType(locationId As Long) As Long? Implements ILocationData.ReadLocationType
-        Return Store.Column.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             LocationTypeIdColumn,

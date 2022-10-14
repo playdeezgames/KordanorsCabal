@@ -19,7 +19,7 @@
             );")
     End Sub
     Public Function Read(locationId As Long) As Long? Implements ILocationDungeonLevelData.Read
-        Return Store.Column.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             DungeonLevelIdColumn,

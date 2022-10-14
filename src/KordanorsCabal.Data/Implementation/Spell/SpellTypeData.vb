@@ -33,7 +33,7 @@
     End Sub
 
     Public Function ReadName(spellTypeId As Long) As String Implements ISpellTypeData.ReadName
-        Return Store.Column.ReadColumnString(
+        Return Store.Column.ReadString(
             AddressOf Initialize,
             TableName,
             SpellTypeNameColumn,
@@ -41,7 +41,7 @@
     End Function
 
     Public Function ReadMaximumLevel(spellTypeId As Long) As Long? Implements ISpellTypeData.ReadMaximumLevel
-        Return Store.Column.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             MaximumLevelColumn,
@@ -49,7 +49,7 @@
     End Function
 
     Public Function ReadCastCheck(spellTypeId As Long) As String Implements ISpellTypeData.ReadCastCheck
-        Return Store.Column.ReadColumnString(
+        Return Store.Column.ReadString(
             AddressOf Initialize,
             TableName,
             CastCheckColumn,
@@ -57,7 +57,7 @@
     End Function
 
     Public Function ReadCast(spellTypeId As Long) As String Implements ISpellTypeData.ReadCast
-        Return Store.Column.ReadColumnString(
+        Return Store.Column.ReadString(
             AddressOf Initialize,
             TableName,
             CastColumn,

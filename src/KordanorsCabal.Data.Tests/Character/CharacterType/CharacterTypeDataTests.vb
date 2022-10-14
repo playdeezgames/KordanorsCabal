@@ -22,7 +22,7 @@
                 Dim characterType = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadIsUndead(characterType).ShouldBeNull
-                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Column.ReadValue(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterTypes,
                                  Columns.IsUndeadColumn,
@@ -36,7 +36,7 @@
                 Dim characterType = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadMoneyDropDice(characterType).ShouldBeNull
-                store.Verify(Function(x) x.Column.ReadColumnString(Of Long)(
+                store.Verify(Function(x) x.Column.ReadString(Of Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterTypes,
                                  Columns.MoneyDropDiceColumn,
@@ -50,7 +50,7 @@
                 Dim characterType = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(characterType).ShouldBeNull
-                store.Verify(Function(x) x.Column.ReadColumnString(Of Long)(
+                store.Verify(Function(x) x.Column.ReadString(Of Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterTypes,
                                  Columns.CharacterTypeNameColumn,
@@ -64,7 +64,7 @@
                 Dim characterType = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadXPValue(characterType).ShouldBeNull
-                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Column.ReadValue(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterTypes,
                                  Columns.XPValueColumn,

@@ -53,7 +53,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadForCharacter(characterId).ShouldBeNull
                 store.Verify(
-                Sub(x) x.Column.ReadColumnValue(Of Long, Long)(
+                Sub(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Inventories,
                     Columns.InventoryIdColumn,
@@ -68,7 +68,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadForLocation(characterId).ShouldBeNull
                 store.Verify(
-                Sub(x) x.Column.ReadColumnValue(Of Long, Long)(
+                Sub(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Inventories,
                     Columns.InventoryIdColumn,

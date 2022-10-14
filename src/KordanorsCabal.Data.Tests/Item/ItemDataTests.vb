@@ -38,7 +38,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadItemType(itemId).ShouldBeNull
                 store.Verify(
-                Sub(x) x.Column.ReadColumnValue(Of Long, Long)(
+                Sub(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Items,
                     Columns.ItemTypeIdColumn,
@@ -54,7 +54,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.WriteItemType(itemId, itemTypeId)
                 store.Verify(
-                Sub(x) x.Column.WriteColumnValue(
+                Sub(x) x.Column.Write(
                     It.IsAny(Of Action),
                     Tables.Items,
                     (Columns.ItemTypeIdColumn, itemTypeId),

@@ -12,7 +12,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(locationId, statisticType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long, Long)(
                     It.IsAny(Of Action),
                     Tables.LocationStatistics,
                     Columns.StatisticValueColumn,

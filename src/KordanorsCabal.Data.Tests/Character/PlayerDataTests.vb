@@ -25,7 +25,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read().ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     Columns.CharacterIdColumn,
@@ -40,7 +40,7 @@
                 subject.ReadDirection().ShouldBeNull
                 Dim playerId = 1
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     Columns.DirectionIdColumn,
@@ -55,7 +55,7 @@
                 subject.ReadPlayerMode().ShouldBeNull
                 Dim playerId = 1
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     Columns.PlayerModeIdColumn,
@@ -91,7 +91,7 @@
                 subject.WriteDirection(direction)
                 Dim playerId = 1
                 store.Verify(
-                    Sub(x) x.Column.WriteColumnValue(Of Long, Long)(
+                    Sub(x) x.Column.Write(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     (Columns.DirectionIdColumn, direction),
@@ -107,7 +107,7 @@
                 subject.WritePlayerMode(mode)
                 Dim playerId = 1
                 store.Verify(
-                    Sub(x) x.Column.WriteColumnValue(Of Long, Long)(
+                    Sub(x) x.Column.Write(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     (Columns.PlayerModeIdColumn, mode),

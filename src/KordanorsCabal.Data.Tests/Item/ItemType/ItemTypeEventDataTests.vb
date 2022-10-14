@@ -12,7 +12,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(itemTypeId, eventId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(
+                    Function(x) x.Column.ReadString(
                         It.IsAny(Of Action),
                         Tables.ItemTypeEvents,
                         Columns.EventNameColumn,

@@ -11,7 +11,7 @@
                 Const locationTypeId = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(locationTypeId).ShouldBeNull
-                store.Verify(Function(x) x.Column.ReadColumnString(Of Long)(
+                store.Verify(Function(x) x.Column.ReadString(Of Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.LocationTypeNameColumn,
@@ -26,7 +26,7 @@
                 Const locationTypeId = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCanMap(locationTypeId).ShouldBeFalse
-                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Column.ReadValue(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.CanMapColumn,
@@ -41,7 +41,7 @@
                 Const locationTypeId = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadIsDungeon(locationTypeId).ShouldBeFalse
-                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Column.ReadValue(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.IsDungeonColumn,
@@ -56,7 +56,7 @@
                 Const locationTypeId = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadRequiresMP(locationTypeId).ShouldBeFalse
-                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Column.ReadValue(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.RequiresMPColumn,

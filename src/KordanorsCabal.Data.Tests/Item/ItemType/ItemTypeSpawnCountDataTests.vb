@@ -12,7 +12,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(itemTypeId, dungeonLevelId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(Of Long, Long)(
+                    Function(x) x.Column.ReadString(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.ItemTypeSpawnCounts,
                     Columns.SpawnDiceColumn,

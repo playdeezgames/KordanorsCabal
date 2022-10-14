@@ -26,7 +26,7 @@
                 Dim questId = 2L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(characterId, questId).ShouldBeNull
-                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
+                store.Verify(Function(x) x.Column.ReadValue(Of Long, Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterQuestCompletions,
                                  Columns.CompletionsColumn,

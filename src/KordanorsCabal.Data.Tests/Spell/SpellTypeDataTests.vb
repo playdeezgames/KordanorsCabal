@@ -12,7 +12,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(spellTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.SpellTypes,
                     Columns.SpellTypeNameColumn,
@@ -27,7 +27,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadMaximumLevel(spellTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.SpellTypes,
                     Columns.MaximumLevelColumn,
@@ -42,7 +42,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCastCheck(spellTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.SpellTypes,
                     Columns.CastCheckColumn,
@@ -57,7 +57,7 @@
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCast(spellTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Column.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.SpellTypes,
                     Columns.CastColumn,
