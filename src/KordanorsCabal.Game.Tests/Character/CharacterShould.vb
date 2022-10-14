@@ -808,7 +808,14 @@ Public Class CharacterShould
     Sub purify_items()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.Inventory.ReadForCharacter(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.InventoryItem.ReadItems(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.PurifyItems()
+                worldData.Verify(Function(x) x.Inventory.ReadForCharacter(id))
+                worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
+                worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
+                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
             End Sub)
     End Sub
     <Fact>
