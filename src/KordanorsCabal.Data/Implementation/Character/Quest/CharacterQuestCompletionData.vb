@@ -31,7 +31,7 @@
             (CompletionsColumn, completions))
     End Sub
     Function Read(characterId As Long, quest As Long) As Long? Implements ICharacterQuestCompletionData.Read
-        Return Store.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             CompletionsColumn,

@@ -10,9 +10,10 @@
                 Dim characterTypeId = 1L
                 Dim dungeonLevel = 2L
                 Dim locationTYpe = 3L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(characterTypeId, dungeonLevel, locationTYpe).ShouldBeFalse
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long, Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long, Long, Long)(
                     It.IsAny(Of Action),
                     Tables.CharacterTypeSpawnLocations,
                     Columns.CharacterTypeIdColumn,

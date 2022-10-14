@@ -9,9 +9,10 @@
             Sub(store, checker, subject)
                 Const itemTypeId = 1L
                 Const eventId = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(itemTypeId, eventId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(
+                    Function(x) x.Column.ReadColumnString(
                         It.IsAny(Of Action),
                         Tables.ItemTypeEvents,
                         Columns.EventNameColumn,

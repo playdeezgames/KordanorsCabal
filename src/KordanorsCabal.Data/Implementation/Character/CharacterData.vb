@@ -20,7 +20,7 @@
         );")
     End Sub
     Public Function ReadCharacterType(characterId As Long) As Long? Implements ICharacterData.ReadCharacterType
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterTypeIdColumn,
@@ -36,7 +36,7 @@
     End Function
 
     Public Function ReadLocation(characterId As Long) As Long? Implements ICharacterData.ReadLocation
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             LocationIdColumn,
@@ -44,7 +44,7 @@
     End Function
 
     Public Sub WriteLocation(characterId As Long, locationId As Long) Implements ICharacterData.WriteLocation
-        Store.WriteColumnValue(
+        Store.Column.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),

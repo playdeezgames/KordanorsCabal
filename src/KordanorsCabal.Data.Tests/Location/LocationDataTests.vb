@@ -35,9 +35,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadLocationType(locationId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Locations,
                     Columns.LocationTypeIdColumn,
@@ -50,9 +51,10 @@
             Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim locationType = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.WriteLocationType(locationId, locationType)
                 store.Verify(
-                    Sub(x) x.WriteColumnValue(Of Long, Long)(
+                    Sub(x) x.Column.WriteColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Locations,
                     (Columns.LocationTypeIdColumn, locationType),

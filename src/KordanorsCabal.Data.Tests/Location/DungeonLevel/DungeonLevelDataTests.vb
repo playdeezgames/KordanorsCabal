@@ -20,10 +20,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim dungeonLevelId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(dungeonLevelId).ShouldBeNull
-                'IStore.ReadColumnString<long>(Action, "DungeonLevels", "DungeonLevelName", (DungeonLevelId, 1))
                 store.Verify(
-                    Function(x) x.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadColumnString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.DungeonLevels,
                     Columns.DungeonLevelNameColumn,

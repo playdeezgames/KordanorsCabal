@@ -45,14 +45,14 @@
     End Sub
 
     Public Function ReadName(directionId As Long) As String Implements IDirectionData.ReadName
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             DirectionNameColumn,
             (DirectionIdColumn, directionId))
     End Function
     Public Function ReadAbbreviation(directionId As Long) As String Implements IDirectionData.ReadAbbreviation
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             AbbreviationColumn,
@@ -67,28 +67,28 @@
     End Function
 
     Public Function ReadIsCardinal(directionId As Long) As Boolean Implements IDirectionData.ReadIsCardinal
-        Return If(Store.ReadColumnValue(Of Long, Long)(
+        Return If(Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             IsCardinalColumn,
             (DirectionIdColumn, directionId)), 0) > 0
     End Function
     Public Function ReadOpposite(directionId As Long) As Long? Implements IDirectionData.ReadOpposite
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             OppositeDirectionIdColumn,
             (DirectionIdColumn, directionId))
     End Function
     Public Function ReadNext(directionId As Long) As Long? Implements IDirectionData.ReadNext
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             NextDirectionIdColumn,
             (DirectionIdColumn, directionId))
     End Function
     Public Function ReadPrevious(directionId As Long) As Long? Implements IDirectionData.ReadPrevious
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             PreviousDirectionIdColumn,

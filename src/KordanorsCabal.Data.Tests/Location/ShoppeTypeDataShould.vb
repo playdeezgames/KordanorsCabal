@@ -8,9 +8,10 @@
         WithSubobject(
             Sub(store, events, subject)
                 Const shoppeTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(shoppeTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(
+                    Function(x) x.Column.ReadColumnString(
                         It.IsAny(Of Action),
                         Tables.ShoppeTypes,
                         Columns.ShoppeTypeNameColumn,

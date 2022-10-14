@@ -48,9 +48,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadForCharacter(characterId).ShouldBeNull
                 store.Verify(
-                Sub(x) x.ReadColumnValue(Of Long, Long)(
+                Sub(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Inventories,
                     Columns.InventoryIdColumn,
@@ -62,9 +63,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadForLocation(characterId).ShouldBeNull
                 store.Verify(
-                Sub(x) x.ReadColumnValue(Of Long, Long)(
+                Sub(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Inventories,
                     Columns.InventoryIdColumn,

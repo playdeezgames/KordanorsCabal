@@ -44,7 +44,7 @@
     End Sub
 
     Public Function ReadIsUndead(characterTypeId As Long) As Long? Implements ICharacterTypeData.ReadIsUndead
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             IsUndeadColumn,
@@ -52,7 +52,7 @@
     End Function
 
     Public Function ReadXPValue(characterTypeId As Long) As Long? Implements ICharacterTypeData.ReadXPValue
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             XPValueColumn,
@@ -64,7 +64,7 @@
     End Sub
 
     Public Function ReadMoneyDropDice(characterTypeId As Long) As String Implements ICharacterTypeData.ReadMoneyDropDice
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             MoneyDropDiceColumn,
@@ -72,7 +72,7 @@
     End Function
 
     Public Function ReadName(characterTypeId As Long) As String Implements ICharacterTypeData.ReadName
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             CharacterTypeNameColumn,

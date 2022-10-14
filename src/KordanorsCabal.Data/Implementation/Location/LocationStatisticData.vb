@@ -32,7 +32,7 @@
     End Function
 
     Public Function Read(locationId As Long, statisticType As Long) As Long? Implements ILocationStatisticData.Read
-        Return Store.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             StatisticValueColumn,

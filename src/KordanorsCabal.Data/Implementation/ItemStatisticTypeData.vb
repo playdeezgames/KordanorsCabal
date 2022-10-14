@@ -22,7 +22,7 @@
     End Sub
 
     Public Function ReadDefaultValue(statisticTypeId As Long) As Long? Implements IItemStatisticTypeData.ReadDefaultValue
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             DefaultValueColumn,

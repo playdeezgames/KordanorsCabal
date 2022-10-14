@@ -9,9 +9,10 @@
             Sub(store, checker, subject)
                 Dim characterTypeId = 1L
                 Dim dungeonLevelId = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadSpawnCount(characterTypeId, dungeonLevelId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
                     It.IsAny(Of Action),
                     Tables.CharacterTypeSpawnCounts,
                     Columns.SpawnCountColumn,

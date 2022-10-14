@@ -8,9 +8,10 @@
         WithSubobject(
             Sub(store, events, subject)
                 Const questTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCanAcceptEventName(questTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(
+                    Function(x) x.Column.ReadColumnString(
                         It.IsAny(Of Action),
                         Tables.QuestTypes,
                         Columns.CanAcceptEventNameColumn,
@@ -22,9 +23,10 @@
         WithSubobject(
             Sub(store, events, subject)
                 Const questTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadAcceptEventName(questTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(
+                    Function(x) x.Column.ReadColumnString(
                         It.IsAny(Of Action),
                         Tables.QuestTypes,
                         Columns.AcceptEventNameColumn,
@@ -36,9 +38,10 @@
         WithSubobject(
             Sub(store, events, subject)
                 Const questTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCanCompleteEventName(questTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(
+                    Function(x) x.Column.ReadColumnString(
                         It.IsAny(Of Action),
                         Tables.QuestTypes,
                         Columns.CanCompleteEventNameColumn,
@@ -50,9 +53,10 @@
         WithSubobject(
             Sub(store, events, subject)
                 Const questTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCompleteEventName(questTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(
+                    Function(x) x.Column.ReadColumnString(
                         It.IsAny(Of Action),
                         Tables.QuestTypes,
                         Columns.CompleteEventNameColumn,

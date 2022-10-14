@@ -49,7 +49,7 @@
     End Sub
 
     Public Function Read(itemTypeId As Long, dungeonLevelId As Long) As String Implements IItemTypeSpawnCountData.Read
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             SpawnDice,

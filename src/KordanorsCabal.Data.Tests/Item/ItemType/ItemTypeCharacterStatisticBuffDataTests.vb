@@ -9,9 +9,10 @@
             Sub(store, checker, subject)
                 Const itemTypeId = 1L
                 Const characterStatisticTypeId = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(itemTypeId, characterStatisticTypeId)
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
                         It.IsAny(Of Action),
                         Tables.ItemTypeCharacterStatisticBuffs,
                         Columns.BuffColumn,

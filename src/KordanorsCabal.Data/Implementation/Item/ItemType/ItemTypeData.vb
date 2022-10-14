@@ -11,7 +11,7 @@
     End Sub
 
     Public Function ReadIsConsumed(itemTypeId As Long) As Long? Implements IItemTypeData.ReadIsConsumed
-        Return Store.ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, IsConsumedColumn, (ItemTypeIdColumn, itemTypeId))
+        Return Store.Column.ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, IsConsumedColumn, (ItemTypeIdColumn, itemTypeId))
     End Function
 
     Friend Sub Initialize()
@@ -81,7 +81,7 @@
                 FROM [cte];")
     End Sub
     Public Function ReadName(itemTypeId As Long) As String Implements IItemTypeData.ReadName
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             ItemTypeNameColumn,

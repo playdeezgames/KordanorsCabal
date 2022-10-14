@@ -9,9 +9,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const spellTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(spellTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadColumnString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.SpellTypes,
                     Columns.SpellTypeNameColumn,
@@ -23,9 +24,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const spellTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadMaximumLevel(spellTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.SpellTypes,
                     Columns.MaximumLevelColumn,
@@ -37,9 +39,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const spellTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCastCheck(spellTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadColumnString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.SpellTypes,
                     Columns.CastCheckColumn,
@@ -51,9 +54,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const spellTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCast(spellTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadColumnString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.SpellTypes,
                     Columns.CastColumn,

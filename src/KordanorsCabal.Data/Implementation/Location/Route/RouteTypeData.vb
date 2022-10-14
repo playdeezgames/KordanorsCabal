@@ -36,7 +36,7 @@
     End Sub
 
     Public Function ReadAbbreviation(routeTypeId As Long) As String Implements IRouteTypeData.ReadAbbreviation
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             AbbreviationColumn,
@@ -44,7 +44,7 @@
     End Function
 
     Public Function ReadIsSingleUse(routeTypeId As Long) As Boolean Implements IRouteTypeData.ReadIsSingleUse
-        Return If(Store.ReadColumnValue(Of Long, Long)(
+        Return If(Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName, IsSingleUseColumn,
             (RouteTypeIdColumn, routeTypeId)), 0L) > 0L

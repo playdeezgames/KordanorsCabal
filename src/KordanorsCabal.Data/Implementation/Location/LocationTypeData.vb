@@ -34,7 +34,7 @@
     End Sub
 
     Public Function ReadRequiresMP(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadRequiresMP
-        Return If(Store.ReadColumnValue(Of Long, Long)(
+        Return If(Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             RequiresMPColumn,
@@ -42,7 +42,7 @@
     End Function
 
     Public Function ReadCanMap(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadCanMap
-        Return If(Store.ReadColumnValue(Of Long, Long)(
+        Return If(Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             CanMapColumn,
@@ -50,7 +50,7 @@
     End Function
 
     Public Function ReadIsDungeon(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadIsDungeon
-        Return If(Store.ReadColumnValue(Of Long, Long)(
+        Return If(Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             IsDungeonColumn,
@@ -62,7 +62,7 @@
     End Sub
 
     Public Function ReadName(locationTypeId As Long) As String Implements ILocationTypeData.ReadName
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             LocationTypeNameColumn,

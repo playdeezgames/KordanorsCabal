@@ -28,7 +28,7 @@
     End Sub
 
     Public Function Read(characterTypeId As Long, itemType As Long) As Boolean Implements ICharacterTypeBribeData.Read
-        Return Store.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             ItemTypeIdColumn,

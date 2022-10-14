@@ -27,7 +27,7 @@
     End Sub
 
     Public Function ReadName(shoppeTypeId As Long) As String Implements IShoppeTypeData.ReadName
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             ShoppeTypeNameColumn,

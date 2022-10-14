@@ -64,7 +64,7 @@
     End Sub
 
     Public Function ReadSpawnCount(characterTypeId As Long, dungeonLevelId As Long) As Long? Implements ICharacterTypeSpawnCountData.ReadSpawnCount
-        Return Store.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             SpawnCountColumn,

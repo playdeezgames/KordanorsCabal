@@ -34,9 +34,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const itemId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadItemType(itemId).ShouldBeNull
                 store.Verify(
-                Sub(x) x.ReadColumnValue(Of Long, Long)(
+                Sub(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Items,
                     Columns.ItemTypeIdColumn,
@@ -49,9 +50,10 @@
             Sub(store, checker, subject)
                 Const itemId = 1L
                 Const itemTypeId = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.WriteItemType(itemId, itemTypeId)
                 store.Verify(
-                Sub(x) x.WriteColumnValue(
+                Sub(x) x.Column.WriteColumnValue(
                     It.IsAny(Of Action),
                     Tables.Items,
                     (Columns.ItemTypeIdColumn, itemTypeId),

@@ -10,8 +10,9 @@
         WithSubobject(Sub(store, checker, subject)
                           Dim characterTypeId = 1L
                           Dim itemType = 2L
+                          store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                           subject.Read(characterTypeId, itemType).ShouldBeFalse
-                          store.Verify(Function(x) x.ReadColumnValue(Of Long, Long, Long)(
+                          store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
                                        It.IsAny(Of Action),
                                        Tables.CharacterTypeBribes,
                                        Columns.ItemTypeIdColumn,

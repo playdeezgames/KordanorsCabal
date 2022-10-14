@@ -10,7 +10,7 @@
     Friend Const MaximumValueColumn = "MaximumValue"
 
     Public Function ReadDefaultValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadDefaultValue
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             DefaultValueColumn,
@@ -19,7 +19,7 @@
 
 
     Public Function ReadName(statisticTypeId As Long) As String Implements ICharacterStatisticTypeData.ReadName
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             CharacterStatisticTypeNameColumn,
@@ -73,7 +73,7 @@
     End Sub
 
     Public Function ReadMaximumValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadMaximumValue
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             MaximumValueColumn,
@@ -81,7 +81,7 @@
     End Function
 
     Public Function ReadMinimumValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadMinimumValue
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             MinimumValueColumn,
@@ -89,7 +89,7 @@
     End Function
 
     Public Function ReadAbbreviation(statisticTypeId As Long) As String Implements ICharacterStatisticTypeData.ReadAbbreviation
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             AbbreviationColumn,
@@ -98,7 +98,7 @@
 
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
-        lookUpByName = Function(name) store.ReadColumnValue(Of String, Long)(
+        lookUpByName = Function(name) store.Column.ReadColumnValue(Of String, Long)(
             AddressOf Initialize,
             TableName,
             CharacterStatisticTypeIdColumn,

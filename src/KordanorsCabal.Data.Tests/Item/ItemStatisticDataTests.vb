@@ -25,9 +25,10 @@
             Sub(store, checker, subject)
                 Const itemId = 1L
                 Const statisticTypeId = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(itemId, statisticTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
                         It.IsAny(Of Action),
                         Tables.ItemStatistics,
                         Columns.StatisticValueColumn,

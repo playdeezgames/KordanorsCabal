@@ -8,9 +8,10 @@
         WithSubobject(
             Sub(store, events, subject)
                 Const statisticTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadDefaultValue(statisticTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                         It.IsAny(Of Action),
                         Tables.ItemStatisticTypes,
                         Columns.DefaultValueColumn,

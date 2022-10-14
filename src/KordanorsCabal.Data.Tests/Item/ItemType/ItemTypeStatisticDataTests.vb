@@ -9,9 +9,10 @@
             Sub(store, checker, subject)
                 Dim itemTypeId = 1L
                 Dim statisticType = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(itemTypeId, statisticType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
                     It.IsAny(Of Action),
                     Tables.ItemTypeStatistics,
                     Columns.ItemTypeStatisticValueColumn,

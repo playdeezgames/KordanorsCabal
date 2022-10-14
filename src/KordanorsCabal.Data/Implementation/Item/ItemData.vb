@@ -25,7 +25,7 @@
     End Function
 
     Public Function ReadItemType(itemId As Long) As Long? Implements IItemData.ReadItemType
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             ItemTypeIdColumn,
@@ -43,7 +43,7 @@
     End Sub
 
     Public Sub WriteItemType(itemId As Long, itemType As Long) Implements IItemData.WriteItemType
-        Store.WriteColumnValue(
+        Store.Column.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (ItemTypeIdColumn, itemType),

@@ -69,8 +69,9 @@
             Sub(store, checker, subject)
                 Const characterId = 1L
                 Const equipSlot = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadForCharacterEquipSlot(characterId, equipSlot).ShouldBeNull
-                store.Verify(Sub(x) x.ReadColumnValue(Of Long, Long, Long)(
+                store.Verify(Sub(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              Columns.ItemIdColumn,

@@ -84,9 +84,10 @@
             Sub(store, checker, subject)
                 Dim locationId = 1L
                 Dim direction = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadForLocationDirection(locationId, direction).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             Columns.RouteIdColumn,
@@ -115,9 +116,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim routeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadToLocation(routeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             Columns.ToLocationIdColumn,
@@ -129,9 +131,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim routeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadRouteType(routeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             Columns.RouteTypeIdColumn,
@@ -144,9 +147,10 @@
             Sub(store, checker, subject)
                 Dim routeId = 1L
                 Dim routeTypeId = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.WriteRouteType(routeId, routeTypeId)
                 store.Verify(
-                    Sub(x) x.WriteColumnValue(Of Long, Long)(
+                    Sub(x) x.Column.WriteColumnValue(Of Long, Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             (Columns.RouteTypeIdColumn, routeTypeId),

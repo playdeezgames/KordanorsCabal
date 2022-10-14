@@ -52,7 +52,7 @@
     End Sub
 
     Public Function Read(characterTypeId As Long, enemyCharacterTypeId As Long) As Boolean Implements ICharacterTypeEnemyData.Read
-        Return Store.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             EnemyCharacterTypeIdColumn,

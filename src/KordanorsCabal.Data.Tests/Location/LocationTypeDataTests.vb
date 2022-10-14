@@ -9,8 +9,9 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const locationTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(locationTypeId).ShouldBeNull
-                store.Verify(Function(x) x.ReadColumnString(Of Long)(
+                store.Verify(Function(x) x.Column.ReadColumnString(Of Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.LocationTypeNameColumn,
@@ -23,8 +24,9 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const locationTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadCanMap(locationTypeId).ShouldBeFalse
-                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.CanMapColumn,
@@ -37,8 +39,9 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const locationTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadIsDungeon(locationTypeId).ShouldBeFalse
-                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.IsDungeonColumn,
@@ -51,8 +54,9 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const locationTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadRequiresMP(locationTypeId).ShouldBeFalse
-                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.LocationTypes,
                                  Columns.RequiresMPColumn,

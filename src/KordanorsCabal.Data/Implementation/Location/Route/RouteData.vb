@@ -36,7 +36,7 @@
     End Sub
 
     Public Sub WriteRouteType(routeId As Long, routeType As Long) Implements IRouteData.WriteRouteType
-        Store.WriteColumnValue(
+        Store.Column.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (RouteTypeIdColumn, routeType),
@@ -44,7 +44,7 @@
     End Sub
 
     Public Function ReadRouteType(routeId As Long) As Long? Implements IRouteData.ReadRouteType
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             RouteTypeIdColumn,
@@ -52,7 +52,7 @@
     End Function
 
     Public Function ReadToLocation(routeId As Long) As Long? Implements IRouteData.ReadToLocation
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             ToLocationIdColumn,
@@ -85,7 +85,7 @@
     End Function
 
     Public Function ReadForLocationDirection(locationId As Long, direction As Long) As Long? Implements IRouteData.ReadForLocationDirection
-        Return Store.ReadColumnValue(Of Long, Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             RouteIdColumn,

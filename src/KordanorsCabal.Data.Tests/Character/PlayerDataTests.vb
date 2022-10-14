@@ -21,10 +21,11 @@
     Sub ShouldQueryTheStoreForTheAssociatedCharacterOfThePlayer()
         WithSubobject(
             Sub(store, checker, subject)
+                Const playerId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read().ShouldBeNull
-                Dim playerId = 1
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     Columns.CharacterIdColumn,
@@ -35,10 +36,11 @@
     Sub ShouldQueryTheStoreForTheAssociatedDirectionOfThePlayer()
         WithSubobject(
             Sub(store, checker, subject)
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadDirection().ShouldBeNull
                 Dim playerId = 1
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     Columns.DirectionIdColumn,
@@ -49,10 +51,11 @@
     Sub ShouldQueryTheStoreForTheAssociatedModeOfThePlayer()
         WithSubobject(
             Sub(store, checker, subject)
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadPlayerMode().ShouldBeNull
                 Dim playerId = 1
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     Columns.PlayerModeIdColumn,
@@ -83,10 +86,11 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim direction = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.WriteDirection(direction)
                 Dim playerId = 1
                 store.Verify(
-                    Sub(x) x.WriteColumnValue(Of Long, Long)(
+                    Sub(x) x.Column.WriteColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     (Columns.DirectionIdColumn, direction),
@@ -98,10 +102,11 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim mode = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.WritePlayerMode(mode)
                 Dim playerId = 1
                 store.Verify(
-                    Sub(x) x.WriteColumnValue(Of Long, Long)(
+                    Sub(x) x.Column.WriteColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     (Columns.PlayerModeIdColumn, mode),

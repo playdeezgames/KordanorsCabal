@@ -8,8 +8,9 @@
         WithSubobject(
             Sub(store, events, subject)
                 Const routeTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadUnlockedRouteType(routeTypeId).ShouldBeNull
-                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(It.IsAny(Of Action), Tables.RouteTypeLocks, Columns.UnlockedRouteTypeIdColumn, (Columns.RouteTypeIdColumn, routeTypeId)))
+                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(It.IsAny(Of Action), Tables.RouteTypeLocks, Columns.UnlockedRouteTypeIdColumn, (Columns.RouteTypeIdColumn, routeTypeId)))
             End Sub)
     End Sub
     <Fact>
@@ -17,8 +18,9 @@
         WithSubobject(
             Sub(store, events, subject)
                 Const routeTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadUnlockItem(routeTypeId).ShouldBeNull
-                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(It.IsAny(Of Action), Tables.RouteTypeLocks, Columns.UnlockItemTypeIdColumn, (Columns.RouteTypeIdColumn, routeTypeId)))
+                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(It.IsAny(Of Action), Tables.RouteTypeLocks, Columns.UnlockItemTypeIdColumn, (Columns.RouteTypeIdColumn, routeTypeId)))
             End Sub)
     End Sub
 End Class

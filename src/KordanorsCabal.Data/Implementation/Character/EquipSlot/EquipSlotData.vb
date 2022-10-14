@@ -6,7 +6,7 @@
     Friend Const EquipSlotNameColumn = "EquipSlotName"
 
     Public Function ReadName(equipSlotId As Long) As String Implements IEquipSlotData.ReadName
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             EquipSlotNameColumn,

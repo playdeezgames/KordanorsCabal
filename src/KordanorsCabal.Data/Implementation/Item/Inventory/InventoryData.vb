@@ -46,14 +46,14 @@
             (CharacterIdColumn, characterId))
     End Sub
     Public Function ReadForCharacter(characterId As Long) As Long? Implements IInventoryData.ReadForCharacter
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             InventoryIdColumn,
             (CharacterIdColumn, characterId))
     End Function
     Public Function ReadForLocation(locationId As Long) As Long? Implements IInventoryData.ReadForLocation
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             InventoryIdColumn,

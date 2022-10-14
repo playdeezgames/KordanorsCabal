@@ -8,9 +8,10 @@
         WithSubobject(
             Sub(store, evenets, subject)
                 Const routeTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadAbbreviation(routeTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(
+                    Function(x) x.Column.ReadColumnString(
                         It.IsAny(Of Action),
                         Tables.RouteTypes,
                         Columns.AbbreviationColumn,
@@ -22,8 +23,9 @@
         WithSubobject(
             Sub(store, evenets, subject)
                 Const routeTypeId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadIsSingleUse(routeTypeId).ShouldBeFalse
-                store.Verify(Function(x) x.ReadColumnValue(Of Long, Long)(It.IsAny(Of Action), Tables.RouteTypes, Columns.IsSingleUseColumn, (Columns.RouteTypeIdColumn, routeTypeId)))
+                store.Verify(Function(x) x.Column.ReadColumnValue(Of Long, Long)(It.IsAny(Of Action), Tables.RouteTypes, Columns.IsSingleUseColumn, (Columns.RouteTypeIdColumn, routeTypeId)))
             End Sub)
     End Sub
 End Class

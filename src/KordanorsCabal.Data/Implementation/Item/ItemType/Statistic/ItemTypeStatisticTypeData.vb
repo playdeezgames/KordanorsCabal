@@ -6,7 +6,7 @@
     Friend Const ItemTypeStatisticTypeNameColumn = "ItemTypeStatisticTypeName"
 
     Public Function ReadName(itemTypeStatisticTypeId As Long) As String Implements IItemTypeStatisticTypeData.ReadName
-        Return Store.ReadColumnString(
+        Return Store.Column.ReadColumnString(
             AddressOf Initialize,
             TableName,
             ItemTypeStatisticTypeNameColumn,

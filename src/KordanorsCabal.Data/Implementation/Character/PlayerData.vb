@@ -26,7 +26,7 @@ Public Class PlayerData
     End Sub
 
     Public Sub WriteDirection(direction As Long) Implements IPlayerData.WriteDirection
-        Store.WriteColumnValue(
+        Store.Column.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (DirectionIdColumn, direction),
@@ -34,14 +34,14 @@ Public Class PlayerData
     End Sub
 
     Public Function ReadPlayerMode() As Long? Implements IPlayerData.ReadPlayerMode
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName, PlayerModeIdColumn,
             (PlayerIdColumn, FixedPlayerId))
     End Function
 
     Public Sub WritePlayerMode(mode As Long) Implements IPlayerData.WritePlayerMode
-        Store.WriteColumnValue(
+        Store.Column.WriteColumnValue(
             AddressOf Initialize,
             TableName,
             (PlayerModeIdColumn, mode),
@@ -49,7 +49,7 @@ Public Class PlayerData
     End Sub
 
     Public Function ReadDirection() As Long? Implements IPlayerData.ReadDirection
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             DirectionIdColumn,
@@ -57,7 +57,7 @@ Public Class PlayerData
     End Function
 
     Public Function Read() As Long? Implements IPlayerData.Read
-        Return Store.ReadColumnValue(Of Long, Long)(
+        Return Store.Column.ReadColumnValue(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterIdColumn,

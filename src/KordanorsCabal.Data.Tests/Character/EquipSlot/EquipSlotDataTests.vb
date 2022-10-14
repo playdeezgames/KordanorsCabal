@@ -8,9 +8,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim equipSlot = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(equipSlot).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadColumnString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.EquipSlots,
                     Columns.EquipSlotNameColumn,

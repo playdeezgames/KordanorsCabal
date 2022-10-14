@@ -11,9 +11,10 @@
             Sub(store, checker, subject)
                 Const spellTypeId = 1L
                 Const level = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.Read(spellTypeId, level)
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long, Long)(
                     It.IsAny(Of Action),
                     Tables.SpellTypeRequiredPowers,
                     Columns.PowerColumn,

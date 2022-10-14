@@ -23,9 +23,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim featureId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadFeatureType(featureId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Features,
                     Columns.FeatureTypeIdColumn,
@@ -37,9 +38,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadForLocation(locationId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Features,
                     Columns.FeatureIdColumn,

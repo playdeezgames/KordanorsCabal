@@ -20,9 +20,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim featureType = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadInteractionMode(featureType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.FeatureTypes,
                     Columns.InteractionModeColumn,
@@ -34,9 +35,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim featureType = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadLocationType(featureType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnValue(Of Long, Long)(
+                    Function(x) x.Column.ReadColumnValue(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.FeatureTypes,
                     Columns.LocationTypeIdColumn,
@@ -48,9 +50,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim featureType = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadName(featureType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.ReadColumnString(Of Long)(
+                    Function(x) x.Column.ReadColumnString(Of Long)(
                     It.IsAny(Of Action),
                     Tables.FeatureTypes,
                     Columns.FeatureTypeNameColumn,
