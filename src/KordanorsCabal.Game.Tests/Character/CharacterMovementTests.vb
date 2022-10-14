@@ -1,7 +1,7 @@
 ﻿Public Class CharacterMovementTests
     Inherits ThingieShould(Of ICharacterMovement)
     Sub New()
-        MyBase.New(AddressOf CharacterMovement.FromId)
+        MyBase.New(Function(w, i) CharacterMovement.FromId(w, Character.FromId(w, i)))
     End Sub
     Private Sub WithMovementSubject(stuffToDo As Action(Of IDirection, Mock(Of IWorldData), ICharacterMovement))
         WithSubject(

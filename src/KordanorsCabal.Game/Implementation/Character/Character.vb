@@ -556,13 +556,13 @@
 
     Public ReadOnly Property Movement As ICharacterMovement Implements ICharacter.Movement
         Get
-            Return CharacterMovement.FromId(WorldData, Id)
+            Return CharacterMovement.FromId(WorldData, Me)
         End Get
     End Property
 
     Public ReadOnly Property Quest As ICharacterQuest Implements ICharacter.Quest
         Get
-            Return CharacterQuest.FromId(WorldData, Id)
+            Return CharacterQuest.FromId(WorldData, Me)
         End Get
     End Property
 

@@ -2,7 +2,7 @@
     Inherits ThingieShould(Of ICharacterQuest)
 
     Public Sub New()
-        MyBase.New(AddressOf CharacterQuest.FromId)
+        MyBase.New(Function(w, i) CharacterQuest.FromId(w, Character.FromId(w, i)))
     End Sub
     <Fact>
     Sub can_accept_quests()
