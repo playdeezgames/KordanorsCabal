@@ -1,6 +1,6 @@
 ﻿Imports Microsoft.Data.Sqlite
+Public Interface IStoreMeta
 
-Public Interface IStore
     Sub Reset()
     Function Renew() As SqliteConnection
     Sub Restore(
@@ -10,9 +10,13 @@ Public Interface IStore
             filename As String)
     Sub Load(
             filename As String)
+End Interface
+Public Interface IStorePrimitive
     Sub ExecuteNonQuery(
                        sql As String,
                        ParamArray parameters() As SqliteParameter)
+End Interface
+Public Interface IStoreColumn
     Function ReadColumnValues(Of TOutputColumn)(
                                                initializer As Action,
                                                tableName As String,
@@ -65,6 +69,8 @@ Public Interface IStore
                                         tableName As String,
                                         setColumn As (String, TSetColumn),
                                         whereColumn As (String, TWhereColumn))
+End Interface
+Public Interface IStoreRecord
     Function ReadRecords(Of TOutputColumn)(
                                           initializer As Action,
                                           tableName As String,
@@ -94,6 +100,8 @@ Public Interface IStore
                                                 outputColumnNames As (String, String),
                                                 forColumnValue As (String, TInputColumn)
                                                 ) As List(Of Tuple(Of TFirstOutputColumn, TSecondOutputColumn))
+End Interface
+Public Interface IStoreClear
     Sub ClearForColumnValue(Of TColumn)(
                                        initializer As Action,
                                        tableName As String,
@@ -104,6 +112,8 @@ Public Interface IStore
                                                 tableName As String,
                                                 firstColumnValue As (String, TFirstColumn),
                                                 secondColumnValue As (String, TSecondColumn))
+End Interface
+Public Interface IStoreReplace
     Sub ReplaceRecord(Of TFirstColumn,
                           TSecondColumn)(
                                         initializer As Action,
@@ -170,6 +180,8 @@ Public Interface IStore
                                       fifthColumnValue As (String, TFifthColumn),
                                       sixthColumnValue As (String, TSixthColumn),
                                       seventhColumnValue As (String, TSeventhColumn))
+End Interface
+Public Interface IStoreCreate
     Function CreateRecord(
                          initializer As Action,
                          tableName As String) As Long
@@ -218,9 +230,14 @@ Public Interface IStore
                                            fourthColumnValue As (String, TFourthColumn),
                                            fifthColumnValue As (String, TFifthColumn)
                                            ) As Long
+End Interface
+Public Interface IStoreCount
     Function ReadCountForColumnValue(Of TInputColumn)(
                                                      initializer As Action,
                                                      tableName As String,
                                                      inputColumnValue As (String, TInputColumn)
                                                      ) As Long
+End Interface
+Public Interface IStore
+    Inherits IStoreMeta, IStorePrimitive, IStoreColumn, IStoreRecord, IStoreClear, IStoreReplace, IStoreCount, IStoreCreate
 End Interface
