@@ -9,7 +9,7 @@
         MyBase.New(store, world)
     End Sub
     Friend Sub Initialize()
-        Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{ItemTypeIdColumn}],
                     [{EquipSlotIdColumn}]) AS

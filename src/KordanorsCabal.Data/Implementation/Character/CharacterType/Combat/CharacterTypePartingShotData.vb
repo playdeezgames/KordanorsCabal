@@ -6,7 +6,7 @@
     Friend Const PartingShotColumn = "PartingShot"
     Friend Const WeightColumn = "Weight"
     Friend Sub Initialize()
-        Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{CharacterTypeIdColumn}],
                     [{PartingShotColumn}],

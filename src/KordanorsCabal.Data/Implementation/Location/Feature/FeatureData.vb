@@ -11,7 +11,7 @@
     End Sub
 
     Friend Sub Initialize()
-        Store.ExecuteNonQuery(
+        Store.Primitive.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{FeatureIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,

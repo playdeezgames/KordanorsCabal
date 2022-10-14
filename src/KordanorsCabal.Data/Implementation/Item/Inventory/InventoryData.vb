@@ -13,7 +13,7 @@
     Friend Sub Initialize()
         CType(World.Character, CharacterData).Initialize()
         CType(World.Location, LocationData).Initialize()
-        Store.ExecuteNonQuery(
+        Store.Primitive.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{InventoryIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,

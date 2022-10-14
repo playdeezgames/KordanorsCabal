@@ -39,9 +39,6 @@
         Reset()
         templateFilename = oldFilename
     End Sub
-    Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As (String, Object)) Implements IStore.ExecuteNonQuery
-        Backer.ExecuteNonQuery(sql, parameters)
-    End Sub
     Private ReadOnly Property LastInsertRowId() As Long
         Get
             Return backer.LastInsertRowId
@@ -51,6 +48,12 @@
     Public ReadOnly Property Count As IStoreCount Implements IStore.Count
         Get
             Return New StoreCount(backer)
+        End Get
+    End Property
+
+    Public ReadOnly Property Primitive As IStorePrimitive Implements IStore.Primitive
+        Get
+            Return New StorePrimitive(backer)
         End Get
     End Property
 
@@ -107,7 +110,7 @@
     End Function
     Public Sub WriteColumnValue(Of TWhereColumn, TSetColumn)(initializer As Action, tableName As String, setColumn As (String, TSetColumn), whereColumn As (String, TWhereColumn)) Implements IStore.WriteColumnValue
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"UPDATE 
                 [{tableName}] 
             SET 
@@ -159,7 +162,7 @@
     End Function
     Public Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnValue As (String, TColumn)) Implements IStore.ClearForColumnValue
         initializer()
-        ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnValue.Item1}]=@{columnValue.Item1};", ($"@{columnValue.Item1}", columnValue.Item2))
+        backer.ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnValue.Item1}]=@{columnValue.Item1};", ($"@{columnValue.Item1}", columnValue.Item2))
     End Sub
     Public Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(
                                                                    initializer As Action,
@@ -167,14 +170,14 @@
                                                                    firstColumnValue As (String, TFirstColumn),
                                                                    secondColumnValue As (String, TSecondColumn)) Implements IStore.ClearForColumnValues
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"DELETE FROM [{tableName}] WHERE [{firstColumnValue.Item1}]=@{firstColumnValue.Item1} AND [{secondColumnValue.Item1}]=@{secondColumnValue.Item1};",
             ($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
             ($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
     End Sub
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn)) Implements IStore.ReplaceRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -190,7 +193,7 @@
     End Sub
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn)) Implements IStore.ReplaceRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -219,7 +222,7 @@
                                                thirdColumnValue As (String, TThirdColumn),
                                                fourthColumnValue As (String, TFourthColumn)) Implements IStore.ReplaceRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -253,7 +256,7 @@
                                       fourthColumnValue As (String, TFourthColumn),
                                       fifthColumnValue As (String, TFifthColumn)) Implements IStore.ReplaceRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -292,7 +295,7 @@
                                       fifthColumnValue As (String, TFifthColumn),
                                       sixthColumnValue As (String, TSixthColumn)) Implements IStore.ReplaceRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -336,7 +339,7 @@
                                       sixthColumnValue As (String, TSixthColumn),
                                       seventhColumnValue As (String, TSeventhColumn)) Implements IStore.ReplaceRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
             (
                 [{firstColumnValue.Item1}],
@@ -367,19 +370,19 @@
     End Sub
     Public Function CreateRecord(initializer As Action, tableName As String) As Long Implements IStore.CreateRecord
         initializer()
-        ExecuteNonQuery($"INSERT INTO [{tableName}] DEFAULT VALUES;")
+        backer.ExecuteNonQuery($"INSERT INTO [{tableName}] DEFAULT VALUES;")
         Return LastInsertRowId
     End Function
     Public Function CreateRecord(Of TColumn)(initializer As Action, tableName As String, columnValue As (String, TColumn)) As Long Implements IStore.CreateRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{columnValue.Item1}]) VALUES(@{columnValue.Item1});",
             ($"@{columnValue.Item1}", columnValue.Item2))
         Return LastInsertRowId
     End Function
     Public Function CreateRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn)) As Long Implements IStore.CreateRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{firstColumnValue.Item1}],[{secondColumnValue.Item1}]) VALUES(@{firstColumnValue.Item1},@{secondColumnValue.Item1});",
             ($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
             ($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
@@ -387,7 +390,7 @@
     End Function
     Public Function CreateRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn)) As Long Implements IStore.CreateRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{firstColumnValue.Item1}],[{secondColumnValue.Item1}],[{thirdColumnValue.Item1}]) VALUES(@{firstColumnValue.Item1},@{secondColumnValue.Item1},@{thirdColumnValue.Item1});",
             ($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
             ($"@{secondColumnValue.Item1}", secondColumnValue.Item2),
@@ -396,7 +399,7 @@
     End Function
     Public Function CreateRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn), fourthColumnValue As (String, TFourthColumn)) As Long Implements IStore.CreateRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{firstColumnValue.Item1}],[{secondColumnValue.Item1}],[{thirdColumnValue.Item1}],[{fourthColumnValue.Item1}]) VALUES(@{firstColumnValue.Item1},@{secondColumnValue.Item1},@{thirdColumnValue.Item1}, @{fourthColumnValue.Item1});",
             ($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
             ($"@{secondColumnValue.Item1}", secondColumnValue.Item2),
@@ -406,7 +409,7 @@
     End Function
     Public Function CreateRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn, TFifthColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn), fourthColumnValue As (String, TFourthColumn), fifthColumnValue As (String, TFifthColumn)) As Long Implements IStore.CreateRecord
         initializer()
-        ExecuteNonQuery(
+        backer.ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{firstColumnValue.Item1}],[{secondColumnValue.Item1}],[{thirdColumnValue.Item1}],[{fourthColumnValue.Item1}],[{fifthColumnValue.Item1}]) VALUES(@{firstColumnValue.Item1},@{secondColumnValue.Item1},@{thirdColumnValue.Item1}, @{fourthColumnValue.Item1}, @{fifthColumnValue.Item1});",
             ($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
             ($"@{secondColumnValue.Item1}", secondColumnValue.Item2),

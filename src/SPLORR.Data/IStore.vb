@@ -1,4 +1,5 @@
 ﻿Public Interface IStore
-    Inherits IStoreMeta, IStorePrimitive, IStoreColumn, IStoreRecord, IStoreClear, IStoreReplace, IStoreCreate
+    Inherits IStoreMeta, IStoreColumn, IStoreRecord, IStoreClear, IStoreReplace, IStoreCreate
     ReadOnly Property Count As IStoreCount
+    ReadOnly Property Primitive As IStorePrimitive
 End Interface

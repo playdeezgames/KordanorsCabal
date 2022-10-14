@@ -10,7 +10,7 @@
     End Sub
 
     Public Sub Initialize()
-        Store.ExecuteNonQuery(
+        Store.Primitive.ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{LocationIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,

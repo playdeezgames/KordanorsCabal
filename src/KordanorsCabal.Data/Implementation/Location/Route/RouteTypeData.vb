@@ -7,7 +7,7 @@
     Friend Const IsSingleUseColumn = "IsSingleUse"
 
     Friend Sub Initialize()
-        Store.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.ExecuteNonQuery($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
                 WITH [cte](
                     [{RouteTypeIdColumn}],
                     [{AbbreviationColumn}],
