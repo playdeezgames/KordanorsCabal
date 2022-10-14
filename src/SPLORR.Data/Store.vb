@@ -6,39 +6,6 @@
         MyBase.New(New Backer)
         Me.templateFilename = filename
     End Sub
-
-    Public Sub Reset() Implements IStore.Reset
-        ShutDown()
-        Backer.Connect(":memory:")
-        Dim loadBacker As New Backer()
-        loadBacker.Connect(templateFilename)
-        loadBacker.BackupTo(Backer)
-    End Sub
-    Public Function Renew() As IBacker Implements IStore.Renew
-        Dim result As IBacker = New Backer()
-        result.TakeConnection(Backer)
-        Backer.Disconnect()
-        Reset()
-        Return result
-    End Function
-    Public Sub Restore(oldBacker As IBacker) Implements IStore.Restore
-        ShutDown()
-        Backer.TakeConnection(oldBacker)
-    End Sub
-    Public Sub ShutDown() Implements IStore.ShutDown
-        Backer.ShutDown()
-    End Sub
-    Public Sub Save(filename As String) Implements IStore.Save
-        Dim saveBacker As New Backer
-        saveBacker.Connect(filename)
-        Backer.BackupTo(saveBacker)
-    End Sub
-    Public Sub Load(filename As String) Implements IStore.Load
-        Dim oldFilename = templateFilename
-        templateFilename = filename
-        Reset()
-        templateFilename = oldFilename
-    End Sub
     Private ReadOnly Property LastInsertRowId() As Long
         Get
             Return backer.LastInsertRowId
@@ -60,6 +27,12 @@
     Public ReadOnly Property Clear As IStoreClear Implements IStore.Clear
         Get
             Return New StoreClear(backer)
+        End Get
+    End Property
+
+    Public ReadOnly Property Meta As IStoreMeta Implements IStore.Meta
+        Get
+            Return New StoreMeta(backer, templateFilename)
         End Get
     End Property
 

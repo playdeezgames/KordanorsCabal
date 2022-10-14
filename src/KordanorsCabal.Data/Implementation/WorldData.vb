@@ -105,23 +105,23 @@
     End Sub
 
     Public Sub Save(filename As String) Implements IWorldData.Save
-        Store.Save(filename)
+        Store.Meta.Save(filename)
     End Sub
 
     Public Sub Load(filename As String) Implements IWorldData.Load
-        Store.Load(filename)
+        Store.Meta.Load(filename)
     End Sub
 
     Public Sub Reset() Implements IWorldData.Reset
-        Store.Reset()
+        Store.Meta.Reset()
     End Sub
 
     Public Function Renew() As IBacker Implements IWorldData.Renew
-        Return Store.Renew()
+        Return Store.Meta.Renew()
     End Function
 
 
     Public Sub Restore(oldBacker As IBacker) Implements IWorldData.Restore
-        Store.Restore(oldBacker)
+        Store.Meta.Restore(oldBacker)
     End Sub
 End Class

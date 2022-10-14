@@ -62,8 +62,9 @@ Public Class WorldDataShould
         Dim checker As New Mock(Of IEventData)
         Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
         Const filename = "filename"
+        store.Setup(Sub(x) x.Meta.Save(It.IsAny(Of String)))
         subject.Save(filename)
-        store.Verify(Sub(x) x.Save(filename), Times.Once)
+        store.Verify(Sub(x) x.Meta.Save(filename), Times.Once)
         store.VerifyNoOtherCalls()
         checker.VerifyNoOtherCalls()
     End Sub
@@ -73,8 +74,9 @@ Public Class WorldDataShould
         Dim checker As New Mock(Of IEventData)
         Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
         Const filename = "filename"
+        store.Setup(Sub(x) x.Meta.Load(It.IsAny(Of String)))
         subject.Load(filename)
-        store.Verify(Sub(x) x.Load(filename), Times.Once)
+        store.Verify(Sub(x) x.Meta.Load(filename), Times.Once)
         store.VerifyNoOtherCalls()
         checker.VerifyNoOtherCalls()
     End Sub
@@ -83,8 +85,9 @@ Public Class WorldDataShould
         Dim store As New Mock(Of IStore)
         Dim checker As New Mock(Of IEventData)
         Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
+        store.Setup(Sub(x) x.Meta.Reset())
         subject.Reset()
-        store.Verify(Sub(x) x.Reset(), Times.Once)
+        store.Verify(Sub(x) x.Meta.Reset(), Times.Once)
         store.VerifyNoOtherCalls()
         checker.VerifyNoOtherCalls()
     End Sub
@@ -93,8 +96,9 @@ Public Class WorldDataShould
         Dim store As New Mock(Of IStore)
         Dim checker As New Mock(Of IEventData)
         Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
+        store.Setup(Function(x) x.Meta.Renew())
         subject.Renew().ShouldBeNull
-        store.Verify(Function(x) x.Renew(), Times.Once)
+        store.Verify(Function(x) x.Meta.Renew(), Times.Once)
         store.VerifyNoOtherCalls()
         checker.VerifyNoOtherCalls()
     End Sub
@@ -103,8 +107,9 @@ Public Class WorldDataShould
         Dim store As New Mock(Of IStore)
         Dim checker As New Mock(Of IEventData)
         Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
+        store.Setup(Sub(x) x.Meta.Restore(It.IsAny(Of IBacker)))
         subject.Restore(Nothing)
-        store.Verify(Sub(x) x.Restore(Nothing), Times.Once)
+        store.Verify(Sub(x) x.Meta.Restore(Nothing), Times.Once)
         store.VerifyNoOtherCalls()
         checker.VerifyNoOtherCalls()
     End Sub
