@@ -1,37 +1,37 @@
 ﻿Public Class Store
+    Inherits StoreBase
     Implements IStore
-    Private backer As IBacker
     Private templateFilename As String
     Public Sub New(filename As String)
-        Me.backer = New Backer
+        MyBase.New(New Backer)
         Me.templateFilename = filename
     End Sub
 
     Public Sub Reset() Implements IStore.Reset
         ShutDown()
-        backer.Connect(":memory:")
+        Backer.Connect(":memory:")
         Dim loadBacker As New Backer()
         loadBacker.Connect(templateFilename)
-        loadBacker.BackupTo(backer)
+        loadBacker.BackupTo(Backer)
     End Sub
     Public Function Renew() As IBacker Implements IStore.Renew
         Dim result As IBacker = New Backer()
-        result.TakeConnection(backer)
-        backer.Disconnect()
+        result.TakeConnection(Backer)
+        Backer.Disconnect()
         Reset()
         Return result
     End Function
     Public Sub Restore(oldBacker As IBacker) Implements IStore.Restore
         ShutDown()
-        backer.TakeConnection(oldBacker)
+        Backer.TakeConnection(oldBacker)
     End Sub
     Public Sub ShutDown() Implements IStore.ShutDown
-        backer.ShutDown()
+        Backer.ShutDown()
     End Sub
     Public Sub Save(filename As String) Implements IStore.Save
         Dim saveBacker As New Backer
         saveBacker.Connect(filename)
-        backer.BackupTo(saveBacker)
+        Backer.BackupTo(saveBacker)
     End Sub
     Public Sub Load(filename As String) Implements IStore.Load
         Dim oldFilename = templateFilename
@@ -40,22 +40,20 @@
         templateFilename = oldFilename
     End Sub
     Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As (String, Object)) Implements IStore.ExecuteNonQuery
-        backer.ExecuteNonQuery(sql, parameters)
+        Backer.ExecuteNonQuery(sql, parameters)
     End Sub
-    Private Function ExecuteScalar(Of TResult As Structure)(query As String, ParamArray parameters() As (String, Object)) As TResult?
-        Return backer.ExecuteScalar(Of TResult)(query, parameters)
-    End Function
-    Private Function ExecuteScalar(Of TResult As Class)(transform As Func(Of Object, TResult), query As String, ParamArray parameters() As (String, Object)) As TResult
-        Return backer.ExecuteScalar(transform, query, parameters)
-    End Function
-    Private Function ExecuteReader(Of TResult)(transform As Func(Of Func(Of String, Object), TResult), query As String, ParamArray parameters() As (String, Object)) As List(Of TResult)
-        Return backer.ExecuteReader(transform, query, parameters)
-    End Function
     Private ReadOnly Property LastInsertRowId() As Long
         Get
             Return backer.LastInsertRowId
         End Get
     End Property
+
+    Public ReadOnly Property Count As IStoreCount Implements IStore.Count
+        Get
+            Return New StoreCount(backer)
+        End Get
+    End Property
+
     Public Function ReadColumnValues(Of TOutputColumn)(
                                                       initializer As Action,
                                                       tableName As String,
@@ -416,15 +414,5 @@
             ($"@{fourthColumnValue.Item1}", fourthColumnValue.Item2),
             ($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2))
         Return LastInsertRowId
-    End Function
-    Public Function ReadCountForColumnValue(Of TInputColumn)(initializer As Action, tableName As String, inputColumnValue As (String, TInputColumn)) As Long Implements IStore.ReadCountForColumnValue
-        initializer()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT 
-                COUNT(1) 
-            FROM [{tableName}] 
-            WHERE 
-                [{inputColumnValue.Item1}]=@{inputColumnValue.Item1};",
-            ($"@{inputColumnValue.Item1}", inputColumnValue.Item2)).Value
     End Function
 End Class

@@ -40,9 +40,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationId = 1L
+                store.Setup(Function(x) x.Count.ReadCountForColumnValue(It.IsAny(Of Action), It.IsAny(Of String), It.IsAny(Of (String, Long))))
                 subject.ReadCountForLocation(locationId).ShouldBe(0)
                 store.Verify(
-                    Function(x) x.ReadCountForColumnValue(
+                    Function(x) x.Count.ReadCountForColumnValue(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             (Columns.LocationIdColumn, locationId)))

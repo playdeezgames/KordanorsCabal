@@ -1,4 +1,6 @@
-﻿Public Class WorldDataSubobjectTests(Of TSubobject)
+﻿Imports SQLitePCL
+
+Public Class WorldDataSubobjectTests(Of TSubobject)
     Private ReadOnly _accessor As Func(Of IWorldData, TSubobject)
     Protected Sub WithSubobject(
                                         stuffToDo As Action(Of Mock(Of IStore), Mock(Of IEventData), TSubobject))

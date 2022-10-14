@@ -104,6 +104,6 @@
     End Function
 
     Public Function ReadCountForLocation(locationId As Long) As Long Implements IRouteData.ReadCountForLocation
-        Return Store.ReadCountForColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId))
+        Return Store.Count.ReadCountForColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId))
     End Function
 End Class
