@@ -28,7 +28,7 @@
     End Function
 
     Public Function Create(characterType As Long, locationId As Long) As Long Implements ICharacterData.Create
-        Return Store.CreateRecord(
+        Return Store.Create.CreateRecord(
             AddressOf Initialize,
             TableName,
             (CharacterTypeIdColumn, characterType),

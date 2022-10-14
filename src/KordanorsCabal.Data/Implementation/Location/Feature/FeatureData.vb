@@ -30,7 +30,7 @@
     End Function
 
     Public Function Create(featureType As Long, locationId As Long) As Long Implements IFeatureData.Create
-        Return Store.CreateRecord(
+        Return Store.Create.CreateRecord(
             AddressOf Initialize,
             TableName,
             (FeatureTypeIdColumn, featureType),

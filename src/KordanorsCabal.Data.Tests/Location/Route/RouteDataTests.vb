@@ -25,9 +25,10 @@
                 Dim direction = 2L
                 Dim routeType = 3L
                 Dim toLocationId = 4L
+                store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.Create(locationId, direction, routeType, toLocationId)
                 store.Verify(
-                    Function(x) x.CreateRecord(Of Long, Long, Long, Long)(
+                    Function(x) x.Create.CreateRecord(Of Long, Long, Long, Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             (Columns.LocationIdColumn, locationId),

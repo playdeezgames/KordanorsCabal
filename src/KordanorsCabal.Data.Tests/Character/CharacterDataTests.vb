@@ -29,8 +29,9 @@
             Sub(store, checker, subject)
                 Const characterType = 1L
                 Const locationId = 2L
+                store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.Create(characterType, locationId)
-                store.Verify(Function(x) x.CreateRecord(
+                store.Verify(Function(x) x.Create.CreateRecord(
                      It.IsAny(Of Action),
                      Tables.Characters,
                      (Columns.CharacterTypeIdColumn, characterType),

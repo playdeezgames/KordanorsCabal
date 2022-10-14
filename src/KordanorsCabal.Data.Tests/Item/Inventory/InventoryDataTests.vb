@@ -22,9 +22,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
+                store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.CreateForCharacter(characterId).ShouldBe(0)
                 store.Verify(
-                Sub(x) x.CreateRecord(
+                Function(x) x.Create.CreateRecord(
                     It.IsAny(Of Action),
                     Tables.Inventories,
                     (Columns.CharacterIdColumn, characterId)))
@@ -35,9 +36,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationId = 1L
+                store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.CreateForLocation(locationId).ShouldBe(0)
                 store.Verify(
-                Sub(x) x.CreateRecord(
+                Function(x) x.Create.CreateRecord(
                     It.IsAny(Of Action),
                     Tables.Inventories,
                     (Columns.LocationIdColumn, locationId)))

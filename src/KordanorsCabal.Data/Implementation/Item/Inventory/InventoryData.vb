@@ -28,13 +28,13 @@
             );")
     End Sub
     Public Function CreateForCharacter(characterId As Long) As Long Implements IInventoryData.CreateForCharacter
-        Return Store.CreateRecord(
+        Return Store.Create.CreateRecord(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId))
     End Function
     Public Function CreateForLocation(locationId As Long) As Long Implements IInventoryData.CreateForLocation
-        Return Store.CreateRecord(
+        Return Store.Create.CreateRecord(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId))

@@ -18,7 +18,7 @@
             );")
     End Sub
     Public Function Create(itemType As Long) As Long Implements IItemData.Create
-        Return Store.CreateRecord(
+        Return Store.Create.CreateRecord(
             AddressOf Initialize,
             TableName,
             (ItemTypeIdColumn, itemType))

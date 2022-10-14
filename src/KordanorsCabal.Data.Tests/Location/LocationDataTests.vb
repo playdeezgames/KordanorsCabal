@@ -8,9 +8,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationType = 1L
+                store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.Create(locationType).ShouldBe(0)
                 store.Verify(
-                    Function(x) x.CreateRecord(Of Long)(
+                    Function(x) x.Create.CreateRecord(Of Long)(
                     It.IsAny(Of Action),
                     Tables.Locations,
                     (Columns.LocationTypeIdColumn, locationType)))

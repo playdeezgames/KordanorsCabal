@@ -21,9 +21,10 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Const itemType = 1L
+                store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.Create(itemType).ShouldBe(0)
                 store.Verify(
-                Sub(x) x.CreateRecord(
+                Function(x) x.Create.CreateRecord(
                     It.IsAny(Of Action),
                     Tables.Items,
                     (Columns.ItemTypeIdColumn, itemType)))

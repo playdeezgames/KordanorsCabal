@@ -94,7 +94,7 @@
     End Function
 
     Public Function Create(locationId As Long, direction As Long, routeType As Long, toLocationId As Long) As Long Implements IRouteData.Create
-        Return Store.CreateRecord(
+        Return Store.Create.CreateRecord(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),
