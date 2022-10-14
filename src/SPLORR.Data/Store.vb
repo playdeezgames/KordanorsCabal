@@ -1,8 +1,8 @@
 ﻿Imports Microsoft.Data.Sqlite
 
 Public Class Store
+    Inherits StoreBase
     Implements IStore
-    Private connection As SqliteConnection
     Private templateFilename As String
     Public Sub New(filename As String)
         Me.templateFilename = filename
