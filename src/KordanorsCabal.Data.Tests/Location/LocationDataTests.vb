@@ -11,7 +11,7 @@
                 store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.Create(locationType).ShouldBe(0)
                 store.Verify(
-                    Function(x) x.Create.CreateRecord(Of Long)(
+                    Function(x) x.Create.Entry(Of Long)(
                     It.IsAny(Of Action),
                     Tables.Locations,
                     (Columns.LocationTypeIdColumn, locationType)))

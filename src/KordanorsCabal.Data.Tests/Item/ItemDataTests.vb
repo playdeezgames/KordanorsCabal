@@ -24,7 +24,7 @@
                 store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.Create(itemType).ShouldBe(0)
                 store.Verify(
-                Function(x) x.Create.CreateRecord(
+                Function(x) x.Create.Entry(
                     It.IsAny(Of Action),
                     Tables.Items,
                     (Columns.ItemTypeIdColumn, itemType)))

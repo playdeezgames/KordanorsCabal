@@ -12,7 +12,7 @@
                 store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.Create(featureType, locationId).ShouldBe(0)
                 store.Verify(
-                    Function(x) x.Create.CreateRecord(Of Long, Long)(
+                    Function(x) x.Create.Entry(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Features,
                     (Columns.FeatureTypeIdColumn, featureType),

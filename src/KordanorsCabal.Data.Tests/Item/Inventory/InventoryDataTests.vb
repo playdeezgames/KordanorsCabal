@@ -25,7 +25,7 @@
                 store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.CreateForCharacter(characterId).ShouldBe(0)
                 store.Verify(
-                Function(x) x.Create.CreateRecord(
+                Function(x) x.Create.Entry(
                     It.IsAny(Of Action),
                     Tables.Inventories,
                     (Columns.CharacterIdColumn, characterId)))
@@ -39,7 +39,7 @@
                 store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.CreateForLocation(locationId).ShouldBe(0)
                 store.Verify(
-                Function(x) x.Create.CreateRecord(
+                Function(x) x.Create.Entry(
                     It.IsAny(Of Action),
                     Tables.Inventories,
                     (Columns.LocationIdColumn, locationId)))

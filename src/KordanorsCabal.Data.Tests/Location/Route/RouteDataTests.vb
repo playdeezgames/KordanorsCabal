@@ -28,7 +28,7 @@
                 store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.Create(locationId, direction, routeType, toLocationId)
                 store.Verify(
-                    Function(x) x.Create.CreateRecord(Of Long, Long, Long, Long)(
+                    Function(x) x.Create.Entry(Of Long, Long, Long, Long)(
                             It.IsAny(Of Action),
                             Tables.Routes,
                             (Columns.LocationIdColumn, locationId),

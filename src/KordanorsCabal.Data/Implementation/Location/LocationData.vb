@@ -43,7 +43,7 @@
     End Function
 
     Public Function Create(locationType As Long) As Long Implements ILocationData.Create
-        Return Store.Create.CreateRecord(
+        Return Store.Create.Entry(
             AddressOf Initialize,
             TableName,
             (LocationTypeIdColumn, locationType))

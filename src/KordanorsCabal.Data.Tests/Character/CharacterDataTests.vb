@@ -31,7 +31,7 @@
                 Const locationId = 2L
                 store.SetupGet(Function(x) x.Create).Returns((New Mock(Of IStoreCreate)).Object)
                 subject.Create(characterType, locationId)
-                store.Verify(Function(x) x.Create.CreateRecord(
+                store.Verify(Function(x) x.Create.Entry(
                      It.IsAny(Of Action),
                      Tables.Characters,
                      (Columns.CharacterTypeIdColumn, characterType),

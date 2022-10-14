@@ -1,20 +1,20 @@
 ﻿Public Interface IStoreCreate
-    Function CreateRecord(
+    Function Entry(
                          initializer As Action,
                          tableName As String) As Long
-    Function CreateRecord(Of TColumn)(
+    Function Entry(Of TColumn)(
                                      initializer As Action,
                                      tableName As String,
                                      columnValue As (String, TColumn)
                                      ) As Long
-    Function CreateRecord(Of TFirstColumn,
+    Function Entry(Of TFirstColumn,
                               TSecondColumn)(
                                             initializer As Action,
                                             tableName As String,
                                             firstColumnValue As (String, TFirstColumn),
                                             secondColumnValue As (String, TSecondColumn)
                                             ) As Long
-    Function CreateRecord(Of TFirstColumn,
+    Function Entry(Of TFirstColumn,
                               TSecondColumn,
                               TThirdColumn)(
                                            initializer As Action,
@@ -23,7 +23,7 @@
                                            secondColumnValue As (String, TSecondColumn),
                                            thirdColumnValue As (String, TThirdColumn)
                                            ) As Long
-    Function CreateRecord(Of TFirstColumn,
+    Function Entry(Of TFirstColumn,
                               TSecondColumn,
                               TThirdColumn,
                               TFourthColumn)(
@@ -34,7 +34,7 @@
                                             thirdColumnValue As (String, TThirdColumn),
                                             fourthColumnValue As (String, TFourthColumn)
                                             ) As Long
-    Function CreateRecord(Of TFirstColumn,
+    Function Entry(Of TFirstColumn,
                               TSecondColumn,
                               TThirdColumn,
                               TFourthColumn,
