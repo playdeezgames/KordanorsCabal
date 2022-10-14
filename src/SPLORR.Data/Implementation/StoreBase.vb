@@ -1,5 +1,4 @@
 ﻿Public Class StoreBase
-    Implements IStoreBase
     Protected backer As IBacker
     Sub New(backer As IBacker)
         Me.backer = backer
