@@ -5,14 +5,6 @@
         MyBase.New(worldData, characterId)
     End Sub
 
-    Public ReadOnly Property ItemsToRepair(shoppeType As IShoppeType) As IEnumerable(Of IItem) Implements ICharacter.ItemsToRepair
-        Get
-            Dim items As New List(Of IItem)
-            items.AddRange(Me.Items.Inventory.Items.Where(Function(x) x.Repair.IsNeeded))
-            items.AddRange(EquippedItems.Where(Function(x) x.Repair.IsNeeded))
-            Return items.Where(Function(x) shoppeType.WillRepair(x.ItemType))
-        End Get
-    End Property
     ReadOnly Property CharacterType As ICharacterType Implements ICharacter.CharacterType
         Get
             Dim result = WorldData.Character.ReadCharacterType(Id)
@@ -33,9 +25,6 @@
     Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
         Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Immobilization), delta)
     End Sub
-    Public Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
-        Return ItemsToRepair(shoppeType).Any
-    End Function
     ReadOnly Property IsUndead As Boolean Implements ICharacter.IsUndead
         Get
             Return CharacterType.IsUndead

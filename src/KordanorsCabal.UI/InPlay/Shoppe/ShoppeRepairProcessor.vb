@@ -25,7 +25,7 @@ Friend Class ShoppeRepairProcessor
         currentItemIndex = 0
         Dim repairs = ShoppeType.Repairs
         items = Game.World.PlayerCharacter(StaticWorldData.World).
-            ItemsToRepair(ShoppeType).
+            Repair.ItemsToRepair(ShoppeType).
             Where(Function(x) ShoppeType.WillRepair(x.ItemType)).ToList
     End Sub
 

@@ -12,9 +12,6 @@
     ReadOnly Property Statistics As ICharacterStatistics
     ReadOnly Property Items As ICharacterItems
     ReadOnly Property Repair As ICharacterRepair
-    'Repair
-    Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean
-    ReadOnly Property ItemsToRepair(shoppeType As IShoppeType) As IEnumerable(Of IItem)
     'Encumbrance
     ReadOnly Property IsEncumbered As Boolean
     ReadOnly Property Encumbrance As Long
