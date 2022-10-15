@@ -14,7 +14,7 @@
     ReadOnly Property Repair As ICharacterRepair
     'Encumbrance
     ReadOnly Property IsEncumbered As Boolean
-    ReadOnly Property Encumbrance As Long
+    ReadOnly Property CurrentEncumbrance As Long
     ReadOnly Property MaximumEncumbrance As Long
     'Statuses
     ReadOnly Property IsUndead As Boolean

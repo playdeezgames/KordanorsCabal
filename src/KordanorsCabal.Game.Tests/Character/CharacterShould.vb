@@ -162,7 +162,7 @@
                 worldData.Setup(Function(x) x.Inventory.ReadForCharacter(It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.InventoryItem.ReadItems(It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
-                subject.Encumbrance.ShouldBe(0)
+                subject.CurrentEncumbrance.ShouldBe(0)
                 worldData.Verify(Function(x) x.Inventory.ReadForCharacter(id))
                 worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
                 worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))

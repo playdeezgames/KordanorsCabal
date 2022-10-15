@@ -50,10 +50,10 @@
     End Function
     ReadOnly Property IsEncumbered As Boolean Implements ICharacter.IsEncumbered
         Get
-            Return Encumbrance > MaximumEncumbrance
+            Return CurrentEncumbrance > MaximumEncumbrance
         End Get
     End Property
-    ReadOnly Property Encumbrance As Long Implements ICharacter.Encumbrance
+    ReadOnly Property CurrentEncumbrance As Long Implements ICharacter.CurrentEncumbrance
         Get
             Dim result = Me.Items.Inventory.TotalEncumbrance
             For Each item In EquippedItems
