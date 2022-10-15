@@ -51,7 +51,7 @@
         If player.HasSpells Then
             Buttons(SpellsButtonIndex).Title = "Spells"
         End If
-        If player.CanMap Then
+        If player.Movement.CanMap Then
             Buttons(MapButtonIndex).Title = "Map"
         End If
         If player.HasEquipment Then
@@ -117,7 +117,7 @@
                     Return UIState.Inventory
                 End If
             Case MapButtonIndex
-                If player.CanMap Then
+                If player.Movement.CanMap Then
                     Return UIState.Map
                 End If
             Case EquipmentButtonIndex

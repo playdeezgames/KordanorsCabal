@@ -113,10 +113,10 @@
     End Sub
     Public Sub Run() Implements ICharacterCombat.Run
         If CanFight Then
-            character.Direction = RNG.FromEnumerable(CardinalDirections(WorldData))
-            If character.Movement.CanMove(character.Direction) Then
+            character.Movement.Direction = RNG.FromEnumerable(CardinalDirections(WorldData))
+            If character.Movement.CanMove(character.Movement.Direction) Then
                 character.EnqueueMessage("You successfully ran!") 'TODO: sfx
-                character.Movement.Move(character.Direction)
+                character.Movement.Move(character.Movement.Direction)
                 Exit Sub
             End If
             character.EnqueueMessage("You fail to run!") 'TODO: shucks!

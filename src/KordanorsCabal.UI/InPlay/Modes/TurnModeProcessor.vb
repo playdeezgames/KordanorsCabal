@@ -33,15 +33,15 @@
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case AroundButtonIndex
                 PopButtonIndex()
-                player.Direction = player.Direction.Opposite
+                player.Movement.Direction = player.Movement.Direction.Opposite
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case LeftButtonIndex
                 PopButtonIndex()
-                player.Direction = player.Direction.PreviousDirection
+                player.Movement.Direction = player.Movement.Direction.PreviousDirection
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case RightButtonIndex
                 PopButtonIndex()
-                player.Direction = player.Direction.NextDirection
+                player.Movement.Direction = player.Movement.Direction.NextDirection
                 player.Mode = Game.Constants.PlayerModes.Neutral
         End Select
         Return UIState.InPlay

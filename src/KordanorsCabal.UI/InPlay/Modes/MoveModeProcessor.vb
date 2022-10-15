@@ -34,7 +34,7 @@ Friend Class MoveModeProcessor
         If player.Movement.CanMoveRight Then
             Buttons(RightButtonIndex).Title = "Right"
         End If
-        If player.CanMoveForward Then
+        If player.Movement.CanMoveForward Then
             Buttons(ForwardButtonIndex).Title = "Forward"
         End If
         If player.Movement.CanMoveBackward Then
@@ -68,13 +68,13 @@ Friend Class MoveModeProcessor
             Case OutButtonIndex
                 Return HandleMove(player, Direction.FromId(StaticWorldData.World, 8L))
             Case ForwardButtonIndex
-                Return HandleMove(player, player.Direction)
+                Return HandleMove(player, player.Movement.Direction)
             Case BackwardButtonIndex
-                Return HandleMove(player, player.Direction.Opposite)
+                Return HandleMove(player, player.Movement.Direction.Opposite)
             Case LeftButtonIndex
-                Return HandleMove(player, player.Direction.PreviousDirection)
+                Return HandleMove(player, player.Movement.Direction.PreviousDirection)
             Case RightButtonIndex
-                Return HandleMove(player, player.Direction.NextDirection)
+                Return HandleMove(player, player.Movement.Direction.NextDirection)
         End Select
         Return UIState.InPlay
     End Function

@@ -179,9 +179,6 @@
                 GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Strength)), 0)
         End Get
     End Property
-    Public Function HasVisited(location As ILocation) As Boolean Implements ICharacter.HasVisited
-        Return WorldData.CharacterLocation.Read(Id, location.Id)
-    End Function
     Private Function RollDice(dice As Long) As Long
         Dim result As Long = 0
         While dice > 0
@@ -393,14 +390,6 @@
             Return Money >= 5
         End Get
     End Property
-    Public Property Direction As IDirection Implements ICharacter.Direction
-        Get
-            Return New Direction(WorldData, WorldData.Player.ReadDirection().Value)
-        End Get
-        Set(value As IDirection)
-            WorldData.Player.WriteDirection(value.Id)
-        End Set
-    End Property
     Public Function CanCastSpell(spellType As ISpellType) As Boolean Implements ICharacter.CanCastSpell
         Return spellType.CanCast(Me)
     End Function
@@ -470,15 +459,6 @@
             Return (Location?.Feature?.Id).HasValue
         End Get
     End Property
-    Public ReadOnly Property CanMap() As Boolean Implements ICharacter.CanMap
-        Get
-            Dim result = Location
-            Return If(result IsNot Nothing, result.LocationType.CanMap, False)
-        End Get
-    End Property
-    Public Function CanMoveForward() As Boolean Implements ICharacter.CanMoveForward
-        Return Movement.CanMove(Direction)
-    End Function
     Public Sub Interact() Implements ICharacter.Interact
         If CanInteract Then
             Mode = Location.Feature.InteractionMode()

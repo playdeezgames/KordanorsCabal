@@ -6,7 +6,7 @@ Public MustInherit Class ModeProcessor
         buffer.WriteTextCentered(0, title, True, Hue.Blue)
     End Sub
     Protected Shared Sub ShowFacing(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
-        buffer.WriteText(xy, $"Facing: {player.Direction.Name}", False, Hue.Black)
+        buffer.WriteText(xy, $"Facing: {player.Movement.Direction.Name}", False, Hue.Black)
     End Sub
     Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
         Dim exits = String.Join(",", player.Location.Routes.Directions.Select(Function(x) x.Abbreviation))
@@ -66,29 +66,29 @@ Public MustInherit Class ModeProcessor
         buffer.PutCell((17, 14), Pattern.BottomRightCorner, False, Hue.Black)
 
         Dim location = player.Location
-        If location.Routes.Exists(player.Direction) Then
+        If location.Routes.Exists(player.Movement.Direction) Then
             buffer.FillCells((9, 6), (4, 1), Pattern.Horizontal1, False, Hue.Black)
             buffer.FillCells((8, 6), (1, 8), Pattern.Vertical8, False, Hue.Black)
             buffer.FillCells((13, 6), (1, 8), Pattern.Vertical1, False, Hue.Black)
             buffer.PutCell((13, 14), Pattern.BottomLeftCorner, False, Hue.Black)
             buffer.PutCell((8, 14), Pattern.BottomRightCorner, False, Hue.Black)
-            Dim routeType = location.Routes.Find(player.Direction).RouteType
+            Dim routeType = location.Routes.Find(player.Movement.Direction).RouteType
             buffer.WriteText((10, 9), routeType.Abbreviation, False, routeType.TextHue)
         End If
 
-        If location.Routes.Exists(player.Direction.PreviousDirection) Then
+        If location.Routes.Exists(player.Movement.Direction.PreviousDirection) Then
             buffer.PutCell((0, 3), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.PutCell((1, 4), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((1, 5), (1, 12), Pattern.Vertical8, False, Hue.Black)
-            Dim routeType = location.Routes.Find(player.Direction.PreviousDirection).RouteType
+            Dim routeType = location.Routes.Find(player.Movement.Direction.PreviousDirection).RouteType
             buffer.WriteText((0, 9), routeType.Abbreviation.Substring(1, 1), False, routeType.TextHue)
         End If
 
-        If location.Routes.Exists(player.Direction.NextDirection) Then
+        If location.Routes.Exists(player.Movement.Direction.NextDirection) Then
             buffer.PutCell((21, 3), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.PutCell((20, 4), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((20, 5), (1, 12), Pattern.Vertical1, False, Hue.Black)
-            Dim routeType = location.Routes.Find(player.Direction.NextDirection).RouteType
+            Dim routeType = location.Routes.Find(player.Movement.Direction.NextDirection).RouteType
             buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, routeType.TextHue)
         End If
 
@@ -124,7 +124,7 @@ Public MustInherit Class ModeProcessor
             ShowEnemy(buffer, (5, 5), enemy)
         End If
 
-        buffer.WriteTextCentered(1, player.Direction.Abbreviation, False, Hue.Purple)
+        buffer.WriteTextCentered(1, player.Movement.Direction.Abbreviation, False, Hue.Purple)
         If player.IsEncumbered Then
             buffer.WriteTextCentered(2, "Encumbered", False, Hue.Red)
         End If

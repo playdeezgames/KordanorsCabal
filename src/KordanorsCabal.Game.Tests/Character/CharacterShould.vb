@@ -158,17 +158,6 @@ Public Class CharacterShould
             End Sub)
     End Sub
     <Fact>
-    Sub have_can_map()
-        WithSubject(
-            Sub(worldData, id, subject)
-                worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
-
-                subject.CanMap.ShouldBeFalse
-
-                worldData.Verify(Function(x) x.Character.ReadLocation(id))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_movement_subobject()
         WithSubject(
             Sub(worldData, id, subject)
@@ -524,33 +513,6 @@ Public Class CharacterShould
             End Sub)
     End Sub
     <Fact>
-    Sub have_can_move_forward()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const directionId = 2L
-                worldData.Setup(Function(x) x.Player.ReadDirection()).Returns(directionId)
-                worldData.Setup(Function(x) x.Inventory.ReadForCharacter(It.IsAny(Of Long)))
-                worldData.Setup(Function(x) x.InventoryItem.ReadItems(It.IsAny(Of Long)))
-                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
-                worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
-                worldData.Setup(Function(x) x.Character.ReadLocation(It.IsAny(Of Long)))
-                subject.CanMoveForward()
-                worldData.Verify(Function(x) x.Player.ReadDirection())
-                worldData.Verify(Function(x) x.Inventory.ReadForCharacter(id))
-                worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
-                worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
-                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 1))
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 24))
-                worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 25))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(1))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(24))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(25))
-                worldData.Verify(Function(x) x.Character.ReadLocation(id))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_use_item()
         WithSubject(
             Sub(worldData, id, subject)
@@ -612,16 +574,6 @@ Public Class CharacterShould
             End Sub)
     End Sub
     <Fact>
-    Sub have_has_visited()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const locationId = 2L
-                worldData.Setup(Function(x) x.CharacterLocation.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.HasVisited(Location.FromId(worldData.Object, locationId))
-                worldData.Verify(Function(x) x.CharacterLocation.Read(id, locationId))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_spells()
         WithSubject(
             Sub(worldData, id, subject)
@@ -673,16 +625,6 @@ Public Class CharacterShould
                 worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
                 worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub have_direction()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const directionId = 2L
-                worldData.Setup(Function(x) x.Player.ReadDirection()).Returns(directionId)
-                subject.Direction.Id.ShouldBe(directionId)
-                worldData.Verify(Function(x) x.Player.ReadDirection())
             End Sub)
     End Sub
     <Fact>

@@ -8,18 +8,37 @@
     End Sub
 
     Public ReadOnly Property Character As ICharacter Implements ICharacterMovement.Character
-
+    Public Function CanMoveForward() As Boolean Implements ICharacterMovement.CanMoveForward
+        Return CanMove(Direction)
+    End Function
+    Public ReadOnly Property CanMap() As Boolean Implements ICharacterMovement.CanMap
+        Get
+            Dim result = Character.Location
+            Return If(result IsNot Nothing, result.LocationType.CanMap, False)
+        End Get
+    End Property
+    Public Property Direction As IDirection Implements ICharacterMovement.Direction
+        Get
+            Return New Direction(WorldData, WorldData.Player.ReadDirection().Value)
+        End Get
+        Set(value As IDirection)
+            WorldData.Player.WriteDirection(value.Id)
+        End Set
+    End Property
+    Public Function HasVisited(location As ILocation) As Boolean Implements ICharacterMovement.HasVisited
+        Return WorldData.CharacterLocation.Read(Id, location.Id)
+    End Function
     Public Shared Function FromId(worldData As IWorldData, character As ICharacter) As ICharacterMovement
         Return If(character IsNot Nothing, New CharacterMovement(worldData, character), Nothing)
     End Function
     Public Function CanMoveLeft() As Boolean Implements ICharacterMovement.CanMoveLeft
-        Return CanMove(Character.Direction.PreviousDirection)
+        Return CanMove(Direction.PreviousDirection)
     End Function
     Public Function CanMoveRight() As Boolean Implements ICharacterMovement.CanMoveRight
-        Return CanMove(Character.Direction.NextDirection)
+        Return CanMove(Direction.NextDirection)
     End Function
     Public Function CanMoveBackward() As Boolean Implements ICharacterMovement.CanMoveBackward
-        Return CanMove(Character.Direction.Opposite)
+        Return CanMove(Direction.Opposite)
     End Function
     Public Function CanMove(direction As IDirection) As Boolean Implements ICharacterMovement.CanMove
         If Character.IsEncumbered Then
