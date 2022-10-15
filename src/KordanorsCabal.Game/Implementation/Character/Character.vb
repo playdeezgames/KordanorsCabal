@@ -4,13 +4,6 @@
     Sub New(worldData As IWorldData, characterId As Long)
         MyBase.New(worldData, characterId)
     End Sub
-    ReadOnly Property Spells As IReadOnlyDictionary(Of Long, Long) Implements ICharacter.Spells
-        Get
-            Return WorldData.CharacterSpell.
-                ReadForCharacter(Id).
-                ToDictionary(Function(x) x.Item1, Function(x) x.Item2)
-        End Get
-    End Property
 
     Public ReadOnly Property ItemsToRepair(shoppeType As IShoppeType) As IEnumerable(Of IItem) Implements ICharacter.ItemsToRepair
         Get
@@ -29,12 +22,6 @@
             item.Purify()
         Next
     End Sub
-
-    ReadOnly Property HasSpells As Boolean Implements ICharacter.HasSpells
-        Get
-            Return Spells.Any
-        End Get
-    End Property
     ReadOnly Property CharacterType As ICharacterType Implements ICharacter.CharacterType
         Get
             Dim result = WorldData.Character.ReadCharacterType(Id)
@@ -52,36 +39,9 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Money), value)
         End Set
     End Property
-    Sub Learn(spellType As ISpellType) Implements ICharacter.Learn
-        If Not CanLearn(spellType) Then
-            EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
-            Return
-        End If
-        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType.Id), 0) + 1
-        EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
-        WorldData.CharacterSpell.Write(Id, spellType.Id, nextLevel)
-    End Sub
-    Function CanLearn(spellType As ISpellType) As Boolean Implements ICharacter.CanLearn
-        Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType.Id), 0) + 1
-        If nextLevel > spellType.MaximumLevel Then
-            Return False
-        End If
-        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Power)), 0) >= spellType.RequiredPower(nextLevel)
-    End Function
     Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
         ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Immobilization), delta)
     End Sub
-    Function RollSpellDice(spellType As ISpellType) As Long Implements ICharacter.RollSpellDice
-        If Not Spells.ContainsKey(spellType.Id) Then
-            Return 0
-        End If
-        Return RollDice(Power + Spells(spellType.Id))
-    End Function
-    ReadOnly Property Power As Long
-        Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Power)).Value
-        End Get
-    End Property
     Public Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
         Return ItemsToRepair(shoppeType).Any
     End Function
@@ -166,17 +126,6 @@
                 GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Strength)), 0)
         End Get
     End Property
-    Private Function RollDice(dice As Long) As Long
-        Dim result As Long = 0
-        While dice > 0
-            result += RNG.RollDice("1d6/6")
-            dice -= 1
-        End While
-        Return result
-    End Function
-    Private Function NegativeInfluence() As Long
-        Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
-    End Function
     ReadOnly Property Name As String Implements ICharacter.Name
         Get
             Return CharacterType.Name
@@ -316,9 +265,6 @@
             Return Money >= 5
         End Get
     End Property
-    Public Function CanCastSpell(spellType As ISpellType) As Boolean Implements ICharacter.CanCastSpell
-        Return spellType.CanCast(Me)
-    End Function
     Public Sub Gamble() Implements ICharacter.Gamble
         If Not CanGamble Then
             EnqueueMessage("You cannot gamble at this time!")
@@ -340,13 +286,6 @@
         End If
         'TODO: sound effect
         EnqueueMessage(lines.ToArray)
-    End Sub
-    Public Sub Cast(spellType As ISpellType) Implements ICharacter.Cast
-        If Not CanCastSpell(spellType) Then
-            EnqueueMessage($"You cannot cast {spellType.Name} at this time.")
-            Return
-        End If
-        spellType.Cast(Me)
     End Sub
     Public Sub Equip(item As IItem) Implements ICharacter.Equip
         If item.Equipment.CanEquip Then
@@ -390,9 +329,6 @@
             Mode = Movement.Location.Feature.InteractionMode()
         End If
     End Sub
-    Public Function RollPower() As Long Implements ICharacter.RollPower
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Power)), 0) + NegativeInfluence())
-    End Function
 
     Public ReadOnly Property HasEquipment As Boolean Implements ICharacter.HasEquipment
         Get
@@ -432,6 +368,12 @@
     Public ReadOnly Property MentalCombat As ICharacterMentalCombat Implements ICharacter.MentalCombat
         Get
             Return CharacterMentalCombat.FromCharacter(WorldData, Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property Spellbook As ICharacterSpellbook Implements ICharacter.Spellbook
+        Get
+            Return CharacterSpellbook.FromCharacter(WorldData, Me)
         End Get
     End Property
 End Class

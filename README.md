@@ -112,3 +112,17 @@ https://www.aardwolf.com/
 
 If the enum needs metadata, then dont enum.
 
+## When yer interface has too many methods
+
+1. Sort methods into roughly related groups of methods
+1. With each method group
+    1. Stub an interface to move the methods into
+    1. Add and stub a property to the original interface that returns an instance of the new interface
+    1. Add test for the new property
+    1. Make that test pass
+    1. Make the class that implements the new interface
+    1. Make a test class for the new class
+    1. Move method signatures from original interface into new interface
+    1. Move implementations from original interface to new interface
+    1. Move tests from original test class to new test class
+    1. Once it builds, it should be good, and tests should still pass

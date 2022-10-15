@@ -48,7 +48,7 @@
         Buttons(TurnFightButtonIndex).Title = If(player.PhysicalCombat.CanFight, "FIGHT!", "Turn...")
         Buttons(MoveRunButtonIndex).Title = If(player.PhysicalCombat.CanFight, "RUN!", "Move...")
         Buttons(MenuButtonIndex).Title = "Game Menu"
-        If player.HasSpells Then
+        If player.Spellbook.HasSpells Then
             Buttons(SpellsButtonIndex).Title = "Spells"
         End If
         If player.Movement.CanMap Then
@@ -130,7 +130,7 @@
                 End If
                 Return UIState.Status
             Case SpellsButtonIndex
-                If player.HasSpells Then
+                If player.Spellbook.HasSpells Then
                     Return UIState.SpellList
                 End If
         End Select

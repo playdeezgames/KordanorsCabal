@@ -7,15 +7,7 @@
     ReadOnly Property PhysicalCombat As ICharacterPhysicalCombat
     ReadOnly Property Advancement As ICharacterAdvancement
     ReadOnly Property MentalCombat As ICharacterMentalCombat
-    'Spells
-    ReadOnly Property Spells As IReadOnlyDictionary(Of Long, Long)
-    Sub Learn(spellType As ISpellType)
-    Sub Cast(spellType As ISpellType)
-    Function RollSpellDice(spellType As ISpellType) As Long
-    Function RollPower() As Long
-    Function CanCastSpell(spellType As ISpellType) As Boolean
-    Function CanLearn(spellType As ISpellType) As Boolean
-    ReadOnly Property HasSpells As Boolean
+    ReadOnly Property Spellbook As ICharacterSpellbook
     'Mana
     ReadOnly Property MaximumMana As Long
     Property CurrentMana As Long

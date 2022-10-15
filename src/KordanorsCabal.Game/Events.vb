@@ -31,7 +31,7 @@
                     Dim character = Game.Character.FromId(worldData, characterId)
                     Return character.Inventory.ItemsOfType(ItemType.FromId(worldData, 21L)).Any()
                 End Function},
-            {"CanLearnHolyBolt", Function(worldData, parms) Character.FromId(worldData, parms(0)).CanLearn(SpellType.FromId(worldData, 1L))},
+            {"CanLearnHolyBolt", Function(worldData, parms) Character.FromId(worldData, parms(0)).Spellbook.CanLearn(SpellType.FromId(worldData, 1L))},
             {"CanUseBeer", Function(worldData, parms)
                                Dim character = Game.Character.FromId(worldData, parms(0))
                                Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
@@ -82,7 +82,7 @@
                              End Function},
             {"CanLearnPurify", Function(worldData, parms)
                                    Dim character = Game.Character.FromId(worldData, parms(0))
-                                   Return character.CanLearn(SpellType.FromId(worldData, 2L))
+                                   Return character.Spellbook.CanLearn(SpellType.FromId(worldData, 2L))
                                End Function}
         }
     Private ReadOnly actionTable As IReadOnlyDictionary(Of String, Action(Of IWorldData, Long())) =
@@ -93,7 +93,7 @@
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
                     Dim spellType = Game.SpellType.FromId(worldData, 1L)
-                    If Not character.CanCastSpell(spellType) Then
+                    If Not character.Spellbook.CanCastSpell(spellType) Then
                         character.EnqueueMessage($"You cannot cast {spellType.Name} now!")
                         Return
                     End If
@@ -102,7 +102,7 @@
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You cast {spellType.Name} on {enemy.Name}!")
                     character.DoFatigue(1)
-                    Dim damage As Long = character.RollSpellDice(spellType)
+                    Dim damage As Long = character.Spellbook.RollSpellDice(spellType)
                     lines.Add($"You do {damage} damage!")
                     enemy.PhysicalCombat.DoDamage(damage)
                     If enemy.Health.IsDead Then
@@ -158,12 +158,12 @@
             {"LearnHolyBolt",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    character.Learn(SpellType.FromId(worldData, 1L))
+                    character.Spellbook.Learn(SpellType.FromId(worldData, 1L))
                 End Sub},
             {"LearnPurify",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    character.Learn(SpellType.FromId(worldData, 2L))
+                    character.Spellbook.Learn(SpellType.FromId(worldData, 2L))
                 End Sub},
             {"EatFood",
                 Sub(worldData, parms)
@@ -356,7 +356,7 @@
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You use {ItemType.FromId(worldData, 11).Name} on {enemy.Name}!")
-                    Dim immobilization As Long = character.RollPower()
+                    Dim immobilization As Long = character.Spellbook.RollPower()
                     lines.Add($"You immobilize {enemy.Name} for {immobilization} turns!")
                     enemy.DoImmobilization(immobilization)
                     character.EnqueueMessage(sfx, lines.ToArray)
