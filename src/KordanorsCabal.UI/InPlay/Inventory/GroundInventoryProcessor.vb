@@ -45,7 +45,7 @@ Friend Class GroundInventoryProcessor
     End Function
 
     Private Function PickUpItem() As UIState
-        Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Add(groundItems(currentItemIndex))
+        Game.World.PlayerCharacter(StaticWorldData.World).Items.Inventory.Add(groundItems(currentItemIndex))
         groundItems = Game.World.PlayerCharacter(StaticWorldData.World).Movement.Location.Inventory.Items.ToList
         If Not groundItems.Any Then
             Return UIState.InPlay

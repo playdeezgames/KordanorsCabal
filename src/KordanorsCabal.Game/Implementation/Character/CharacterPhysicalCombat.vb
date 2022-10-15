@@ -77,7 +77,7 @@
     End Property
     Friend Sub DropLoot()
         'TODO: unequip everything
-        For Each item In character.Inventory.Items
+        For Each item In character.Items.Inventory.Items
             character.Movement.Location.Inventory.Add(item)
         Next
         character.CharacterType.Combat.DropLoot(character.Movement.Location)
@@ -270,7 +270,7 @@
         For Each equipSlot In character.EquippedSlots
             character.Unequip(equipSlot)
         Next
-        For Each item In character.Inventory.Items
+        For Each item In character.Items.Inventory.Items
             character.Movement.Location.Inventory.Add(item)
         Next
     End Sub

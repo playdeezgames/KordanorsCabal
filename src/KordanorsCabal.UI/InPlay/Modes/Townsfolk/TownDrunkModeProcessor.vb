@@ -21,7 +21,7 @@ Friend Class TownDrunkModeProcessor
     Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
-        If player.HasItemType(ItemType.FromId(StaticWorldData.World, 26)) Then
+        If player.Items.HasItemType(ItemType.FromId(StaticWorldData.World, 26)) Then
             Buttons(EnableButtonIndex).Title = "Give Beer"
         End If
     End Sub
@@ -32,7 +32,7 @@ Friend Class TownDrunkModeProcessor
                 PopButtonIndex()
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case EnableButtonIndex
-                If player.HasItemType(ItemType.FromId(StaticWorldData.World, 26)) Then
+                If player.Items.HasItemType(ItemType.FromId(StaticWorldData.World, 26)) Then
                     Return GiveBeer(player)
                 End If
         End Select
@@ -41,8 +41,8 @@ Friend Class TownDrunkModeProcessor
 
     Private Function GiveBeer(player As ICharacter) As UIState
         player.EnqueueMessage($"You give {ItemType.FromId(StaticWorldData.World, 26).Name} to {New FeatureType(StaticWorldData.World, 3L).Name}.", $"{New FeatureType(StaticWorldData.World, 3L).Name} drinks it all in one swallow, burps, and hands you {ItemType.FromId(StaticWorldData.World, 30).Name}.")
-        player.Inventory.ItemsOfType(ItemType.FromId(StaticWorldData.World, 26)).First.Destroy()
-        player.Inventory.Add(Item.Create(StaticWorldData.World, 30))
+        player.Items.Inventory.ItemsOfType(ItemType.FromId(StaticWorldData.World, 26)).First.Destroy()
+        player.Items.Inventory.Add(Item.Create(StaticWorldData.World, 30))
         PushUIState(UIState.InPlay)
         Return UIState.Message
     End Function

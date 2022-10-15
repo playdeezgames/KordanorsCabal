@@ -11,12 +11,7 @@
     ReadOnly Property Mana As ICharacterMana
     ReadOnly Property Statistics As ICharacterStatistics
     ReadOnly Property Items As ICharacterItems
-    'Inventory
-    ReadOnly Property Inventory As IInventory
-    ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean
-    Function HasItemType(itemType As IItemType) As Boolean
-    Sub UseItem(item As IItem)
-    Sub PurifyItems()
+    ReadOnly Property Repair As ICharacterRepair
     'Repair
     Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean
     ReadOnly Property ItemsToRepair(shoppeType As IShoppeType) As IEnumerable(Of IItem)

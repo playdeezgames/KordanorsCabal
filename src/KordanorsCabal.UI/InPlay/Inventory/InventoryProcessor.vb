@@ -31,7 +31,7 @@ Friend Class InventoryProcessor
         currentItemIndex = 0
         items = New List(Of (String, IEnumerable(Of IItem)))
         Dim table As New Dictionary(Of String, List(Of IItem))
-        For Each item In Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Items.OrderBy(Function(x) x.Name)
+        For Each item In Game.World.PlayerCharacter(StaticWorldData.World).Items.Inventory.Items.OrderBy(Function(x) x.Name)
             If Not table.ContainsKey(item.Name) Then
                 table(item.Name) = New List(Of IItem)
             End If

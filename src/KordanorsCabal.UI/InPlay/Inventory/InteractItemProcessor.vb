@@ -30,7 +30,7 @@ Friend Class InteractItemProcessor
 
     Private Shared Function UseItem() As UIState
         If InteractItem.Usage.CanUse(Game.World.PlayerCharacter(StaticWorldData.World)) Then
-            Game.World.PlayerCharacter(StaticWorldData.World).UseItem(InteractItem)
+            Game.World.PlayerCharacter(StaticWorldData.World).Items.UseItem(InteractItem)
             MainProcessor.PushUIState(UIState.Inventory)
             Return UIState.Message
         End If
@@ -41,7 +41,7 @@ Friend Class InteractItemProcessor
 
     Private Shared Function DropItem() As UIState
         Game.World.PlayerCharacter(StaticWorldData.World).Movement.Location.Inventory.Add(InteractItem)
-        If Game.World.PlayerCharacter(StaticWorldData.World).Inventory.IsEmpty Then
+        If Game.World.PlayerCharacter(StaticWorldData.World).Items.Inventory.IsEmpty Then
             Return UIState.InPlay
         End If
         Return UIState.Inventory

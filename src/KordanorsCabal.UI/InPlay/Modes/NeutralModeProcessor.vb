@@ -70,7 +70,7 @@
                 If(Not player.Movement.Location.Inventory.IsEmpty,
                     "Ground...",
                     ""))
-        If Not player.Inventory.IsEmpty Then
+        If Not player.Items.Inventory.IsEmpty Then
             Buttons(InventoryButtonIndex).Title = "Inventory"
         End If
     End Sub
@@ -113,7 +113,7 @@
             Case MenuButtonIndex
                 Return UIState.GameMenuScreen
             Case InventoryButtonIndex
-                If Not player.Inventory.IsEmpty Then
+                If Not player.Items.Inventory.IsEmpty Then
                     Return UIState.Inventory
                 End If
             Case MapButtonIndex

@@ -8,20 +8,11 @@
     Public ReadOnly Property ItemsToRepair(shoppeType As IShoppeType) As IEnumerable(Of IItem) Implements ICharacter.ItemsToRepair
         Get
             Dim items As New List(Of IItem)
-            items.AddRange(Inventory.Items.Where(Function(x) x.Repair.IsNeeded))
+            items.AddRange(Me.Items.Inventory.Items.Where(Function(x) x.Repair.IsNeeded))
             items.AddRange(EquippedItems.Where(Function(x) x.Repair.IsNeeded))
             Return items.Where(Function(x) shoppeType.WillRepair(x.ItemType))
         End Get
     End Property
-
-    Sub PurifyItems() Implements ICharacter.PurifyItems
-        For Each item In Inventory.Items
-            item.Purify()
-        Next
-        For Each item In EquippedItems
-            item.Purify()
-        Next
-    End Sub
     ReadOnly Property CharacterType As ICharacterType Implements ICharacter.CharacterType
         Get
             Dim result = WorldData.Character.ReadCharacterType(Id)
@@ -45,11 +36,6 @@
     Public Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
         Return ItemsToRepair(shoppeType).Any
     End Function
-    ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean Implements ICharacter.CanBeBribedWith
-        Get
-            Return CharacterType.Combat.CanBeBribedWith(itemType)
-        End Get
-    End Property
     ReadOnly Property IsUndead As Boolean Implements ICharacter.IsUndead
         Get
             Return CharacterType.IsUndead
@@ -73,15 +59,6 @@
     Shared Function FromId(worldData As IWorldData, characterId As Long?) As ICharacter
         Return If(characterId.HasValue, New Character(worldData, characterId.Value), Nothing)
     End Function
-    ReadOnly Property Inventory As IInventory Implements ICharacter.Inventory
-        Get
-            Dim inventoryId As Long? = WorldData.Inventory.ReadForCharacter(Id)
-            If Not inventoryId.HasValue Then
-                inventoryId = WorldData.Inventory.CreateForCharacter(Id)
-            End If
-            Return Game.Inventory.FromId(WorldData, inventoryId.Value)
-        End Get
-    End Property
     ReadOnly Property IsEncumbered As Boolean Implements ICharacter.IsEncumbered
         Get
             Return Encumbrance > MaximumEncumbrance
@@ -89,7 +66,7 @@
     End Property
     ReadOnly Property Encumbrance As Long Implements ICharacter.Encumbrance
         Get
-            Dim result = Inventory.TotalEncumbrance
+            Dim result = Me.Items.Inventory.TotalEncumbrance
             For Each item In EquippedItems
                 result += item.ItemType.Encumbrance
             Next
@@ -175,13 +152,10 @@
     Public Sub Unequip(equipSlot As IEquipSlot) Implements ICharacter.Unequip
         Dim item = Equipment(equipSlot)
         If item IsNot Nothing Then
-            Inventory.Add(item)
+            Me.Items.Inventory.Add(item)
             WorldData.CharacterEquipSlot.Clear(Id, equipSlot.Id)
         End If
     End Sub
-    Function HasItemType(itemType As IItemType) As Boolean Implements ICharacter.HasItemType
-        Return Inventory.ItemsOfType(itemType).Any
-    End Function
     Property Drunkenness As Long Implements ICharacter.Drunkenness
         Get
             Return Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Drunkenness)).Value
@@ -257,21 +231,13 @@
             Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
             Dim oldItem = Equipment(equipSlot)
             If oldItem IsNot Nothing Then
-                Inventory.Add(oldItem)
+                Me.Items.Inventory.Add(oldItem)
             End If
             WorldData.CharacterEquipSlot.Write(Id, equipSlot.Id, item.Id)
             EnqueueMessage($"You equip {item.Name} to {equipSlot.Name}.")
             Return
         End If
         EnqueueMessage($"You cannot equip {item.Name}!")
-    End Sub
-    Public Sub UseItem(item As IItem) Implements ICharacter.UseItem
-        If item.Usage.CanUse(Me) Then
-            item.Usage.Use(Me)
-            If item.Usage.IsConsumed Then
-                item.Destroy()
-            End If
-        End If
     End Sub
     Public Property Mode As Long Implements ICharacter.Mode
         Get
@@ -354,6 +320,12 @@
     Public ReadOnly Property Items As ICharacterItems Implements ICharacter.Items
         Get
             Return CharacterItems.FromCharacter(WorldData, Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property Repair As ICharacterRepair Implements ICharacter.Repair
+        Get
+            Return CharacterRepair.FromCharacter(WorldData, Me)
         End Get
     End Property
 End Class

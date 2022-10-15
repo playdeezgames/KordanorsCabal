@@ -24,7 +24,7 @@ Friend Class ShoppeSellProcessor
         currentItemIndex = 0
         Dim offers = ShoppeType.Offers
         items = Game.World.PlayerCharacter(
-            StaticWorldData.World).Inventory.Items.Where(
+            StaticWorldData.World).Items.Inventory.Items.Where(
             Function(x) ShoppeType.WillBuy(x.ItemType)).ToList
     End Sub
 
