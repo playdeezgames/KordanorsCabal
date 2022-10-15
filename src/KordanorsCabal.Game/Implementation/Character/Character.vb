@@ -289,23 +289,6 @@
             Return WorldData.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(WorldData, x))
         End Get
     End Property
-    Function AddXP(xp As Long) As Boolean Implements ICharacter.AddXP
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.XP), xp)
-        Dim xpGoal = GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.XPGoal))
-        If Not xpGoal.HasValue Then
-            Return False
-        End If
-        If GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.XP)).Value >= xpGoal Then
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.XP), -xpGoal.Value)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.XPGoal), xpGoal.Value)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Unassigned), 1)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Wounds), 0)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Stress), 0)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Fatigue), 0)
-            Return True
-        End If
-        Return False
-    End Function
     Public Sub Unequip(equipSlot As IEquipSlot) Implements ICharacter.Unequip
         Dim item = Equipment(equipSlot)
         If item IsNot Nothing Then
@@ -361,17 +344,6 @@
             SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.FoodPoisoning), value)
         End Set
     End Property
-    ReadOnly Property IsFullyAssigned As Boolean Implements ICharacter.IsFullyAssigned
-        Get
-            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Unassigned)), 0) = 0
-        End Get
-    End Property
-    Public Sub AssignPoint(statisticType As ICharacterStatisticType) Implements ICharacter.AssignPoint
-        If Not IsFullyAssigned Then
-            ChangeStatistic(statisticType, 1)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Unassigned), -1)
-        End If
-    End Sub
     Public ReadOnly Property CanGamble As Boolean Implements ICharacter.CanGamble
         Get
             Return Money >= 5

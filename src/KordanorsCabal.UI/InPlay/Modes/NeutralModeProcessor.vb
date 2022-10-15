@@ -57,7 +57,7 @@
         If player.HasEquipment Then
             Buttons(EquipmentButtonIndex).Title = "Equipment"
         End If
-        Buttons(StatusLevelUpButtonIndex).Title = If(player.IsFullyAssigned, "Status", "Level up!")
+        Buttons(StatusLevelUpButtonIndex).Title = If(player.Advancement.IsFullyAssigned, "Status", "Level up!")
         If player.CanDoIntimidation Then
             Buttons(InteractIntimidateButtonIndex).Title = "Intimidate!"
         ElseIf player.CanInteract Then
@@ -125,7 +125,7 @@
                     Return UIState.Equipment
                 End If
             Case StatusLevelUpButtonIndex
-                If Not player.IsFullyAssigned Then
+                If Not player.Advancement.IsFullyAssigned Then
                     Return UIState.LevelUp
                 End If
                 Return UIState.Status

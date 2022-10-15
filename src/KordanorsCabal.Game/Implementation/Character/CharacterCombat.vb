@@ -94,7 +94,7 @@
         Dim xp As Long = XPValue
         If xp > 0 Then
             lines.Add($"You get {xp} XP!")
-            If killedBy.AddXP(xp) Then
+            If killedBy.Advancement.AddXP(xp) Then
                 lines.Add($"You level up!")
             End If
         End If

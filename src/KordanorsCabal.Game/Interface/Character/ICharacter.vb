@@ -6,10 +6,6 @@
     ReadOnly Property Health As ICharacterHealth
     ReadOnly Property Combat As ICharacterCombat
     ReadOnly Property Advancement As ICharacterAdvancement
-    'Advancement
-    Function AddXP(xp As Long) As Boolean
-    Sub AssignPoint(statisticType As ICharacterStatisticType)
-    ReadOnly Property IsFullyAssigned As Boolean
     'Mental Combat
     Sub AddStress(delta As Long)
     ReadOnly Property CanDoIntimidation() As Boolean
