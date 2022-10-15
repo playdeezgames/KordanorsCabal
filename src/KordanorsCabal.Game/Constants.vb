@@ -19,31 +19,31 @@
         Public Const Healer = 12L
     End Class
     Public Class StatisticTypes
-        Public Const CharacterStatisticType1 = 1L
-        Public Const CharacterStatisticType2 = 2L
-        Public Const CharacterStatisticType3 = 3L
-        Public Const CharacterStatisticType4 = 4L
-        Public Const CharacterStatisticType5 = 5L
-        Public Const CharacterStatisticType6 = 6L
-        Public Const CharacterStatisticType7 = 7L
-        Public Const CharacterStatisticType8 = 8L
-        Public Const CharacterStatisticType9 = 9L
-        Public Const CharacterStatisticType10 = 10L
-        Public Const CharacterStatisticType11 = 11L
-        Public Const CharacterStatisticType12 = 12L
-        Public Const CharacterStatisticType13 = 13L
-        Public Const CharacterStatisticType14 = 14L
-        Public Const CharacterStatisticType15 = 15L
-        Public Const CharacterStatisticType16 = 16L
-        Public Const CharacterStatisticType17 = 17L
-        Public Const CharacterStatisticType18 = 18L
-        Public Const CharacterStatisticType19 = 19L
-        Public Const CharacterStatisticType20 = 20L
-        Public Const CharacterStatisticType21 = 21L
-        Public Const CharacterStatisticType22 = 22L
-        Public Const CharacterStatisticType23 = 23L
-        Public Const CharacterStatisticType24 = 24L
-        Public Const CharacterStatisticType25 = 25L
+        Public Const Strength = 1L
+        Public Const Dexterity = 2L
+        Public Const Influence = 3L
+        Public Const Willpower = 4L
+        Public Const Power = 5L
+        Public Const HP = 6L
+        Public Const MP = 7L
+        Public Const Mana = 8L
+        Public Const Unassigned = 9L
+        Public Const UnarmedMaximumDamage = 10L
+        Public Const BaseMaximumDefend = 11L
+        Public Const Wounds = 12L
+        Public Const Stress = 13L
+        Public Const Money = 14L
+        Public Const Fatigue = 15L
+        Public Const XP = 16L
+        Public Const XPGoal = 17L
+        Public Const Drunkenness = 18L
+        Public Const Highness = 19L
+        Public Const Hunger = 20L
+        Public Const FoodPoisoning = 21L
+        Public Const Chafing = 22L
+        Public Const Immobilization = 23L
+        Public Const BaseLift = 24L
+        Public Const BonusLift = 25L
         Public Const CharacterStatisticType28 = 28L
     End Class
 End Class
