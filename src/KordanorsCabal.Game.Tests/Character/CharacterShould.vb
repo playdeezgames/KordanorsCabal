@@ -768,7 +768,7 @@ Public Class CharacterShould
     Sub have_combat_subobject()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.Combat.ShouldNotBeNull
+                subject.PhysicalCombat.ShouldNotBeNull
             End Sub)
     End Sub
     <Fact>

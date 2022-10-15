@@ -134,7 +134,7 @@
         Dim attackRoll = RollAttack()
         Dim enemy = character.Movement.Location.Factions.EnemiesOf(character).First
         lines.Add($"You roll an attack of {attackRoll}.")
-        Dim defendRoll = enemy.Combat.RollDefend()
+        Dim defendRoll = enemy.PhysicalCombat.RollDefend()
         lines.Add($"{enemy.Name} rolls a defend of {defendRoll}.")
         Dim result = attackRoll - defendRoll
         Dim sfx As Sfx?
@@ -146,12 +146,12 @@
             Case Else
                 Dim damage = DetermineDamage(result)
                 lines.Add($"You do {damage} damage!")
-                enemy.Combat.DoDamage(damage)
+                enemy.PhysicalCombat.DoDamage(damage)
                 For Each brokenItemType In character.DoWeaponWear(damage)
                     lines.Add($"Yer {brokenItemType.Name} breaks!")
                 Next
                 If enemy.Health.IsDead Then
-                    Dim killResult = enemy.Combat.Kill(character)
+                    Dim killResult = enemy.PhysicalCombat.Kill(character)
                     sfx = If(killResult.Item1, sfx)
                     lines.AddRange(killResult.Item2)
                     Exit Select
@@ -234,7 +234,7 @@
         Dim lines As New List(Of String) From {
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
-        Dim attackRoll = enemy.Combat.RollAttack()
+        Dim attackRoll = enemy.PhysicalCombat.RollAttack()
         lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
         For Each brokenItemType In character.DoArmorWear(attackRoll)
             lines.Add($"Yer {brokenItemType.Name} breaks!")
@@ -248,14 +248,14 @@
                 lines.Add($"{enemy.Name} misses!")
                 sfx = Game.Sfx.Miss
             Case Else
-                Dim damage = enemy.Combat.DetermineDamage(result)
+                Dim damage = enemy.PhysicalCombat.DetermineDamage(result)
                 lines.Add($"{enemy.Name} does {damage} damage!")
                 DoDamage(damage)
                 enemy.DoWeaponWear(damage)
                 If character.Health.IsDead Then
                     sfx = Game.Sfx.PlayerDeath
                     lines.Add($"{enemy.Name} kills you!")
-                    Dim partingShot = enemy.Combat.PartingShot
+                    Dim partingShot = enemy.PhysicalCombat.PartingShot
                     If Not String.IsNullOrEmpty(partingShot) Then
                         lines.Add($"{enemy.Name} says ""{partingShot}""")
                     End If

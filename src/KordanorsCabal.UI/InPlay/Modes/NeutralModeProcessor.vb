@@ -45,8 +45,8 @@
         End If
     End Sub
     Friend Overrides Sub UpdateButtons(player As ICharacter)
-        Buttons(TurnFightButtonIndex).Title = If(player.Combat.CanFight, "FIGHT!", "Turn...")
-        Buttons(MoveRunButtonIndex).Title = If(player.Combat.CanFight, "RUN!", "Move...")
+        Buttons(TurnFightButtonIndex).Title = If(player.PhysicalCombat.CanFight, "FIGHT!", "Turn...")
+        Buttons(MoveRunButtonIndex).Title = If(player.PhysicalCombat.CanFight, "RUN!", "Move...")
         Buttons(MenuButtonIndex).Title = "Game Menu"
         If player.HasSpells Then
             Buttons(SpellsButtonIndex).Title = "Spells"
@@ -65,7 +65,7 @@
         End If
         Dim enemyCount = player.Movement.Location.Factions.EnemiesOf(player).Count
         Buttons(GroundEnemiesButtonIndex).Title =
-            If(player.Combat.CanFight,
+            If(player.PhysicalCombat.CanFight,
                 $"Enemies({enemyCount})",
                 If(Not player.Movement.Location.Inventory.IsEmpty,
                     "Ground...",
@@ -78,16 +78,16 @@
     Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
         Select Case button.Index
             Case TurnFightButtonIndex 'also the fight button!
-                If player.Combat.CanFight Then
-                    player.Combat.Fight()
+                If player.PhysicalCombat.CanFight Then
+                    player.PhysicalCombat.Fight()
                     MainProcessor.PushUIState(UIState.InPlay)
                     Return UIState.Message
                 End If
                 PushButtonIndex(0)
                 player.Mode = Game.Constants.PlayerModes.Turn
             Case MoveRunButtonIndex
-                If player.Combat.CanFight Then
-                    player.Combat.Run()
+                If player.PhysicalCombat.CanFight Then
+                    player.PhysicalCombat.Run()
                     MainProcessor.PushUIState(UIState.InPlay)
                     Return UIState.Message
                 End If
@@ -104,7 +104,7 @@
                     Return UIState.InPlay
                 End If
             Case GroundEnemiesButtonIndex
-                If player.Combat.CanFight Then
+                If player.PhysicalCombat.CanFight Then
                     Return UIState.Enemies
                 End If
                 If Not player.Movement.Location.Inventory.IsEmpty Then

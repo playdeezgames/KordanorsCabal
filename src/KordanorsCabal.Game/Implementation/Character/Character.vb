@@ -454,7 +454,7 @@
                 lines.Add($"{enemy.Name} is not intimidated.")
             End If
             EnqueueMessage(lines.ToArray)
-            Combat.DoCounterAttacks()
+            PhysicalCombat.DoCounterAttacks()
             Return
         End If
         EnqueueMessage("You cannot intimidate at this time!")
@@ -487,7 +487,7 @@
         End Get
     End Property
 
-    Public ReadOnly Property Combat As ICharacterPhysicalCombat Implements ICharacter.Combat
+    Public ReadOnly Property PhysicalCombat As ICharacterPhysicalCombat Implements ICharacter.PhysicalCombat
         Get
             Return CharacterPhysicalCombat.FromCharacter(WorldData, Me)
         End Get
