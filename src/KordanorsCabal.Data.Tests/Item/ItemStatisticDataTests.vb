@@ -46,7 +46,7 @@
                 store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(itemId, statisticTypeId, statisticValue)
                 store.Verify(
-                    Sub(x) x.Replace.ReplaceRecord(Of Long, Long, Long)(
+                    Sub(x) x.Replace.Entry(Of Long, Long, Long)(
                         It.IsAny(Of Action),
                         Tables.ItemStatistics,
                         (Columns.ItemIdColumn, itemId),

@@ -43,7 +43,7 @@
                 Dim completions = 3L
                 store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(characterId, questId, completions)
-                store.Verify(Sub(x) x.Replace.ReplaceRecord(Of Long, Long, Long)(
+                store.Verify(Sub(x) x.Replace.Entry(Of Long, Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterQuestCompletions,
                                  (CharacterIdColumn, characterId),

@@ -20,7 +20,7 @@
             );")
     End Sub
     Public Sub Write(inventoryId As Long, itemId As Long) Implements IInventoryItemData.Write
-        Store.Replace.ReplaceRecord(
+        Store.Replace.Entry(
             AddressOf Initialize,
             TableName,
             (InventoryIdColumn, inventoryId),

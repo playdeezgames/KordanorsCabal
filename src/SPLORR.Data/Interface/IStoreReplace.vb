@@ -1,11 +1,11 @@
 ﻿Public Interface IStoreReplace
-    Sub ReplaceRecord(Of TFirstColumn,
+    Sub Entry(Of TFirstColumn,
                           TSecondColumn)(
                                         initializer As Action,
                                         tableName As String,
                                         firstColumnValue As (String, TFirstColumn),
                                         secondColumnValue As (String, TSecondColumn))
-    Sub ReplaceRecord(Of TFirstColumn,
+    Sub Entry(Of TFirstColumn,
                           TSecondColumn,
                           TThirdColumn)(
                                        initializer As Action,
@@ -13,7 +13,7 @@
                                        firstColumnValue As (String, TFirstColumn),
                                        secondColumnValue As (String, TSecondColumn),
                                        thirdColumnValue As (String, TThirdColumn))
-    Sub ReplaceRecord(Of TFirstColumn,
+    Sub Entry(Of TFirstColumn,
                         TSecondColumn,
                         TThirdColumn,
                         TFourthColumn)(
@@ -23,7 +23,7 @@
                                     secondColumnValue As (String, TSecondColumn),
                                     thirdColumnValue As (String, TThirdColumn),
                                     fourthColumnValue As (String, TFourthColumn))
-    Sub ReplaceRecord(Of TFirstColumn,
+    Sub Entry(Of TFirstColumn,
                          TSecondColumn,
                          TThirdColumn,
                          TFourthColumn,
@@ -35,7 +35,7 @@
                                       thirdColumnValue As (String, TThirdColumn),
                                       fourthColumnValue As (String, TFourthColumn),
                                       fifthColumnValue As (String, TFifthColumn))
-    Sub ReplaceRecord(Of TFirstColumn,
+    Sub Entry(Of TFirstColumn,
                          TSecondColumn,
                          TThirdColumn,
                          TFourthColumn,
@@ -49,7 +49,7 @@
                                       fourthColumnValue As (String, TFourthColumn),
                                       fifthColumnValue As (String, TFifthColumn),
                                       sixthColumnValue As (String, TSixthColumn))
-    Sub ReplaceRecord(Of TFirstColumn,
+    Sub Entry(Of TFirstColumn,
                          TSecondColumn,
                          TThirdColumn,
                          TFourthColumn,

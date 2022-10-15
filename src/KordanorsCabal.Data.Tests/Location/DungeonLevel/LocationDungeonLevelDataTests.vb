@@ -42,7 +42,7 @@
                 store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(locationId, dungeonLevel)
                 store.Verify(
-                    Sub(x) x.Replace.ReplaceRecord(Of Long, Long)(
+                    Sub(x) x.Replace.Entry(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.LocationDungeonLevels,
                     (Columns.LocationIdColumn, locationId),

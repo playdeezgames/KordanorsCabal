@@ -49,7 +49,7 @@
                 (LocationStatisticTypeIdColumn, statisticType))
             Return
         End If
-        Store.Replace.ReplaceRecord(
+        Store.Replace.Entry(
             AddressOf Initialize,
             TableName,
             (LocationIdColumn, locationId),

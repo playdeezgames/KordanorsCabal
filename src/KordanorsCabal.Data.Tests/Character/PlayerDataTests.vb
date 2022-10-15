@@ -73,7 +73,7 @@
                 subject.Write(characterId, direction, mode)
                 Dim playerId = 1
                 store.Verify(
-                    Sub(x) x.Replace.ReplaceRecord(Of Long, Long, Long, Long)(
+                    Sub(x) x.Replace.Entry(Of Long, Long, Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     (Columns.PlayerIdColumn, playerId),

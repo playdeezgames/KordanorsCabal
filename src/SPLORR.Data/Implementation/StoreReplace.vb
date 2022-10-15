@@ -5,7 +5,7 @@
     Public Sub New(backer As IBacker)
         MyBase.New(backer)
     End Sub
-    Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn)) Implements IStoreReplace.ReplaceRecord
+    Public Sub Entry(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn)) Implements IStoreReplace.Entry
         initializer()
         backer.Execute(
             $"REPLACE INTO [{tableName}]
@@ -21,7 +21,7 @@
             ($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
             ($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
     End Sub
-    Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn)) Implements IStoreReplace.ReplaceRecord
+    Public Sub Entry(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn)) Implements IStoreReplace.Entry
         initializer()
         backer.Execute(
             $"REPLACE INTO [{tableName}]
@@ -40,7 +40,7 @@
             ($"@{secondColumnValue.Item1}", secondColumnValue.Item2),
             ($"@{thirdColumnValue.Item1}", thirdColumnValue.Item2))
     End Sub
-    Public Sub ReplaceRecord(Of
+    Public Sub Entry(Of
                                  TFirstColumn,
                                  TSecondColumn,
                                  TThirdColumn,
@@ -50,7 +50,7 @@
                                                firstColumnValue As (String, TFirstColumn),
                                                secondColumnValue As (String, TSecondColumn),
                                                thirdColumnValue As (String, TThirdColumn),
-                                               fourthColumnValue As (String, TFourthColumn)) Implements IStoreReplace.ReplaceRecord
+                                               fourthColumnValue As (String, TFourthColumn)) Implements IStoreReplace.Entry
         initializer()
         backer.Execute(
             $"REPLACE INTO [{tableName}]
@@ -72,7 +72,7 @@
             ($"@{thirdColumnValue.Item1}", thirdColumnValue.Item2),
             ($"@{fourthColumnValue.Item1}", fourthColumnValue.Item2))
     End Sub
-    Public Sub ReplaceRecord(
+    Public Sub Entry(
                      Of TFirstColumn,
                          TSecondColumn,
                          TThirdColumn,
@@ -84,7 +84,7 @@
                                       secondColumnValue As (String, TSecondColumn),
                                       thirdColumnValue As (String, TThirdColumn),
                                       fourthColumnValue As (String, TFourthColumn),
-                                      fifthColumnValue As (String, TFifthColumn)) Implements IStoreReplace.ReplaceRecord
+                                      fifthColumnValue As (String, TFifthColumn)) Implements IStoreReplace.Entry
         initializer()
         backer.Execute(
             $"REPLACE INTO [{tableName}]
@@ -109,7 +109,7 @@
             ($"@{fourthColumnValue.Item1}", fourthColumnValue.Item2),
             ($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2))
     End Sub
-    Public Sub ReplaceRecord(
+    Public Sub Entry(
                      Of TFirstColumn,
                          TSecondColumn,
                          TThirdColumn,
@@ -123,7 +123,7 @@
                                       thirdColumnValue As (String, TThirdColumn),
                                       fourthColumnValue As (String, TFourthColumn),
                                       fifthColumnValue As (String, TFifthColumn),
-                                      sixthColumnValue As (String, TSixthColumn)) Implements IStoreReplace.ReplaceRecord
+                                      sixthColumnValue As (String, TSixthColumn)) Implements IStoreReplace.Entry
         initializer()
         backer.Execute(
             $"REPLACE INTO [{tableName}]
@@ -151,7 +151,7 @@
             ($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2),
             ($"@{sixthColumnValue.Item1}", sixthColumnValue.Item2))
     End Sub
-    Public Sub ReplaceRecord(
+    Public Sub Entry(
                      Of TFirstColumn,
                          TSecondColumn,
                          TThirdColumn,
@@ -167,7 +167,7 @@
                                       fourthColumnValue As (String, TFourthColumn),
                                       fifthColumnValue As (String, TFifthColumn),
                                       sixthColumnValue As (String, TSixthColumn),
-                                      seventhColumnValue As (String, TSeventhColumn)) Implements IStoreReplace.ReplaceRecord
+                                      seventhColumnValue As (String, TSeventhColumn)) Implements IStoreReplace.Entry
         initializer()
         backer.Execute(
             $"REPLACE INTO [{tableName}]

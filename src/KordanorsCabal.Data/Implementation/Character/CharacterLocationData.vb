@@ -23,7 +23,7 @@
             );")
     End Sub
     Public Sub Write(characterId As Long, locationId As Long) Implements ICharacterLocationData.Write
-        Store.Replace.ReplaceRecord(
+        Store.Replace.Entry(
             AddressOf Initialize,
             TableName,
             (CharacterIdColumn, characterId),

@@ -65,7 +65,7 @@ Public Class PlayerData
     End Function
 
     Public Sub Write(characterId As Long, direction As Long, mode As Long) Implements IPlayerData.Write
-        Store.Replace.ReplaceRecord(
+        Store.Replace.Entry(
             AddressOf Initialize,
             TableName,
             (PlayerIdColumn, FixedPlayerId),

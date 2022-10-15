@@ -56,7 +56,7 @@
                 Dim level = 3L
                 store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
                 subject.Write(characterId, spellType, level)
-                store.Verify(Sub(x) x.Replace.ReplaceRecord(
+                store.Verify(Sub(x) x.Replace.Entry(
                                  It.IsAny(Of Action),
                                  CharacterSpells,
                                  (CharacterIdColumn, characterId),
