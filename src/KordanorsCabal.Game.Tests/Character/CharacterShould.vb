@@ -500,4 +500,11 @@ Public Class CharacterShould
                 subject.Statistics.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub have_items_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Items.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class

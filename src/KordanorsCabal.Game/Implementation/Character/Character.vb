@@ -350,4 +350,10 @@
             Return CharacterStatistics.FromCharacter(WorldData, Me)
         End Get
     End Property
+
+    Public ReadOnly Property Items As ICharacterItems Implements ICharacter.Items
+        Get
+            Return CharacterItems.FromCharacter(WorldData, Me)
+        End Get
+    End Property
 End Class

@@ -10,6 +10,7 @@
     ReadOnly Property Spellbook As ICharacterSpellbook
     ReadOnly Property Mana As ICharacterMana
     ReadOnly Property Statistics As ICharacterStatistics
+    ReadOnly Property Items As ICharacterItems
     'Inventory
     ReadOnly Property Inventory As IInventory
     ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean
