@@ -413,4 +413,11 @@
                 subject.Repair.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub have_encumbrance_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Encumbrance.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class

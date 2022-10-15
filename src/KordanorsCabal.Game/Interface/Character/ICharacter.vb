@@ -12,6 +12,7 @@
     ReadOnly Property Statistics As ICharacterStatistics
     ReadOnly Property Items As ICharacterItems
     ReadOnly Property Repair As ICharacterRepair
+    ReadOnly Property Encumbrance As ICharacterEncumbrance
     'Encumbrance
     ReadOnly Property IsEncumbered As Boolean
     ReadOnly Property CurrentEncumbrance As Long

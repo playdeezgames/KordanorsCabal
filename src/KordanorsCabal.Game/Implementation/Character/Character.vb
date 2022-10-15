@@ -317,4 +317,10 @@
             Return CharacterRepair.FromCharacter(WorldData, Me)
         End Get
     End Property
+
+    Public ReadOnly Property Encumbrance As ICharacterEncumbrance Implements ICharacter.Encumbrance
+        Get
+            Return CharacterEncumbrance.FromCharacter(WorldData, Me)
+        End Get
+    End Property
 End Class
