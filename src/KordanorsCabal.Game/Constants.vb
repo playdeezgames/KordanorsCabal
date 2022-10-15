@@ -18,7 +18,7 @@
         Public Const Constable = 11L
         Public Const Healer = 12L
     End Class
-    Public Class CharacterStatisticTypes
+    Public Class StatisticTypes
         Public Const CharacterStatisticType1 = 1L
         Public Const CharacterStatisticType2 = 2L
         Public Const CharacterStatisticType3 = 3L
