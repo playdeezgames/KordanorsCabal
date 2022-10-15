@@ -58,7 +58,7 @@
             Buttons(EquipmentButtonIndex).Title = "Equipment"
         End If
         Buttons(StatusLevelUpButtonIndex).Title = If(player.Advancement.IsFullyAssigned, "Status", "Level up!")
-        If player.CanDoIntimidation Then
+        If player.MentalCombat.CanDoIntimidation Then
             Buttons(InteractIntimidateButtonIndex).Title = "Intimidate!"
         ElseIf player.CanInteract Then
             Buttons(InteractIntimidateButtonIndex).Title = "Interact..."
@@ -94,8 +94,8 @@
                 PushButtonIndex(0)
                 player.Mode = Game.Constants.PlayerModes.Move
             Case InteractIntimidateButtonIndex
-                If player.CanDoIntimidation Then
-                    player.DoIntimidation()
+                If player.MentalCombat.CanDoIntimidation Then
+                    player.MentalCombat.DoIntimidation()
                     MainProcessor.PushUIState(UIState.InPlay)
                     Return UIState.Message
                 ElseIf player.CanInteract Then

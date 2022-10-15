@@ -62,7 +62,7 @@
         If Not Location.Routes.Find(direction).CanMove(Character) Then
             Return False
         End If
-        If Location.Routes.Find(direction).ToLocation.LocationType.RequiresMP AndAlso Character.IsDemoralized() Then
+        If Location.Routes.Find(direction).ToLocation.LocationType.RequiresMP AndAlso Character.MentalCombat.IsDemoralized() Then
             Return False
         End If
         Return True

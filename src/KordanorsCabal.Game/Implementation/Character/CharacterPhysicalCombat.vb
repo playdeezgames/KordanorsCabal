@@ -206,9 +206,9 @@
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
         lines.Add($"{enemy.Name} attempts to intimidate you!")
-        Dim influenceRoll = enemy.RollInfluence
+        Dim influenceRoll = enemy.MentalCombat.RollInfluence
         lines.Add($"{enemy.Name} rolls influence of {influenceRoll}.")
-        Dim willpowerRoll = character.RollWillpower()
+        Dim willpowerRoll = character.MentalCombat.RollWillpower()
         lines.Add($"You roll willpower of {willpowerRoll}.")
         Dim result = influenceRoll - willpowerRoll
         Dim sfx As Sfx?
@@ -218,15 +218,15 @@
                 sfx = Game.Sfx.Miss
             Case Else
                 lines.Add($"{enemy.Name} adds 1 stress!")
-                character.AddStress(1)
-                If character.IsDemoralized() Then
+                character.MentalCombat.AddStress(1)
+                If character.MentalCombat.IsDemoralized() Then
                     lines.Add($"{enemy.Name} completely demoralizes you and you drop everything and run away!")
                     Panic()
                     character.Money \= 2
                     character.Movement.Location = Game.Location.FromLocationType(WorldData, LocationType.FromId(WorldData, 1L)).Single
                     Exit Select
                 End If
-                lines.Add($"You have {character.CurrentMP} MP left.")
+                lines.Add($"You have {character.MentalCombat.CurrentMP} MP left.")
         End Select
         character.EnqueueMessage(sfx, lines.ToArray)
     End Sub

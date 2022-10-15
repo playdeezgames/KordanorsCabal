@@ -177,43 +177,10 @@
     Private Function NegativeInfluence() As Long
         Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
     End Function
-    Function RollInfluence() As Long Implements ICharacter.RollInfluence
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Influence)), 0) + NegativeInfluence())
-    End Function
-    Function RollWillpower() As Long Implements ICharacter.RollWillpower
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Willpower)), 0) + NegativeInfluence())
-    End Function
-    ReadOnly Property IsDemoralized() As Boolean Implements ICharacter.IsDemoralized
-        Get
-            If GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Willpower)).HasValue Then
-                Return CurrentMP <= 0
-            End If
-            Return False
-        End Get
-    End Property
-    Sub AddStress(delta As Long) Implements ICharacter.AddStress
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Stress), delta)
-    End Sub
-    ReadOnly Property CanIntimidate As Boolean Implements ICharacter.CanIntimidate
-        Get
-            If Not GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Willpower)).HasValue Then
-                Return False
-            End If
-            Return Movement.Location.Factions.AlliesOf(Me).Count <= Movement.Location.Factions.EnemiesOf(Me).Count
-        End Get
-    End Property
     ReadOnly Property Name As String Implements ICharacter.Name
         Get
             Return CharacterType.Name
         End Get
-    End Property
-    Property CurrentMP As Long Implements ICharacter.CurrentMP
-        Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.MP)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Stress)).Value)
-        End Get
-        Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Stress), GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.MP)).Value - value)
-        End Set
     End Property
     Property CurrentMana As Long Implements ICharacter.CurrentMana
         Get
@@ -423,43 +390,6 @@
             Mode = Movement.Location.Feature.InteractionMode()
         End If
     End Sub
-    ReadOnly Property CanDoIntimidation() As Boolean Implements ICharacter.CanDoIntimidation
-        Get
-            If If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Influence)), 0) <= 0 Then
-                Return False
-            End If
-            Dim enemy = Movement.Location.Factions.EnemiesOf(Me).FirstOrDefault
-            If enemy Is Nothing Then
-                Return False
-            End If
-            Return enemy.CanIntimidate
-        End Get
-    End Property
-    Public Sub DoIntimidation() Implements ICharacter.DoIntimidation
-        If CanDoIntimidation Then
-            Dim lines As New List(Of String)
-            Dim enemy = Movement.Location.Factions.EnemiesOf(Me).First
-            Dim influenceRoll = RollInfluence()
-            lines.Add($"You roll {influenceRoll} influence.")
-            Dim willpowerRoll = enemy.RollWillpower()
-            lines.Add($"{enemy.Name} rolls {willpowerRoll} willpower.")
-            If influenceRoll > willpowerRoll Then
-                enemy.AddStress(1)
-                lines.Add($"{enemy.Name} loses 1 MP!")
-                If enemy.IsDemoralized Then
-                    lines.Add($"{enemy.Name} runs away!")
-                    enemy.Destroy()
-                End If
-            Else
-                lines.Add($"{enemy.Name} is not intimidated.")
-            End If
-            EnqueueMessage(lines.ToArray)
-            PhysicalCombat.DoCounterAttacks()
-            Return
-        End If
-        EnqueueMessage("You cannot intimidate at this time!")
-    End Sub
-
     Public Function RollPower() As Long Implements ICharacter.RollPower
         Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Power)), 0) + NegativeInfluence())
     End Function

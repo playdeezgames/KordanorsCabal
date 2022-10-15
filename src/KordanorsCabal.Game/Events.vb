@@ -243,7 +243,7 @@
                     character.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Stress), -healRoll)
                     Dim lines As New List(Of String)
                     lines.Add($"You make use of {ItemType.FromId(worldData, Constants.StatisticTypes.ItemType28).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(worldData, 7).Name}.")
-                    lines.Add($"You now have {character.CurrentMP} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP).Name}.")
+                    lines.Add($"You now have {character.MentalCombat.CurrentMP} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP).Name}.")
                     Dim lotionItem = character.Inventory.ItemsOfType(ItemType.FromId(worldData, 39)).FirstOrDefault
                     If lotionItem Is Nothing Then
                         lines.Add($"You also receive 10 {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Chafing).Name}. Try {ItemType.FromId(worldData, 39).Name} next time.")
@@ -293,7 +293,7 @@
                         character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(worldData, 26).Name}, and they wander off to get drunk.")
                         Return
                     End If
-                    character.CurrentMP = character.GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP)).Value
+                    character.MentalCombat.CurrentMP = character.GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP)).Value
                     character.Drunkenness += 10
                     character.Inventory.Add(Game.Item.Create(worldData, 30))
                     character.EnqueueMessage("You drink the beer, and suddenly feel braver!")

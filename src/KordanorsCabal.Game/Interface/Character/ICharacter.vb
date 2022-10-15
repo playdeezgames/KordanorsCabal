@@ -7,15 +7,6 @@
     ReadOnly Property PhysicalCombat As ICharacterPhysicalCombat
     ReadOnly Property Advancement As ICharacterAdvancement
     ReadOnly Property MentalCombat As ICharacterMentalCombat
-    'Mental Combat
-    Sub AddStress(delta As Long)
-    ReadOnly Property CanDoIntimidation() As Boolean
-    Sub DoIntimidation()
-    ReadOnly Property CanIntimidate As Boolean
-    ReadOnly Property IsDemoralized As Boolean
-    Property CurrentMP As Long
-    Function RollWillpower() As Long
-    Function RollInfluence() As Long
     'Spells
     ReadOnly Property Spells As IReadOnlyDictionary(Of Long, Long)
     Sub Learn(spellType As ISpellType)
