@@ -4,7 +4,7 @@
     ReadOnly Property Movement As ICharacterMovement
     ReadOnly Property Quest As ICharacterQuest
     ReadOnly Property Health As ICharacterHealth
-    ReadOnly Property Combat As ICharacterCombat
+    ReadOnly Property Combat As ICharacterPhysicalCombat
     ReadOnly Property Advancement As ICharacterAdvancement
     'Mental Combat
     Sub AddStress(delta As Long)

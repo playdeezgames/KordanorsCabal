@@ -1,4 +1,4 @@
-﻿Public Interface ICharacterCombat
+﻿Public Interface ICharacterPhysicalCombat
     Inherits IBaseThingie
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String))
     ReadOnly Property CanFight As Boolean

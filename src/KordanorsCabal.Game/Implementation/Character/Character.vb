@@ -487,9 +487,9 @@
         End Get
     End Property
 
-    Public ReadOnly Property Combat As ICharacterCombat Implements ICharacter.Combat
+    Public ReadOnly Property Combat As ICharacterPhysicalCombat Implements ICharacter.Combat
         Get
-            Return CharacterCombat.FromCharacter(WorldData, Me)
+            Return CharacterPhysicalCombat.FromCharacter(WorldData, Me)
         End Get
     End Property
 

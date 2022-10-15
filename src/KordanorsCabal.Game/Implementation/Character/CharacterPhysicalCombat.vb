@@ -1,16 +1,16 @@
-﻿Public Class CharacterCombat
+﻿Public Class CharacterPhysicalCombat
     Inherits BaseThingie
-    Implements ICharacterCombat
+    Implements ICharacterPhysicalCombat
     Private ReadOnly character As ICharacter
 
     Public Sub New(worldData As IWorldData, character As ICharacter)
         MyBase.New(worldData, character.Id)
         Me.character = character
     End Sub
-    Shared Function FromCharacter(worldData As IWorldData, character As ICharacter) As ICharacterCombat
-        Return If(character IsNot Nothing, New CharacterCombat(worldData, character), Nothing)
+    Shared Function FromCharacter(worldData As IWorldData, character As ICharacter) As ICharacterPhysicalCombat
+        Return If(character IsNot Nothing, New CharacterPhysicalCombat(worldData, character), Nothing)
     End Function
-    ReadOnly Property CanFight As Boolean Implements ICharacterCombat.CanFight
+    ReadOnly Property CanFight As Boolean Implements ICharacterPhysicalCombat.CanFight
         Get
             If character.Movement.Location Is Nothing Then
                 Return False
@@ -18,16 +18,16 @@
             Return character.Movement.Location.Factions.EnemiesOf(character).Any
         End Get
     End Property
-    ReadOnly Property IsEnemy(character As ICharacter) As Boolean Implements ICharacterCombat.IsEnemy
+    ReadOnly Property IsEnemy(character As ICharacter) As Boolean Implements ICharacterPhysicalCombat.IsEnemy
         Get
             Return Me.character.CharacterType.Combat.IsEnemy(character.CharacterType)
         End Get
     End Property
-    Function RollDefend() As Long Implements ICharacterCombat.RollDefend
+    Function RollDefend() As Long Implements ICharacterPhysicalCombat.RollDefend
         Dim maximumDefend = character.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.BaseMaximumDefend)).Value
         Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
     End Function
-    Function RollAttack() As Long Implements ICharacterCombat.RollAttack
+    Function RollAttack() As Long Implements ICharacterPhysicalCombat.RollAttack
         Return RollDice(GetAttackDice() + NegativeInfluence())
     End Function
     Private Function RollDice(dice As Long) As Long
@@ -41,12 +41,12 @@
     Private Function NegativeInfluence() As Long
         Return If(character.Drunkenness > 0 OrElse character.Highness > 0 OrElse character.Chafing > 0, -1, 0)
     End Function
-    ReadOnly Property PartingShot As String Implements ICharacterCombat.PartingShot
+    ReadOnly Property PartingShot As String Implements ICharacterPhysicalCombat.PartingShot
         Get
             Return character.CharacterType.Combat.PartingShot
         End Get
     End Property
-    Sub DoDamage(damage As Long) Implements ICharacterCombat.DoDamage
+    Sub DoDamage(damage As Long) Implements ICharacterPhysicalCombat.DoDamage
         character.ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Wounds), damage)
     End Sub
     ReadOnly Property EquippedItems As IEnumerable(Of IItem)
@@ -54,7 +54,7 @@
             Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
         End Get
     End Property
-    Function DetermineDamage(value As Long) As Long Implements ICharacterCombat.DetermineDamage
+    Function DetermineDamage(value As Long) As Long Implements ICharacterPhysicalCombat.DetermineDamage
         Dim maximumDamage As Long? = Nothing
         For Each item In EquippedItems
             Dim itemMaximumDamage = item.Weapon.MaximumDamage
@@ -82,7 +82,7 @@
         Next
         character.CharacterType.Combat.DropLoot(character.Movement.Location)
     End Sub
-    Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String)) Implements ICharacterCombat.Kill
+    Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String)) Implements ICharacterPhysicalCombat.Kill
         Dim lines As New List(Of String)
         lines.Add($"You kill {character.Name}!")
         Dim sfx As Sfx? = Game.Sfx.EnemyDeath
@@ -102,7 +102,7 @@
         character.Destroy()
         Return (sfx, lines)
     End Function
-    Sub DoCounterAttacks() Implements ICharacterCombat.DoCounterAttacks
+    Sub DoCounterAttacks() Implements ICharacterPhysicalCombat.DoCounterAttacks
         Dim enemies = character.Movement.Location.Factions.EnemiesOf(character)
         Dim enemyCount = enemies.Count
         Dim enemyIndex = 1
@@ -111,7 +111,7 @@
             enemyIndex += 1
         Next
     End Sub
-    Public Sub Run() Implements ICharacterCombat.Run
+    Public Sub Run() Implements ICharacterPhysicalCombat.Run
         If CanFight Then
             character.Movement.Direction = RNG.FromEnumerable(CardinalDirections(WorldData))
             If character.Movement.CanMove(character.Movement.Direction) Then
@@ -123,7 +123,7 @@
             DoCounterAttacks()
         End If
     End Sub
-    Public Sub Fight() Implements ICharacterCombat.Fight
+    Public Sub Fight() Implements ICharacterPhysicalCombat.Fight
         If CanFight Then
             DoAttack()
             DoCounterAttacks()
