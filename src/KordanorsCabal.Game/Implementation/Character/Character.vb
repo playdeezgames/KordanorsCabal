@@ -497,16 +497,6 @@
             Return EquippedItems.Any
         End Get
     End Property
-
-    Public Property Statistic(statisticType As ICharacterStatisticType) As Long Implements ICharacter.Statistic
-        Get
-            Return GetStatistic(statisticType).Value
-        End Get
-        Set(value As Long)
-            SetStatistic(statisticType, value)
-        End Set
-    End Property
-
     Public ReadOnly Property HasStatistic(statisticType As ICharacterStatisticType) As Boolean Implements ICharacter.HasStatistic
         Get
             Return GetStatistic(statisticType).HasValue
