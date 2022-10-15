@@ -242,7 +242,7 @@
                     Dim healRoll = RNG.RollDice("1d4")
                     character.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Stress), -healRoll)
                     Dim lines As New List(Of String)
-                    lines.Add($"You make use of {ItemType.FromId(worldData, Constants.StatisticTypes.CharacterStatisticType28).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(worldData, 7).Name}.")
+                    lines.Add($"You make use of {ItemType.FromId(worldData, Constants.StatisticTypes.ItemType28).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(worldData, 7).Name}.")
                     lines.Add($"You now have {character.CurrentMP} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP).Name}.")
                     Dim lotionItem = character.Inventory.ItemsOfType(ItemType.FromId(worldData, 39)).FirstOrDefault
                     If lotionItem Is Nothing Then
