@@ -216,7 +216,7 @@ Public Module World
         Dim startingLocation = Location.FromLocationType(worldData, LocationType.FromId(worldData, 1L)).First
         Dim playerCharacter = Character.Create(worldData, CharacterType.FromId(worldData, Constants.CharacterTypes.CharacterType11), startingLocation, CharacterType.FromId(worldData, Constants.CharacterTypes.CharacterType11).Spawning.InitialStatistics())
         playerCharacter.Location = startingLocation 'to track that this place has been visited
-        worldData.Player.Write(playerCharacter.Id, RNG.FromEnumerable(CardinalDirections(worldData)).Id, PlayerMode.Neutral)
+        worldData.Player.Write(playerCharacter.Id, RNG.FromEnumerable(CardinalDirections(worldData)).Id, Constants.PlayerModes.Neutral)
         RollUpPlayerCharacter(worldData)
     End Sub
 
@@ -271,8 +271,8 @@ Public Module World
     End Sub
 
     Private Sub SecondRoll(worldData As IWorldData)
-        Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, 9L))
-        PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, 9L), 0)
+        Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, Constants.CharacterStatisticTypes.CharacterStatisticType9))
+        PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, Constants.CharacterStatisticTypes.CharacterStatisticType9), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(SecondRollTable)
             PlayerCharacter(worldData).ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
@@ -302,8 +302,8 @@ Public Module World
         }
 
     Private Sub FirstRoll(worldData As IWorldData)
-        Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, 9L))
-        PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, 9L), 0)
+        Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, Constants.CharacterStatisticTypes.CharacterStatisticType9))
+        PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, Constants.CharacterStatisticTypes.CharacterStatisticType9), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(FirstRollTable)
             PlayerCharacter(worldData).ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)

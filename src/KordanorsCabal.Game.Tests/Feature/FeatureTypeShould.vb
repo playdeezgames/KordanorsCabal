@@ -26,7 +26,7 @@
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.Setup(Function(x) x.FeatureType.ReadInteractionMode(It.IsAny(Of Long))).Returns(0)
-                subject.InteractionMode.ShouldBe(PlayerMode.None)
+                subject.InteractionMode.ShouldBe(Game.Constants.PlayerModes.None)
                 worldData.Verify(Function(x) x.FeatureType.ReadInteractionMode(id))
             End Sub)
     End Sub

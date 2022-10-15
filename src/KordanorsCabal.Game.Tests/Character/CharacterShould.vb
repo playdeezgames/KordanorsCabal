@@ -690,7 +690,7 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.Setup(Function(x) x.Player.ReadPlayerMode()).Returns(0)
-                subject.Mode.ShouldBe(PlayerMode.None)
+                subject.Mode.ShouldBe(Game.Constants.PlayerModes.None)
                 worldData.Verify(Function(x) x.Player.ReadPlayerMode())
             End Sub)
     End Sub

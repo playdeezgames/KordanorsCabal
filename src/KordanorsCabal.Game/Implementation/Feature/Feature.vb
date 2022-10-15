@@ -24,7 +24,7 @@
         End Get
     End Property
 
-    ReadOnly Property InteractionMode As PlayerMode Implements IFeature.InteractionMode
+    ReadOnly Property InteractionMode As Long Implements IFeature.InteractionMode
         Get
             Return FeatureType.InteractionMode
         End Get

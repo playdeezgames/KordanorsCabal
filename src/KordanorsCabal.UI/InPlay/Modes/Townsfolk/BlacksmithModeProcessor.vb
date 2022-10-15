@@ -36,7 +36,7 @@
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case OffersButtonIndex
                 ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                 Return UIState.ShoppeOffers
@@ -59,7 +59,7 @@
     End Function
 
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
-        player.Mode = PlayerMode.Neutral
+        player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
 End Class

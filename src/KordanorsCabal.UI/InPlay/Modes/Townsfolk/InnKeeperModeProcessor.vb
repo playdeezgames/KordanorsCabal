@@ -48,7 +48,7 @@
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case QuestButtonIndex
                 Return HandleQuestButton(player)
             Case PricesButtonIndex
@@ -76,7 +76,7 @@
     End Function
 
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
-        player.Mode = PlayerMode.Neutral
+        player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
 End Class

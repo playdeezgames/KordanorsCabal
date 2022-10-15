@@ -46,10 +46,10 @@
     End Property
     Property Money As Long Implements ICharacter.Money
         Get
-            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 14L)), 0L)
+            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType14)), 0L)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 14L), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType14), value)
         End Set
     End Property
     Sub Learn(spellType As ISpellType) Implements ICharacter.Learn
@@ -66,10 +66,10 @@
         If nextLevel > spellType.MaximumLevel Then
             Return False
         End If
-        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) >= spellType.RequiredPower(nextLevel)
+        Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType5)), 0) >= spellType.RequiredPower(nextLevel)
     End Function
     Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 23L), delta)
+        ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType23), delta)
     End Sub
     Function RollSpellDice(spellType As ISpellType) As Long Implements ICharacter.RollSpellDice
         If Not Spells.ContainsKey(spellType.Id) Then
@@ -79,7 +79,7 @@
     End Function
     ReadOnly Property Power As Long
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType5)).Value
         End Get
     End Property
     Public Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
@@ -172,11 +172,11 @@
     ReadOnly Property MaximumEncumbrance As Long Implements ICharacter.MaximumEncumbrance
         Get
             Return If(
-            GetStatistic(CharacterStatisticType.FromId(WorldData, 24L)), 0) +
+            GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType24)), 0) +
             If(
-                GetStatistic(CharacterStatisticType.FromId(WorldData, 25L)), 0) *
+                GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType25)), 0) *
             If(
-                GetStatistic(CharacterStatisticType.FromId(WorldData, 1L)), 0)
+                GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType1)), 0)
         End Get
     End Property
     Public Function HasVisited(location As ILocation) As Boolean Implements ICharacter.HasVisited
@@ -194,25 +194,25 @@
         Return If(Drunkenness > 0 OrElse Highness > 0 OrElse Chafing > 0, -1, 0)
     End Function
     Function RollInfluence() As Long Implements ICharacter.RollInfluence
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 3L)), 0) + NegativeInfluence())
+        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType3)), 0) + NegativeInfluence())
     End Function
     Function RollWillpower() As Long Implements ICharacter.RollWillpower
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)), 0) + NegativeInfluence())
+        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType4)), 0) + NegativeInfluence())
     End Function
     ReadOnly Property IsDemoralized() As Boolean Implements ICharacter.IsDemoralized
         Get
-            If GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
+            If GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType4)).HasValue Then
                 Return CurrentMP <= 0
             End If
             Return False
         End Get
     End Property
     Sub AddStress(delta As Long) Implements ICharacter.AddStress
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 13L), delta)
+        ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType13), delta)
     End Sub
     ReadOnly Property CanIntimidate As Boolean Implements ICharacter.CanIntimidate
         Get
-            If Not GetStatistic(CharacterStatisticType.FromId(WorldData, 4L)).HasValue Then
+            If Not GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType4)).HasValue Then
                 Return False
             End If
             Return Location.Factions.AlliesOf(Me).Count <= Location.Factions.EnemiesOf(Me).Count
@@ -225,24 +225,24 @@
     End Property
     Property CurrentMP As Long Implements ICharacter.CurrentMP
         Get
-            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, 13L)).Value)
+            Return Math.Max(0, GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType7)).Value - GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType13)).Value)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 13L), GetStatistic(CharacterStatisticType.FromId(WorldData, 7)).Value - value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType13), GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType7)).Value - value)
         End Set
     End Property
     Property CurrentMana As Long Implements ICharacter.CurrentMana
         Get
-            Dim maximumMana = GetStatistic(CharacterStatisticType.FromId(WorldData, 8L))
-            Dim fatigue = GetStatistic(CharacterStatisticType.FromId(WorldData, 15L))
+            Dim maximumMana = GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType8))
+            Dim fatigue = GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType15))
             Return Math.Max(0, If(maximumMana, 0L) - If(fatigue, 0L))
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 15L), GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value - value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType15), GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType8)).Value - value)
         End Set
     End Property
     Sub DoFatigue(fatigue As Long) Implements ICharacter.DoFatigue
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 15L), fatigue)
+        ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType15), fatigue)
     End Sub
     Sub Destroy() Implements ICharacter.Destroy
         WorldData.Character.Clear(Id)
@@ -306,18 +306,18 @@
         End Get
     End Property
     Function AddXP(xp As Long) As Boolean Implements ICharacter.AddXP
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, 16L), xp)
-        Dim xpGoal = GetStatistic(CharacterStatisticType.FromId(WorldData, 17L))
+        ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType16), xp)
+        Dim xpGoal = GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType17))
         If Not xpGoal.HasValue Then
             Return False
         End If
-        If GetStatistic(CharacterStatisticType.FromId(WorldData, 16L)).Value >= xpGoal Then
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 16L), -xpGoal.Value)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 17L), xpGoal.Value)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), 1)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 12L), 0)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 13L), 0)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 15L), 0)
+        If GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType16)).Value >= xpGoal Then
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType16), -xpGoal.Value)
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType17), xpGoal.Value)
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType9), 1)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType12), 0)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType13), 0)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType15), 0)
             Return True
         End If
         Return False
@@ -334,58 +334,58 @@
     End Function
     Property Drunkenness As Long Implements ICharacter.Drunkenness
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 18L)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType18)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 18L), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType18), value)
         End Set
     End Property
     Property Chafing As Long Implements ICharacter.Chafing
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 22L)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType22)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 22L), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType22), value)
         End Set
     End Property
     Property Highness As Long Implements ICharacter.Highness
         Get
-            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 19L)), 0)
+            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType19)), 0)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 19L), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType19), value)
         End Set
     End Property
     Property Hunger As Long Implements ICharacter.Hunger
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 20L)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType20)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 20L), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType20), value)
         End Set
     End Property
     Public ReadOnly Property MaximumMana As Long Implements ICharacter.MaximumMana
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 8L)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType8)).Value
         End Get
     End Property
     Public Property FoodPoisoning As Long Implements ICharacter.FoodPoisoning
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, 21L)).Value
+            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType21)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, 21L), value)
+            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType21), value)
         End Set
     End Property
     ReadOnly Property IsFullyAssigned As Boolean Implements ICharacter.IsFullyAssigned
         Get
-            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, 9L)), 0) = 0
+            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType9)), 0) = 0
         End Get
     End Property
     Public Sub AssignPoint(statisticType As ICharacterStatisticType) Implements ICharacter.AssignPoint
         If Not IsFullyAssigned Then
             ChangeStatistic(statisticType, 1)
-            ChangeStatistic(CharacterStatisticType.FromId(WorldData, 9L), -1)
+            ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType9), -1)
         End If
     End Sub
     Public ReadOnly Property CanGamble As Boolean Implements ICharacter.CanGamble
@@ -457,11 +457,11 @@
             End If
         End If
     End Sub
-    Public Property Mode As PlayerMode Implements ICharacter.Mode
+    Public Property Mode As Long Implements ICharacter.Mode
         Get
-            Return CType(WorldData.Player.ReadPlayerMode().Value, PlayerMode)
+            Return WorldData.Player.ReadPlayerMode().Value
         End Get
-        Set(value As PlayerMode)
+        Set(value As Long)
             WorldData.Player.WritePlayerMode(value)
         End Set
     End Property
@@ -486,7 +486,7 @@
     End Sub
     ReadOnly Property CanDoIntimidation() As Boolean Implements ICharacter.CanDoIntimidation
         Get
-            If If(GetStatistic(CharacterStatisticType.FromId(WorldData, 3L)), 0) <= 0 Then
+            If If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType3)), 0) <= 0 Then
                 Return False
             End If
             Dim enemy = Location.Factions.EnemiesOf(Me).FirstOrDefault
@@ -522,7 +522,7 @@
     End Sub
 
     Public Function RollPower() As Long Implements ICharacter.RollPower
-        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, 5L)), 0) + NegativeInfluence())
+        Return RollDice(If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.CharacterStatisticTypes.CharacterStatisticType5)), 0) + NegativeInfluence())
     End Function
 
     Public ReadOnly Property HasEquipment As Boolean Implements ICharacter.HasEquipment

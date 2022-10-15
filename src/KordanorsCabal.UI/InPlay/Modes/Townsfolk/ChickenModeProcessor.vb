@@ -31,7 +31,7 @@ Friend Class ChickenModeProcessor
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case FeedButtonIndex
                 If player.HasItemType(ItemType.FromId(StaticWorldData.World, 24)) OrElse player.HasItemType(ItemType.FromId(StaticWorldData.World, 35)) Then
                     Dim item = RNG.FromEnumerable(player.Inventory.Items.Where(Function(x) x.Name = ItemType.FromId(StaticWorldData.World, 24L).Name))
@@ -61,7 +61,7 @@ Friend Class ChickenModeProcessor
     End Function
 
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
-        player.Mode = PlayerMode.Neutral
+        player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
 End Class

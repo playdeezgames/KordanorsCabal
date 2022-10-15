@@ -32,7 +32,7 @@
                 Const featureTypeId = 2L
                 worldData.Setup(Function(x) x.Feature.ReadFeatureType(It.IsAny(Of Long))).Returns(featureTypeId)
                 worldData.Setup(Function(x) x.FeatureType.ReadInteractionMode(It.IsAny(Of Long))).Returns(0L)
-                subject.InteractionMode.ShouldBe(PlayerMode.None)
+                subject.InteractionMode.ShouldBe(Game.Constants.PlayerModes.None)
                 worldData.Verify(Function(x) x.Feature.ReadFeatureType(id))
                 worldData.Verify(Function(x) x.FeatureType.ReadInteractionMode(featureTypeId))
             End Sub)

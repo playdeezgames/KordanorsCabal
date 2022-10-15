@@ -38,7 +38,7 @@ Friend Class BlackMageModeProcessor
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case OffersButtonIndex
                 ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 1)
                 Return UIState.ShoppeOffers
@@ -61,7 +61,7 @@ Friend Class BlackMageModeProcessor
     End Function
 
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
-        player.Mode = PlayerMode.Neutral
+        player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
 End Class

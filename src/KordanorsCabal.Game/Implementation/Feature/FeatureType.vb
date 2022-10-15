@@ -14,9 +14,9 @@
             Return Game.LocationType.FromId(WorldData, WorldData.FeatureType.ReadLocationType(Id))
         End Get
     End Property
-    ReadOnly Property InteractionMode As PlayerMode Implements IFeatureType.InteractionMode
+    ReadOnly Property InteractionMode As Long Implements IFeatureType.InteractionMode
         Get
-            Return CType(WorldData.FeatureType.ReadInteractionMode(Id).Value, PlayerMode)
+            Return WorldData.FeatureType.ReadInteractionMode(Id).Value
         End Get
     End Property
     Sub New(worldData As IWorldData, featureTypeId As Long)

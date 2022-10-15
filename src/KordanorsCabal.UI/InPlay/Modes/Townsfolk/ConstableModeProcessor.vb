@@ -28,7 +28,7 @@
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case BountiesButtonIndex
                 Return HandleBounties(player)
         End Select
@@ -52,7 +52,7 @@
     End Function
 
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
-        player.Mode = PlayerMode.Neutral
+        player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
 End Class

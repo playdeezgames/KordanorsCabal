@@ -30,7 +30,7 @@ Friend Class TownDrunkModeProcessor
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case EnableButtonIndex
                 If player.HasItemType(ItemType.FromId(StaticWorldData.World, 26)) Then
                     Return GiveBeer(player)
@@ -48,7 +48,7 @@ Friend Class TownDrunkModeProcessor
     End Function
 
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
-        player.Mode = PlayerMode.Neutral
+        player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
 End Class

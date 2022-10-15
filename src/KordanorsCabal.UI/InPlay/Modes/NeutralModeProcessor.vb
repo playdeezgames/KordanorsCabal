@@ -84,7 +84,7 @@
                     Return UIState.Message
                 End If
                 PushButtonIndex(0)
-                player.Mode = PlayerMode.Turn
+                player.Mode = Game.Constants.PlayerModes.Turn
             Case MoveRunButtonIndex
                 If player.Combat.CanFight Then
                     player.Combat.Run()
@@ -92,7 +92,7 @@
                     Return UIState.Message
                 End If
                 PushButtonIndex(0)
-                player.Mode = PlayerMode.Move
+                player.Mode = Game.Constants.PlayerModes.Move
             Case InteractIntimidateButtonIndex
                 If player.CanDoIntimidation Then
                     player.DoIntimidation()
@@ -138,7 +138,7 @@
     End Function
 
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
-        player.Mode = PlayerMode.Neutral
+        player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
 End Class

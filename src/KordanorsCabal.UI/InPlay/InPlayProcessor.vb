@@ -3,21 +3,21 @@
 Friend Class InPlayProcessor
     Implements IProcessor
 
-    Private ReadOnly _modeProcessors As IReadOnlyDictionary(Of PlayerMode, ModeProcessor) =
-        New Dictionary(Of PlayerMode, ModeProcessor) From
+    Private ReadOnly _modeProcessors As IReadOnlyDictionary(Of Long, ModeProcessor) =
+        New Dictionary(Of Long, ModeProcessor) From
         {
-            {PlayerMode.BlackMage, New BlackMageModeProcessor},
-            {PlayerMode.BlackMarket, New BlackMarketModeProcessor},
-            {PlayerMode.Blacksmith, New BlacksmithModeProcessor},
-            {PlayerMode.Constable, New ConstableModeProcessor},
-            {PlayerMode.Chicken, New ChickenModeProcessor},
-            {PlayerMode.Elder, New ElderModeProcessor},
-            {PlayerMode.Healer, New HealerModeProcessor},
-            {PlayerMode.InnKeeper, New InnKeeperModeProcessor},
-            {PlayerMode.Move, New MoveModeProcessor},
-            {PlayerMode.Neutral, New NeutralModeProcessor},
-            {PlayerMode.TownDrunk, New TownDrunkModeProcessor},
-            {PlayerMode.Turn, New TurnModeProcessor}
+            {Game.Constants.PlayerModes.BlackMage, New BlackMageModeProcessor},
+            {Game.Constants.PlayerModes.BlackMarket, New BlackMarketModeProcessor},
+            {Game.Constants.PlayerModes.Blacksmith, New BlacksmithModeProcessor},
+            {Game.Constants.PlayerModes.Constable, New ConstableModeProcessor},
+            {Game.Constants.PlayerModes.Chicken, New ChickenModeProcessor},
+            {Game.Constants.PlayerModes.Elder, New ElderModeProcessor},
+            {Game.Constants.PlayerModes.Healer, New HealerModeProcessor},
+            {Game.Constants.PlayerModes.InnKeeper, New InnKeeperModeProcessor},
+            {Game.Constants.PlayerModes.Move, New MoveModeProcessor},
+            {Game.Constants.PlayerModes.Neutral, New NeutralModeProcessor},
+            {Game.Constants.PlayerModes.TownDrunk, New TownDrunkModeProcessor},
+            {Game.Constants.PlayerModes.Turn, New TurnModeProcessor}
         }
 
 

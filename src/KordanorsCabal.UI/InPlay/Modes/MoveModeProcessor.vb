@@ -58,7 +58,7 @@ Friend Class MoveModeProcessor
         Select Case button.Index
             Case CancelButtonIndex
                 PopButtonIndex()
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case DownButtonIndex
                 Return HandleMove(player, Direction.FromId(StaticWorldData.World, 6L))
             Case UpButtonIndex
@@ -82,7 +82,7 @@ Friend Class MoveModeProcessor
     Private Function HandleMove(player As ICharacter, direction As IDirection) As UIState
         If player.Movement.CanMove(direction) Then
             PopButtonIndex()
-            player.Mode = PlayerMode.Neutral
+            player.Mode = Game.Constants.PlayerModes.Neutral
             If player.Movement.Move(direction) Then
                 player.EnqueueMessage("You take damage from starvation!")
                 If player.Health.IsDead Then
@@ -96,7 +96,7 @@ Friend Class MoveModeProcessor
     End Function
 
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
-        player.Mode = PlayerMode.Neutral
+        player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
 End Class

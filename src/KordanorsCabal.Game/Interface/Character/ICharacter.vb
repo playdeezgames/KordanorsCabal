@@ -56,7 +56,7 @@
     Sub DoIntimidation()
     Sub PurifyItems()
     Property Direction As IDirection
-    Property Mode As PlayerMode
+    Property Mode As Long
     ReadOnly Property IsFullyAssigned As Boolean
     Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As ICharacterStatisticType) As Long?

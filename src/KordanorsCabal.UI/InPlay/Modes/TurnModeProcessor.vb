@@ -30,25 +30,25 @@
         Select Case button.Index
             Case CancelButtonIndex
                 PopButtonIndex()
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case AroundButtonIndex
                 PopButtonIndex()
                 player.Direction = player.Direction.Opposite
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case LeftButtonIndex
                 PopButtonIndex()
                 player.Direction = player.Direction.PreviousDirection
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
             Case RightButtonIndex
                 PopButtonIndex()
                 player.Direction = player.Direction.NextDirection
-                player.Mode = PlayerMode.Neutral
+                player.Mode = Game.Constants.PlayerModes.Neutral
         End Select
         Return UIState.InPlay
     End Function
 
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
-        player.Mode = PlayerMode.Neutral
+        player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
 End Class
