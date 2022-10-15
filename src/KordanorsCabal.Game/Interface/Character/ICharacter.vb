@@ -8,10 +8,7 @@
     ReadOnly Property Advancement As ICharacterAdvancement
     ReadOnly Property MentalCombat As ICharacterMentalCombat
     ReadOnly Property Spellbook As ICharacterSpellbook
-    'Mana
-    ReadOnly Property MaximumMana As Long
-    Property CurrentMana As Long
-    Sub DoFatigue(fatigue As Long)
+    ReadOnly Property Mana As ICharacterMana
     'Statistics
     Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As ICharacterStatisticType) As Long?

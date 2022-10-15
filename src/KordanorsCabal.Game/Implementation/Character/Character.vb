@@ -131,19 +131,6 @@
             Return CharacterType.Name
         End Get
     End Property
-    Property CurrentMana As Long Implements ICharacter.CurrentMana
-        Get
-            Dim maximumMana = GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Mana))
-            Dim fatigue = GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Fatigue))
-            Return Math.Max(0, If(maximumMana, 0L) - If(fatigue, 0L))
-        End Get
-        Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Fatigue), GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Mana)).Value - value)
-        End Set
-    End Property
-    Sub DoFatigue(fatigue As Long) Implements ICharacter.DoFatigue
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Fatigue), fatigue)
-    End Sub
     Sub Destroy() Implements ICharacter.Destroy
         WorldData.Character.Clear(Id)
     End Sub
@@ -246,11 +233,6 @@
         Set(value As Long)
             SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger), value)
         End Set
-    End Property
-    Public ReadOnly Property MaximumMana As Long Implements ICharacter.MaximumMana
-        Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Mana)).Value
-        End Get
     End Property
     Public Property FoodPoisoning As Long Implements ICharacter.FoodPoisoning
         Get
@@ -374,6 +356,12 @@
     Public ReadOnly Property Spellbook As ICharacterSpellbook Implements ICharacter.Spellbook
         Get
             Return CharacterSpellbook.FromCharacter(WorldData, Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property Mana As ICharacterMana Implements ICharacter.Mana
+        Get
+            Return CharacterMana.FromCharacter(WorldData, Me)
         End Get
     End Property
 End Class

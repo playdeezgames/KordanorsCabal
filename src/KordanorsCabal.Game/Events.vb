@@ -11,13 +11,13 @@
                     If enemy Is Nothing OrElse Not enemy.IsUndead Then
                         Return False
                     End If
-                    Return character.CurrentMana > 0
+                    Return character.Mana.CurrentMana > 0
                 End Function},
             {"CharacterCanCastPurify",
                 Function(worldData, parms)
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
-                    Return character.CurrentMana > 0
+                    Return character.Mana.CurrentMana > 0
                 End Function},
             {"CharacterCanAcceptCellarRatsQuest",
                 Function(worldData, parms)
@@ -54,12 +54,12 @@
                         End Function},
             {"CanUseAirShard", Function(worldData, parms)
                                    Dim character = Game.Character.FromId(worldData, parms(0))
-                                   Return character.Movement.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0
+                                   Return character.Movement.Location.LocationType.IsDungeon AndAlso character.Mana.CurrentMana > 0
                                End Function},
             {"CanUseEarthShard", Function(worldData, parms)
                                      Dim character = Game.Character.FromId(worldData, parms(0))
                                      Dim location = character.Movement.Location
-                                     Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
+                                     Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.Mana.CurrentMana > 0
                                  End Function},
             {"CanUsePr0n", Function(worldData, parms)
                                Dim character = Game.Character.FromId(worldData, parms(0))
@@ -69,11 +69,11 @@
             {"CanUseFireShard", Function(worldData, parms)
                                     Dim character = Game.Character.FromId(worldData, parms(0))
                                     Dim location = character.Movement.Location
-                                    Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
+                                    Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.Mana.CurrentMana > 0
                                 End Function},
             {"CanUseWaterShard", Function(worldData, parms)
                                      Dim character = Game.Character.FromId(worldData, parms(0))
-                                     Return character.Movement.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0
+                                     Return character.Movement.Location.LocationType.IsDungeon AndAlso character.Mana.CurrentMana > 0
                                  End Function},
             {"CanUseBottle", Function(worldData, parms)
                                  Dim character = Game.Character.FromId(worldData, parms(0))
@@ -101,7 +101,7 @@
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You cast {spellType.Name} on {enemy.Name}!")
-                    character.DoFatigue(1)
+                    character.Mana.DoFatigue(1)
                     Dim damage As Long = character.Spellbook.RollSpellDice(spellType)
                     lines.Add($"You do {damage} damage!")
                     enemy.PhysicalCombat.DoDamage(damage)
@@ -118,7 +118,7 @@
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
                     character.PurifyItems()
-                    character.DoFatigue(1)
+                    character.Mana.DoFatigue(1)
                     character.EnqueueMessage("You purify yer inventory!")
                 End Sub},
             {"CharacterAcceptCellarRatsQuest",
@@ -209,7 +209,7 @@
             {"UseAirShard",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    character.CurrentMana -= 1
+                    character.Mana.CurrentMana -= 1
                     Dim level = character.Movement.Location.DungeonLevel
                     Dim locations = Location.FromLocationType(worldData, LocationType.FromId(worldData, 4L)).Where(Function(x) x.DungeonLevel.Id = level.Id)
                     character.Movement.Location = RNG.FromEnumerable(locations)
@@ -314,7 +314,7 @@
             {"UseFireShard",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    character.DoFatigue(1)
+                    character.Mana.DoFatigue(1)
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
@@ -343,15 +343,15 @@
             {"UseHerb",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    Dim delta = character.MaximumMana - character.CurrentMana
-                    character.CurrentMana = character.MaximumMana
+                    Dim delta = character.Mana.MaximumMana - character.Mana.CurrentMana
+                    character.Mana.CurrentMana = character.Mana.MaximumMana
                     character.Highness += 10
                     character.EnqueueMessage($"You use yer {ItemType.FromId(worldData, 33).Name} to smoke yer {ItemType.FromId(worldData, 34).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Mana).Name}.")
                 End Sub},
             {"UseEarthShard",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    character.DoFatigue(1)
+                    character.Mana.DoFatigue(1)
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
@@ -365,7 +365,7 @@
             {"UseWaterShard",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    character.CurrentMana -= 1
+                    character.Mana.CurrentMana -= 1
                     character.Health.Heal()
                     character.EnqueueMessage($"You use {ItemType.FromId(worldData, 12L).Name} to heal yer wounds!")
                 End Sub},
