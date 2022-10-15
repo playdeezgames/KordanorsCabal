@@ -12,7 +12,7 @@
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadForTransactionType(itemTypeId, transactionTypeId).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Record.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+                    Function(x) x.Record.WithValues(Of Long, Long, Long)(
                         It.IsAny(Of Action),
                         Tables.ItemTypeShopTypes,
                         Columns.ShoppeTypeIdColumn,

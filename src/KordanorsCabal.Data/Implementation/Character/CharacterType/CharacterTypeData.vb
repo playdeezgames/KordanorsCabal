@@ -80,7 +80,7 @@
     End Function
 
     Public Function ReadAll() As IEnumerable(Of Long) Implements ICharacterTypeData.ReadAll
-        Return Store.Record.ReadRecords(Of Long)(
+        Return Store.Record.All(Of Long)(
             AddressOf Initialize,
             TableName,
             CharacterTypeIdColumn)

@@ -30,7 +30,7 @@
     End Sub
 
     Public Function Read(characterId As Long, quest As Long) As Boolean Implements ICharacterQuestData.Read
-        Return If(Store.Record.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+        Return If(Store.Record.WithValues(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             CharacterIdColumn,

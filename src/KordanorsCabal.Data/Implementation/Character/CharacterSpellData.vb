@@ -24,7 +24,7 @@
     End Sub
 
     Public Function ReadForCharacter(characterId As Long) As IEnumerable(Of Tuple(Of Long, Long)) Implements ICharacterSpellData.ReadForCharacter
-        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+        Return Store.Record.WithValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             (SpellTypeIdColumn, SpellLevelColumn),

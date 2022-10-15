@@ -1,17 +1,17 @@
 ﻿Public Interface IStoreRecord
-    Function ReadRecords(Of TOutputColumn)(
+    Function All(Of TOutputColumn)(
                                           initializer As Action,
                                           tableName As String,
                                           outputColumnName As String
                                           ) As List(Of TOutputColumn)
-    Function ReadRecordsWithColumnValue(Of TInputColumn,
+    Function WithValues(Of TInputColumn,
                                             TOutputColumn)(
                                                           initializer As Action,
                                                           tableName As String,
                                                           outputColumnName As String,
                                                           forColumnValue As (String, TInputColumn)
                                                           ) As List(Of TOutputColumn)
-    Function ReadRecordsWithColumnValues(Of TFirstInputColumn,
+    Function WithValues(Of TFirstInputColumn,
                                              TSecondInputColumn,
                                              TOutputColumn)(
                                                            initializer As Action,
@@ -20,7 +20,7 @@
                                                            firstColumnValue As (String, TFirstInputColumn),
                                                            secondColumnValue As (String, TSecondInputColumn)
                                                            ) As List(Of TOutputColumn)
-    Function ReadRecordsWithColumnValue(Of TInputColumn,
+    Function WithValue(Of TInputColumn,
                                             TFirstOutputColumn,
                                             TSecondOutputColumn)(
                                                 initializer As Action,

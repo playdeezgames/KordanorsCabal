@@ -57,7 +57,7 @@
     End Sub
 
     Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of Long, Integer) Implements ICharacterTypeLootData.Read
-        Dim results = Store.Record.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+        Dim results = Store.Record.WithValue(Of Long, Long, Long)(
             AddressOf Initialize,
             TableName,
             (ItemTypeIdColumn, WeightColumn),

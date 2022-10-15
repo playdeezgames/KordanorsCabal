@@ -25,7 +25,7 @@
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadItems(inventoryId).ShouldBeNull
                 store.Verify(
-                    function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long)(
+                    function(x) x.Record.WithValues(Of Long, Long)(
                         It.IsAny(Of Action),
                         Tables.InventoryItems,
                         Columns.ItemIdColumn,

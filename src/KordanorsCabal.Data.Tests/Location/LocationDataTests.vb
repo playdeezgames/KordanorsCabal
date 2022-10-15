@@ -25,7 +25,7 @@
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadForLocationType(locationType).ShouldBeNull
                 store.Verify(
-                    Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long)(
+                    Function(x) x.Record.WithValues(Of Long, Long)(
                     It.IsAny(Of Action),
                     Tables.Locations,
                     Columns.LocationIdColumn,

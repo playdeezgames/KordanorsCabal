@@ -40,7 +40,7 @@
                 Dim characterId = 1L
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadForCharacter(characterId).ShouldBeNull
-                store.Verify(Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+                store.Verify(Function(x) x.Record.WithValue(Of Long, Long, Long)(
                                  It.IsAny(Of Action),
                                  CharacterSpells,
                                  (SpellTypeIdColumn, SpellLevelColumn),

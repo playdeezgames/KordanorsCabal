@@ -40,7 +40,7 @@
                 Dim quest = 2L
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.Read(characterId, quest).ShouldBeFalse
-                store.Verify(Sub(x) x.Record.ReadRecordsWithColumnValues(Of Long, Long, Long)(
+                store.Verify(Sub(x) x.Record.WithValues(Of Long, Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterQuests,
                                  CharacterIdColumn,

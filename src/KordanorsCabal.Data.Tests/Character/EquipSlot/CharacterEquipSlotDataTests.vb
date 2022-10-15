@@ -58,7 +58,7 @@ Public Class CharacterEquipSlotDataTests
                 Const characterId = 1L
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadEquipSlotsForCharacter(characterId).ShouldBeNull
-                store.Verify(Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Record.WithValues(Of Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              Columns.EquipSlotColumn,
@@ -90,7 +90,7 @@ Public Class CharacterEquipSlotDataTests
                 Const characterId = 1L
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadItemsForCharacter(characterId).ShouldBeNull
-                store.Verify(Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long)(
+                store.Verify(Function(x) x.Record.WithValues(Of Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              Columns.ItemIdColumn,

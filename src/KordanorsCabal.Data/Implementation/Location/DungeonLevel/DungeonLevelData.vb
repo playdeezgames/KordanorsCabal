@@ -23,7 +23,7 @@
     End Sub
 
     Public Function ReadAll() As IEnumerable(Of Long) Implements IDungeonLevelData.ReadAll
-        Return Store.Record.ReadRecords(Of Long)(
+        Return Store.Record.All(Of Long)(
             AddressOf Initialize,
             TableName,
             DungeonLevelIdColumn)

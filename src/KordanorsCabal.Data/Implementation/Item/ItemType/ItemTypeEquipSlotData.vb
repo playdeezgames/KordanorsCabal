@@ -40,7 +40,7 @@
     End Sub
 
     Public Function ReadForItemType(itemTypeId As Long) As IEnumerable(Of Long) Implements IItemTypeEquipSlotData.ReadForItemType
-        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long)(
+        Return Store.Record.WithValues(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             EquipSlotIdColumn,

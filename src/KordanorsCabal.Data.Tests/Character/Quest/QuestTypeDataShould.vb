@@ -69,7 +69,7 @@
             Sub(store, events, subject)
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadAll().ShouldBeNull
-                store.Verify(Function(x) x.Record.ReadRecords(Of Long)(It.IsAny(Of Action), Tables.QuestTypes, Columns.QuestTypeIdColumn))
+                store.Verify(Function(x) x.Record.All(Of Long)(It.IsAny(Of Action), Tables.QuestTypes, Columns.QuestTypeIdColumn))
             End Sub)
     End Sub
 End Class

@@ -10,7 +10,7 @@
                 Dim characterType = 1L
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.Read(characterType).ShouldBeNull
-                store.Verify(Function(x) x.Record.ReadRecordsWithColumnValue(Of Long, Long, Long)(
+                store.Verify(Function(x) x.Record.WithValue(Of Long, Long, Long)(
                                  It.IsAny(Of Action),
                                  Tables.CharacterTypeLoots,
                                  (Columns.ItemTypeIdColumn, Columns.WeightColumn),

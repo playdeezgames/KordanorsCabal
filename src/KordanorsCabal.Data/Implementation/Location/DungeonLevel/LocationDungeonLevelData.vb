@@ -35,7 +35,7 @@
     End Sub
 
     Public Function ReadForDungeonLevel(dungeonLevel As Long) As IEnumerable(Of Long) Implements ILocationDungeonLevelData.ReadForDungeonLevel
-        Return Store.Record.ReadRecordsWithColumnValue(Of Long, Long)(
+        Return Store.Record.WithValues(Of Long, Long)(
             AddressOf Initialize,
             TableName,
             LocationIdColumn,

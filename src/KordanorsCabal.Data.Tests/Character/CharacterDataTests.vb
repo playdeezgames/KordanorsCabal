@@ -60,7 +60,7 @@
                 Dim locationId = 1L
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadForLocation(locationId)
-                store.Verify(Function(x) x.Record.ReadRecordsWithColumnValue(Of Long,
+                store.Verify(Function(x) x.Record.WithValues(Of Long,
                                  Long)(
                                  It.IsAny(Of Action),
                                  Tables.Characters,

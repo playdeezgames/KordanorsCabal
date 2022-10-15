@@ -10,7 +10,7 @@
                 store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
                 subject.ReadAll().ShouldBeNull
                 store.Verify(
-                    Function(x) x.Record.ReadRecords(Of Long)(
+                    Function(x) x.Record.All(Of Long)(
                     It.IsAny(Of Action),
                     Tables.FeatureTypes,
                     Columns.FeatureTypeIdColumn))
