@@ -497,12 +497,6 @@
             Return EquippedItems.Any
         End Get
     End Property
-    Public ReadOnly Property HasStatistic(statisticType As ICharacterStatisticType) As Boolean Implements ICharacter.HasStatistic
-        Get
-            Return GetStatistic(statisticType).HasValue
-        End Get
-    End Property
-
     Public ReadOnly Property Movement As ICharacterMovement Implements ICharacter.Movement
         Get
             Return CharacterMovement.FromId(WorldData, Me)

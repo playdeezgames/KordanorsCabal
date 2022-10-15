@@ -35,7 +35,6 @@
     Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long)
     Function GetStatistic(statisticType As ICharacterStatisticType) As Long?
     Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long)
-    ReadOnly Property HasStatistic(statisticType As ICharacterStatisticType) As Boolean
     'Inventory
     ReadOnly Property Inventory As IInventory
     ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean
