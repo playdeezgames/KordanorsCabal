@@ -40,7 +40,7 @@ Friend Class InteractItemProcessor
     End Function
 
     Private Shared Function DropItem() As UIState
-        Game.World.PlayerCharacter(StaticWorldData.World).Location.Inventory.Add(InteractItem)
+        Game.World.PlayerCharacter(StaticWorldData.World).Movement.Location.Inventory.Add(InteractItem)
         If Game.World.PlayerCharacter(StaticWorldData.World).Inventory.IsEmpty Then
             Return UIState.InPlay
         End If

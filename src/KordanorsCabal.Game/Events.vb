@@ -7,7 +7,7 @@
                 Function(worldData, parms)
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
-                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy Is Nothing OrElse Not enemy.IsUndead Then
                         Return False
                     End If
@@ -34,18 +34,18 @@
             {"CanLearnHolyBolt", Function(worldData, parms) Character.FromId(worldData, parms(0)).CanLearn(SpellType.FromId(worldData, 1L))},
             {"CanUseBeer", Function(worldData, parms)
                                Dim character = Game.Character.FromId(worldData, parms(0))
-                               Dim enemy = character.Location.Factions.FirstEnemy(character)
+                               Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                                Return enemy Is Nothing OrElse enemy.CanBeBribedWith(ItemType.FromId(worldData, 26))
                            End Function},
-            {"IsInDungeon", Function(worldData, parms) Character.FromId(worldData, parms(0)).Location.LocationType.IsDungeon},
+            {"IsInDungeon", Function(worldData, parms) Character.FromId(worldData, parms(0)).Movement.Location.LocationType.IsDungeon},
             {"AlwaysTrue", Function(worldData, parms) True},
             {"IsFightingUndead", Function(worldData, parms)
                                      Dim character = Game.Character.FromId(worldData, parms(0))
-                                     Return character.Combat.CanFight AndAlso character.Location.Factions.FirstEnemy(character).IsUndead
+                                     Return character.Combat.CanFight AndAlso character.Movement.Location.Factions.FirstEnemy(character).IsUndead
                                  End Function},
             {"CanUseRottenEgg", Function(worldData, parms)
                                     Dim character = Game.Character.FromId(worldData, parms(0))
-                                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                                     Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)))
                                 End Function},
             {"HasBong", Function(worldData, parms)
@@ -54,30 +54,30 @@
                         End Function},
             {"CanUseAirShard", Function(worldData, parms)
                                    Dim character = Game.Character.FromId(worldData, parms(0))
-                                   Return character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0
+                                   Return character.Movement.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0
                                End Function},
             {"CanUseEarthShard", Function(worldData, parms)
                                      Dim character = Game.Character.FromId(worldData, parms(0))
-                                     Dim location = character.Location
+                                     Dim location = character.Movement.Location
                                      Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
                                  End Function},
             {"CanUsePr0n", Function(worldData, parms)
                                Dim character = Game.Character.FromId(worldData, parms(0))
-                               Dim enemy = character.Location.Factions.FirstEnemy(character)
+                               Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                                Return (enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 28))) OrElse enemy Is Nothing
                            End Function},
             {"CanUseFireShard", Function(worldData, parms)
                                     Dim character = Game.Character.FromId(worldData, parms(0))
-                                    Dim location = character.Location
+                                    Dim location = character.Movement.Location
                                     Return location.LocationType.IsDungeon AndAlso location.Factions.EnemiesOf(character).Any AndAlso character.CurrentMana > 0
                                 End Function},
             {"CanUseWaterShard", Function(worldData, parms)
                                      Dim character = Game.Character.FromId(worldData, parms(0))
-                                     Return character.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0
+                                     Return character.Movement.Location.LocationType.IsDungeon AndAlso character.CurrentMana > 0
                                  End Function},
             {"CanUseBottle", Function(worldData, parms)
                                  Dim character = Game.Character.FromId(worldData, parms(0))
-                                 Dim enemy = character.Location.Factions.FirstEnemy(character)
+                                 Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                                  Return enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 30))
                              End Function},
             {"CanLearnPurify", Function(worldData, parms)
@@ -97,7 +97,7 @@
                         character.EnqueueMessage($"You cannot cast {spellType.Name} now!")
                         Return
                     End If
-                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You cast {spellType.Name} on {enemy.Name}!")
@@ -180,7 +180,7 @@
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim sfx As Sfx? = Nothing
                     Dim damageRoll = RNG.RollDice("1d4")
-                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String) From {
                         $"{ItemType.FromId(worldData, 22L).Name} deals {damageRoll} HP to {enemy.Name}!"
                     }
@@ -196,7 +196,7 @@
             {"UseTownPortal",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    Dim location = character.Location
+                    Dim location = character.Movement.Location
                     Dim outDirection = Direction.FromId(worldData, 8L)
                     Dim inDirection = Direction.FromId(worldData, 7L)
                     location.Routes.DestroyRoute(outDirection)
@@ -210,15 +210,15 @@
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     character.CurrentMana -= 1
-                    Dim level = character.Location.DungeonLevel
+                    Dim level = character.Movement.Location.DungeonLevel
                     Dim locations = Location.FromLocationType(worldData, LocationType.FromId(worldData, 4L)).Where(Function(x) x.DungeonLevel.Id = level.Id)
-                    character.Location = RNG.FromEnumerable(locations)
+                    character.Movement.Location = RNG.FromEnumerable(locations)
                     character.EnqueueMessage($"You use the {ItemType.FromId(worldData, 14L).Name} and suddenly find yerself somewhere else!")
                 End Sub},
             {"UseRottenEgg",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)) Then
                         character.EnqueueMessage($"You give {enemy.Name} the {Game.ItemType.FromId(worldData, 37).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
@@ -229,7 +229,7 @@
             {"UsePr0n",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 28)) Then
                         character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(worldData, 28).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
@@ -287,7 +287,7 @@
             {"UseBeer",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.CanBeBribedWith(ItemType.FromId(worldData, 26)) Then
                         enemy.Destroy()
                         character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(worldData, 26).Name}, and they wander off to get drunk.")
@@ -301,7 +301,7 @@
             {"UseMoonPortal",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    Dim location = character.Location
+                    Dim location = character.Movement.Location
                     Dim outDirection = Direction.FromId(worldData, 8L)
                     Dim inDirection = Direction.FromId(worldData, 7L)
                     location.Routes.DestroyRoute(outDirection)
@@ -315,7 +315,7 @@
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     character.DoFatigue(1)
-                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You use {ItemType.FromId(worldData, 13).Name} on {enemy.Name}!")
@@ -352,7 +352,7 @@
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     character.DoFatigue(1)
-                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
                     lines.Add($"You use {ItemType.FromId(worldData, 11).Name} on {enemy.Name}!")
@@ -372,7 +372,7 @@
             {"UseBottle",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
-                    Dim enemy = character.Location.Factions.FirstEnemy(character)
+                    Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     character.EnqueueMessage($"You give the {ItemType.FromId(worldData, 30).Name} to the {enemy.Name}, and it wanders off happily.")
                     enemy.Destroy()
                 End Sub},

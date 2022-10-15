@@ -9,7 +9,7 @@
 
 
     Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
-        ShowHeader(buffer, player.Location.Feature.Name)
+        ShowHeader(buffer, player.Movement.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
                 buffer.WriteText((0, 1), "@#$% off, you %$#^!", False, Hue.Black)

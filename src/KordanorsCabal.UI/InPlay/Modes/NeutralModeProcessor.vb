@@ -13,7 +13,7 @@
     Const MenuButtonIndex = 9
 
     Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
-        Dim location = player.Location
+        Dim location = player.Movement.Location
         If location.LocationType.IsDungeon Then
             ShowDungeon(buffer, player)
         Else
@@ -27,7 +27,7 @@
     End Sub
 
     Private Sub ShowTownPortal(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
-        If player.Location.Routes.RouteTypes.Any(Function(x) x.Id = 10L) Then
+        If player.Movement.Location.Routes.RouteTypes.Any(Function(x) x.Id = 10L) Then
             buffer.WriteText(xy, "There is a portal here!", False, Hue.Purple)
         End If
     End Sub
@@ -39,7 +39,7 @@
     End Sub
 
     Private Sub ShowFeatures(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
-        Dim feature = player.Location.Feature
+        Dim feature = player.Movement.Location.Feature
         If feature IsNot Nothing Then
             buffer.WriteText(xy, $"You see: {feature.Name}", False, Hue.Black)
         End If
@@ -63,11 +63,11 @@
         ElseIf player.CanInteract Then
             Buttons(InteractIntimidateButtonIndex).Title = "Interact..."
         End If
-        Dim enemyCount = player.Location.Factions.EnemiesOf(player).Count
+        Dim enemyCount = player.Movement.Location.Factions.EnemiesOf(player).Count
         Buttons(GroundEnemiesButtonIndex).Title =
             If(player.Combat.CanFight,
                 $"Enemies({enemyCount})",
-                If(Not player.Location.Inventory.IsEmpty,
+                If(Not player.Movement.Location.Inventory.IsEmpty,
                     "Ground...",
                     ""))
         If Not player.Inventory.IsEmpty Then
@@ -107,7 +107,7 @@
                 If player.Combat.CanFight Then
                     Return UIState.Enemies
                 End If
-                If Not player.Location.Inventory.IsEmpty Then
+                If Not player.Movement.Location.Inventory.IsEmpty Then
                     Return UIState.GroundInventory
                 End If
             Case MenuButtonIndex

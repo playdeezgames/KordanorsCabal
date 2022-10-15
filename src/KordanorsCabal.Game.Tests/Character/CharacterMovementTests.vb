@@ -15,6 +15,20 @@
             End Sub)
     End Sub
     <Fact>
+    Sub have_location()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const locationId = 1L
+                Dim characterData As New Mock(Of ICharacterData)
+                characterData.Setup(Function(x) x.ReadLocation(id)).Returns(locationId)
+                worldData.SetupGet(Function(x) x.Character).Returns(characterData.Object)
+
+                subject.Location.ShouldNotBeNull
+
+                worldData.Verify(Function(x) x.Character.ReadLocation(id))
+            End Sub)
+    End Sub
+    <Fact>
     Sub have_direction()
         WithSubject(
             Sub(worldData, id, subject)

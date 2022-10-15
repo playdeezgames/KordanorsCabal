@@ -1,8 +1,6 @@
 ﻿Public Interface ICharacter
     Inherits IBaseThingie
     ReadOnly Property CharacterType As ICharacterType
-    Property Location As ILocation
-
     ReadOnly Property Movement As ICharacterMovement
     ReadOnly Property Quest As ICharacterQuest
     ReadOnly Property Health As ICharacterHealth

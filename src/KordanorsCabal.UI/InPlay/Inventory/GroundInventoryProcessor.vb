@@ -27,7 +27,7 @@ Friend Class GroundInventoryProcessor
 
     Public Sub Initialize() Implements IProcessor.Initialize
         currentItemIndex = 0
-        groundItems = Game.World.PlayerCharacter(StaticWorldData.World).Location.Inventory.Items.ToList
+        groundItems = Game.World.PlayerCharacter(StaticWorldData.World).Movement.Location.Inventory.Items.ToList
     End Sub
 
     Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
@@ -46,7 +46,7 @@ Friend Class GroundInventoryProcessor
 
     Private Function PickUpItem() As UIState
         Game.World.PlayerCharacter(StaticWorldData.World).Inventory.Add(groundItems(currentItemIndex))
-        groundItems = Game.World.PlayerCharacter(StaticWorldData.World).Location.Inventory.Items.ToList
+        groundItems = Game.World.PlayerCharacter(StaticWorldData.World).Movement.Location.Inventory.Items.ToList
         If Not groundItems.Any Then
             Return UIState.InPlay
         End If

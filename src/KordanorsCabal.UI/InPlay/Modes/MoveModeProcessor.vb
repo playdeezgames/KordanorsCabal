@@ -14,11 +14,11 @@ Friend Class MoveModeProcessor
     Const OutButtonIndex = 8
 
     Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
-        Dim location = player.Location
+        Dim location = player.Movement.Location
         If location.LocationType.IsDungeon Then
             ShowDungeon(buffer, player)
         Else
-            ShowHeader(buffer, player.Location.LocationType.Name)
+            ShowHeader(buffer, player.Movement.Location.LocationType.Name)
             ShowFacing(buffer, (0, 1), player)
             ShowExits(buffer, (0, 2), player)
 

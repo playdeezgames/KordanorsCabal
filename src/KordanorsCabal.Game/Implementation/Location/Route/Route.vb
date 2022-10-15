@@ -54,6 +54,6 @@
             End If
             Return destination
         End If
-        Return player.Location
+        Return player.Movement.Location
     End Function
 End Class

@@ -6,14 +6,26 @@
         MyBase.New(worldData, character.Id)
         Me.Character = character
     End Sub
-
+    Property Location As ILocation Implements ICharacterMovement.Location
+        Get
+            Dim result = WorldData.Character.ReadLocation(Id)
+            If result Is Nothing Then
+                Return Nothing
+            End If
+            Return Game.Location.FromId(WorldData, result.Value)
+        End Get
+        Set(value As ILocation)
+            WorldData.Character.WriteLocation(Id, value.Id)
+            WorldData.CharacterLocation.Write(Id, value.Id)
+        End Set
+    End Property
     Public ReadOnly Property Character As ICharacter Implements ICharacterMovement.Character
     Public Function CanMoveForward() As Boolean Implements ICharacterMovement.CanMoveForward
         Return CanMove(Direction)
     End Function
     Public ReadOnly Property CanMap() As Boolean Implements ICharacterMovement.CanMap
         Get
-            Dim result = Character.Location
+            Dim result = Location
             Return If(result IsNot Nothing, result.LocationType.CanMap, False)
         End Get
     End Property
@@ -44,13 +56,13 @@
         If Character.IsEncumbered Then
             Return False
         End If
-        If Character.Location Is Nothing OrElse Not Character.Location.Routes.Exists(direction) Then
+        If Location Is Nothing OrElse Not Location.Routes.Exists(direction) Then
             Return False
         End If
-        If Not Character.Location.Routes.Find(direction).CanMove(Character) Then
+        If Not Location.Routes.Find(direction).CanMove(Character) Then
             Return False
         End If
-        If Character.Location.Routes.Find(direction).ToLocation.LocationType.RequiresMP AndAlso Character.IsDemoralized() Then
+        If Location.Routes.Find(direction).ToLocation.LocationType.RequiresMP AndAlso Character.IsDemoralized() Then
             Return False
         End If
         Return True
@@ -63,7 +75,7 @@
             Character.Highness -= 1
             Character.FoodPoisoning -= 1
             Character.Chafing -= 1
-            Character.Location = Character.Location.Routes.Find(direction).Move(Character)
+            Location = Location.Routes.Find(direction).Move(Character)
             If Character.Hunger = CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger).MaximumValue Then
                 Character.Hunger \= 2
                 Character.Health.Current -= 1

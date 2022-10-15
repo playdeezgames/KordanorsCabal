@@ -8,7 +8,7 @@ Friend Class EnemiesProcessor
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Enemies", True, Hue.Blue)
         Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
-        Dim enemies = player.Location.Factions.EnemiesOf(player)
+        Dim enemies = player.Movement.Location.Factions.EnemiesOf(player)
         Dim row = 1
         For Each enemy In enemies
             buffer.WriteText((0, row), $"{enemy.Name}({enemy.Health.Current}/{enemy.Health.Maximum})", False, Hue.Black)

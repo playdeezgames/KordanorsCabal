@@ -12,10 +12,10 @@
     End Function
     ReadOnly Property CanFight As Boolean Implements ICharacterCombat.CanFight
         Get
-            If character.Location Is Nothing Then
+            If character.Movement.Location Is Nothing Then
                 Return False
             End If
-            Return character.Location.Factions.EnemiesOf(character).Any
+            Return character.Movement.Location.Factions.EnemiesOf(character).Any
         End Get
     End Property
     ReadOnly Property IsEnemy(character As ICharacter) As Boolean Implements ICharacterCombat.IsEnemy
@@ -78,9 +78,9 @@
     Friend Sub DropLoot()
         'TODO: unequip everything
         For Each item In character.Inventory.Items
-            character.Location.Inventory.Add(item)
+            character.Movement.Location.Inventory.Add(item)
         Next
-        character.CharacterType.Combat.DropLoot(character.Location)
+        character.CharacterType.Combat.DropLoot(character.Movement.Location)
     End Sub
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String)) Implements ICharacterCombat.Kill
         Dim lines As New List(Of String)
@@ -103,7 +103,7 @@
         Return (sfx, lines)
     End Function
     Sub DoCounterAttacks() Implements ICharacterCombat.DoCounterAttacks
-        Dim enemies = character.Location.Factions.EnemiesOf(character)
+        Dim enemies = character.Movement.Location.Factions.EnemiesOf(character)
         Dim enemyCount = enemies.Count
         Dim enemyIndex = 1
         For Each enemy In enemies
@@ -132,7 +132,7 @@
     Private Sub DoAttack()
         Dim lines As New List(Of String)
         Dim attackRoll = RollAttack()
-        Dim enemy = character.Location.Factions.EnemiesOf(character).First
+        Dim enemy = character.Movement.Location.Factions.EnemiesOf(character).First
         lines.Add($"You roll an attack of {attackRoll}.")
         Dim defendRoll = enemy.Combat.RollDefend()
         lines.Add($"{enemy.Name} rolls a defend of {defendRoll}.")
@@ -223,7 +223,7 @@
                     lines.Add($"{enemy.Name} completely demoralizes you and you drop everything and run away!")
                     Panic()
                     character.Money \= 2
-                    character.Location = Game.Location.FromLocationType(WorldData, LocationType.FromId(WorldData, 1L)).Single
+                    character.Movement.Location = Game.Location.FromLocationType(WorldData, LocationType.FromId(WorldData, 1L)).Single
                     Exit Select
                 End If
                 lines.Add($"You have {character.CurrentMP} MP left.")
@@ -271,7 +271,7 @@
             character.Unequip(equipSlot)
         Next
         For Each item In character.Inventory.Items
-            character.Location.Inventory.Add(item)
+            character.Movement.Location.Inventory.Add(item)
         Next
     End Sub
 End Class

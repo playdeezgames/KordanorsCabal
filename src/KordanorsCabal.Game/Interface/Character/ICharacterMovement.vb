@@ -10,4 +10,5 @@
     Function HasVisited(location As ILocation) As Boolean
     ReadOnly Property CanMap() As Boolean
     Property Direction As IDirection
+    Property Location As ILocation
 End Interface

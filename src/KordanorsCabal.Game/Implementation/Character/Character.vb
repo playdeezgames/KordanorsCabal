@@ -119,19 +119,6 @@
             SetStatistic(statisticType, current.Value + delta)
         End If
     End Sub
-    Property Location As ILocation Implements ICharacter.Location
-        Get
-            Dim result = WorldData.Character.ReadLocation(Id)
-            If result Is Nothing Then
-                Return Nothing
-            End If
-            Return Game.Location.FromId(WorldData, result.Value)
-        End Get
-        Set(value As ILocation)
-            WorldData.Character.WriteLocation(Id, value.Id)
-            WorldData.CharacterLocation.Write(Id, value.Id)
-        End Set
-    End Property
     Shared Function FromId(worldData As IWorldData, characterId As Long?) As ICharacter
         Return If(characterId.HasValue, New Character(worldData, characterId.Value), Nothing)
     End Function
@@ -212,7 +199,7 @@
             If Not GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Willpower)).HasValue Then
                 Return False
             End If
-            Return Location.Factions.AlliesOf(Me).Count <= Location.Factions.EnemiesOf(Me).Count
+            Return Movement.Location.Factions.AlliesOf(Me).Count <= Movement.Location.Factions.EnemiesOf(Me).Count
         End Get
     End Property
     ReadOnly Property Name As String Implements ICharacter.Name
@@ -456,12 +443,12 @@
     End Property
     Public ReadOnly Property CanInteract As Boolean Implements ICharacter.CanInteract
         Get
-            Return (Location?.Feature?.Id).HasValue
+            Return (Movement.Location?.Feature?.Id).HasValue
         End Get
     End Property
     Public Sub Interact() Implements ICharacter.Interact
         If CanInteract Then
-            Mode = Location.Feature.InteractionMode()
+            Mode = Movement.Location.Feature.InteractionMode()
         End If
     End Sub
     ReadOnly Property CanDoIntimidation() As Boolean Implements ICharacter.CanDoIntimidation
@@ -469,7 +456,7 @@
             If If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Influence)), 0) <= 0 Then
                 Return False
             End If
-            Dim enemy = Location.Factions.EnemiesOf(Me).FirstOrDefault
+            Dim enemy = Movement.Location.Factions.EnemiesOf(Me).FirstOrDefault
             If enemy Is Nothing Then
                 Return False
             End If
@@ -479,7 +466,7 @@
     Public Sub DoIntimidation() Implements ICharacter.DoIntimidation
         If CanDoIntimidation Then
             Dim lines As New List(Of String)
-            Dim enemy = Location.Factions.EnemiesOf(Me).First
+            Dim enemy = Movement.Location.Factions.EnemiesOf(Me).First
             Dim influenceRoll = RollInfluence()
             lines.Add($"You roll {influenceRoll} influence.")
             Dim willpowerRoll = enemy.RollWillpower()

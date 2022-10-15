@@ -8,7 +8,7 @@ Friend Class MapProcessor
             redrawBuffer = False
             buffer.Fill(Pattern.Space, False, Hue.Blue)
             Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
-            Dim playerLocation = player.Location
+            Dim playerLocation = player.Movement.Location
             Dim level = playerLocation.DungeonLevel
             If level IsNot Nothing Then
                 Dim locations = Location.ByDungeonLevel(StaticWorldData.World, level).Where(Function(x) player.Movement.HasVisited(x))

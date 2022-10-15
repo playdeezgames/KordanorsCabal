@@ -9,7 +9,7 @@ Public MustInherit Class ModeProcessor
         buffer.WriteText(xy, $"Facing: {player.Movement.Direction.Name}", False, Hue.Black)
     End Sub
     Protected Shared Sub ShowExits(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
-        Dim exits = String.Join(",", player.Location.Routes.Directions.Select(Function(x) x.Abbreviation))
+        Dim exits = String.Join(",", player.Movement.Location.Routes.Directions.Select(Function(x) x.Abbreviation))
         buffer.WriteText(xy, $"Exits: {exits}", False, Hue.Black)
     End Sub
 
@@ -65,7 +65,7 @@ Public MustInherit Class ModeProcessor
         buffer.PutCell((4, 14), Pattern.BottomLeftCorner, False, Hue.Black)
         buffer.PutCell((17, 14), Pattern.BottomRightCorner, False, Hue.Black)
 
-        Dim location = player.Location
+        Dim location = player.Movement.Location
         If location.Routes.Exists(player.Movement.Direction) Then
             buffer.FillCells((9, 6), (4, 1), Pattern.Horizontal1, False, Hue.Black)
             buffer.FillCells((8, 6), (1, 8), Pattern.Vertical8, False, Hue.Black)
@@ -112,14 +112,14 @@ Public MustInherit Class ModeProcessor
             ShowSprite(buffer, (5, 5), location.Routes.Find(Direction.FromId(StaticWorldData.World, 7L)).RouteType.Sprite)
         End If
 
-        For Each item In player.Location.Inventory.Items
+        For Each item In player.Movement.Location.Inventory.Items
             Dim itemType = item.ItemType.Id
             If itemType.DisplayPattern.HasValue Then
                 buffer.PutCell(itemType.DisplayXY.Value, itemType.DisplayPattern.Value, False, itemType.DisplayHue.Value)
             End If
         Next
 
-        Dim enemy = player.Location.Factions.EnemiesOf(player).FirstOrDefault
+        Dim enemy = player.Movement.Location.Factions.EnemiesOf(player).FirstOrDefault
         If enemy IsNot Nothing Then
             ShowEnemy(buffer, (5, 5), enemy)
         End If
