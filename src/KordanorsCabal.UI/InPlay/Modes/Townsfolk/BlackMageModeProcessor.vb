@@ -29,7 +29,7 @@ Friend Class BlackMageModeProcessor
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         Buttons(PricesButtonIndex).Title = "Prices"
         Buttons(BuyButtonIndex).Title = "Buy"
-        If player.CurrentMana < player.MaximumMana Then
+        If player.Mana.CurrentMana < player.Mana.MaximumMana Then
             Buttons(RestoreButtonIndex).Title = "Restore"
         End If
     End Sub
@@ -53,7 +53,7 @@ Friend Class BlackMageModeProcessor
                 Return UIState.ShoppeBuy
             Case RestoreButtonIndex
                 player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {ItemType.FromId(StaticWorldData.World, 33).Name} and gives you a hit of {ItemType.FromId(StaticWorldData.World, 34).Name}.")
-                player.CurrentMana = player.MaximumMana
+                player.Mana.CurrentMana = player.Mana.MaximumMana
                 PushUIState(UIState.InPlay)
                 Return UIState.Message
         End Select

@@ -33,14 +33,14 @@
     End Property
     Property Money As Long Implements ICharacter.Money
         Get
-            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Money)), 0L)
+            Return If(Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Money)), 0L)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Money), value)
+            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Money), value)
         End Set
     End Property
     Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
-        ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Immobilization), delta)
+        Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Immobilization), delta)
     End Sub
     Public Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean Implements ICharacter.HasItemsToRepair
         Return ItemsToRepair(shoppeType).Any
@@ -65,33 +65,13 @@
         Dim character = FromId(worldData, worldData.Character.Create(characterType.Id, location.Id))
         If initialStatistics IsNot Nothing Then
             For Each entry In initialStatistics
-                character.SetStatistic(entry.Item1, entry.Item2)
+                character.Statistics.SetStatistic(entry.Item1, entry.Item2)
             Next
         End If
         Return character
     End Function
-    Public Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long) Implements ICharacter.SetStatistic
-        WorldData.CharacterStatistic.Write(Id, statisticType.Id, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
-    End Sub
-    Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long) Implements ICharacter.ChangeStatistic
-        Dim current = GetStatistic(statisticType)
-        If current IsNot Nothing Then
-            SetStatistic(statisticType, current.Value + delta)
-        End If
-    End Sub
     Shared Function FromId(worldData As IWorldData, characterId As Long?) As ICharacter
         Return If(characterId.HasValue, New Character(worldData, characterId.Value), Nothing)
-    End Function
-    Public Function GetStatistic(statisticType As ICharacterStatisticType) As Long? Implements ICharacter.GetStatistic
-        Dim result = If(WorldData.CharacterStatistic.Read(Id,
-                                                          statisticType.Id), statisticType.DefaultValue)
-        If result.HasValue Then
-            For Each item In EquippedItems
-                Dim buff As Long = If(item.Equipment.EquippedBuff(statisticType), 0)
-                result = result.Value + buff
-            Next
-        End If
-        Return result
     End Function
     ReadOnly Property Inventory As IInventory Implements ICharacter.Inventory
         Get
@@ -119,11 +99,11 @@
     ReadOnly Property MaximumEncumbrance As Long Implements ICharacter.MaximumEncumbrance
         Get
             Return If(
-            GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.BaseLift)), 0) +
+            Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.BaseLift)), 0) +
             If(
-                GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.BonusLift)), 0) *
+                Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.BonusLift)), 0) *
             If(
-                GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Strength)), 0)
+                Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Strength)), 0)
         End Get
     End Property
     ReadOnly Property Name As String Implements ICharacter.Name
@@ -204,42 +184,42 @@
     End Function
     Property Drunkenness As Long Implements ICharacter.Drunkenness
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Drunkenness)).Value
+            Return Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Drunkenness)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Drunkenness), value)
+            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Drunkenness), value)
         End Set
     End Property
     Property Chafing As Long Implements ICharacter.Chafing
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Chafing)).Value
+            Return Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Chafing)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Chafing), value)
+            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Chafing), value)
         End Set
     End Property
     Property Highness As Long Implements ICharacter.Highness
         Get
-            Return If(GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Highness)), 0)
+            Return If(Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Highness)), 0)
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Highness), value)
+            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Highness), value)
         End Set
     End Property
     Property Hunger As Long Implements ICharacter.Hunger
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger)).Value
+            Return Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger), value)
+            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger), value)
         End Set
     End Property
     Public Property FoodPoisoning As Long Implements ICharacter.FoodPoisoning
         Get
-            Return GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.FoodPoisoning)).Value
+            Return Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.FoodPoisoning)).Value
         End Get
         Set(value As Long)
-            SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.FoodPoisoning), value)
+            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.FoodPoisoning), value)
         End Set
     End Property
     Public ReadOnly Property CanGamble As Boolean Implements ICharacter.CanGamble
@@ -362,6 +342,12 @@
     Public ReadOnly Property Mana As ICharacterMana Implements ICharacter.Mana
         Get
             Return CharacterMana.FromCharacter(WorldData, Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property Statistics As ICharacterStatistics Implements ICharacter.Statistics
+        Get
+            Return CharacterStatistics.FromCharacter(WorldData, Me)
         End Get
     End Property
 End Class

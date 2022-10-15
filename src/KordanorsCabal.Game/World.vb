@@ -271,11 +271,11 @@ Public Module World
     End Sub
 
     Private Sub SecondRoll(worldData As IWorldData)
-        Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Unassigned))
-        PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Unassigned), 0)
+        Dim dice = PlayerCharacter(worldData).Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Unassigned))
+        PlayerCharacter(worldData).Statistics.SetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Unassigned), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(SecondRollTable)
-            PlayerCharacter(worldData).ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
+            PlayerCharacter(worldData).Statistics.ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
             dice -= 1
         End While
     End Sub
@@ -302,11 +302,11 @@ Public Module World
         }
 
     Private Sub FirstRoll(worldData As IWorldData)
-        Dim dice = PlayerCharacter(worldData).GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Unassigned))
-        PlayerCharacter(worldData).SetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Unassigned), 0)
+        Dim dice = PlayerCharacter(worldData).Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Unassigned))
+        PlayerCharacter(worldData).Statistics.SetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Unassigned), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(FirstRollTable)
-            PlayerCharacter(worldData).ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
+            PlayerCharacter(worldData).Statistics.ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
             dice -= 1
         End While
     End Sub

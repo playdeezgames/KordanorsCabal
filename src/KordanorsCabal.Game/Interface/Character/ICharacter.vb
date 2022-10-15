@@ -9,10 +9,7 @@
     ReadOnly Property MentalCombat As ICharacterMentalCombat
     ReadOnly Property Spellbook As ICharacterSpellbook
     ReadOnly Property Mana As ICharacterMana
-    'Statistics
-    Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long)
-    Function GetStatistic(statisticType As ICharacterStatisticType) As Long?
-    Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long)
+    ReadOnly Property Statistics As ICharacterStatistics
     'Inventory
     ReadOnly Property Inventory As IInventory
     ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean

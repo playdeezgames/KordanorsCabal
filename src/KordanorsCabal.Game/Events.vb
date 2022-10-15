@@ -169,7 +169,7 @@
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim healRoll = 1
-                    character.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Wounds), -healRoll)
+                    character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Wounds), -healRoll)
                     character.Hunger = 0
                     character.EnqueueMessage(
                         $"Food heals up to {healRoll} HP!",
@@ -240,7 +240,7 @@
                         Return
                     End If
                     Dim healRoll = RNG.RollDice("1d4")
-                    character.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Stress), -healRoll)
+                    character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Stress), -healRoll)
                     Dim lines As New List(Of String)
                     lines.Add($"You make use of {ItemType.FromId(worldData, Constants.StatisticTypes.ItemType28).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(worldData, 7).Name}.")
                     lines.Add($"You now have {character.MentalCombat.CurrentMP} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP).Name}.")
@@ -293,7 +293,7 @@
                         character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(worldData, 26).Name}, and they wander off to get drunk.")
                         Return
                     End If
-                    character.MentalCombat.CurrentMP = character.GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP)).Value
+                    character.MentalCombat.CurrentMP = character.Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP)).Value
                     character.Drunkenness += 10
                     character.Inventory.Add(Game.Item.Create(worldData, 30))
                     character.EnqueueMessage("You drink the beer, and suddenly feel braver!")
@@ -334,7 +334,7 @@
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim healRoll = RNG.RollDice("2d4")
-                    character.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Wounds), -healRoll)
+                    character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Wounds), -healRoll)
                     character.Inventory.Add(Item.Create(worldData, 30))
                     character.EnqueueMessage(
                 $"Potion heals up to {healRoll} HP!",
@@ -387,7 +387,7 @@
                         $"You got food poisoning!")
                     Else
                         Dim healRoll = 1
-                        character.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Wounds), -healRoll)
+                        character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Wounds), -healRoll)
                         character.Hunger = 0
                         character.EnqueueMessage(
                         $"Food heals up to {healRoll} HP!",
