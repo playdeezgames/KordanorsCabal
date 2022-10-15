@@ -1,4 +1,4 @@
-﻿Public Class CharacterCombatShould
+﻿Public Class CharacterPhysicalCombatShould
     Inherits ThingieShould(Of ICharacterPhysicalCombat)
     Sub New()
         MyBase.New(Function(w, i) CharacterPhysicalCombat.FromCharacter(w, Character.FromId(w, i)))

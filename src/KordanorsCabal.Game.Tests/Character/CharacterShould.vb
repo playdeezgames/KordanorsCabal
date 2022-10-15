@@ -765,7 +765,7 @@ Public Class CharacterShould
             End Sub)
     End Sub
     <Fact>
-    Sub have_combat_subobject()
+    Sub have_physicalcombat_subobject()
         WithSubject(
             Sub(worldData, id, subject)
                 subject.PhysicalCombat.ShouldNotBeNull
@@ -776,6 +776,13 @@ Public Class CharacterShould
         WithSubject(
             Sub(worldData, id, subject)
                 subject.Advancement.ShouldNotBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_mentalcombat_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.MentalCombat.ShouldNotBeNull
             End Sub)
     End Sub
 End Class

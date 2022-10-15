@@ -6,6 +6,7 @@
     ReadOnly Property Health As ICharacterHealth
     ReadOnly Property PhysicalCombat As ICharacterPhysicalCombat
     ReadOnly Property Advancement As ICharacterAdvancement
+    ReadOnly Property MentalCombat As ICharacterMentalCombat
     'Mental Combat
     Sub AddStress(delta As Long)
     ReadOnly Property CanDoIntimidation() As Boolean

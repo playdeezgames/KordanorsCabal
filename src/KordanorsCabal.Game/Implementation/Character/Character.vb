@@ -498,4 +498,10 @@
             Return CharacterAdvancement.FromCharacter(WorldData, Me)
         End Get
     End Property
+
+    Public ReadOnly Property MentalCombat As ICharacterMentalCombat Implements ICharacter.MentalCombat
+        Get
+            Return CharacterMentalCombat.FromCharacter(WorldData, Me)
+        End Get
+    End Property
 End Class
