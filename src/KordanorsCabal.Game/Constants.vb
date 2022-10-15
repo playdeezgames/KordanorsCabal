@@ -1,7 +1,7 @@
 ﻿Public Class Constants
     Public Class CharacterTypes
-        Public Const CharacterType11 = 11L
-        Public Const CharacterType13 = 13L
+        Public Const N00b = 11L
+        Public Const Rat = 13L
     End Class
     Public Class PlayerModes
         Public Const None = 0L
