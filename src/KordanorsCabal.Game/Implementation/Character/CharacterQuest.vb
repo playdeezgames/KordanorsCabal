@@ -7,7 +7,7 @@
         MyBase.New(worldData, character.Id)
         Me.character = character
     End Sub
-    Shared Function FromId(worldData As IWorldData, character As ICharacter) As ICharacterQuest
+    Shared Function FromCharacter(worldData As IWorldData, character As ICharacter) As ICharacterQuest
         Return If(character IsNot Nothing, New CharacterQuest(worldData, character), Nothing)
     End Function
     Public Function CanAccept(quest As IQuestType) As Boolean Implements ICharacterQuest.CanAccept

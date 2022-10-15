@@ -1,7 +1,7 @@
 ﻿Public Class CharacterCombatShould
     Inherits ThingieShould(Of ICharacterCombat)
     Sub New()
-        MyBase.New(Function(w, i) CharacterCombat.FromId(w, Character.FromId(w, i)))
+        MyBase.New(Function(w, i) CharacterCombat.FromCharacter(w, Character.FromId(w, i)))
     End Sub
     <Fact>
     Sub run()

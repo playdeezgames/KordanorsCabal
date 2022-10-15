@@ -499,13 +499,13 @@
     End Property
     Public ReadOnly Property Movement As ICharacterMovement Implements ICharacter.Movement
         Get
-            Return CharacterMovement.FromId(WorldData, Me)
+            Return CharacterMovement.FromCharacter(WorldData, Me)
         End Get
     End Property
 
     Public ReadOnly Property Quest As ICharacterQuest Implements ICharacter.Quest
         Get
-            Return CharacterQuest.FromId(WorldData, Me)
+            Return CharacterQuest.FromCharacter(WorldData, Me)
         End Get
     End Property
 
@@ -517,7 +517,13 @@
 
     Public ReadOnly Property Combat As ICharacterCombat Implements ICharacter.Combat
         Get
-            Return CharacterCombat.FromId(WorldData, Me)
+            Return CharacterCombat.FromCharacter(WorldData, Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property Advancement As ICharacterAdvancement Implements ICharacter.Advancement
+        Get
+            Return CharacterAdvancement.FromCharacter(WorldData, Me)
         End Get
     End Property
 End Class

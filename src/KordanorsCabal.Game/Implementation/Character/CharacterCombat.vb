@@ -7,7 +7,7 @@
         MyBase.New(worldData, character.Id)
         Me.character = character
     End Sub
-    Shared Function FromId(worldData As IWorldData, character As ICharacter) As ICharacterCombat
+    Shared Function FromCharacter(worldData As IWorldData, character As ICharacter) As ICharacterCombat
         Return If(character IsNot Nothing, New CharacterCombat(worldData, character), Nothing)
     End Function
     ReadOnly Property CanFight As Boolean Implements ICharacterCombat.CanFight

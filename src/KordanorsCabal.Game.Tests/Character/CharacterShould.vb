@@ -815,4 +815,11 @@ Public Class CharacterShould
                 subject.Combat.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub have_advancement_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Advancement.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class

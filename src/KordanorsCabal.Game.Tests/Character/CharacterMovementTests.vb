@@ -1,7 +1,7 @@
 ﻿Public Class CharacterMovementTests
     Inherits ThingieShould(Of ICharacterMovement)
     Sub New()
-        MyBase.New(Function(w, i) CharacterMovement.FromId(w, Character.FromId(w, i)))
+        MyBase.New(Function(w, i) CharacterMovement.FromCharacter(w, Character.FromId(w, i)))
     End Sub
     <Fact>
     Sub have_can_map()

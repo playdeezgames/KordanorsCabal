@@ -40,7 +40,7 @@
     Public Function HasVisited(location As ILocation) As Boolean Implements ICharacterMovement.HasVisited
         Return WorldData.CharacterLocation.Read(Id, location.Id)
     End Function
-    Public Shared Function FromId(worldData As IWorldData, character As ICharacter) As ICharacterMovement
+    Public Shared Function FromCharacter(worldData As IWorldData, character As ICharacter) As ICharacterMovement
         Return If(character IsNot Nothing, New CharacterMovement(worldData, character), Nothing)
     End Function
     Public Function CanMoveLeft() As Boolean Implements ICharacterMovement.CanMoveLeft
