@@ -16,9 +16,6 @@
     ReadOnly Property Statuses As ICharacterStatuses
     ReadOnly Property Interaction As ICharacterInteraction
     ReadOnly Property Equipment As ICharacterEquipment
-    'Gamble
-    Sub Gamble()
-    ReadOnly Property CanGamble As Boolean
     'Messages
     Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
     Sub EnqueueMessage(ParamArray lines() As String)

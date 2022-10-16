@@ -14,7 +14,7 @@
                 buffer.WriteText((0, 1), "Off with ye then!", False, Hue.Black)
                 Return
             Case GambleButtonIndex
-                If player.CanGamble Then
+                If player.Interaction.CanGamble Then
                     buffer.WriteText((0, 1), "Play two-up for 5 money! Try yer luck! Flip two coins, and if both are head, you win 15! Otherwise, I take yer 5!", False, Hue.Black)
                     buffer.WriteText((0, 8), $"You have {player.Statuses.Money} money.", False, Hue.Black)
                     Return
@@ -27,7 +27,7 @@
     Friend Overrides Sub UpdateButtons(player As ICharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
-        If player.CanGamble Then
+        If player.Interaction.CanGamble Then
             Buttons(GambleButtonIndex).Title = "Gamble"
         End If
         Buttons(PricesButtonIndex).Title = "Prices"
@@ -40,8 +40,8 @@
                 PopButtonIndex()
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case GambleButtonIndex
-                If player.CanGamble Then
-                    player.Gamble()
+                If player.Interaction.CanGamble Then
+                    player.Interaction.Gamble()
                     PushUIState(UIState.InPlay)
                     Return UIState.Message
                 End If
