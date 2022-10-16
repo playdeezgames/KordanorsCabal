@@ -1,5 +1,6 @@
 ﻿Public Class PlayerCharacter
     Inherits Character
+    Implements IPlayerCharacter
     Shared ReadOnly Property Messages As New Queue(Of Message)
     Public Overrides Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
         If sfx.HasValue Then
