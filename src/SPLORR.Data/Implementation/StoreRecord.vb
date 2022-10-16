@@ -48,7 +48,7 @@
                 Dim secondColumnValue = reader(secondColumnName)
                 Return New Tuple(Of TFirstOutputColumn, TSecondOutputColumn)(
                     CType(If(TypeOf firstColumnValue Is DBNull, Nothing, firstColumnValue), TFirstOutputColumn),
-                    CType(secondColumnValue, TSecondOutputColumn))
+                    CType(If(TypeOf secondColumnValue Is DBNull, Nothing, secondColumnValue), TSecondOutputColumn))
             End Function,
             $"SELECT [{outputColumnNames.Item1}],[{outputColumnNames.Item2}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
             ($"@{forColumnValue.Item1}", forColumnValue.Item2))
