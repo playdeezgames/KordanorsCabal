@@ -13,10 +13,7 @@
     ReadOnly Property Items As ICharacterItems
     ReadOnly Property Repair As ICharacterRepair
     ReadOnly Property Encumbrance As ICharacterEncumbrance
-    'Encumbrance
-    ReadOnly Property IsEncumbered As Boolean
-    ReadOnly Property CurrentEncumbrance As Long
-    ReadOnly Property MaximumEncumbrance As Long
+    ReadOnly Property Statuses As ICharacterStatuses
     'Statuses
     ReadOnly Property IsUndead As Boolean
     Property Hunger As Long

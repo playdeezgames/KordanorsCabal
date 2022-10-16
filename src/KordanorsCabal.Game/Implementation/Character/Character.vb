@@ -48,30 +48,6 @@
     Shared Function FromId(worldData As IWorldData, characterId As Long?) As ICharacter
         Return If(characterId.HasValue, New Character(worldData, characterId.Value), Nothing)
     End Function
-    ReadOnly Property IsEncumbered As Boolean Implements ICharacter.IsEncumbered
-        Get
-            Return CurrentEncumbrance > MaximumEncumbrance
-        End Get
-    End Property
-    ReadOnly Property CurrentEncumbrance As Long Implements ICharacter.CurrentEncumbrance
-        Get
-            Dim result = Me.Items.Inventory.TotalEncumbrance
-            For Each item In EquippedItems
-                result += item.ItemType.Encumbrance
-            Next
-            Return result
-        End Get
-    End Property
-    ReadOnly Property MaximumEncumbrance As Long Implements ICharacter.MaximumEncumbrance
-        Get
-            Return If(
-            Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.BaseLift)), 0) +
-            If(
-                Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.BonusLift)), 0) *
-            If(
-                Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Strength)), 0)
-        End Get
-    End Property
     ReadOnly Property Name As String Implements ICharacter.Name
         Get
             Return CharacterType.Name
@@ -102,6 +78,11 @@
         End While
         Return result
     End Function
+    ReadOnly Property EquippedItems As IEnumerable(Of IItem)
+        Get
+            Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
+        End Get
+    End Property
     Private Function WearOneWeapon() As IItemType
         WearOneWeapon = Nothing
         Dim items = EquippedItems.Where(Function(x) x.Durability.Maximum IsNot Nothing AndAlso x.Weapon.IsWeapon).ToList
@@ -128,11 +109,6 @@
     Function Equipment(equipSlot As IEquipSlot) As IItem Implements ICharacter.Equipment
         Return Item.FromId(WorldData, WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
     End Function
-    ReadOnly Property EquippedItems As IEnumerable(Of IItem)
-        Get
-            Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
-        End Get
-    End Property
     ReadOnly Property EquippedSlots As IEnumerable(Of IEquipSlot) Implements ICharacter.EquippedSlots
         Get
             Return WorldData.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(WorldData, x))
@@ -321,6 +297,12 @@
     Public ReadOnly Property Encumbrance As ICharacterEncumbrance Implements ICharacter.Encumbrance
         Get
             Return CharacterEncumbrance.FromCharacter(WorldData, Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property Statuses As ICharacterStatuses Implements ICharacter.Statuses
+        Get
+            Return CharacterStatuses.FromCharacter(WorldData, Me)
         End Get
     End Property
 End Class

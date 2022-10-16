@@ -33,7 +33,7 @@
     End Sub
 
     Private Sub ShowEncumbered(buffer As PatternBuffer, xy As (Integer, Integer), player As ICharacter)
-        If player.IsEncumbered Then
+        If player.Encumbrance.IsEncumbered Then
             buffer.WriteText(xy, "You are encumbered!", False, Hue.Red)
         End If
     End Sub

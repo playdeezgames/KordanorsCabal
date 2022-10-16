@@ -125,7 +125,7 @@ Public MustInherit Class ModeProcessor
         End If
 
         buffer.WriteTextCentered(1, player.Movement.Direction.Abbreviation, False, Hue.Purple)
-        If player.IsEncumbered Then
+        If player.Encumbrance.IsEncumbered Then
             buffer.WriteTextCentered(2, "Encumbered", False, Hue.Red)
         End If
     End Sub

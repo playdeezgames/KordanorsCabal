@@ -53,7 +53,7 @@
         Return CanMove(Direction.Opposite)
     End Function
     Public Function CanMove(direction As IDirection) As Boolean Implements ICharacterMovement.CanMove
-        If Character.IsEncumbered Then
+        If Me.Character.Encumbrance.IsEncumbered Then
             Return False
         End If
         If Location Is Nothing OrElse Not Location.Routes.Exists(direction) Then
