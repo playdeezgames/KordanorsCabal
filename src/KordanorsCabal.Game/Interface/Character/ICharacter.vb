@@ -17,6 +17,6 @@
     ReadOnly Property Interaction As ICharacterInteraction
     ReadOnly Property Equipment As ICharacterEquipment
     Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
-    Property Mode As Long 'TODO: only affects player....
     Sub Destroy()
+    Property Mode As Long 'TODO: only affects player....
 End Interface
