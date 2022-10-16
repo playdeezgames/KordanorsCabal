@@ -27,7 +27,13 @@
         Return character
     End Function
     Shared Function FromId(worldData As IWorldData, characterId As Long?) As ICharacter
-        Return If(characterId.HasValue, New Character(worldData, characterId.Value), Nothing)
+        Return If(
+            characterId.HasValue,
+            If(
+                characterId.Value = worldData.Player.Read(),
+                New PlayerCharacter(worldData),
+                New Character(worldData, characterId.Value)),
+            Nothing)
     End Function
     Sub Destroy() Implements ICharacter.Destroy
         WorldData.Character.Clear(Id)

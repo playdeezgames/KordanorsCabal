@@ -133,3 +133,4 @@ If the enum needs metadata, then dont enum.
 * CharacterTypes
 * CharacterStatisticTypes
 * CharacterTypeInitialStatistics
+* CharacterTypeAttackTypes
