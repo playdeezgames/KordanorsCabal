@@ -39,7 +39,7 @@
         Return result
     End Function
     Private Function NegativeInfluence() As Long
-        Return If(character.Drunkenness > 0 OrElse character.Highness > 0 OrElse character.Chafing > 0, -1, 0)
+        Return If(character.Statuses.Drunkenness > 0 OrElse character.Statuses.Highness > 0 OrElse character.Statuses.Chafing > 0, -1, 0)
     End Function
     ReadOnly Property PartingShot As String Implements ICharacterPhysicalCombat.PartingShot
         Get
@@ -222,7 +222,7 @@
                 If character.MentalCombat.IsDemoralized() Then
                     lines.Add($"{enemy.Name} completely demoralizes you and you drop everything and run away!")
                     Panic()
-                    character.Money \= 2
+                    character.Statuses.Money \= 2
                     character.Movement.Location = Game.Location.FromLocationType(WorldData, LocationType.FromId(WorldData, 1L)).Single
                     Exit Select
                 End If

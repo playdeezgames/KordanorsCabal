@@ -69,15 +69,15 @@
     End Function
     Public Function Move(direction As IDirection) As Boolean Implements ICharacterMovement.Move
         If CanMove(direction) Then
-            Dim hungerRate = Math.Max(Character.Highness \ 2 + Character.FoodPoisoning \ 2, 1)
-            Character.Hunger += hungerRate
-            Character.Drunkenness -= 1
-            Character.Highness -= 1
-            Character.FoodPoisoning -= 1
-            Character.Chafing -= 1
+            Dim hungerRate = Math.Max(Character.Statuses.Highness \ 2 + Character.Statuses.FoodPoisoning \ 2, 1)
+            Character.Statuses.Hunger += hungerRate
+            Character.Statuses.Drunkenness -= 1
+            Character.Statuses.Highness -= 1
+            Character.Statuses.FoodPoisoning -= 1
+            Character.Statuses.Chafing -= 1
             Location = Location.Routes.Find(direction).Move(Character)
-            If Character.Hunger = CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger).MaximumValue Then
-                Character.Hunger \= 2
+            If Character.Statuses.Hunger = CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger).MaximumValue Then
+                Character.Statuses.Hunger \= 2
                 Character.Health.Current -= 1
                 Return True
             End If

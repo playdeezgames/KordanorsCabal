@@ -14,22 +14,6 @@
             Return Game.CharacterType.FromId(WorldData, result.Value)
         End Get
     End Property
-    Property Money As Long Implements ICharacter.Money
-        Get
-            Return If(Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Money)), 0L)
-        End Get
-        Set(value As Long)
-            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Money), value)
-        End Set
-    End Property
-    Sub DoImmobilization(delta As Long) Implements ICharacter.DoImmobilization
-        Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Immobilization), delta)
-    End Sub
-    ReadOnly Property IsUndead As Boolean Implements ICharacter.IsUndead
-        Get
-            Return CharacterType.IsUndead
-        End Get
-    End Property
     Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String) Implements ICharacter.EnqueueMessage
         'do nothing!
     End Sub
@@ -121,49 +105,9 @@
             WorldData.CharacterEquipSlot.Clear(Id, equipSlot.Id)
         End If
     End Sub
-    Property Drunkenness As Long Implements ICharacter.Drunkenness
-        Get
-            Return Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Drunkenness)).Value
-        End Get
-        Set(value As Long)
-            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Drunkenness), value)
-        End Set
-    End Property
-    Property Chafing As Long Implements ICharacter.Chafing
-        Get
-            Return Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Chafing)).Value
-        End Get
-        Set(value As Long)
-            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Chafing), value)
-        End Set
-    End Property
-    Property Highness As Long Implements ICharacter.Highness
-        Get
-            Return If(Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Highness)), 0)
-        End Get
-        Set(value As Long)
-            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Highness), value)
-        End Set
-    End Property
-    Property Hunger As Long Implements ICharacter.Hunger
-        Get
-            Return Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger)).Value
-        End Get
-        Set(value As Long)
-            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger), value)
-        End Set
-    End Property
-    Public Property FoodPoisoning As Long Implements ICharacter.FoodPoisoning
-        Get
-            Return Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.FoodPoisoning)).Value
-        End Get
-        Set(value As Long)
-            Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.FoodPoisoning), value)
-        End Set
-    End Property
     Public ReadOnly Property CanGamble As Boolean Implements ICharacter.CanGamble
         Get
-            Return Money >= 5
+            Return Statuses.Money >= 5
         End Get
     End Property
     Public Sub Gamble() Implements ICharacter.Gamble
@@ -180,10 +124,10 @@
         Dim winner = firstCoin > 0 AndAlso secondCoin > 0
         If winner Then
             lines.Add("You win and receive 15 money!")
-            Money += 15
+            Statuses.Money += 15
         Else
             lines.Add("You lose and must pay 5 money!")
-            Money -= 5
+            Statuses.Money -= 5
         End If
         'TODO: sound effect
         EnqueueMessage(lines.ToArray)

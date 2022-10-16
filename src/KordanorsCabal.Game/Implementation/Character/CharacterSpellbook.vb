@@ -72,6 +72,6 @@
         Return result
     End Function
     Private Function NegativeInfluence() As Long
-        Return If(character.Drunkenness > 0 OrElse character.Highness > 0 OrElse character.Chafing > 0, -1, 0)
+        Return If(character.Statuses.Drunkenness > 0 OrElse character.Statuses.Highness > 0 OrElse character.Statuses.Chafing > 0, -1, 0)
     End Function
 End Class
