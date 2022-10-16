@@ -16,6 +16,7 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadMinimumValue(statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadMaximumValue(statisticTypeId))
                 worldData.Verify(Sub(x) x.CharacterStatistic.Write(id, statisticTypeId, statisticValue))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -29,6 +30,7 @@
                 subject.ChangeStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId), delta)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -41,6 +43,7 @@
                 subject.GetStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBeNull
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

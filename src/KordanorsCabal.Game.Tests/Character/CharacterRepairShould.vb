@@ -16,6 +16,7 @@
                 worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
                 worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -31,6 +32,7 @@
                 worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
                 worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

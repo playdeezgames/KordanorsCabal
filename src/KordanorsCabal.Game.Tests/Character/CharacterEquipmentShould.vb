@@ -10,6 +10,7 @@
                 worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.HasEquipment.ShouldBeFalse
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -25,6 +26,7 @@
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
                 worldData.Verify(Function(x) x.ItemTypeEquipSlot.ReadForItemType(itemTypeId))
                 worldData.Verify(Function(x) x.ItemType.ReadName(itemTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -35,6 +37,7 @@
                 worldData.Setup(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Unequip(EquipSlot.FromId(worldData.Object, equipSlotId))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(id, equipSlotId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -45,6 +48,7 @@
                 worldData.Setup(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.CurrentEquipment(EquipSlot.FromId(worldData.Object, equipSlotId))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(id, equipSlotId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -54,6 +58,7 @@
                 worldData.Setup(Function(x) x.CharacterEquipSlot.ReadEquipSlotsForCharacter(It.IsAny(Of Long)))
                 subject.EquippedSlots.ShouldBeEmpty
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadEquipSlotsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -64,6 +69,7 @@
                 worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.DoArmorWear(wear).ShouldBeEmpty
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -74,6 +80,7 @@
                 worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.DoWeaponWear(wear).ShouldBeEmpty
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

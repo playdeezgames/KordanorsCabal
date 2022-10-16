@@ -17,6 +17,7 @@
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, otherStatisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(otherStatisticTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -34,6 +35,7 @@
                 statisticType.VerifyNoOtherCalls()
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -45,6 +47,7 @@
                 subject.IsFullyAssigned.ShouldBeTrue
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 9))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(9))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

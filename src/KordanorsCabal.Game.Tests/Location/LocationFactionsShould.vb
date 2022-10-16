@@ -11,6 +11,7 @@
                 worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
                 subject.FirstEnemy(Character.FromId(worldData.Object, characterId)).ShouldBeNull
                 worldData.Verify(Function(x) x.Character.ReadForLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -21,6 +22,7 @@
                 worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
                 subject.EnemiesOf(Character.FromId(worldData.Object, characterId)).ShouldBeEmpty
                 worldData.Verify(Function(x) x.Character.ReadForLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -31,6 +33,7 @@
                 worldData.Setup(Function(x) x.Character.ReadForLocation(It.IsAny(Of Long)))
                 subject.AlliesOf(Character.FromId(worldData.Object, characterId)).ShouldBeEmpty
                 worldData.Verify(Function(x) x.Character.ReadForLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

@@ -10,6 +10,7 @@
                 worldData.Setup(Function(x) x.Character.ReadLocation(It.IsAny(Of Long)))
                 subject.Run()
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -31,6 +32,7 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(19))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(22))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -50,6 +52,7 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(19))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(22))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -62,6 +65,7 @@
                 subject.PartingShot.ShouldBeNull
                 worldData.Verify(Function(x) x.Character.ReadCharacterType(id))
                 worldData.Verify(Function(x) x.CharacterTypePartingShot.Read(characterTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -88,6 +92,7 @@
                 worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
                 worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
                 worldData.Verify(Function(x) x.CharacterTypeLoot.Read(characterTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -109,6 +114,7 @@
                 worldData.Verify(Function(x) x.Character.ReadCharacterType(id))
                 worldData.Verify(Function(x) x.Character.ReadCharacterType(otherCharacterId))
                 worldData.Verify(Function(x) x.CharacterTypeEnemy.Read(characterTypeId, otherCharacterTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -118,6 +124,7 @@
                 worldData.Setup(Function(x) x.Character.ReadLocation(It.IsAny(Of Long)))
                 subject.Fight()
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -130,6 +137,7 @@
                 subject.DoDamage(damage)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 12))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(12))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -141,6 +149,7 @@
                 subject.DoCounterAttacks()
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
                 worldData.Verify(Function(x) x.Character.ReadForLocation(locationId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -155,6 +164,7 @@
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 10))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(10))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -166,6 +176,7 @@
                 subject.CanFight().ShouldBeFalse
 
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

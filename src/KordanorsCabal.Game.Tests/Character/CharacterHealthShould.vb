@@ -12,6 +12,7 @@
                 subject.NeedsHealing.ShouldBeFalse
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 12))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -23,6 +24,7 @@
                 subject.Maximum.ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 6))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(6))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -40,6 +42,7 @@
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, secondStatisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(firstStatisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(secondStatisticTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -53,6 +56,7 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadMinimumValue(12))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadMaximumValue(12))
                 worldData.Verify(Sub(x) x.CharacterStatistic.Write(id, 12, 0))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -70,6 +74,7 @@
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, secondStatisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(firstStatisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(secondStatisticTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

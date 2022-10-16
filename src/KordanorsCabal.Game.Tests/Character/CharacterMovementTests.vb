@@ -12,6 +12,7 @@
                 subject.CanMap.ShouldBeFalse
 
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -26,6 +27,7 @@
                 subject.Location.ShouldNotBeNull
 
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -36,6 +38,7 @@
                 worldData.Setup(Function(x) x.Player.ReadDirection()).Returns(directionId)
                 subject.Direction.Id.ShouldBe(directionId)
                 worldData.Verify(Function(x) x.Player.ReadDirection())
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -46,6 +49,7 @@
                 worldData.Setup(Function(x) x.CharacterLocation.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.HasVisited(Location.FromId(worldData.Object, locationId))
                 worldData.Verify(Function(x) x.CharacterLocation.Read(id, locationId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -73,6 +77,7 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(24))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(25))
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     Private Sub WithMovementSubject(stuffToDo As Action(Of IDirection, Mock(Of IWorldData), ICharacterMovement))
@@ -105,6 +110,7 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(secondStatisticId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(thirdStatisticId))
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -112,6 +118,7 @@
         WithMovementSubject(
             Sub(direction, worldData, subject)
                 subject.CanMove(direction).ShouldBeFalse
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     Private Sub WithRelativeMovementSubject(stuffToDo As Action(Of Long, Mock(Of IDirectionData), ICharacterMovement))
@@ -125,6 +132,7 @@
                 worldData.SetupGet(Function(x) x.Direction).Returns(directionData.Object)
                 stuffToDo(directionId, directionData, subject)
                 playerData.Verify(Function(x) x.ReadDirection)
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -168,6 +176,7 @@
         WithMovementSubject(
             Sub(direction, worldData, subject)
                 subject.Move(direction)
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

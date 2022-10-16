@@ -6,6 +6,7 @@
     Protected Sub WithSubject(stuffToDo As Action(Of Mock(Of IWorldData), Long, TThingie))
         Const id = 1L
         Dim worldData As New Mock(Of IWorldData)
+        worldData.Setup(Function(x) x.Player.Read())
         Dim subject As TThingie = ThingieMaker(worldData.Object, id)
         stuffToDo(worldData, id, subject)
         worldData.VerifyNoOtherCalls()

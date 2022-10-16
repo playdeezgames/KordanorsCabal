@@ -11,6 +11,7 @@
                 worldData.Setup(Function(x) x.CharacterSpell.ReadForCharacter(It.IsAny(Of Long)))
                 subject.RollSpellDice(SpellType.FromId(worldData.Object, spellTypeId)).ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterSpell.ReadForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -30,6 +31,7 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(19))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(22))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -43,6 +45,7 @@
                 worldData.Verify(Function(x) x.CharacterSpell.Read(id, spellTypeId))
                 worldData.Verify(Function(x) x.SpellType.ReadMaximumLevel(spellTypeId))
                 worldData.Verify(Function(x) x.SpellType.ReadName(spellTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -52,6 +55,7 @@
                 worldData.Setup(Function(x) x.CharacterSpell.ReadForCharacter(It.IsAny(Of Long)))
                 subject.Spells.ShouldBeEmpty
                 worldData.Verify(Function(x) x.CharacterSpell.ReadForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -65,6 +69,7 @@
                 worldData.Verify(Function(x) x.SpellType.ReadCastCheck(spellTypeId))
                 worldData.Verify(Function(x) x.SpellType.ReadName(spellTypeId))
                 worldData.Verify(Function(x) x.Events.Test(worldData.Object, Nothing, {id}))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -74,6 +79,7 @@
                 worldData.Setup(Function(x) x.CharacterSpell.ReadForCharacter(It.IsAny(Of Long)))
                 subject.HasSpells.ShouldBeFalse
                 worldData.Verify(Function(x) x.CharacterSpell.ReadForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -90,6 +96,7 @@
 
                 worldData.Verify(Function(x) x.CharacterSpell.Read(id, spellTypeId))
                 worldData.Verify(Function(x) x.SpellType.ReadMaximumLevel(spellTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -105,6 +112,7 @@
 
                 worldData.Verify(Function(x) x.SpellType.ReadCastCheck(spellTypeId))
                 worldData.Verify(Function(x) x.Events.Test(It.IsAny(Of IWorldData), Nothing, id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

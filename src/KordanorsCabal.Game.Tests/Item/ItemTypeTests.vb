@@ -148,6 +148,7 @@
                 worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Use(Character.FromId(worldData.Object, characterId))
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 3))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -158,6 +159,7 @@
                 worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.CanUse(Character.FromId(worldData.Object, characterId))
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 2))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>

@@ -13,6 +13,7 @@
                 subject.IsUndead.ShouldBeFalse
                 worldData.Verify(Function(x) x.Character.ReadCharacterType(id))
                 worldData.Verify(Function(x) x.CharacterType.ReadIsUndead(characterTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -26,6 +27,7 @@
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 20))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(20))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -39,6 +41,7 @@
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 19))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(19))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -52,6 +55,7 @@
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 21))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(21))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -65,6 +69,7 @@
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 18))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(18))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -78,6 +83,7 @@
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 22))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(22))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -89,6 +95,7 @@
                 subject.Money.ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 14))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(14))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -101,6 +108,7 @@
                 subject.DoImmobilization(wear)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 23))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(23))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

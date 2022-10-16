@@ -13,6 +13,7 @@
                 subject.CanAccept(Character.FromId(worldData.Object, characterId)).ShouldBeFalse
                 worldData.Verify(Function(x) x.QuestType.ReadCanAcceptEventName(id))
                 worldData.Verify(Function(x) x.Events.Test(worldData.Object, Nothing, {characterId}))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -25,6 +26,7 @@
                 subject.CanComplete(Character.FromId(worldData.Object, characterId)).ShouldBeFalse
                 worldData.Verify(Function(x) x.QuestType.ReadCanCompleteEventName(id))
                 worldData.Verify(Function(x) x.Events.Test(worldData.Object, Nothing, {characterId}))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -37,6 +39,7 @@
                 subject.Accept(Character.FromId(worldData.Object, characterId))
                 worldData.Verify(Function(x) x.QuestType.ReadCanAcceptEventName(id))
                 worldData.Verify(Function(x) x.Events.Test(worldData.Object, Nothing, {characterId}))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -47,6 +50,7 @@
                 worldData.Setup(Function(x) x.CharacterQuest.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Complete(Character.FromId(worldData.Object, characterId))
                 worldData.Verify(Function(x) x.CharacterQuest.Read(characterId, id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

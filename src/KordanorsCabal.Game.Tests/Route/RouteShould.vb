@@ -34,6 +34,7 @@
                 subject.CanMove(Character.FromId(worldData.Object, characterId))
                 worldData.Verify(Function(x) x.Route.ReadRouteType(id))
                 worldData.Verify(Function(x) x.RouteTypeLock.ReadUnlockItem(routeTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -59,6 +60,7 @@
                 worldData.Verify(Function(x) x.Route.ReadToLocation(id))
                 worldData.Verify(Function(x) x.RouteTypeLock.ReadUnlockItem(routeTypeId))
                 worldData.Verify(Function(x) x.RouteType.ReadIsSingleUse(routeTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

@@ -12,6 +12,7 @@
                 subject.CanInteract().ShouldBeFalse
 
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -21,6 +22,7 @@
                 worldData.Setup(Function(x) x.Character.ReadLocation(It.IsAny(Of Long)))
                 subject.Interact()
                 worldData.Verify(Function(x) x.Character.ReadLocation(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -36,6 +38,7 @@
 
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -47,6 +50,7 @@
                 subject.Gamble()
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 14))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(14))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

@@ -14,6 +14,7 @@
                 subject.CanUse(Character.FromId(worldData.Object, characterId)).ShouldBeFalse
                 worldData.Verify(Function(x) x.Item.ReadItemType(id))
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 2L))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -39,6 +40,7 @@
                 subject.Use(Character.FromId(worldData.Object, characterId))
                 worldData.Verify(Function(x) x.Item.ReadItemType(id))
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 3L))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 

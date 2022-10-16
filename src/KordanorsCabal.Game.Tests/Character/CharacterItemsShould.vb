@@ -20,6 +20,7 @@
                 characterData.Verify(Function(x) x.ReadCharacterType(id))
                 worldData.Verify(Function(x) x.CharacterTypeBribe.Read(characterTypeId, itemTypeId))
                 characterData.VerifyNoOtherCalls()
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -30,6 +31,7 @@
                 subject.Inventory.Id.ShouldBe(0)
                 worldData.Verify(Function(x) x.Inventory.ReadForCharacter(id))
                 worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -43,6 +45,7 @@
                 worldData.Verify(Function(x) x.Inventory.ReadForCharacter(id))
                 worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
                 worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -56,6 +59,7 @@
                 subject.UseItem(Item.FromId(worldData.Object, itemId))
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 2L))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -70,6 +74,7 @@
                 worldData.Verify(Function(x) x.Inventory.CreateForCharacter(id))
                 worldData.Verify(Function(x) x.InventoryItem.ReadItems(0))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class

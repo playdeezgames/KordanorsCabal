@@ -12,6 +12,7 @@
                 subject.MaximumMana.ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 8))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -27,6 +28,7 @@
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 15))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(15))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
     <Fact>
@@ -39,6 +41,7 @@
                 subject.DoFatigue(wear)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 15))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(15))
+                worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
 End Class
