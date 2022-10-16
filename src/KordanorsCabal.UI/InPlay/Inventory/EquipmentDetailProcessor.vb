@@ -21,8 +21,8 @@ Friend Class EquipmentDetailProcessor
 
     Private Shared Function Unequip() As UIState
         Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
-        player.Unequip(EquipSlot)
-        If player.HasEquipment Then
+        player.Equipment.Unequip(EquipSlot)
+        If player.Equipment.HasEquipment Then
             Return UIState.Equipment
         End If
         Return UIState.InPlay
@@ -33,7 +33,7 @@ Friend Class EquipmentDetailProcessor
     End Sub
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
-        Dim item = Game.World.PlayerCharacter(StaticWorldData.World).CurrentEquipment(EquipSlot)
+        Dim item = Game.World.PlayerCharacter(StaticWorldData.World).Equipment.CurrentEquipment(EquipSlot)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, EquipSlot.Name, True, Hue.Blue)
         buffer.WriteText((0, 1), $"Item: {item.Name}", False, Hue.Black)

@@ -23,7 +23,7 @@ Friend Class InteractItemProcessor
     End Sub
 
     Private Shared Function EquipItem() As UIState
-        Game.World.PlayerCharacter(StaticWorldData.World).Equip(InteractItem)
+        Game.World.PlayerCharacter(StaticWorldData.World).Equipment.Equip(InteractItem)
         MainProcessor.PushUIState(UIState.Inventory)
         Return UIState.Message
     End Function

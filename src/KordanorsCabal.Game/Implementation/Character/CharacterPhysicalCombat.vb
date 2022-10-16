@@ -138,7 +138,7 @@
         lines.Add($"{enemy.Name} rolls a defend of {defendRoll}.")
         Dim result = attackRoll - defendRoll
         Dim sfx As Sfx?
-        enemy.DoArmorWear(attackRoll)
+        enemy.Equipment.DoArmorWear(attackRoll)
         Select Case result
             Case Is <= 0
                 lines.Add("You miss!")
@@ -147,7 +147,7 @@
                 Dim damage = DetermineDamage(result)
                 lines.Add($"You do {damage} damage!")
                 enemy.PhysicalCombat.DoDamage(damage)
-                For Each brokenItemType In character.DoWeaponWear(damage)
+                For Each brokenItemType In character.Equipment.DoWeaponWear(damage)
                     lines.Add($"Yer {brokenItemType.Name} breaks!")
                 Next
                 If enemy.Health.IsDead Then
@@ -236,7 +236,7 @@
         }
         Dim attackRoll = enemy.PhysicalCombat.RollAttack()
         lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
-        For Each brokenItemType In character.DoArmorWear(attackRoll)
+        For Each brokenItemType In character.Equipment.DoArmorWear(attackRoll)
             lines.Add($"Yer {brokenItemType.Name} breaks!")
         Next
         Dim defendRoll = RollDefend()
@@ -251,7 +251,7 @@
                 Dim damage = enemy.PhysicalCombat.DetermineDamage(result)
                 lines.Add($"{enemy.Name} does {damage} damage!")
                 DoDamage(damage)
-                enemy.DoWeaponWear(damage)
+                enemy.Equipment.DoWeaponWear(damage)
                 If character.Health.IsDead Then
                     sfx = Game.Sfx.PlayerDeath
                     lines.Add($"{enemy.Name} kills you!")
@@ -267,8 +267,8 @@
         character.EnqueueMessage(sfx, lines.ToArray)
     End Sub
     Private Sub Panic()
-        For Each equipSlot In character.EquippedSlots
-            character.Unequip(equipSlot)
+        For Each equipSlot In character.Equipment.EquippedSlots
+            character.Equipment.Unequip(equipSlot)
         Next
         For Each item In character.Items.Inventory.Items
             character.Movement.Location.Inventory.Add(item)

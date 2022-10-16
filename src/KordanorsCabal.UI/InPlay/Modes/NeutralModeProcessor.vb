@@ -54,7 +54,7 @@
         If player.Movement.CanMap Then
             Buttons(MapButtonIndex).Title = "Map"
         End If
-        If player.HasEquipment Then
+        If player.Equipment.HasEquipment Then
             Buttons(EquipmentButtonIndex).Title = "Equipment"
         End If
         Buttons(StatusLevelUpButtonIndex).Title = If(player.Advancement.IsFullyAssigned, "Status", "Level up!")
@@ -120,7 +120,7 @@
                     Return UIState.Map
                 End If
             Case EquipmentButtonIndex
-                If player.HasEquipment Then
+                If player.Equipment.HasEquipment Then
                     Return UIState.Equipment
                 End If
             Case StatusLevelUpButtonIndex

@@ -13,10 +13,10 @@ Friend Class EquipmentProcessor
         buffer.WriteText((0, 1), "Go Back", rowIndex = 0, Hue.Black)
         Dim row As Integer = 1
         Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
-        For Each entry In player.EquippedSlots
+        For Each entry In player.Equipment.EquippedSlots
             Dim slotName = $"{entry.Name}: "
             buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
-            Dim item = player.CurrentEquipment(entry)
+            Dim item = player.Equipment.CurrentEquipment(entry)
             Dim condition = item.Durability.Maximum / item.Durability.Current
             Dim conditionHue = If(condition >= 4, Hue.Red, If(condition >= 2, Hue.Yellow, Hue.Black))
             buffer.WriteText((slotName.Length, row + 1), item.Name, rowIndex = row, conditionHue)
@@ -30,7 +30,7 @@ Friend Class EquipmentProcessor
         table.Clear()
         table(0) = Nothing
         Dim row As Integer = 1
-        For Each entry In Game.World.PlayerCharacter(StaticWorldData.World).EquippedSlots
+        For Each entry In Game.World.PlayerCharacter(StaticWorldData.World).Equipment.EquippedSlots
             table(row) = entry
             row += 1
         Next
