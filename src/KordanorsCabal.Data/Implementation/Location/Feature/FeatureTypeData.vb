@@ -31,12 +31,12 @@
             (FeatureTypeIdColumn, featureTypeId))
     End Function
     Friend Sub Initialize()
-        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [FeatureTypes] AS
                 WITH [cte](
-                    [{FeatureTypeIdColumn}],
-                    [{FeatureTypeNameColumn}],
-                    [{LocationTypeIdColumn}],
-                    [{InteractionModeColumn}]) AS
+                    [FeatureTypeId],
+                    [FeatureTypeName],
+                    [LocationTypeId],
+                    [InteractionMode]) AS
                 (VALUES
                     (6,'Marcus the Black Mage',2,9),
                     (5,'""Honest"" Dan',2,8),
