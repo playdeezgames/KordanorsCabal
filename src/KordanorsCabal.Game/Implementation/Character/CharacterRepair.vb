@@ -17,11 +17,6 @@
             Return items.Where(Function(x) shoppeType.WillRepair(x.ItemType))
         End Get
     End Property
-    ReadOnly Property EquippedItems As IEnumerable(Of IItem)
-        Get
-            Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
-        End Get
-    End Property
     Public Function HasItemsToRepair(shoppeType As IShoppeType) As Boolean Implements ICharacterRepair.HasItemsToRepair
         Return ItemsToRepair(shoppeType).Any
     End Function

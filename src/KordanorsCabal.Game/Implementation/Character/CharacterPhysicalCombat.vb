@@ -47,11 +47,6 @@
     Sub DoDamage(damage As Long) Implements ICharacterPhysicalCombat.DoDamage
         character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Wounds), damage)
     End Sub
-    ReadOnly Property EquippedItems As IEnumerable(Of IItem)
-        Get
-            Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
-        End Get
-    End Property
     Function DetermineDamage(value As Long) As Long Implements ICharacterPhysicalCombat.DetermineDamage
         Dim maximumDamage As Long? = Nothing
         For Each item In EquippedItems
@@ -60,7 +55,7 @@
                 maximumDamage = If(maximumDamage, 0) + itemMaximumDamage.Value
             End If
         Next
-        maximumDamage = If(maximumDamage, character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.UnarmedMaximumDamage)).Value)
+        maximumDamage = If(maximumDamage, Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.UnarmedMaximumDamage)).Value)
         Return If(value < 0, 0, If(value > maximumDamage.Value, maximumDamage.Value, value))
     End Function
     ReadOnly Property RollMoneyDrop As Long

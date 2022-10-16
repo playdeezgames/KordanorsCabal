@@ -32,23 +32,6 @@
     Sub Destroy() Implements ICharacter.Destroy
         WorldData.Character.Clear(Id)
     End Sub
-    ReadOnly Property EquippedItems As IEnumerable(Of IItem)
-        Get
-            Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
-        End Get
-    End Property
-    Private Function WearOneWeapon() As IItemType
-        WearOneWeapon = Nothing
-        Dim items = EquippedItems.Where(Function(x) x.Durability.Maximum IsNot Nothing AndAlso x.Weapon.IsWeapon).ToList
-        If items.Any Then
-            Dim item = RNG.FromList(items)
-            item.Durability.Reduce(1)
-            If item.Durability.IsBroken Then
-                WearOneWeapon = item.ItemType
-                item.Destroy()
-            End If
-        End If
-    End Function
     Public Property Mode As Long Implements ICharacter.Mode
         Get
             Return WorldData.Player.ReadPlayerMode().Value
