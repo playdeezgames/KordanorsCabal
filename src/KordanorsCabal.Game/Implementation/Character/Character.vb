@@ -156,17 +156,6 @@
             WorldData.Player.WritePlayerMode(value)
         End Set
     End Property
-    Public ReadOnly Property CanInteract As Boolean Implements ICharacter.CanInteract
-        Get
-            Return (Movement.Location?.Feature?.Id).HasValue
-        End Get
-    End Property
-    Public Sub Interact() Implements ICharacter.Interact
-        If CanInteract Then
-            Mode = Movement.Location.Feature.InteractionMode()
-        End If
-    End Sub
-
     Public ReadOnly Property HasEquipment As Boolean Implements ICharacter.HasEquipment
         Get
             Return EquippedItems.Any

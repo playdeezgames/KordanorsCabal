@@ -60,7 +60,7 @@
         Buttons(StatusLevelUpButtonIndex).Title = If(player.Advancement.IsFullyAssigned, "Status", "Level up!")
         If player.MentalCombat.CanDoIntimidation Then
             Buttons(InteractIntimidateButtonIndex).Title = "Intimidate!"
-        ElseIf player.CanInteract Then
+        ElseIf player.Interaction.CanInteract Then
             Buttons(InteractIntimidateButtonIndex).Title = "Interact..."
         End If
         Dim enemyCount = player.Movement.Location.Factions.EnemiesOf(player).Count
@@ -74,7 +74,6 @@
             Buttons(InventoryButtonIndex).Title = "Inventory"
         End If
     End Sub
-
     Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
         Select Case button.Index
             Case TurnFightButtonIndex 'also the fight button!
@@ -98,9 +97,9 @@
                     player.MentalCombat.DoIntimidation()
                     MainProcessor.PushUIState(UIState.InPlay)
                     Return UIState.Message
-                ElseIf player.CanInteract Then
+                ElseIf player.Interaction.CanInteract Then
                     PushButtonIndex(0)
-                    player.Interact()
+                    player.Interaction.Interact()
                     Return UIState.InPlay
                 End If
             Case GroundEnemiesButtonIndex
@@ -136,7 +135,6 @@
         End Select
         Return UIState.InPlay
     End Function
-
     Friend Overrides Function HandleRed(player As ICharacter) As UIState
         player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
