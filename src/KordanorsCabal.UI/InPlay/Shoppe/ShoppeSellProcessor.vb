@@ -7,7 +7,7 @@ Friend Class ShoppeSellProcessor
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, $"Sell", True, Hue.Blue)
-        buffer.WriteTextCentered(1, $"Money: {Game.World.PlayerCharacter(StaticWorldData.World).Money}", False, Hue.Black)
+        buffer.WriteTextCentered(1, $"Money: {Game.World.PlayerCharacter(StaticWorldData.World).Statuses.Money}", False, Hue.Black)
 
         For row = ListStartRow + 1 To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
@@ -51,7 +51,7 @@ Friend Class ShoppeSellProcessor
             Return UIState.InPlay
         End If
         Dim item = items(currentItemIndex)
-        Game.World.PlayerCharacter(StaticWorldData.World).Money += If(ShoppeType.BuyPrice(item.ItemType), 0)
+        Game.World.PlayerCharacter(StaticWorldData.World).Statuses.Money += If(ShoppeType.BuyPrice(item.ItemType), 0)
         item.Destroy()
         Dim oldIndex = currentItemIndex
         Initialize()

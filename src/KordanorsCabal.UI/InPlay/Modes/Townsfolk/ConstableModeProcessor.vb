@@ -40,7 +40,7 @@
             Dim cards = player.Items.Inventory.ItemsOfType(ItemType.FromId(StaticWorldData.World, 32))
             Dim reward As Long = cards.Count * 10
             player.EnqueueMessage($"I'll be certain to file these under evidence. Here's yer reward! {reward} money.")
-            player.Money += reward
+            player.Statuses.Money += reward
             For Each card In cards
                 card.Destroy()
             Next

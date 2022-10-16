@@ -276,4 +276,11 @@
                 subject.Statuses.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub have_interactions_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Interaction.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class

@@ -16,7 +16,7 @@
             Case GambleButtonIndex
                 If player.CanGamble Then
                     buffer.WriteText((0, 1), "Play two-up for 5 money! Try yer luck! Flip two coins, and if both are head, you win 15! Otherwise, I take yer 5!", False, Hue.Black)
-                    buffer.WriteText((0, 8), $"You have {player.Money} money.", False, Hue.Black)
+                    buffer.WriteText((0, 8), $"You have {player.Statuses.Money} money.", False, Hue.Black)
                     Return
                 End If
         End Select

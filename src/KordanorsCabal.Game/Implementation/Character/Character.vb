@@ -249,4 +249,10 @@
             Return CharacterStatuses.FromCharacter(WorldData, Me)
         End Get
     End Property
+
+    Public ReadOnly Property Interaction As ICharacterInteraction Implements ICharacter.Interaction
+        Get
+            Return CharacterInteraction.FromCharacter(WorldData, Me)
+        End Get
+    End Property
 End Class

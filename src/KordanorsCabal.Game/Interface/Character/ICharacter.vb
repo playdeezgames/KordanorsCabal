@@ -14,6 +14,7 @@
     ReadOnly Property Repair As ICharacterRepair
     ReadOnly Property Encumbrance As ICharacterEncumbrance
     ReadOnly Property Statuses As ICharacterStatuses
+    ReadOnly Property Interaction As ICharacterInteraction
     'Interaction
     Sub Interact()
     ReadOnly Property CanInteract As Boolean
