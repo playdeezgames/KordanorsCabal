@@ -40,8 +40,16 @@
                     outputColumnNames As (String, String),
                     forColumnValue As (String, TInputColumn)) As List(Of Tuple(Of TFirstOutputColumn, TSecondOutputColumn)) Implements IStoreRecord.WithValue
         initializer()
+        Dim firstColumnName = outputColumnNames.Item1
+        Dim secondColumnName = outputColumnNames.Item2
         Return ExecuteReader(
-            Function(reader) New Tuple(Of TFirstOutputColumn, TSecondOutputColumn)(CType(reader(outputColumnNames.Item1), TFirstOutputColumn), CType(reader(outputColumnNames.Item2), TSecondOutputColumn)),
+            Function(reader)
+                Dim firstColumnValue = reader(firstColumnName)
+                Dim secondColumnValue = reader(secondColumnName)
+                Return New Tuple(Of TFirstOutputColumn, TSecondOutputColumn)(
+                    CType(If(TypeOf firstColumnValue Is DBNull, Nothing, firstColumnValue), TFirstOutputColumn),
+                    CType(secondColumnValue, TSecondOutputColumn))
+            End Function,
             $"SELECT [{outputColumnNames.Item1}],[{outputColumnNames.Item2}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
             ($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
