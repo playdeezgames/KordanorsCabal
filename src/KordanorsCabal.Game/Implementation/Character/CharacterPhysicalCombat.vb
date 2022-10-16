@@ -115,11 +115,11 @@
         If CanFight Then
             character.Movement.Direction = RNG.FromEnumerable(CardinalDirections(WorldData))
             If character.Movement.CanMove(character.Movement.Direction) Then
-                character.EnqueueMessage("You successfully ran!") 'TODO: sfx
+                character.EnqueueMessage(Nothing, "You successfully ran!") 'TODO: sfx
                 character.Movement.Move(character.Movement.Direction)
                 Exit Sub
             End If
-            character.EnqueueMessage("You fail to run!") 'TODO: shucks!
+            character.EnqueueMessage(Nothing, "You fail to run!") 'TODO: shucks!
             DoCounterAttacks()
         End If
     End Sub
@@ -199,7 +199,7 @@
         }
         lines.Add($"{enemy.CharacterType.Name} is immobilized!")
         enemy.Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Immobilization), -1)
-        character.EnqueueMessage(lines.ToArray)
+        character.EnqueueMessage(Nothing, lines.ToArray)
     End Sub
     Private Sub DoMentalCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
         Dim lines As New List(Of String) From {

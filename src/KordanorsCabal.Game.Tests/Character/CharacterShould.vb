@@ -46,7 +46,7 @@
     Sub enqueue_messages_without_sfx()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.EnqueueMessage("text")
+                subject.EnqueueMessage(Nothing, "text")
             End Sub)
     End Sub
     <Fact>

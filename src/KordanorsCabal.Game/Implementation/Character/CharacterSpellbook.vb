@@ -25,11 +25,11 @@
     End Property
     Sub Learn(spellType As ISpellType) Implements ICharacterSpellbook.Learn
         If Not CanLearn(spellType) Then
-            Character.EnqueueMessage($"You cannot learn {spellType.Name} at this time!")
+            character.EnqueueMessage(Nothing, $"You cannot learn {spellType.Name} at this time!")
             Return
         End If
         Dim nextLevel = If(WorldData.CharacterSpell.Read(Id, spellType.Id), 0) + 1
-        character.EnqueueMessage($"You now know {spellType.Name} at level {nextLevel}.")
+        character.EnqueueMessage(Nothing, $"You now know {spellType.Name} at level {nextLevel}.")
         WorldData.CharacterSpell.Write(Id, spellType.Id, nextLevel)
     End Sub
     Function CanLearn(spellType As ISpellType) As Boolean Implements ICharacterSpellbook.CanLearn
@@ -55,7 +55,7 @@
     End Function
     Public Sub Cast(spellType As ISpellType) Implements ICharacterSpellbook.Cast
         If Not CanCastSpell(spellType) Then
-            character.EnqueueMessage($"You cannot cast {spellType.Name} at this time.")
+            character.EnqueueMessage(Nothing, $"You cannot cast {spellType.Name} at this time.")
             Return
         End If
         spellType.Cast(character)

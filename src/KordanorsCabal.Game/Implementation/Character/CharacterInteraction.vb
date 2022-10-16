@@ -28,7 +28,7 @@
     End Property
     Public Sub Gamble() Implements ICharacterInteraction.Gamble
         If Not CanGamble Then
-            character.EnqueueMessage("You cannot gamble at this time!")
+            character.EnqueueMessage(Nothing, "You cannot gamble at this time!")
             Return
         End If
         Dim lines As New List(Of String)
@@ -46,6 +46,6 @@
             character.Statuses.Money -= 5
         End If
         'TODO: sound effect
-        character.EnqueueMessage(lines.ToArray)
+        character.EnqueueMessage(Nothing, lines.ToArray)
     End Sub
 End Class

@@ -94,7 +94,7 @@
                     Dim character = Game.Character.FromId(worldData, characterId)
                     Dim spellType = Game.SpellType.FromId(worldData, 1L)
                     If Not character.Spellbook.CanCastSpell(spellType) Then
-                        character.EnqueueMessage($"You cannot cast {spellType.Name} now!")
+                        character.EnqueueMessage(Nothing, $"You cannot cast {spellType.Name} now!")
                         Return
                     End If
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
@@ -119,13 +119,13 @@
                     Dim character = Game.Character.FromId(worldData, characterId)
                     character.Items.PurifyItems()
                     character.Mana.DoFatigue(1)
-                    character.EnqueueMessage("You purify yer inventory!")
+                    character.EnqueueMessage(Nothing, "You purify yer inventory!")
                 End Sub},
             {"CharacterAcceptCellarRatsQuest",
                 Sub(worldData, parms)
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
-                    character.EnqueueMessage("You accept the quest!")
+                    character.EnqueueMessage(Nothing, "You accept the quest!")
                     worldData.CharacterQuest.Write(character.Id, 1L)
                     Dim ratCount = If(worldData.CharacterQuestCompletion.Read(character.Id, 1L), 0) + 1
                     Dim location = Game.Location.FromLocationType(worldData, LocationType.FromId(worldData, 7L)).Single
@@ -139,7 +139,7 @@
                 Sub(worldData, parms)
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
-                    character.EnqueueMessage("You complete the quest!")
+                    character.EnqueueMessage(Nothing, "You complete the quest!")
                     Dim ratTails = character.Items.Inventory.ItemsOfType(ItemType.FromId(worldData, 21L)).Take(10)
                     For Each ratTail In ratTails
                         character.Statuses.Money += 1
@@ -171,7 +171,7 @@
                     Dim healRoll = 1
                     character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Wounds), -healRoll)
                     character.Statuses.Hunger = 0
-                    character.EnqueueMessage(
+                    character.EnqueueMessage(Nothing,
                         $"Food heals up to {healRoll} HP!",
                         $"You now have {character.Health.Current} HP!")
                 End Sub},
@@ -204,7 +204,7 @@
                     destination.Routes.DestroyRoute(inDirection)
                     Route.Create(worldData, location, outDirection, RouteType.FromId(worldData, 10L), destination)
                     Route.Create(worldData, destination, inDirection, RouteType.FromId(worldData, 10L), location)
-                    character.EnqueueMessage("A portal opens before you!")
+                    character.EnqueueMessage(Nothing, "A portal opens before you!")
                 End Sub},
             {"UseAirShard",
                 Sub(worldData, parms)
@@ -213,30 +213,30 @@
                     Dim level = character.Movement.Location.DungeonLevel
                     Dim locations = Location.FromLocationType(worldData, LocationType.FromId(worldData, 4L)).Where(Function(x) x.DungeonLevel.Id = level.Id)
                     character.Movement.Location = RNG.FromEnumerable(locations)
-                    character.EnqueueMessage($"You use the {ItemType.FromId(worldData, 14L).Name} and suddenly find yerself somewhere else!")
+                    character.EnqueueMessage(Nothing, $"You use the {ItemType.FromId(worldData, 14L).Name} and suddenly find yerself somewhere else!")
                 End Sub},
             {"UseRottenEgg",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)) Then
-                        character.EnqueueMessage($"You give {enemy.CharacterType.Name} the {Game.ItemType.FromId(worldData, 37).Name}, and they quickly wander off with a seeming great purpose.")
+                        character.EnqueueMessage(Nothing, $"You give {enemy.CharacterType.Name} the {Game.ItemType.FromId(worldData, 37).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
                         Return
                     End If
-                    character.EnqueueMessage($"You cannot use that now!")
+                    character.EnqueueMessage(Nothing, $"You cannot use that now!")
                 End Sub},
             {"UsePr0n",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, 28)) Then
-                        character.EnqueueMessage($"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, 28).Name}, and they quickly wander off with a seeming great purpose.")
+                        character.EnqueueMessage(Nothing, $"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, 28).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
                         Return
                     End If
                     If enemy IsNot Nothing Then
-                        character.EnqueueMessage("Dude! now is not the time!")
+                        character.EnqueueMessage(Nothing, "Dude! now is not the time!")
                         Return
                     End If
                     Dim healRoll = RNG.RollDice("1d4")
@@ -257,7 +257,7 @@
                             character.Items.Inventory.Add(Item.Create(worldData, 30))
                         End If
                     End If
-                    character.EnqueueMessage(lines.ToArray)
+                    character.EnqueueMessage(Nothing, lines.ToArray)
                 End Sub},
             {"UseMagicEgg",
                 Sub(worldData, parms)
@@ -281,7 +281,7 @@
                             {27L, 1}
                         }
                     Dim item = Game.Item.Create(worldData, RNG.FromGenerator(table))
-                    character.EnqueueMessage($"You crack open the {ItemType.FromId(worldData, 25).Name} and find {item.Name} inside!")
+                    character.EnqueueMessage(Nothing, $"You crack open the {ItemType.FromId(worldData, 25).Name} and find {item.Name} inside!")
                     character.Items.Inventory.Add(item)
                 End Sub},
             {"UseBeer",
@@ -290,13 +290,13 @@
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, 26)) Then
                         enemy.Destroy()
-                        character.EnqueueMessage($"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, 26).Name}, and they wander off to get drunk.")
+                        character.EnqueueMessage(Nothing, $"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, 26).Name}, and they wander off to get drunk.")
                         Return
                     End If
                     character.MentalCombat.CurrentMP = character.Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP)).Value
                     character.Statuses.Drunkenness += 10
                     character.Items.Inventory.Add(Game.Item.Create(worldData, 30))
-                    character.EnqueueMessage("You drink the beer, and suddenly feel braver!")
+                    character.EnqueueMessage(Nothing, "You drink the beer, and suddenly feel braver!")
                 End Sub},
             {"UseMoonPortal",
                 Sub(worldData, parms)
@@ -309,7 +309,7 @@
                     destination.Routes.DestroyRoute(inDirection)
                     Route.Create(worldData, location, outDirection, RouteType.FromId(worldData, 10L), destination)
                     Route.Create(worldData, destination, inDirection, RouteType.FromId(worldData, 10L), location)
-                    character.EnqueueMessage("A portal opens before you!")
+                    character.EnqueueMessage(Nothing, "A portal opens before you!")
                 End Sub},
             {"UseFireShard",
                 Sub(worldData, parms)
@@ -336,7 +336,7 @@
                     Dim healRoll = RNG.RollDice("2d4")
                     character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Wounds), -healRoll)
                     character.Items.Inventory.Add(Item.Create(worldData, 30))
-                    character.EnqueueMessage(
+                    character.EnqueueMessage(Nothing,
                 $"Potion heals up to {healRoll} HP!",
                 $"You now have {character.Health.Current} HP!")
                 End Sub},
@@ -346,7 +346,7 @@
                     Dim delta = character.Mana.MaximumMana - character.Mana.CurrentMana
                     character.Mana.CurrentMana = character.Mana.MaximumMana
                     character.Statuses.Highness += 10
-                    character.EnqueueMessage($"You use yer {ItemType.FromId(worldData, 33).Name} to smoke yer {ItemType.FromId(worldData, 34).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Mana).Name}.")
+                    character.EnqueueMessage(Nothing, $"You use yer {ItemType.FromId(worldData, 33).Name} to smoke yer {ItemType.FromId(worldData, 34).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Mana).Name}.")
                 End Sub},
             {"UseEarthShard",
                 Sub(worldData, parms)
@@ -367,13 +367,13 @@
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     character.Mana.CurrentMana -= 1
                     character.Health.Heal()
-                    character.EnqueueMessage($"You use {ItemType.FromId(worldData, 12L).Name} to heal yer wounds!")
+                    character.EnqueueMessage(Nothing, $"You use {ItemType.FromId(worldData, 12L).Name} to heal yer wounds!")
                 End Sub},
             {"UseBottle",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                    character.EnqueueMessage($"You give the {ItemType.FromId(worldData, 30).Name} to the {enemy.CharacterType.Name}, and it wanders off happily.")
+                    character.EnqueueMessage(Nothing, $"You give the {ItemType.FromId(worldData, 30).Name} to the {enemy.CharacterType.Name}, and it wanders off happily.")
                     enemy.Destroy()
                 End Sub},
             {"UseRottenFood",
@@ -382,14 +382,14 @@
                     If RNG.RollDice("1d2") = 1 Then
                         character.Statuses.Hunger \= 2
                         character.Statuses.FoodPoisoning = 10
-                        character.EnqueueMessage(
+                        character.EnqueueMessage(Nothing,
                         $"Food was rotten!",
                         $"You got food poisoning!")
                     Else
                         Dim healRoll = 1
                         character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Wounds), -healRoll)
                         character.Statuses.Hunger = 0
-                        character.EnqueueMessage(
+                        character.EnqueueMessage(Nothing,
                         $"Food heals up to {healRoll} HP!",
                         $"You now have {character.Health.Current} HP!")
                     End If

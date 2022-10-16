@@ -20,13 +20,13 @@
             WorldData.Events.Perform(WorldData, WorldData.QuestType.ReadCompleteEventName(Id), character.Id)
             Return
         End If
-        character.EnqueueMessage("You cannot complete this quest at this time.")
+        character.EnqueueMessage(Nothing, "You cannot complete this quest at this time.")
     End Sub
     Sub Accept(character As ICharacter) Implements IQuestType.Accept
         If CanAccept(character) Then
             WorldData.Events.Perform(WorldData, WorldData.QuestType.ReadAcceptEventName(Id), character.Id)
             Return
         End If
-        character.EnqueueMessage("You cannot accept this quest at this time.")
+        character.EnqueueMessage(Nothing, "You cannot accept this quest at this time.")
     End Sub
 End Class

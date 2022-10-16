@@ -71,10 +71,10 @@
                 character.Items.Inventory.Add(oldItem)
             End If
             WorldData.CharacterEquipSlot.Write(Id, equipSlot.Id, item.Id)
-            character.EnqueueMessage($"You equip {item.Name} to {equipSlot.Name}.")
+            character.EnqueueMessage(Nothing, $"You equip {item.Name} to {equipSlot.Name}.")
             Return
         End If
-        character.EnqueueMessage($"You cannot equip {item.Name}!")
+        character.EnqueueMessage(Nothing, $"You cannot equip {item.Name}!")
     End Sub
     Public ReadOnly Property HasEquipment As Boolean Implements ICharacterEquipment.HasEquipment
         Get

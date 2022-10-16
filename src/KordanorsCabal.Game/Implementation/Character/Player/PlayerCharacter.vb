@@ -1,9 +1,6 @@
 ﻿Public Class PlayerCharacter
     Inherits Character
     Shared ReadOnly Property Messages As New Queue(Of Message)
-    Public Overrides Sub EnqueueMessage(ParamArray lines() As String)
-        EnqueueMessage(Nothing, lines)
-    End Sub
     Public Overrides Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
         If sfx.HasValue Then
             Messages.Enqueue(Message.Create(sfx.Value, lines))

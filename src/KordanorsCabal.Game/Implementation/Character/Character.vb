@@ -17,9 +17,6 @@
     Overridable Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String) Implements ICharacter.EnqueueMessage
         'do nothing!
     End Sub
-    Overridable Sub EnqueueMessage(ParamArray lines() As String) Implements ICharacter.EnqueueMessage
-        'do nothing!
-    End Sub
     Friend Shared Function Create(worldData As IWorldData, characterType As ICharacterType, location As ILocation, initialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long))) As ICharacter
         Dim character = FromId(worldData, worldData.Character.Create(characterType.Id, location.Id))
         If initialStatistics IsNot Nothing Then

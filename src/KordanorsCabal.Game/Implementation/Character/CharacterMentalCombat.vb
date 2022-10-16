@@ -83,10 +83,10 @@
             Else
                 lines.Add($"{enemy.CharacterType.Name} is not intimidated.")
             End If
-            character.EnqueueMessage(lines.ToArray)
+            character.EnqueueMessage(Nothing, lines.ToArray)
             character.PhysicalCombat.DoCounterAttacks()
             Return
         End If
-        character.EnqueueMessage("You cannot intimidate at this time!")
+        character.EnqueueMessage(Nothing, "You cannot intimidate at this time!")
     End Sub
 End Class
