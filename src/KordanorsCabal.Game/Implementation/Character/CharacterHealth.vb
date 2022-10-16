@@ -1,24 +1,24 @@
 ﻿Public Class CharacterHealth
-    Inherits BaseThingie
+    Inherits SubcharacterBase
     Implements ICharacterHealth
 
-    Public Sub New(worldData As IWorldData, id As Long)
-        MyBase.New(worldData, id)
+    Public Sub New(worldData As IWorldData, character As ICharacter)
+        MyBase.New(worldData, character)
     End Sub
-    Shared Function FromId(worldData As IWorldData, id As Long?) As ICharacterHealth
-        Return If(id.HasValue, New CharacterHealth(worldData, id.Value), Nothing)
+    Shared Function FromCharacter(worldData As IWorldData, character As ICharacter) As ICharacterHealth
+        Return If(character IsNot Nothing, New CharacterHealth(worldData, character), Nothing)
     End Function
     Property Current As Long Implements ICharacterHealth.Current
         Get
-            Return Math.Max(0, Maximum - If(Character.FromId(WorldData, Id).Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)), 0))
+            Return Math.Max(0, Maximum - If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, 12L)), 0))
         End Get
         Set(value As Long)
-            Character.FromId(WorldData, Id).Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Wounds), Character.FromId(WorldData, Id).Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.HP)).Value - value)
+            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Wounds), Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.HP)).Value - value)
         End Set
     End Property
     ReadOnly Property Maximum As Long Implements ICharacterHealth.Maximum
         Get
-            Return If(Character.FromId(WorldData, Id).Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.HP)), 0)
+            Return If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.HP)), 0)
         End Get
     End Property
     ReadOnly Property IsDead As Boolean Implements ICharacterHealth.IsDead
@@ -28,10 +28,10 @@
     End Property
     ReadOnly Property NeedsHealing As Boolean Implements ICharacterHealth.NeedsHealing
         Get
-            Return Character.FromId(WorldData, Id).Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Wounds)).Value > 0
+            Return Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Wounds)).Value > 0
         End Get
     End Property
     Public Sub Heal() Implements ICharacterHealth.Heal
-        Character.FromId(WorldData, Id).Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Wounds), 0)
+        Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Wounds), 0)
     End Sub
 End Class

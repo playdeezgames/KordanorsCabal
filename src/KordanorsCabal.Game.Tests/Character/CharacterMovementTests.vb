@@ -164,13 +164,6 @@
             End Sub)
     End Sub
     <Fact>
-    Sub character_movement_can_access_character_subobject()
-        WithSubject(
-            Sub(worldData, id, subject)
-                subject.Character.Id.ShouldBe(id)
-            End Sub)
-    End Sub
-    <Fact>
     Sub characters_can_move_in_a_given_directions()
         WithMovementSubject(
             Sub(direction, worldData, subject)

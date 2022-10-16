@@ -1,10 +1,9 @@
 ﻿Public Class CharacterMovement
-    Inherits BaseThingie
+    Inherits SubcharacterBase
     Implements ICharacterMovement
 
     Public Sub New(worldData As IWorldData, character As ICharacter)
-        MyBase.New(worldData, character.Id)
-        Me.Character = character
+        MyBase.New(worldData, character)
     End Sub
     Property Location As ILocation Implements ICharacterMovement.Location
         Get
@@ -19,7 +18,6 @@
             WorldData.CharacterLocation.Write(Id, value.Id)
         End Set
     End Property
-    Public ReadOnly Property Character As ICharacter Implements ICharacterMovement.Character
     Public Function CanMoveForward() As Boolean Implements ICharacterMovement.CanMoveForward
         Return CanMove(Direction)
     End Function

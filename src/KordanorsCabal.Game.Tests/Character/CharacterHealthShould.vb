@@ -1,7 +1,7 @@
 ﻿Public Class CharacterHealthShould
     Inherits ThingieShould(Of ICharacterHealth)
     Sub New()
-        MyBase.New(AddressOf CharacterHealth.FromId)
+        MyBase.New(Function(w, i) CharacterHealth.FromCharacter(w, Character.FromId(w, i)))
     End Sub
     <Fact>
     Sub have_needs_healing()

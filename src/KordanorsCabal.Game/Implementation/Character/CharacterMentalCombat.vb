@@ -1,10 +1,8 @@
 ﻿Public Class CharacterMentalCombat
-    Inherits BaseThingie
+    Inherits SubcharacterBase
     Implements ICharacterMentalCombat
-    Private character As ICharacter
     Public Sub New(worldData As IWorldData, character As ICharacter)
-        MyBase.New(worldData, character.Id)
-        Me.character = character
+        MyBase.New(worldData, character)
     End Sub
     Private Function RollDice(dice As Long) As Long
         Dim result As Long = 0

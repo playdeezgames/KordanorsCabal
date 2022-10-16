@@ -71,7 +71,7 @@
 
     Public ReadOnly Property Health As ICharacterHealth Implements ICharacter.Health
         Get
-            Return CharacterHealth.FromId(WorldData, Id)
+            Return CharacterHealth.FromCharacter(WorldData, Me)
         End Get
     End Property
 

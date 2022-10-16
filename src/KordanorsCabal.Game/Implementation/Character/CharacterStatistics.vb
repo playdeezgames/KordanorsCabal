@@ -1,11 +1,9 @@
 ﻿Public Class CharacterStatistics
-    Inherits BaseThingie
+    Inherits SubcharacterBase
     Implements ICharacterStatistics
-    Private character As ICharacter
 
     Public Sub New(worldData As IWorldData, character As ICharacter)
-        MyBase.New(worldData, character.Id)
-        Me.character = character
+        MyBase.New(worldData, character)
     End Sub
 
     Public Shared Function FromCharacter(worldData As IWorldData, character As ICharacter) As ICharacterStatistics
