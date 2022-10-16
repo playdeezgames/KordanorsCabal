@@ -61,15 +61,4 @@
     Public Function RollPower() As Long Implements ICharacterSpellbook.RollPower
         Return RollDice(If(character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Power)), 0) + NegativeInfluence())
     End Function
-    Private Function RollDice(dice As Long) As Long
-        Dim result As Long = 0
-        While dice > 0
-            result += RNG.RollDice("1d6/6")
-            dice -= 1
-        End While
-        Return result
-    End Function
-    Private Function NegativeInfluence() As Long
-        Return If(character.Statuses.Drunkenness > 0 OrElse character.Statuses.Highness > 0 OrElse character.Statuses.Chafing > 0, -1, 0)
-    End Function
 End Class

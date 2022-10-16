@@ -11,4 +11,15 @@
             Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
         End Get
     End Property
+    Protected Function RollDice(dice As Long) As Long
+        Dim result As Long = 0
+        While dice > 0
+            result += RNG.RollDice("1d6/6")
+            dice -= 1
+        End While
+        Return result
+    End Function
+    Protected Function NegativeInfluence() As Long
+        Return If(Character.Statuses.Drunkenness > 0 OrElse Character.Statuses.Highness > 0 OrElse Character.Statuses.Chafing > 0, -1, 0)
+    End Function
 End Class

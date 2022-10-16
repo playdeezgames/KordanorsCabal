@@ -28,20 +28,9 @@
     Function RollAttack() As Long Implements ICharacterPhysicalCombat.RollAttack
         Return RollDice(GetAttackDice() + NegativeInfluence())
     End Function
-    Private Function RollDice(dice As Long) As Long
-        Dim result As Long = 0
-        While dice > 0
-            result += RNG.RollDice("1d6/6")
-            dice -= 1
-        End While
-        Return result
-    End Function
-    Private Function NegativeInfluence() As Long
-        Return If(character.Statuses.Drunkenness > 0 OrElse character.Statuses.Highness > 0 OrElse character.Statuses.Chafing > 0, -1, 0)
-    End Function
     ReadOnly Property PartingShot As String Implements ICharacterPhysicalCombat.PartingShot
         Get
-            Return character.CharacterType.Combat.PartingShot
+            Return Character.CharacterType.Combat.PartingShot
         End Get
     End Property
     Sub DoDamage(damage As Long) Implements ICharacterPhysicalCombat.DoDamage
