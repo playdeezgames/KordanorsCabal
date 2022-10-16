@@ -11,7 +11,7 @@ Friend Class EnemiesProcessor
         Dim enemies = player.Movement.Location.Factions.EnemiesOf(player)
         Dim row = 1
         For Each enemy In enemies
-            buffer.WriteText((0, row), $"{enemy.Name}({enemy.Health.Current}/{enemy.Health.Maximum})", False, Hue.Black)
+            buffer.WriteText((0, row), $"{enemy.CharacterType.Name}({enemy.Health.Current}/{enemy.Health.Maximum})", False, Hue.Black)
             row += 1
         Next
     End Sub

@@ -72,16 +72,16 @@
             Dim influenceRoll = RollInfluence()
             lines.Add($"You roll {influenceRoll} influence.")
             Dim willpowerRoll = enemy.MentalCombat.RollWillpower()
-            lines.Add($"{enemy.Name} rolls {willpowerRoll} willpower.")
+            lines.Add($"{enemy.CharacterType.Name} rolls {willpowerRoll} willpower.")
             If influenceRoll > willpowerRoll Then
                 enemy.MentalCombat.AddStress(1)
-                lines.Add($"{enemy.Name} loses 1 MP!")
+                lines.Add($"{enemy.CharacterType.Name} loses 1 MP!")
                 If enemy.MentalCombat.IsDemoralized Then
-                    lines.Add($"{enemy.Name} runs away!")
+                    lines.Add($"{enemy.CharacterType.Name} runs away!")
                     enemy.Destroy()
                 End If
             Else
-                lines.Add($"{enemy.Name} is not intimidated.")
+                lines.Add($"{enemy.CharacterType.Name} is not intimidated.")
             End If
             character.EnqueueMessage(lines.ToArray)
             character.PhysicalCombat.DoCounterAttacks()

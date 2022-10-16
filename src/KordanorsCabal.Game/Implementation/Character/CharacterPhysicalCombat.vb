@@ -84,7 +84,7 @@
     End Sub
     Function Kill(killedBy As ICharacter) As (Sfx?, List(Of String)) Implements ICharacterPhysicalCombat.Kill
         Dim lines As New List(Of String)
-        lines.Add($"You kill {character.Name}!")
+        lines.Add($"You kill {character.CharacterType.Name}!")
         Dim sfx As Sfx? = Game.Sfx.EnemyDeath
         Dim money As Long = RollMoneyDrop
         If money > 0 Then
@@ -135,7 +135,7 @@
         Dim enemy = character.Movement.Location.Factions.EnemiesOf(character).First
         lines.Add($"You roll an attack of {attackRoll}.")
         Dim defendRoll = enemy.PhysicalCombat.RollDefend()
-        lines.Add($"{enemy.Name} rolls a defend of {defendRoll}.")
+        lines.Add($"{enemy.CharacterType.Name} rolls a defend of {defendRoll}.")
         Dim result = attackRoll - defendRoll
         Dim sfx As Sfx?
         enemy.Equipment.DoArmorWear(attackRoll)
@@ -157,7 +157,7 @@
                     Exit Select
                 End If
                 sfx = Game.Sfx.EnemyHit
-                lines.Add($"{enemy.Name} has {enemy.Health.Current} HP left.")
+                lines.Add($"{enemy.CharacterType.Name} has {enemy.Health.Current} HP left.")
         End Select
         character.EnqueueMessage(sfx, lines.ToArray)
     End Sub
@@ -197,7 +197,7 @@
         Dim lines As New List(Of String) From {
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
-        lines.Add($"{enemy.Name} is immobilized!")
+        lines.Add($"{enemy.CharacterType.Name} is immobilized!")
         enemy.Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Immobilization), -1)
         character.EnqueueMessage(lines.ToArray)
     End Sub
@@ -205,22 +205,22 @@
         Dim lines As New List(Of String) From {
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
-        lines.Add($"{enemy.Name} attempts to intimidate you!")
+        lines.Add($"{enemy.CharacterType.Name} attempts to intimidate you!")
         Dim influenceRoll = enemy.MentalCombat.RollInfluence
-        lines.Add($"{enemy.Name} rolls influence of {influenceRoll}.")
+        lines.Add($"{enemy.CharacterType.Name} rolls influence of {influenceRoll}.")
         Dim willpowerRoll = character.MentalCombat.RollWillpower()
         lines.Add($"You roll willpower of {willpowerRoll}.")
         Dim result = influenceRoll - willpowerRoll
         Dim sfx As Sfx?
         Select Case result
             Case Is <= 0
-                lines.Add($"{enemy.Name} fails to intimidate you!")
+                lines.Add($"{enemy.CharacterType.Name} fails to intimidate you!")
                 sfx = Game.Sfx.Miss
             Case Else
-                lines.Add($"{enemy.Name} adds 1 stress!")
+                lines.Add($"{enemy.CharacterType.Name} adds 1 stress!")
                 character.MentalCombat.AddStress(1)
                 If character.MentalCombat.IsDemoralized() Then
-                    lines.Add($"{enemy.Name} completely demoralizes you and you drop everything and run away!")
+                    lines.Add($"{enemy.CharacterType.Name} completely demoralizes you and you drop everything and run away!")
                     Panic()
                     character.Statuses.Money \= 2
                     character.Movement.Location = Game.Location.FromLocationType(WorldData, LocationType.FromId(WorldData, 1L)).Single
@@ -235,7 +235,7 @@
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
         Dim attackRoll = enemy.PhysicalCombat.RollAttack()
-        lines.Add($"{enemy.Name} rolls an attack of {attackRoll}.")
+        lines.Add($"{enemy.CharacterType.Name} rolls an attack of {attackRoll}.")
         For Each brokenItemType In character.Equipment.DoArmorWear(attackRoll)
             lines.Add($"Yer {brokenItemType.Name} breaks!")
         Next
@@ -245,19 +245,19 @@
         Dim sfx As Sfx?
         Select Case result
             Case Is <= 0
-                lines.Add($"{enemy.Name} misses!")
+                lines.Add($"{enemy.CharacterType.Name} misses!")
                 sfx = Game.Sfx.Miss
             Case Else
                 Dim damage = enemy.PhysicalCombat.DetermineDamage(result)
-                lines.Add($"{enemy.Name} does {damage} damage!")
+                lines.Add($"{enemy.CharacterType.Name} does {damage} damage!")
                 DoDamage(damage)
                 enemy.Equipment.DoWeaponWear(damage)
                 If character.Health.IsDead Then
                     sfx = Game.Sfx.PlayerDeath
-                    lines.Add($"{enemy.Name} kills you!")
+                    lines.Add($"{enemy.CharacterType.Name} kills you!")
                     Dim partingShot = enemy.PhysicalCombat.PartingShot
                     If Not String.IsNullOrEmpty(partingShot) Then
-                        lines.Add($"{enemy.Name} says ""{partingShot}""")
+                        lines.Add($"{enemy.CharacterType.Name} says ""{partingShot}""")
                     End If
                     Exit Select
                 End If

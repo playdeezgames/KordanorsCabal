@@ -32,11 +32,6 @@
     Shared Function FromId(worldData As IWorldData, characterId As Long?) As ICharacter
         Return If(characterId.HasValue, New Character(worldData, characterId.Value), Nothing)
     End Function
-    ReadOnly Property Name As String Implements ICharacter.Name
-        Get
-            Return CharacterType.Name
-        End Get
-    End Property
     Sub Destroy() Implements ICharacter.Destroy
         WorldData.Character.Clear(Id)
     End Sub

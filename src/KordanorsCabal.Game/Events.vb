@@ -100,7 +100,7 @@
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
-                    lines.Add($"You cast {spellType.Name} on {enemy.Name}!")
+                    lines.Add($"You cast {spellType.Name} on {enemy.CharacterType.Name}!")
                     character.Mana.DoFatigue(1)
                     Dim damage As Long = character.Spellbook.RollSpellDice(spellType)
                     lines.Add($"You do {damage} damage!")
@@ -182,7 +182,7 @@
                     Dim damageRoll = RNG.RollDice("1d4")
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String) From {
-                        $"{ItemType.FromId(worldData, 22L).Name} deals {damageRoll} HP to {enemy.Name}!"
+                        $"{ItemType.FromId(worldData, 22L).Name} deals {damageRoll} HP to {enemy.CharacterType.Name}!"
                     }
                     enemy.PhysicalCombat.DoDamage(damageRoll)
                     If enemy.Health.IsDead Then
@@ -220,7 +220,7 @@
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)) Then
-                        character.EnqueueMessage($"You give {enemy.Name} the {Game.ItemType.FromId(worldData, 37).Name}, and they quickly wander off with a seeming great purpose.")
+                        character.EnqueueMessage($"You give {enemy.CharacterType.Name} the {Game.ItemType.FromId(worldData, 37).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
                         Return
                     End If
@@ -231,7 +231,7 @@
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, 28)) Then
-                        character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(worldData, 28).Name}, and they quickly wander off with a seeming great purpose.")
+                        character.EnqueueMessage($"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, 28).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
                         Return
                     End If
@@ -290,7 +290,7 @@
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, 26)) Then
                         enemy.Destroy()
-                        character.EnqueueMessage($"You give {enemy.Name} the {ItemType.FromId(worldData, 26).Name}, and they wander off to get drunk.")
+                        character.EnqueueMessage($"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, 26).Name}, and they wander off to get drunk.")
                         Return
                     End If
                     character.MentalCombat.CurrentMP = character.Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP)).Value
@@ -318,7 +318,7 @@
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
-                    lines.Add($"You use {ItemType.FromId(worldData, 13).Name} on {enemy.Name}!")
+                    lines.Add($"You use {ItemType.FromId(worldData, 13).Name} on {enemy.CharacterType.Name}!")
                     Dim damage As Long = RNG.RollDice("3d4")
                     lines.Add($"You do {damage} damage!")
                     enemy.PhysicalCombat.DoDamage(damage)
@@ -355,9 +355,9 @@
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
-                    lines.Add($"You use {ItemType.FromId(worldData, 11).Name} on {enemy.Name}!")
+                    lines.Add($"You use {ItemType.FromId(worldData, 11).Name} on {enemy.CharacterType.Name}!")
                     Dim immobilization As Long = character.Spellbook.RollPower()
-                    lines.Add($"You immobilize {enemy.Name} for {immobilization} turns!")
+                    lines.Add($"You immobilize {enemy.CharacterType.Name} for {immobilization} turns!")
                     enemy.Statuses.DoImmobilization(immobilization)
                     character.EnqueueMessage(sfx, lines.ToArray)
                     character.PhysicalCombat.DoCounterAttacks()
@@ -373,7 +373,7 @@
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                    character.EnqueueMessage($"You give the {ItemType.FromId(worldData, 30).Name} to the {enemy.Name}, and it wanders off happily.")
+                    character.EnqueueMessage($"You give the {ItemType.FromId(worldData, 30).Name} to the {enemy.CharacterType.Name}, and it wanders off happily.")
                     enemy.Destroy()
                 End Sub},
             {"UseRottenFood",

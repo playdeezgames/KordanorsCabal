@@ -25,23 +25,6 @@
             End Sub)
     End Sub
     <Fact>
-    Sub have_name()
-        WithSubject(
-            Sub(worldData, id, subject)
-                Const characterTypeId = 1L
-                Dim characterData As New Mock(Of ICharacterData)
-                characterData.Setup(Function(x) x.ReadCharacterType(id)).Returns(characterTypeId)
-                worldData.SetupGet(Function(x) x.Character).Returns(characterData.Object)
-                Dim characterTypeData As New Mock(Of ICharacterTypeData)
-                worldData.SetupGet(Function(x) x.CharacterType).Returns(characterTypeData.Object)
-
-                subject.Name.ShouldBeNull
-
-                worldData.Verify(Function(x) x.Character.ReadCharacterType(id))
-                worldData.Verify(Function(x) x.CharacterType.ReadName(characterTypeId))
-            End Sub)
-    End Sub
-    <Fact>
     Sub have_mode()
         WithSubject(
             Sub(worldData, id, subject)

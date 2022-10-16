@@ -17,10 +17,9 @@
     ReadOnly Property Interaction As ICharacterInteraction
     ReadOnly Property Equipment As ICharacterEquipment
     'Messages
-    Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String)
+    Sub EnqueueMessage(sfx As Sfx?, ParamArray lines() As String) 'TODO: make an Sfx.None, and make it optional?
     Sub EnqueueMessage(ParamArray lines() As String)
     'Misc
-    ReadOnly Property Name As String
-    Property Mode As Long
+    Property Mode As Long 'TODO: only affects player....
     Sub Destroy()
 End Interface
