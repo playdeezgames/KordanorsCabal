@@ -4,24 +4,6 @@
     Friend Const TableName = "CharacterTypeBribes"
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
-    Friend Sub Initialize()
-        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
-                WITH [cte](
-                    [{CharacterTypeIdColumn}],
-                    [{ItemTypeIdColumn}]) AS
-                (VALUES
-                    (6,26),
-                    (6,28),
-                    (7,26),
-                    (9,28),
-                    (10,30).
-                    (2,37)
-                )
-                SELECT 
-                    [{CharacterTypeIdColumn}],
-                    [{ItemTypeIdColumn}]
-                FROM [cte];")
-    End Sub
 
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
@@ -29,7 +11,7 @@
 
     Public Function Read(characterTypeId As Long, itemType As Long) As Boolean Implements ICharacterTypeBribeData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             ItemTypeIdColumn,
             (CharacterTypeIdColumn, characterTypeId),
