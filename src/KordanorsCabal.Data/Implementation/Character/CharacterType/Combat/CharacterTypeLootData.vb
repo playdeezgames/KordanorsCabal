@@ -10,7 +10,7 @@
     End Sub
 
     Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of Long, Integer) Implements ICharacterTypeLootData.Read
-        Dim results = Store.Record.WithValue(Of Long, Long, Long)(
+        Dim results = Store.Record.WithValue(Of Long, Long?, Long)(
             AddressOf NoInitializer,
             TableName,
             (ItemTypeIdColumn, WeightColumn),
@@ -19,7 +19,7 @@
             Return Nothing
         End If
         Return results.ToDictionary(
-                Function(x) x.Item1,
+                Function(x) If(x.Item1, 0),
                 Function(x) CInt(x.Item2))
     End Function
 End Class
