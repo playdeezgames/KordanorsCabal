@@ -13,10 +13,10 @@
             (ItemTypeStatisticTypeIdColumn, itemTypeStatisticTypeId))
     End Function
     Friend Sub Initialize()
-        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
+        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [ItemTypeStatisticTypes] AS
                 WITH [cte](
-                    [{ItemTypeStatisticTypeIdColumn}],
-                    [{ItemTypeStatisticTypeNameColumn}]) AS
+                    [ItemTypeStatisticTypeId],
+                    [ItemTypeStatisticTypeName]) AS
                 (VALUES
                     (1,'Encumbrance'),
                     (2,'AttackDice'),
