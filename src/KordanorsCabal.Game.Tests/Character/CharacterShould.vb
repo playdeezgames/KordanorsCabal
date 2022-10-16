@@ -96,7 +96,7 @@
             Sub(worldData, id, subject)
                 Const equipSlotId = 2L
                 worldData.Setup(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.Equipment(EquipSlot.FromId(worldData.Object, equipSlotId))
+                subject.CurrentEquipment(EquipSlot.FromId(worldData.Object, equipSlotId))
                 worldData.Verify(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(id, equipSlotId))
             End Sub)
     End Sub
@@ -261,6 +261,13 @@
         WithSubject(
             Sub(worldData, id, subject)
                 subject.Interaction.ShouldNotBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_equipment_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Equipment.ShouldNotBeNull
             End Sub)
     End Sub
 End Class

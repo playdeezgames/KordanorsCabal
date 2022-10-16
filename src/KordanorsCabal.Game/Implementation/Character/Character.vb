@@ -90,7 +90,7 @@
             End If
         End If
     End Function
-    Function Equipment(equipSlot As IEquipSlot) As IItem Implements ICharacter.Equipment
+    Function CurrentEquipment(equipSlot As IEquipSlot) As IItem Implements ICharacter.CurrentEquipment
         Return Item.FromId(WorldData, WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
     End Function
     ReadOnly Property EquippedSlots As IEnumerable(Of IEquipSlot) Implements ICharacter.EquippedSlots
@@ -99,7 +99,7 @@
         End Get
     End Property
     Public Sub Unequip(equipSlot As IEquipSlot) Implements ICharacter.Unequip
-        Dim item = Equipment(equipSlot)
+        Dim item = CurrentEquipment(equipSlot)
         If item IsNot Nothing Then
             Me.Items.Inventory.Add(item)
             WorldData.CharacterEquipSlot.Clear(Id, equipSlot.Id)
@@ -136,9 +136,9 @@
         If item.Equipment.CanEquip Then
             WorldData.InventoryItem.ClearForItem(item.Id)
             Dim equipSlots = item.Equipment.EquipSlots
-            Dim availableEquipSlots = equipSlots.Where(Function(x) Equipment(x) Is Nothing)
+            Dim availableEquipSlots = equipSlots.Where(Function(x) CurrentEquipment(x) Is Nothing)
             Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
-            Dim oldItem = Equipment(equipSlot)
+            Dim oldItem = CurrentEquipment(equipSlot)
             If oldItem IsNot Nothing Then
                 Me.Items.Inventory.Add(oldItem)
             End If
@@ -242,6 +242,12 @@
     Public ReadOnly Property Interaction As ICharacterInteraction Implements ICharacter.Interaction
         Get
             Return CharacterInteraction.FromCharacter(WorldData, Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property Equipment As ICharacterEquipment Implements ICharacter.Equipment
+        Get
+            Return CharacterEquipment.FromCharacter(WorldData, Me)
         End Get
     End Property
 End Class

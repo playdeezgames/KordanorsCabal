@@ -16,7 +16,7 @@ Friend Class EquipmentProcessor
         For Each entry In player.EquippedSlots
             Dim slotName = $"{entry.Name}: "
             buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
-            Dim item = player.Equipment(entry)
+            Dim item = player.CurrentEquipment(entry)
             Dim condition = item.Durability.Maximum / item.Durability.Current
             Dim conditionHue = If(condition >= 4, Hue.Red, If(condition >= 2, Hue.Yellow, Hue.Black))
             buffer.WriteText((slotName.Length, row + 1), item.Name, rowIndex = row, conditionHue)

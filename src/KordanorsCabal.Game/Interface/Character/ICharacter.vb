@@ -15,13 +15,14 @@
     ReadOnly Property Encumbrance As ICharacterEncumbrance
     ReadOnly Property Statuses As ICharacterStatuses
     ReadOnly Property Interaction As ICharacterInteraction
+    ReadOnly Property Equipment As ICharacterEquipment
     'Equipment
     Function DoArmorWear(wear As Long) As IEnumerable(Of IItemType)
     Function DoWeaponWear(wear As Long) As IEnumerable(Of IItemType)
     ReadOnly Property HasEquipment As Boolean
     ReadOnly Property EquippedSlots As IEnumerable(Of IEquipSlot)
     Sub Unequip(equipSlot As IEquipSlot)
-    Function Equipment(equipSlot As IEquipSlot) As IItem
+    Function CurrentEquipment(equipSlot As IEquipSlot) As IItem
     Sub Equip(item As IItem)
     'Gamble
     Sub Gamble()

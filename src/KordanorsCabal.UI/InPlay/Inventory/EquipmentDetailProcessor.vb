@@ -33,7 +33,7 @@ Friend Class EquipmentDetailProcessor
     End Sub
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
-        Dim item = Game.World.PlayerCharacter(StaticWorldData.World).Equipment(EquipSlot)
+        Dim item = Game.World.PlayerCharacter(StaticWorldData.World).CurrentEquipment(EquipSlot)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, EquipSlot.Name, True, Hue.Blue)
         buffer.WriteText((0, 1), $"Item: {item.Name}", False, Hue.Black)
