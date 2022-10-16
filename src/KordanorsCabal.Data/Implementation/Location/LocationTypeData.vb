@@ -7,35 +7,9 @@
     Friend Const IsDungeonColumn = "IsDungeon"
     Friend Const CanMapColumn = "CanMap"
     Friend Const RequiresMPColumn = "RequiresMP"
-    Friend Sub Initialize()
-        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
-                WITH [cte](
-                    [{LocationTypeIdColumn}],
-                    [{LocationTypeNameColumn}],
-                    [{IsDungeonColumn}],
-                    [{CanMapColumn}],
-                    [{RequiresMPColumn}]) AS
-                (VALUES
-                    (1,'Town Square',0,0,0),
-                    (2,'Town',0,0,0),
-                    (3,'Church Entrance',0,0,0),
-                    (4,'Dungeon',1,1,1),
-                    (5,'Dungeon Dead End',1,1,1),
-                    (6,'Dungeon Boss',1,1,1),
-                    (7,'Cellar',1,0,1),
-                    (8,'Moon',1,1,1))
-                SELECT 
-                    [{LocationTypeIdColumn}],
-                    [{LocationTypeNameColumn}],
-                    [{IsDungeonColumn}],
-                    [{CanMapColumn}],
-                    [{RequiresMPColumn}]
-                FROM [cte];")
-    End Sub
-
     Public Function ReadRequiresMP(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadRequiresMP
         Return If(Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             RequiresMPColumn,
             (LocationTypeIdColumn, locationTypeId)), 0) > 0
@@ -43,7 +17,7 @@
 
     Public Function ReadCanMap(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadCanMap
         Return If(Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             CanMapColumn,
             (LocationTypeIdColumn, locationTypeId)), 0) > 0
@@ -51,7 +25,7 @@
 
     Public Function ReadIsDungeon(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadIsDungeon
         Return If(Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             IsDungeonColumn,
             (LocationTypeIdColumn, locationTypeId)), 0) > 0
@@ -63,7 +37,7 @@
 
     Public Function ReadName(locationTypeId As Long) As String Implements ILocationTypeData.ReadName
         Return Store.Column.ReadString(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             LocationTypeNameColumn,
             (LocationTypeIdColumn, locationTypeId))
