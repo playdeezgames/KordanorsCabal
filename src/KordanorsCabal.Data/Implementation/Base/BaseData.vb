@@ -5,4 +5,6 @@
         Me.Store = store
         Me.World = world
     End Sub
+    Protected Sub NoInitializer()
+    End Sub
 End Class
