@@ -32,14 +32,6 @@
     Sub Destroy() Implements ICharacter.Destroy
         WorldData.Character.Clear(Id)
     End Sub
-    Public Property Mode As Long Implements ICharacter.Mode
-        Get
-            Return WorldData.Player.ReadPlayerMode().Value
-        End Get
-        Set(value As Long)
-            WorldData.Player.WritePlayerMode(value)
-        End Set
-    End Property
     Public ReadOnly Property Movement As ICharacterMovement Implements ICharacter.Movement
         Get
             Return CharacterMovement.FromCharacter(WorldData, Me)

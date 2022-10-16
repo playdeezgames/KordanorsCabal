@@ -7,7 +7,7 @@
     Const GoodByeButtonIndex = 9
 
 
-    Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As IPlayerCharacter, buffer As PatternBuffer)
         ShowHeader(buffer, player.Movement.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
@@ -21,14 +21,14 @@
         End Select
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As ICharacter)
+    Friend Overrides Sub UpdateButtons(player As IPlayerCharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         Buttons(EncourageButtonIndex).Title = "Pep talk"
         Buttons(MainQuestButtonIndex).Title = "The Cabal"
     End Sub
 
-    Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As IPlayerCharacter, button As Button) As UIState
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
@@ -48,7 +48,7 @@
         Return UIState.Message
     End Function
 
-    Friend Overrides Function HandleRed(player As ICharacter) As UIState
+    Friend Overrides Function HandleRed(player As IPlayerCharacter) As UIState
         player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function

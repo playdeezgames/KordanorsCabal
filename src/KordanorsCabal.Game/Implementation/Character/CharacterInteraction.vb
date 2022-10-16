@@ -16,7 +16,7 @@
     End Property
     Public Sub Interact() Implements ICharacterInteraction.Interact
         If CanInteract Then
-            character.Mode = character.Movement.Location.Feature.InteractionMode()
+            DirectCast(Character, IPlayerCharacter).Mode = Character.Movement.Location.Feature.InteractionMode()
         End If
     End Sub
     Public ReadOnly Property CanGamble As Boolean Implements ICharacterInteraction.CanGamble

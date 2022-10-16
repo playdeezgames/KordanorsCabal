@@ -6,7 +6,7 @@
     Const RightButtonIndex = 5
     Const AroundButtonIndex = 1
 
-    Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As IPlayerCharacter, buffer As PatternBuffer)
         Dim location = player.Movement.Location
         If location.LocationType.IsDungeon Then
             ShowDungeon(buffer, player)
@@ -19,14 +19,14 @@
         End If
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As ICharacter)
+    Friend Overrides Sub UpdateButtons(player As IPlayerCharacter)
         Buttons(CancelButtonIndex).Title = "Cancel"
         Buttons(LeftButtonIndex).Title = "Left"
         Buttons(RightButtonIndex).Title = "Right"
         Buttons(AroundButtonIndex).Title = "Around"
     End Sub
 
-    Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As IPlayerCharacter, button As Button) As UIState
         Select Case button.Index
             Case CancelButtonIndex
                 PopButtonIndex()
@@ -47,7 +47,7 @@
         Return UIState.InPlay
     End Function
 
-    Friend Overrides Function HandleRed(player As ICharacter) As UIState
+    Friend Overrides Function HandleRed(player As IPlayerCharacter) As UIState
         player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function

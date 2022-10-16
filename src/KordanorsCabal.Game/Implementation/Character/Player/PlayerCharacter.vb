@@ -12,4 +12,12 @@
     Sub New(worldData As IWorldData)
         MyBase.New(worldData, worldData.Player.Read().Value)
     End Sub
+    Public Property Mode As Long Implements IPlayerCharacter.Mode
+        Get
+            Return WorldData.Player.ReadPlayerMode().Value
+        End Get
+        Set(value As Long)
+            WorldData.Player.WritePlayerMode(value)
+        End Set
+    End Property
 End Class

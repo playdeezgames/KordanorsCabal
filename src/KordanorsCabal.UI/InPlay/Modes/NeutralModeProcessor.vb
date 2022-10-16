@@ -12,7 +12,7 @@
     Const SpellsButtonIndex = 8
     Const MenuButtonIndex = 9
 
-    Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As IPlayerCharacter, buffer As PatternBuffer)
         Dim location = player.Movement.Location
         If location.LocationType.IsDungeon Then
             ShowDungeon(buffer, player)
@@ -44,7 +44,7 @@
             buffer.WriteText(xy, $"You see: {feature.Name}", False, Hue.Black)
         End If
     End Sub
-    Friend Overrides Sub UpdateButtons(player As ICharacter)
+    Friend Overrides Sub UpdateButtons(player As IPlayerCharacter)
         Buttons(TurnFightButtonIndex).Title = If(player.PhysicalCombat.CanFight, "FIGHT!", "Turn...")
         Buttons(MoveRunButtonIndex).Title = If(player.PhysicalCombat.CanFight, "RUN!", "Move...")
         Buttons(MenuButtonIndex).Title = "Game Menu"
@@ -74,7 +74,7 @@
             Buttons(InventoryButtonIndex).Title = "Inventory"
         End If
     End Sub
-    Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As IPlayerCharacter, button As Button) As UIState
         Select Case button.Index
             Case TurnFightButtonIndex 'also the fight button!
                 If player.PhysicalCombat.CanFight Then
@@ -135,7 +135,7 @@
         End Select
         Return UIState.InPlay
     End Function
-    Friend Overrides Function HandleRed(player As ICharacter) As UIState
+    Friend Overrides Function HandleRed(player As IPlayerCharacter) As UIState
         player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function

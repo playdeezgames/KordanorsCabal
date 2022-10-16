@@ -7,7 +7,7 @@
     Const PricesButtonIndex = 6
     Const BuyButtonIndex = 7
 
-    Friend Overrides Sub UpdateBuffer(player As ICharacter, buffer As PatternBuffer)
+    Friend Overrides Sub UpdateBuffer(player As IPlayerCharacter, buffer As PatternBuffer)
         ShowHeader(buffer, player.Movement.Location.Feature.Name)
         Select Case CurrentButtonIndex
             Case GoodByeButtonIndex
@@ -24,7 +24,7 @@
         buffer.WriteText((0, 2), "Would you like to buy a lovely pair of trousers?", False, Hue.Black)
     End Sub
 
-    Friend Overrides Sub UpdateButtons(player As ICharacter)
+    Friend Overrides Sub UpdateButtons(player As IPlayerCharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
         If player.Interaction.CanGamble Then
@@ -34,7 +34,7 @@
         Buttons(BuyButtonIndex).Title = "Buy"
     End Sub
 
-    Friend Overrides Function HandleButton(player As ICharacter, button As Button) As UIState
+    Friend Overrides Function HandleButton(player As IPlayerCharacter, button As Button) As UIState
         Select Case button.Index
             Case GoodByeButtonIndex
                 PopButtonIndex()
@@ -55,7 +55,7 @@
         Return UIState.InPlay
     End Function
 
-    Friend Overrides Function HandleRed(player As ICharacter) As UIState
+    Friend Overrides Function HandleRed(player As IPlayerCharacter) As UIState
         player.Mode = Game.Constants.PlayerModes.Neutral
         Return UIState.InPlay
     End Function
