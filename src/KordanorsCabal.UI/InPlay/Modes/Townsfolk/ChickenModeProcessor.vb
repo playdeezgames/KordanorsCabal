@@ -47,14 +47,14 @@ Friend Class ChickenModeProcessor
         If RNG.FromRange(0, 5) = 0 Then
             Select Case itemType.Id
                 Case 24L
-                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {Game.ItemType.FromId(StaticWorldData.World, 25).Name} pops out!")
+                    player.EnqueueMessage(Nothing, $"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food and then a {Game.ItemType.FromId(StaticWorldData.World, 25).Name} pops out!")
                     player.Items.Inventory.Add(Game.Item.Create(StaticWorldData.World, 25L))
                 Case 35L
-                    player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {Game.ItemType.FromId(StaticWorldData.World, 37).Name} pops out!")
+                    player.EnqueueMessage(Nothing, $"{New FeatureType(StaticWorldData.World, 4L).Name} eats the rotten food and then a {Game.ItemType.FromId(StaticWorldData.World, 37).Name} pops out!")
                     player.Items.Inventory.Add(Game.Item.Create(StaticWorldData.World, 37))
             End Select
         Else
-            player.EnqueueMessage($"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food, and gives a satified ""moo"" in return.")
+            player.EnqueueMessage(Nothing, $"{New FeatureType(StaticWorldData.World, 4L).Name} eats the food, and gives a satified ""moo"" in return.")
         End If
         PushUIState(UIState.InPlay)
         Return UIState.Message

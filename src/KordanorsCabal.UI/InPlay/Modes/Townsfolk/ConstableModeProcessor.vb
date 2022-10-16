@@ -39,13 +39,13 @@
         If player.Items.HasItemType(ItemType.FromId(StaticWorldData.World, 32)) Then
             Dim cards = player.Items.Inventory.ItemsOfType(ItemType.FromId(StaticWorldData.World, 32))
             Dim reward As Long = cards.Count * 10
-            player.EnqueueMessage($"I'll be certain to file these under evidence. Here's yer reward! {reward} money.")
+            player.EnqueueMessage(Nothing, $"I'll be certain to file these under evidence. Here's yer reward! {reward} money.")
             player.Statuses.Money += reward
             For Each card In cards
                 card.Destroy()
             Next
         Else
-            player.EnqueueMessage("See me when you've got evidence of malcontent activity.")
+            player.EnqueueMessage(Nothing, "See me when you've got evidence of malcontent activity.")
         End If
         PushUIState(UIState.InPlay)
         Return UIState.Message

@@ -84,7 +84,7 @@ Friend Class MoveModeProcessor
             PopButtonIndex()
             player.Mode = Game.Constants.PlayerModes.Neutral
             If player.Movement.Move(direction) Then
-                player.EnqueueMessage("You take damage from starvation!")
+                player.EnqueueMessage(Nothing, "You take damage from starvation!")
                 If player.Health.IsDead Then
                     Return UIState.Dead
                 End If

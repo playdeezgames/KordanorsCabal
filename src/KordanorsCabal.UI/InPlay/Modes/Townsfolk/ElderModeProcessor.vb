@@ -40,7 +40,7 @@
     End Function
 
     Private Function HandleEncouragement(player As ICharacter) As UIState
-        player.EnqueueMessage("Sometimes in our life we all have pain. We all have sorrow. But, if we are wise, we know that there's always tomorrow!")
+        player.EnqueueMessage(Nothing, "Sometimes in our life we all have pain. We all have sorrow. But, if we are wise, we know that there's always tomorrow!")
         If player.MentalCombat.CurrentMP < 1 Then
             player.MentalCombat.CurrentMP = 1
         End If

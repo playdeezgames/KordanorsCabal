@@ -34,7 +34,7 @@ Friend Class InteractItemProcessor
             MainProcessor.PushUIState(UIState.Inventory)
             Return UIState.Message
         End If
-        Game.World.PlayerCharacter(StaticWorldData.World).EnqueueMessage("You cannot use that now!") 'TODO: shucks!
+        Game.World.PlayerCharacter(StaticWorldData.World).EnqueueMessage(Nothing, "You cannot use that now!") 'TODO: shucks!
         MainProcessor.PushUIState(UIState.InteractItem)
         Return UIState.Message
     End Function
