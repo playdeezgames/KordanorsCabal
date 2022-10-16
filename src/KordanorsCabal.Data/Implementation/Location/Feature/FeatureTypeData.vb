@@ -9,7 +9,7 @@
 
     Public Function ReadName(featureTypeId As Long) As String Implements IFeatureTypeData.ReadName
         Return Store.Column.ReadString(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             FeatureTypeNameColumn,
             (FeatureTypeIdColumn, featureTypeId))
@@ -17,7 +17,7 @@
 
     Public Function ReadLocationType(featureTypeId As Long) As Long? Implements IFeatureTypeData.ReadLocationType
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             LocationTypeIdColumn,
             (FeatureTypeIdColumn, featureTypeId))
@@ -25,40 +25,14 @@
 
     Public Function ReadInteractionMode(featureTypeId As Long) As Long? Implements IFeatureTypeData.ReadInteractionMode
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             InteractionModeColumn,
             (FeatureTypeIdColumn, featureTypeId))
     End Function
-    Friend Sub Initialize()
-        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [FeatureTypes] AS
-                WITH [cte](
-                    [FeatureTypeId],
-                    [FeatureTypeName],
-                    [LocationTypeId],
-                    [InteractionMode]) AS
-                (VALUES
-                    (6,'Marcus the Black Mage',2,9),
-                    (5,'""Honest"" Dan',2,8),
-                    (7,'Samuli the Blacksmith',2,10),
-                    (4,'Sander the Chicken',2,7),
-                    (9,'David the Constable',2,11),
-                    (1,'Zooperdan the Elder',1,4),
-                    (8,'Nihilist Healer Marten',2,12),
-                    (2,'Graham the Innkeeper',2,5),
-                    (3,'Yermom the Drunk',2,6)
-                )
-                SELECT 
-                    [{FeatureTypeIdColumn}],
-                    [{FeatureTypeNameColumn}],
-                    [{LocationTypeIdColumn}],
-                    [{InteractionModeColumn}]
-                FROM [cte];")
-    End Sub
-
     Public Function ReadAll() As IEnumerable(Of Long) Implements IFeatureTypeData.ReadAll
         Return Store.Record.All(Of Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             FeatureTypeIdColumn)
     End Function
