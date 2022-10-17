@@ -1,7 +1,6 @@
 ﻿Public Class ItemStatisticTypeData
     Inherits BaseData
     Implements IItemStatisticTypeData
-    Friend Const TableName = "ItemStatisticTypes"
     Friend Const ItemStatisticTypeIdColumn = "ItemStatisticTypeId"
     Friend Const DefaultValueColumn = "DefaultValue"
     Public Sub New(store As IStore, world As IWorldData)
@@ -11,7 +10,7 @@
     Public Function ReadDefaultValue(statisticTypeId As Long) As Long? Implements IItemStatisticTypeData.ReadDefaultValue
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            ItemStatisticTypes,
             DefaultValueColumn,
             (ItemStatisticTypeIdColumn, statisticTypeId))
     End Function
