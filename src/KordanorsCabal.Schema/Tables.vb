@@ -1,4 +1,4 @@
-Module Tables
+Public Module Tables
     Public Const CharacterEquipSlots = "CharacterEquipSlots"
     Public Const CharacterLocations = "CharacterLocations"
     Public Const CharacterQuestCompletions = "CharacterQuestCompletions"

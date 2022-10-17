@@ -38,6 +38,8 @@
 
   <ItemGroup>
     <Import Include="KordanorsCabal.Data" />
+    <Import Include="KordanorsCabal.Data.Tests.My" />
+    <Import Include="KordanorsCabal.Schema" />
     <Import Include="Moq" />
     <Import Include="Shouldly" />
     <Import Include="SPLORR.Data" />

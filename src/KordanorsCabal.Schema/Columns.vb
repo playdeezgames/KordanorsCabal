@@ -1,4 +1,4 @@
-Module Columns
+Public Module Columns
     Public Const AbbreviationColumn = "Abbreviation"
     Public Const AcceptEventNameColumn = "AcceptEventName"
     Public Const AttackTypeColumn = "AttackType"

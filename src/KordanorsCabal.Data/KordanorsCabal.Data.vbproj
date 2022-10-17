@@ -19,11 +19,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KordanorsCabal.Schema\KordanorsCabal.Schema.vbproj" />
     <ProjectReference Include="..\SPLORR.Data\SPLORR.Data.vbproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Import Include="SPLORR.Data" />
+	<Import Include="KordanorsCabal.Schema" />
   </ItemGroup>
 
 </Project>
