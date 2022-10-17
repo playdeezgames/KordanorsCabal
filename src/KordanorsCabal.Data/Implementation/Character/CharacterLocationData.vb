@@ -8,21 +8,9 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{CharacterIdColumn}] INT NOT NULL,
-                [{LocationIdColumn}] INT NOT NULL,
-                UNIQUE([{CharacterIdColumn}],[{LocationIdColumn}]),
-                FOREIGN KEY([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}]),
-                FOREIGN KEY([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
-            );")
-    End Sub
     Public Sub Write(characterId As Long, locationId As Long) Implements ICharacterLocationData.Write
         Store.Replace.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (CharacterIdColumn, characterId),
             (LocationIdColumn, locationId))
@@ -30,7 +18,7 @@
 
     Public Function Read(characterId As Long, locationId As Long) As Boolean Implements ICharacterLocationData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             CharacterIdColumn,
             (CharacterIdColumn, characterId),
@@ -39,7 +27,7 @@
 
     Public Sub ClearForCharacter(characterId As Long) Implements ICharacterLocationData.ClearForCharacter
         Store.Clear.ForValue(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
