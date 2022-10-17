@@ -1,7 +1,6 @@
 ﻿Public Class ItemTypeEventData
     Inherits BaseData
     Implements IItemTypeEventData
-    Friend Const TableName = "ItemTypeEvents"
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
     Friend Const EventIdColumn = "EventId"
     Friend Const EventNameColumn = "EventName"
@@ -12,7 +11,7 @@
     Public Function Read(itemTypeId As Long, eventId As Long) As String Implements IItemTypeEventData.Read
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
-            TableName,
+            ItemTypeEvents,
             EventNameColumn,
             (ItemTypeIdColumn, itemTypeId),
             (EventIdColumn, eventId))

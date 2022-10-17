@@ -1,7 +1,6 @@
 ﻿Public Class ItemTypeEquipSlotData
     Inherits BaseData
     Implements IItemTypeEquipSlotData
-    Friend Const TableName = "ItemTypeEquipSlots"
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
     Friend Const EquipSlotIdColumn = EquipSlotData.EquipSlotIdColumn
 
@@ -11,7 +10,7 @@
     Public Function ReadForItemType(itemTypeId As Long) As IEnumerable(Of Long) Implements IItemTypeEquipSlotData.ReadForItemType
         Return Store.Record.WithValues(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            ItemTypeEquipSlots,
             EquipSlotIdColumn,
             (ItemTypeIdColumn, itemTypeId))
     End Function
