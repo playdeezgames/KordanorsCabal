@@ -9,21 +9,9 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{CharacterIdColumn}] INT NOT NULL,
-                [{CharacterStatisticTypeIdColumn}] INT NOT NULL,
-                [{StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{CharacterIdColumn}],[{CharacterStatisticTypeIdColumn}]),
-                FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
-            );")
-    End Sub
     Public Sub Write(characterId As Long, statisticType As Long, statisticValue As Long) Implements ICharacterStatisticData.Write
         Store.Replace.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (CharacterIdColumn, characterId),
             (CharacterStatisticTypeIdColumn, statisticType),
@@ -32,7 +20,7 @@
 
     Public Function Read(characterId As Long, statisticType As Long) As Long? Implements ICharacterStatisticData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             StatisticValueColumn,
             (CharacterIdColumn, characterId),
@@ -41,7 +29,7 @@
 
     Friend Sub ClearForCharacter(characterId As Long) Implements ICharacterStatisticData.ClearForCharacter
         Store.Clear.ForValue(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
