@@ -9,21 +9,9 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{FeatureIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
-                [{FeatureTypeIdColumn}] INT NOT NULL,
-                [{LocationIdColumn}] INT NOT NULL UNIQUE,
-                FOREIGN KEY([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
-            );")
-    End Sub
-
     Public Function ReadFeatureType(featureId As Long) As Long? Implements IFeatureData.ReadFeatureType
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             FeatureTypeIdColumn,
             (FeatureIdColumn, featureId))
@@ -31,7 +19,7 @@
 
     Public Function Create(featureType As Long, locationId As Long) As Long Implements IFeatureData.Create
         Return Store.Create.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (FeatureTypeIdColumn, featureType),
             (LocationIdColumn, locationId))
@@ -39,7 +27,7 @@
 
     Public Function ReadForLocation(locationId As Long) As Long? Implements IFeatureData.ReadForLocation
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             FeatureIdColumn,
             (LocationIdColumn, locationId))
