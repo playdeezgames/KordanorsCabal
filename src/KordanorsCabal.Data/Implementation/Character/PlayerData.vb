@@ -11,22 +11,9 @@ Public Class PlayerData
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{PlayerIdColumn}] INT NOT NULL UNIQUE CHECK([{PlayerIdColumn}]={FixedPlayerId}),
-                [{CharacterIdColumn}] INT NOT NULL,
-                [{DirectionIdColumn}] INT NOT NULL,
-                [{PlayerModeIdColumn}] INT NOT NULL,
-                FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
-            );")
-    End Sub
-
     Public Sub WriteDirection(direction As Long) Implements IPlayerData.WriteDirection
         Store.Column.Write(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (DirectionIdColumn, direction),
             (PlayerIdColumn, FixedPlayerId))
@@ -34,14 +21,14 @@ Public Class PlayerData
 
     Public Function ReadPlayerMode() As Long? Implements IPlayerData.ReadPlayerMode
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName, PlayerModeIdColumn,
             (PlayerIdColumn, FixedPlayerId))
     End Function
 
     Public Sub WritePlayerMode(mode As Long) Implements IPlayerData.WritePlayerMode
         Store.Column.Write(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (PlayerModeIdColumn, mode),
             (PlayerIdColumn, FixedPlayerId))
@@ -49,7 +36,7 @@ Public Class PlayerData
 
     Public Function ReadDirection() As Long? Implements IPlayerData.ReadDirection
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             DirectionIdColumn,
             (PlayerIdColumn, FixedPlayerId))
@@ -57,7 +44,7 @@ Public Class PlayerData
 
     Public Function Read() As Long? Implements IPlayerData.Read
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             CharacterIdColumn,
             (PlayerIdColumn, FixedPlayerId))
@@ -65,7 +52,7 @@ Public Class PlayerData
 
     Public Sub Write(characterId As Long, direction As Long, mode As Long) Implements IPlayerData.Write
         Store.Replace.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (PlayerIdColumn, FixedPlayerId),
             (CharacterIdColumn, characterId),
@@ -75,7 +62,7 @@ Public Class PlayerData
 
     Friend Sub ClearForCharacter(characterId As Long) Implements IPlayerData.ClearForCharacter
         Store.Clear.ForValue(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
