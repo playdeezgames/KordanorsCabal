@@ -19,18 +19,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{73A8B0
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "KordanorsCabal.UI", "KordanorsCabal.UI\KordanorsCabal.UI.vbproj", "{A76752E6-9CF2-4614-BB9D-0B5AE7A16894}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stuff", "Stuff", "{D804FB32-97D0-4FA1-88C7-EA3D4D3AA11E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "STUFF", "STUFF", "{D804FB32-97D0-4FA1-88C7-EA3D4D3AA11E}"
 	ProjectSection(SolutionItems) = preProject
 		..\pub-windows\.itch.toml = ..\pub-windows\.itch.toml
 		..\README.md = ..\README.md
 		..\shippit.sh = ..\shippit.sh
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KordanorsCabal.Data.Tests", "KordanorsCabal.Data.Tests\KordanorsCabal.Data.Tests.vbproj", "{F46D9E73-2E95-41ED-9511-9E2BC744EA70}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "KordanorsCabal.Data.Tests", "KordanorsCabal.Data.Tests\KordanorsCabal.Data.Tests.vbproj", "{F46D9E73-2E95-41ED-9511-9E2BC744EA70}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FB9CA904-159A-4AEE-A831-15FDB7B890A1}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KordanorsCabal.Game.Tests", "KordanorsCabal.Game.Tests\KordanorsCabal.Game.Tests.vbproj", "{B2C33B22-8784-4920-B8DF-E6D6898C529A}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "KordanorsCabal.Game.Tests", "KordanorsCabal.Game.Tests\KordanorsCabal.Game.Tests.vbproj", "{B2C33B22-8784-4920-B8DF-E6D6898C529A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

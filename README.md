@@ -134,3 +134,11 @@ If the enum needs metadata, then dont enum.
 * CharacterStatisticTypes
 * CharacterTypeInitialStatistics
 * CharacterTypeAttackTypes
+
+# S.T.U.F.F
+
+* S: Stuff
+* T: Tabulised
+* U: Utilising
+* F: Fact
+* F: Finding
