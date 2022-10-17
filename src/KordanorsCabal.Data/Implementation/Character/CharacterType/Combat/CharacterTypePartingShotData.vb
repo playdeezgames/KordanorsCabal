@@ -1,7 +1,6 @@
 ﻿Public Class CharacterTypePartingShotData
     Inherits BaseData
     Implements ICharacterTypePartingShotData
-    Friend Const TableName = "CharacterTypePartingShots"
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Const PartingShotColumn = "PartingShot"
     Friend Const WeightColumn = "Weight"
@@ -12,7 +11,7 @@
     Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of String, Integer) Implements ICharacterTypePartingShotData.Read
         Dim results = Store.Record.WithValue(Of Long, String, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterTypePartingShots,
             (PartingShotColumn, WeightColumn),
             (CharacterTypeIdColumn, characterTypeId))
         If results Is Nothing Then
