@@ -47,7 +47,7 @@ Public Class CharacterEquipSlotDataTests
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              (Columns.CharacterIdColumn, characterId),
-                             (Columns.EquipSlotColumn, equipSlot)),
+                             (Columns.EquipSlotIdColumn, equipSlot)),
                              Times.Once)
             End Sub)
     End Sub
@@ -61,7 +61,7 @@ Public Class CharacterEquipSlotDataTests
                 store.Verify(Function(x) x.Record.WithValues(Of Long, Long)(
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
-                             Columns.EquipSlotColumn,
+                             Columns.EquipSlotIdColumn,
                              (Columns.CharacterIdColumn, characterId)),
                              Times.Once)
             End Sub)
@@ -79,7 +79,7 @@ Public Class CharacterEquipSlotDataTests
                              Tables.CharacterEquipSlots,
                              Columns.ItemIdColumn,
                              (Columns.CharacterIdColumn, characterId),
-                             (Columns.EquipSlotColumn, equipSlot)),
+                             (Columns.EquipSlotIdColumn, equipSlot)),
                              Times.Once)
             End Sub)
     End Sub
@@ -111,7 +111,7 @@ Public Class CharacterEquipSlotDataTests
                              It.IsAny(Of Action),
                              Tables.CharacterEquipSlots,
                              (Columns.CharacterIdColumn, characterId),
-                             (Columns.EquipSlotColumn, equipSlot),
+                             (Columns.EquipSlotIdColumn, equipSlot),
                              (Columns.ItemIdColumn, itemId)),
                              Times.Once)
             End Sub)
