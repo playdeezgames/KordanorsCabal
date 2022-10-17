@@ -1,7 +1,6 @@
 ﻿Public Class ShoppeTypeData
     Inherits BaseData
     Implements IShoppeTypeData
-    Friend Const TableName = "ShoppeTypes"
     Friend Const ShoppeTypeIdColumn = "ShoppeTypeId"
     Friend Const ShoppeTypeNameColumn = "ShoppeTypeName"
     Public Sub New(store As IStore, world As IWorldData)
@@ -11,7 +10,7 @@
     Public Function ReadName(shoppeTypeId As Long) As String Implements IShoppeTypeData.ReadName
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
-            TableName,
+            ShoppeTypes,
             ShoppeTypeNameColumn,
             (ShoppeTypeIdColumn, shoppeTypeId))
     End Function

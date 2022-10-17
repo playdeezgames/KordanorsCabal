@@ -1,7 +1,6 @@
 ﻿Friend Class SpellTypeData
     Inherits BaseData
     Implements ISpellTypeData
-    Friend Const TableName = "SpellTypes"
     Friend Const SpellTypeIdColumn = "SpellTypeId"
     Friend Const SpellTypeNameColumn = "SpellTypeName"
     Friend Const MaximumLevelColumn = "MaximumLevel"
@@ -14,7 +13,7 @@
     Public Function ReadName(spellTypeId As Long) As String Implements ISpellTypeData.ReadName
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
-            TableName,
+            SpellTypes,
             SpellTypeNameColumn,
             (SpellTypeIdColumn, spellTypeId))
     End Function
@@ -22,7 +21,7 @@
     Public Function ReadMaximumLevel(spellTypeId As Long) As Long? Implements ISpellTypeData.ReadMaximumLevel
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            SpellTypes,
             MaximumLevelColumn,
             (SpellTypeIdColumn, spellTypeId))
     End Function
@@ -30,7 +29,7 @@
     Public Function ReadCastCheck(spellTypeId As Long) As String Implements ISpellTypeData.ReadCastCheck
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
-            TableName,
+            SpellTypes,
             CastCheckColumn,
             (SpellTypeIdColumn, spellTypeId))
     End Function
@@ -38,7 +37,7 @@
     Public Function ReadCast(spellTypeId As Long) As String Implements ISpellTypeData.ReadCast
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
-            TableName,
+            SpellTypes,
             CastColumn,
             (SpellTypeIdColumn, spellTypeId))
     End Function

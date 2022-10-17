@@ -1,7 +1,6 @@
 ﻿Public Class RouteTypeLockData
     Inherits BaseData
     Implements IRouteTypeLockData
-    Friend Const TableName = "RouteTypeLocks"
     Friend Const RouteTypeIdColumn = RouteTypeData.RouteTypeIdColumn
     Friend Const UnlockedRouteTypeIdColumn = "UnlockedRouteTypeId"
     Friend Const UnlockItemTypeId = "UnlockItemTypeId"
@@ -12,7 +11,7 @@
     Public Function ReadUnlockItem(routeTypeId As Long) As Long? Implements IRouteTypeLockData.ReadUnlockItem
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            RouteTypeLocks,
             UnlockItemTypeId,
             (RouteTypeIdColumn, routeTypeId))
     End Function
@@ -20,7 +19,7 @@
     Public Function ReadUnlockedRouteType(routeTypeId As Long) As Long? Implements IRouteTypeLockData.ReadUnlockedRouteType
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            RouteTypeLocks,
             UnlockedRouteTypeIdColumn,
             (RouteTypeIdColumn, routeTypeId))
     End Function
