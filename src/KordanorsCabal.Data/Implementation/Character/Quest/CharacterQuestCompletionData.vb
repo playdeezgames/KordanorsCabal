@@ -9,21 +9,9 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{CharacterIdColumn}] INT NOT NULL,
-                [{QuestTypeIdColumn}] INT NOT NULL,
-                [{CompletionsColumn}] INT NOT NULL,
-                UNIQUE([{CharacterIdColumn}],[{QuestTypeIdColumn}]),
-                FOREIGN KEY([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
-            );")
-    End Sub
     Sub Write(characterId As Long, quest As Long, completions As Long) Implements ICharacterQuestCompletionData.Write
         Store.Replace.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (CharacterIdColumn, characterId),
             (QuestTypeIdColumn, quest),
@@ -31,7 +19,7 @@
     End Sub
     Function Read(characterId As Long, quest As Long) As Long? Implements ICharacterQuestCompletionData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             CompletionsColumn,
             (CharacterIdColumn, characterId),
@@ -40,7 +28,7 @@
 
     Friend Sub ClearForCharacter(characterId As Long) Implements ICharacterQuestCompletionData.ClearForCharacter
         Store.Clear.ForValue(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
