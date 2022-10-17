@@ -1,7 +1,6 @@
 ﻿Public Class ItemData
     Inherits BaseData
     Implements IItemData
-    Friend Const TableName = "Items"
     Friend Const ItemIdColumn = "ItemId"
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
 
@@ -11,14 +10,14 @@
     Public Function Create(itemType As Long) As Long Implements IItemData.Create
         Return Store.Create.Entry(
             AddressOf NoInitializer,
-            TableName,
+            Items,
             (ItemTypeIdColumn, itemType))
     End Function
 
     Public Function ReadItemType(itemId As Long) As Long? Implements IItemData.ReadItemType
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            Items,
             ItemTypeIdColumn,
             (ItemIdColumn, itemId))
     End Function
@@ -29,14 +28,14 @@
         World.ItemStatistic.ClearForItem(itemId)
         Store.Clear.ForValue(
             AddressOf NoInitializer,
-            TableName,
+            Items,
             (ItemIdColumn, itemId))
     End Sub
 
     Public Sub WriteItemType(itemId As Long, itemType As Long) Implements IItemData.WriteItemType
         Store.Column.Write(
             AddressOf NoInitializer,
-            TableName,
+            Items,
             (ItemTypeIdColumn, itemType),
             (ItemIdColumn, itemId))
     End Sub
