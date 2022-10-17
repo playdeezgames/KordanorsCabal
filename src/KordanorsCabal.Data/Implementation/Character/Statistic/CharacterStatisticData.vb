@@ -1,10 +1,6 @@
 ﻿Public Class CharacterStatisticData
     Inherits BaseData
     Implements ICharacterStatisticData
-    Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const CharacterStatisticTypeIdColumn = CharacterStatisticTypeData.CharacterStatisticTypeIdColumn
-    Friend Const StatisticValueColumn = "StatisticValue"
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

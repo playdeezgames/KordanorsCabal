@@ -1,9 +1,6 @@
 ﻿Public Class CharacterQuestData
     Inherits BaseData
     Implements ICharacterQuestData
-    Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const QuestTypeIdColumn = QuestTypeData.QuestTypeIdColumn
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

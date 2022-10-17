@@ -1,9 +1,6 @@
 ﻿Friend Class RouteTypeData
     Inherits BaseData
     Implements IRouteTypeData
-    Friend Const RouteTypeIdColumn = "RouteTypeId"
-    Friend Const AbbreviationColumn = "Abbreviation"
-    Friend Const IsSingleUseColumn = "IsSingleUse"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

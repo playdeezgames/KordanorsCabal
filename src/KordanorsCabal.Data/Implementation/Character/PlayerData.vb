@@ -1,10 +1,6 @@
 Public Class PlayerData
     Inherits BaseData
     Implements IPlayerData
-    Friend Const PlayerIdColumn = "PlayerId"
-    Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const DirectionIdColumn = "DirectionId"
-    Friend Const PlayerModeIdColumn = "PlayerModeId"
     Const FixedPlayerId = 1L
 
     Public Sub New(store As IStore, world As IWorldData)

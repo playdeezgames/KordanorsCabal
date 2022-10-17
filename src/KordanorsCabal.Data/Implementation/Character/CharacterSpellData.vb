@@ -1,10 +1,6 @@
 ﻿Public Class CharacterSpellData
     Inherits BaseData
     Implements ICharacterSpellData
-    Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const SpellTypeIdColumn = SpellTypeData.SpellTypeIdColumn
-    Friend Const SpellLevelColumn = "SpellLevel"
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

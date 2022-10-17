@@ -1,10 +1,6 @@
 ﻿Public Class CharacterEquipSlotData
     Inherits BaseData
     Implements ICharacterEquipSlotData
-    Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const EquipSlotColumn = EquipSlotData.EquipSlotIdColumn
-    Friend Const ItemIdColumn = ItemData.ItemIdColumn
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
@@ -12,7 +8,7 @@
         Return Store.Record.WithValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
             CharacterEquipSlots,
-            (EquipSlotColumn, ItemIdColumn),
+            (EquipSlotIdColumn, ItemIdColumn),
             (CharacterIdColumn, characterId))
     End Function
 
@@ -21,7 +17,7 @@
             AddressOf NoInitializer,
             CharacterEquipSlots,
             (CharacterIdColumn, characterId),
-            (EquipSlotColumn, equipSlot))
+            (EquipSlotIdColumn, equipSlot))
     End Sub
 
     Public Sub Write(characterId As Long, equipSlot As Long, itemId As Long) Implements ICharacterEquipSlotData.Write
@@ -29,7 +25,7 @@
             AddressOf NoInitializer,
             CharacterEquipSlots,
             (CharacterIdColumn, characterId),
-            (EquipSlotColumn, equipSlot),
+            (EquipSlotIdColumn, equipSlot),
             (ItemIdColumn, itemId))
     End Sub
 
@@ -53,12 +49,12 @@
             CharacterEquipSlots,
             ItemIdColumn,
             (CharacterIdColumn, characterId),
-            (EquipSlotColumn, equipSlotId))
+            (EquipSlotIdColumn, equipSlotId))
     End Function
     Public Function ReadItemsForCharacter(characterId As Long) As IEnumerable(Of Long) Implements ICharacterEquipSlotData.ReadItemsForCharacter
         Return Store.Record.WithValues(Of Long, Long)(AddressOf NoInitializer, CharacterEquipSlots, ItemIdColumn, (CharacterIdColumn, characterId))
     End Function
     Public Function ReadEquipSlotsForCharacter(characterId As Long) As IEnumerable(Of Long) Implements ICharacterEquipSlotData.ReadEquipSlotsForCharacter
-        Return Store.Record.WithValues(Of Long, Long)(AddressOf NoInitializer, CharacterEquipSlots, EquipSlotColumn, (CharacterIdColumn, characterId))
+        Return Store.Record.WithValues(Of Long, Long)(AddressOf NoInitializer, CharacterEquipSlots, EquipSlotIdColumn, (CharacterIdColumn, characterId))
     End Function
 End Class

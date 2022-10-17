@@ -1,10 +1,6 @@
 ﻿Public Class ItemTypeShopTypeData
     Inherits BaseData
     Implements IItemTypeShopTypeData
-    Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
-    Friend Const ShoppeTypeIdColumn = ShoppeTypeData.ShoppeTypeIdColumn
-    Friend Const TransactionTypeIdColumn = "TransactionTypeId"
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

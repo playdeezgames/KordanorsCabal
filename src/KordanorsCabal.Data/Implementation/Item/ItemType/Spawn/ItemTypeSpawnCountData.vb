@@ -1,9 +1,6 @@
 ﻿Public Class ItemTypeSpawnCountData
     Inherits BaseData
     Implements IItemTypeSpawnCountData
-    Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
-    Friend Const DungeonLevelIdColumn = DungeonLevelData.DungeonLevelIdColumn
-    Friend Const SpawnDiceColumn = "SpawnDice"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

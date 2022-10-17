@@ -1,13 +1,6 @@
 ﻿Public Class CharacterStatisticTypeData
     Inherits NameCacheData
     Implements ICharacterStatisticTypeData
-    Friend Const CharacterStatisticTypeIdColumn = "CharacterStatisticTypeId"
-    Friend Const CharacterStatisticTypeNameColumn = "CharacterStatisticTypeName"
-    Friend Const AbbreviationColumn = "Abbreviation"
-    Friend Const MinimumValueColumn = "MinimumValue"
-    Friend Const DefaultValueColumn = "DefaultValue"
-    Friend Const MaximumValueColumn = "MaximumValue"
-
     Public Function ReadDefaultValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadDefaultValue
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,

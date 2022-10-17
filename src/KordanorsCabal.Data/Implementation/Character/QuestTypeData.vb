@@ -1,11 +1,6 @@
 ﻿Public Class QuestTypeData
     Inherits BaseData
     Implements IQuestTypeData
-    Friend Const QuestTypeIdColumn = "QuestTypeId"
-    Friend Const CanAcceptEventNameColumn = "CanAcceptEventName"
-    Friend Const AcceptEventNameColumn = "AcceptEventName"
-    Friend Const CanCompleteEventNameColumn = "CanCompleteEventName"
-    Friend Const CompleteEventNameColumn = "CompleteEventName"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

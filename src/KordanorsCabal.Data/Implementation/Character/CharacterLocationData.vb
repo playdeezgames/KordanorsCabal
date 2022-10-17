@@ -1,9 +1,6 @@
 ﻿Public Class CharacterLocationData
     Inherits BaseData
     Implements ICharacterLocationData
-    Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const LocationIdColumn = LocationData.LocationIdColumn
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

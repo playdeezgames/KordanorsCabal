@@ -1,9 +1,6 @@
 ﻿Public Class RouteTypeLockData
     Inherits BaseData
     Implements IRouteTypeLockData
-    Friend Const RouteTypeIdColumn = RouteTypeData.RouteTypeIdColumn
-    Friend Const UnlockedRouteTypeIdColumn = "UnlockedRouteTypeId"
-    Friend Const UnlockItemTypeId = "UnlockItemTypeId"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
@@ -12,7 +9,7 @@
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
             RouteTypeLocks,
-            UnlockItemTypeId,
+            UnlockItemTypeIdColumn,
             (RouteTypeIdColumn, routeTypeId))
     End Function
 

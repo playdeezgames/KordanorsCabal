@@ -1,9 +1,6 @@
 ﻿Public Class CharacterTypeSpawnLocationData
     Inherits BaseData
     Implements ICharacterTypeSpawnLocationData
-    Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
-    Friend Const DungeonLevelIdColumn = DungeonLevelData.DungeonLevelIdColumn
-    Friend Const LocationTypeIdColumn = LocationTypeData.LocationTypeIdColumn
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

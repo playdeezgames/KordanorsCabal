@@ -1,10 +1,6 @@
 ﻿Public Class FeatureData
     Inherits BaseData
     Implements IFeatureData
-    Friend Const FeatureIdColumn = "FeatureId"
-    Friend Const FeatureTypeIdColumn = FeatureTypeData.FeatureTypeIdColumn
-    Friend Const LocationIdColumn = LocationData.LocationIdColumn
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

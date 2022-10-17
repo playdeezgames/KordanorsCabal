@@ -1,9 +1,6 @@
 ﻿Public Class LocationData
     Inherits BaseData
     Implements ILocationData
-    Public Const LocationIdColumn = "LocationId"
-    Friend Const LocationTypeIdColumn = "LocationTypeId"
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

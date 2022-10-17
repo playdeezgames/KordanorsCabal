@@ -1,12 +1,6 @@
 ﻿Public Class CharacterTypeData
     Inherits BaseData
     Implements ICharacterTypeData
-    Friend Const CharacterTypeIdColumn = "CharacterTypeId"
-    Friend Const CharacterTypeNameColumn = "CharacterTypeName"
-    Friend Const XPValueColumn = "XPValue"
-    Friend Const MoneyDropDiceColumn = "MoneyDropDice"
-    Friend Const IsUndeadColumn = "IsUndead"
-
     Public Function ReadIsUndead(characterTypeId As Long) As Long? Implements ICharacterTypeData.ReadIsUndead
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,

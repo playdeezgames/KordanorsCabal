@@ -1,11 +1,6 @@
 ﻿Public Class FeatureTypeData
     Inherits BaseData
     Implements IFeatureTypeData
-    Friend Const FeatureTypeIdColumn = "FeatureTypeId"
-    Friend Const FeatureTypeNameColumn = "FeatureTypeName"
-    Friend Const LocationTypeIdColumn = LocationTypeData.LocationTypeIdColumn
-    Friend Const InteractionModeColumn = "InteractionMode"
-
     Public Function ReadName(featureTypeId As Long) As String Implements IFeatureTypeData.ReadName
         Return Store.Column.ReadString(
             AddressOf NoInitializer,

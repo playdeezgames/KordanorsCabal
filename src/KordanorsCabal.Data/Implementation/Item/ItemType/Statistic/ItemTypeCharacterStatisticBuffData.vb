@@ -1,9 +1,6 @@
 ﻿Friend Class ItemTypeCharacterStatisticBuffData
     Inherits BaseData
     Implements IItemTypeCharacterStatisticBuffData
-    Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
-    Friend Const CharacterStatisticTypeIdColumn = CharacterStatisticTypeData.CharacterStatisticTypeIdColumn
-    Friend Const BuffColumn = "Buff"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

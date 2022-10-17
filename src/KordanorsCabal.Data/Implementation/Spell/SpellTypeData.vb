@@ -1,12 +1,6 @@
 ﻿Friend Class SpellTypeData
     Inherits BaseData
     Implements ISpellTypeData
-    Friend Const SpellTypeIdColumn = "SpellTypeId"
-    Friend Const SpellTypeNameColumn = "SpellTypeName"
-    Friend Const MaximumLevelColumn = "MaximumLevel"
-    Friend Const CastCheckColumn = "CastCheck"
-    Friend Const CastColumn = "Cast"
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

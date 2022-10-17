@@ -1,12 +1,6 @@
 ﻿Public Class RouteData
     Inherits BaseData
     Implements IRouteData
-    Friend Const RouteIdColumn = "RouteId"
-    Friend Const LocationIdColumn = LocationData.LocationIdColumn
-    Friend Const DirectionIdColumn = "DirectionId"
-    Friend Const RouteTypeIdColumn = "RouteTypeId"
-    Friend Const ToLocationIdColumn = "To" + LocationData.LocationIdColumn
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

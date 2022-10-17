@@ -1,8 +1,6 @@
 ﻿Public Class DungeonLevelData
     Inherits BaseData
     Implements IDungeonLevelData
-    Friend Const DungeonLevelIdColumn = "DungeonLevelId"
-    Friend Const DungeonLevelNameColumn = "DungeonLevelName"
     Public Function ReadAll() As IEnumerable(Of Long) Implements IDungeonLevelData.ReadAll
         Return Store.Record.All(Of Long)(
             AddressOf NoInitializer,

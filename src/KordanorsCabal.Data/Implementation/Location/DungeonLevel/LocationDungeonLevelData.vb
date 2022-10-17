@@ -1,9 +1,6 @@
 ﻿Public Class LocationDungeonLevelData
     Inherits BaseData
     Implements ILocationDungeonLevelData
-    Friend Const LocationIdColumn = LocationData.LocationIdColumn
-    Friend Const DungeonLevelIdColumn = "DungeonLevelId"
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

@@ -1,11 +1,6 @@
 ﻿Public Class LocationTypeData
     Inherits BaseData
     Implements ILocationTypeData
-    Friend Const LocationTypeIdColumn = "LocationTypeId"
-    Friend Const LocationTypeNameColumn = "LocationTypeName"
-    Friend Const IsDungeonColumn = "IsDungeon"
-    Friend Const CanMapColumn = "CanMap"
-    Friend Const RequiresMPColumn = "RequiresMP"
     Public Function ReadRequiresMP(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadRequiresMP
         Return If(Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,

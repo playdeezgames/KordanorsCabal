@@ -1,9 +1,6 @@
 ﻿Public Class ItemTypeStatisticData
     Inherits BaseData
     Implements IItemTypeStatisticData
-    Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
-    Friend Const ItemTypeStatisticTypeIdColumn = ItemTypeStatisticTypeData.ItemTypeStatisticTypeIdColumn
-    Friend Const ItemTypeStatisticValueColumn = "ItemTypeStatisticValue"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

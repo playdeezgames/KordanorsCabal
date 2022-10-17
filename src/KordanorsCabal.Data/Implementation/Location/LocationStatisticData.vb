@@ -1,10 +1,6 @@
 ﻿Public Class LocationStatisticData
     Inherits BaseData
     Implements ILocationStatisticData
-    Friend Const LocationIdColumn = LocationData.LocationIdColumn
-    Friend Const LocationStatisticTypeIdColumn = "LocationStatisticTypeId"
-    Friend Const StatisticValueColumn = "StatisticValue"
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

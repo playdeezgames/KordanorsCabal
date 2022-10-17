@@ -1,9 +1,6 @@
 ﻿Friend Class SpellTypeRequiredPowerData
     Inherits BaseData
     Implements ISpellTypeRequiredPowerData
-    Friend Const SpellTypeIdColumn = SpellTypeData.SpellTypeIdColumn
-    Friend Const SpellLevelColumn = "SpellLevel"
-    Friend Const PowerColumn = "Power"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

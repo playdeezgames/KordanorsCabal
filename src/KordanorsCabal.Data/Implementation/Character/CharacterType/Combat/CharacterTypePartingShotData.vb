@@ -1,9 +1,6 @@
 ﻿Public Class CharacterTypePartingShotData
     Inherits BaseData
     Implements ICharacterTypePartingShotData
-    Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
-    Friend Const PartingShotColumn = "PartingShot"
-    Friend Const WeightColumn = "Weight"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

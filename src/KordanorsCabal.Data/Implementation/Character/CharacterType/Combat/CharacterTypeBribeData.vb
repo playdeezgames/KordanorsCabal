@@ -1,9 +1,6 @@
 ﻿Public Class CharacterTypeBribeData
     Inherits BaseData
     Implements ICharacterTypeBribeData
-    Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
-    Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

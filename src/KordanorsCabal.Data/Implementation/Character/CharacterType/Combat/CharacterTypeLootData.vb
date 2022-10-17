@@ -1,9 +1,6 @@
 ﻿Public Class CharacterTypeLootData
     Inherits BaseData
     Implements ICharacterTypeLootData
-    Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
-    Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
-    Friend Const WeightColumn = "Weight"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

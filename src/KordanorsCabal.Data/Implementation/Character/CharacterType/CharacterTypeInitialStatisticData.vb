@@ -1,9 +1,6 @@
 ﻿Public Class CharacterTypeInitialStatisticData
     Inherits BaseData
     Implements ICharacterTypeInitialStatisticData
-    Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
-    Friend Const CharacterStatisticTypeIdColumn = CharacterStatisticTypeData.CharacterStatisticTypeIdColumn
-    Friend Const InitialValueColumn = "InitialValue"
     Public Function ReadAllForCharacterType(characterTypeId As Long) As List(Of Tuple(Of Long, Long)) Implements ICharacterTypeInitialStatisticData.ReadAllForCharacterType
         Return Store.Record.WithValue(Of Long, Long, Long)(
             AddressOf NoInitializer,

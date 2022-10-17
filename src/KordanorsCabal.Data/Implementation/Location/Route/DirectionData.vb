@@ -1,13 +1,6 @@
 ﻿Public Class DirectionData
     Inherits BaseData
     Implements IDirectionData
-    Friend Const DirectionIdColumn = "DirectionId"
-    Friend Const DirectionNameColumn = "DirectionName"
-    Friend Const AbbreviationColumn = "Abbreviation"
-    Friend Const IsCardinalColumn = "IsCardinal"
-    Friend Const PreviousDirectionIdColumn = "PreviousDirectionId"
-    Friend Const OppositeDirectionIdColumn = "OppositeDirectionId"
-    Friend Const NextDirectionIdColumn = "NextDirectionId"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

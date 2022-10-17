@@ -1,8 +1,6 @@
 ﻿Public Class CharacterTypeEnemyData
     Inherits BaseData
     Implements ICharacterTypeEnemyData
-    Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
-    Friend Const EnemyCharacterTypeIdColumn = "EnemyCharacterTypeId"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

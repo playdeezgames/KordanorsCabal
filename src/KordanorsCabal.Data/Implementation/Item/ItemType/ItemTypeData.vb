@@ -1,10 +1,6 @@
 ﻿Public Class ItemTypeData
     Inherits BaseData
     Implements IItemTypeData
-    Friend Const ItemTypeIdColumn = "ItemTypeId"
-    Friend Const ItemTypeNameColumn = "ItemTypeName"
-    Friend Const IsConsumedColumn = "IsConsumed"
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

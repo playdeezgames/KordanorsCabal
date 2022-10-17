@@ -1,9 +1,6 @@
 ﻿Public Class ItemTypeEventData
     Inherits BaseData
     Implements IItemTypeEventData
-    Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
-    Friend Const EventIdColumn = "EventId"
-    Friend Const EventNameColumn = "EventName"
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub

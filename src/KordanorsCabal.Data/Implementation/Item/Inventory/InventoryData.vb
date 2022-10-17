@@ -1,10 +1,6 @@
 ﻿Public Class InventoryData
     Inherits BaseData
     Implements IInventoryData
-    Friend Const InventoryIdColumn = "InventoryId"
-    Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
-    Friend Const LocationIdColumn = LocationData.LocationIdColumn
-
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
