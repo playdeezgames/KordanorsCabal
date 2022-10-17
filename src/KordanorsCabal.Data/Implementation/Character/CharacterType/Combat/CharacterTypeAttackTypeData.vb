@@ -1,7 +1,6 @@
 ﻿Public Class CharacterTypeAttackTypeData
     Inherits BaseData
     Implements ICharacterTypeAttackTypeData
-    Friend Const TableName = "CharacterTypeAttackTypes"
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Const AttackTypeColumn = "AttackType"
     Friend Const WeightColumn = "Weight"
@@ -12,7 +11,7 @@
     Public Function Read(characterTypeId As Long) As IReadOnlyDictionary(Of Long, Integer) Implements ICharacterTypeAttackTypeData.Read
         Dim results = Store.Record.WithValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterTypeAttackTypes,
             (AttackTypeColumn, WeightColumn),
             (CharacterTypeIdColumn, characterTypeId))
         If results Is Nothing Then

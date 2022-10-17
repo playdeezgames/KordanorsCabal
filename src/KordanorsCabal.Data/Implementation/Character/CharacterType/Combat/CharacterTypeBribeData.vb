@@ -1,7 +1,6 @@
 ﻿Public Class CharacterTypeBribeData
     Inherits BaseData
     Implements ICharacterTypeBribeData
-    Friend Const TableName = "CharacterTypeBribes"
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
 
@@ -12,7 +11,7 @@
     Public Function Read(characterTypeId As Long, itemType As Long) As Boolean Implements ICharacterTypeBribeData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterTypeBribes,
             ItemTypeIdColumn,
             (CharacterTypeIdColumn, characterTypeId),
             (ItemTypeIdColumn, itemType)).HasValue

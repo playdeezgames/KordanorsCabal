@@ -1,7 +1,6 @@
 ﻿Public Class CharacterSpellData
     Inherits BaseData
     Implements ICharacterSpellData
-    Friend Const TableName = "CharacterSpells"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const SpellTypeIdColumn = SpellTypeData.SpellTypeIdColumn
     Friend Const SpellLevelColumn = "SpellLevel"
@@ -12,7 +11,7 @@
     Public Function ReadForCharacter(characterId As Long) As IEnumerable(Of Tuple(Of Long, Long)) Implements ICharacterSpellData.ReadForCharacter
         Return Store.Record.WithValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterSpells,
             (SpellTypeIdColumn, SpellLevelColumn),
             (CharacterIdColumn, characterId))
     End Function
@@ -20,7 +19,7 @@
     Public Function Read(characterId As Long, spellType As Long) As Long? Implements ICharacterSpellData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterSpells,
             SpellLevelColumn,
             (CharacterIdColumn, characterId),
             (SpellTypeIdColumn, spellType))
@@ -29,7 +28,7 @@
     Public Sub Write(characterId As Long, spellType As Long, spellLevel As Long) Implements ICharacterSpellData.Write
         Store.Replace.Entry(
             AddressOf NoInitializer,
-            TableName,
+            CharacterSpells,
             (CharacterIdColumn, characterId),
             (SpellTypeIdColumn, spellType),
             (SpellLevelColumn, spellLevel))
@@ -38,7 +37,7 @@
     Public Sub ClearForCharacter(characterId As Long) Implements ICharacterSpellData.ClearForCharacter
         Store.Clear.ForValue(
             AddressOf NoInitializer,
-            TableName,
+            CharacterSpells,
             (CharacterIdColumn, characterId))
     End Sub
 End Class

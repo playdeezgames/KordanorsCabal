@@ -1,7 +1,6 @@
 ﻿Public Class CharacterData
     Inherits BaseData
     Implements ICharacterData
-    Friend Const TableName = "Characters"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
@@ -11,7 +10,7 @@
     Public Function ReadCharacterType(characterId As Long) As Long? Implements ICharacterData.ReadCharacterType
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            Tables.Characters,
             CharacterTypeIdColumn,
             (CharacterIdColumn, characterId))
     End Function
@@ -19,7 +18,7 @@
     Public Function Create(characterType As Long, locationId As Long) As Long Implements ICharacterData.Create
         Return Store.Create.Entry(
             AddressOf NoInitializer,
-            TableName,
+            Tables.Characters,
             (CharacterTypeIdColumn, characterType),
             (LocationIdColumn, locationId))
     End Function
@@ -27,7 +26,7 @@
     Public Function ReadLocation(characterId As Long) As Long? Implements ICharacterData.ReadLocation
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            Tables.Characters,
             LocationIdColumn,
             (CharacterIdColumn, characterId))
     End Function
@@ -35,7 +34,7 @@
     Public Sub WriteLocation(characterId As Long, locationId As Long) Implements ICharacterData.WriteLocation
         Store.Column.Write(
             AddressOf NoInitializer,
-            TableName,
+            Tables.Characters,
             (LocationIdColumn, locationId),
             (CharacterIdColumn, characterId))
     End Sub
@@ -43,7 +42,7 @@
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long) Implements ICharacterData.ReadForLocation
         Return Store.Record.WithValues(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            Tables.Characters,
             CharacterIdColumn,
             (LocationIdColumn, locationId))
     End Function
@@ -59,7 +58,7 @@
         World.CharacterSpell.ClearForCharacter(characterId)
         Store.Clear.ForValue(
             AddressOf NoInitializer,
-            TableName,
+            Tables.Characters,
             (CharacterIdColumn, characterId))
     End Sub
 End Class
