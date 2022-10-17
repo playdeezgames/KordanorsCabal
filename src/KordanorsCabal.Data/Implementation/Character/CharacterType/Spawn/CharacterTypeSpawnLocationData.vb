@@ -1,7 +1,6 @@
 ﻿Public Class CharacterTypeSpawnLocationData
     Inherits BaseData
     Implements ICharacterTypeSpawnLocationData
-    Friend Const TableName = "CharacterTypeSpawnLocations"
     Friend Const CharacterTypeIdColumn = CharacterTypeData.CharacterTypeIdColumn
     Friend Const DungeonLevelIdColumn = DungeonLevelData.DungeonLevelIdColumn
     Friend Const LocationTypeIdColumn = LocationTypeData.LocationTypeIdColumn
@@ -15,7 +14,7 @@
                         locationType As Long) As Boolean Implements ICharacterTypeSpawnLocationData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterTypeSpawnLocations,
             CharacterTypeIdColumn,
             (CharacterTypeIdColumn, characterTypeId),
             (DungeonLevelIdColumn, dungeonLevel),
