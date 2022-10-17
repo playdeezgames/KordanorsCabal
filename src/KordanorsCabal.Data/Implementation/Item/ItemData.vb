@@ -8,25 +8,16 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{ItemIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
-                [{ItemTypeIdColumn}] INT NOT NULL
-            );")
-    End Sub
     Public Function Create(itemType As Long) As Long Implements IItemData.Create
         Return Store.Create.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (ItemTypeIdColumn, itemType))
     End Function
 
     Public Function ReadItemType(itemId As Long) As Long? Implements IItemData.ReadItemType
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             ItemTypeIdColumn,
             (ItemIdColumn, itemId))
@@ -37,14 +28,14 @@
         World.InventoryItem.ClearForItem(itemId)
         World.ItemStatistic.ClearForItem(itemId)
         Store.Clear.ForValue(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (ItemIdColumn, itemId))
     End Sub
 
     Public Sub WriteItemType(itemId As Long, itemType As Long) Implements IItemData.WriteItemType
         Store.Column.Write(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (ItemTypeIdColumn, itemType),
             (ItemIdColumn, itemId))

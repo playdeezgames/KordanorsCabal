@@ -10,7 +10,6 @@
     End Sub
 
     Friend Sub Initialize()
-        CType(World.Item, ItemData).Initialize()
         CType(World.Inventory, InventoryData).Initialize()
         Store.Primitive.Execute(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
