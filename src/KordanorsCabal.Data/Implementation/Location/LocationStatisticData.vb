@@ -1,7 +1,6 @@
 ﻿Public Class LocationStatisticData
     Inherits BaseData
     Implements ILocationStatisticData
-    Friend Const TableName = "LocationStatistics"
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const LocationStatisticTypeIdColumn = "LocationStatisticTypeId"
     Friend Const StatisticValueColumn = "StatisticValue"
@@ -12,7 +11,7 @@
     Public Function ReadForStatisticValue(statisticType As Long, statisticValue As Long) As IEnumerable(Of Long)
         Return Store.Record.WithValues(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName, LocationIdColumn,
+            LocationStatistics, LocationIdColumn,
             (LocationStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue))
     End Function
@@ -20,7 +19,7 @@
     Public Function Read(locationId As Long, statisticType As Long) As Long? Implements ILocationStatisticData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            LocationStatistics,
             StatisticValueColumn,
             (LocationIdColumn, locationId),
             (LocationStatisticTypeIdColumn, statisticType))
@@ -30,14 +29,14 @@
         If Not statisticValue.HasValue Then
             Store.Clear.ForValues(
                 AddressOf NoInitializer,
-                TableName,
+                LocationStatistics,
                 (LocationIdColumn, locationId),
                 (LocationStatisticTypeIdColumn, statisticType))
             Return
         End If
         Store.Replace.Entry(
             AddressOf NoInitializer,
-            TableName,
+            LocationStatistics,
             (LocationIdColumn, locationId),
             (LocationStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue.Value))
