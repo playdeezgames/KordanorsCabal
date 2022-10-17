@@ -11,32 +11,16 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{RouteIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
-                [{LocationIdColumn}] INT NOT NULL,
-                [{DirectionIdColumn}] INT NOT NULL,
-                [{RouteTypeIdColumn}] INT NOT NULL,
-                [{ToLocationIdColumn}] INT NOT NULL,
-                UNIQUE([{LocationIdColumn}],[{DirectionIdColumn}]),
-                FOREIGN KEY([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}]),
-                FOREIGN KEY([{ToLocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
-            );")
-    End Sub
-
     Public Sub Clear(routeId As Long) Implements IRouteData.Clear
         Store.Clear.ForValue(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (RouteIdColumn, routeId))
     End Sub
 
     Public Sub WriteRouteType(routeId As Long, routeType As Long) Implements IRouteData.WriteRouteType
         Store.Column.Write(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (RouteTypeIdColumn, routeType),
             (RouteIdColumn, routeId))
@@ -44,7 +28,7 @@
 
     Public Function ReadRouteType(routeId As Long) As Long? Implements IRouteData.ReadRouteType
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             RouteTypeIdColumn,
             (RouteIdColumn, routeId))
@@ -52,7 +36,7 @@
 
     Public Function ReadToLocation(routeId As Long) As Long? Implements IRouteData.ReadToLocation
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             ToLocationIdColumn,
             (RouteIdColumn, routeId))
@@ -60,7 +44,7 @@
 
     Public Function ReadForLocationRouteType(locationId As Long, routeType As Long) As IEnumerable(Of Long) Implements IRouteData.ReadForLocationRouteType
         Return Store.Record.WithValues(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             RouteIdColumn,
             (LocationIdColumn, locationId),
@@ -69,7 +53,7 @@
 
     Public Function ReadDirectionRouteForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long)) Implements IRouteData.ReadDirectionRouteForLocation
         Return Store.Record.WithValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (DirectionIdColumn, RouteIdColumn),
             (LocationIdColumn, locationId))
@@ -77,7 +61,7 @@
 
     Public Function ReadDirectionRouteTypeForLocation(locationId As Long) As IEnumerable(Of Tuple(Of Long, Long)) Implements IRouteData.ReadDirectionRouteTypeForLocation
         Return Store.Record.WithValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (DirectionIdColumn, RouteTypeIdColumn),
             (LocationIdColumn, locationId))
@@ -85,7 +69,7 @@
 
     Public Function ReadForLocationDirection(locationId As Long, direction As Long) As Long? Implements IRouteData.ReadForLocationDirection
         Return Store.Column.ReadValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             RouteIdColumn,
             (LocationIdColumn, locationId),
@@ -94,7 +78,7 @@
 
     Public Function Create(locationId As Long, direction As Long, routeType As Long, toLocationId As Long) As Long Implements IRouteData.Create
         Return Store.Create.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (LocationIdColumn, locationId),
             (DirectionIdColumn, direction),
@@ -103,6 +87,6 @@
     End Function
 
     Public Function ReadCountForLocation(locationId As Long) As Long Implements IRouteData.ReadCountForLocation
-        Return Store.Count.ForValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId))
+        Return Store.Count.ForValue(AddressOf NoInitializer, TableName, (LocationIdColumn, locationId))
     End Function
 End Class
