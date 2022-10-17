@@ -1,7 +1,6 @@
 ﻿Public Class InventoryData
     Inherits BaseData
     Implements IInventoryData
-    Friend Const TableName = "Inventories"
     Friend Const InventoryIdColumn = "InventoryId"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
@@ -12,32 +11,32 @@
     Public Function CreateForCharacter(characterId As Long) As Long Implements IInventoryData.CreateForCharacter
         Return Store.Create.Entry(
             AddressOf NoInitializer,
-            TableName,
+            Inventories,
             (CharacterIdColumn, characterId))
     End Function
     Public Function CreateForLocation(locationId As Long) As Long Implements IInventoryData.CreateForLocation
         Return Store.Create.Entry(
             AddressOf NoInitializer,
-            TableName,
+            Inventories,
             (LocationIdColumn, locationId))
     End Function
     Sub ClearForCharacter(characterId As Long) Implements IInventoryData.ClearForCharacter
         Store.Clear.ForValue(
             AddressOf NoInitializer,
-            TableName,
+            Inventories,
             (CharacterIdColumn, characterId))
     End Sub
     Public Function ReadForCharacter(characterId As Long) As Long? Implements IInventoryData.ReadForCharacter
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            Inventories,
             InventoryIdColumn,
             (CharacterIdColumn, characterId))
     End Function
     Public Function ReadForLocation(locationId As Long) As Long? Implements IInventoryData.ReadForLocation
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            Inventories,
             InventoryIdColumn,
             (LocationIdColumn, locationId))
     End Function
