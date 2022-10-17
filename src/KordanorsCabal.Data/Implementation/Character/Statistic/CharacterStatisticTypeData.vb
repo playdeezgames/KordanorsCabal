@@ -1,7 +1,6 @@
 ﻿Public Class CharacterStatisticTypeData
     Inherits NameCacheData
     Implements ICharacterStatisticTypeData
-    Friend Const TableName = "CharacterStatisticTypes"
     Friend Const CharacterStatisticTypeIdColumn = "CharacterStatisticTypeId"
     Friend Const CharacterStatisticTypeNameColumn = "CharacterStatisticTypeName"
     Friend Const AbbreviationColumn = "Abbreviation"
@@ -12,7 +11,7 @@
     Public Function ReadDefaultValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadDefaultValue
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterStatisticTypes,
             DefaultValueColumn,
             (CharacterStatisticTypeIdColumn, statisticTypeId))
     End Function
@@ -21,14 +20,14 @@
     Public Function ReadName(statisticTypeId As Long) As String Implements ICharacterStatisticTypeData.ReadName
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
-            TableName,
+            CharacterStatisticTypes,
             CharacterStatisticTypeNameColumn,
             (CharacterStatisticTypeIdColumn, statisticTypeId))
     End Function
     Public Function ReadMaximumValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadMaximumValue
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterStatisticTypes,
             MaximumValueColumn,
             (CharacterStatisticTypeIdColumn, statisticTypeId))
     End Function
@@ -36,7 +35,7 @@
     Public Function ReadMinimumValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadMinimumValue
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterStatisticTypes,
             MinimumValueColumn,
             (CharacterStatisticTypeIdColumn, statisticTypeId))
     End Function
@@ -44,7 +43,7 @@
     Public Function ReadAbbreviation(statisticTypeId As Long) As String Implements ICharacterStatisticTypeData.ReadAbbreviation
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
-            TableName,
+            CharacterStatisticTypes,
             AbbreviationColumn,
             (CharacterStatisticTypeIdColumn, statisticTypeId))
     End Function
@@ -53,7 +52,7 @@
         MyBase.New(store, world)
         lookUpByName = Function(name) store.Column.ReadValue(Of String, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterStatisticTypes,
             CharacterStatisticTypeIdColumn,
             (CharacterStatisticTypeNameColumn, name))
     End Sub
