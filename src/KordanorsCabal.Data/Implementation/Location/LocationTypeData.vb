@@ -1,7 +1,6 @@
 ﻿Public Class LocationTypeData
     Inherits BaseData
     Implements ILocationTypeData
-    Friend Const TableName = "LocationTypes"
     Friend Const LocationTypeIdColumn = "LocationTypeId"
     Friend Const LocationTypeNameColumn = "LocationTypeName"
     Friend Const IsDungeonColumn = "IsDungeon"
@@ -10,7 +9,7 @@
     Public Function ReadRequiresMP(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadRequiresMP
         Return If(Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            LocationTypes,
             RequiresMPColumn,
             (LocationTypeIdColumn, locationTypeId)), 0) > 0
     End Function
@@ -18,7 +17,7 @@
     Public Function ReadCanMap(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadCanMap
         Return If(Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            LocationTypes,
             CanMapColumn,
             (LocationTypeIdColumn, locationTypeId)), 0) > 0
     End Function
@@ -26,7 +25,7 @@
     Public Function ReadIsDungeon(locationTypeId As Long) As Boolean Implements ILocationTypeData.ReadIsDungeon
         Return If(Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            LocationTypes,
             IsDungeonColumn,
             (LocationTypeIdColumn, locationTypeId)), 0) > 0
     End Function
@@ -38,7 +37,7 @@
     Public Function ReadName(locationTypeId As Long) As String Implements ILocationTypeData.ReadName
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
-            TableName,
+            LocationTypes,
             LocationTypeNameColumn,
             (LocationTypeIdColumn, locationTypeId))
     End Function
