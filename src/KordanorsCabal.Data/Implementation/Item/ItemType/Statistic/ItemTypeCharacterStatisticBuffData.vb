@@ -1,7 +1,6 @@
 ﻿Friend Class ItemTypeCharacterStatisticBuffData
     Inherits BaseData
     Implements IItemTypeCharacterStatisticBuffData
-    Friend Const TableName = "ItemTypeCharacterStatisticBuffs"
     Friend Const ItemTypeIdColumn = ItemTypeData.ItemTypeIdColumn
     Friend Const CharacterStatisticTypeIdColumn = CharacterStatisticTypeData.CharacterStatisticTypeIdColumn
     Friend Const BuffColumn = "Buff"
@@ -12,7 +11,7 @@
     Public Function Read(itemTypeId As Long, characterStatisticTypeId As Long) As Long? Implements IItemTypeCharacterStatisticBuffData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            ItemTypeCharacterStatisticBuffs,
             BuffColumn,
             (ItemTypeIdColumn, itemTypeId),
             (CharacterStatisticTypeIdColumn, characterStatisticTypeId))
