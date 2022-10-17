@@ -11,30 +11,9 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute($"CREATE TABLE IF NOT EXISTS [{TableName}] AS
-                WITH [cte](
-                    [{SpellTypeIdColumn}],
-                    [{SpellTypeNameColumn}],
-                    [{MaximumLevelColumn}],
-                    [{CastCheckColumn}],
-                    [{CastColumn}]) AS
-                (VALUES
-                    (1,'Holy Bolt', 1, 'CharacterCanCastHolyBolt', 'CharacterCastHolyBolt'),
-                    (2,'Purify', 1, 'CharacterCanCastPurify', 'CharacterCastPurify'))
-                SELECT 
-                    [{SpellTypeIdColumn}],
-                    [{SpellTypeNameColumn}],
-                    [{MaximumLevelColumn}],
-                    [{CastCheckColumn}],
-                    [{CastColumn}]
-                FROM [cte];")
-    End Sub
-
     Public Function ReadName(spellTypeId As Long) As String Implements ISpellTypeData.ReadName
         Return Store.Column.ReadString(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             SpellTypeNameColumn,
             (SpellTypeIdColumn, spellTypeId))
@@ -42,7 +21,7 @@
 
     Public Function ReadMaximumLevel(spellTypeId As Long) As Long? Implements ISpellTypeData.ReadMaximumLevel
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             MaximumLevelColumn,
             (SpellTypeIdColumn, spellTypeId))
@@ -50,7 +29,7 @@
 
     Public Function ReadCastCheck(spellTypeId As Long) As String Implements ISpellTypeData.ReadCastCheck
         Return Store.Column.ReadString(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             CastCheckColumn,
             (SpellTypeIdColumn, spellTypeId))
@@ -58,7 +37,7 @@
 
     Public Function ReadCast(spellTypeId As Long) As String Implements ISpellTypeData.ReadCast
         Return Store.Column.ReadString(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             CastColumn,
             (SpellTypeIdColumn, spellTypeId))
