@@ -9,22 +9,9 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{LocationIdColumn}] INT NOT NULL,
-                [{LocationStatisticTypeIdColumn}] INT NOT NULL, 
-                [{StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{LocationIdColumn}],[{LocationStatisticTypeIdColumn}]),
-                FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
-            );")
-    End Sub
-
     Public Function ReadForStatisticValue(statisticType As Long, statisticValue As Long) As IEnumerable(Of Long)
         Return Store.Record.WithValues(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName, LocationIdColumn,
             (LocationStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue))
@@ -32,7 +19,7 @@
 
     Public Function Read(locationId As Long, statisticType As Long) As Long? Implements ILocationStatisticData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             StatisticValueColumn,
             (LocationIdColumn, locationId),
@@ -42,14 +29,14 @@
     Public Sub Write(locationId As Long, statisticType As Long, statisticValue As Long?) Implements ILocationStatisticData.Write
         If Not statisticValue.HasValue Then
             Store.Clear.ForValues(
-                AddressOf Initialize,
+                AddressOf NoInitializer,
                 TableName,
                 (LocationIdColumn, locationId),
                 (LocationStatisticTypeIdColumn, statisticType))
             Return
         End If
         Store.Replace.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (LocationIdColumn, locationId),
             (LocationStatisticTypeIdColumn, statisticType),
