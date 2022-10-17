@@ -1,7 +1,6 @@
 ﻿Public Class FeatureData
     Inherits BaseData
     Implements IFeatureData
-    Friend Const TableName = "Features"
     Friend Const FeatureIdColumn = "FeatureId"
     Friend Const FeatureTypeIdColumn = FeatureTypeData.FeatureTypeIdColumn
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
@@ -12,7 +11,7 @@
     Public Function ReadFeatureType(featureId As Long) As Long? Implements IFeatureData.ReadFeatureType
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            Features,
             FeatureTypeIdColumn,
             (FeatureIdColumn, featureId))
     End Function
@@ -20,7 +19,7 @@
     Public Function Create(featureType As Long, locationId As Long) As Long Implements IFeatureData.Create
         Return Store.Create.Entry(
             AddressOf NoInitializer,
-            TableName,
+            Features,
             (FeatureTypeIdColumn, featureType),
             (LocationIdColumn, locationId))
     End Function
@@ -28,7 +27,7 @@
     Public Function ReadForLocation(locationId As Long) As Long? Implements IFeatureData.ReadForLocation
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            Features,
             FeatureIdColumn,
             (LocationIdColumn, locationId))
     End Function
