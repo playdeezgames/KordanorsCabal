@@ -8,18 +8,9 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{InventoryIdColumn}] INT NOT NULL,
-                [{ItemIdColumn}] INT NOT NULL UNIQUE
-            );")
-    End Sub
     Public Sub Write(inventoryId As Long, itemId As Long) Implements IInventoryItemData.Write
         Store.Replace.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (InventoryIdColumn, inventoryId),
             (ItemIdColumn, itemId))
@@ -27,7 +18,7 @@
 
     Public Function ReadItems(inventoryId As Long) As IEnumerable(Of Long) Implements IInventoryItemData.ReadItems
         Return Store.Record.WithValues(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             ItemIdColumn,
             (InventoryIdColumn, inventoryId))
@@ -35,7 +26,7 @@
 
     Public Sub ClearForItem(itemId As Long) Implements IInventoryItemData.ClearForItem
         Store.Clear.ForValue(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (ItemIdColumn, itemId))
     End Sub
