@@ -9,22 +9,9 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{CharacterIdColumn}] INT NOT NULL,
-                [{SpellTypeIdColumn}] INT NOT NULL,
-                [{SpellLevelColumn}] INT NOT NULL,
-                UNIQUE([{CharacterIdColumn}],[{SpellTypeIdColumn}]),
-                FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
-            );")
-    End Sub
-
     Public Function ReadForCharacter(characterId As Long) As IEnumerable(Of Tuple(Of Long, Long)) Implements ICharacterSpellData.ReadForCharacter
         Return Store.Record.WithValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (SpellTypeIdColumn, SpellLevelColumn),
             (CharacterIdColumn, characterId))
@@ -32,7 +19,7 @@
 
     Public Function Read(characterId As Long, spellType As Long) As Long? Implements ICharacterSpellData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             SpellLevelColumn,
             (CharacterIdColumn, characterId),
@@ -41,7 +28,7 @@
 
     Public Sub Write(characterId As Long, spellType As Long, spellLevel As Long) Implements ICharacterSpellData.Write
         Store.Replace.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (CharacterIdColumn, characterId),
             (SpellTypeIdColumn, spellType),
@@ -50,7 +37,7 @@
 
     Public Sub ClearForCharacter(characterId As Long) Implements ICharacterSpellData.ClearForCharacter
         Store.Clear.ForValue(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (CharacterIdColumn, characterId))
     End Sub
