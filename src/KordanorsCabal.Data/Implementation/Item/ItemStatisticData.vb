@@ -1,7 +1,6 @@
 ﻿Public Class ItemStatisticData
     Inherits BaseData
     Implements IItemStatisticData
-    Friend Const TableName = "ItemStatistics"
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
     Friend Const ItemStatisticTypeIdColumn = "ItemStatisticTypeId"
     Friend Const StatisticValueColumn = "StatisticValue"
@@ -12,7 +11,7 @@
     Public Function Read(itemId As Long, statisticType As Long) As Long? Implements IItemStatisticData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            ItemStatistics,
             StatisticValueColumn,
             (ItemIdColumn, itemId),
             (ItemStatisticTypeIdColumn, statisticType))
@@ -21,7 +20,7 @@
     Public Sub Write(itemId As Long, statisticType As Long, value As Long) Implements IItemStatisticData.Write
         Store.Replace.Entry(
             AddressOf NoInitializer,
-            TableName,
+            ItemStatistics,
             (ItemIdColumn, itemId),
             (ItemStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, value))
@@ -30,7 +29,7 @@
     Public Sub ClearForItem(itemId As Long) Implements IItemStatisticData.ClearForItem
         Store.Clear.ForValue(
             AddressOf NoInitializer,
-            TableName,
+            ItemStatistics,
             (ItemIdColumn, itemId))
     End Sub
 End Class
