@@ -11,7 +11,6 @@
     End Sub
 
     Friend Sub Initialize()
-        CType(World.Character, CharacterData).Initialize()
         CType(World.Item, ItemData).Initialize()
         Store.Primitive.Execute(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
