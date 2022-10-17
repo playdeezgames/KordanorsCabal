@@ -1,7 +1,6 @@
 ﻿Public Class CharacterStatisticData
     Inherits BaseData
     Implements ICharacterStatisticData
-    Friend Const TableName = "CharacterStatistics"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const CharacterStatisticTypeIdColumn = CharacterStatisticTypeData.CharacterStatisticTypeIdColumn
     Friend Const StatisticValueColumn = "StatisticValue"
@@ -12,7 +11,7 @@
     Public Sub Write(characterId As Long, statisticType As Long, statisticValue As Long) Implements ICharacterStatisticData.Write
         Store.Replace.Entry(
             AddressOf NoInitializer,
-            TableName,
+            CharacterStatistics,
             (CharacterIdColumn, characterId),
             (CharacterStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue))
@@ -21,7 +20,7 @@
     Public Function Read(characterId As Long, statisticType As Long) As Long? Implements ICharacterStatisticData.Read
         Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterStatistics,
             StatisticValueColumn,
             (CharacterIdColumn, characterId),
             (CharacterStatisticTypeIdColumn, statisticType))
@@ -30,7 +29,7 @@
     Friend Sub ClearForCharacter(characterId As Long) Implements ICharacterStatisticData.ClearForCharacter
         Store.Clear.ForValue(
             AddressOf NoInitializer,
-            TableName,
+            CharacterStatistics,
             (CharacterIdColumn, characterId))
     End Sub
 End Class
