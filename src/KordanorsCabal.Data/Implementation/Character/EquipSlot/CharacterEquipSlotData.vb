@@ -1,7 +1,6 @@
 ﻿Public Class CharacterEquipSlotData
     Inherits BaseData
     Implements ICharacterEquipSlotData
-    Friend Const TableName = "CharacterEquipSlots"
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
     Friend Const EquipSlotColumn = EquipSlotData.EquipSlotIdColumn
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
@@ -12,7 +11,7 @@
     Public Function Read(characterId As Long) As IEnumerable(Of Tuple(Of Long, Long))
         Return Store.Record.WithValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterEquipSlots,
             (EquipSlotColumn, ItemIdColumn),
             (CharacterIdColumn, characterId))
     End Function
@@ -20,7 +19,7 @@
     Public Sub Clear(characterId As Long, equipSlot As Long) Implements ICharacterEquipSlotData.Clear
         Store.Clear.ForValues(
             AddressOf NoInitializer,
-            TableName,
+            CharacterEquipSlots,
             (CharacterIdColumn, characterId),
             (EquipSlotColumn, equipSlot))
     End Sub
@@ -28,7 +27,7 @@
     Public Sub Write(characterId As Long, equipSlot As Long, itemId As Long) Implements ICharacterEquipSlotData.Write
         Store.Replace.Entry(
             AddressOf NoInitializer,
-            TableName,
+            CharacterEquipSlots,
             (CharacterIdColumn, characterId),
             (EquipSlotColumn, equipSlot),
             (ItemIdColumn, itemId))
@@ -37,29 +36,29 @@
     Public Sub ClearForCharacter(characterId As Long) Implements ICharacterEquipSlotData.ClearForCharacter
         Store.Clear.ForValue(
             AddressOf NoInitializer,
-            TableName,
+            CharacterEquipSlots,
             (CharacterIdColumn, characterId))
     End Sub
 
     Public Sub ClearForItem(itemId As Long) Implements ICharacterEquipSlotData.ClearForItem
         Store.Clear.ForValue(
             AddressOf NoInitializer,
-            TableName,
+            CharacterEquipSlots,
             (ItemIdColumn, itemId))
     End Sub
 
     Public Function ReadForCharacterEquipSlot(characterId As Long, equipSlotId As Long) As Long? Implements ICharacterEquipSlotData.ReadForCharacterEquipSlot
         Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
-            TableName,
+            CharacterEquipSlots,
             ItemIdColumn,
             (CharacterIdColumn, characterId),
             (EquipSlotColumn, equipSlotId))
     End Function
     Public Function ReadItemsForCharacter(characterId As Long) As IEnumerable(Of Long) Implements ICharacterEquipSlotData.ReadItemsForCharacter
-        Return Store.Record.WithValues(Of Long, Long)(AddressOf NoInitializer, TableName, ItemIdColumn, (CharacterIdColumn, characterId))
+        Return Store.Record.WithValues(Of Long, Long)(AddressOf NoInitializer, CharacterEquipSlots, ItemIdColumn, (CharacterIdColumn, characterId))
     End Function
     Public Function ReadEquipSlotsForCharacter(characterId As Long) As IEnumerable(Of Long) Implements ICharacterEquipSlotData.ReadEquipSlotsForCharacter
-        Return Store.Record.WithValues(Of Long, Long)(AddressOf NoInitializer, TableName, EquipSlotColumn, (CharacterIdColumn, characterId))
+        Return Store.Record.WithValues(Of Long, Long)(AddressOf NoInitializer, CharacterEquipSlots, EquipSlotColumn, (CharacterIdColumn, characterId))
     End Function
 End Class
