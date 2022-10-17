@@ -8,18 +8,9 @@
     Public Sub New(store As IStore, world As IWorldData)
         MyBase.New(store, world)
     End Sub
-
-    Friend Sub Initialize()
-        Store.Primitive.Execute(
-            $"CREATE TABLE IF NOT EXISTS [{TableName}]
-            (
-                [{LocationIdColumn}] INT NOT NULL UNIQUE,
-                [{DungeonLevelIdColumn}] INT NOT NULL
-            );")
-    End Sub
     Public Function Read(locationId As Long) As Long? Implements ILocationDungeonLevelData.Read
         Return Store.Column.ReadValue(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             DungeonLevelIdColumn,
             (LocationIdColumn, locationId))
@@ -27,7 +18,7 @@
 
     Public Sub Write(locationId As Long, dungeonLevel As Long) Implements ILocationDungeonLevelData.Write
         Store.Replace.Entry(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             (LocationIdColumn, locationId),
             (DungeonLevelIdColumn, dungeonLevel))
@@ -35,7 +26,7 @@
 
     Public Function ReadForDungeonLevel(dungeonLevel As Long) As IEnumerable(Of Long) Implements ILocationDungeonLevelData.ReadForDungeonLevel
         Return Store.Record.WithValues(Of Long, Long)(
-            AddressOf Initialize,
+            AddressOf NoInitializer,
             TableName,
             LocationIdColumn,
             (DungeonLevelIdColumn, dungeonLevel))
