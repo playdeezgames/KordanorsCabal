@@ -932,6 +932,7 @@
       "System.Memory/4.5.3": {},
       "KordanorsCabal.Data/1.0.0": {
         "dependencies": {
+          "KordanorsCabal.Schema": "1.0.0",
           "SPLORR.Data": "1.0.0"
         },
         "runtime": {
@@ -945,6 +946,14 @@
         },
         "runtime": {
           "KordanorsCabal.Game.dll": {}
+        }
+      },
+      "KordanorsCabal.Schema/1.0.0": {
+        "dependencies": {
+          "Microsoft.Data.Sqlite": "6.0.8"
+        },
+        "runtime": {
+          "KordanorsCabal.Schema.dll": {}
         }
       },
       "KordanorsCabal.UI/1.0.0": {
@@ -1049,6 +1058,11 @@
       "sha512": ""
     },
     "KordanorsCabal.Game/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "KordanorsCabal.Schema/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
