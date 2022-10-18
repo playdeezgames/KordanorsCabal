@@ -1,6 +1,4 @@
-﻿Imports KordanorsCabal.Data
-
-Friend Class BlackMageModeProcessor
+﻿Friend Class BlackMageModeProcessor
     Inherits ModeProcessor
 
     Const WelcomeButtonIndex = 0
@@ -43,7 +41,7 @@ Friend Class BlackMageModeProcessor
                 ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 1)
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 1)
+                ShoppeProcessor(Of IItem).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 1)
                 Return UIState.ShoppeSell
             Case PricesButtonIndex
                 ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 1)

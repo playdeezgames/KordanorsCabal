@@ -41,7 +41,7 @@
                 ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
+                ShoppeProcessor(Of IItem).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                 Return UIState.ShoppeSell
             Case PricesButtonIndex
                 ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
