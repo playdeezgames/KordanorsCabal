@@ -1,4 +1,4 @@
-Public Module Populate
+Public Module Populator
     Sub Populate(connection As SqliteConnection)
         PopulateCharacterTypes(connection)
         PopulateCharacterStatisticTypes(connection)
