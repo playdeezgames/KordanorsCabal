@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "KordanorsCabal.Scaffolder": {
+      "commandName": "Project",
+      "commandLineArgs": "E:\\GIT\\KordanorsCabal\\src\\KordanorsCabal\\boilerplate.db"
+    }
+  }
+}
