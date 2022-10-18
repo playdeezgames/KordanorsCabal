@@ -47,7 +47,7 @@
                 ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (Long, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
+                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
                 Return UIState.ShoppeBuy
             Case RepairButtonIndex
                 If player.Repair.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.World, 2)) Then
