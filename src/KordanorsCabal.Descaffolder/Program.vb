@@ -1,5 +1,4 @@
 Imports Microsoft.Data.Sqlite
-Imports SQLitePCL
 
 Module Program
     Function FetchTableSql(connection As SqliteConnection) As IReadOnlyDictionary(Of String, String)
@@ -25,6 +24,37 @@ Module Program
             CreateTablesFile(tableSql.Keys)
             Dim allColumns = FetchColumnNames(connection, tableSql.Keys)
             CreateColumnsFile(allColumns)
+            Dim replacements = CreateReplacements(tableSql.Keys, allColumns)
+            CreateScaffoldFile(tableSql, replacements)
+        End Using
+    End Sub
+
+    Private Function CreateReplacements(keys As IEnumerable(Of String), allColumns As HashSet(Of String)) As IReadOnlyDictionary(Of String, String)
+        Dim result As New Dictionary(Of String, String)
+        For Each key In keys
+            result($"[{key}]") = $"[{{Tables.{key}}}]"
+        Next
+        For Each column In allColumns
+            result($"[{column}]") = $"[{{Columns.{column}Column}}]"
+        Next
+        Return result
+    End Function
+
+    Private Sub CreateScaffoldFile(tableSql As IReadOnlyDictionary(Of String, String), replacements As IReadOnlyDictionary(Of String, String))
+        Using writer = System.IO.File.CreateText("Scaffold.vb")
+            writer.WriteLine("Public Module Scaffold")
+            writer.WriteLine("    Private Sub ScaffoldTable(connection as SqliteConnection, sql As String)")
+            writer.WriteLine("        'TODO: make db call")
+            writer.WriteLine("    End Sub")
+            writer.WriteLine("    Public Sub Scaffold(connection as SqliteConnection)")
+            For Each value In tableSql.Values
+                For Each replacement In replacements
+                    value = value.Replace(replacement.Key, replacement.Value)
+                Next
+                writer.WriteLine($"        ScaffoldTable(connection, $""{value.Replace("""", """""")}"")")
+            Next
+            writer.WriteLine("    End Sub")
+            writer.WriteLine("End Module")
         End Using
     End Sub
 
