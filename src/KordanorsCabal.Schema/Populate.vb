@@ -50,12 +50,12 @@ Public Module Populate
         PopulateRoutes(connection)
     End Sub
     Sub PopulateCharacterTypesRecord(connection As SqliteConnection, CharacterTypeId As Long, CharacterTypeName As String, XPValue As Long, MoneyDropDice As String, IsUndead As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterTypes]([CharacterTypeId], [CharacterTypeName], [XPValue], [MoneyDropDice], [IsUndead]) VALUES (@CharacterTypeId, @CharacterTypeName, @XPValue, @MoneyDropDice, @IsUndead);", connection)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
-            command.Parameters.AddWithValue("@CharacterTypeName", CharacterTypeName)
-            command.Parameters.AddWithValue("@XPValue", XPValue)
-            command.Parameters.AddWithValue("@MoneyDropDice", MoneyDropDice)
-            command.Parameters.AddWithValue("@IsUndead", IsUndead)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypes}]([{Columns.CharacterTypeIdColumn}], [{Columns.CharacterTypeNameColumn}], [{Columns.XPValueColumn}], [{Columns.MoneyDropDiceColumn}], [{Columns.IsUndeadColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.CharacterTypeNameColumn}, @{Columns.XPValueColumn}, @{Columns.MoneyDropDiceColumn}, @{Columns.IsUndeadColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeNameColumn}", CharacterTypeName)
+            command.Parameters.AddWithValue($"@{Columns.XPValueColumn}", XPValue)
+            command.Parameters.AddWithValue($"@{Columns.MoneyDropDiceColumn}", MoneyDropDice)
+            command.Parameters.AddWithValue($"@{Columns.IsUndeadColumn}", IsUndead)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -78,13 +78,13 @@ Public Module Populate
         PopulateCharacterTypesRecord(connection, 16, "Zombie", 1, "2d4", 1)
     End Sub
     Sub PopulateCharacterStatisticTypesRecord(connection As SqliteConnection, CharacterStatisticTypeId As Long, CharacterStatisticTypeName As String, Abbreviation As String, MinimumValue As Long, DefaultValue As Long?, MaximumValue As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterStatisticTypes]([CharacterStatisticTypeId], [CharacterStatisticTypeName], [Abbreviation], [MinimumValue], [DefaultValue], [MaximumValue]) VALUES (@CharacterStatisticTypeId, @CharacterStatisticTypeName, @Abbreviation, @MinimumValue, @DefaultValue, @MaximumValue);", connection)
-            command.Parameters.AddWithValue("@CharacterStatisticTypeId", CharacterStatisticTypeId)
-            command.Parameters.AddWithValue("@CharacterStatisticTypeName", CharacterStatisticTypeName)
-            command.Parameters.AddWithValue("@Abbreviation", Abbreviation)
-            command.Parameters.AddWithValue("@MinimumValue", MinimumValue)
-            command.Parameters.AddWithValue("@DefaultValue", If(DefaultValue Is Nothing, CObj(DBNull.Value), DefaultValue))
-            command.Parameters.AddWithValue("@MaximumValue", MaximumValue)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}], [{Columns.CharacterStatisticTypeNameColumn}], [{Columns.AbbreviationColumn}], [{Columns.MinimumValueColumn}], [{Columns.DefaultValueColumn}], [{Columns.MaximumValueColumn}]) VALUES (@{Columns.CharacterStatisticTypeIdColumn}, @{Columns.CharacterStatisticTypeNameColumn}, @{Columns.AbbreviationColumn}, @{Columns.MinimumValueColumn}, @{Columns.DefaultValueColumn}, @{Columns.MaximumValueColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", CharacterStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeNameColumn}", CharacterStatisticTypeName)
+            command.Parameters.AddWithValue($"@{Columns.AbbreviationColumn}", Abbreviation)
+            command.Parameters.AddWithValue($"@{Columns.MinimumValueColumn}", MinimumValue)
+            command.Parameters.AddWithValue($"@{Columns.DefaultValueColumn}", If(DefaultValue Is Nothing, CObj(DBNull.Value), DefaultValue))
+            command.Parameters.AddWithValue($"@{Columns.MaximumValueColumn}", MaximumValue)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -116,10 +116,10 @@ Public Module Populate
         PopulateCharacterStatisticTypesRecord(connection, 25, "Bonus Lift", "Bonus Lift", 0, 0, 99999)
     End Sub
     Sub PopulateCharacterTypeInitialStatisticsRecord(connection As SqliteConnection, CharacterTypeId As Long, CharacterStatisticTypeId As Long, InitialValue As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterTypeInitialStatistics]([CharacterTypeId], [CharacterStatisticTypeId], [InitialValue]) VALUES (@CharacterTypeId, @CharacterStatisticTypeId, @InitialValue);", connection)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
-            command.Parameters.AddWithValue("@CharacterStatisticTypeId", CharacterStatisticTypeId)
-            command.Parameters.AddWithValue("@InitialValue", InitialValue)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeInitialStatistics}]([{Columns.CharacterTypeIdColumn}], [{Columns.CharacterStatisticTypeIdColumn}], [{Columns.InitialValueColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.CharacterStatisticTypeIdColumn}, @{Columns.InitialValueColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
+            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", CharacterStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.InitialValueColumn}", InitialValue)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -308,10 +308,10 @@ Public Module Populate
         PopulateCharacterTypeInitialStatisticsRecord(connection, 16, 12, 0)
     End Sub
     Sub PopulateCharacterTypeAttackTypesRecord(connection As SqliteConnection, CharacterTypeId As Long, AttackType As Long, Weight As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterTypeAttackTypes]([CharacterTypeId], [AttackType], [Weight]) VALUES (@CharacterTypeId, @AttackType, @Weight);", connection)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
-            command.Parameters.AddWithValue("@AttackType", AttackType)
-            command.Parameters.AddWithValue("@Weight", Weight)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeAttackTypes}]([{Columns.CharacterTypeIdColumn}], [{Columns.AttackTypeColumn}], [{Columns.WeightColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.AttackTypeColumn}, @{Columns.WeightColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
+            command.Parameters.AddWithValue($"@{Columns.AttackTypeColumn}", AttackType)
+            command.Parameters.AddWithValue($"@{Columns.WeightColumn}", Weight)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -335,10 +335,10 @@ Public Module Populate
         PopulateCharacterTypeAttackTypesRecord(connection, 16, 1, 1)
     End Sub
     Sub PopulateItemTypesRecord(connection As SqliteConnection, ItemTypeId As Long, ItemTypeName As String, IsConsumed As Long)
-        Using command = New SqliteCommand("INSERT INTO [ItemTypes]([ItemTypeId], [ItemTypeName], [IsConsumed]) VALUES (@ItemTypeId, @ItemTypeName, @IsConsumed);", connection)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
-            command.Parameters.AddWithValue("@ItemTypeName", ItemTypeName)
-            command.Parameters.AddWithValue("@IsConsumed", IsConsumed)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypes}]([{Columns.ItemTypeIdColumn}], [{Columns.ItemTypeNameColumn}], [{Columns.IsConsumedColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.ItemTypeNameColumn}, @{Columns.IsConsumedColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeNameColumn}", ItemTypeName)
+            command.Parameters.AddWithValue($"@{Columns.IsConsumedColumn}", IsConsumed)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -397,9 +397,9 @@ Public Module Populate
         PopulateItemTypesRecord(connection, 52, "Amulet of Yendor", 1)
     End Sub
     Sub PopulateCharacterTypeBribesRecord(connection As SqliteConnection, CharacterTypeId As Long, ItemTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterTypeBribes]([CharacterTypeId], [ItemTypeId]) VALUES (@CharacterTypeId, @ItemTypeId);", connection)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeBribes}]([{Columns.CharacterTypeIdColumn}], [{Columns.ItemTypeIdColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.ItemTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -412,9 +412,9 @@ Public Module Populate
         PopulateCharacterTypeBribesRecord(connection, 2, 37)
     End Sub
     Sub PopulateCharacterTypeEnemiesRecord(connection As SqliteConnection, CharacterTypeId As Long, EnemyCharacterTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterTypeEnemies]([CharacterTypeId], [EnemyCharacterTypeId]) VALUES (@CharacterTypeId, @EnemyCharacterTypeId);", connection)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
-            command.Parameters.AddWithValue("@EnemyCharacterTypeId", EnemyCharacterTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeEnemies}]([{Columns.CharacterTypeIdColumn}], [{Columns.EnemyCharacterTypeIdColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.EnemyCharacterTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
+            command.Parameters.AddWithValue($"@{Columns.EnemyCharacterTypeIdColumn}", EnemyCharacterTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -451,10 +451,10 @@ Public Module Populate
         PopulateCharacterTypeEnemiesRecord(connection, 11, 16)
     End Sub
     Sub PopulateCharacterTypeLootsRecord(connection As SqliteConnection, CharacterTypeId As Long, ItemTypeId As Long?, Weight As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterTypeLoots]([CharacterTypeId], [ItemTypeId], [Weight]) VALUES (@CharacterTypeId, @ItemTypeId, @Weight);", connection)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
-            command.Parameters.AddWithValue("@ItemTypeId", If(ItemTypeId Is Nothing, CObj(DBNull.Value), ItemTypeId))
-            command.Parameters.AddWithValue("@Weight", Weight)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeLoots}]([{Columns.CharacterTypeIdColumn}], [{Columns.ItemTypeIdColumn}], [{Columns.WeightColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.ItemTypeIdColumn}, @{Columns.WeightColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", If(ItemTypeId Is Nothing, CObj(DBNull.Value), ItemTypeId))
+            command.Parameters.AddWithValue($"@{Columns.WeightColumn}", Weight)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -492,10 +492,10 @@ Public Module Populate
         PopulateCharacterTypeLootsRecord(connection, 16, 38, 3)
     End Sub
     Sub PopulateCharacterTypePartingShotsRecord(connection As SqliteConnection, CharacterTypeId As Long, PartingShot As String, Weight As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterTypePartingShots]([CharacterTypeId], [PartingShot], [Weight]) VALUES (@CharacterTypeId, @PartingShot, @Weight);", connection)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
-            command.Parameters.AddWithValue("@PartingShot", PartingShot)
-            command.Parameters.AddWithValue("@Weight", Weight)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypePartingShots}]([{Columns.CharacterTypeIdColumn}], [{Columns.PartingShotColumn}], [{Columns.WeightColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.PartingShotColumn}, @{Columns.WeightColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
+            command.Parameters.AddWithValue($"@{Columns.PartingShotColumn}", PartingShot)
+            command.Parameters.AddWithValue($"@{Columns.WeightColumn}", Weight)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -505,9 +505,9 @@ Public Module Populate
         PopulateCharacterTypePartingShotsRecord(connection, 16, "Breains!", 1)
     End Sub
     Sub PopulateDungeonLevelsRecord(connection As SqliteConnection, DungeonLevelId As Long, DungeonLevelName As String)
-        Using command = New SqliteCommand("INSERT INTO [DungeonLevels]([DungeonLevelId], [DungeonLevelName]) VALUES (@DungeonLevelId, @DungeonLevelName);", connection)
-            command.Parameters.AddWithValue("@DungeonLevelId", DungeonLevelId)
-            command.Parameters.AddWithValue("@DungeonLevelName", DungeonLevelName)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.DungeonLevels}]([{Columns.DungeonLevelIdColumn}], [{Columns.DungeonLevelNameColumn}]) VALUES (@{Columns.DungeonLevelIdColumn}, @{Columns.DungeonLevelNameColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.DungeonLevelIdColumn}", DungeonLevelId)
+            command.Parameters.AddWithValue($"@{Columns.DungeonLevelNameColumn}", DungeonLevelName)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -520,10 +520,10 @@ Public Module Populate
         PopulateDungeonLevelsRecord(connection, 6, "The Moon")
     End Sub
     Sub PopulateCharacterTypeSpawnCountsRecord(connection As SqliteConnection, CharacterTypeId As Long, DungeonLevelId As Long, SpawnCount As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterTypeSpawnCounts]([CharacterTypeId], [DungeonLevelId], [SpawnCount]) VALUES (@CharacterTypeId, @DungeonLevelId, @SpawnCount);", connection)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
-            command.Parameters.AddWithValue("@DungeonLevelId", DungeonLevelId)
-            command.Parameters.AddWithValue("@SpawnCount", SpawnCount)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeSpawnCounts}]([{Columns.CharacterTypeIdColumn}], [{Columns.DungeonLevelIdColumn}], [{Columns.SpawnCountColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.DungeonLevelIdColumn}, @{Columns.SpawnCountColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
+            command.Parameters.AddWithValue($"@{Columns.DungeonLevelIdColumn}", DungeonLevelId)
+            command.Parameters.AddWithValue($"@{Columns.SpawnCountColumn}", SpawnCount)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -573,12 +573,12 @@ Public Module Populate
         PopulateCharacterTypeSpawnCountsRecord(connection, 16, 4, 30)
     End Sub
     Sub PopulateLocationTypesRecord(connection As SqliteConnection, LocationTypeId As Long, LocationTypeName As String, IsDungeon As Long, CanMap As Long, RequiresMP As Long)
-        Using command = New SqliteCommand("INSERT INTO [LocationTypes]([LocationTypeId], [LocationTypeName], [IsDungeon], [CanMap], [RequiresMP]) VALUES (@LocationTypeId, @LocationTypeName, @IsDungeon, @CanMap, @RequiresMP);", connection)
-            command.Parameters.AddWithValue("@LocationTypeId", LocationTypeId)
-            command.Parameters.AddWithValue("@LocationTypeName", LocationTypeName)
-            command.Parameters.AddWithValue("@IsDungeon", IsDungeon)
-            command.Parameters.AddWithValue("@CanMap", CanMap)
-            command.Parameters.AddWithValue("@RequiresMP", RequiresMP)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.LocationTypes}]([{Columns.LocationTypeIdColumn}], [{Columns.LocationTypeNameColumn}], [{Columns.IsDungeonColumn}], [{Columns.CanMapColumn}], [{Columns.RequiresMPColumn}]) VALUES (@{Columns.LocationTypeIdColumn}, @{Columns.LocationTypeNameColumn}, @{Columns.IsDungeonColumn}, @{Columns.CanMapColumn}, @{Columns.RequiresMPColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.LocationTypeIdColumn}", LocationTypeId)
+            command.Parameters.AddWithValue($"@{Columns.LocationTypeNameColumn}", LocationTypeName)
+            command.Parameters.AddWithValue($"@{Columns.IsDungeonColumn}", IsDungeon)
+            command.Parameters.AddWithValue($"@{Columns.CanMapColumn}", CanMap)
+            command.Parameters.AddWithValue($"@{Columns.RequiresMPColumn}", RequiresMP)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -593,10 +593,10 @@ Public Module Populate
         PopulateLocationTypesRecord(connection, 8, "Moon", 1, 1, 1)
     End Sub
     Sub PopulateCharacterTypeSpawnLocationsRecord(connection As SqliteConnection, CharacterTypeId As Long, DungeonLevelId As Long, LocationTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterTypeSpawnLocations]([CharacterTypeId], [DungeonLevelId], [LocationTypeId]) VALUES (@CharacterTypeId, @DungeonLevelId, @LocationTypeId);", connection)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
-            command.Parameters.AddWithValue("@DungeonLevelId", DungeonLevelId)
-            command.Parameters.AddWithValue("@LocationTypeId", LocationTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeSpawnLocations}]([{Columns.CharacterTypeIdColumn}], [{Columns.DungeonLevelIdColumn}], [{Columns.LocationTypeIdColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.DungeonLevelIdColumn}, @{Columns.LocationTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
+            command.Parameters.AddWithValue($"@{Columns.DungeonLevelIdColumn}", DungeonLevelId)
+            command.Parameters.AddWithValue($"@{Columns.LocationTypeIdColumn}", LocationTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -683,9 +683,9 @@ Public Module Populate
         PopulateCharacterTypeSpawnLocationsRecord(connection, 16, 5, 5)
     End Sub
     Sub PopulateEquipSlotsRecord(connection As SqliteConnection, EquipSlotId As Long, EquipSlotName As String)
-        Using command = New SqliteCommand("INSERT INTO [EquipSlots]([EquipSlotId], [EquipSlotName]) VALUES (@EquipSlotId, @EquipSlotName);", connection)
-            command.Parameters.AddWithValue("@EquipSlotId", EquipSlotId)
-            command.Parameters.AddWithValue("@EquipSlotName", EquipSlotName)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.EquipSlots}]([{Columns.EquipSlotIdColumn}], [{Columns.EquipSlotNameColumn}]) VALUES (@{Columns.EquipSlotIdColumn}, @{Columns.EquipSlotNameColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.EquipSlotIdColumn}", EquipSlotId)
+            command.Parameters.AddWithValue($"@{Columns.EquipSlotNameColumn}", EquipSlotName)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -700,12 +700,12 @@ Public Module Populate
         PopulateEquipSlotsRecord(connection, 8, "RHand")
     End Sub
     Sub PopulateQuestTypesRecord(connection As SqliteConnection, QuestTypeId As Long, CanAcceptEventName As String, AcceptEventName As String, CanCompleteEventName As String, CompleteEventName As String)
-        Using command = New SqliteCommand("INSERT INTO [QuestTypes]([QuestTypeId], [CanAcceptEventName], [AcceptEventName], [CanCompleteEventName], [CompleteEventName]) VALUES (@QuestTypeId, @CanAcceptEventName, @AcceptEventName, @CanCompleteEventName, @CompleteEventName);", connection)
-            command.Parameters.AddWithValue("@QuestTypeId", QuestTypeId)
-            command.Parameters.AddWithValue("@CanAcceptEventName", CanAcceptEventName)
-            command.Parameters.AddWithValue("@AcceptEventName", AcceptEventName)
-            command.Parameters.AddWithValue("@CanCompleteEventName", CanCompleteEventName)
-            command.Parameters.AddWithValue("@CompleteEventName", CompleteEventName)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.QuestTypes}]([{Columns.QuestTypeIdColumn}], [{Columns.CanAcceptEventNameColumn}], [{Columns.AcceptEventNameColumn}], [{Columns.CanCompleteEventNameColumn}], [{Columns.CompleteEventNameColumn}]) VALUES (@{Columns.QuestTypeIdColumn}, @{Columns.CanAcceptEventNameColumn}, @{Columns.AcceptEventNameColumn}, @{Columns.CanCompleteEventNameColumn}, @{Columns.CompleteEventNameColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.QuestTypeIdColumn}", QuestTypeId)
+            command.Parameters.AddWithValue($"@{Columns.CanAcceptEventNameColumn}", CanAcceptEventName)
+            command.Parameters.AddWithValue($"@{Columns.AcceptEventNameColumn}", AcceptEventName)
+            command.Parameters.AddWithValue($"@{Columns.CanCompleteEventNameColumn}", CanCompleteEventName)
+            command.Parameters.AddWithValue($"@{Columns.CompleteEventNameColumn}", CompleteEventName)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -713,9 +713,9 @@ Public Module Populate
         PopulateQuestTypesRecord(connection, 1, "CharacterCanAcceptCellarRatsQuest", "CharacterAcceptCellarRatsQuest", "CharacterCanCompleteCellarRatsQuest", "CharacterCompleteCellarRatsQuest")
     End Sub
     Sub PopulateItemStatisticTypesRecord(connection As SqliteConnection, ItemStatisticTypeId As Long, DefaultValue As Long)
-        Using command = New SqliteCommand("INSERT INTO [ItemStatisticTypes]([ItemStatisticTypeId], [DefaultValue]) VALUES (@ItemStatisticTypeId, @DefaultValue);", connection)
-            command.Parameters.AddWithValue("@ItemStatisticTypeId", ItemStatisticTypeId)
-            command.Parameters.AddWithValue("@DefaultValue", DefaultValue)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemStatisticTypes}]([{Columns.ItemStatisticTypeIdColumn}], [{Columns.DefaultValueColumn}]) VALUES (@{Columns.ItemStatisticTypeIdColumn}, @{Columns.DefaultValueColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemStatisticTypeIdColumn}", ItemStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.DefaultValueColumn}", DefaultValue)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -723,9 +723,9 @@ Public Module Populate
         PopulateItemStatisticTypesRecord(connection, 1, 0)
     End Sub
     Sub PopulateItemTypeEquipSlotsRecord(connection As SqliteConnection, ItemTypeId As Long, EquipSlotId As Long)
-        Using command = New SqliteCommand("INSERT INTO [ItemTypeEquipSlots]([ItemTypeId], [EquipSlotId]) VALUES (@ItemTypeId, @EquipSlotId);", connection)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
-            command.Parameters.AddWithValue("@EquipSlotId", EquipSlotId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeEquipSlots}]([{Columns.ItemTypeIdColumn}], [{Columns.EquipSlotIdColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.EquipSlotIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
+            command.Parameters.AddWithValue($"@{Columns.EquipSlotIdColumn}", EquipSlotId)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -750,10 +750,10 @@ Public Module Populate
         PopulateItemTypeEquipSlotsRecord(connection, 52, 6)
     End Sub
     Sub PopulateItemTypeEventsRecord(connection As SqliteConnection, ItemTypeId As Long, EventId As Long, EventName As String)
-        Using command = New SqliteCommand("INSERT INTO [ItemTypeEvents]([ItemTypeId], [EventId], [EventName]) VALUES (@ItemTypeId, @EventId, @EventName);", connection)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
-            command.Parameters.AddWithValue("@EventId", EventId)
-            command.Parameters.AddWithValue("@EventName", EventName)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeEvents}]([{Columns.ItemTypeIdColumn}], [{Columns.EventIdColumn}], [{Columns.EventNameColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.EventIdColumn}, @{Columns.EventNameColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
+            command.Parameters.AddWithValue($"@{Columns.EventIdColumn}", EventId)
+            command.Parameters.AddWithValue($"@{Columns.EventNameColumn}", EventName)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -797,9 +797,9 @@ Public Module Populate
         PopulateItemTypeEventsRecord(connection, 47, 3, "LearnPurify")
     End Sub
     Sub PopulateShoppeTypesRecord(connection As SqliteConnection, ShoppeTypeId As Long, ShoppeTypeName As String)
-        Using command = New SqliteCommand("INSERT INTO [ShoppeTypes]([ShoppeTypeId], [ShoppeTypeName]) VALUES (@ShoppeTypeId, @ShoppeTypeName);", connection)
-            command.Parameters.AddWithValue("@ShoppeTypeId", ShoppeTypeId)
-            command.Parameters.AddWithValue("@ShoppeTypeName", ShoppeTypeName)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ShoppeTypes}]([{Columns.ShoppeTypeIdColumn}], [{Columns.ShoppeTypeNameColumn}]) VALUES (@{Columns.ShoppeTypeIdColumn}, @{Columns.ShoppeTypeNameColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ShoppeTypeIdColumn}", ShoppeTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ShoppeTypeNameColumn}", ShoppeTypeName)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -811,10 +811,10 @@ Public Module Populate
         PopulateShoppeTypesRecord(connection, 5, "Black Market")
     End Sub
     Sub PopulateItemTypeShopTypesRecord(connection As SqliteConnection, ItemTypeId As Long, ShoppeTypeId As Long, TransactionTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [ItemTypeShopTypes]([ItemTypeId], [ShoppeTypeId], [TransactionTypeId]) VALUES (@ItemTypeId, @ShoppeTypeId, @TransactionTypeId);", connection)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
-            command.Parameters.AddWithValue("@ShoppeTypeId", ShoppeTypeId)
-            command.Parameters.AddWithValue("@TransactionTypeId", TransactionTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeShopTypes}]([{Columns.ItemTypeIdColumn}], [{Columns.ShoppeTypeIdColumn}], [{Columns.TransactionTypeIdColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.ShoppeTypeIdColumn}, @{Columns.TransactionTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ShoppeTypeIdColumn}", ShoppeTypeId)
+            command.Parameters.AddWithValue($"@{Columns.TransactionTypeIdColumn}", TransactionTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -864,10 +864,10 @@ Public Module Populate
         PopulateItemTypeShopTypesRecord(connection, 52, 5, 2)
     End Sub
     Sub PopulateItemTypeSpawnCountsRecord(connection As SqliteConnection, ItemTypeId As Long, DungeonLevelId As Long, SpawnDice As String)
-        Using command = New SqliteCommand("INSERT INTO [ItemTypeSpawnCounts]([ItemTypeId], [DungeonLevelId], [SpawnDice]) VALUES (@ItemTypeId, @DungeonLevelId, @SpawnDice);", connection)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
-            command.Parameters.AddWithValue("@DungeonLevelId", DungeonLevelId)
-            command.Parameters.AddWithValue("@SpawnDice", SpawnDice)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeSpawnCounts}]([{Columns.ItemTypeIdColumn}], [{Columns.DungeonLevelIdColumn}], [{Columns.SpawnDiceColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.DungeonLevelIdColumn}, @{Columns.SpawnDiceColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
+            command.Parameters.AddWithValue($"@{Columns.DungeonLevelIdColumn}", DungeonLevelId)
+            command.Parameters.AddWithValue($"@{Columns.SpawnDiceColumn}", SpawnDice)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -898,10 +898,10 @@ Public Module Populate
         PopulateItemTypeSpawnCountsRecord(connection, 51, 5, "1d1")
     End Sub
     Sub PopulateItemTypeSpawnLocationTypesRecord(connection As SqliteConnection, ItemTypeId As Long, DungeonLevelId As Long, LocationTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [ItemTypeSpawnLocationTypes]([ItemTypeId], [DungeonLevelId], [LocationTypeId]) VALUES (@ItemTypeId, @DungeonLevelId, @LocationTypeId);", connection)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
-            command.Parameters.AddWithValue("@DungeonLevelId", DungeonLevelId)
-            command.Parameters.AddWithValue("@LocationTypeId", LocationTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeSpawnLocationTypes}]([{Columns.ItemTypeIdColumn}], [{Columns.DungeonLevelIdColumn}], [{Columns.LocationTypeIdColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.DungeonLevelIdColumn}, @{Columns.LocationTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
+            command.Parameters.AddWithValue($"@{Columns.DungeonLevelIdColumn}", DungeonLevelId)
+            command.Parameters.AddWithValue($"@{Columns.LocationTypeIdColumn}", LocationTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -990,10 +990,10 @@ Public Module Populate
         PopulateItemTypeSpawnLocationTypesRecord(connection, 51, 2, 6)
     End Sub
     Sub PopulateItemTypeCharacterStatisticBuffsRecord(connection As SqliteConnection, ItemTypeId As Long, CharacterStatisticTypeId As Long, Buff As Long)
-        Using command = New SqliteCommand("INSERT INTO [ItemTypeCharacterStatisticBuffs]([ItemTypeId], [CharacterStatisticTypeId], [Buff]) VALUES (@ItemTypeId, @CharacterStatisticTypeId, @Buff);", connection)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
-            command.Parameters.AddWithValue("@CharacterStatisticTypeId", CharacterStatisticTypeId)
-            command.Parameters.AddWithValue("@Buff", Buff)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeCharacterStatisticBuffs}]([{Columns.ItemTypeIdColumn}], [{Columns.CharacterStatisticTypeIdColumn}], [{Columns.BuffColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.CharacterStatisticTypeIdColumn}, @{Columns.BuffColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
+            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", CharacterStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.BuffColumn}", Buff)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -1005,9 +1005,9 @@ Public Module Populate
         PopulateItemTypeCharacterStatisticBuffsRecord(connection, 51, 8, 1)
     End Sub
     Sub PopulateItemTypeStatisticTypesRecord(connection As SqliteConnection, ItemTypeStatisticTypeId As Long, ItemTypeStatisticTypeName As String)
-        Using command = New SqliteCommand("INSERT INTO [ItemTypeStatisticTypes]([ItemTypeStatisticTypeId], [ItemTypeStatisticTypeName]) VALUES (@ItemTypeStatisticTypeId, @ItemTypeStatisticTypeName);", connection)
-            command.Parameters.AddWithValue("@ItemTypeStatisticTypeId", ItemTypeStatisticTypeId)
-            command.Parameters.AddWithValue("@ItemTypeStatisticTypeName", ItemTypeStatisticTypeName)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeStatisticTypes}]([{Columns.ItemTypeStatisticTypeIdColumn}], [{Columns.ItemTypeStatisticTypeNameColumn}]) VALUES (@{Columns.ItemTypeStatisticTypeIdColumn}, @{Columns.ItemTypeStatisticTypeNameColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeStatisticTypeIdColumn}", ItemTypeStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeStatisticTypeNameColumn}", ItemTypeStatisticTypeName)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -1022,10 +1022,10 @@ Public Module Populate
         PopulateItemTypeStatisticTypesRecord(connection, 8, "RepairPrice")
     End Sub
     Sub PopulateItemTypeStatisticsRecord(connection As SqliteConnection, ItemTypeId As Long, ItemTypeStatisticTypeId As Long, ItemTypeStatisticValue As Long)
-        Using command = New SqliteCommand("INSERT INTO [ItemTypeStatistics]([ItemTypeId], [ItemTypeStatisticTypeId], [ItemTypeStatisticValue]) VALUES (@ItemTypeId, @ItemTypeStatisticTypeId, @ItemTypeStatisticValue);", connection)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
-            command.Parameters.AddWithValue("@ItemTypeStatisticTypeId", ItemTypeStatisticTypeId)
-            command.Parameters.AddWithValue("@ItemTypeStatisticValue", ItemTypeStatisticValue)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeStatistics}]([{Columns.ItemTypeIdColumn}], [{Columns.ItemTypeStatisticTypeIdColumn}], [{Columns.ItemTypeStatisticValueColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.ItemTypeStatisticTypeIdColumn}, @{Columns.ItemTypeStatisticValueColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeStatisticTypeIdColumn}", ItemTypeStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeStatisticValueColumn}", ItemTypeStatisticValue)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -1112,11 +1112,11 @@ Public Module Populate
         PopulateItemTypeStatisticsRecord(connection, 52, 7, 1000)
     End Sub
     Sub PopulateFeatureTypesRecord(connection As SqliteConnection, FeatureTypeId As Long, FeatureTypeName As String, LocationTypeId As Long, InteractionMode As Long)
-        Using command = New SqliteCommand("INSERT INTO [FeatureTypes]([FeatureTypeId], [FeatureTypeName], [LocationTypeId], [InteractionMode]) VALUES (@FeatureTypeId, @FeatureTypeName, @LocationTypeId, @InteractionMode);", connection)
-            command.Parameters.AddWithValue("@FeatureTypeId", FeatureTypeId)
-            command.Parameters.AddWithValue("@FeatureTypeName", FeatureTypeName)
-            command.Parameters.AddWithValue("@LocationTypeId", LocationTypeId)
-            command.Parameters.AddWithValue("@InteractionMode", InteractionMode)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.FeatureTypes}]([{Columns.FeatureTypeIdColumn}], [{Columns.FeatureTypeNameColumn}], [{Columns.LocationTypeIdColumn}], [{Columns.InteractionModeColumn}]) VALUES (@{Columns.FeatureTypeIdColumn}, @{Columns.FeatureTypeNameColumn}, @{Columns.LocationTypeIdColumn}, @{Columns.InteractionModeColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.FeatureTypeIdColumn}", FeatureTypeId)
+            command.Parameters.AddWithValue($"@{Columns.FeatureTypeNameColumn}", FeatureTypeName)
+            command.Parameters.AddWithValue($"@{Columns.LocationTypeIdColumn}", LocationTypeId)
+            command.Parameters.AddWithValue($"@{Columns.InteractionModeColumn}", InteractionMode)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -1132,14 +1132,14 @@ Public Module Populate
         PopulateFeatureTypesRecord(connection, 9, "David the Constable", 2, 11)
     End Sub
     Sub PopulateDirectionsRecord(connection As SqliteConnection, DirectionId As Long, DirectionName As String, Abbreviation As String, IsCardinal As Long, PreviousDirectionId As Long?, OppositeDirectionId As Long, NextDirectionId As Long?)
-        Using command = New SqliteCommand("INSERT INTO [Directions]([DirectionId], [DirectionName], [Abbreviation], [IsCardinal], [PreviousDirectionId], [OppositeDirectionId], [NextDirectionId]) VALUES (@DirectionId, @DirectionName, @Abbreviation, @IsCardinal, @PreviousDirectionId, @OppositeDirectionId, @NextDirectionId);", connection)
-            command.Parameters.AddWithValue("@DirectionId", DirectionId)
-            command.Parameters.AddWithValue("@DirectionName", DirectionName)
-            command.Parameters.AddWithValue("@Abbreviation", Abbreviation)
-            command.Parameters.AddWithValue("@IsCardinal", IsCardinal)
-            command.Parameters.AddWithValue("@PreviousDirectionId", If(PreviousDirectionId Is Nothing, CObj(DBNull.Value), PreviousDirectionId))
-            command.Parameters.AddWithValue("@OppositeDirectionId", OppositeDirectionId)
-            command.Parameters.AddWithValue("@NextDirectionId", If(NextDirectionId Is Nothing, CObj(DBNull.Value), NextDirectionId))
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.Directions}]([{Columns.DirectionIdColumn}], [{Columns.DirectionNameColumn}], [{Columns.AbbreviationColumn}], [{Columns.IsCardinalColumn}], [{Columns.PreviousDirectionIdColumn}], [{Columns.OppositeDirectionIdColumn}], [{Columns.NextDirectionIdColumn}]) VALUES (@{Columns.DirectionIdColumn}, @{Columns.DirectionNameColumn}, @{Columns.AbbreviationColumn}, @{Columns.IsCardinalColumn}, @{Columns.PreviousDirectionIdColumn}, @{Columns.OppositeDirectionIdColumn}, @{Columns.NextDirectionIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.DirectionIdColumn}", DirectionId)
+            command.Parameters.AddWithValue($"@{Columns.DirectionNameColumn}", DirectionName)
+            command.Parameters.AddWithValue($"@{Columns.AbbreviationColumn}", Abbreviation)
+            command.Parameters.AddWithValue($"@{Columns.IsCardinalColumn}", IsCardinal)
+            command.Parameters.AddWithValue($"@{Columns.PreviousDirectionIdColumn}", If(PreviousDirectionId Is Nothing, CObj(DBNull.Value), PreviousDirectionId))
+            command.Parameters.AddWithValue($"@{Columns.OppositeDirectionIdColumn}", OppositeDirectionId)
+            command.Parameters.AddWithValue($"@{Columns.NextDirectionIdColumn}", If(NextDirectionId Is Nothing, CObj(DBNull.Value), NextDirectionId))
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -1154,10 +1154,10 @@ Public Module Populate
         PopulateDirectionsRecord(connection, 8, "Out", "Out", 0, Nothing, 7, Nothing)
     End Sub
     Sub PopulateRouteTypesRecord(connection As SqliteConnection, RouteTypeId As Long, Abbreviation As String, IsSingleUse As Long)
-        Using command = New SqliteCommand("INSERT INTO [RouteTypes]([RouteTypeId], [Abbreviation], [IsSingleUse]) VALUES (@RouteTypeId, @Abbreviation, @IsSingleUse);", connection)
-            command.Parameters.AddWithValue("@RouteTypeId", RouteTypeId)
-            command.Parameters.AddWithValue("@Abbreviation", Abbreviation)
-            command.Parameters.AddWithValue("@IsSingleUse", IsSingleUse)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.RouteTypes}]([{Columns.RouteTypeIdColumn}], [{Columns.AbbreviationColumn}], [{Columns.IsSingleUseColumn}]) VALUES (@{Columns.RouteTypeIdColumn}, @{Columns.AbbreviationColumn}, @{Columns.IsSingleUseColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.RouteTypeIdColumn}", RouteTypeId)
+            command.Parameters.AddWithValue($"@{Columns.AbbreviationColumn}", Abbreviation)
+            command.Parameters.AddWithValue($"@{Columns.IsSingleUseColumn}", IsSingleUse)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -1175,10 +1175,10 @@ Public Module Populate
         PopulateRouteTypesRecord(connection, 11, "  ", 0)
     End Sub
     Sub PopulateRouteTypeLocksRecord(connection As SqliteConnection, RouteTypeId As Long, UnlockedRouteTypeId As Long, UnlockItemTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [RouteTypeLocks]([RouteTypeId], [UnlockedRouteTypeId], [UnlockItemTypeId]) VALUES (@RouteTypeId, @UnlockedRouteTypeId, @UnlockItemTypeId);", connection)
-            command.Parameters.AddWithValue("@RouteTypeId", RouteTypeId)
-            command.Parameters.AddWithValue("@UnlockedRouteTypeId", UnlockedRouteTypeId)
-            command.Parameters.AddWithValue("@UnlockItemTypeId", UnlockItemTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.RouteTypeLocks}]([{Columns.RouteTypeIdColumn}], [{Columns.UnlockedRouteTypeIdColumn}], [{Columns.UnlockItemTypeIdColumn}]) VALUES (@{Columns.RouteTypeIdColumn}, @{Columns.UnlockedRouteTypeIdColumn}, @{Columns.UnlockItemTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.RouteTypeIdColumn}", RouteTypeId)
+            command.Parameters.AddWithValue($"@{Columns.UnlockedRouteTypeIdColumn}", UnlockedRouteTypeId)
+            command.Parameters.AddWithValue($"@{Columns.UnlockItemTypeIdColumn}", UnlockItemTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -1191,12 +1191,12 @@ Public Module Populate
         PopulateRouteTypeLocksRecord(connection, 9, 2, 6)
     End Sub
     Sub PopulateSpellTypesRecord(connection As SqliteConnection, SpellTypeId As Long, SpellTypeName As String, MaximumLevel As Long, CastCheck As String, Cast As String)
-        Using command = New SqliteCommand("INSERT INTO [SpellTypes]([SpellTypeId], [SpellTypeName], [MaximumLevel], [CastCheck], [Cast]) VALUES (@SpellTypeId, @SpellTypeName, @MaximumLevel, @CastCheck, @Cast);", connection)
-            command.Parameters.AddWithValue("@SpellTypeId", SpellTypeId)
-            command.Parameters.AddWithValue("@SpellTypeName", SpellTypeName)
-            command.Parameters.AddWithValue("@MaximumLevel", MaximumLevel)
-            command.Parameters.AddWithValue("@CastCheck", CastCheck)
-            command.Parameters.AddWithValue("@Cast", Cast)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.SpellTypes}]([{Columns.SpellTypeIdColumn}], [{Columns.SpellTypeNameColumn}], [{Columns.MaximumLevelColumn}], [{Columns.CastCheckColumn}], [{Columns.CastColumn}]) VALUES (@{Columns.SpellTypeIdColumn}, @{Columns.SpellTypeNameColumn}, @{Columns.MaximumLevelColumn}, @{Columns.CastCheckColumn}, @{Columns.CastColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.SpellTypeIdColumn}", SpellTypeId)
+            command.Parameters.AddWithValue($"@{Columns.SpellTypeNameColumn}", SpellTypeName)
+            command.Parameters.AddWithValue($"@{Columns.MaximumLevelColumn}", MaximumLevel)
+            command.Parameters.AddWithValue($"@{Columns.CastCheckColumn}", CastCheck)
+            command.Parameters.AddWithValue($"@{Columns.CastColumn}", Cast)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -1205,10 +1205,10 @@ Public Module Populate
         PopulateSpellTypesRecord(connection, 2, "Purify", 1, "CharacterCanCastPurify", "CharacterCastPurify")
     End Sub
     Sub PopulateSpellTypeRequiredPowersRecord(connection As SqliteConnection, SpellTypeId As Long, SpellLevel As Long, Power As Long)
-        Using command = New SqliteCommand("INSERT INTO [SpellTypeRequiredPowers]([SpellTypeId], [SpellLevel], [Power]) VALUES (@SpellTypeId, @SpellLevel, @Power);", connection)
-            command.Parameters.AddWithValue("@SpellTypeId", SpellTypeId)
-            command.Parameters.AddWithValue("@SpellLevel", SpellLevel)
-            command.Parameters.AddWithValue("@Power", Power)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.SpellTypeRequiredPowers}]([{Columns.SpellTypeIdColumn}], [{Columns.SpellLevelColumn}], [{Columns.PowerColumn}]) VALUES (@{Columns.SpellTypeIdColumn}, @{Columns.SpellLevelColumn}, @{Columns.PowerColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.SpellTypeIdColumn}", SpellTypeId)
+            command.Parameters.AddWithValue($"@{Columns.SpellLevelColumn}", SpellLevel)
+            command.Parameters.AddWithValue($"@{Columns.PowerColumn}", Power)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -1219,167 +1219,167 @@ Public Module Populate
         PopulateSpellTypeRequiredPowersRecord(connection, 2, 1, 0)
     End Sub
     Sub PopulateLocationsRecord(connection As SqliteConnection, LocationId As Long, LocationTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [Locations]([LocationId], [LocationTypeId]) VALUES (@LocationId, @LocationTypeId);", connection)
-            command.Parameters.AddWithValue("@LocationId", LocationId)
-            command.Parameters.AddWithValue("@LocationTypeId", LocationTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.Locations}]([{Columns.LocationIdColumn}], [{Columns.LocationTypeIdColumn}]) VALUES (@{Columns.LocationIdColumn}, @{Columns.LocationTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.LocationIdColumn}", LocationId)
+            command.Parameters.AddWithValue($"@{Columns.LocationTypeIdColumn}", LocationTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateLocations(connection As SqliteConnection)
     End Sub
     Sub PopulateCharactersRecord(connection As SqliteConnection, CharacterId As Long, LocationId As Long, CharacterTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [Characters]([CharacterId], [LocationId], [CharacterTypeId]) VALUES (@CharacterId, @LocationId, @CharacterTypeId);", connection)
-            command.Parameters.AddWithValue("@CharacterId", CharacterId)
-            command.Parameters.AddWithValue("@LocationId", LocationId)
-            command.Parameters.AddWithValue("@CharacterTypeId", CharacterTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.Characters}]([{Columns.CharacterIdColumn}], [{Columns.LocationIdColumn}], [{Columns.CharacterTypeIdColumn}]) VALUES (@{Columns.CharacterIdColumn}, @{Columns.LocationIdColumn}, @{Columns.CharacterTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", CharacterId)
+            command.Parameters.AddWithValue($"@{Columns.LocationIdColumn}", LocationId)
+            command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateCharacters(connection As SqliteConnection)
     End Sub
     Sub PopulateCharacterLocationsRecord(connection As SqliteConnection, CharacterId As Long, LocationId As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterLocations]([CharacterId], [LocationId]) VALUES (@CharacterId, @LocationId);", connection)
-            command.Parameters.AddWithValue("@CharacterId", CharacterId)
-            command.Parameters.AddWithValue("@LocationId", LocationId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterLocations}]([{Columns.CharacterIdColumn}], [{Columns.LocationIdColumn}]) VALUES (@{Columns.CharacterIdColumn}, @{Columns.LocationIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", CharacterId)
+            command.Parameters.AddWithValue($"@{Columns.LocationIdColumn}", LocationId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateCharacterLocations(connection As SqliteConnection)
     End Sub
     Sub PopulateCharacterSpellsRecord(connection As SqliteConnection, CharacterId As Long, SpellTypeId As Long, SpellLevel As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterSpells]([CharacterId], [SpellTypeId], [SpellLevel]) VALUES (@CharacterId, @SpellTypeId, @SpellLevel);", connection)
-            command.Parameters.AddWithValue("@CharacterId", CharacterId)
-            command.Parameters.AddWithValue("@SpellTypeId", SpellTypeId)
-            command.Parameters.AddWithValue("@SpellLevel", SpellLevel)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterSpells}]([{Columns.CharacterIdColumn}], [{Columns.SpellTypeIdColumn}], [{Columns.SpellLevelColumn}]) VALUES (@{Columns.CharacterIdColumn}, @{Columns.SpellTypeIdColumn}, @{Columns.SpellLevelColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", CharacterId)
+            command.Parameters.AddWithValue($"@{Columns.SpellTypeIdColumn}", SpellTypeId)
+            command.Parameters.AddWithValue($"@{Columns.SpellLevelColumn}", SpellLevel)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateCharacterSpells(connection As SqliteConnection)
     End Sub
     Sub PopulatePlayersRecord(connection As SqliteConnection, PlayerId As Long, CharacterId As Long, DirectionId As Long, PlayerModeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [Players]([PlayerId], [CharacterId], [DirectionId], [PlayerModeId]) VALUES (@PlayerId, @CharacterId, @DirectionId, @PlayerModeId);", connection)
-            command.Parameters.AddWithValue("@PlayerId", PlayerId)
-            command.Parameters.AddWithValue("@CharacterId", CharacterId)
-            command.Parameters.AddWithValue("@DirectionId", DirectionId)
-            command.Parameters.AddWithValue("@PlayerModeId", PlayerModeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.Players}]([{Columns.PlayerIdColumn}], [{Columns.CharacterIdColumn}], [{Columns.DirectionIdColumn}], [{Columns.PlayerModeIdColumn}]) VALUES (@{Columns.PlayerIdColumn}, @{Columns.CharacterIdColumn}, @{Columns.DirectionIdColumn}, @{Columns.PlayerModeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.PlayerIdColumn}", PlayerId)
+            command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", CharacterId)
+            command.Parameters.AddWithValue($"@{Columns.DirectionIdColumn}", DirectionId)
+            command.Parameters.AddWithValue($"@{Columns.PlayerModeIdColumn}", PlayerModeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulatePlayers(connection As SqliteConnection)
     End Sub
     Sub PopulateItemsRecord(connection As SqliteConnection, ItemId As Long, ItemTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [Items]([ItemId], [ItemTypeId]) VALUES (@ItemId, @ItemTypeId);", connection)
-            command.Parameters.AddWithValue("@ItemId", ItemId)
-            command.Parameters.AddWithValue("@ItemTypeId", ItemTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.Items}]([{Columns.ItemIdColumn}], [{Columns.ItemTypeIdColumn}]) VALUES (@{Columns.ItemIdColumn}, @{Columns.ItemTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemIdColumn}", ItemId)
+            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateItems(connection As SqliteConnection)
     End Sub
     Sub PopulateCharacterEquipSlotsRecord(connection As SqliteConnection, CharacterId As Long, EquipSlotId As Long, ItemId As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterEquipSlots]([CharacterId], [EquipSlotId], [ItemId]) VALUES (@CharacterId, @EquipSlotId, @ItemId);", connection)
-            command.Parameters.AddWithValue("@CharacterId", CharacterId)
-            command.Parameters.AddWithValue("@EquipSlotId", EquipSlotId)
-            command.Parameters.AddWithValue("@ItemId", ItemId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterEquipSlots}]([{Columns.CharacterIdColumn}], [{Columns.EquipSlotIdColumn}], [{Columns.ItemIdColumn}]) VALUES (@{Columns.CharacterIdColumn}, @{Columns.EquipSlotIdColumn}, @{Columns.ItemIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", CharacterId)
+            command.Parameters.AddWithValue($"@{Columns.EquipSlotIdColumn}", EquipSlotId)
+            command.Parameters.AddWithValue($"@{Columns.ItemIdColumn}", ItemId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateCharacterEquipSlots(connection As SqliteConnection)
     End Sub
     Sub PopulateCharacterQuestCompletionsRecord(connection As SqliteConnection, CharacterId As Long, QuestTypeId As Long, Completions As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterQuestCompletions]([CharacterId], [QuestTypeId], [Completions]) VALUES (@CharacterId, @QuestTypeId, @Completions);", connection)
-            command.Parameters.AddWithValue("@CharacterId", CharacterId)
-            command.Parameters.AddWithValue("@QuestTypeId", QuestTypeId)
-            command.Parameters.AddWithValue("@Completions", Completions)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterQuestCompletions}]([{Columns.CharacterIdColumn}], [{Columns.QuestTypeIdColumn}], [{Columns.CompletionsColumn}]) VALUES (@{Columns.CharacterIdColumn}, @{Columns.QuestTypeIdColumn}, @{Columns.CompletionsColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", CharacterId)
+            command.Parameters.AddWithValue($"@{Columns.QuestTypeIdColumn}", QuestTypeId)
+            command.Parameters.AddWithValue($"@{Columns.CompletionsColumn}", Completions)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateCharacterQuestCompletions(connection As SqliteConnection)
     End Sub
     Sub PopulateCharacterQuestsRecord(connection As SqliteConnection, CharacterId As Long, QuestTypeId As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterQuests]([CharacterId], [QuestTypeId]) VALUES (@CharacterId, @QuestTypeId);", connection)
-            command.Parameters.AddWithValue("@CharacterId", CharacterId)
-            command.Parameters.AddWithValue("@QuestTypeId", QuestTypeId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterQuests}]([{Columns.CharacterIdColumn}], [{Columns.QuestTypeIdColumn}]) VALUES (@{Columns.CharacterIdColumn}, @{Columns.QuestTypeIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", CharacterId)
+            command.Parameters.AddWithValue($"@{Columns.QuestTypeIdColumn}", QuestTypeId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateCharacterQuests(connection As SqliteConnection)
     End Sub
     Sub PopulateCharacterStatisticsRecord(connection As SqliteConnection, CharacterId As Long, CharacterStatisticTypeId As Long, StatisticValue As Long)
-        Using command = New SqliteCommand("INSERT INTO [CharacterStatistics]([CharacterId], [CharacterStatisticTypeId], [StatisticValue]) VALUES (@CharacterId, @CharacterStatisticTypeId, @StatisticValue);", connection)
-            command.Parameters.AddWithValue("@CharacterId", CharacterId)
-            command.Parameters.AddWithValue("@CharacterStatisticTypeId", CharacterStatisticTypeId)
-            command.Parameters.AddWithValue("@StatisticValue", StatisticValue)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterStatistics}]([{Columns.CharacterIdColumn}], [{Columns.CharacterStatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.CharacterIdColumn}, @{Columns.CharacterStatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", CharacterId)
+            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", CharacterStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.StatisticValueColumn}", StatisticValue)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateCharacterStatistics(connection As SqliteConnection)
     End Sub
     Sub PopulateInventoriesRecord(connection As SqliteConnection, InventoryId As Long, CharacterId As Long?, LocationId As Long?)
-        Using command = New SqliteCommand("INSERT INTO [Inventories]([InventoryId], [CharacterId], [LocationId]) VALUES (@InventoryId, @CharacterId, @LocationId);", connection)
-            command.Parameters.AddWithValue("@InventoryId", InventoryId)
-            command.Parameters.AddWithValue("@CharacterId", If(CharacterId Is Nothing, CObj(DBNull.Value), CharacterId))
-            command.Parameters.AddWithValue("@LocationId", If(LocationId Is Nothing, CObj(DBNull.Value), LocationId))
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.Inventories}]([{Columns.InventoryIdColumn}], [{Columns.CharacterIdColumn}], [{Columns.LocationIdColumn}]) VALUES (@{Columns.InventoryIdColumn}, @{Columns.CharacterIdColumn}, @{Columns.LocationIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.InventoryIdColumn}", InventoryId)
+            command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", If(CharacterId Is Nothing, CObj(DBNull.Value), CharacterId))
+            command.Parameters.AddWithValue($"@{Columns.LocationIdColumn}", If(LocationId Is Nothing, CObj(DBNull.Value), LocationId))
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateInventories(connection As SqliteConnection)
     End Sub
     Sub PopulateInventoryItemsRecord(connection As SqliteConnection, InventoryId As Long, ItemId As Long)
-        Using command = New SqliteCommand("INSERT INTO [InventoryItems]([InventoryId], [ItemId]) VALUES (@InventoryId, @ItemId);", connection)
-            command.Parameters.AddWithValue("@InventoryId", InventoryId)
-            command.Parameters.AddWithValue("@ItemId", ItemId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.InventoryItems}]([{Columns.InventoryIdColumn}], [{Columns.ItemIdColumn}]) VALUES (@{Columns.InventoryIdColumn}, @{Columns.ItemIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.InventoryIdColumn}", InventoryId)
+            command.Parameters.AddWithValue($"@{Columns.ItemIdColumn}", ItemId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateInventoryItems(connection As SqliteConnection)
     End Sub
     Sub PopulateItemStatisticsRecord(connection As SqliteConnection, ItemId As Long, ItemStatisticTypeId As Long, StatisticValue As Long)
-        Using command = New SqliteCommand("INSERT INTO [ItemStatistics]([ItemId], [ItemStatisticTypeId], [StatisticValue]) VALUES (@ItemId, @ItemStatisticTypeId, @StatisticValue);", connection)
-            command.Parameters.AddWithValue("@ItemId", ItemId)
-            command.Parameters.AddWithValue("@ItemStatisticTypeId", ItemStatisticTypeId)
-            command.Parameters.AddWithValue("@StatisticValue", StatisticValue)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemStatistics}]([{Columns.ItemIdColumn}], [{Columns.ItemStatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.ItemIdColumn}, @{Columns.ItemStatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.ItemIdColumn}", ItemId)
+            command.Parameters.AddWithValue($"@{Columns.ItemStatisticTypeIdColumn}", ItemStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.StatisticValueColumn}", StatisticValue)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateItemStatistics(connection As SqliteConnection)
     End Sub
     Sub PopulateLocationDungeonLevelsRecord(connection As SqliteConnection, LocationId As Long, DungeonLevelId As Long)
-        Using command = New SqliteCommand("INSERT INTO [LocationDungeonLevels]([LocationId], [DungeonLevelId]) VALUES (@LocationId, @DungeonLevelId);", connection)
-            command.Parameters.AddWithValue("@LocationId", LocationId)
-            command.Parameters.AddWithValue("@DungeonLevelId", DungeonLevelId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.LocationDungeonLevels}]([{Columns.LocationIdColumn}], [{Columns.DungeonLevelIdColumn}]) VALUES (@{Columns.LocationIdColumn}, @{Columns.DungeonLevelIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.LocationIdColumn}", LocationId)
+            command.Parameters.AddWithValue($"@{Columns.DungeonLevelIdColumn}", DungeonLevelId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateLocationDungeonLevels(connection As SqliteConnection)
     End Sub
     Sub PopulateFeaturesRecord(connection As SqliteConnection, FeatureId As Long, FeatureTypeId As Long, LocationId As Long)
-        Using command = New SqliteCommand("INSERT INTO [Features]([FeatureId], [FeatureTypeId], [LocationId]) VALUES (@FeatureId, @FeatureTypeId, @LocationId);", connection)
-            command.Parameters.AddWithValue("@FeatureId", FeatureId)
-            command.Parameters.AddWithValue("@FeatureTypeId", FeatureTypeId)
-            command.Parameters.AddWithValue("@LocationId", LocationId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.Features}]([{Columns.FeatureIdColumn}], [{Columns.FeatureTypeIdColumn}], [{Columns.LocationIdColumn}]) VALUES (@{Columns.FeatureIdColumn}, @{Columns.FeatureTypeIdColumn}, @{Columns.LocationIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.FeatureIdColumn}", FeatureId)
+            command.Parameters.AddWithValue($"@{Columns.FeatureTypeIdColumn}", FeatureTypeId)
+            command.Parameters.AddWithValue($"@{Columns.LocationIdColumn}", LocationId)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateFeatures(connection As SqliteConnection)
     End Sub
     Sub PopulateLocationStatisticsRecord(connection As SqliteConnection, LocationId As Long, LocationStatisticTypeId As Long, StatisticValue As Long)
-        Using command = New SqliteCommand("INSERT INTO [LocationStatistics]([LocationId], [LocationStatisticTypeId], [StatisticValue]) VALUES (@LocationId, @LocationStatisticTypeId, @StatisticValue);", connection)
-            command.Parameters.AddWithValue("@LocationId", LocationId)
-            command.Parameters.AddWithValue("@LocationStatisticTypeId", LocationStatisticTypeId)
-            command.Parameters.AddWithValue("@StatisticValue", StatisticValue)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.LocationStatistics}]([{Columns.LocationIdColumn}], [{Columns.LocationStatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.LocationIdColumn}, @{Columns.LocationStatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.LocationIdColumn}", LocationId)
+            command.Parameters.AddWithValue($"@{Columns.LocationStatisticTypeIdColumn}", LocationStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.StatisticValueColumn}", StatisticValue)
             command.ExecuteNonQuery()
         End Using
     End Sub
     Sub PopulateLocationStatistics(connection As SqliteConnection)
     End Sub
     Sub PopulateRoutesRecord(connection As SqliteConnection, RouteId As Long, LocationId As Long, DirectionId As Long, RouteTypeId As Long, ToLocationId As Long)
-        Using command = New SqliteCommand("INSERT INTO [Routes]([RouteId], [LocationId], [DirectionId], [RouteTypeId], [ToLocationId]) VALUES (@RouteId, @LocationId, @DirectionId, @RouteTypeId, @ToLocationId);", connection)
-            command.Parameters.AddWithValue("@RouteId", RouteId)
-            command.Parameters.AddWithValue("@LocationId", LocationId)
-            command.Parameters.AddWithValue("@DirectionId", DirectionId)
-            command.Parameters.AddWithValue("@RouteTypeId", RouteTypeId)
-            command.Parameters.AddWithValue("@ToLocationId", ToLocationId)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.Routes}]([{Columns.RouteIdColumn}], [{Columns.LocationIdColumn}], [{Columns.DirectionIdColumn}], [{Columns.RouteTypeIdColumn}], [{Columns.ToLocationIdColumn}]) VALUES (@{Columns.RouteIdColumn}, @{Columns.LocationIdColumn}, @{Columns.DirectionIdColumn}, @{Columns.RouteTypeIdColumn}, @{Columns.ToLocationIdColumn});", connection)
+            command.Parameters.AddWithValue($"@{Columns.RouteIdColumn}", RouteId)
+            command.Parameters.AddWithValue($"@{Columns.LocationIdColumn}", LocationId)
+            command.Parameters.AddWithValue($"@{Columns.DirectionIdColumn}", DirectionId)
+            command.Parameters.AddWithValue($"@{Columns.RouteTypeIdColumn}", RouteTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ToLocationIdColumn}", ToLocationId)
             command.ExecuteNonQuery()
         End Using
     End Sub

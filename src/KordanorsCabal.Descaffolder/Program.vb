@@ -68,16 +68,16 @@ Module Program
             writer.Write($", {column.Item1} As {column.Item2}")
         Next
         writer.WriteLine($")")
-        writer.Write($"        Using command = New SqliteCommand(""INSERT INTO [{key}](")
-        writer.Write(String.Join(", ", columns.Select(Function(x) $"[{x.Item1}]")))
+        writer.Write($"        Using command = New SqliteCommand($""INSERT INTO [{{Tables.{key}}}](")
+        writer.Write(String.Join(", ", columns.Select(Function(x) $"[{{Columns.{x.Item1}Column}}]")))
         writer.Write(") VALUES (")
-        writer.Write(String.Join(", ", columns.Select(Function(x) $"@{x.Item1}")))
+        writer.Write(String.Join(", ", columns.Select(Function(x) $"@{{Columns.{x.Item1}Column}}")))
         writer.WriteLine(");"", connection)")
         For Each column In columns
             If column.Item2 = "Long?" Then
-                writer.WriteLine($"            command.Parameters.AddWithValue(""@{column.Item1}"", If({column.Item1} Is Nothing, CObj(DBNull.Value) ,{column.Item1}))")
+                writer.WriteLine($"            command.Parameters.AddWithValue($""@{{Columns.{column.Item1}Column}}"", If({column.Item1} Is Nothing, CObj(DBNull.Value) ,{column.Item1}))")
             Else
-                writer.WriteLine($"            command.Parameters.AddWithValue(""@{column.Item1}"", {column.Item1})")
+                writer.WriteLine($"            command.Parameters.AddWithValue($""@{{Columns.{column.Item1}Column}}"", {column.Item1})")
             End If
         Next
         writer.WriteLine("            command.ExecuteNonQuery()")
