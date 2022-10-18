@@ -356,7 +356,7 @@ Public Module Scaffolder
                 [{Columns.StatisticValueColumn}] INT NOT NULL,
                 UNIQUE([{Columns.ItemIdColumn}],[{Columns.ItemStatisticTypeIdColumn}]),
                 FOREIGN KEY ([{Columns.ItemIdColumn}]) REFERENCES [{Tables.Items}]([{Columns.ItemIdColumn}]),
-                FOREIGN KEY ([{Columns.ItemStatisticTypeIdColumn}]) REFERENCES [{Tables.ItemTypeStatisticTypes}]([{Columns.ItemStatisticTypeIdColumn}])
+                FOREIGN KEY ([{Columns.ItemStatisticTypeIdColumn}]) REFERENCES [{Tables.ItemStatisticTypes}]([{Columns.ItemStatisticTypeIdColumn}])
             )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.LocationDungeonLevels}]
             (
