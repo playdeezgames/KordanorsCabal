@@ -1,4 +1,7 @@
+Imports System.Data
+Imports System.IO
 Imports Microsoft.Data.Sqlite
+Imports SQLitePCL
 
 Module Program
     Function FetchTableSql(connection As SqliteConnection) As IReadOnlyDictionary(Of String, String)
@@ -26,7 +29,86 @@ Module Program
             CreateColumnsFile(allColumns)
             Dim replacements = CreateReplacements(tableSql.Keys, allColumns)
             CreateScaffoldFile(tableSql, replacements)
+            CreatePopulateFile(connection, tableSql.Keys, replacements)
         End Using
+    End Sub
+
+    Private Sub CreatePopulateFile(connection As SqliteConnection, keys As IEnumerable(Of String), replacements As IReadOnlyDictionary(Of String, String))
+        Using writer = System.IO.File.CreateText("Populate.vb")
+            writer.WriteLine("Public Module Populate")
+            writer.WriteLine("    Sub Populate(connection As SqliteConnection)")
+            For Each key In keys
+                writer.WriteLine($"        Populate{key}(connection)")
+            Next
+            writer.WriteLine("    End Sub")
+            For Each key In keys
+                CreatePopulateTable(writer, connection, key, replacements)
+            Next
+            writer.WriteLine("End Module")
+        End Using
+    End Sub
+
+    Private Sub CreatePopulateTable(writer As StreamWriter, connection As SqliteConnection, key As String, replacements As IReadOnlyDictionary(Of String, String))
+        Dim columns As New List(Of (String, String))
+        Using command = New SqliteCommand($"PRAGMA table_info({key})", connection)
+            Using reader = command.ExecuteReader()
+                While reader.Read
+                    Dim columnName = CStr(reader(1))
+                    Dim columnType = CStr(reader(2))
+                    Dim notNull = CLng(reader(3)) > 0
+                    columns.Add((columnName,
+                                If(columnType = "TEXT", "String",
+                                If(columnType = "INTEGER", "Long",
+                                If(notNull, "Long", "Long?")))))
+                End While
+            End Using
+        End Using
+        writer.Write($"    Sub Populate{key}Record(connection As SqliteConnection")
+        For Each column In columns
+            writer.Write($", {column.Item1} As {column.Item2}")
+        Next
+        writer.WriteLine($")")
+        writer.Write($"        Using command = New SqliteCommand(""INSERT INTO [{key}](")
+        writer.Write(String.Join(", ", columns.Select(Function(x) $"[{x.Item1}]")))
+        writer.Write(") VALUES (")
+        writer.Write(String.Join(", ", columns.Select(Function(x) $"@{x.Item1}")))
+        writer.WriteLine(");"", connection)")
+        For Each column In columns
+            If column.Item2 = "Long?" Then
+                writer.WriteLine($"            command.Parameters.AddWithValue(""@{column.Item1}"", If({column.Item1} Is Nothing, CObj(DBNull.Value) ,{column.Item1}))")
+            Else
+                writer.WriteLine($"            command.Parameters.AddWithValue(""@{column.Item1}"", {column.Item1})")
+            End If
+        Next
+        writer.WriteLine("            command.ExecuteNonQuery()")
+        writer.WriteLine("        End Using")
+        writer.WriteLine("    End Sub")
+        writer.WriteLine($"    Sub Populate{key}(connection As SqliteConnection)")
+        Using command = New SqliteCommand($"SELECT * FROM [{key}];", connection)
+            Using reader = command.ExecuteReader
+                While reader.Read
+                    writer.Write($"        Populate{key}Record(connection")
+                    Dim index = 0
+                    For Each column In columns
+                        Select Case column.Item2
+                            Case "String"
+                                writer.Write($",""{CStr(reader(index)).Replace("""", """""")}""")
+                            Case "Long?"
+                                If TypeOf reader(index) Is DBNull Then
+                                    writer.Write(", Nothing")
+                                Else
+                                    writer.Write($", {CLng(reader(index))}")
+                                End If
+                            Case "Long"
+                                writer.Write($", {CLng(reader(index))}")
+                        End Select
+                        index += 1
+                    Next
+                    writer.WriteLine(")")
+                End While
+            End Using
+        End Using
+        writer.WriteLine("    End Sub")
     End Sub
 
     Private Function CreateReplacements(keys As IEnumerable(Of String), allColumns As HashSet(Of String)) As IReadOnlyDictionary(Of String, String)
@@ -44,7 +126,9 @@ Module Program
         Using writer = System.IO.File.CreateText("Scaffold.vb")
             writer.WriteLine("Public Module Scaffold")
             writer.WriteLine("    Private Sub ScaffoldTable(connection as SqliteConnection, sql As String)")
-            writer.WriteLine("        'TODO: make db call")
+            writer.WriteLine("        Using command = New SqliteCommand(sql, connection)")
+            writer.WriteLine("            command.ExecuteNonQuery()")
+            writer.WriteLine("        End Using")
             writer.WriteLine("    End Sub")
             writer.WriteLine("    Public Sub Scaffold(connection as SqliteConnection)")
             For Each value In tableSql.Values

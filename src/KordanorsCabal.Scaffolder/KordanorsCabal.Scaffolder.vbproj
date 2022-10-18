@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>KordanorsCabal.Scaffolder</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KordanorsCabal.Schema\KordanorsCabal.Schema.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="KordanorsCabal.Scaffolder.My" />
+    <Import Include="KordanorsCabal.Schema" />
+    <Import Include="Microsoft.CSharp.RuntimeBinder" />
+    <Import Include="Microsoft.Data.Sqlite" />
+  </ItemGroup>
+
+</Project>

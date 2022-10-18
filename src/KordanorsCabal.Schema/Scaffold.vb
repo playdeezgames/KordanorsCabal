@@ -1,5 +1,8 @@
 Public Module Scaffold
     Private Sub ScaffoldTable(connection as SqliteConnection, sql As String)
+        Using command = New SqliteCommand(sql, connection)
+            command.ExecuteNonQuery()
+        End Using
     End Sub
     Public Sub Scaffold(connection as SqliteConnection)
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.CharacterTypes}]
