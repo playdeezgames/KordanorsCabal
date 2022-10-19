@@ -7,9 +7,9 @@
     Sub have_has_equipment()
         WithSubject(
             Sub(worldData, id, subject)
-                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.HasEquipment.ShouldBeFalse
-                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(id))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
@@ -34,9 +34,9 @@
         WithSubject(
             Sub(worldData, id, subject)
                 Const equipSlotId = 2L
-                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Character.EquipSlot.ReadForCharacterEquipSlot(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Unequip(EquipSlot.FromId(worldData.Object, equipSlotId))
-                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(id, equipSlotId))
+                worldData.Verify(Function(x) x.Character.EquipSlot.ReadForCharacterEquipSlot(id, equipSlotId))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
@@ -45,9 +45,9 @@
         WithSubject(
             Sub(worldData, id, subject)
                 Const equipSlotId = 2L
-                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Character.EquipSlot.ReadForCharacterEquipSlot(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.CurrentEquipment(EquipSlot.FromId(worldData.Object, equipSlotId))
-                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadForCharacterEquipSlot(id, equipSlotId))
+                worldData.Verify(Function(x) x.Character.EquipSlot.ReadForCharacterEquipSlot(id, equipSlotId))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
@@ -55,9 +55,9 @@
     Sub have_equipped_slots()
         WithSubject(
             Sub(worldData, id, subject)
-                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadEquipSlotsForCharacter(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Character.EquipSlot.ReadEquipSlotsForCharacter(It.IsAny(Of Long)))
                 subject.EquippedSlots.ShouldBeEmpty
-                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadEquipSlotsForCharacter(id))
+                worldData.Verify(Function(x) x.Character.EquipSlot.ReadEquipSlotsForCharacter(id))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
@@ -66,9 +66,9 @@
         WithSubject(
             Sub(worldData, id, subject)
                 Const wear = 2L
-                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.DoArmorWear(wear).ShouldBeEmpty
-                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(id))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
@@ -77,9 +77,9 @@
         WithSubject(
             Sub(worldData, id, subject)
                 Const wear = 2L
-                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.DoWeaponWear(wear).ShouldBeEmpty
-                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(id))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub

@@ -1,5 +1,6 @@
 ﻿Public Interface ICharacterData
     Sub Clear(characterId As Long)
+    ReadOnly Property EquipSlot As ICharacterEquipSlotData
     Function ReadLocation(characterId As Long) As Long?
     Sub WriteLocation(characterId As Long, locationId As Long)
     Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)

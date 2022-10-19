@@ -44,18 +44,18 @@
         Return result
     End Function
     Function CurrentEquipment(equipSlot As IEquipSlot) As IItem Implements ICharacterEquipment.CurrentEquipment
-        Return Item.FromId(WorldData, WorldData.CharacterEquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
+        Return Item.FromId(WorldData, WorldData.Character.EquipSlot.ReadForCharacterEquipSlot(Id, equipSlot.Id))
     End Function
     ReadOnly Property EquippedSlots As IEnumerable(Of IEquipSlot) Implements ICharacterEquipment.EquippedSlots
         Get
-            Return WorldData.CharacterEquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(WorldData, x))
+            Return WorldData.Character.EquipSlot.ReadEquipSlotsForCharacter(Id).Select(Function(x) New EquipSlot(WorldData, x))
         End Get
     End Property
     Public Sub Unequip(equipSlot As IEquipSlot) Implements ICharacterEquipment.Unequip
         Dim item = CurrentEquipment(equipSlot)
         If item IsNot Nothing Then
-            character.Items.Inventory.Add(item)
-            WorldData.CharacterEquipSlot.Clear(Id, equipSlot.Id)
+            Character.Items.Inventory.Add(item)
+            WorldData.Character.EquipSlot.Clear(Id, equipSlot.Id)
         End If
     End Sub
     Public Sub Equip(item As IItem) Implements ICharacterEquipment.Equip
@@ -66,10 +66,10 @@
             Dim equipSlot = If(availableEquipSlots.Any, availableEquipSlots.First, equipSlots.First)
             Dim oldItem = CurrentEquipment(equipSlot)
             If oldItem IsNot Nothing Then
-                character.Items.Inventory.Add(oldItem)
+                Character.Items.Inventory.Add(oldItem)
             End If
-            WorldData.CharacterEquipSlot.Write(Id, equipSlot.Id, item.Id)
-            character.EnqueueMessage(Nothing, $"You equip {item.Name} to {equipSlot.Name}.")
+            WorldData.Character.EquipSlot.Write(Id, equipSlot.Id, item.Id)
+            Character.EnqueueMessage(Nothing, $"You equip {item.Name} to {equipSlot.Name}.")
             Return
         End If
         character.EnqueueMessage(Nothing, $"You cannot equip {item.Name}!")

@@ -2,7 +2,6 @@
     Implements IWorldData
     Private ReadOnly Store As IStore
     Public ReadOnly Property Character As ICharacterData Implements IWorldData.Character
-    Public ReadOnly Property CharacterEquipSlot As ICharacterEquipSlotData Implements IWorldData.CharacterEquipSlot
     Public ReadOnly Property CharacterLocation As ICharacterLocationData Implements IWorldData.CharacterLocation
     Public ReadOnly Property CharacterQuestCompletion As ICharacterQuestCompletionData Implements IWorldData.CharacterQuestCompletion
     Public ReadOnly Property CharacterQuest As ICharacterQuestData Implements IWorldData.CharacterQuest
@@ -55,7 +54,6 @@
         Me.Store = store
         Me.Events = events
         Character = New CharacterData(store, Me)
-        CharacterEquipSlot = New CharacterEquipSlotData(store, Me)
         CharacterLocation = New CharacterLocationData(store, Me)
         CharacterQuestCompletion = New CharacterQuestCompletionData(store, Me)
         CharacterQuest = New CharacterQuestData(store, Me)

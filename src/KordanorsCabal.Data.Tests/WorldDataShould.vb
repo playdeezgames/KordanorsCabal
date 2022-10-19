@@ -5,7 +5,6 @@ Public Class WorldDataShould
         Dim checker As New Mock(Of IEventData)
         Dim subject As IWorldData = New WorldData(store.Object, checker.Object)
         subject.Character.ShouldNotBeNull
-        subject.CharacterEquipSlot.ShouldNotBeNull
         subject.CharacterLocation.ShouldNotBeNull
         subject.CharacterQuestCompletion.ShouldNotBeNull
         subject.CharacterQuest.ShouldNotBeNull

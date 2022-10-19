@@ -8,7 +8,7 @@
     End Sub
     Protected ReadOnly Property EquippedItems As IEnumerable(Of IItem)
         Get
-            Return WorldData.CharacterEquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
+            Return WorldData.Character.EquipSlot.ReadItemsForCharacter(Id).Select(Function(x) Item.FromId(WorldData, x))
         End Get
     End Property
     Protected Function RollDice(dice As Long) As Long

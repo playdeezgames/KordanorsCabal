@@ -20,7 +20,7 @@
     End Function
 
     Public Sub Clear(itemId As Long) Implements IItemData.Clear
-        World.CharacterEquipSlot.ClearForItem(itemId)
+        World.Character.EquipSlot.ClearForItem(itemId)
         World.InventoryItem.ClearForItem(itemId)
         World.ItemStatistic.ClearForItem(itemId)
         Store.Clear.ForValue(

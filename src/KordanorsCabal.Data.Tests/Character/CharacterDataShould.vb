@@ -1,4 +1,4 @@
-﻿Public Class CharacterData_should
+﻿Public Class CharacterDataShould
     Inherits WorldDataSubobjectTests(Of ICharacterData)
 
     Public Sub New()
@@ -96,6 +96,13 @@
                                  Tables.Characters,
                                  (Columns.LocationIdColumn, locationId),
                                  (Columns.CharacterIdColumn, characterId)))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_equip_slot_subobject()
+        WithSubobject(
+            Sub(store, checker, subject)
+                subject.EquipSlot.ShouldNotBeNull
             End Sub)
     End Sub
 End Class

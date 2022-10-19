@@ -44,10 +44,16 @@
             (LocationIdColumn, locationId))
     End Function
 
+    Public ReadOnly Property EquipSlot As ICharacterEquipSlotData Implements ICharacterData.EquipSlot
+        Get
+            Return New CharacterEquipSlotData(Store, World)
+        End Get
+    End Property
+
     Public Sub Clear(characterId As Long) Implements ICharacterData.Clear
         World.CharacterQuest.ClearForCharacter(characterId)
         World.CharacterQuestCompletion.ClearForCharacter(characterId)
-        World.CharacterEquipSlot.ClearForCharacter(characterId)
+        EquipSlot.ClearForCharacter(characterId)
         World.Inventory.ClearForCharacter(characterId)
         World.CharacterLocation.ClearForCharacter(characterId)
         World.CharacterStatistic.ClearForCharacter(characterId)

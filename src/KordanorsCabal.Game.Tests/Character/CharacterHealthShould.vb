@@ -8,10 +8,10 @@
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(0)
-                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.NeedsHealing.ShouldBeFalse
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 12))
-                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(id))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub

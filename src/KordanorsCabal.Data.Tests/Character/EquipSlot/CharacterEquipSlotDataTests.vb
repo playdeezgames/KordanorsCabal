@@ -4,7 +4,7 @@ Public Class CharacterEquipSlotDataTests
     Inherits WorldDataSubobjectTests(Of ICharacterEquipSlotData)
 
     Public Sub New()
-        MyBase.New(Function(x) x.CharacterEquipSlot)
+        MyBase.New(Function(x) x.Character.EquipSlot)
     End Sub
 
     <Fact>

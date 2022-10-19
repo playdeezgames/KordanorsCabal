@@ -20,7 +20,7 @@
             Sub(worldData, id, subject)
                 worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long))).Returns(0)
-                worldData.Setup(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(It.IsAny(Of Long)))
                 subject.RollPower().ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 5))
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 18))
@@ -30,7 +30,7 @@
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(18))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(19))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(22))
-                worldData.Verify(Function(x) x.CharacterEquipSlot.ReadItemsForCharacter(id))
+                worldData.Verify(Function(x) x.Character.EquipSlot.ReadItemsForCharacter(id))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
