@@ -87,4 +87,11 @@
                 subject.Usage.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub decay()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Decay()
+            End Sub)
+    End Sub
 End Class

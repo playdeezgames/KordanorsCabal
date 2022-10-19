@@ -393,6 +393,13 @@
                         $"Food heals up to {healRoll} HP!",
                         $"You now have {character.Health.Current} HP!")
                     End If
+                End Sub},
+            {"LocationDecayItems",
+                Sub(worldData, parms)
+                    Dim location = Game.Location.FromId(worldData, parms(0))
+                    For Each item In location.Inventory.Items
+                        item.Decay()
+                    Next
                 End Sub}
         }
     Public Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms() As Long) Implements IEventData.Perform

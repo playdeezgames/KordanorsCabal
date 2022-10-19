@@ -27,6 +27,11 @@
     Public Sub Destroy() Implements IItem.Destroy
         WorldData.Item.Clear(Id)
     End Sub
+
+    Public Sub Decay() Implements IItem.Decay
+        'TODO: something!
+    End Sub
+
     Public ReadOnly Property Weapon As IWeapon Implements IItem.Weapon
         Get
             Return Game.Weapon.FromId(WorldData, Id)

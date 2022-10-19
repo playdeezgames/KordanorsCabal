@@ -11,4 +11,5 @@
 
     Sub Purify()
     Sub Destroy()
+    Sub Decay()
 End Interface
