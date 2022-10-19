@@ -1,4 +1,4 @@
-﻿Friend Module ItemTypeBopulator
+﻿Friend Module ItemTypePopulator
     Friend Const ItemType1 = 1
     Friend Const ItemType2 = 2
     Friend Const ItemType3 = 3

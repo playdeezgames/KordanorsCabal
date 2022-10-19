@@ -400,6 +400,12 @@
                     For Each item In location.Inventory.Items
                         item.Decay()
                     Next
+                End Sub},
+            {"FoodDecay",
+                Sub(worldData, parms)
+                    If RNG.RollDice("1d2") = 1 Then
+                        worldData.Item.WriteItemType(parms(0), 35L)
+                    End If
                 End Sub}
         }
     Public Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms() As Long) Implements IEventData.Perform
