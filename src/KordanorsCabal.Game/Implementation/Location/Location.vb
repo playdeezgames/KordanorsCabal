@@ -25,6 +25,11 @@
     Shared Function FromId(worldData As IWorldData, locationId As Long?) As ILocation
         Return If(locationId.HasValue, New Location(worldData, locationId.Value), Nothing)
     End Function
+
+    Public Sub DecayItems() Implements ILocation.DecayItems
+        'TODO: something
+    End Sub
+
     ReadOnly Property Feature As IFeature Implements ILocation.Feature
         Get
             Return Game.Feature.FromId(WorldData, WorldData.Feature.ReadForLocation(Id))

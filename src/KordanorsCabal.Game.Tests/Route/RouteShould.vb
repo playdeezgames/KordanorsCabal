@@ -52,15 +52,18 @@
             Sub(worldData, id, subject)
                 Const characterId = 2L
                 Const routeTypeId = 3L
+                Const locationId = 4L
                 worldData.Setup(Function(x) x.Route.ReadRouteType(It.IsAny(Of Long))).Returns(routeTypeId)
                 worldData.Setup(Function(x) x.RouteTypeLock.ReadUnlockItem(It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.RouteType.ReadIsSingleUse(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Character.ReadLocation(It.IsAny(Of Long))).Returns(locationId)
                 subject.Move(Character.FromId(worldData.Object, characterId))
                 worldData.Verify(Function(x) x.Route.ReadRouteType(id))
                 worldData.Verify(Function(x) x.Route.ReadToLocation(id))
                 worldData.Verify(Function(x) x.RouteTypeLock.ReadUnlockItem(routeTypeId))
                 worldData.Verify(Function(x) x.RouteType.ReadIsSingleUse(routeTypeId))
                 worldData.Verify(Function(x) x.Player.Read())
+                worldData.Verify(Function(x) x.Character.ReadLocation(characterId))
             End Sub)
     End Sub
 End Class

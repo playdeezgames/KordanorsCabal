@@ -7,4 +7,5 @@
     ReadOnly Property Statistics As ILocationStatistics
     ReadOnly Property Factions As ILocationFactions
     ReadOnly Property Feature As IFeature
+    Sub DecayItems()
 End Interface

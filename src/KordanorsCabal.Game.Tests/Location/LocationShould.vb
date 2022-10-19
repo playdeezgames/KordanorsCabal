@@ -63,4 +63,11 @@
                 subject.Factions.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub decay_items()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.DecayItems()
+            End Sub)
+    End Sub
 End Class

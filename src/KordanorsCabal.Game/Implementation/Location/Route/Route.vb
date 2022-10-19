@@ -48,6 +48,7 @@
                 RouteType = RouteType.UnlockedRouteType
                 Play(Sfx.UnlockDoor)
             End If
+            player.Movement.Location.DecayItems()
             Dim destination = ToLocation
             If RouteType.IsSingleUse Then
                 Destroy()
