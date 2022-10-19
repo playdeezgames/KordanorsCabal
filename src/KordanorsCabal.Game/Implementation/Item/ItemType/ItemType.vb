@@ -14,20 +14,6 @@
             Return If(WorldData.ItemType.ReadIsConsumed(Id), 0) > 0
         End Get
     End Property
-    ReadOnly Property SpawnLocationTypes(dungeonLevel As IDungeonLevel) As HashSet(Of ILocationType) Implements IItemType.SpawnLocationTypes
-        Get
-            Dim results = WorldData.ItemTypeSpawnLocationType.ReadAll(Id, dungeonLevel.Id)
-            If results Is Nothing Then
-                Return New HashSet(Of ILocationType)
-            End If
-            Return New HashSet(Of ILocationType)(results.Select(Function(x) LocationType.FromId(WorldData, x)))
-        End Get
-    End Property
-    Private ReadOnly Property SpawnCounts(dungeonLevel As IDungeonLevel) As String
-        Get
-            Return WorldData.ItemTypeSpawnCount.Read(Id, dungeonLevel.Id)
-        End Get
-    End Property
     Private ReadOnly Property ItemTypeStatistic(itemTypeStatisticType As IItemTypeStatisticType) As Long?
         Get
             Return WorldData.ItemTypeStatistic.Read(Id, itemTypeStatisticType.Id)
@@ -154,9 +140,6 @@
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItemType.EquippedBuff
         Return WorldData.ItemTypeCharacterStatisticBuff.Read(Id, statisticType.Id)
     End Function
-    Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long Implements IItemType.RollSpawnCount
-        Return RNG.RollDice(SpawnCounts(dungeonLevel))
-    End Function
     ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean Implements IItemType.HasOffer
         Get
             Return boughtAt.Contains(shoppeType.Id)
@@ -182,6 +165,13 @@
             Return WorldData.ItemTypeEvent.Read(Id, DecayEventId)
         End Get
     End Property
+
+    Public ReadOnly Property Spawn As IItemTypeSpawn Implements IItemType.Spawn
+        Get
+            Return ItemTypeSpawn.FromId(WorldData, Id)
+        End Get
+    End Property
+
     Public Sub Decay(item As IItem) Implements IItemType.Decay
         Dim result As Action(Of IWorldData, IItem) = Nothing
         Dim eventName = DecayActionName

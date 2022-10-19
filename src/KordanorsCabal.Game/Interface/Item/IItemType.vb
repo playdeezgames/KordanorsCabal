@@ -3,9 +3,7 @@
     ReadOnly Property Name As String
     ReadOnly Property IsConsumed As Boolean
     ReadOnly Property Encumbrance As Long
-    'spawn
-    ReadOnly Property SpawnLocationTypes(dungeonLevel As IDungeonLevel) As HashSet(Of ILocationType)
-    Function RollSpawnCount(dungeonLevel As IDungeonLevel) As Long
+    ReadOnly Property Spawn As IItemTypeSpawn
     'equipment
     ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot)
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?

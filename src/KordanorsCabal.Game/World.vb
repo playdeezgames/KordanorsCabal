@@ -161,7 +161,7 @@ Public Module World
     End Sub
 
     Private Sub SpawnItem(worldData As IWorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel, itemType As IItemType)
-        Dim locationTypes = itemType.SpawnLocationTypes(dungeonLevel)
+        Dim locationTypes = itemType.Spawn.SpawnLocationTypes(dungeonLevel)
         If locationTypes.Any Then
             Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Select(Function(y) y.Id).Contains(x.LocationType.Id)))
             spawnLocation.Inventory.Add(Item.Create(worldData, itemType.Id))
@@ -175,7 +175,7 @@ Public Module World
 
     Private Sub PopulateItems(worldData As IWorldData, locations As IReadOnlyList(Of ILocation), dungeonLevel As IDungeonLevel)
         For Each itemType In AllItemTypes(worldData)
-            Dim itemCount As Long = itemType.RollSpawnCount(dungeonLevel)
+            Dim itemCount As Long = itemType.Spawn.RollSpawnCount(dungeonLevel)
             While itemCount > 0
                 itemCount -= 1
                 SpawnItem(worldData, locations, dungeonLevel, itemType)
