@@ -112,120 +112,6 @@ Public Module Populator
         PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType24, "Base Lift", "Base Lift", 0, 0, 99999)
         PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType25, "Bonus Lift", "Bonus Lift", 0, 0, 99999)
     End Sub
-    Sub PopulateItemTypesRecord(connection As SqliteConnection, ItemTypeId As Long, ItemTypeName As String, IsConsumed As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypes}]([{Columns.ItemTypeIdColumn}], [{Columns.ItemTypeNameColumn}], [{Columns.IsConsumedColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.ItemTypeNameColumn}, @{Columns.IsConsumedColumn});", connection)
-            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
-            command.Parameters.AddWithValue($"@{Columns.ItemTypeNameColumn}", ItemTypeName)
-            command.Parameters.AddWithValue($"@{Columns.IsConsumedColumn}", IsConsumed)
-            command.ExecuteNonQuery()
-        End Using
-    End Sub
-    Friend Const ItemType1 = 1
-    Friend Const ItemType2 = 2
-    Friend Const ItemType3 = 3
-    Friend Const ItemType4 = 4
-    Friend Const ItemType5 = 5
-    Friend Const ItemType6 = 6
-    Friend Const ItemType7 = 7
-    Friend Const ItemType8 = 8
-    Friend Const ItemType9 = 9
-    Friend Const ItemType10 = 10
-    Friend Const ItemType11 = 11
-    Friend Const ItemType12 = 12
-    Friend Const ItemType13 = 13
-    Friend Const ItemType14 = 14
-    Friend Const ItemType15 = 15
-    Friend Const ItemType16 = 16
-    Friend Const ItemType17 = 17
-    Friend Const ItemType18 = 18
-    Friend Const ItemType19 = 19
-    Friend Const ItemType20 = 20
-    Friend Const ItemType21 = 21
-    Friend Const ItemType22 = 22
-    Friend Const ItemType23 = 23
-    Friend Const ItemType24 = 24
-    Friend Const ItemType25 = 25
-    Friend Const ItemType26 = 26
-    Friend Const ItemType27 = 27
-    Friend Const ItemType28 = 28
-    Friend Const ItemType29 = 29
-    Friend Const ItemType30 = 30
-    Friend Const ItemType31 = 31
-    Friend Const ItemType32 = 32
-    Friend Const ItemType33 = 33
-    Friend Const ItemType34 = 34
-    Friend Const ItemType35 = 35
-    Friend Const ItemType36 = 36
-    Friend Const ItemType37 = 37
-    Friend Const ItemType38 = 38
-    Friend Const ItemType39 = 39
-    Friend Const ItemType40 = 40
-    Friend Const ItemType41 = 41
-    Friend Const ItemType42 = 42
-    Friend Const ItemType43 = 43
-    Friend Const ItemType44 = 44
-    Friend Const ItemType45 = 45
-    Friend Const ItemType46 = 46
-    Friend Const ItemType47 = 47
-    Friend Const ItemType48 = 48
-    Friend Const ItemType49 = 49
-    Friend Const ItemType50 = 50
-    Friend Const ItemType51 = 51
-    Friend Const ItemType52 = 52
-    Sub PopulateItemTypes(connection As SqliteConnection)
-        PopulateItemTypesRecord(connection, 1, "FE Key", 1)
-        PopulateItemTypesRecord(connection, 2, "CU Key", 1)
-        PopulateItemTypesRecord(connection, 3, "AG Key", 1)
-        PopulateItemTypesRecord(connection, 4, "AU Key", 1)
-        PopulateItemTypesRecord(connection, 5, "PT Key", 1)
-        PopulateItemTypesRecord(connection, 6, "Elemental Orb", 0)
-        PopulateItemTypesRecord(connection, 7, "Potion", 1)
-        PopulateItemTypesRecord(connection, 8, "Goblin Ear", 1)
-        PopulateItemTypesRecord(connection, 9, "Skull Fragment", 1)
-        PopulateItemTypesRecord(connection, 10, "Dagger", 1)
-        PopulateItemTypesRecord(connection, 11, "Earth Shard", 0)
-        PopulateItemTypesRecord(connection, 12, "Water Shard", 0)
-        PopulateItemTypesRecord(connection, 13, "Fire Shard", 0)
-        PopulateItemTypesRecord(connection, 14, "Air Shard", 0)
-        PopulateItemTypesRecord(connection, 15, "Shield", 1)
-        PopulateItemTypesRecord(connection, 16, "Helmet", 1)
-        PopulateItemTypesRecord(connection, 17, "Chainmail", 1)
-        PopulateItemTypesRecord(connection, 18, "Shortsword", 1)
-        PopulateItemTypesRecord(connection, 19, "Brodesode", 1)
-        PopulateItemTypesRecord(connection, 20, "Platemail", 1)
-        PopulateItemTypesRecord(connection, 21, "Rat Tail", 1)
-        PopulateItemTypesRecord(connection, 22, "Holy ""Water""", 1)
-        PopulateItemTypesRecord(connection, 23, "Town Portal", 1)
-        PopulateItemTypesRecord(connection, 24, "Food", 1)
-        PopulateItemTypesRecord(connection, 25, "Magic Egg", 1)
-        PopulateItemTypesRecord(connection, 26, "Beer", 1)
-        PopulateItemTypesRecord(connection, 27, "Trousers", 1)
-        PopulateItemTypesRecord(connection, 28, "Pr0n Scroll", 1)
-        PopulateItemTypesRecord(connection, 29, "Moon Portal", 1)
-        PopulateItemTypesRecord(connection, 30, "Empty Bottle", 1)
-        PopulateItemTypesRecord(connection, 31, "Book of Holy Bolt", 1)
-        PopulateItemTypesRecord(connection, 32, "Membership Card", 1)
-        PopulateItemTypesRecord(connection, 33, "Bong", 1)
-        PopulateItemTypesRecord(connection, 34, """Herb""", 1)
-        PopulateItemTypesRecord(connection, 35, "Food", 1)
-        PopulateItemTypesRecord(connection, 36, "Mushroom", 1)
-        PopulateItemTypesRecord(connection, 37, "Rotten Egg", 1)
-        PopulateItemTypesRecord(connection, 38, "Zombie Taint", 1)
-        PopulateItemTypesRecord(connection, 39, "Lotion", 1)
-        PopulateItemTypesRecord(connection, 40, "Bat Wing", 1)
-        PopulateItemTypesRecord(connection, 41, "Snake Fang", 1)
-        PopulateItemTypesRecord(connection, 42, "Shoe Laces", 1)
-        PopulateItemTypesRecord(connection, 43, "Spacesord", 1)
-        PopulateItemTypesRecord(connection, 44, "Horns of Kordanor", 1)
-        PopulateItemTypesRecord(connection, 45, "Amulet of HP", 1)
-        PopulateItemTypesRecord(connection, 46, "Ring of HP", 1)
-        PopulateItemTypesRecord(connection, 47, "Book of Purify", 1)
-        PopulateItemTypesRecord(connection, 48, "Amulet of STR", 1)
-        PopulateItemTypesRecord(connection, 49, "Amulet of DEX", 1)
-        PopulateItemTypesRecord(connection, 50, "Amulet of POW", 1)
-        PopulateItemTypesRecord(connection, 51, "Amulet of Mana", 1)
-        PopulateItemTypesRecord(connection, 52, "Amulet of Yendor", 1)
-    End Sub
     Sub PopulateCharacterTypeBribesRecord(connection As SqliteConnection, CharacterTypeId As Long, ItemTypeId As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeBribes}]([{Columns.CharacterTypeIdColumn}], [{Columns.ItemTypeIdColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.ItemTypeIdColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
@@ -644,65 +530,17 @@ Public Module Populator
             command.ExecuteNonQuery()
         End Using
     End Sub
+    Friend Const ShoppeType1 = 1L
+    Friend Const ShoppeType2 = 2L
+    Friend Const ShoppeType3 = 3L
+    Friend Const ShoppeType4 = 4L
+    Friend Const ShoppeType5 = 5L
     Sub PopulateShoppeTypes(connection As SqliteConnection)
-        PopulateShoppeTypesRecord(connection, 1, "Magic")
-        PopulateShoppeTypesRecord(connection, 2, "Blacksmith")
-        PopulateShoppeTypesRecord(connection, 3, "Innkeeper")
-        PopulateShoppeTypesRecord(connection, 4, "Healer")
-        PopulateShoppeTypesRecord(connection, 5, "Black Market")
-    End Sub
-    Sub PopulateItemTypeShopTypesRecord(connection As SqliteConnection, ItemTypeId As Long, ShoppeTypeId As Long, TransactionTypeId As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeShopTypes}]([{Columns.ItemTypeIdColumn}], [{Columns.ShoppeTypeIdColumn}], [{Columns.TransactionTypeIdColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.ShoppeTypeIdColumn}, @{Columns.TransactionTypeIdColumn});", connection)
-            command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
-            command.Parameters.AddWithValue($"@{Columns.ShoppeTypeIdColumn}", ShoppeTypeId)
-            command.Parameters.AddWithValue($"@{Columns.TransactionTypeIdColumn}", TransactionTypeId)
-            command.ExecuteNonQuery()
-        End Using
-    End Sub
-    Sub PopulateItemTypeShopTypes(connection As SqliteConnection)
-        PopulateItemTypeShopTypesRecord(connection, 7, 4, 2)
-        PopulateItemTypeShopTypesRecord(connection, 8, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 9, 1, 1)
-        PopulateItemTypeShopTypesRecord(connection, 10, 2, 1)
-        PopulateItemTypeShopTypesRecord(connection, 10, 2, 2)
-        PopulateItemTypeShopTypesRecord(connection, 10, 2, 3)
-        PopulateItemTypeShopTypesRecord(connection, 15, 2, 1)
-        PopulateItemTypeShopTypesRecord(connection, 15, 2, 2)
-        PopulateItemTypeShopTypesRecord(connection, 15, 2, 3)
-        PopulateItemTypeShopTypesRecord(connection, 16, 2, 1)
-        PopulateItemTypeShopTypesRecord(connection, 16, 2, 2)
-        PopulateItemTypeShopTypesRecord(connection, 16, 2, 3)
-        PopulateItemTypeShopTypesRecord(connection, 17, 2, 1)
-        PopulateItemTypeShopTypesRecord(connection, 17, 2, 2)
-        PopulateItemTypeShopTypesRecord(connection, 17, 2, 3)
-        PopulateItemTypeShopTypesRecord(connection, 18, 2, 1)
-        PopulateItemTypeShopTypesRecord(connection, 18, 2, 2)
-        PopulateItemTypeShopTypesRecord(connection, 18, 2, 3)
-        PopulateItemTypeShopTypesRecord(connection, 19, 2, 1)
-        PopulateItemTypeShopTypesRecord(connection, 19, 2, 2)
-        PopulateItemTypeShopTypesRecord(connection, 29, 2, 3)
-        PopulateItemTypeShopTypesRecord(connection, 20, 2, 1)
-        PopulateItemTypeShopTypesRecord(connection, 20, 2, 2)
-        PopulateItemTypeShopTypesRecord(connection, 20, 2, 3)
-        PopulateItemTypeShopTypesRecord(connection, 21, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 22, 4, 2)
-        PopulateItemTypeShopTypesRecord(connection, 23, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 24, 3, 2)
-        PopulateItemTypeShopTypesRecord(connection, 25, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 26, 3, 2)
-        PopulateItemTypeShopTypesRecord(connection, 27, 5, 2)
-        PopulateItemTypeShopTypesRecord(connection, 28, 5, 2)
-        PopulateItemTypeShopTypesRecord(connection, 29, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 31, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 33, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 34, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 36, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 38, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 39, 5, 2)
-        PopulateItemTypeShopTypesRecord(connection, 40, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 41, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 47, 1, 2)
-        PopulateItemTypeShopTypesRecord(connection, 52, 5, 2)
+        PopulateShoppeTypesRecord(connection, ShoppeType1, "Magic")
+        PopulateShoppeTypesRecord(connection, ShoppeType2, "Blacksmith")
+        PopulateShoppeTypesRecord(connection, ShoppeType3, "Innkeeper")
+        PopulateShoppeTypesRecord(connection, ShoppeType4, "Healer")
+        PopulateShoppeTypesRecord(connection, ShoppeType5, "Black Market")
     End Sub
     Sub PopulateItemTypeSpawnCountsRecord(connection As SqliteConnection, ItemTypeId As Long, DungeonLevelId As Long, SpawnDice As String)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeSpawnCounts}]([{Columns.ItemTypeIdColumn}], [{Columns.DungeonLevelIdColumn}], [{Columns.SpawnDiceColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.DungeonLevelIdColumn}, @{Columns.SpawnDiceColumn});", connection)
