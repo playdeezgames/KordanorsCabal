@@ -1,6 +1,4 @@
-﻿Imports SQLitePCL
-
-Public Class CharacterEquipSlotDataTests
+﻿Public Class CharacterEquipSlotDataShould
     Inherits WorldDataSubobjectTests(Of ICharacterEquipSlotData)
 
     Public Sub New()
