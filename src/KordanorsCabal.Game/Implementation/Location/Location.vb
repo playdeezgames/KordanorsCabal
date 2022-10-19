@@ -27,7 +27,7 @@
     End Function
 
     Public Sub DecayItems() Implements ILocation.DecayItems
-        'TODO: something
+        WorldData.Events.Perform(WorldData, "LocationDecayItems", Id)
     End Sub
 
     ReadOnly Property Feature As IFeature Implements ILocation.Feature

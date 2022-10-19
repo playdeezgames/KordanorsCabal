@@ -57,6 +57,7 @@
                 worldData.Setup(Function(x) x.RouteTypeLock.ReadUnlockItem(It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.RouteType.ReadIsSingleUse(It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.Character.ReadLocation(It.IsAny(Of Long))).Returns(locationId)
+                worldData.Setup(Sub(x) x.Events.Perform(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
                 subject.Move(Character.FromId(worldData.Object, characterId))
                 worldData.Verify(Function(x) x.Route.ReadRouteType(id))
                 worldData.Verify(Function(x) x.Route.ReadToLocation(id))
@@ -64,6 +65,7 @@
                 worldData.Verify(Function(x) x.RouteType.ReadIsSingleUse(routeTypeId))
                 worldData.Verify(Function(x) x.Player.Read())
                 worldData.Verify(Function(x) x.Character.ReadLocation(characterId))
+                worldData.Verify(Sub(x) x.Events.Perform(worldData.Object, "LocationDecayItems", {locationId}))
             End Sub)
     End Sub
 End Class

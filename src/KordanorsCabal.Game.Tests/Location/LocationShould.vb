@@ -67,7 +67,9 @@
     Sub decay_items()
         WithSubject(
             Sub(worldData, id, subject)
+                worldData.Setup(Sub(x) x.Events.Perform(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
                 subject.DecayItems()
+                worldData.Verify(Sub(x) x.Events.Perform(worldData.Object, "LocationDecayItems", {id}))
             End Sub)
     End Sub
 End Class
