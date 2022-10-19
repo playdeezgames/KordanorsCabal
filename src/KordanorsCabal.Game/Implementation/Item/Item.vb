@@ -29,7 +29,7 @@
     End Sub
 
     Public Sub Decay() Implements IItem.Decay
-        'TODO: something!
+        ItemType.Decay(Me)
     End Sub
 
     Public ReadOnly Property Weapon As IWeapon Implements IItem.Weapon

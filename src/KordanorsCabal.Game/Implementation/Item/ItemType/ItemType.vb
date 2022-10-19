@@ -99,9 +99,10 @@
                 ReadForTransactionType(Id, RepairTransactionTypeId)
         End Get
     End Property
-    Const UseEventId = 3L
-    Const CanUseEventId = 2L
     Const PurifyEventId = 1L
+    Const CanUseEventId = 2L
+    Const UseEventId = 3L
+    Const DecayEventId = 4L
     Private ReadOnly Property UseActionName As String
         Get
             Return WorldData.ItemTypeEvent.Read(Id, UseEventId)
@@ -175,5 +176,17 @@
            worldData As IWorldData,
            itemTypeId As Long)
         MyBase.New(worldData, itemTypeId)
+    End Sub
+    Private ReadOnly Property DecayActionName As String
+        Get
+            Return WorldData.ItemTypeEvent.Read(Id, DecayEventId)
+        End Get
+    End Property
+    Public Sub Decay(item As IItem) Implements IItemType.Decay
+        Dim result As Action(Of IWorldData, IItem) = Nothing
+        Dim eventName = DecayActionName
+        If eventName IsNot Nothing Then
+            WorldData.Events.Perform(WorldData, eventName, item.Id)
+        End If
     End Sub
 End Class

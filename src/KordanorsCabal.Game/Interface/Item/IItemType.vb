@@ -17,6 +17,7 @@
     Sub Use(character As ICharacter)
     Function CanUse(character As ICharacter) As Boolean
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
+    Sub Decay(item As IItem)
     ReadOnly Property IsWeapon As Boolean
     ReadOnly Property IsArmor As Boolean
     ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean

@@ -220,4 +220,27 @@
                 worldData.Verify(Function(x) x.ItemTypeShopType.ReadForTransactionType(itemTypeId, 3))
             End Sub)
     End Sub
+    <Fact>
+    Sub decay_items_no_event()
+        WithSubject(
+            Sub(worldData, itemTypeId, subject)
+                Const itemId = 2L
+                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.Decay(Game.Item.FromId(worldData.Object, itemId))
+                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 4L))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub decay_items_with_event()
+        WithSubject(
+            Sub(worldData, itemTypeId, subject)
+                Const itemId = 2L
+                Const eventName = "three"
+                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(eventName)
+                worldData.Setup(Sub(x) x.Events.Perform(It.IsAny(Of IWorldData), It.IsAny(Of String), It.IsAny(Of Long())))
+                subject.Decay(Game.Item.FromId(worldData.Object, itemId))
+                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 4L))
+                worldData.Verify(Sub(x) x.Events.Perform(worldData.Object, eventName, itemId))
+            End Sub)
+    End Sub
 End Class
