@@ -99,4 +99,13 @@
                 worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 4L))
             End Sub)
     End Sub
+    <Fact>
+    Sub have_an_inventory()
+        WithSubject(
+            Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.InventoryItem.ReadForItem(It.IsAny(Of Long)))
+                subject.Inventory.ShouldBeNull
+                worldData.Verify(Function(x) x.InventoryItem.ReadForItem(id))
+            End Sub)
+    End Sub
 End Class

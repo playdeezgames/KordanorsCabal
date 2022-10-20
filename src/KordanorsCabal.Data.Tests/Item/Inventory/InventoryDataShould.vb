@@ -1,10 +1,10 @@
-﻿Public Class InventoryDataTests
+﻿Public Class InventoryDataShould
     Inherits WorldDataSubobjectTests(Of IInventoryData)
     Sub New()
         MyBase.New(Function(x) x.Inventory)
     End Sub
     <Fact>
-    Sub ShouldClearInventoryDataForAGivenCharacter()
+    Sub ClearInventoryDataForAGivenCharacter()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
@@ -18,7 +18,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldCreateInventoryForAGivenCharacter()
+    Sub CreateInventoryForAGivenCharacter()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
@@ -32,7 +32,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldCreateInventoryForAGivenLocation()
+    Sub CreateInventoryForAGivenLocation()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim locationId = 1L
@@ -46,7 +46,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheStoreForInventoryDataForAGivenCharacter()
+    Sub QueryTheStoreForInventoryDataForAGivenCharacter()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
@@ -61,18 +61,33 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheStoreForInventoryDataForAGivenLocation()
+    Sub QueryTheStoreForInventoryDataForAGivenLocation()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
                 subject.ReadForLocation(characterId).ShouldBeNull
                 store.Verify(
-                Sub(x) x.Column.ReadValue(Of Long, Long)(
-                    It.IsAny(Of Action),
-                    Tables.Inventories,
-                    Columns.InventoryIdColumn,
-                    (Columns.LocationIdColumn, characterId)))
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
+                        It.IsAny(Of Action),
+                        Tables.Inventories,
+                        Columns.InventoryIdColumn,
+                        (Columns.LocationIdColumn, characterId)))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub fetch_location_associated_with_inventory()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const inventoryId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
+                subject.ReadLocation(inventoryId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
+                        It.IsAny(Of Action),
+                        Tables.Inventories,
+                        Columns.LocationIdColumn,
+                        (Columns.InventoryIdColumn, inventoryId)))
             End Sub)
     End Sub
 End Class

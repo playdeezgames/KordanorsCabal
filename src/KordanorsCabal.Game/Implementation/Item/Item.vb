@@ -62,4 +62,10 @@
             Return Game.Usage.FromId(WorldData, Id)
         End Get
     End Property
+
+    Public ReadOnly Property Inventory As IInventory Implements IItem.Inventory
+        Get
+            Return Game.Inventory.FromId(WorldData, WorldData.InventoryItem.ReadForItem(Id))
+        End Get
+    End Property
 End Class

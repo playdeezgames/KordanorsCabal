@@ -4,8 +4,8 @@
     Sub New(worldData As IWorldData, inventoryId As Long)
         MyBase.New(worldData, inventoryId)
     End Sub
-    Shared Function FromId(worldData As IWorldData, inventoryId As Long) As IInventory
-        Return New Inventory(worldData, inventoryId)
+    Shared Function FromId(worldData As IWorldData, inventoryId As Long?) As IInventory
+        Return If(inventoryId.HasValue, New Inventory(worldData, inventoryId.Value), Nothing)
     End Function
     ReadOnly Property IsEmpty As Boolean Implements IInventory.IsEmpty
         Get
@@ -28,6 +28,12 @@
     ReadOnly Property TotalEncumbrance As Long Implements IInventory.TotalEncumbrance
         Get
             Return Items.Sum(Function(x) x.ItemType.Encumbrance)
+        End Get
+    End Property
+
+    Public ReadOnly Property Location As ILocation Implements IInventory.Location
+        Get
+            Return Game.Location.FromId(WorldData, WorldData.Inventory.ReadLocation(Id))
         End Get
     End Property
 End Class

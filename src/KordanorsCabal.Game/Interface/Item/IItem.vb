@@ -12,4 +12,5 @@
     Sub Purify()
     Sub Destroy()
     Sub Decay()
+    ReadOnly Property Inventory As IInventory
 End Interface

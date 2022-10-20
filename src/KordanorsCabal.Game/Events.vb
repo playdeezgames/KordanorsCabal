@@ -406,6 +406,16 @@
                     If RNG.RollDice("1d2") = 1 Then
                         worldData.Item.WriteItemType(parms(0), 35L)
                     End If
+                End Sub},
+            {"RottenFoodDecay",
+                Sub(worldData, parms)
+                    If RNG.RollDice("1d2") = 1 Then
+                        Dim item = Game.Item.FromId(worldData, parms(0))
+                        Dim location = item.Inventory.Location
+                        Dim initialStatistics = CharacterType.FromId(worldData, Constants.CharacterTypes.Rat).Spawning.InitialStatistics()
+                        Game.Character.Create(worldData, CharacterType.FromId(worldData, Constants.CharacterTypes.Rat), location, initialStatistics)
+                        item.Destroy()
+                    End If
                 End Sub}
         }
     Public Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms() As Long) Implements IEventData.Perform

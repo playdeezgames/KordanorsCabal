@@ -36,4 +36,12 @@
             InventoryIdColumn,
             (LocationIdColumn, locationId))
     End Function
+
+    Public Function ReadLocation(inventoryId As Long) As Long? Implements IInventoryData.ReadLocation
+        Return Store.Column.ReadValue(Of Long, Long)(
+            AddressOf NoInitializer,
+            Inventories,
+            LocationIdColumn,
+            (InventoryIdColumn, inventoryId))
+    End Function
 End Class

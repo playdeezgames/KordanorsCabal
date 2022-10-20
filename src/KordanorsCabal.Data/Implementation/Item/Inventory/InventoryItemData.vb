@@ -26,4 +26,12 @@
             InventoryItems,
             (ItemIdColumn, itemId))
     End Sub
+
+    Public Function ReadForItem(itemId As Long) As Long? Implements IInventoryItemData.ReadForItem
+        Return Store.Column.ReadValue(Of Long, Long)(
+            AddressOf NoInitializer,
+            Tables.InventoryItems,
+            Columns.InventoryIdColumn,
+            (Columns.ItemIdColumn, itemId))
+    End Function
 End Class
