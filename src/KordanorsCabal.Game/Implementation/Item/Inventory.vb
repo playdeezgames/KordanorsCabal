@@ -30,7 +30,6 @@
             Return Items.Sum(Function(x) x.ItemType.Encumbrance)
         End Get
     End Property
-
     Public ReadOnly Property Location As ILocation Implements IInventory.Location
         Get
             Return Game.Location.FromId(WorldData, WorldData.Inventory.ReadLocation(Id))
