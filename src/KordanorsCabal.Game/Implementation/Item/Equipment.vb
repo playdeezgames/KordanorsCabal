@@ -10,15 +10,15 @@
     End Function
     ReadOnly Property CanEquip As Boolean Implements IEquipment.CanEquip
         Get
-            Return Item.FromId(WorldData, Id).ItemType.EquipSlots.Any
+            Return Item.FromId(WorldData, Id).ItemType.Equip.EquipSlots.Any
         End Get
     End Property
     ReadOnly Property EquipSlots() As IEnumerable(Of IEquipSlot) Implements IEquipment.EquipSlots
         Get
-            Return Item.FromId(WorldData, Id).ItemType.EquipSlots
+            Return Item.FromId(WorldData, Id).ItemType.Equip.EquipSlots
         End Get
     End Property
     Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IEquipment.EquippedBuff
-        Return Item.FromId(WorldData, Id).ItemType.EquippedBuff(statisticType)
+        Return Item.FromId(WorldData, Id).ItemType.Equip.EquippedBuff(statisticType)
     End Function
 End Class

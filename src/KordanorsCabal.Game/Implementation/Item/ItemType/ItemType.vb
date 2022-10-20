@@ -59,11 +59,6 @@
             Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 8)), 0)
         End Get
     End Property
-    ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot) Implements IItemType.EquipSlots
-        Get
-            Return WorldData.ItemTypeEquipSlot.ReadForItemType(Id).Select(Function(x) EquipSlot.FromId(WorldData, x))
-        End Get
-    End Property
     Private Const OfferTransactionTypeId = 1L
     Private Const PriceTransactionTypeId = 2L
     Private Const RepairTransactionTypeId = 3L
@@ -137,9 +132,6 @@
             Return DefendDice > 0
         End Get
     End Property
-    Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItemType.EquippedBuff
-        Return WorldData.ItemTypeCharacterStatisticBuff.Read(Id, statisticType.Id)
-    End Function
     ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean Implements IItemType.HasOffer
         Get
             Return boughtAt.Contains(shoppeType.Id)

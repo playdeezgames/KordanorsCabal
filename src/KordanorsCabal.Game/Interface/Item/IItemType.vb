@@ -5,9 +5,6 @@
     ReadOnly Property Encumbrance As Long
     ReadOnly Property Spawn As IItemTypeSpawn
     ReadOnly Property Equip As IItemTypeEquip
-    'equipment
-    ReadOnly Property EquipSlots As IEnumerable(Of IEquipSlot)
-    Function EquippedBuff(statisticType As ICharacterStatisticType) As Long?
     'attacking
     ReadOnly Property AttackDice As Long
     ReadOnly Property IsWeapon As Boolean
