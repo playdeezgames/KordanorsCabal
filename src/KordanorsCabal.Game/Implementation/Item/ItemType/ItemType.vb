@@ -172,6 +172,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property Equip As IItemTypeEquip Implements IItemType.Equip
+        Get
+            Return ItemTypeEquip.FromId(WorldData, Id)
+        End Get
+    End Property
+
     Public Sub Decay(item As IItem) Implements IItemType.Decay
         Dim result As Action(Of IWorldData, IItem) = Nothing
         Dim eventName = DecayActionName

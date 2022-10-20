@@ -229,4 +229,11 @@
                 subject.Spawn.ShouldNotBeNull
             End Sub)
     End Sub
+    <Fact>
+    Sub have_equip_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Equip.ShouldNotBeNull
+            End Sub)
+    End Sub
 End Class
