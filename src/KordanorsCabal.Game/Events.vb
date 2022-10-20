@@ -403,7 +403,7 @@
                 End Sub},
             {"FoodDecay",
                 Sub(worldData, parms)
-                    If RNG.RollDice("1d2") = 1 Then
+                    If RNG.RollDice("1d3") = 1 Then
                         worldData.Item.WriteItemType(parms(0), 35L)
                     End If
                 End Sub},
@@ -411,9 +411,11 @@
                 Sub(worldData, parms)
                     If RNG.RollDice("1d2") = 1 Then
                         Dim item = Game.Item.FromId(worldData, parms(0))
-                        Dim location = item.Inventory.Location
-                        Dim initialStatistics = CharacterType.FromId(worldData, Constants.CharacterTypes.Rat).Spawning.InitialStatistics()
-                        Game.Character.Create(worldData, CharacterType.FromId(worldData, Constants.CharacterTypes.Rat), location, initialStatistics)
+                        If RNG.RollDice("1d2") = 1 Then
+                            Dim location = item.Inventory.Location
+                            Dim initialStatistics = CharacterType.FromId(worldData, Constants.CharacterTypes.Rat).Spawning.InitialStatistics()
+                            Game.Character.Create(worldData, CharacterType.FromId(worldData, Constants.CharacterTypes.Rat), location, initialStatistics)
+                        End If
                         item.Destroy()
                     End If
                 End Sub}
