@@ -14,49 +14,34 @@
             Return If(WorldData.ItemType.ReadIsConsumed(Id), 0) > 0
         End Get
     End Property
-    Private ReadOnly Property ItemTypeStatistic(itemTypeStatisticType As IItemTypeStatisticType) As Long?
+    Friend Shared ReadOnly Property ItemTypeStatistic(WorldData As IWorldData, Id As Long, itemTypeStatisticType As IItemTypeStatisticType) As Long?
         Get
             Return WorldData.ItemTypeStatistic.Read(Id, itemTypeStatisticType.Id)
         End Get
     End Property
     ReadOnly Property Encumbrance As Long Implements IItemType.Encumbrance
         Get
-            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 1)), 0)
-        End Get
-    End Property
-    ReadOnly Property AttackDice As Long Implements IItemType.AttackDice
-        Get
-            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 2)), 0)
-        End Get
-    End Property
-    ReadOnly Property MaximumDamage As Long? Implements IItemType.MaximumDamage
-        Get
-            Return ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 3))
-        End Get
-    End Property
-    ReadOnly Property DefendDice As Long Implements IItemType.DefendDice
-        Get
-            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 4)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 1)), 0)
         End Get
     End Property
     ReadOnly Property MaximumDurability As Long? Implements IItemType.MaximumDurability
         Get
-            Return ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 5))
+            Return ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 5))
         End Get
     End Property
     ReadOnly Property Offer As Long Implements IItemType.Offer
         Get
-            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 6)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 6)), 0)
         End Get
     End Property
     ReadOnly Property Price As Long Implements IItemType.Price
         Get
-            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 7)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 7)), 0)
         End Get
     End Property
     ReadOnly Property RepairPrice As Long Implements IItemType.RepairPrice
         Get
-            Return If(ItemTypeStatistic(ItemTypeStatisticType.FromId(WorldData, 8)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 8)), 0)
         End Get
     End Property
     Private Const OfferTransactionTypeId = 1L
@@ -120,18 +105,6 @@
         End If
         Return False
     End Function
-
-    Public ReadOnly Property IsWeapon As Boolean Implements IItemType.IsWeapon
-        Get
-            Return AttackDice > 0
-        End Get
-    End Property
-
-    Public ReadOnly Property IsArmor As Boolean Implements IItemType.IsArmor
-        Get
-            Return DefendDice > 0
-        End Get
-    End Property
     ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean Implements IItemType.HasOffer
         Get
             Return boughtAt.Contains(shoppeType.Id)
@@ -167,6 +140,12 @@
     Public ReadOnly Property Equip As IItemTypeEquip Implements IItemType.Equip
         Get
             Return ItemTypeEquip.FromId(WorldData, Id)
+        End Get
+    End Property
+
+    Public ReadOnly Property Combat As IItemTypeCombat Implements IItemType.Combat
+        Get
+            Return ItemTypeCombat.FromId(WorldData, Id)
         End Get
     End Property
 

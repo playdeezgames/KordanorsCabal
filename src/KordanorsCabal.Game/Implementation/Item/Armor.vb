@@ -11,12 +11,12 @@
     End Function
     ReadOnly Property IsArmor() As Boolean Implements IArmor.IsArmor
         Get
-            Return Item.FromId(WorldData, Id).ItemType.IsArmor
+            Return Item.FromId(WorldData, Id).ItemType.Combat.IsArmor
         End Get
     End Property
     ReadOnly Property DefendDice As Long Implements IArmor.DefendDice
         Get
-            Return Item.FromId(WorldData, Id).ItemType.DefendDice
+            Return Item.FromId(WorldData, Id).ItemType.Combat.DefendDice
         End Get
     End Property
 End Class

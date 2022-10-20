@@ -5,13 +5,7 @@
     ReadOnly Property Encumbrance As Long
     ReadOnly Property Spawn As IItemTypeSpawn
     ReadOnly Property Equip As IItemTypeEquip
-    'attacking
-    ReadOnly Property AttackDice As Long
-    ReadOnly Property IsWeapon As Boolean
-    ReadOnly Property MaximumDamage As Long?
-    'defending
-    ReadOnly Property DefendDice As Long
-    ReadOnly Property IsArmor As Boolean
+    ReadOnly Property Combat As IItemTypeCombat
     'offers
     ReadOnly Property Offer As Long
     ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean

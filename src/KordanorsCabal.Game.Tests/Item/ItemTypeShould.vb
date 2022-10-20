@@ -29,39 +29,12 @@
             End Sub)
     End Sub
     <Fact>
-    Sub item_types_have_attack_dice()
-        WithSubject(
-            Sub(worldData, itemTypeId, subject)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.AttackDice.ShouldBe(0L)
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 2))
-            End Sub)
-    End Sub
-    <Fact>
     Sub item_types_have_encumbrance()
         WithSubject(
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Encumbrance.ShouldBe(0L)
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 1))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub item_types_have_maximum_damage()
-        WithSubject(
-            Sub(worldData, itemTypeId, subject)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.MaximumDamage.ShouldBeNull
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 3))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub item_types_have_defend_dice()
-        WithSubject(
-            Sub(worldData, itemTypeId, subject)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.DefendDice.ShouldBe(0L)
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4))
             End Sub)
     End Sub
     <Fact>
@@ -133,24 +106,6 @@
             End Sub)
     End Sub
     <Fact>
-    Sub item_types_has_is_weapon_determiner()
-        WithSubject(
-            Sub(worldData, itemTypeId, subject)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.IsWeapon.ShouldBeFalse
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 2))
-            End Sub)
-    End Sub
-    <Fact>
-    Sub item_types_has_is_armor_determiner()
-        WithSubject(
-            Sub(worldData, itemTypeId, subject)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.IsArmor.ShouldBeFalse
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4))
-            End Sub)
-    End Sub
-    <Fact>
     Sub item_types_has_offer_determiner()
         WithSubject(
             Sub(worldData, itemTypeId, subject)
@@ -215,6 +170,13 @@
         WithSubject(
             Sub(worldData, id, subject)
                 subject.Equip.ShouldNotBeNull
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_combat_subobject()
+        WithSubject(
+            Sub(worldData, id, subject)
+                subject.Combat.ShouldNotBeNull
             End Sub)
     End Sub
 End Class
