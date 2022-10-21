@@ -12,6 +12,7 @@
                 worldData.Setup(Function(x) x.ItemType.ReadName(It.IsAny(Of Long)))
                 subject.Name.ShouldBeNull
                 worldData.Verify(Function(x) x.Item.ReadItemType(id))
+                worldData.Verify(Function(x) x.Item.ReadName(id))
                 worldData.Verify(Function(x) x.ItemType.ReadName(itemTypeId))
             End Sub)
     End Sub

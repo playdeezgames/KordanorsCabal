@@ -24,6 +24,7 @@
                 worldData.Setup(Function(x) x.ItemType.ReadName(It.IsAny(Of Long)))
                 subject.Equip(Item.FromId(worldData.Object, itemId))
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
+                worldData.Verify(Function(x) x.Item.ReadName(itemId))
                 worldData.Verify(Function(x) x.ItemTypeEquipSlot.ReadForItemType(itemTypeId))
                 worldData.Verify(Function(x) x.ItemType.ReadName(itemTypeId))
                 worldData.Verify(Function(x) x.Player.Read())

@@ -1,4 +1,4 @@
-﻿Public Class ItemDataTests
+﻿Public Class ItemDataShould
     Inherits WorldDataSubobjectTests(Of IItemData)
     Sub New()
         MyBase.New(Function(x) x.Item)
@@ -46,7 +46,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub items_can_have_their_item_type_written_into_the_data_store()
+    Sub have_their_item_type_written_into_the_data_store()
         WithSubobject(
             Sub(store, checker, subject)
                 Const itemId = 1L
@@ -59,6 +59,21 @@
                     Tables.Items,
                     (Columns.ItemTypeIdColumn, itemTypeId),
                     (Columns.ItemIdColumn, itemId)))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_a_name()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const itemId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
+                subject.ReadName(itemId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.Column.ReadString(
+                        It.IsAny(Of Action),
+                        Tables.Items,
+                        Columns.ItemNameColumn,
+                        (Columns.ItemIdColumn, itemId)))
             End Sub)
     End Sub
 End Class

@@ -36,4 +36,12 @@
             (ItemTypeIdColumn, itemType),
             (ItemIdColumn, itemId))
     End Sub
+
+    Public Function ReadName(itemId As Long) As String Implements IItemData.ReadName
+        Return Store.Column.ReadString(
+            AddressOf NoInitializer,
+            Tables.Items,
+            Columns.ItemNameColumn,
+            (Columns.ItemIdColumn, itemId))
+    End Function
 End Class
