@@ -12,5 +12,6 @@
     Sub Purify()
     Sub Destroy()
     Sub Decay()
+    ReadOnly Property Lore As ILore
     ReadOnly Property Inventory As IInventory
 End Interface

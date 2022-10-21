@@ -108,4 +108,13 @@
                 worldData.Verify(Function(x) x.InventoryItem.ReadForItem(id))
             End Sub)
     End Sub
+    <Fact>
+    Sub have_lore()
+        WithSubject(
+            Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.ItemLore.ReadForItem(It.IsAny(Of Long)))
+                subject.Lore.ShouldBeNull
+                worldData.Verify(Function(x) x.ItemLore.ReadForItem(id))
+            End Sub)
+    End Sub
 End Class

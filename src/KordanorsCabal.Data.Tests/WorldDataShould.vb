@@ -52,6 +52,7 @@ Public Class WorldDataShould
         subject.SpellType.ShouldNotBeNull
         subject.SpellTypeRequiredPower.ShouldNotBeNull
         subject.Events.ShouldNotBeNull
+        subject.ItemLore.ShouldNotBeNull
         store.VerifyNoOtherCalls()
         checker.VerifyNoOtherCalls()
     End Sub

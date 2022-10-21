@@ -52,4 +52,5 @@
     Sub Reset()
     Function Renew() As IBacker
     Sub Restore(oldBacker As IBacker)
+    ReadOnly Property ItemLore As IItemLoreData
 End Interface

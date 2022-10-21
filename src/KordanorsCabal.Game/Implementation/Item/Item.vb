@@ -68,4 +68,11 @@
             Return Game.Inventory.FromId(WorldData, WorldData.InventoryItem.ReadForItem(Id))
         End Get
     End Property
+
+    Public ReadOnly Property Lore As ILore Implements IItem.Lore
+        Get
+            Dim loreId As Long? = WorldData.ItemLore.ReadForItem(Id)
+            Return Game.Lore.FromId(WorldData, loreId)
+        End Get
+    End Property
 End Class

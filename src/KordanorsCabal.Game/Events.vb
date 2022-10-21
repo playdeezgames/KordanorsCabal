@@ -422,6 +422,7 @@
             {"ReadScroll",
                 Sub(worldData, parms)
                     Dim item = Game.Item.FromId(worldData, parms(0))
+                    Dim lore = item.Lore
                     'does item have lore associated?
                     'no? associate lore
                     'give message containing lore

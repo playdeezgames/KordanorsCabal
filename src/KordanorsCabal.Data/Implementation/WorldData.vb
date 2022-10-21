@@ -50,6 +50,8 @@
     Public ReadOnly Property RouteTypeLock As IRouteTypeLockData Implements IWorldData.RouteTypeLock
     Public ReadOnly Property ItemStatisticType As IItemStatisticTypeData Implements IWorldData.ItemStatisticType
 
+    Public ReadOnly Property ItemLore As IItemLoreData Implements IWorldData.ItemLore
+
     Public Sub New(store As IStore, events As IEventData)
         Me.Store = store
         Me.Events = events
@@ -100,6 +102,7 @@
         ShoppeType = New ShoppeTypeData(store, Me)
         SpellType = New SpellTypeData(store, Me)
         SpellTypeRequiredPower = New SpellTypeRequiredPowerData(store, Me)
+        ItemLore = New ItemLoreData(store, Me)
     End Sub
 
     Public Sub Save(filename As String) Implements IWorldData.Save
