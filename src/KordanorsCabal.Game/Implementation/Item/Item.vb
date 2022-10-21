@@ -17,6 +17,7 @@
     End Property
     Public ReadOnly Property Name As String Implements IItem.Name
         Get
+            'if the item has been given a name, use that instead!
             Return ItemType.Name
         End Get
     End Property

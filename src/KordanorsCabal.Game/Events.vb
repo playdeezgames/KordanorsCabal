@@ -421,11 +421,13 @@
                 End Sub},
             {"ReadScroll",
                 Sub(worldData, parms)
-                    Dim item = Game.Item.FromId(worldData, parms(0))
-                    Dim lore = item.Lore
-                    'does item have lore associated?
-                    'no? associate lore
-                    'give message containing lore
+                    Dim character = Game.Character.FromId(worldData, parms(0))
+                    'Dim item = Game.Item.FromId(worldData, parms(1))
+                    'Dim lore = item.Lore
+                    'If lore Is Nothing Then
+                    '    'no? associate lore
+                    'End If
+                    ''give message containing lore
                 End Sub}
         }
     Public Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms() As Long) Implements IEventData.Perform
