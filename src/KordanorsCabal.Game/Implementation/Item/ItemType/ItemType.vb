@@ -91,10 +91,10 @@
             WorldData.Events.Perform(WorldData, eventName, item.Id)
         End If
     End Sub
-    Sub Use(character As ICharacter) Implements IItemType.Use
+    Sub Use(character As ICharacter, item As IItem) Implements IItemType.Use
         Dim eventName = UseActionName
         If eventName IsNot Nothing Then
-            WorldData.Events.Perform(WorldData, eventName, character.Id)
+            WorldData.Events.Perform(WorldData, eventName, character.Id, item.Id)
         End If
     End Sub
 
