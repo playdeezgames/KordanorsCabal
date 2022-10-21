@@ -48,7 +48,83 @@ Public Module Populator
         PopulateFeatures(connection)
         PopulateLocationStatistics(connection)
         PopulateRoutes(connection)
+        PopulateLores(connection)
+        PopulateItemLores(connection)
     End Sub
+
+    Private Sub PopulateItemLores(connection As SqliteConnection)
+    End Sub
+    Friend Const LoreType1 = 1L
+    Friend Const LoreType2 = 2L
+    Friend Const LoreType3 = 3L
+    Friend Const LoreType4 = 4L
+    Friend Const LoreType5 = 5L
+    Friend Const LoreType6 = 6L
+    Friend Const LoreType7 = 7L
+    Friend Const LoreType8 = 8L
+    Friend Const LoreType9 = 9L
+    Friend Const LoreType10 = 10L
+    Friend Const LoreType11 = 11L
+    Friend Const LoreType12 = 12L
+    Friend Const LoreType13 = 13L
+    Friend Const LoreType14 = 14L
+    Friend Const LoreType15 = 15L
+    Friend Const LoreType16 = 16L
+    Friend Const LoreType17 = 17L
+    Friend Const LoreType18 = 18L
+    Friend Const LoreType19 = 19L
+    Friend Const LoreType20 = 20L
+    Friend Const LoreType21 = 21L
+    Friend Const LoreType22 = 22L
+    Friend Const LoreType23 = 23L
+    Friend Const LoreType24 = 24L
+    Friend Const LoreType25 = 25L
+    Private Sub PopulateLores(connection As SqliteConnection)
+        PopulateLoreRecord(connection, LoreType1, "Lore #1")
+        PopulateLoreRecord(connection, LoreType2, "Lore #2")
+        PopulateLoreRecord(connection, LoreType3, "Lore #3")
+        PopulateLoreRecord(connection, LoreType4, "Lore #4")
+        PopulateLoreRecord(connection, LoreType5, "Lore #5")
+        PopulateLoreRecord(connection, LoreType6, "Lore #6")
+        PopulateLoreRecord(connection, LoreType7, "Lore #7")
+        PopulateLoreRecord(connection, LoreType8, "Lore #8")
+        PopulateLoreRecord(connection, LoreType9, "Lore #9")
+        PopulateLoreRecord(connection, LoreType10, "Lore #10")
+        PopulateLoreRecord(connection, LoreType11, "Lore #11")
+        PopulateLoreRecord(connection, LoreType12, "Lore #12")
+        PopulateLoreRecord(connection, LoreType13, "Lore #13")
+        PopulateLoreRecord(connection, LoreType14, "Lore #14")
+        PopulateLoreRecord(connection, LoreType15, "Lore #15")
+        PopulateLoreRecord(connection, LoreType16, "Lore #16")
+        PopulateLoreRecord(connection, LoreType17, "Lore #17")
+        PopulateLoreRecord(connection, LoreType18, "Lore #18")
+        PopulateLoreRecord(connection, LoreType19, "Lore #19")
+        PopulateLoreRecord(connection, LoreType20, "Lore #20")
+        PopulateLoreRecord(connection, LoreType21, "Lore #21")
+        PopulateLoreRecord(connection, LoreType22, "Lore #22")
+        PopulateLoreRecord(connection, LoreType23, "Lore #23")
+        PopulateLoreRecord(connection, LoreType24, "Lore #24")
+        PopulateLoreRecord(connection, LoreType25, "Lore #25")
+    End Sub
+
+    Private Sub PopulateLoreRecord(connection As SqliteConnection, loreId As Long, loreText As String)
+        Using command = New SqliteCommand(
+            $"INSERT INTO [{Tables.Lores}]
+            (
+                [{Columns.LoreIdColumn}], 
+                [{Columns.LoreTextColumn}]
+            ) 
+            VALUES 
+            (
+                @{Columns.LoreIdColumn}, 
+                @{Columns.LoreTextColumn}
+            );", connection)
+            command.Parameters.AddWithValue($"@{Columns.LoreIdColumn}", loreId)
+            command.Parameters.AddWithValue($"@{Columns.LoreTextColumn}", loreText)
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
+
     Sub PopulateRouteTypesRecord(connection As SqliteConnection, RouteTypeId As Long, Abbreviation As String, IsSingleUse As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.RouteTypes}]([{Columns.RouteTypeIdColumn}], [{Columns.AbbreviationColumn}], [{Columns.IsSingleUseColumn}]) VALUES (@{Columns.RouteTypeIdColumn}, @{Columns.AbbreviationColumn}, @{Columns.IsSingleUseColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.RouteTypeIdColumn}", RouteTypeId)

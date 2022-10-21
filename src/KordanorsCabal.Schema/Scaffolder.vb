@@ -394,8 +394,17 @@ Public Module Scaffolder
                 FOREIGN KEY([{Columns.DirectionIdColumn}]) REFERENCES [{Tables.Directions}]([{Columns.DirectionIdColumn}]),
                 FOREIGN KEY([{Columns.RouteTypeIdColumn}]) REFERENCES [{Tables.RouteTypes}]([{Columns.RouteTypeIdColumn}])
             )")
-        'ScaffoldTable(connection, $"CREATE TABLE [{Tables.}]
-        '    (
-        '    )")
+        ScaffoldTable(connection, $"CREATE TABLE [{Tables.Lores}]
+            (
+                [{Columns.LoreIdColumn}] INTEGER PRIMARY KEY,
+                [{Columns.LoreTextColumn}] TEXT NOT NULL
+            )")
+        ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemLores}]
+            (
+                [{Columns.LoreIdColumn}] INT NOT NULL UNIQUE,
+                [{Columns.ItemIdColumn}] INT NOT NULL UNIQUE,
+                FOREIGN KEY ([{Columns.LoreIdColumn}]) REFERENCES [{Tables.Lores}]([{Columns.LoreIdColumn}]),
+                FOREIGN KEY ([{Columns.ItemIdColumn}]) REFERENCES [{Tables.Items}]([{Columns.ItemIdColumn}])
+            )")
     End Sub
 End Module

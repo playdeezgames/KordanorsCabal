@@ -47,6 +47,8 @@ Public Module Columns
     Public Const LocationStatisticTypeIdColumn = "LocationStatisticTypeId"
     Public Const LocationTypeIdColumn = "LocationTypeId"
     Public Const LocationTypeNameColumn = "LocationTypeName"
+    Public Const LoreIdColumn = "LoreId"
+    Public Const LoreTextColumn = "LoreText"
     Public Const MaximumLevelColumn = "MaximumLevel"
     Public Const MaximumValueColumn = "MaximumValue"
     Public Const MinimumValueColumn = "MinimumValue"
