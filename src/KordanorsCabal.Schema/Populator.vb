@@ -80,47 +80,50 @@ Public Module Populator
     Friend Const LoreType24 = 24L
     Friend Const LoreType25 = 25L
     Private Sub PopulateLores(connection As SqliteConnection)
-        PopulateLoreRecord(connection, LoreType1, "Lore #1")
-        PopulateLoreRecord(connection, LoreType2, "Lore #2")
-        PopulateLoreRecord(connection, LoreType3, "Lore #3")
-        PopulateLoreRecord(connection, LoreType4, "Lore #4")
-        PopulateLoreRecord(connection, LoreType5, "Lore #5")
-        PopulateLoreRecord(connection, LoreType6, "Lore #6")
-        PopulateLoreRecord(connection, LoreType7, "Lore #7")
-        PopulateLoreRecord(connection, LoreType8, "Lore #8")
-        PopulateLoreRecord(connection, LoreType9, "Lore #9")
-        PopulateLoreRecord(connection, LoreType10, "Lore #10")
-        PopulateLoreRecord(connection, LoreType11, "Lore #11")
-        PopulateLoreRecord(connection, LoreType12, "Lore #12")
-        PopulateLoreRecord(connection, LoreType13, "Lore #13")
-        PopulateLoreRecord(connection, LoreType14, "Lore #14")
-        PopulateLoreRecord(connection, LoreType15, "Lore #15")
-        PopulateLoreRecord(connection, LoreType16, "Lore #16")
-        PopulateLoreRecord(connection, LoreType17, "Lore #17")
-        PopulateLoreRecord(connection, LoreType18, "Lore #18")
-        PopulateLoreRecord(connection, LoreType19, "Lore #19")
-        PopulateLoreRecord(connection, LoreType20, "Lore #20")
-        PopulateLoreRecord(connection, LoreType21, "Lore #21")
-        PopulateLoreRecord(connection, LoreType22, "Lore #22")
-        PopulateLoreRecord(connection, LoreType23, "Lore #23")
-        PopulateLoreRecord(connection, LoreType24, "Lore #24")
-        PopulateLoreRecord(connection, LoreType25, "Lore #25")
+        PopulateLoreRecord(connection, LoreType1, "Lore #1", "Lore #1")
+        PopulateLoreRecord(connection, LoreType2, "Lore #2", "Lore #2")
+        PopulateLoreRecord(connection, LoreType3, "Lore #3", "Lore #3")
+        PopulateLoreRecord(connection, LoreType4, "Lore #4", "Lore #4")
+        PopulateLoreRecord(connection, LoreType5, "Lore #5", "Lore #5")
+        PopulateLoreRecord(connection, LoreType6, "Lore #6", "Lore #6")
+        PopulateLoreRecord(connection, LoreType7, "Lore #7", "Lore #7")
+        PopulateLoreRecord(connection, LoreType8, "Lore #8", "Lore #8")
+        PopulateLoreRecord(connection, LoreType9, "Lore #9", "Lore #9")
+        PopulateLoreRecord(connection, LoreType10, "Lore #10", "Lore #10")
+        PopulateLoreRecord(connection, LoreType11, "Lore #11", "Lore #11")
+        PopulateLoreRecord(connection, LoreType12, "Lore #12", "Lore #12")
+        PopulateLoreRecord(connection, LoreType13, "Lore #13", "Lore #13")
+        PopulateLoreRecord(connection, LoreType14, "Lore #14", "Lore #14")
+        PopulateLoreRecord(connection, LoreType15, "Lore #15", "Lore #15")
+        PopulateLoreRecord(connection, LoreType16, "Lore #16", "Lore #16")
+        PopulateLoreRecord(connection, LoreType17, "Lore #17", "Lore #17")
+        PopulateLoreRecord(connection, LoreType18, "Lore #18", "Lore #18")
+        PopulateLoreRecord(connection, LoreType19, "Lore #19", "Lore #19")
+        PopulateLoreRecord(connection, LoreType20, "Lore #20", "Lore #20")
+        PopulateLoreRecord(connection, LoreType21, "Lore #21", "Lore #21")
+        PopulateLoreRecord(connection, LoreType22, "Lore #22", "Lore #22")
+        PopulateLoreRecord(connection, LoreType23, "Lore #23", "Lore #23")
+        PopulateLoreRecord(connection, LoreType24, "Lore #24", "Lore #24")
+        PopulateLoreRecord(connection, LoreType25, "Lore #25", "Lore #25")
     End Sub
 
-    Private Sub PopulateLoreRecord(connection As SqliteConnection, loreId As Long, loreText As String)
+    Private Sub PopulateLoreRecord(connection As SqliteConnection, loreId As Long, itemName As String, loreText As String)
         Using command = New SqliteCommand(
             $"INSERT INTO [{Tables.Lores}]
             (
                 [{Columns.LoreIdColumn}], 
+                [{Columns.ItemNameColumn}],
                 [{Columns.LoreTextColumn}]
             ) 
             VALUES 
             (
                 @{Columns.LoreIdColumn}, 
+                @{Columns.ItemNameColumn}, 
                 @{Columns.LoreTextColumn}
             );", connection)
             command.Parameters.AddWithValue($"@{Columns.LoreIdColumn}", loreId)
             command.Parameters.AddWithValue($"@{Columns.LoreTextColumn}", loreText)
+            command.Parameters.AddWithValue($"@{Columns.ItemNameColumn}", itemName)
             command.ExecuteNonQuery()
         End Using
     End Sub
@@ -239,10 +242,11 @@ Public Module Populator
     End Sub
     Sub PopulatePlayers(connection As SqliteConnection)
     End Sub
-    Sub PopulateItemsRecord(connection As SqliteConnection, ItemId As Long, ItemTypeId As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.Items}]([{Columns.ItemIdColumn}], [{Columns.ItemTypeIdColumn}]) VALUES (@{Columns.ItemIdColumn}, @{Columns.ItemTypeIdColumn});", connection)
+    Sub PopulateItemsRecord(connection As SqliteConnection, ItemId As Long, ItemTypeId As Long, ItemName As String)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.Items}]([{Columns.ItemIdColumn}], [{Columns.ItemTypeIdColumn}], [{Columns.ItemNameColumn}]) VALUES (@{Columns.ItemIdColumn}, @{Columns.ItemTypeIdColumn}, @{Columns.ItemNameColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.ItemIdColumn}", ItemId)
             command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
+            command.Parameters.AddWithValue($"@{Columns.ItemNameColumn}", If(ItemName Is Nothing, CObj(DBNull.Value), CObj(ItemName)))
             command.ExecuteNonQuery()
         End Using
     End Sub

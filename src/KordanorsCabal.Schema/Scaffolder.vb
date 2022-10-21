@@ -292,6 +292,7 @@ Public Module Scaffolder
             (
                 [{Columns.ItemIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
                 [{Columns.ItemTypeIdColumn}] INT NOT NULL,
+                [{Columns.ItemNameColumn}] TEXT NULL,
 				FOREIGN KEY ([{Columns.ItemTypeIdColumn}]) REFERENCES [{Tables.ItemTypes}]([{Columns.ItemTypeIdColumn}])
             )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.CharacterEquipSlots}]
@@ -397,6 +398,7 @@ Public Module Scaffolder
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.Lores}]
             (
                 [{Columns.LoreIdColumn}] INTEGER PRIMARY KEY,
+                [{Columns.ItemNameColumn}] TEXT NOT NULL,
                 [{Columns.LoreTextColumn}] TEXT NOT NULL
             )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemLores}]
