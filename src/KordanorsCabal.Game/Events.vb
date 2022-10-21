@@ -418,6 +418,13 @@
                         End If
                         item.Destroy()
                     End If
+                End Sub},
+            {"ReadScroll",
+                Sub(worldData, parms)
+                    Dim item = Game.Item.FromId(worldData, parms(0))
+                    'does item have lore associated?
+                    'no? associate lore
+                    'give message containing lore
                 End Sub}
         }
     Public Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms() As Long) Implements IEventData.Perform

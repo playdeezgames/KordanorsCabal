@@ -45,7 +45,7 @@ Public Module Patterns
             New PatternBitmap(2, 2, 2, 2, 2, 2, 126, 0),
             New PatternBitmap(66, 102, 90, 90, 66, 66, 66, 0),
             New PatternBitmap(66, 70, 74, 82, 98, 66, 66, 0),
-            New PatternBitmap(24, 36, 66, 66, 66, 36, 24, 0),
+            New PatternBitmap(36, 24, 36, 66, 66, 36, 24, 0),
             New PatternBitmap(62, 66, 66, 62, 2, 2, 2, 0),
             New PatternBitmap(24, 36, 66, 66, 82, 36, 88, 0),
             New PatternBitmap(62, 66, 66, 62, 18, 34, 66, 0),

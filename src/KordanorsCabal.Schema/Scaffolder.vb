@@ -394,5 +394,8 @@ Public Module Scaffolder
                 FOREIGN KEY([{Columns.DirectionIdColumn}]) REFERENCES [{Tables.Directions}]([{Columns.DirectionIdColumn}]),
                 FOREIGN KEY([{Columns.RouteTypeIdColumn}]) REFERENCES [{Tables.RouteTypes}]([{Columns.RouteTypeIdColumn}])
             )")
+        'ScaffoldTable(connection, $"CREATE TABLE [{Tables.}]
+        '    (
+        '    )")
     End Sub
 End Module
