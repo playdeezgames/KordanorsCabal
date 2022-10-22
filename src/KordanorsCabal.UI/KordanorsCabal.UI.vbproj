@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Import Include="KordanorsCabal.Data" />
     <Import Include="KordanorsCabal.Game" />
+    <Import Include="KordanorsCabal.Schema" />
     <Import Include="SPLORR.UI" />
   </ItemGroup>
 

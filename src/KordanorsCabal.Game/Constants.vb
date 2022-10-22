@@ -44,6 +44,5 @@
         Public Const Immobilization = 23L
         Public Const BaseLift = 24L
         Public Const BonusLift = 25L
-        Public Const ItemType28 = 28L
     End Class
 End Class

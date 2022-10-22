@@ -31,6 +31,8 @@
 
   <ItemGroup>
     <Import Include="KordanorsCabal.Data" />
+    <Import Include="KordanorsCabal.Game.My" />
+    <Import Include="KordanorsCabal.Schema" />
     <Import Include="SPLORR.Data" />
     <Import Include="SPLORR.Game" />
   </ItemGroup>

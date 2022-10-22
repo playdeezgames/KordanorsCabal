@@ -50,7 +50,7 @@
                 ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 1)
                 Return UIState.ShoppeBuy
             Case RestoreButtonIndex
-                player.EnqueueMessage(Nothing, $"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {ItemType.FromId(StaticWorldData.World, 33).Name} and gives you a hit of {ItemType.FromId(StaticWorldData.World, 34).Name}.")
+                player.EnqueueMessage(Nothing, $"{New FeatureType(StaticWorldData.World, 6L).Name} sparks up his {ItemType.FromId(StaticWorldData.World, ItemType33).Name} and gives you a hit of {ItemType.FromId(StaticWorldData.World, ItemType34).Name}.")
                 player.Mana.CurrentMana = player.Mana.MaximumMana
                 PushUIState(UIState.InPlay)
                 Return UIState.Message

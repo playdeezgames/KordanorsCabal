@@ -29,13 +29,13 @@
                 Function(worldData, parms)
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
-                    Return character.Items.Inventory.ItemsOfType(ItemType.FromId(worldData, 21L)).Any()
+                    Return character.Items.Inventory.ItemsOfType(ItemType.FromId(worldData, ItemType21)).Any()
                 End Function},
             {"CanLearnHolyBolt", Function(worldData, parms) Character.FromId(worldData, parms(0)).Spellbook.CanLearn(SpellType.FromId(worldData, 1L))},
             {"CanUseBeer", Function(worldData, parms)
                                Dim character = Game.Character.FromId(worldData, parms(0))
                                Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                               Return enemy Is Nothing OrElse enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, 26))
+                               Return enemy Is Nothing OrElse enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, ItemType26))
                            End Function},
             {"IsInDungeon", Function(worldData, parms) Character.FromId(worldData, parms(0)).Movement.Location.LocationType.IsDungeon},
             {"AlwaysTrue", Function(worldData, parms) True},
@@ -46,11 +46,11 @@
             {"CanUseRottenEgg", Function(worldData, parms)
                                     Dim character = Game.Character.FromId(worldData, parms(0))
                                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                                    Return (enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)))
+                                    Return (enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(Game.ItemType.FromId(worldData, ItemType37)))
                                 End Function},
             {"HasBong", Function(worldData, parms)
                             Dim character = Game.Character.FromId(worldData, parms(0))
-                            Return character.Items.Inventory.ItemsOfType(ItemType.FromId(worldData, 33)).Any
+                            Return character.Items.Inventory.ItemsOfType(ItemType.FromId(worldData, ItemType33)).Any
                         End Function},
             {"CanUseAirShard", Function(worldData, parms)
                                    Dim character = Game.Character.FromId(worldData, parms(0))
@@ -64,7 +64,7 @@
             {"CanUsePr0n", Function(worldData, parms)
                                Dim character = Game.Character.FromId(worldData, parms(0))
                                Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                               Return (enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, 28))) OrElse enemy Is Nothing
+                               Return (enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, ItemType28))) OrElse enemy Is Nothing
                            End Function},
             {"CanUseFireShard", Function(worldData, parms)
                                     Dim character = Game.Character.FromId(worldData, parms(0))
@@ -78,7 +78,7 @@
             {"CanUseBottle", Function(worldData, parms)
                                  Dim character = Game.Character.FromId(worldData, parms(0))
                                  Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                                 Return enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, 30))
+                                 Return enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, ItemType30))
                              End Function},
             {"CanLearnPurify", Function(worldData, parms)
                                    Dim character = Game.Character.FromId(worldData, parms(0))
@@ -140,7 +140,7 @@
                     Dim characterId = parms(0)
                     Dim character = Game.Character.FromId(worldData, characterId)
                     character.EnqueueMessage(Nothing, "You complete the quest!")
-                    Dim ratTails = character.Items.Inventory.ItemsOfType(ItemType.FromId(worldData, 21L)).Take(10)
+                    Dim ratTails = character.Items.Inventory.ItemsOfType(ItemType.FromId(worldData, ItemType21)).Take(10)
                     For Each ratTail In ratTails
                         character.Statuses.Money += 1
                         ratTail.Destroy()
@@ -182,7 +182,7 @@
                     Dim damageRoll = RNG.RollDice("1d4")
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String) From {
-                        $"{ItemType.FromId(worldData, 22L).Name} deals {damageRoll} HP to {enemy.CharacterType.Name}!"
+                        $"{ItemType.FromId(worldData, ItemType22).Name} deals {damageRoll} HP to {enemy.CharacterType.Name}!"
                     }
                     enemy.PhysicalCombat.DoDamage(damageRoll)
                     If enemy.Health.IsDead Then
@@ -213,14 +213,14 @@
                     Dim level = character.Movement.Location.DungeonLevel
                     Dim locations = Location.FromLocationType(worldData, LocationType.FromId(worldData, 4L)).Where(Function(x) x.DungeonLevel.Id = level.Id)
                     character.Movement.Location = RNG.FromEnumerable(locations)
-                    character.EnqueueMessage(Nothing, $"You use the {ItemType.FromId(worldData, 14L).Name} and suddenly find yerself somewhere else!")
+                    character.EnqueueMessage(Nothing, $"You use the {ItemType.FromId(worldData, ItemType14).Name} and suddenly find yerself somewhere else!")
                 End Sub},
             {"UseRottenEgg",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                    If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(Game.ItemType.FromId(worldData, 37)) Then
-                        character.EnqueueMessage(Nothing, $"You give {enemy.CharacterType.Name} the {Game.ItemType.FromId(worldData, 37).Name}, and they quickly wander off with a seeming great purpose.")
+                    If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(Game.ItemType.FromId(worldData, ItemType37)) Then
+                        character.EnqueueMessage(Nothing, $"You give {enemy.CharacterType.Name} the {Game.ItemType.FromId(worldData, ItemType37).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
                         Return
                     End If
@@ -230,8 +230,8 @@
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                    If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, 28)) Then
-                        character.EnqueueMessage(Nothing, $"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, 28).Name}, and they quickly wander off with a seeming great purpose.")
+                    If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, ItemType28)) Then
+                        character.EnqueueMessage(Nothing, $"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, ItemType28).Name}, and they quickly wander off with a seeming great purpose.")
                         enemy.Destroy()
                         Return
                     End If
@@ -242,17 +242,17 @@
                     Dim healRoll = RNG.RollDice("1d4")
                     character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Stress), -healRoll)
                     Dim lines As New List(Of String)
-                    lines.Add($"You make use of {ItemType.FromId(worldData, Constants.StatisticTypes.ItemType28).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(worldData, 7).Name}.")
+                    lines.Add($"You make use of {ItemType.FromId(worldData, ItemType28).Name}, which cheers you up by {healRoll} {CharacterStatisticType.FromId(worldData, 7).Name}.")
                     lines.Add($"You now have {character.MentalCombat.CurrentMP} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP).Name}.")
-                    Dim lotionItem = character.Items.Inventory.ItemsOfType(ItemType.FromId(worldData, 39)).FirstOrDefault
+                    Dim lotionItem = character.Items.Inventory.ItemsOfType(ItemType.FromId(worldData, ItemType39)).FirstOrDefault
                     If lotionItem Is Nothing Then
-                        lines.Add($"You also receive 10 {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Chafing).Name}. Try {ItemType.FromId(worldData, 39).Name} next time.")
+                        lines.Add($"You also receive 10 {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Chafing).Name}. Try {ItemType.FromId(worldData, ItemType39).Name} next time.")
                         character.Statuses.Chafing = 10
                     Else
-                        lines.Add($"You use a bit of {ItemType.FromId(worldData, 39).Name} to prevent {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Chafing).Name}.")
+                        lines.Add($"You use a bit of {ItemType.FromId(worldData, ItemType39).Name} to prevent {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Chafing).Name}.")
                         lotionItem.Durability.Reduce(1)
                         If lotionItem.Durability.Current = 0 Then
-                            lines.Add($"You ran out that bottle of {ItemType.FromId(worldData, 39).Name}.")
+                            lines.Add($"You ran out that bottle of {ItemType.FromId(worldData, ItemType39).Name}.")
                             lotionItem.Destroy()
                             character.Items.Inventory.Add(Item.Create(worldData, 30))
                         End If
@@ -281,16 +281,16 @@
                             {27L, 1}
                         }
                     Dim item = Game.Item.Create(worldData, RNG.FromGenerator(table))
-                    character.EnqueueMessage(Nothing, $"You crack open the {ItemType.FromId(worldData, 25).Name} and find {item.Name} inside!")
+                    character.EnqueueMessage(Nothing, $"You crack open the {ItemType.FromId(worldData, ItemType25).Name} and find {item.Name} inside!")
                     character.Items.Inventory.Add(item)
                 End Sub},
             {"UseBeer",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                    If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, 26)) Then
+                    If enemy IsNot Nothing AndAlso enemy.Items.CanBeBribedWith(ItemType.FromId(worldData, ItemType26)) Then
                         enemy.Destroy()
-                        character.EnqueueMessage(Nothing, $"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, 26).Name}, and they wander off to get drunk.")
+                        character.EnqueueMessage(Nothing, $"You give {enemy.CharacterType.Name} the {ItemType.FromId(worldData, ItemType26).Name}, and they wander off to get drunk.")
                         Return
                     End If
                     character.MentalCombat.CurrentMP = character.Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.MP)).Value
@@ -318,7 +318,7 @@
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
-                    lines.Add($"You use {ItemType.FromId(worldData, 13).Name} on {enemy.CharacterType.Name}!")
+                    lines.Add($"You use {ItemType.FromId(worldData, ItemType13).Name} on {enemy.CharacterType.Name}!")
                     Dim damage As Long = RNG.RollDice("3d4")
                     lines.Add($"You do {damage} damage!")
                     enemy.PhysicalCombat.DoDamage(damage)
@@ -346,7 +346,7 @@
                     Dim delta = character.Mana.MaximumMana - character.Mana.CurrentMana
                     character.Mana.CurrentMana = character.Mana.MaximumMana
                     character.Statuses.Highness += 10
-                    character.EnqueueMessage(Nothing, $"You use yer {ItemType.FromId(worldData, 33).Name} to smoke yer {ItemType.FromId(worldData, 34).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Mana).Name}.")
+                    character.EnqueueMessage(Nothing, $"You use yer {ItemType.FromId(worldData, ItemType33).Name} to smoke yer {ItemType.FromId(worldData, ItemType34).Name}.", $"You gain {delta} {CharacterStatisticType.FromId(worldData, Constants.StatisticTypes.Mana).Name}.")
                 End Sub},
             {"UseEarthShard",
                 Sub(worldData, parms)
@@ -355,7 +355,7 @@
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String)
                     Dim sfx As Sfx? = Nothing
-                    lines.Add($"You use {ItemType.FromId(worldData, 11).Name} on {enemy.CharacterType.Name}!")
+                    lines.Add($"You use {ItemType.FromId(worldData, ItemType11).Name} on {enemy.CharacterType.Name}!")
                     Dim immobilization As Long = character.Spellbook.RollPower()
                     lines.Add($"You immobilize {enemy.CharacterType.Name} for {immobilization} turns!")
                     enemy.Statuses.DoImmobilization(immobilization)
@@ -367,13 +367,13 @@
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     character.Mana.CurrentMana -= 1
                     character.Health.Heal()
-                    character.EnqueueMessage(Nothing, $"You use {ItemType.FromId(worldData, 12L).Name} to heal yer wounds!")
+                    character.EnqueueMessage(Nothing, $"You use {ItemType.FromId(worldData, ItemType12).Name} to heal yer wounds!")
                 End Sub},
             {"UseBottle",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
-                    character.EnqueueMessage(Nothing, $"You give the {ItemType.FromId(worldData, 30).Name} to the {enemy.CharacterType.Name}, and it wanders off happily.")
+                    character.EnqueueMessage(Nothing, $"You give the {ItemType.FromId(worldData, ItemType30).Name} to the {enemy.CharacterType.Name}, and it wanders off happily.")
                     enemy.Destroy()
                 End Sub},
             {"UseRottenFood",
