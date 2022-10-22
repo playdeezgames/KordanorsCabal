@@ -44,4 +44,12 @@
             Columns.ItemNameColumn,
             (Columns.ItemIdColumn, itemId))
     End Function
+
+    Public Sub WriteName(itemId As Long, itemName As String) Implements IItemData.WriteName
+        Store.Column.Write(
+            AddressOf NoInitializer,
+            Tables.Items,
+            (Columns.ItemNameColumn, itemName),
+            (Columns.ItemIdColumn, itemId))
+    End Sub
 End Class

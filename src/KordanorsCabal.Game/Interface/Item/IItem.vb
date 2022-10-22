@@ -1,6 +1,6 @@
 ﻿Public Interface IItem
     Inherits IBaseThingie
-    ReadOnly Property Name As String
+    Property Name As String
     ReadOnly Property ItemType As IItemType
     ReadOnly Property Weapon As IWeapon
     ReadOnly Property Durability As IDurability
@@ -12,6 +12,6 @@
     Sub Purify()
     Sub Destroy()
     Sub Decay()
-    ReadOnly Property Lore As ILore
+    Property Lore As ILore
     ReadOnly Property Inventory As IInventory
 End Interface

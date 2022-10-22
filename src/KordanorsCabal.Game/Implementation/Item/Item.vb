@@ -15,10 +15,13 @@
             Return Game.ItemType.FromId(WorldData, WorldData.Item.ReadItemType(Id))
         End Get
     End Property
-    Public ReadOnly Property Name As String Implements IItem.Name
+    Public Property Name As String Implements IItem.Name
         Get
             Return If(WorldData.Item.ReadName(Id), ItemType.Name)
         End Get
+        Set(value As String)
+            WorldData.Item.WriteName(Id, value)
+        End Set
     End Property
     Public Sub Purify() Implements IItem.Purify
         ItemType.Purify(Me)
@@ -69,10 +72,16 @@
         End Get
     End Property
 
-    Public ReadOnly Property Lore As ILore Implements IItem.Lore
+    Public Property Lore As ILore Implements IItem.Lore
         Get
-            Dim loreId As Long? = WorldData.ItemLore.ReadForItem(Id)
-            Return Game.Lore.FromId(WorldData, loreId)
+            Return Game.Lore.FromId(WorldData, WorldData.ItemLore.ReadForItem(Id))
         End Get
+        Set(value As ILore)
+            If value Is Nothing Then
+                WorldData.ItemLore.ClearForItem(Id)
+            Else
+                WorldData.ItemLore.Write(Id, value.Id)
+            End If
+        End Set
     End Property
 End Class

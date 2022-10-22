@@ -425,9 +425,16 @@
                     Dim item = Game.Item.FromId(worldData, parms(1))
                     Dim lore = item.Lore
                     If lore Is Nothing Then
-                        'no? associate lore
+                        Dim allLoreIds As HashSet(Of Long) = New HashSet(Of Long)(worldData.Lore.ReadAll())
+                        Dim allAssignedLoreIds As IEnumerable(Of Long) = worldData.ItemLore.ReadAllLore()
+                        For Each assignedLoreId In allAssignedLoreIds
+                            allLoreIds.Remove(assignedLoreId)
+                        Next
+                        lore = Game.Lore.FromId(worldData, RNG.FromEnumerable(allLoreIds))
+                        item.Lore = lore
+                        item.Name = lore.ItemName
                     End If
-                    'give message containing lore
+                    character.EnqueueMessage(Nothing, lore.Text)
                 End Sub}
         }
     Public Sub Perform(worldData As IWorldData, eventName As String, ParamArray parms() As Long) Implements IEventData.Perform

@@ -51,6 +51,7 @@
     Public ReadOnly Property ItemStatisticType As IItemStatisticTypeData Implements IWorldData.ItemStatisticType
 
     Public ReadOnly Property ItemLore As IItemLoreData Implements IWorldData.ItemLore
+    Public ReadOnly Property Lore As ILoreData Implements IWorldData.Lore
 
     Public Sub New(store As IStore, events As IEventData)
         Me.Store = store
@@ -103,6 +104,7 @@
         SpellType = New SpellTypeData(store, Me)
         SpellTypeRequiredPower = New SpellTypeRequiredPowerData(store, Me)
         ItemLore = New ItemLoreData(store, Me)
+        Lore = New LoreData(store, Me)
     End Sub
 
     Public Sub Save(filename As String) Implements IWorldData.Save

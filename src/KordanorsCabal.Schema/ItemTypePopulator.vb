@@ -286,7 +286,7 @@
         PopulateItemTypeSpawnCountsRecord(connection, ItemType48, DungeonLevel4, "1d1")
         PopulateItemTypeSpawnCountsRecord(connection, ItemType50, DungeonLevel3, "1d1")
         PopulateItemTypeSpawnCountsRecord(connection, ItemType51, DungeonLevel5, "1d1")
-        PopulateItemTypeSpawnCountsRecord(connection, ItemType53, DungeonLevel1, "125d1")
+        PopulateItemTypeSpawnCountsRecord(connection, ItemType53, DungeonLevel1, "5d1")
         PopulateItemTypeSpawnCountsRecord(connection, ItemType53, DungeonLevel2, "5d1")
         PopulateItemTypeSpawnCountsRecord(connection, ItemType53, DungeonLevel3, "5d1")
         PopulateItemTypeSpawnCountsRecord(connection, ItemType53, DungeonLevel4, "5d1")

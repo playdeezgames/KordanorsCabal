@@ -4,4 +4,5 @@
     Function ReadItemType(itemId As Long) As Long?
     Sub WriteItemType(itemId As Long, itemType As Long)
     Function ReadName(itemId As Long) As String
+    Sub WriteName(itemId As Long, itemName As String)
 End Interface

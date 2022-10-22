@@ -76,4 +76,15 @@
                         (Columns.ItemIdColumn, itemId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub set_a_name()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const itemId = 1L
+                Const itemName = "two"
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
+                subject.WriteName(itemId, itemName)
+                store.Verify(Sub(x) x.Column.Write(It.IsAny(Of Action), Tables.Items, (Columns.ItemNameColumn, itemName), (Columns.ItemIdColumn, itemId)))
+            End Sub)
+    End Sub
 End Class

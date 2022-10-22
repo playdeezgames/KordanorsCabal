@@ -1,4 +1,6 @@
-﻿Public Class ItemShould
+﻿Imports SQLitePCL
+
+Public Class ItemShould
     Inherits ThingieShould(Of IItem)
     Sub New()
         MyBase.New(AddressOf Item.FromId)
@@ -116,6 +118,35 @@
                 worldData.Setup(Function(x) x.ItemLore.ReadForItem(It.IsAny(Of Long)))
                 subject.Lore.ShouldBeNull
                 worldData.Verify(Function(x) x.ItemLore.ReadForItem(id))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub assign_lore()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const loreId = 2L
+                worldData.Setup(Sub(x) x.ItemLore.Write(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.Lore = Lore.FromId(worldData.Object, loreId)
+                worldData.Verify(Sub(x) x.ItemLore.Write(id, loreId))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub remove_lore_assignment()
+        WithSubject(
+            Sub(worldData, id, subject)
+                worldData.Setup(Sub(x) x.ItemLore.ClearForItem(It.IsAny(Of Long)))
+                subject.Lore = Nothing
+                worldData.Verify(Sub(x) x.ItemLore.ClearForItem(id))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub assign_a_name()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const itemName = "one"
+                worldData.Setup(Sub(x) x.Item.WriteName(It.IsAny(Of Long), It.IsAny(Of String)))
+                subject.Name = itemName
+                worldData.Verify(Sub(x) x.Item.WriteName(id, itemName))
             End Sub)
     End Sub
 End Class
