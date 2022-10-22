@@ -10,7 +10,7 @@
     ReadOnly Property Current As Long? Implements IDurability.Current
         Get
             If Maximum.HasValue Then
-                Return Maximum.Value - GetStatistic(ItemStatisticType.FromId(WorldData, 1))
+                Return Maximum.Value - GetStatistic(ItemStatisticType.FromId(WorldData, ItemStatisticType1))
             End If
             Return Nothing
         End Get
@@ -25,7 +25,7 @@
     End Property
     Public Sub Reduce(amount As Long) Implements IDurability.Reduce
         If Maximum.HasValue Then
-            ChangeStatistic(ItemStatisticType.FromId(WorldData, 1), amount)
+            ChangeStatistic(ItemStatisticType.FromId(WorldData, ItemStatisticType1), amount)
         End If
     End Sub
     Private Sub ChangeStatistic(statisticType As IItemStatisticType, delta As Long)
