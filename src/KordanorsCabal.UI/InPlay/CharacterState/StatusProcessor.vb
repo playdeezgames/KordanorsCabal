@@ -9,36 +9,36 @@ Friend Class StatusProcessor
         buffer.WriteTextCentered(0, "Status", True, Hue.Blue)
         Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
 
-        buffer.WriteText((0, 1), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Strength).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Strength))}", False, Hue.Black)
-        buffer.WriteText((0, 2), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Dexterity).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Dexterity))}", False, Hue.Black)
-        buffer.WriteText((0, 3), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.HP).Abbreviation} {player.Health.Current}/{player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 6L))}", False, Hue.Black)
+        buffer.WriteText((0, 1), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType1).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType1))}", False, Hue.Black)
+        buffer.WriteText((0, 2), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType2).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType2))}", False, Hue.Black)
+        buffer.WriteText((0, 3), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType6).Abbreviation} {player.Health.Current}/{player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 6L))}", False, Hue.Black)
 
-        buffer.WriteText((11, 1), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Influence).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Influence))}", False, Hue.Black)
-        buffer.WriteText((11, 2), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Willpower).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Willpower))}", False, Hue.Black)
-        buffer.WriteText((11, 3), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.MP).Abbreviation} {player.MentalCombat.CurrentMP}/{player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.MP))}", False, Hue.Black)
+        buffer.WriteText((11, 1), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType3).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType3))}", False, Hue.Black)
+        buffer.WriteText((11, 2), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType4).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType4))}", False, Hue.Black)
+        buffer.WriteText((11, 3), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType7).Abbreviation} {player.MentalCombat.CurrentMP}/{player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType7))}", False, Hue.Black)
 
-        buffer.WriteText((0, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Power).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Power))}", False, Hue.Black)
-        buffer.WriteText((0, 6), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Mana).Abbreviation} {player.Mana.CurrentMana}/{player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Mana))}", False, Hue.Black)
+        buffer.WriteText((0, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType5).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType5))}", False, Hue.Black)
+        buffer.WriteText((0, 6), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType8).Abbreviation} {player.Mana.CurrentMana}/{player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType8))}", False, Hue.Black)
 
-        buffer.WriteText((11, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.XP).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 16L))}/{player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 17L))}", False, Hue.Black)
+        buffer.WriteText((11, 5), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType16).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType16))}/{player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType17))}", False, Hue.Black)
 
-        buffer.WriteText((0, 8), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Money).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 14L))}", False, Hue.Black)
-        buffer.WriteText((0, 10), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Hunger).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, 20L))}", False, Hue.Black)
+        buffer.WriteText((0, 8), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType14).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType14))}", False, Hue.Black)
+        buffer.WriteText((0, 10), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType20).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType20))}", False, Hue.Black)
         Dim row = 11
         If player.Statuses.Highness > 0 Then
-            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Highness).Abbreviation} {player.Statuses.Highness}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType19).Abbreviation} {player.Statuses.Highness}", False, Hue.Black)
             row += 1
         End If
         If player.Statuses.Drunkenness > 0 Then
-            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Drunkenness).Abbreviation} {player.Statuses.Drunkenness}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType18).Abbreviation} {player.Statuses.Drunkenness}", False, Hue.Black)
             row += 1
         End If
         If player.Statuses.FoodPoisoning > 0 Then
-            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.FoodPoisoning).Abbreviation} {player.Statuses.FoodPoisoning}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType21).Abbreviation} {player.Statuses.FoodPoisoning}", False, Hue.Black)
             row += 1
         End If
         If player.Statuses.Chafing > 0 Then
-            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Chafing).Abbreviation} {player.Statuses.Chafing}", False, Hue.Black)
+            buffer.WriteText((0, row), $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType22).Abbreviation} {player.Statuses.Chafing}", False, Hue.Black)
             row += 1
         End If
     End Sub

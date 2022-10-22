@@ -11,20 +11,20 @@
     End Function
     Property CurrentMana As Long Implements ICharacterMana.CurrentMana
         Get
-            Dim maximumMana = character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Mana))
-            Dim fatigue = character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Fatigue))
+            Dim maximumMana = Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType8))
+            Dim fatigue = Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType15))
             Return Math.Max(0, If(maximumMana, 0L) - If(fatigue, 0L))
         End Get
         Set(value As Long)
-            character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Fatigue), character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Mana)).Value - value)
+            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType15), Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType8)).Value - value)
         End Set
     End Property
     Sub DoFatigue(fatigue As Long) Implements ICharacterMana.DoFatigue
-        character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Fatigue), fatigue)
+        Character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType15), fatigue)
     End Sub
     Public ReadOnly Property MaximumMana As Long Implements ICharacterMana.MaximumMana
         Get
-            Return character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Mana)).Value
+            Return Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType8)).Value
         End Get
     End Property
 End Class

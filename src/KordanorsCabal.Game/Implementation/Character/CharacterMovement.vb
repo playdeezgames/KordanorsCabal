@@ -74,7 +74,7 @@
             Character.Statuses.FoodPoisoning -= 1
             Character.Statuses.Chafing -= 1
             Location = Location.Routes.Find(direction).Move(Character)
-            If Character.Statuses.Hunger = CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Hunger).MaximumValue Then
+            If Character.Statuses.Hunger = CharacterStatisticType.FromId(WorldData, CharacterStatisticType20).MaximumValue Then
                 Character.Statuses.Hunger \= 2
                 Character.Health.Current -= 1
                 Return True

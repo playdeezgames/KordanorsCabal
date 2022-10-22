@@ -26,11 +26,11 @@
     ReadOnly Property MaximumEncumbrance As Long Implements ICharacterEncumbrance.MaximumEncumbrance
         Get
             Return If(
-            Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.BaseLift)), 0) +
-            If(
-                Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.BonusLift)), 0) *
-            If(
-                Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, Constants.StatisticTypes.Strength)), 0)
+                Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType24)), 0) +
+                If(
+                    Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType25)), 0) *
+                    If(
+                        Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType1)), 0)
         End Get
     End Property
 End Class

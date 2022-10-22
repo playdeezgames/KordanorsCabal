@@ -16,14 +16,14 @@ Friend Class FinalizeCharacterProcessor
             New List(Of (String, Func(Of UIState))) From
             {
                 ("Cancel", Function() cancelState),
-                ($"STR: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Strength), nextState, currentState)),
-                ($"DEX: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Dexterity), nextState, currentState)),
-                ($"INF: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Influence), nextState, currentState)),
-                ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Willpower), nextState, currentState)),
-                ($"POW: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Power), nextState, currentState)),
-                ($"HP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.HP), nextState, currentState)),
-                ($"MP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.MP), nextState, currentState)),
-                ($"Mana: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Mana), nextState, currentState))
+                ($"STR: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType1), nextState, currentState)),
+                ($"DEX: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType2), nextState, currentState)),
+                ($"INF: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType3), nextState, currentState)),
+                ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType4), nextState, currentState)),
+                ($"POW: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType5), nextState, currentState)),
+                ($"HP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType6), nextState, currentState)),
+                ($"MP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType7), nextState, currentState)),
+                ($"Mana: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType8), nextState, currentState))
             },
             7,
             currentState)
@@ -46,7 +46,7 @@ Friend Class FinalizeCharacterProcessor
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteTextCentered(0, prompt, True, Hue.Blue)
         Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
-        buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Unassigned).Name}: {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, Game.Constants.StatisticTypes.Unassigned))}", False, Hue.Purple)
+        buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType9).Name}: {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType9))}", False, Hue.Purple)
         buffer.WriteText((0, 4), "Choose where to assignpoint(s):", False, Hue.Black)
         For Each index In indices
             UpdateMenuItemText(index, $"{New CharacterStatisticType(StaticWorldData.World, index).Name}: {player.Statistics.GetStatistic(New CharacterStatisticType(StaticWorldData.World, index))}")
