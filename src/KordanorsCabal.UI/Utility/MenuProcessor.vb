@@ -1,5 +1,5 @@
 ﻿Public MustInherit Class MenuProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
 
     Private ReadOnly MenuItems As List(Of (String, Func(Of UIState)))
     Private ReadOnly MenuRow As Integer
@@ -12,7 +12,7 @@
         Me.uiState = uiState
     End Sub
 
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         ShowPrompt(buffer)
         Dim index As Integer = 0
@@ -28,7 +28,7 @@
 
     Protected MustOverride Sub ShowPrompt(buffer As PatternBuffer)
 
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Up
                 PreviousMenuItem()
@@ -52,8 +52,5 @@
 
     Private Sub PreviousMenuItem()
         currentItem = (currentItem + MenuItems.Count - 1) Mod MenuItems.Count
-    End Sub
-
-    Public Overridable Sub Initialize() Implements IProcessor.Initialize
     End Sub
 End Class

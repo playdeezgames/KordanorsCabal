@@ -37,17 +37,17 @@ Public Module MainProcessor
             {UIState.Status, New StatusProcessor},
             {UIState.TitleScreen, New TitleScreenProcessor}
         }
-    Public Function ProcessCommand(uiState As UIState, command As Command) As UIState
-        Dim newState = processors(uiState).ProcessCommand(command)
+    Public Function ProcessCommand(worldData As IWorldData, uiState As UIState, command As Command) As UIState
+        Dim newState = processors(uiState).ProcessCommand(worldData, command)
         If newState <> UIState.None AndAlso newState <> uiState Then
             processors(newState).Initialize()
         End If
         Return newState
     End Function
 
-    Public Sub UpdateBuffer(uiState As UIState, buffer As PatternBuffer)
+    Public Sub UpdateBuffer(worldData As IWorldData, uiState As UIState, buffer As PatternBuffer)
         If processors.ContainsKey(uiState) Then
-            processors(uiState).UpdateBuffer(buffer)
+            processors(uiState).UpdateBuffer(worldData, buffer)
         End If
     End Sub
 

@@ -22,6 +22,7 @@
     End Sub
 
     Public Overrides Sub Initialize()
+
         currentItem = 0
     End Sub
 

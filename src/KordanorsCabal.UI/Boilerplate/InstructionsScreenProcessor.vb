@@ -1,7 +1,7 @@
 ﻿Friend Class InstructionsScreenProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
 
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.WriteText((0, 0), "     Instructions     ", True, Hue.Blue)
 
@@ -14,10 +14,10 @@
                           }, False, Hue.Black)
     End Sub
 
-    Public Sub Initialize() Implements IProcessor.Initialize
+    Public Overrides Sub Initialize()
     End Sub
 
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Green, Command.Blue, Command.Red
                 Return UIState.TitleScreen

@@ -137,13 +137,13 @@ Public Class Root
     End Sub
 
     Private Sub UpdateOutput()
-        MainProcessor.UpdateBuffer(uiState, renderer.PatternBuffer)
+        MainProcessor.UpdateBuffer(WorldData, uiState, renderer.PatternBuffer)
     End Sub
 
     Private Sub ProcessInput()
         Dim newPressedCommands = New HashSet(Of Command)(Keyboard.GetState().GetPressedKeys().Where(AddressOf KeyCommands.ContainsKey).Select(Function(x) KeyCommands(x)))
         For Each command In newPressedCommands.Where(Function(x) Not pressedCommands.Contains(x))
-            uiState = MainProcessor.ProcessCommand(uiState, command)
+            uiState = MainProcessor.ProcessCommand(WorldData, uiState, command)
         Next
         pressedCommands = newPressedCommands
     End Sub

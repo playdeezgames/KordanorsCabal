@@ -1,9 +1,12 @@
 ﻿Imports KordanorsCabal.Data
 
 Friend Class MessageProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
 
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub Initialize()
+    End Sub
+
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         Dim message = PlayerCharacter.Messages.First
         If message.Sfx.HasValue Then
             SfxPlayer.Play(message.Sfx.Value)
@@ -17,10 +20,7 @@ Friend Class MessageProcessor
         Next
     End Sub
 
-    Public Sub Initialize() Implements IProcessor.Initialize
-    End Sub
-
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Green, Command.Blue, Command.Red
                 Dim messages = PlayerCharacter.Messages
@@ -28,7 +28,7 @@ Friend Class MessageProcessor
                 If messages.Any Then
                     Return UIState.Message
                 End If
-                If Game.World.PlayerCharacter(StaticWorldData.World).Health.IsDead Then
+                If Game.World.PlayerCharacter(StaticWorldData.WorldData).Health.IsDead Then
                     Return UIState.Dead
                 End If
                 Return PopUIState()

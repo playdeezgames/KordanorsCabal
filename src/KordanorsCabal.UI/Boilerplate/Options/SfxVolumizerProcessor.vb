@@ -32,6 +32,7 @@
     End Sub
 
     Public Overrides Sub Initialize()
+
         currentItem = CInt(GetCurrentSfxVolume.Invoke() * 10.0)
     End Sub
 

@@ -1,13 +1,13 @@
 ﻿Imports KordanorsCabal.Data
 
 Friend Class EnemiesProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
 
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Enemies", True, Hue.Blue)
-        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.WorldData)
         Dim enemies = player.Movement.Location.Factions.EnemiesOf(player)
         Dim row = 1
         For Each enemy In enemies
@@ -16,10 +16,10 @@ Friend Class EnemiesProcessor
         Next
     End Sub
 
-    Public Sub Initialize() Implements IProcessor.Initialize
+    Public Overrides Sub Initialize()
     End Sub
 
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Blue, Command.Green, Command.Red
                 Return UIState.InPlay

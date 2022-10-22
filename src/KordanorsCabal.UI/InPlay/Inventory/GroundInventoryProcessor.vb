@@ -1,7 +1,7 @@
 ﻿Imports KordanorsCabal.Data
 
 Friend Class GroundInventoryProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
 
     Private groundItems As List(Of IItem)
     Private currentItemIndex As Integer = 0
@@ -9,7 +9,7 @@ Friend Class GroundInventoryProcessor
     Const ListHiliteRow = 10
     Const ListEndRow = 21
 
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "On the Ground", True, Hue.Blue)
@@ -25,12 +25,13 @@ Friend Class GroundInventoryProcessor
         buffer.WriteTextCentered(buffer.Rows - 1, "Arrows, Space, Esc", False, Hue.Black)
     End Sub
 
-    Public Sub Initialize() Implements IProcessor.Initialize
+    Public Overrides Sub Initialize()
+
         currentItemIndex = 0
-        groundItems = Game.World.PlayerCharacter(StaticWorldData.World).Movement.Location.Inventory.Items.ToList
+        groundItems = Game.World.PlayerCharacter(StaticWorldData.WorldData).Movement.Location.Inventory.Items.ToList
     End Sub
 
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Red
                 Return UIState.InPlay
@@ -45,8 +46,8 @@ Friend Class GroundInventoryProcessor
     End Function
 
     Private Function PickUpItem() As UIState
-        Game.World.PlayerCharacter(StaticWorldData.World).Items.Inventory.Add(groundItems(currentItemIndex))
-        groundItems = Game.World.PlayerCharacter(StaticWorldData.World).Movement.Location.Inventory.Items.ToList
+        Game.World.PlayerCharacter(StaticWorldData.WorldData).Items.Inventory.Add(groundItems(currentItemIndex))
+        groundItems = Game.World.PlayerCharacter(StaticWorldData.WorldData).Movement.Location.Inventory.Items.ToList
         If Not groundItems.Any Then
             Return UIState.InPlay
         End If

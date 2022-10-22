@@ -29,6 +29,7 @@
     End Sub
 
     Public Overrides Sub Initialize()
+
         currentItem = GetCurrentScreenSize.Invoke() - 1
     End Sub
 

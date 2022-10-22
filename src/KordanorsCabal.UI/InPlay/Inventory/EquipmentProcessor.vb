@@ -1,18 +1,18 @@
 ﻿Imports KordanorsCabal.Data
 
 Friend Class EquipmentProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
 
     Private rowIndex As Integer = 0
     Private table As New Dictionary(Of Integer, IEquipSlot)
 
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Black)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Equipment", True, Hue.Blue)
         buffer.WriteText((0, 1), "Go Back", rowIndex = 0, Hue.Black)
         Dim row As Integer = 1
-        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.WorldData)
         For Each entry In player.Equipment.EquippedSlots
             Dim slotName = $"{entry.Name}: "
             buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
@@ -25,18 +25,19 @@ Friend Class EquipmentProcessor
         buffer.WriteTextCentered(buffer.Rows - 1, "Arrows, Space, Esc", False, Hue.Black)
     End Sub
 
-    Public Sub Initialize() Implements IProcessor.Initialize
+    Public Overrides Sub Initialize()
+
         rowIndex = 0
         table.Clear()
         table(0) = Nothing
         Dim row As Integer = 1
-        For Each entry In Game.World.PlayerCharacter(StaticWorldData.World).Equipment.EquippedSlots
+        For Each entry In Game.World.PlayerCharacter(StaticWorldData.WorldData).Equipment.EquippedSlots
             table(row) = entry
             row += 1
         Next
     End Sub
 
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Red
                 Return UIState.InPlay

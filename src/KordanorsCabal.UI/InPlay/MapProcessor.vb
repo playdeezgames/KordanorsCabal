@@ -1,17 +1,17 @@
 ﻿Imports KordanorsCabal.Data
 
 Friend Class MapProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
     Private redrawBuffer As Boolean
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         If redrawBuffer Then
             redrawBuffer = False
             buffer.Fill(Pattern.Space, False, Hue.Blue)
-            Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
+            Dim player = Game.World.PlayerCharacter(StaticWorldData.WorldData)
             Dim playerLocation = player.Movement.Location
             Dim level = playerLocation.DungeonLevel
             If level IsNot Nothing Then
-                Dim locations = Location.ByDungeonLevel(StaticWorldData.World, level).Where(Function(x) player.Movement.HasVisited(x))
+                Dim locations = Location.ByDungeonLevel(StaticWorldData.WorldData, level).Where(Function(x) player.Movement.HasVisited(x))
                 For Each location In locations
                     Dim inverted = (location.Id = playerLocation.Id)
                     Dim dungeonColumn = location.Statistics.GetStatistic(LocationStatisticType.DungeonColumn).Value
@@ -30,10 +30,10 @@ Friend Class MapProcessor
     End Sub
 
     Private Sub DrawLocation(buffer As PatternBuffer, xy As (Integer, Integer), location As ILocation, inverted As Boolean, displayHue As Hue)
-        Dim northExit = location.Routes.Exists(Direction.FromId(StaticWorldData.World, 1L))
-        Dim eastExit = location.Routes.Exists(Direction.FromId(StaticWorldData.World, 2L))
-        Dim southExit = location.Routes.Exists(Direction.FromId(StaticWorldData.World, 3L))
-        Dim westExit = location.Routes.Exists(Direction.FromId(StaticWorldData.World, 4L))
+        Dim northExit = location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 1L))
+        Dim eastExit = location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 2L))
+        Dim southExit = location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 3L))
+        Dim westExit = location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 4L))
         'upper left
         buffer.PutCell(xy,
                        If(northExit AndAlso westExit, Pattern.ElbowUpLeft,
@@ -56,11 +56,12 @@ Friend Class MapProcessor
                        If(eastExit, Pattern.Horizontal5, Pattern.ElbowUpLeft))), inverted, displayHue)
     End Sub
 
-    Public Sub Initialize() Implements IProcessor.Initialize
+    Public Overrides Sub Initialize()
+
         redrawBuffer = True
     End Sub
 
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Return UIState.InPlay
     End Function
 End Class

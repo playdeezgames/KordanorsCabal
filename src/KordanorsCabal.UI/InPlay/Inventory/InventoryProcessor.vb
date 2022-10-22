@@ -1,8 +1,7 @@
-﻿Imports KordanorsCabal.Data
-Imports SPLORR.Game
+﻿Imports SPLORR.Game
 
 Friend Class InventoryProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
 
     Private items As List(Of (String, IEnumerable(Of IItem)))
     Private currentItemIndex As Integer = 0
@@ -10,11 +9,11 @@ Friend Class InventoryProcessor
     Const ListHiliteRow = 10
     Const ListEndRow = 21
 
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Inventory", True, Hue.Blue)
-        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.WorldData)
         buffer.WriteTextCentered(1, $"Encumbrance: {player.Encumbrance.CurrentEncumbrance}/{player.Encumbrance.MaximumEncumbrance}", False, Hue.Red)
         For row = ListStartRow To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
@@ -27,11 +26,12 @@ Friend Class InventoryProcessor
         buffer.WriteTextCentered(buffer.Rows - 1, "Arrows, Space, Esc", False, Hue.Black)
     End Sub
 
-    Public Sub Initialize() Implements IProcessor.Initialize
+    Public Overrides Sub Initialize()
+
         currentItemIndex = 0
         items = New List(Of (String, IEnumerable(Of IItem)))
         Dim table As New Dictionary(Of String, List(Of IItem))
-        For Each item In Game.World.PlayerCharacter(StaticWorldData.World).Items.Inventory.Items.OrderBy(Function(x) x.Name)
+        For Each item In Game.World.PlayerCharacter(StaticWorldData.WorldData).Items.Inventory.Items.OrderBy(Function(x) x.Name)
             If Not table.ContainsKey(item.Name) Then
                 table(item.Name) = New List(Of IItem)
             End If
@@ -42,7 +42,7 @@ Friend Class InventoryProcessor
         Next
     End Sub
 
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Red
                 Return UIState.InPlay

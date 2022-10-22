@@ -1,7 +1,7 @@
 ﻿Friend Class AboutScreenProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
 
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "About", True, Hue.Blue)
@@ -15,10 +15,10 @@
         buffer.WriteText((0, 20), "Please see Credits.txtfor links to their    work!", False, Hue.Purple)
     End Sub
 
-    Public Sub Initialize() Implements IProcessor.Initialize
+    Public Overrides Sub Initialize()
     End Sub
 
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Green, Command.Blue, Command.Red
                 Return UIState.TitleScreen

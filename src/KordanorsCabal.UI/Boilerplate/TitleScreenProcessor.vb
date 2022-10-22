@@ -8,9 +8,6 @@ Friend Class TitleScreenProcessor
     Const OptionsMenuItem = "Options"
     Const AboutMenuItem = "About"
     Const QuitMenuItem = "Quit"
-
-
-
     Public Sub New()
         MyBase.New(
             New List(Of (String, Func(Of UIState))) From
@@ -32,8 +29,8 @@ Friend Class TitleScreenProcessor
     End Function
 
     Friend Shared Function StartGame() As UIState
-        Game.World.Start(StaticWorldData.World)
-        If Not Game.World.PlayerCharacter(StaticWorldData.World).Advancement.IsFullyAssigned Then
+        Game.World.Start(StaticWorldData.WorldData)
+        If Not Game.World.PlayerCharacter(StaticWorldData.WorldData).Advancement.IsFullyAssigned Then
             Return UIState.FinalizeCharacter
         End If
         Return UIState.Prolog
@@ -50,5 +47,8 @@ Friend Class TitleScreenProcessor
         buffer.WriteText((0, 11), "   A Production  of   ", False, Hue.Black)
         buffer.WriteText((0, 12), "   TheGrumpyGameDev   ", False, Hue.Black)
         buffer.WriteText((0, buffer.Rows - 1), "Controls: Arrows/Space", False, Hue.Blue)
+    End Sub
+
+    Public Overrides Sub Initialize()
     End Sub
 End Class

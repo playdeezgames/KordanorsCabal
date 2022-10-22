@@ -1,7 +1,7 @@
 ﻿Friend Class ShoppeOffersProcessor
     Inherits ShoppeProcessor(Of String)
 
-    Public Overrides Sub UpdateBuffer(buffer As PatternBuffer)
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Offers", True, Hue.Blue)
@@ -18,11 +18,12 @@
     End Sub
 
     Public Overrides Sub Initialize()
+
         currentItemIndex = 0
         items = ShoppeType.Offers.Select(Function(x) $"{x.Key.Name}: {x.Value}").ToList
     End Sub
 
-    Public Overrides Function ProcessCommand(command As Command) As UIState
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Red
                 Return UIState.InPlay

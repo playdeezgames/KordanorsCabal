@@ -14,6 +14,9 @@
             UIState.ConfirmQuit)
     End Sub
 
+    Public Overrides Sub Initialize()
+    End Sub
+
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteText((0, 10), "Are you sure you want to quit?", False, Hue.Red)
     End Sub

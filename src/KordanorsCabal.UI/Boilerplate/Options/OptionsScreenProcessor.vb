@@ -14,6 +14,9 @@
             UIState.OptionsScreen)
     End Sub
 
+    Public Overrides Sub Initialize()
+    End Sub
+
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteText((7, 0), "Options:", False, Hue.Blue)
     End Sub

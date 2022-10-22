@@ -3,11 +3,11 @@
 Friend Class ShoppeBuyProcessor
     Inherits ShoppeProcessor(Of (IItemType, Long))
 
-    Public Overrides Sub UpdateBuffer(buffer As PatternBuffer)
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, $"Buy", True, Hue.Blue)
-        buffer.WriteTextCentered(1, $"Money: {Game.World.PlayerCharacter(StaticWorldData.World).Statuses.Money}", False, Hue.Black)
+        buffer.WriteTextCentered(1, $"Money: {Game.World.PlayerCharacter(StaticWorldData.WorldData).Statuses.Money}", False, Hue.Black)
 
         For row = ListStartRow + 1 To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
@@ -21,12 +21,13 @@ Friend Class ShoppeBuyProcessor
     End Sub
 
     Public Overrides Sub Initialize()
+
         currentItemIndex = 0
-        Dim money = Game.World.PlayerCharacter(StaticWorldData.World).Statuses.Money
+        Dim money = Game.World.PlayerCharacter(StaticWorldData.WorldData).Statuses.Money
         items = ShoppeType.Prices.Where(Function(x) x.Value <= money).Select(Function(x) (x.Key, x.Value)).ToList
     End Sub
 
-    Public Overrides Function ProcessCommand(command As Command) As UIState
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Red
                 Return UIState.InPlay
@@ -49,8 +50,8 @@ Friend Class ShoppeBuyProcessor
             Return UIState.InPlay
         End If
         Dim itemType = items(currentItemIndex)
-        Game.World.PlayerCharacter(StaticWorldData.World).Statuses.Money -= itemType.Item2
-        Game.World.PlayerCharacter(StaticWorldData.World).Items.Inventory.Add(Game.Item.Create(StaticWorldData.World, itemType.Item1.Id))
+        Game.World.PlayerCharacter(StaticWorldData.WorldData).Statuses.Money -= itemType.Item2
+        Game.World.PlayerCharacter(StaticWorldData.WorldData).Items.Inventory.Add(Game.Item.Create(StaticWorldData.WorldData, itemType.Item1.Id))
         Dim oldIndex = currentItemIndex
         Initialize()
         If Not items.Any Then

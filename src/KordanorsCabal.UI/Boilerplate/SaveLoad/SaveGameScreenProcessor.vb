@@ -20,7 +20,7 @@ Friend Class SaveGameScreenProcessor
     End Sub
 
     Private Shared Function SaveSlot(slotNumber As Integer) As UIState
-        StaticWorldData.World.Save(SaveSlotName(slotNumber))
+        StaticWorldData.WorldData.Save(SaveSlotName(slotNumber))
         Return UIState.InPlay
     End Function
 
@@ -30,25 +30,26 @@ Friend Class SaveGameScreenProcessor
     End Sub
 
     Public Overrides Sub Initialize()
+
         Validated = False
     End Sub
 
     Friend Sub ValidateSlots()
         If Not Validated Then
-            Dim oldConnection = StaticWorldData.World.Renew()
+            Dim oldConnection = StaticWorldData.WorldData.Renew()
             ValidateSlot(1)
             ValidateSlot(2)
             ValidateSlot(3)
             ValidateSlot(4)
             ValidateSlot(5)
-            StaticWorldData.World.Restore(oldConnection)
+            StaticWorldData.WorldData.Restore(oldConnection)
             Validated = True
         End If
     End Sub
 
     Private Sub ValidateSlot(slotNumber As Integer)
-        StaticWorldData.World.Load(SaveSlotName(slotNumber))
-        If Game.World.IsValid(StaticWorldData.World) Then
+        StaticWorldData.WorldData.Load(SaveSlotName(slotNumber))
+        If Game.World.IsValid(StaticWorldData.WorldData) Then
             UpdateMenuItemText(slotNumber, $"Slot {slotNumber}")
         Else
             UpdateMenuItemText(slotNumber, "(empty)")

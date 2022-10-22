@@ -40,16 +40,16 @@ Friend Class MoveModeProcessor
         If player.Movement.CanMoveBackward Then
             Buttons(BackwardButtonIndex).Title = "Backward"
         End If
-        If player.Movement.CanMove(Direction.FromId(StaticWorldData.World, 5L)) Then
+        If player.Movement.CanMove(Direction.FromId(StaticWorldData.WorldData, 5L)) Then
             Buttons(UpButtonIndex).Title = "Up"
         End If
-        If player.Movement.CanMove(Direction.FromId(StaticWorldData.World, 6L)) Then
+        If player.Movement.CanMove(Direction.FromId(StaticWorldData.WorldData, 6L)) Then
             Buttons(DownButtonIndex).Title = "Down"
         End If
-        If player.Movement.CanMove(Direction.FromId(StaticWorldData.World, 7L)) Then
+        If player.Movement.CanMove(Direction.FromId(StaticWorldData.WorldData, 7L)) Then
             Buttons(InButtonIndex).Title = "In"
         End If
-        If player.Movement.CanMove(Direction.FromId(StaticWorldData.World, 8L)) Then
+        If player.Movement.CanMove(Direction.FromId(StaticWorldData.WorldData, 8L)) Then
             Buttons(OutButtonIndex).Title = "Out"
         End If
     End Sub
@@ -60,13 +60,13 @@ Friend Class MoveModeProcessor
                 PopButtonIndex()
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case DownButtonIndex
-                Return HandleMove(player, Direction.FromId(StaticWorldData.World, 6L))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.WorldData, 6L))
             Case UpButtonIndex
-                Return HandleMove(player, Direction.FromId(StaticWorldData.World, 5L))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.WorldData, 5L))
             Case InButtonIndex
-                Return HandleMove(player, Direction.FromId(StaticWorldData.World, 7L))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.WorldData, 7L))
             Case OutButtonIndex
-                Return HandleMove(player, Direction.FromId(StaticWorldData.World, 8L))
+                Return HandleMove(player, Direction.FromId(StaticWorldData.WorldData, 8L))
             Case ForwardButtonIndex
                 Return HandleMove(player, player.Movement.Direction)
             Case BackwardButtonIndex

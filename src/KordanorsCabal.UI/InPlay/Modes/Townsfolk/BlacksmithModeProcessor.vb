@@ -27,7 +27,7 @@
         Buttons(SellButtonIndex).Title = "Sell"
         Buttons(PricesButtonIndex).Title = "Prices"
         Buttons(BuyButtonIndex).Title = "Buy"
-        If player.Repair.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.World, 2)) Then
+        If player.Repair.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.WorldData, 2)) Then
             Buttons(RepairButtonIndex).Title = "Repair"
         End If
     End Sub
@@ -38,20 +38,20 @@
                 PopButtonIndex()
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case OffersButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
+                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 2)
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor(Of IItem).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
+                ShoppeProcessor(Of IItem).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 2)
                 Return UIState.ShoppeSell
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
+                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 2)
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
+                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 2)
                 Return UIState.ShoppeBuy
             Case RepairButtonIndex
-                If player.Repair.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.World, 2)) Then
-                    ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(StaticWorldData.World, 2)
+                If player.Repair.HasItemsToRepair(ShoppeType.FromId(StaticWorldData.WorldData, 2)) Then
+                    ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 2)
                     Return UIState.ShoppeRepair
                 End If
         End Select

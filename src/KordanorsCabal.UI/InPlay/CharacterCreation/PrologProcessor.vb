@@ -1,7 +1,7 @@
 ﻿Friend Class PrologProcessor
-    Implements IProcessor
+    Inherits BaseProcessor
 
-    Public Sub UpdateBuffer(buffer As PatternBuffer) Implements IProcessor.UpdateBuffer
+    Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.WriteTextCentered(0, "        Prolog        ", True, Hue.Blue)
         buffer.WriteLines((0, 2), New List(Of String) From
@@ -29,10 +29,10 @@
         buffer.WriteTextCentered(22, "SPACE to start", True, Hue.Orange)
     End Sub
 
-    Public Sub Initialize() Implements IProcessor.Initialize
+    Public Overrides Sub Initialize()
     End Sub
 
-    Public Function ProcessCommand(command As Command) As UIState Implements IProcessor.ProcessCommand
+    Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         If command = Command.Green OrElse command = Command.Blue Then
             Return UIState.InPlay
         End If

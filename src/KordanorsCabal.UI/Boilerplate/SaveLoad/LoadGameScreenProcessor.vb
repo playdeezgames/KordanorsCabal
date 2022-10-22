@@ -20,8 +20,8 @@ Friend Class LoadGameScreenProcessor
     End Sub
 
     Private Shared Function ContinueSlot(slotNumber As Integer) As UIState
-        StaticWorldData.World.Load(SaveSlotName(slotNumber))
-        If Game.World.IsValid(StaticWorldData.World) Then
+        StaticWorldData.WorldData.Load(SaveSlotName(slotNumber))
+        If Game.World.IsValid(StaticWorldData.WorldData) Then
             Return UIState.InPlay
         End If
         Return TitleScreenProcessor.StartGame()
@@ -44,8 +44,8 @@ Friend Class LoadGameScreenProcessor
     End Sub
 
     Private Sub ValidateSlot(slotNumber As Integer)
-        StaticWorldData.World.Load(SaveSlotName(slotNumber))
-        If Game.World.IsValid(StaticWorldData.World) Then
+        StaticWorldData.WorldData.Load(SaveSlotName(slotNumber))
+        If Game.World.IsValid(StaticWorldData.WorldData) Then
             UpdateMenuItemText(slotNumber, $"Slot {slotNumber}")
         Else
             UpdateMenuItemText(slotNumber, "(empty)")
@@ -55,4 +55,7 @@ Friend Class LoadGameScreenProcessor
     Public Overrides Function HandleRed() As UIState
         Return UIState.TitleScreen
     End Function
+
+    Public Overrides Sub Initialize()
+    End Sub
 End Class

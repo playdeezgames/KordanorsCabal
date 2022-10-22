@@ -6,7 +6,7 @@ Friend Class FinalizeCharacterProcessor
     Private prompt As String
 
     Private Shared Function ApplyPoint(statisticType As ICharacterStatisticType, nextState As UIState, currentState As UIState) As UIState
-        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.WorldData)
         player.Advancement.AssignPoint(statisticType)
         Return If(player.Advancement.IsFullyAssigned, nextState, currentState)
     End Function
@@ -16,14 +16,14 @@ Friend Class FinalizeCharacterProcessor
             New List(Of (String, Func(Of UIState))) From
             {
                 ("Cancel", Function() cancelState),
-                ($"STR: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType1), nextState, currentState)),
-                ($"DEX: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType2), nextState, currentState)),
-                ($"INF: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType3), nextState, currentState)),
-                ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType4), nextState, currentState)),
-                ($"POW: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType5), nextState, currentState)),
-                ($"HP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType6), nextState, currentState)),
-                ($"MP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType7), nextState, currentState)),
-                ($"Mana: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType8), nextState, currentState))
+                ($"STR: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType1), nextState, currentState)),
+                ($"DEX: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType2), nextState, currentState)),
+                ($"INF: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType3), nextState, currentState)),
+                ($"WIL: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType4), nextState, currentState)),
+                ($"POW: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType5), nextState, currentState)),
+                ($"HP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType6), nextState, currentState)),
+                ($"MP: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType7), nextState, currentState)),
+                ($"Mana: ?", Function() ApplyPoint(CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType8), nextState, currentState))
             },
             7,
             currentState)
@@ -45,11 +45,14 @@ Friend Class FinalizeCharacterProcessor
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteTextCentered(0, prompt, True, Hue.Blue)
-        Dim player = Game.World.PlayerCharacter(StaticWorldData.World)
-        buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType9).Name}: {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.World, CharacterStatisticType9))}", False, Hue.Purple)
+        Dim player = Game.World.PlayerCharacter(StaticWorldData.WorldData)
+        buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType9).Name}: {player.Statistics.GetStatistic(CharacterStatisticType.FromId(StaticWorldData.WorldData, CharacterStatisticType9))}", False, Hue.Purple)
         buffer.WriteText((0, 4), "Choose where to assignpoint(s):", False, Hue.Black)
         For Each index In indices
-            UpdateMenuItemText(index, $"{New CharacterStatisticType(StaticWorldData.World, index).Name}: {player.Statistics.GetStatistic(New CharacterStatisticType(StaticWorldData.World, index))}")
+            UpdateMenuItemText(index, $"{New CharacterStatisticType(StaticWorldData.WorldData, index).Name}: {player.Statistics.GetStatistic(New CharacterStatisticType(StaticWorldData.WorldData, index))}")
         Next
+    End Sub
+
+    Public Overrides Sub Initialize()
     End Sub
 End Class
