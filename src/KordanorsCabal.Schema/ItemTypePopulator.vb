@@ -441,4 +441,78 @@
         PopulateItemTypeStatisticsRecord(connection, ItemType47, ItemTypeStatisticType7, 50)
         PopulateItemTypeStatisticsRecord(connection, ItemType52, ItemTypeStatisticType7, 1000)
     End Sub
+    Public Sub PopulateItemLores(connection As SqliteConnection)
+    End Sub
+    Public Const LoreType1 = 1L
+    Public Const LoreType2 = 2L
+    Public Const LoreType3 = 3L
+    Public Const LoreType4 = 4L
+    Public Const LoreType5 = 5L
+    Public Const LoreType6 = 6L
+    Public Const LoreType7 = 7L
+    Public Const LoreType8 = 8L
+    Public Const LoreType9 = 9L
+    Public Const LoreType10 = 10L
+    Public Const LoreType11 = 11L
+    Public Const LoreType12 = 12L
+    Public Const LoreType13 = 13L
+    Public Const LoreType14 = 14L
+    Public Const LoreType15 = 15L
+    Public Const LoreType16 = 16L
+    Public Const LoreType17 = 17L
+    Public Const LoreType18 = 18L
+    Public Const LoreType19 = 19L
+    Public Const LoreType20 = 20L
+    Public Const LoreType21 = 21L
+    Public Const LoreType22 = 22L
+    Public Const LoreType23 = 23L
+    Public Const LoreType24 = 24L
+    Public Const LoreType25 = 25L
+    Friend Sub PopulateLores(connection As SqliteConnection)
+        PopulateLoreRecord(connection, LoreType1, "Genso Manifest Pg137", "My ears cannot stand the constant scratching at the door. The chamber is sealed with magics cast in the ancient days by the morntai keepers in service to Larak, but they are centuries gone. From generation to generation my kin have kept vigil, not to keep the captive within, but to keep those that seek his release without. There are fewer of us in each generation. I fear one day we shall be no more, and what then?")
+        PopulateLoreRecord(connection, LoreType2, "Breviary of Dom Pg76", "Each night my brothers an I pray earnestly to the three Gods in Grot, but the howls from the other side of the sealed door weaken our knees. We are taught that the seal cannot be undone without the reuniting of the shards, and the art of shardmending has been lost to time, we are told. Some of us are not so sure.")
+        PopulateLoreRecord(connection, LoreType3, "Londo's Canticle Pg32", "The first of the shards has been found and awakened. Within it are held the powers of vanishing and reappearing. We have entrusted it to a younger brother for safe keeping. I can only hope our faith in him is well placed. It has dangerous sorcery within it.")
+        PopulateLoreRecord(connection, LoreType4, "Tome of Krass Pg8", "Praise be to Reylon, Shyrana, and Larak, for saving the very life of our glorious leader with the power of the healing shard. It is a critical time for us, and without the reinforcement that the gods are with us, our brotherhood would fall away from its mission.")
+        PopulateLoreRecord(connection, LoreType5, "Haikus of Esdjee #15", "Keep him in prison/for the one seeking his death/shall overtake all")
+        PopulateLoreRecord(connection, LoreType6, "Bartulicas' Plea", "An answer must be found to banish Kordanor forever back to Jhama where he belongs. All efforts towards this have been meaningless vanity. An answer must exist and must be found, already we can feel the overpowerer approaching. We must not fail.")
+        PopulateLoreRecord(connection, LoreType7, "Z's Epistle", "I have arrived. Yer time is nearly up. I cannot enter yer realm for your many wards of protection, but I will find a way to send another to fetch what I need. -Z")
+        PopulateLoreRecord(connection, LoreType8, "Lore #8", "Lore #8")
+        PopulateLoreRecord(connection, LoreType9, "Lore #9", "Lore #9")
+        PopulateLoreRecord(connection, LoreType10, "Lore #10", "Lore #10")
+        PopulateLoreRecord(connection, LoreType11, "Lore #11", "Lore #11")
+        PopulateLoreRecord(connection, LoreType12, "Lore #12", "Lore #12")
+        PopulateLoreRecord(connection, LoreType13, "Lore #13", "Lore #13")
+        PopulateLoreRecord(connection, LoreType14, "Lore #14", "Lore #14")
+        PopulateLoreRecord(connection, LoreType15, "Lore #15", "Lore #15")
+        PopulateLoreRecord(connection, LoreType16, "Lore #16", "Lore #16")
+        PopulateLoreRecord(connection, LoreType17, "Lore #17", "Lore #17")
+        PopulateLoreRecord(connection, LoreType18, "Lore #18", "Lore #18")
+        PopulateLoreRecord(connection, LoreType19, "Lore #19", "Lore #19")
+        PopulateLoreRecord(connection, LoreType20, "Lore #20", "Lore #20")
+        PopulateLoreRecord(connection, LoreType21, "Lore #21", "Lore #21")
+        PopulateLoreRecord(connection, LoreType22, "Lore #22", "Lore #22")
+        PopulateLoreRecord(connection, LoreType23, "Lore #23", "Lore #23")
+        PopulateLoreRecord(connection, LoreType24, "Lore #24", "Lore #24")
+        PopulateLoreRecord(connection, LoreType25, "Lore #25", "Lore #25")
+    End Sub
+    Private Sub PopulateLoreRecord(connection As SqliteConnection, loreId As Long, itemName As String, loreText As String)
+        Using command = New SqliteCommand(
+            $"INSERT INTO [{Tables.Lores}]
+            (
+                [{Columns.LoreIdColumn}], 
+                [{Columns.ItemNameColumn}],
+                [{Columns.LoreTextColumn}]
+            ) 
+            VALUES 
+            (
+                @{Columns.LoreIdColumn}, 
+                @{Columns.ItemNameColumn}, 
+                @{Columns.LoreTextColumn}
+            );", connection)
+            command.Parameters.AddWithValue($"@{Columns.LoreIdColumn}", loreId)
+            command.Parameters.AddWithValue($"@{Columns.LoreTextColumn}", loreText)
+            command.Parameters.AddWithValue($"@{Columns.ItemNameColumn}", itemName)
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
 End Module
