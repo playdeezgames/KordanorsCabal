@@ -45,10 +45,10 @@
             Case HealButtonIndex
                 player.Health.Heal()
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 4)
+                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(WorldData, 4)
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 4)
+                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(WorldData, 4)
                 Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay

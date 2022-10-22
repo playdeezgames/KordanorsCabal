@@ -7,11 +7,11 @@ Friend Class MapProcessor
         If redrawBuffer Then
             redrawBuffer = False
             buffer.Fill(Pattern.Space, False, Hue.Blue)
-            Dim player = Game.World.PlayerCharacter(StaticWorldData.WorldData)
+            Dim player = Game.World.PlayerCharacter(worldData)
             Dim playerLocation = player.Movement.Location
             Dim level = playerLocation.DungeonLevel
             If level IsNot Nothing Then
-                Dim locations = Location.ByDungeonLevel(StaticWorldData.WorldData, level).Where(Function(x) player.Movement.HasVisited(x))
+                Dim locations = Location.ByDungeonLevel(worldData, level).Where(Function(x) player.Movement.HasVisited(x))
                 For Each location In locations
                     Dim inverted = (location.Id = playerLocation.Id)
                     Dim dungeonColumn = location.Statistics.GetStatistic(LocationStatisticType.DungeonColumn).Value
@@ -30,10 +30,10 @@ Friend Class MapProcessor
     End Sub
 
     Private Sub DrawLocation(buffer As PatternBuffer, xy As (Integer, Integer), location As ILocation, inverted As Boolean, displayHue As Hue)
-        Dim northExit = location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 1L))
-        Dim eastExit = location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 2L))
-        Dim southExit = location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 3L))
-        Dim westExit = location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 4L))
+        Dim northExit = location.Routes.Exists(Direction.FromId(WorldData, 1L))
+        Dim eastExit = location.Routes.Exists(Direction.FromId(WorldData, 2L))
+        Dim southExit = location.Routes.Exists(Direction.FromId(WorldData, 3L))
+        Dim westExit = location.Routes.Exists(Direction.FromId(WorldData, 4L))
         'upper left
         buffer.PutCell(xy,
                        If(northExit AndAlso westExit, Pattern.ElbowUpLeft,

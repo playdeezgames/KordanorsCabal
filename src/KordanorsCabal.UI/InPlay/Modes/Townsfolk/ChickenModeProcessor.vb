@@ -22,7 +22,7 @@ Friend Class ChickenModeProcessor
     Friend Overrides Sub UpdateButtons(player As IPlayerCharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
-        If player.Items.HasItemType(ItemType.FromId(StaticWorldData.WorldData, ItemType24)) OrElse player.Items.HasItemType(ItemType.FromId(StaticWorldData.WorldData, ItemType35)) Then
+        If player.Items.HasItemType(ItemType.FromId(WorldData, ItemType24)) OrElse player.Items.HasItemType(ItemType.FromId(WorldData, ItemType35)) Then
             Buttons(FeedButtonIndex).Title = "Feed"
         End If
     End Sub
@@ -33,8 +33,8 @@ Friend Class ChickenModeProcessor
                 PopButtonIndex()
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case FeedButtonIndex
-                If player.Items.HasItemType(ItemType.FromId(StaticWorldData.WorldData, ItemType24)) OrElse player.Items.HasItemType(ItemType.FromId(StaticWorldData.WorldData, ItemType35)) Then
-                    Dim item = RNG.FromEnumerable(player.Items.Inventory.Items.Where(Function(x) x.Name = ItemType.FromId(StaticWorldData.WorldData, ItemType24).Name))
+                If player.Items.HasItemType(ItemType.FromId(WorldData, ItemType24)) OrElse player.Items.HasItemType(ItemType.FromId(WorldData, ItemType35)) Then
+                    Dim item = RNG.FromEnumerable(player.Items.Inventory.Items.Where(Function(x) x.Name = ItemType.FromId(WorldData, ItemType24).Name))
                     Return FeedChicken(player, item)
                 End If
         End Select
@@ -47,14 +47,14 @@ Friend Class ChickenModeProcessor
         If RNG.FromRange(0, 5) = 0 Then
             Select Case itemType.Id
                 Case 24L
-                    player.EnqueueMessage(Nothing, $"{New FeatureType(StaticWorldData.WorldData, 4).Name} eats the food and then a {Game.ItemType.FromId(StaticWorldData.WorldData, ItemType25).Name} pops out!")
-                    player.Items.Inventory.Add(Game.Item.Create(StaticWorldData.WorldData, ItemType25))
+                    player.EnqueueMessage(Nothing, $"{New FeatureType(WorldData, 4).Name} eats the food and then a {Game.ItemType.FromId(WorldData, ItemType25).Name} pops out!")
+                    player.Items.Inventory.Add(Game.Item.Create(WorldData, ItemType25))
                 Case 35L
-                    player.EnqueueMessage(Nothing, $"{New FeatureType(StaticWorldData.WorldData, 4L).Name} eats the rotten food and then a {Game.ItemType.FromId(StaticWorldData.WorldData, ItemType37).Name} pops out!")
-                    player.Items.Inventory.Add(Game.Item.Create(StaticWorldData.WorldData, 37))
+                    player.EnqueueMessage(Nothing, $"{New FeatureType(WorldData, 4L).Name} eats the rotten food and then a {Game.ItemType.FromId(WorldData, ItemType37).Name} pops out!")
+                    player.Items.Inventory.Add(Game.Item.Create(WorldData, 37))
             End Select
         Else
-            player.EnqueueMessage(Nothing, $"{New FeatureType(StaticWorldData.WorldData, 4L).Name} eats the food, and gives a satified ""moo"" in return.")
+            player.EnqueueMessage(Nothing, $"{New FeatureType(WorldData, 4L).Name} eats the food, and gives a satified ""moo"" in return.")
         End If
         PushUIState(UIState.InPlay)
         Return UIState.Message

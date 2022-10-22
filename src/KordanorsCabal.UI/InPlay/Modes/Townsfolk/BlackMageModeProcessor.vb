@@ -38,19 +38,19 @@
                 PopButtonIndex()
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case OffersButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 1)
+                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(WorldData, 1)
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor(Of IItem).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 1)
+                ShoppeProcessor(Of IItem).ShoppeType = ShoppeType.FromId(WorldData, 1)
                 Return UIState.ShoppeSell
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 1)
+                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(WorldData, 1)
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 1)
+                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(WorldData, 1)
                 Return UIState.ShoppeBuy
             Case RestoreButtonIndex
-                player.EnqueueMessage(Nothing, $"{New FeatureType(StaticWorldData.WorldData, 6L).Name} sparks up his {ItemType.FromId(StaticWorldData.WorldData, ItemType33).Name} and gives you a hit of {ItemType.FromId(StaticWorldData.WorldData, ItemType34).Name}.")
+                player.EnqueueMessage(Nothing, $"{New FeatureType(WorldData, 6L).Name} sparks up his {ItemType.FromId(WorldData, ItemType33).Name} and gives you a hit of {ItemType.FromId(WorldData, ItemType34).Name}.")
                 player.Mana.CurrentMana = player.Mana.MaximumMana
                 PushUIState(UIState.InPlay)
                 Return UIState.Message

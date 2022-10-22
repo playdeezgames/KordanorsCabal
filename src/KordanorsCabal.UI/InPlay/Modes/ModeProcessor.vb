@@ -92,24 +92,24 @@ Public MustInherit Class ModeProcessor
             buffer.WriteText((21, 9), routeType.Abbreviation.Substring(0, 1), False, routeType.TextHue)
         End If
 
-        If location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 5L)) Then
+        If location.Routes.Exists(Direction.FromId(WorldData, 5L)) Then
             buffer.PutCell((7, 0), Pattern.DownwardDiagonal, False, Hue.Black)
             buffer.FillCells((8, 0), (6, 1), Pattern.Horizontal8, False, Hue.Black)
             buffer.PutCell((14, 0), Pattern.UpwardDiagonal, False, Hue.Black)
         End If
 
-        If location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 6L)) Then
+        If location.Routes.Exists(Direction.FromId(WorldData, 6L)) Then
             buffer.PutCell((7, 17), Pattern.UpwardDiagonal, False, Hue.Black)
             buffer.FillCells((8, 17), (6, 1), Pattern.Horizontal1, False, Hue.Black)
             buffer.PutCell((14, 17), Pattern.DownwardDiagonal, False, Hue.Black)
         End If
 
-        If location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 8L)) Then
-            ShowSprite(buffer, (5, 5), location.Routes.Find(Direction.FromId(StaticWorldData.WorldData, 8L)).RouteType.Sprite)
+        If location.Routes.Exists(Direction.FromId(WorldData, 8L)) Then
+            ShowSprite(buffer, (5, 5), location.Routes.Find(Direction.FromId(WorldData, 8L)).RouteType.Sprite)
         End If
 
-        If location.Routes.Exists(Direction.FromId(StaticWorldData.WorldData, 7L)) Then
-            ShowSprite(buffer, (5, 5), location.Routes.Find(Direction.FromId(StaticWorldData.WorldData, 7L)).RouteType.Sprite)
+        If location.Routes.Exists(Direction.FromId(WorldData, 7L)) Then
+            ShowSprite(buffer, (5, 5), location.Routes.Find(Direction.FromId(WorldData, 7L)).RouteType.Sprite)
         End If
 
         For Each item In player.Movement.Location.Inventory.Items

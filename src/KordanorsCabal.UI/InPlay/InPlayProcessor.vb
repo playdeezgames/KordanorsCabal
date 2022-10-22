@@ -23,8 +23,8 @@ Friend Class InPlayProcessor
 
     Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
-        Dim modeProcessor = _modeProcessors(Game.World.PlayerCharacter(StaticWorldData.WorldData).Mode)
-        Dim player = Game.World.PlayerCharacter(StaticWorldData.WorldData)
+        Dim modeProcessor = _modeProcessors(Game.World.PlayerCharacter(worldData).Mode)
+        Dim player = Game.World.PlayerCharacter(worldData)
         modeProcessor.UpdateBuffer(player, buffer)
         For Each button In ModeProcessor.Buttons
             button.Clear()
@@ -46,7 +46,7 @@ Friend Class InPlayProcessor
         Dim nextState = UIState.InPlay
         Select Case command
             Case Command.Green, Command.Blue
-                nextState = _modeProcessors(Game.World.PlayerCharacter(StaticWorldData.WorldData).Mode).HandleButton(Game.World.PlayerCharacter(StaticWorldData.WorldData), ModeProcessor.Buttons(ModeProcessor.CurrentButtonIndex))
+                nextState = _modeProcessors(Game.World.PlayerCharacter(worldData).Mode).HandleButton(Game.World.PlayerCharacter(worldData), ModeProcessor.Buttons(ModeProcessor.CurrentButtonIndex))
             Case Command.Down
                 ModeProcessor.CurrentButtonIndex = (ModeProcessor.CurrentButtonIndex + 1) Mod ModeProcessor.Buttons.Count
             Case Command.Up
@@ -54,7 +54,7 @@ Friend Class InPlayProcessor
             Case Command.Left, Command.Right
                 ModeProcessor.CurrentButtonIndex = (ModeProcessor.CurrentButtonIndex + ModeProcessor.Buttons.Count \ 2) Mod ModeProcessor.Buttons.Count
             Case Command.Red
-                nextState = _modeProcessors(Game.World.PlayerCharacter(StaticWorldData.WorldData).Mode).HandleRed(Game.World.PlayerCharacter(StaticWorldData.WorldData))
+                nextState = _modeProcessors(Game.World.PlayerCharacter(worldData).Mode).HandleRed(Game.World.PlayerCharacter(worldData))
         End Select
         Return nextState
     End Function

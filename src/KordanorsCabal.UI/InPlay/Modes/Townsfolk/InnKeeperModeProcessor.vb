@@ -14,7 +14,7 @@
             Case GoodByeButtonIndex
                 buffer.WriteText((0, 1), "@#$% off, you %$#^!", False, Hue.Black)
             Case QuestButtonIndex
-                If player.Quest.Has(QuestType.FromId(StaticWorldData.WorldData, 1L)) Then
+                If player.Quest.Has(QuestType.FromId(WorldData, 1L)) Then
                     buffer.WriteText((0, 1), "How the rat killing going?", False, Hue.Black)
                     Exit Select
                 End If
@@ -33,11 +33,11 @@
     End Sub
 
     Private Sub UpdateQuestButton(player As ICharacter)
-        If player.Quest.Has(QuestType.FromId(StaticWorldData.WorldData, 1L)) Then
+        If player.Quest.Has(QuestType.FromId(WorldData, 1L)) Then
             Buttons(QuestButtonIndex).Title = "Quest Done!"
             Return
         End If
-        If player.Quest.CanAccept(QuestType.FromId(StaticWorldData.WorldData, 1L)) Then
+        If player.Quest.CanAccept(QuestType.FromId(WorldData, 1L)) Then
             Buttons(QuestButtonIndex).Title = "Do Quest!"
             Return
         End If
@@ -52,23 +52,23 @@
             Case QuestButtonIndex
                 Return HandleQuestButton(player)
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 3)
+                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(WorldData, 3)
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(StaticWorldData.WorldData, 3)
+                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(WorldData, 3)
                 Return UIState.ShoppeBuy
         End Select
         Return UIState.InPlay
     End Function
 
     Private Function HandleQuestButton(player As IPlayerCharacter) As UIState
-        If player.Quest.Has(QuestType.FromId(StaticWorldData.WorldData, 1L)) Then
-            player.Quest.Complete(QuestType.FromId(StaticWorldData.WorldData, 1L))
+        If player.Quest.Has(QuestType.FromId(WorldData, 1L)) Then
+            player.Quest.Complete(QuestType.FromId(WorldData, 1L))
             PushUIState(UIState.InPlay)
             Return UIState.Message
         End If
-        If player.Quest.CanAccept(QuestType.FromId(StaticWorldData.WorldData, 1L)) Then
-            player.Quest.Accept(QuestType.FromId(StaticWorldData.WorldData, 1L))
+        If player.Quest.CanAccept(QuestType.FromId(WorldData, 1L)) Then
+            player.Quest.Accept(QuestType.FromId(WorldData, 1L))
             PushUIState(UIState.InPlay)
             Return UIState.Message
         End If

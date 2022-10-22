@@ -21,7 +21,7 @@ Friend Class TownDrunkModeProcessor
     Friend Overrides Sub UpdateButtons(player As IPlayerCharacter)
         Buttons(WelcomeButtonIndex).Title = "Hello!"
         Buttons(GoodByeButtonIndex).Title = "Good-bye"
-        If player.Items.HasItemType(ItemType.FromId(StaticWorldData.WorldData, ItemType26)) Then
+        If player.Items.HasItemType(ItemType.FromId(WorldData, ItemType26)) Then
             Buttons(EnableButtonIndex).Title = "Give Beer"
         End If
     End Sub
@@ -32,7 +32,7 @@ Friend Class TownDrunkModeProcessor
                 PopButtonIndex()
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case EnableButtonIndex
-                If player.Items.HasItemType(ItemType.FromId(StaticWorldData.WorldData, ItemType26)) Then
+                If player.Items.HasItemType(ItemType.FromId(WorldData, ItemType26)) Then
                     Return GiveBeer(player)
                 End If
         End Select
@@ -40,9 +40,9 @@ Friend Class TownDrunkModeProcessor
     End Function
 
     Private Function GiveBeer(player As ICharacter) As UIState
-        player.EnqueueMessage(Nothing, $"You give {ItemType.FromId(StaticWorldData.WorldData, ItemType26).Name} to {New FeatureType(StaticWorldData.WorldData, 3L).Name}.", $"{New FeatureType(StaticWorldData.WorldData, 3L).Name} drinks it all in one swallow, burps, and hands you {ItemType.FromId(StaticWorldData.WorldData, ItemType30).Name}.")
-        player.Items.Inventory.ItemsOfType(ItemType.FromId(StaticWorldData.WorldData, ItemType26)).First.Destroy()
-        player.Items.Inventory.Add(Item.Create(StaticWorldData.WorldData, ItemType30))
+        player.EnqueueMessage(Nothing, $"You give {ItemType.FromId(WorldData, ItemType26).Name} to {New FeatureType(WorldData, 3L).Name}.", $"{New FeatureType(WorldData, 3L).Name} drinks it all in one swallow, burps, and hands you {ItemType.FromId(WorldData, ItemType30).Name}.")
+        player.Items.Inventory.ItemsOfType(ItemType.FromId(WorldData, ItemType26)).First.Destroy()
+        player.Items.Inventory.Add(Item.Create(WorldData, ItemType30))
         PushUIState(UIState.InPlay)
         Return UIState.Message
     End Function

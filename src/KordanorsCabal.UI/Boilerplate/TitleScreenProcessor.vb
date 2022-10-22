@@ -29,8 +29,8 @@ Friend Class TitleScreenProcessor
     End Function
 
     Friend Shared Function StartGame() As UIState
-        Game.World.Start(StaticWorldData.WorldData)
-        If Not Game.World.PlayerCharacter(StaticWorldData.WorldData).Advancement.IsFullyAssigned Then
+        Game.World.Start(WorldData)
+        If Not Game.World.PlayerCharacter(WorldData).Advancement.IsFullyAssigned Then
             Return UIState.FinalizeCharacter
         End If
         Return UIState.Prolog
