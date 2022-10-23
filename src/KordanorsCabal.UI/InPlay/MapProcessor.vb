@@ -15,7 +15,7 @@ Friend Class MapProcessor
                 For Each location In locations
                     Dim inverted = (location.Id = playerLocation.Id)
                     Dim dungeonColumn = location.Statistics.GetStatistic(LocationStatisticType.FromId(worldData, LocationStatisticType1)).Value
-                    Dim dungeonRow = location.Statistics.GetStatistic(LocationStatisticType.FromId(worldData, LocationStatisticType1)).Value
+                    Dim dungeonRow = location.Statistics.GetStatistic(LocationStatisticType.FromId(worldData, LocationStatisticType2)).Value
                     Dim displayHue =
                         If(location.Factions.EnemiesOf(player).Any, Hue.Pink,
                         If(location.Routes.HasStairs, Hue.Green,
