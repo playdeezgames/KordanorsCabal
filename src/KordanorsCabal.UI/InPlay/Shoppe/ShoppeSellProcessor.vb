@@ -1,6 +1,4 @@
-﻿Imports KordanorsCabal.Data
-
-Friend Class ShoppeSellProcessor
+﻿Friend Class ShoppeSellProcessor
     Inherits ShoppeProcessor(Of IItem)
 
     Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
