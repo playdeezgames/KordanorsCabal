@@ -39,6 +39,7 @@ Public Module Tables
     Public Const LocationDungeonLevels = "LocationDungeonLevels"
     Public Const Locations = "Locations"
     Public Const LocationStatistics = "LocationStatistics"
+    Public Const LocationStatisticTypes = "LocationStatisticTypes"
     Public Const LocationTypes = "LocationTypes"
     Public Const Lores = "Lores"
     Public Const Players = "Players"

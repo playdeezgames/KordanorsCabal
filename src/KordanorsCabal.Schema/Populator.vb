@@ -46,6 +46,7 @@ Public Module Populator
         PopulateItemStatistics(connection)
         PopulateLocationDungeonLevels(connection)
         PopulateFeatures(connection)
+        PopulateLocationStatisticTypes(connection)
         PopulateLocationStatistics(connection)
         PopulateRoutes(connection)
         PopulateLores(connection)

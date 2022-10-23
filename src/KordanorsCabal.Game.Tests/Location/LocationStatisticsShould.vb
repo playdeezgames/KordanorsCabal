@@ -7,7 +7,7 @@
     Sub set_statistics()
         WithSubject(
             Sub(worldData, id, subject)
-                Const statisticType = LocationStatisticType.DungeonRow
+                Const statisticType = OldLocationStatisticType.DungeonRow
                 Const statisticValue = 2L
                 worldData.Setup(Sub(x) x.LocationStatistic.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of Long?)))
                 subject.SetStatistic(statisticType, statisticValue)
@@ -18,7 +18,7 @@
     Sub get_statistics()
         WithSubject(
             Sub(worldData, id, subject)
-                Const statisticType = LocationStatisticType.DungeonRow
+                Const statisticType = OldLocationStatisticType.DungeonRow
                 worldData.Setup(Function(x) x.LocationStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.GetStatistic(statisticType).ShouldBeNull
                 worldData.Verify(Function(x) x.LocationStatistic.Read(id, statisticType))

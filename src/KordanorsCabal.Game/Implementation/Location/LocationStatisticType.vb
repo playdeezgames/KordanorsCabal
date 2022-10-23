@@ -1,4 +1,4 @@
-﻿Public Enum LocationStatisticType
+﻿Public Enum OldLocationStatisticType
     None
     DungeonColumn
     DungeonRow

@@ -1,5 +1,5 @@
 ﻿Public Interface ILocationStatistics
     Inherits IBaseThingie
-    Sub SetStatistic(statisticType As LocationStatisticType, statisticValue As Long?)
-    Function GetStatistic(statisticType As LocationStatisticType) As Long?
+    Sub SetStatistic(statisticType As OldLocationStatisticType, statisticValue As Long?)
+    Function GetStatistic(statisticType As OldLocationStatisticType) As Long?
 End Interface
