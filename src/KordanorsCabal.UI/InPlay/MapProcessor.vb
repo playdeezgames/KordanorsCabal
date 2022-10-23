@@ -7,7 +7,7 @@ Friend Class MapProcessor
         If redrawBuffer Then
             redrawBuffer = False
             buffer.Fill(Pattern.Space, False, Hue.Blue)
-            Dim player = Game.StaticWorld.PlayerCharacter(worldData)
+            Dim player = World.FromWorldData(worldData).PlayerCharacter
             Dim playerLocation = player.Movement.Location
             Dim level = playerLocation.DungeonLevel
             If level IsNot Nothing Then

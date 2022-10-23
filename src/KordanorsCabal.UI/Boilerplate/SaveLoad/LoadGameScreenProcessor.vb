@@ -18,7 +18,7 @@
 
     Private Shared Function ContinueSlot(slotNumber As Integer) As UIState
         WorldData.Load(SaveSlotName(slotNumber))
-        If Game.StaticWorld.IsValid(WorldData) Then
+        If World.FromWorldData(WorldData).IsValid Then
             Return UIState.InPlay
         End If
         Return TitleScreenProcessor.StartGame()
@@ -42,7 +42,7 @@
 
     Private Sub ValidateSlot(slotNumber As Integer)
         WorldData.Load(SaveSlotName(slotNumber))
-        If Game.StaticWorld.IsValid(WorldData) Then
+        If World.FromWorldData(WorldData).IsValid Then
             UpdateMenuItemText(slotNumber, $"Slot {slotNumber}")
         Else
             UpdateMenuItemText(slotNumber, "(empty)")

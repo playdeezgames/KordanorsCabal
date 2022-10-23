@@ -7,7 +7,7 @@ Friend Class ShoppeRepairProcessor
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, $"Repair", True, Hue.Blue)
-        buffer.WriteTextCentered(1, $"Money: {Game.StaticWorld.PlayerCharacter(worldData).Statuses.Money}", False, Hue.Black)
+        buffer.WriteTextCentered(1, $"Money: {World.FromWorldData(worldData).PlayerCharacter.Statuses.Money}", False, Hue.Black)
 
         For row = ListStartRow + 1 To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
@@ -25,7 +25,7 @@ Friend Class ShoppeRepairProcessor
 
         currentItemIndex = 0
         Dim repairs = ShoppeType.Repairs
-        items = Game.StaticWorld.PlayerCharacter(WorldData).
+        items = World.FromWorldData(WorldData).PlayerCharacter.
             Repair.ItemsToRepair(ShoppeType).
             Where(Function(x) ShoppeType.WillRepair(x.ItemType)).ToList
     End Sub
@@ -54,10 +54,10 @@ Friend Class ShoppeRepairProcessor
         End If
         Dim item = items(currentItemIndex)
         Dim repairCost = item.Repair.RepairCost(Game.ShoppeType.FromId(WorldData, 2))
-        If Game.StaticWorld.PlayerCharacter(WorldData).Statuses.Money < repairCost Then
+        If World.FromWorldData(WorldData).PlayerCharacter.Statuses.Money < repairCost Then
             Return UIState.ShoppeRepair
         End If
-        Game.StaticWorld.PlayerCharacter(WorldData).Statuses.Money -= repairCost
+        World.FromWorldData(WorldData).PlayerCharacter.Statuses.Money -= repairCost
         item.Repair.Perform()
         Dim oldIndex = currentItemIndex
         Initialize()

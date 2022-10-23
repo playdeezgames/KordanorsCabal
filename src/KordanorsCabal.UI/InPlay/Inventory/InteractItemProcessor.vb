@@ -23,25 +23,25 @@ Friend Class InteractItemProcessor
     End Sub
 
     Private Shared Function EquipItem() As UIState
-        Game.StaticWorld.PlayerCharacter(WorldData).Equipment.Equip(InteractItem)
+        World.FromWorldData(WorldData).PlayerCharacter.Equipment.Equip(InteractItem)
         MainProcessor.PushUIState(UIState.Inventory)
         Return UIState.Message
     End Function
 
     Private Shared Function UseItem() As UIState
-        If InteractItem.Usage.CanUse(Game.StaticWorld.PlayerCharacter(WorldData)) Then
-            Game.StaticWorld.PlayerCharacter(WorldData).Items.UseItem(InteractItem)
+        If InteractItem.Usage.CanUse(World.FromWorldData(WorldData).PlayerCharacter) Then
+            World.FromWorldData(WorldData).PlayerCharacter.Items.UseItem(InteractItem)
             MainProcessor.PushUIState(UIState.Inventory)
             Return UIState.Message
         End If
-        Game.StaticWorld.PlayerCharacter(WorldData).EnqueueMessage(Nothing, "You cannot use that now!") 'TODO: shucks!
+        World.FromWorldData(WorldData).PlayerCharacter.EnqueueMessage(Nothing, "You cannot use that now!") 'TODO: shucks!
         MainProcessor.PushUIState(UIState.InteractItem)
         Return UIState.Message
     End Function
 
     Private Shared Function DropItem() As UIState
-        Game.StaticWorld.PlayerCharacter(WorldData).Movement.Location.Inventory.Add(InteractItem)
-        If Game.StaticWorld.PlayerCharacter(WorldData).Items.Inventory.IsEmpty Then
+        World.FromWorldData(WorldData).PlayerCharacter.Movement.Location.Inventory.Add(InteractItem)
+        If World.FromWorldData(WorldData).PlayerCharacter.Items.Inventory.IsEmpty Then
             Return UIState.InPlay
         End If
         Return UIState.Inventory

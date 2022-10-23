@@ -1,4 +1,4 @@
-﻿Module FeatureTypePopulator
+﻿Public Module FeatureTypePopulator
     Private Sub PopulateFeatureTypesRecord(connection As SqliteConnection, FeatureTypeId As Long, FeatureTypeName As String, LocationTypeId As Long, InteractionMode As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.FeatureTypes}]([{Columns.FeatureTypeIdColumn}], [{Columns.FeatureTypeNameColumn}], [{Columns.LocationTypeIdColumn}], [{Columns.InteractionModeColumn}]) VALUES (@{Columns.FeatureTypeIdColumn}, @{Columns.FeatureTypeNameColumn}, @{Columns.LocationTypeIdColumn}, @{Columns.InteractionModeColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.FeatureTypeIdColumn}", FeatureTypeId)
@@ -8,24 +8,24 @@
             command.ExecuteNonQuery()
         End Using
     End Sub
-    Friend Const FeatureType1 = 1L
-    Friend Const FeatureType2 = 2L
-    Friend Const FeatureType3 = 3L
-    Friend Const FeatureType4 = 4L
-    Friend Const FeatureType5 = 5L
-    Friend Const FeatureType6 = 6L
-    Friend Const FeatureType7 = 7L
-    Friend Const FeatureType8 = 8L
-    Friend Const FeatureType9 = 9L
-    Friend Const InteractionMode4 = 4
-    Friend Const InteractionMode5 = 5
-    Friend Const InteractionMode6 = 6
-    Friend Const InteractionMode7 = 7
-    Friend Const InteractionMode8 = 8
-    Friend Const InteractionMode9 = 9
-    Friend Const InteractionMode10 = 10
-    Friend Const InteractionMode11 = 11
-    Friend Const InteractionMode12 = 12
+    Public Const FeatureType1 = 1L
+    Public Const FeatureType2 = 2L
+    Public Const FeatureType3 = 3L
+    Public Const FeatureType4 = 4L
+    Public Const FeatureType5 = 5L
+    Public Const FeatureType6 = 6L
+    Public Const FeatureType7 = 7L
+    Public Const FeatureType8 = 8L
+    Public Const FeatureType9 = 9L
+    Public Const InteractionMode4 = 4
+    Public Const InteractionMode5 = 5
+    Public Const InteractionMode6 = 6
+    Public Const InteractionMode7 = 7
+    Public Const InteractionMode8 = 8
+    Public Const InteractionMode9 = 9
+    Public Const InteractionMode10 = 10
+    Public Const InteractionMode11 = 11
+    Public Const InteractionMode12 = 12
     Friend Sub PopulateFeatureTypes(connection As SqliteConnection)
         PopulateFeatureTypesRecord(connection, FeatureType1, "Zooperdan the Elder", LocationType1, InteractionMode4)
         PopulateFeatureTypesRecord(connection, FeatureType2, "Graham the Innkeeper", LocationType2, InteractionMode5)

@@ -12,7 +12,7 @@ Friend Class EquipmentProcessor
         buffer.WriteTextCentered(0, "Equipment", True, Hue.Blue)
         buffer.WriteText((0, 1), "Go Back", rowIndex = 0, Hue.Black)
         Dim row As Integer = 1
-        Dim player = Game.StaticWorld.PlayerCharacter(worldData)
+        Dim player = World.FromWorldData(WorldData).PlayerCharacter
         For Each entry In player.Equipment.EquippedSlots
             Dim slotName = $"{entry.Name}: "
             buffer.WriteText((0, row + 1), slotName, rowIndex = row, Hue.Black)
@@ -31,7 +31,7 @@ Friend Class EquipmentProcessor
         table.Clear()
         table(0) = Nothing
         Dim row As Integer = 1
-        For Each entry In Game.StaticWorld.PlayerCharacter(WorldData).Equipment.EquippedSlots
+        For Each entry In World.FromWorldData(WorldData).PlayerCharacter.Equipment.EquippedSlots
             table(row) = entry
             row += 1
         Next

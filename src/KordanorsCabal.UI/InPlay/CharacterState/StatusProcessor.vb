@@ -7,7 +7,7 @@ Friend Class StatusProcessor
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Status", True, Hue.Blue)
-        Dim player = Game.StaticWorld.PlayerCharacter(worldData)
+        Dim player = World.FromWorldData(WorldData).PlayerCharacter
 
         buffer.WriteText((0, 1), $"{CharacterStatisticType.FromId(worldData, CharacterStatisticType1).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, CharacterStatisticType1))}", False, Hue.Black)
         buffer.WriteText((0, 2), $"{CharacterStatisticType.FromId(worldData, CharacterStatisticType2).Abbreviation} {player.Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, CharacterStatisticType2))}", False, Hue.Black)
