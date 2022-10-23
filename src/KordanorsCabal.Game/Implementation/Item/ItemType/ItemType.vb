@@ -21,27 +21,27 @@
     End Property
     ReadOnly Property Encumbrance As Long Implements IItemType.Encumbrance
         Get
-            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 1)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, ItemTypeStatisticType1)), 0)
         End Get
     End Property
     ReadOnly Property MaximumDurability As Long? Implements IItemType.MaximumDurability
         Get
-            Return ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 5))
+            Return ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, ItemTypeStatisticType5))
         End Get
     End Property
     ReadOnly Property Offer As Long Implements IItemType.Offer
         Get
-            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 6)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, ItemTypeStatisticType6)), 0)
         End Get
     End Property
     ReadOnly Property Price As Long Implements IItemType.Price
         Get
-            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 7)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, ItemTypeStatisticType7)), 0)
         End Get
     End Property
     ReadOnly Property RepairPrice As Long Implements IItemType.RepairPrice
         Get
-            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, 8)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, ItemTypeStatisticType.FromId(WorldData, ItemTypeStatisticType8)), 0)
         End Get
     End Property
     Private Const OfferTransactionTypeId = 1L
