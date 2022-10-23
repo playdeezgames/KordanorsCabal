@@ -13,7 +13,7 @@ Friend Class InventoryProcessor
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Inventory", True, Hue.Blue)
-        Dim player = Game.World.PlayerCharacter(worldData)
+        Dim player = Game.StaticWorld.PlayerCharacter(worldData)
         buffer.WriteTextCentered(1, $"Encumbrance: {player.Encumbrance.CurrentEncumbrance}/{player.Encumbrance.MaximumEncumbrance}", False, Hue.Red)
         For row = ListStartRow To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
@@ -31,7 +31,7 @@ Friend Class InventoryProcessor
         currentItemIndex = 0
         items = New List(Of (String, IEnumerable(Of IItem)))
         Dim table As New Dictionary(Of String, List(Of IItem))
-        For Each item In Game.World.PlayerCharacter(WorldData).Items.Inventory.Items.OrderBy(Function(x) x.Name)
+        For Each item In Game.StaticWorld.PlayerCharacter(WorldData).Items.Inventory.Items.OrderBy(Function(x) x.Name)
             If Not table.ContainsKey(item.Name) Then
                 table(item.Name) = New List(Of IItem)
             End If

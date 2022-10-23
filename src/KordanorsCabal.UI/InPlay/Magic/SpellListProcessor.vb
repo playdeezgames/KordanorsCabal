@@ -13,7 +13,7 @@ Friend Class SpellListProcessor
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.FillCells((0, 0), (buffer.Columns, 1), Pattern.Space, True, Hue.Blue)
         buffer.WriteTextCentered(0, "Spell List", True, Hue.Blue)
-        Dim player = Game.World.PlayerCharacter(worldData)
+        Dim player = Game.StaticWorld.PlayerCharacter(worldData)
         For row = ListStartRow To ListEndRow
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
             If itemIndex >= 0 AndAlso itemIndex < items.Count Then
@@ -30,7 +30,7 @@ Friend Class SpellListProcessor
     Public Overrides Sub Initialize()
 
         currentItemIndex = 0
-        items = Game.World.PlayerCharacter(WorldData).Spellbook.Spells.Select(Function(x) (x.Key, x.Value)).ToList
+        items = Game.StaticWorld.PlayerCharacter(WorldData).Spellbook.Spells.Select(Function(x) (x.Key, x.Value)).ToList
     End Sub
 
     Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
@@ -48,7 +48,7 @@ Friend Class SpellListProcessor
     End Function
 
     Private Function CastSpell() As UIState
-        Game.World.PlayerCharacter(WorldData).Spellbook.Cast(Game.SpellType.FromId(WorldData, items(currentItemIndex).Item1))
+        Game.StaticWorld.PlayerCharacter(WorldData).Spellbook.Cast(Game.SpellType.FromId(WorldData, items(currentItemIndex).Item1))
         PushUIState(UIState.SpellList)
         Return UIState.Message
     End Function

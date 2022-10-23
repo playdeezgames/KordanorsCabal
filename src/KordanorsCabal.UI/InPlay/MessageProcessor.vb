@@ -28,7 +28,7 @@ Friend Class MessageProcessor
                 If messages.Any Then
                     Return UIState.Message
                 End If
-                If Game.World.PlayerCharacter(worldData).Health.IsDead Then
+                If Game.StaticWorld.PlayerCharacter(worldData).Health.IsDead Then
                     Return UIState.Dead
                 End If
                 Return PopUIState()

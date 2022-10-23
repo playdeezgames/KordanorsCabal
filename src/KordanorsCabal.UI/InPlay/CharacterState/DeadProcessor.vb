@@ -7,7 +7,7 @@ Friend Class DeadProcessor
     Public Overrides Sub UpdateBuffer(worldData As IWorldData, buffer As PatternBuffer)
         buffer.Fill(Pattern.Space, False, Hue.Blue)
         buffer.WriteText((0, 0), "yer dead!", False, Hue.Red)
-        If Game.World.PlayerCharacter(worldData).Equipment.CurrentEquipment(EquipSlot.FromId(worldData, 5L)) IsNot Nothing Then
+        If Game.StaticWorld.PlayerCharacter(worldData).Equipment.CurrentEquipment(EquipSlot.FromId(worldData, 5L)) IsNot Nothing Then
             buffer.WriteText((0, 2), "But at least you died with dignity!", False, Hue.Black)
         End If
     End Sub

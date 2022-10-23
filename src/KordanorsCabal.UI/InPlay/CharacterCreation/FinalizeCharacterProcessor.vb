@@ -6,7 +6,7 @@ Friend Class FinalizeCharacterProcessor
     Private prompt As String
 
     Private Shared Function ApplyPoint(statisticType As ICharacterStatisticType, nextState As UIState, currentState As UIState) As UIState
-        Dim player = Game.World.PlayerCharacter(WorldData)
+        Dim player = Game.StaticWorld.PlayerCharacter(WorldData)
         player.Advancement.AssignPoint(statisticType)
         Return If(player.Advancement.IsFullyAssigned, nextState, currentState)
     End Function
@@ -45,7 +45,7 @@ Friend Class FinalizeCharacterProcessor
 
     Protected Overrides Sub ShowPrompt(buffer As PatternBuffer)
         buffer.WriteTextCentered(0, prompt, True, Hue.Blue)
-        Dim player = Game.World.PlayerCharacter(WorldData)
+        Dim player = Game.StaticWorld.PlayerCharacter(WorldData)
         buffer.WriteTextCentered(2, $"{CharacterStatisticType.FromId(WorldData, CharacterStatisticType9).Name}: {player.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType9))}", False, Hue.Purple)
         buffer.WriteText((0, 4), "Choose where to assignpoint(s):", False, Hue.Black)
         For Each index In indices

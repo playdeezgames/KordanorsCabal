@@ -1,4 +1,4 @@
-Public Module World
+Public Module StaticWorld
     Public Sub Start(worldData As IWorldData)
         Dim start = DateTimeOffset.Now
         worldData.Reset()
