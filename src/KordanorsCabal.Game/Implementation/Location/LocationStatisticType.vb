@@ -1,9 +1,4 @@
-﻿Public Enum OldLocationStatisticType
-    None
-    DungeonColumn
-    DungeonRow
-End Enum
-Public Class LocationStatisticType
+﻿Public Class LocationStatisticType
     Inherits BaseThingie
     Implements ILocationStatisticType
     Public Sub New(worldData As IWorldData, id As Long)

@@ -1,4 +1,4 @@
-﻿Module LocationTypePopulator
+﻿Public Module LocationTypePopulator
     Private Sub PopulateLocationTypesRecord(connection As SqliteConnection, LocationTypeId As Long, LocationTypeName As String, IsDungeon As Long, CanMap As Long, RequiresMP As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.LocationTypes}]([{Columns.LocationTypeIdColumn}], [{Columns.LocationTypeNameColumn}], [{Columns.IsDungeonColumn}], [{Columns.CanMapColumn}], [{Columns.RequiresMPColumn}]) VALUES (@{Columns.LocationTypeIdColumn}, @{Columns.LocationTypeNameColumn}, @{Columns.IsDungeonColumn}, @{Columns.CanMapColumn}, @{Columns.RequiresMPColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.LocationTypeIdColumn}", LocationTypeId)

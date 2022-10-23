@@ -8,10 +8,10 @@
     Shared Function FromId(worldData As IWorldData, id As Long?) As ILocationStatistics
         Return If(id.HasValue, New LocationStatistics(worldData, id.Value), Nothing)
     End Function
-    Public Function GetStatistic(statisticType As OldLocationStatisticType) As Long? Implements ILocationStatistics.GetStatistic
-        Return WorldData.LocationStatistic.Read(Id, statisticType)
+    Public Function GetStatistic(statisticType As ILocationStatisticType) As Long? Implements ILocationStatistics.GetStatistic
+        Return WorldData.LocationStatistic.Read(Id, statisticType.Id)
     End Function
-    Sub SetStatistic(statisticType As OldLocationStatisticType, statisticValue As Long?) Implements ILocationStatistics.SetStatistic
-        WorldData.LocationStatistic.Write(Id, statisticType, statisticValue)
+    Sub SetStatistic(statisticType As ILocationStatisticType, statisticValue As Long?) Implements ILocationStatistics.SetStatistic
+        WorldData.LocationStatistic.Write(Id, statisticType.Id, statisticValue)
     End Sub
 End Class
