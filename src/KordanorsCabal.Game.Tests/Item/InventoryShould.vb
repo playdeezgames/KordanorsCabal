@@ -37,12 +37,15 @@
         WithSubject(
             Sub(worldData, id, subject)
                 Const itemId = 2L
+                Const itemTypeId = 3L
                 worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 worldData.Setup(Sub(x) x.InventoryItem.Write(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
                 subject.Add(Item.FromId(worldData.Object, itemId))
                 worldData.Verify(Sub(x) x.InventoryItem.Write(id, itemId))
                 worldData.Verify(Sub(x) x.InventoryItem.ReadForItem(itemId))
-                worldData.Verify(Function(x) x.ItemTypeEvent.Read(id, ItemType.AddToInventoryEventId))
+                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, ItemType.AddToInventoryEventId))
+                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
             End Sub)
     End Sub
     <Fact>
@@ -61,6 +64,15 @@
                 worldData.Setup(Function(x) x.InventoryItem.ReadItems(It.IsAny(Of Long)))
                 subject.IsEmpty.ShouldBeTrue
                 worldData.Verify(Function(x) x.InventoryItem.ReadItems(id))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub have_character()
+        WithSubject(
+            Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.Inventory.ReadCharacter(It.IsAny(Of Long)))
+                subject.Character.ShouldBeNull
+                worldData.Verify(Function(x) x.Inventory.ReadCharacter(id))
             End Sub)
     End Sub
 End Class

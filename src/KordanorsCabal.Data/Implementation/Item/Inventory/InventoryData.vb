@@ -44,4 +44,12 @@
             LocationIdColumn,
             (InventoryIdColumn, inventoryId))
     End Function
+
+    Public Function ReadCharacter(inventoryId As Long) As Long? Implements IInventoryData.ReadCharacter
+        Return Store.Column.ReadValue(Of Long, Long)(
+            AddressOf NoInitializer,
+            Inventories,
+            CharacterIdColumn,
+            (InventoryIdColumn, inventoryId))
+    End Function
 End Class

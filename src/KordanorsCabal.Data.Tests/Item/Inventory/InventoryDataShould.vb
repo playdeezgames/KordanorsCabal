@@ -90,4 +90,19 @@
                         (Columns.InventoryIdColumn, inventoryId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub fetch_character_associated_with_inventory()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const inventoryId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
+                subject.ReadCharacter(inventoryId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
+                        It.IsAny(Of Action),
+                        Tables.Inventories,
+                        Columns.CharacterIdColumn,
+                        (Columns.InventoryIdColumn, inventoryId)))
+            End Sub)
+    End Sub
 End Class

@@ -4,6 +4,7 @@
     ReadOnly Property Items As IReadOnlyList(Of IItem)
     Sub Add(item As IItem)
     ReadOnly Property Location As ILocation
+    ReadOnly Property Character As ICharacter
     ReadOnly Property TotalEncumbrance As Long
     ReadOnly Property IsEmpty As Boolean
 End Interface

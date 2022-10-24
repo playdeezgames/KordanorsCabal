@@ -23,7 +23,7 @@
             Return
         End If
         WorldData.InventoryItem.Write(Id, item.Id)
-        Dim eventName = WorldData.ItemTypeEvent.Read(Id, ItemType.AddToInventoryEventId)
+        Dim eventName = WorldData.ItemTypeEvent.Read(item.ItemType.Id, ItemType.AddToInventoryEventId)
         If eventName IsNot Nothing Then
             WorldData.Events.Perform(WorldData, eventName, Id, item.Id)
         End If
@@ -41,6 +41,12 @@
     Public ReadOnly Property Location As ILocation Implements IInventory.Location
         Get
             Return Game.Location.FromId(WorldData, WorldData.Inventory.ReadLocation(Id))
+        End Get
+    End Property
+
+    Public ReadOnly Property Character As ICharacter Implements IInventory.Character
+        Get
+            Return Game.Character.FromId(WorldData, WorldData.Inventory.ReadCharacter(Id))
         End Get
     End Property
 End Class

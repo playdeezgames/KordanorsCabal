@@ -126,10 +126,11 @@
             command.ExecuteNonQuery()
         End Using
     End Sub
-    Friend Const EventTypePurify = 1
-    Friend Const EventTypeCanUse = 2
-    Friend Const EventTypeUse = 3
-    Friend Const EventTypeDecay = 4
+    Friend Const EventTypePurify = 1L
+    Friend Const EventTypeCanUse = 2L
+    Friend Const EventTypeUse = 3L
+    Friend Const EventTypeDecay = 4L
+    Friend Const EventTypeAddToInventory = 5L
     Sub PopulateItemTypeEvents(connection As SqliteConnection)
         PopulateItemTypeEventsRecord(connection, ItemType7, EventTypeCanUse, "AlwaysTrue")
         PopulateItemTypeEventsRecord(connection, ItemType7, EventTypeUse, "DrinkPotion")
