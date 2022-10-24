@@ -44,7 +44,7 @@
                 maximumDamage = If(maximumDamage, 0) + itemMaximumDamage.Value
             End If
         Next
-        maximumDamage = If(maximumDamage, Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeMaximumDamage)).Value)
+        maximumDamage = If(maximumDamage, Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeUnarmedMaximumDamage)).Value)
         Return If(value < 0, 0, If(value > maximumDamage.Value, maximumDamage.Value, value))
     End Function
     ReadOnly Property RollMoneyDrop As Long
