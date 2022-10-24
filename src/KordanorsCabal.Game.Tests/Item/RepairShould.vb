@@ -16,8 +16,8 @@
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long))).Returns(1L)
                 item.IsNeeded.ShouldBeTrue
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5L))
-                worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 1L))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 33L))
+                worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 28L))
             End Sub)
     End Sub
     <Fact>
@@ -42,8 +42,8 @@
                 subject.RepairCost(ShoppeType.FromId(worldData.Object, shoppeTypeId)).ShouldBe(0)
                 worldData.Verify(Function(x) x.Item.ReadItemType(id))
                 worldData.Verify(Function(x) x.ItemType.ReadAll())
-                worldData.Verify(Function(x) x.ItemStatistic.Read(id, 1L))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5))
+                worldData.Verify(Function(x) x.ItemStatistic.Read(id, 28L))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 33))
             End Sub)
     End Sub
 End Class

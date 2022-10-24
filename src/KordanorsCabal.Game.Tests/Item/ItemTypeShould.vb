@@ -34,7 +34,7 @@
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Encumbrance.ShouldBe(0L)
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 1))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 29))
             End Sub)
     End Sub
     <Fact>
@@ -43,7 +43,7 @@
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.MaximumDurability.ShouldBeNull
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 5))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 33))
             End Sub)
     End Sub
     <Fact>
@@ -52,7 +52,7 @@
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Offer.ShouldBe(0L)
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 6))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 34))
             End Sub)
     End Sub
     <Fact>
@@ -61,7 +61,7 @@
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Price.ShouldBe(0L)
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 7))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 35))
             End Sub)
     End Sub
     <Fact>
@@ -70,7 +70,7 @@
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.RepairPrice.ShouldBe(0L)
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 8))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 36))
             End Sub)
     End Sub
     <Fact>

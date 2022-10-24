@@ -15,7 +15,7 @@
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 item.IsWeapon.ShouldBeFalse
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 2L))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 30L))
             End Sub)
     End Sub
     <Fact>
@@ -27,7 +27,7 @@
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 item.AttackDice.ShouldBe(0)
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 2L))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 30L))
             End Sub)
     End Sub
     <Fact>
@@ -39,7 +39,7 @@
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 item.MaximumDamage.ShouldBeNull
                 worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 3L))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 31L))
             End Sub)
     End Sub
 End Class

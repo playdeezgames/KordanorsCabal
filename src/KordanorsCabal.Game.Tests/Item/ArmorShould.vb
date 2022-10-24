@@ -12,7 +12,7 @@
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.IsArmor.ShouldBeFalse
                 worldData.Verify(Function(x) x.Item.ReadItemType(id))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4L))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 32L))
             End Sub)
     End Sub
     <Fact>
@@ -24,7 +24,7 @@
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.DefendDice.ShouldBe(0)
                 worldData.Verify(Function(x) x.Item.ReadItemType(id))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 4L))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 32L))
             End Sub)
     End Sub
 End Class
