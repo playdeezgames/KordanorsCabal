@@ -1,29 +1,29 @@
 ﻿Public Module StatisticTypePopulator
-    Public Const CharacterStatisticType1 = 1
-    Public Const CharacterStatisticType2 = 2
-    Public Const CharacterStatisticType3 = 3
-    Public Const CharacterStatisticType4 = 4
-    Public Const CharacterStatisticType5 = 5
-    Public Const CharacterStatisticType6 = 6
-    Public Const CharacterStatisticType7 = 7
-    Public Const CharacterStatisticType8 = 8
-    Public Const CharacterStatisticType9 = 9
-    Public Const CharacterStatisticType10 = 10
-    Public Const CharacterStatisticType11 = 11
-    Public Const CharacterStatisticType12 = 12
-    Public Const CharacterStatisticType13 = 13
-    Public Const CharacterStatisticType14 = 14
-    Public Const CharacterStatisticType15 = 15
-    Public Const CharacterStatisticType16 = 16
-    Public Const CharacterStatisticType17 = 17
-    Public Const CharacterStatisticType18 = 18
-    Public Const CharacterStatisticType19 = 19
-    Public Const CharacterStatisticType20 = 20
-    Public Const CharacterStatisticType21 = 21
-    Public Const CharacterStatisticType22 = 22
-    Public Const CharacterStatisticType23 = 23
-    Public Const CharacterStatisticType24 = 24
-    Public Const CharacterStatisticType25 = 25
+    Public Const StatisticTypeStrength = 1
+    Public Const StatisticTypeDexterity = 2
+    Public Const StatisticTypeInfluence = 3
+    Public Const StatisticTypeWillpower = 4
+    Public Const StatisticTypePower = 5
+    Public Const StatisticTypeHP = 6
+    Public Const StatisticTypeMP = 7
+    Public Const StatisticTypeMana = 8
+    Public Const StatisticTypeUnassigned = 9
+    Public Const StatisticTypeMaximumDamage = 10
+    Public Const StatisticTypeMaximumDefend = 11
+    Public Const StatisticTypeWounds = 12
+    Public Const StatisticTypeStress = 13
+    Public Const StatisticTypeMoney = 14
+    Public Const StatisticTypeFatigue = 15
+    Public Const StatisticTypeXP = 16
+    Public Const StatisticTypeXPGoal = 17
+    Public Const StatisticTypeDrunkenness = 18
+    Public Const StatisticTypeHighness = 19
+    Public Const StatisticTypeHunger = 20
+    Public Const StatisticTypeFoodPoisoning = 21
+    Public Const StatisticTypeChafing = 22
+    Public Const StatisticTypeImmobilization = 23
+    Public Const StatisticTypeBaseLift = 24
+    Public Const StatisticTypeBonusLift = 25
     Public Const StatisticTypeDungeonColumn = 26
     Public Const StatisticTypeDungeonRow = 27
     Public Const ItemStatisticType28 = 28L
@@ -47,31 +47,31 @@
         End Using
     End Sub
     Friend Sub PopulateCharacterStatisticTypes(connection As SqliteConnection)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType1, "Strength", "STR", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType2, "Dexterity", "DEX", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType3, "Influence", "INF", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType4, "Willpower", "WIL", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType5, "Power", "POW", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType6, "HP", "HP", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType7, "MP", "MP", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType8, "Mana", "Mana", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType9, "Unassigned", "Unassigned", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType10, "Unarmed Maximum Damage", "MAXDMG", 0, 1, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType11, "Base Maximum Defend", "MAXDEF", 0, 1, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType12, "Wounds", "Wounds", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType13, "Stress", "Stress", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType14, "Money", "$", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType15, "Fatigue", "Fatigue", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType16, "XP", "XP", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType17, "XP Goal", "XP Goal", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType18, "Drunkenness", "Drunkenness", 0, 0, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType19, "Highness", "Highness", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType20, "Hunger", "Hunger", 0, 0, 100)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType21, "Food Poisoning", "Food Poisoning", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType22, "Chafing", "Chafing", 0, 0, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType23, "Immobilization", "Immobilization", 0, Nothing, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType24, "Base Lift", "Base Lift", 0, 0, 99999)
-        PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType25, "Bonus Lift", "Bonus Lift", 0, 0, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeStrength, "Strength", "STR", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDexterity, "Dexterity", "DEX", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeInfluence, "Influence", "INF", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeWillpower, "Willpower", "WIL", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypePower, "Power", "POW", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeHP, "HP", "HP", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeMP, "MP", "MP", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeMana, "Mana", "Mana", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeUnassigned, "Unassigned", "Unassigned", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeMaximumDamage, "Unarmed Maximum Damage", "MAXDMG", 0, 1, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeMaximumDefend, "Base Maximum Defend", "MAXDEF", 0, 1, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeWounds, "Wounds", "Wounds", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeStress, "Stress", "Stress", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeMoney, "Money", "$", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeFatigue, "Fatigue", "Fatigue", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeXP, "XP", "XP", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeXPGoal, "XP Goal", "XP Goal", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDrunkenness, "Drunkenness", "Drunkenness", 0, 0, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeHighness, "Highness", "Highness", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeHunger, "Hunger", "Hunger", 0, 0, 100)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeFoodPoisoning, "Food Poisoning", "Food Poisoning", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeChafing, "Chafing", "Chafing", 0, 0, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeImmobilization, "Immobilization", "Immobilization", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeBaseLift, "Base Lift", "Base Lift", 0, 0, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeBonusLift, "Bonus Lift", "Bonus Lift", 0, 0, 99999)
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDungeonColumn, "Dungeon Column", "Column", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDungeonRow, "Dungeon Row", "Row", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, ItemStatisticType28, "Durability", "Durability", 0, 0, 99999)
@@ -83,16 +83,6 @@
         PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType34, "Offer", "Offer", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType35, "Price", "Price", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType36, "RepairPrice", "Repair", 0, Nothing, 99999)
-    End Sub
-    Private Sub PopulateItemStatisticTypesRecord(connection As SqliteConnection, ItemStatisticTypeId As Long, DefaultValue As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemStatisticTypes}]([{Columns.ItemStatisticTypeIdColumn}], [{Columns.DefaultValueColumn}]) VALUES (@{Columns.ItemStatisticTypeIdColumn}, @{Columns.DefaultValueColumn});", connection)
-            command.Parameters.AddWithValue($"@{Columns.ItemStatisticTypeIdColumn}", ItemStatisticTypeId)
-            command.Parameters.AddWithValue($"@{Columns.DefaultValueColumn}", DefaultValue)
-            command.ExecuteNonQuery()
-        End Using
-    End Sub
-    Friend Sub PopulateItemStatisticTypes(connection As SqliteConnection)
-        PopulateItemStatisticTypesRecord(connection, ItemStatisticType28, 0)
     End Sub
     Private Sub PopulateItemTypeStatisticTypesRecord(connection As SqliteConnection, ItemTypeStatisticTypeId As Long, ItemTypeStatisticTypeName As String)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeStatisticTypes}]([{Columns.ItemTypeStatisticTypeIdColumn}], [{Columns.ItemTypeStatisticTypeNameColumn}]) VALUES (@{Columns.ItemTypeStatisticTypeIdColumn}, @{Columns.ItemTypeStatisticTypeNameColumn});", connection)

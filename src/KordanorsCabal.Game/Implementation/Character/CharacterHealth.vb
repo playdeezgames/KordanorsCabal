@@ -10,15 +10,15 @@
     End Function
     Property Current As Long Implements ICharacterHealth.Current
         Get
-            Return Math.Max(0, Maximum - If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType12)), 0))
+            Return Math.Max(0, Maximum - If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeWounds)), 0))
         End Get
         Set(value As Long)
-            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType12), Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType6)).Value - value)
+            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeWounds), Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeHP)).Value - value)
         End Set
     End Property
     ReadOnly Property Maximum As Long Implements ICharacterHealth.Maximum
         Get
-            Return If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType6)), 0)
+            Return If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeHP)), 0)
         End Get
     End Property
     ReadOnly Property IsDead As Boolean Implements ICharacterHealth.IsDead
@@ -28,10 +28,10 @@
     End Property
     ReadOnly Property NeedsHealing As Boolean Implements ICharacterHealth.NeedsHealing
         Get
-            Return Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType12)).Value > 0
+            Return Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeWounds)).Value > 0
         End Get
     End Property
     Public Sub Heal() Implements ICharacterHealth.Heal
-        Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, CharacterStatisticType12), 0)
+        Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeWounds), 0)
     End Sub
 End Class

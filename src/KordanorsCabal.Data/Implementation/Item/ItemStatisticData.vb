@@ -10,7 +10,7 @@
             ItemStatistics,
             StatisticValueColumn,
             (ItemIdColumn, itemId),
-            (ItemStatisticTypeIdColumn, statisticType))
+            (CharacterStatisticTypeIdColumn, statisticType))
     End Function
 
     Public Sub Write(itemId As Long, statisticType As Long, value As Long) Implements IItemStatisticData.Write
@@ -18,7 +18,7 @@
             AddressOf NoInitializer,
             ItemStatistics,
             (ItemIdColumn, itemId),
-            (ItemStatisticTypeIdColumn, statisticType),
+            (CharacterStatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, value))
     End Sub
 

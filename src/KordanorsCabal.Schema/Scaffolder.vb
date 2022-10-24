@@ -121,11 +121,6 @@ Public Module Scaffolder
                     [{Columns.CanCompleteEventNameColumn}] TEXT NOT NULL,
                     [{Columns.CompleteEventNameColumn}] TEXT NOT NULL
 )")
-        ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemStatisticTypes}]
-(
-	[{Columns.ItemStatisticTypeIdColumn}] INTEGER PRIMARY KEY,
-	[{Columns.DefaultValueColumn}] INT NOT NULL
-)")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemTypeEquipSlots}]
 (
                     [{Columns.ItemTypeIdColumn}] INT NOT NULL,
@@ -353,11 +348,11 @@ Public Module Scaffolder
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemStatistics}]
             (
                 [{Columns.ItemIdColumn}] INT NOT NULL,
-                [{Columns.ItemStatisticTypeIdColumn}] INT NOT NULL,
+                [{Columns.CharacterStatisticTypeIdColumn}] INT NOT NULL,
                 [{Columns.StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{Columns.ItemIdColumn}],[{Columns.ItemStatisticTypeIdColumn}]),
+                UNIQUE([{Columns.ItemIdColumn}],[{Columns.CharacterStatisticTypeIdColumn}]),
                 FOREIGN KEY ([{Columns.ItemIdColumn}]) REFERENCES [{Tables.Items}]([{Columns.ItemIdColumn}]),
-                FOREIGN KEY ([{Columns.ItemStatisticTypeIdColumn}]) REFERENCES [{Tables.ItemStatisticTypes}]([{Columns.ItemStatisticTypeIdColumn}])
+                FOREIGN KEY ([{Columns.CharacterStatisticTypeIdColumn}]) REFERENCES [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}])
             )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.LocationDungeonLevels}]
             (

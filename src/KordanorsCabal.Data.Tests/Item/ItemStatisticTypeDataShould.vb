@@ -13,9 +13,9 @@
                 store.Verify(
                     Function(x) x.Column.ReadValue(Of Long, Long)(
                         It.IsAny(Of Action),
-                        Tables.ItemStatisticTypes,
+                        Tables.CharacterStatisticTypes,
                         Columns.DefaultValueColumn,
-                        (Columns.ItemStatisticTypeIdColumn, statisticTypeId)))
+                        (Columns.CharacterStatisticTypeIdColumn, statisticTypeId)))
             End Sub)
     End Sub
 End Class

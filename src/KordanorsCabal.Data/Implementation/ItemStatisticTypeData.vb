@@ -8,8 +8,8 @@
     Public Function ReadDefaultValue(statisticTypeId As Long) As Long? Implements IItemStatisticTypeData.ReadDefaultValue
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
-            ItemStatisticTypes,
+            CharacterStatisticTypes,
             DefaultValueColumn,
-            (ItemStatisticTypeIdColumn, statisticTypeId))
+            (CharacterStatisticTypeIdColumn, statisticTypeId))
     End Function
 End Class

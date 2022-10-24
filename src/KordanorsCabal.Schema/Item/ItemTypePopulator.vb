@@ -346,11 +346,11 @@
         End Using
     End Sub
     Sub PopulateItemTypeCharacterStatisticBuffs(connection As SqliteConnection)
-        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType45, CharacterStatisticType6, 1)
-        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType46, CharacterStatisticType6, 1)
-        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType49, CharacterStatisticType2, 1)
-        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType50, CharacterStatisticType5, 1)
-        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType51, CharacterStatisticType8, 1)
+        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType45, StatisticTypeHP, 1)
+        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType46, StatisticTypeHP, 1)
+        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType49, StatisticTypeDexterity, 1)
+        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType50, StatisticTypePower, 1)
+        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType51, StatisticTypeMana, 1)
     End Sub
     Private Sub PopulateItemTypeStatisticsRecord(connection As SqliteConnection, ItemTypeId As Long, ItemTypeStatisticTypeId As Long, ItemTypeStatisticValue As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeStatistics}]([{Columns.ItemTypeIdColumn}], [{Columns.ItemTypeStatisticTypeIdColumn}], [{Columns.ItemTypeStatisticValueColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.ItemTypeStatisticTypeIdColumn}, @{Columns.ItemTypeStatisticValueColumn});", connection)

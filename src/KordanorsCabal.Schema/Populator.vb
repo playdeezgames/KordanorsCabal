@@ -15,7 +15,6 @@ Public Module Populator
         PopulateCharacterTypeSpawnLocations(connection)
         PopulateEquipSlots(connection)
         PopulateQuestTypes(connection)
-        PopulateItemStatisticTypes(connection)
         PopulateItemTypeEquipSlots(connection)
         PopulateItemTypeEvents(connection)
         PopulateShoppeTypes(connection)
