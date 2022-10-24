@@ -27,6 +27,14 @@
     Public Const StatisticTypeDungeonColumn = 26
     Public Const StatisticTypeDungeonRow = 27
     Public Const ItemStatisticType28 = 28L
+    Public Const ItemTypeStatisticType29 = 29L
+    Public Const ItemTypeStatisticType30 = 30L
+    Public Const ItemTypeStatisticType31 = 31L
+    Public Const ItemTypeStatisticType32 = 32L
+    Public Const ItemTypeStatisticType33 = 33L
+    Public Const ItemTypeStatisticType34 = 34L
+    Public Const ItemTypeStatisticType35 = 35L
+    Public Const ItemTypeStatisticType36 = 36L
     Private Sub PopulateCharacterStatisticTypesRecord(connection As SqliteConnection, CharacterStatisticTypeId As Long, CharacterStatisticTypeName As String, Abbreviation As String, MinimumValue As Long, DefaultValue As Long?, MaximumValue As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}], [{Columns.CharacterStatisticTypeNameColumn}], [{Columns.AbbreviationColumn}], [{Columns.MinimumValueColumn}], [{Columns.DefaultValueColumn}], [{Columns.MaximumValueColumn}]) VALUES (@{Columns.CharacterStatisticTypeIdColumn}, @{Columns.CharacterStatisticTypeNameColumn}, @{Columns.AbbreviationColumn}, @{Columns.MinimumValueColumn}, @{Columns.DefaultValueColumn}, @{Columns.MaximumValueColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", CharacterStatisticTypeId)
@@ -67,6 +75,14 @@
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDungeonColumn, "Dungeon Column", "Column", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDungeonRow, "Dungeon Row", "Row", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, ItemStatisticType28, "Durability", "Durability", 0, 0, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType29, "Encumbrance", "Enc", 0, 0, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType30, "AttackDice", "ATK", 0, 0, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType31, "MaximumDamage", "MaxDMG", 0, 0, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType32, "DefendDice", "DEF", 0, 0, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType33, "MaximumDurability", "MaxDUR", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType34, "Offer", "Offer", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType35, "Price", "Price", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, ItemTypeStatisticType36, "RepairPrice", "Repair", 0, Nothing, 99999)
     End Sub
     Private Sub PopulateItemStatisticTypesRecord(connection As SqliteConnection, ItemStatisticTypeId As Long, DefaultValue As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemStatisticTypes}]([{Columns.ItemStatisticTypeIdColumn}], [{Columns.DefaultValueColumn}]) VALUES (@{Columns.ItemStatisticTypeIdColumn}, @{Columns.DefaultValueColumn});", connection)
@@ -85,14 +101,6 @@
             command.ExecuteNonQuery()
         End Using
     End Sub
-    Public Const ItemTypeStatisticType29 = 29L
-    Public Const ItemTypeStatisticType30 = 30L
-    Public Const ItemTypeStatisticType31 = 31L
-    Public Const ItemTypeStatisticType32 = 32L
-    Public Const ItemTypeStatisticType33 = 33L
-    Public Const ItemTypeStatisticType34 = 34L
-    Public Const ItemTypeStatisticType35 = 35L
-    Public Const ItemTypeStatisticType36 = 36L
     Friend Sub PopulateItemTypeStatisticTypes(connection As SqliteConnection)
         PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType29, "Encumbrance")
         PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType30, "AttackDice")
