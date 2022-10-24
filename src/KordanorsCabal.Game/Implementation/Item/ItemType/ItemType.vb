@@ -65,10 +65,11 @@
                 ReadForTransactionType(Id, RepairTransactionTypeId)
         End Get
     End Property
-    Const PurifyEventId = 1L
-    Const CanUseEventId = 2L
-    Const UseEventId = 3L
-    Const DecayEventId = 4L
+    Public Const PurifyEventId = 1L
+    Public Const CanUseEventId = 2L
+    Public Const UseEventId = 3L
+    Public Const DecayEventId = 4L
+    Public Const AddToInventoryEventId = 5L
     Private ReadOnly Property UseActionName As String
         Get
             Return WorldData.ItemTypeEvent.Read(Id, UseEventId)
@@ -85,7 +86,6 @@
         End Get
     End Property
     Sub Purify(item As IItem) Implements IItemType.Purify
-        Dim result As Action(Of IWorldData, IItem) = Nothing
         Dim eventName = PurifyActionName
         If eventName IsNot Nothing Then
             WorldData.Events.Perform(WorldData, eventName, item.Id)

@@ -23,6 +23,10 @@
             Return
         End If
         WorldData.InventoryItem.Write(Id, item.Id)
+        Dim eventName = WorldData.ItemTypeEvent.Read(Id, ItemType.AddToInventoryEventId)
+        If eventName IsNot Nothing Then
+            WorldData.Events.Perform(WorldData, eventName, Id, item.Id)
+        End If
     End Sub
     ReadOnly Property ItemsOfType(itemType As IItemType) As IEnumerable(Of IItem) Implements IInventory.ItemsOfType
         Get
