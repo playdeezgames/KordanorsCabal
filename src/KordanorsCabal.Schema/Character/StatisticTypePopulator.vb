@@ -26,6 +26,7 @@
     Public Const CharacterStatisticType25 = 25
     Public Const StatisticTypeDungeonColumn = 26
     Public Const StatisticTypeDungeonRow = 27
+    Public Const ItemStatisticType28 = 28L
     Private Sub PopulateCharacterStatisticTypesRecord(connection As SqliteConnection, CharacterStatisticTypeId As Long, CharacterStatisticTypeName As String, Abbreviation As String, MinimumValue As Long, DefaultValue As Long?, MaximumValue As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}], [{Columns.CharacterStatisticTypeNameColumn}], [{Columns.AbbreviationColumn}], [{Columns.MinimumValueColumn}], [{Columns.DefaultValueColumn}], [{Columns.MaximumValueColumn}]) VALUES (@{Columns.CharacterStatisticTypeIdColumn}, @{Columns.CharacterStatisticTypeNameColumn}, @{Columns.AbbreviationColumn}, @{Columns.MinimumValueColumn}, @{Columns.DefaultValueColumn}, @{Columns.MaximumValueColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", CharacterStatisticTypeId)
@@ -65,6 +66,7 @@
         PopulateCharacterStatisticTypesRecord(connection, CharacterStatisticType25, "Bonus Lift", "Bonus Lift", 0, 0, 99999)
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDungeonColumn, "Dungeon Column", "Column", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDungeonRow, "Dungeon Row", "Row", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, ItemStatisticType28, "Durability", "Durability", 0, 0, 99999)
     End Sub
     Private Sub PopulateItemStatisticTypesRecord(connection As SqliteConnection, ItemStatisticTypeId As Long, DefaultValue As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemStatisticTypes}]([{Columns.ItemStatisticTypeIdColumn}], [{Columns.DefaultValueColumn}]) VALUES (@{Columns.ItemStatisticTypeIdColumn}, @{Columns.DefaultValueColumn});", connection)
@@ -73,9 +75,8 @@
             command.ExecuteNonQuery()
         End Using
     End Sub
-    Public Const ItemStatisticType1 = 1L
     Friend Sub PopulateItemStatisticTypes(connection As SqliteConnection)
-        PopulateItemStatisticTypesRecord(connection, ItemStatisticType1, 0)
+        PopulateItemStatisticTypesRecord(connection, ItemStatisticType28, 0)
     End Sub
     Private Sub PopulateItemTypeStatisticTypesRecord(connection As SqliteConnection, ItemTypeStatisticTypeId As Long, ItemTypeStatisticTypeName As String)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeStatisticTypes}]([{Columns.ItemTypeStatisticTypeIdColumn}], [{Columns.ItemTypeStatisticTypeNameColumn}]) VALUES (@{Columns.ItemTypeStatisticTypeIdColumn}, @{Columns.ItemTypeStatisticTypeNameColumn});", connection)
@@ -84,22 +85,22 @@
             command.ExecuteNonQuery()
         End Using
     End Sub
-    Public Const ItemTypeStatisticType1 = 1L
-    Public Const ItemTypeStatisticType2 = 2L
-    Public Const ItemTypeStatisticType3 = 3L
-    Public Const ItemTypeStatisticType4 = 4L
-    Public Const ItemTypeStatisticType5 = 5L
-    Public Const ItemTypeStatisticType6 = 6L
-    Public Const ItemTypeStatisticType7 = 7L
-    Public Const ItemTypeStatisticType8 = 8L
+    Public Const ItemTypeStatisticType29 = 29L
+    Public Const ItemTypeStatisticType30 = 30L
+    Public Const ItemTypeStatisticType31 = 31L
+    Public Const ItemTypeStatisticType32 = 32L
+    Public Const ItemTypeStatisticType33 = 33L
+    Public Const ItemTypeStatisticType34 = 34L
+    Public Const ItemTypeStatisticType35 = 35L
+    Public Const ItemTypeStatisticType36 = 36L
     Friend Sub PopulateItemTypeStatisticTypes(connection As SqliteConnection)
-        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType1, "Encumbrance")
-        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType2, "AttackDice")
-        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType3, "MaximumDamage")
-        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType4, "DefendDice")
-        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType5, "MaximumDurability")
-        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType6, "Offer")
-        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType7, "Price")
-        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType8, "RepairPrice")
+        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType29, "Encumbrance")
+        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType30, "AttackDice")
+        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType31, "MaximumDamage")
+        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType32, "DefendDice")
+        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType33, "MaximumDurability")
+        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType34, "Offer")
+        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType35, "Price")
+        PopulateItemTypeStatisticTypesRecord(connection, ItemTypeStatisticType36, "RepairPrice")
     End Sub
 End Module

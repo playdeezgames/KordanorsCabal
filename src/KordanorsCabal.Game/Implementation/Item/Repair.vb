@@ -23,7 +23,7 @@
     End Sub
     Public Function RepairCost(shoppeType As IShoppeType) As Long Implements IRepair.RepairCost
         Dim fullRepairPrice = shoppeType.RepairPrice(Item.FromId(WorldData, Id).ItemType)
-        Dim wear = GetStatistic(ItemStatisticType.FromId(WorldData, ItemStatisticType1))
+        Dim wear = GetStatistic(ItemStatisticType.FromId(WorldData, ItemStatisticType28))
         Dim maximum = Durability.FromId(WorldData, Id).Maximum.Value
         Dim remainder = If(wear * fullRepairPrice Mod maximum > 0, 1, 0)
         Return wear * If(fullRepairPrice, 0) \ maximum + remainder
