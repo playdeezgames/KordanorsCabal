@@ -66,27 +66,6 @@
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDungeonColumn, "Dungeon Column", "Column", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeDungeonRow, "Dungeon Row", "Row", 0, Nothing, 99999)
     End Sub
-    Public Const LocationStatisticType1 = 1L
-    Public Const LocationStatisticType2 = 2L
-    Friend Sub PopulateLocationStatisticTypes(connection As SqliteConnection)
-        PopulateLocationStatisticTypesRecord(connection, LocationStatisticType1)
-        PopulateLocationStatisticTypesRecord(connection, LocationStatisticType2)
-    End Sub
-
-    Private Sub PopulateLocationStatisticTypesRecord(connection As SqliteConnection, locationStatisticType As Long)
-        Using command = New SqliteCommand(
-            $"INSERT INTO [{Tables.LocationStatisticTypes}]
-            (
-                [{Columns.LocationStatisticTypeIdColumn}]
-            ) 
-            VALUES 
-            (
-                @{Columns.LocationStatisticTypeIdColumn}
-            );", connection)
-            command.Parameters.AddWithValue($"@{Columns.LocationStatisticTypeIdColumn}", locationStatisticType)
-            command.ExecuteNonQuery()
-        End Using
-    End Sub
     Private Sub PopulateItemStatisticTypesRecord(connection As SqliteConnection, ItemStatisticTypeId As Long, DefaultValue As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemStatisticTypes}]([{Columns.ItemStatisticTypeIdColumn}], [{Columns.DefaultValueColumn}]) VALUES (@{Columns.ItemStatisticTypeIdColumn}, @{Columns.DefaultValueColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.ItemStatisticTypeIdColumn}", ItemStatisticTypeId)

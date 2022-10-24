@@ -14,8 +14,8 @@ Friend Class MapProcessor
                 Dim locations = Location.ByDungeonLevel(worldData, level).Where(Function(x) player.Movement.HasVisited(x))
                 For Each location In locations
                     Dim inverted = (location.Id = playerLocation.Id)
-                    Dim dungeonColumn = location.Statistics.GetStatistic(LocationStatisticType.FromId(worldData, LocationStatisticType1)).Value
-                    Dim dungeonRow = location.Statistics.GetStatistic(LocationStatisticType.FromId(worldData, LocationStatisticType2)).Value
+                    Dim dungeonColumn = location.Statistics.GetStatistic(LocationStatisticType.FromId(worldData, StatisticTypeDungeonColumn)).Value
+                    Dim dungeonRow = location.Statistics.GetStatistic(LocationStatisticType.FromId(worldData, StatisticTypeDungeonRow)).Value
                     Dim displayHue =
                         If(location.Factions.EnemiesOf(player).Any, Hue.Pink,
                         If(location.Routes.HasStairs, Hue.Green,

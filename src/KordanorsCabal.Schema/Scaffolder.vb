@@ -248,10 +248,6 @@ Public Module Scaffolder
 					UNIQUE([{Columns.SpellTypeIdColumn}],[{Columns.SpellLevelColumn}]),
 					FOREIGN KEY([{Columns.SpellTypeIdColumn}]) REFERENCES [{Tables.SpellTypes}]([{Columns.SpellTypeIdColumn}])
 					)")
-        ScaffoldTable(connection, $"CREATE TABLE [{Tables.LocationStatisticTypes}]
-(
-    [{Columns.LocationStatisticTypeIdColumn}] INTEGER PRIMARY KEY
-);")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.Locations}]
 (
 	[{Columns.LocationIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -381,11 +377,11 @@ Public Module Scaffolder
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.LocationStatistics}]
             (
                 [{Columns.LocationIdColumn}] INT NOT NULL,
-                [{Columns.LocationStatisticTypeIdColumn}] INT NOT NULL, 
+                [{Columns.CharacterStatisticTypeIdColumn}] INT NOT NULL, 
                 [{Columns.StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{Columns.LocationIdColumn}],[{Columns.LocationStatisticTypeIdColumn}]),
+                UNIQUE([{Columns.LocationIdColumn}],[{Columns.CharacterStatisticTypeIdColumn}]),
                 FOREIGN KEY ([{Columns.LocationIdColumn}]) REFERENCES [{Tables.Locations}]([{Columns.LocationIdColumn}]),
-                FOREIGN KEY ([{Columns.LocationStatisticTypeIdColumn}]) REFERENCES [{Tables.LocationStatisticTypes}]([{Columns.LocationStatisticTypeIdColumn}])
+                FOREIGN KEY ([{Columns.CharacterStatisticTypeIdColumn}]) REFERENCES [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}])
             )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.Routes}]
             (

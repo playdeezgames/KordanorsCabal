@@ -19,9 +19,9 @@
     Sub PopulateLocationDungeonLevels(connection As SqliteConnection)
     End Sub
     Sub PopulateLocationStatisticsRecord(connection As SqliteConnection, LocationId As Long, LocationStatisticTypeId As Long, StatisticValue As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.LocationStatistics}]([{Columns.LocationIdColumn}], [{Columns.LocationStatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.LocationIdColumn}, @{Columns.LocationStatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.LocationStatistics}]([{Columns.LocationIdColumn}], [{Columns.CharacterStatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.LocationIdColumn}, @{Columns.CharacterStatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.LocationIdColumn}", LocationId)
-            command.Parameters.AddWithValue($"@{Columns.LocationStatisticTypeIdColumn}", LocationStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", LocationStatisticTypeId)
             command.Parameters.AddWithValue($"@{Columns.StatisticValueColumn}", StatisticValue)
             command.ExecuteNonQuery()
         End Using

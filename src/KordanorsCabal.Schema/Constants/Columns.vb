@@ -45,7 +45,6 @@ Public Module Columns
     Public Const ItemTypeStatisticTypeNameColumn = "ItemTypeStatisticTypeName"
     Public Const ItemTypeStatisticValueColumn = "ItemTypeStatisticValue"
     Public Const LocationIdColumn = "LocationId"
-    Public Const LocationStatisticTypeIdColumn = "LocationStatisticTypeId"
     Public Const LocationTypeIdColumn = "LocationTypeId"
     Public Const LocationTypeNameColumn = "LocationTypeName"
     Public Const LoreIdColumn = "LoreId"
