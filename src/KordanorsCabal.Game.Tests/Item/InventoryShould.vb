@@ -36,10 +36,11 @@
     Sub add_item()
         WithSubject(
             Sub(worldData, id, subject)
-                Const itemID = 2L
+                Const itemId = 2L
                 worldData.Setup(Sub(x) x.InventoryItem.Write(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Add(Item.FromId(worldData.Object, itemId))
-                worldData.Verify(Sub(x) x.InventoryItem.Write(id, itemID))
+                worldData.Verify(Sub(x) x.InventoryItem.Write(id, itemId))
+                worldData.Verify(Sub(x) x.InventoryItem.ReadForItem(itemId))
             End Sub)
     End Sub
     <Fact>

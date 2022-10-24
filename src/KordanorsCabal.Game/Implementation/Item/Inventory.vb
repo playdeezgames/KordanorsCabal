@@ -18,6 +18,10 @@
         End Get
     End Property
     Public Sub Add(item As IItem) Implements IInventory.Add
+        Dim oldInventoryId As Long? = WorldData.InventoryItem.ReadForItem(item.Id)
+        If oldInventoryId.HasValue AndAlso oldInventoryId.Value = Id Then
+            Return
+        End If
         WorldData.InventoryItem.Write(Id, item.Id)
     End Sub
     ReadOnly Property ItemsOfType(itemType As IItemType) As IEnumerable(Of IItem) Implements IInventory.ItemsOfType
