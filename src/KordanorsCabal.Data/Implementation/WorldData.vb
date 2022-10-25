@@ -7,7 +7,7 @@
     Public ReadOnly Property CharacterQuest As ICharacterQuestData Implements IWorldData.CharacterQuest
     Public ReadOnly Property CharacterSpell As ICharacterSpellData Implements IWorldData.CharacterSpell
     Public ReadOnly Property CharacterStatistic As ICharacterStatisticData Implements IWorldData.CharacterStatistic
-    Public ReadOnly Property CharacterStatisticType As IStatisticTypeData Implements IWorldData.CharacterStatisticType
+    Public ReadOnly Property StatisticType As IStatisticTypeData Implements IWorldData.StatisticType
     Public ReadOnly Property CharacterType As ICharacterTypeData Implements IWorldData.CharacterType
     Public ReadOnly Property CharacterTypeAttackType As ICharacterTypeAttackTypeData Implements IWorldData.CharacterTypeAttackType
     Public ReadOnly Property CharacterTypeBribe As ICharacterTypeBribeData Implements IWorldData.CharacterTypeBribe
@@ -59,7 +59,7 @@
         CharacterQuest = New CharacterQuestData(store, Me)
         CharacterSpell = New CharacterSpellData(store, Me)
         CharacterStatistic = New CharacterStatisticData(store, Me)
-        CharacterStatisticType = New StatisticTypeData(store, Me)
+        StatisticType = New StatisticTypeData(store, Me)
         CharacterType = New CharacterTypeData(store, Me)
         CharacterTypeAttackType = New CharacterTypeAttackTypeData(store, Me)
         CharacterTypeBribe = New CharacterTypeBribeData(store, Me)

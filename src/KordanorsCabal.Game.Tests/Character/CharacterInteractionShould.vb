@@ -32,12 +32,12 @@
                 Const statisticTypeId = 14L
 
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.StatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
 
                 subject.CanGamble.ShouldBeFalse
 
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
+                worldData.Verify(Function(x) x.StatisticType.ReadDefaultValue(statisticTypeId))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
@@ -46,10 +46,10 @@
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.StatisticType.ReadDefaultValue(It.IsAny(Of Long)))
                 subject.Gamble()
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 14))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(14))
+                worldData.Verify(Function(x) x.StatisticType.ReadDefaultValue(14))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub

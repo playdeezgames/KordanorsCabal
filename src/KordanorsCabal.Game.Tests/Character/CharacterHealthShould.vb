@@ -20,10 +20,10 @@
         WithSubject(
             Sub(worldData, id, subject)
                 worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.StatisticType.ReadDefaultValue(It.IsAny(Of Long)))
                 subject.Maximum.ShouldBe(0)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, 6))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(6))
+                worldData.Verify(Function(x) x.StatisticType.ReadDefaultValue(6))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
@@ -34,14 +34,14 @@
                 Const firstStatisticTypeId = 6L
                 Const secondStatisticTypeId = 12L
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.StatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
 
                 subject.IsDead.ShouldBeTrue
 
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, firstStatisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, secondStatisticTypeId))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(firstStatisticTypeId))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(secondStatisticTypeId))
+                worldData.Verify(Function(x) x.StatisticType.ReadDefaultValue(firstStatisticTypeId))
+                worldData.Verify(Function(x) x.StatisticType.ReadDefaultValue(secondStatisticTypeId))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub
@@ -49,12 +49,12 @@
     Sub heal()
         WithSubject(
             Sub(worldData, id, subject)
-                worldData.Setup(Function(x) x.CharacterStatisticType.ReadMinimumValue(It.IsAny(Of Long))).Returns(0)
-                worldData.Setup(Function(x) x.CharacterStatisticType.ReadMaximumValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.StatisticType.ReadMinimumValue(It.IsAny(Of Long))).Returns(0)
+                worldData.Setup(Function(x) x.StatisticType.ReadMaximumValue(It.IsAny(Of Long))).Returns(0)
                 worldData.Setup(Sub(x) x.CharacterStatistic.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Heal()
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadMinimumValue(12))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadMaximumValue(12))
+                worldData.Verify(Function(x) x.StatisticType.ReadMinimumValue(12))
+                worldData.Verify(Function(x) x.StatisticType.ReadMaximumValue(12))
                 worldData.Verify(Sub(x) x.CharacterStatistic.Write(id, 12, 0))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
@@ -66,14 +66,14 @@
                 Const firstStatisticTypeId = 6L
                 Const secondStatisticTypeId = 12L
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.StatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
 
                 subject.Current.ShouldBe(0)
 
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, firstStatisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, secondStatisticTypeId))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(firstStatisticTypeId))
-                worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(secondStatisticTypeId))
+                worldData.Verify(Function(x) x.StatisticType.ReadDefaultValue(firstStatisticTypeId))
+                worldData.Verify(Function(x) x.StatisticType.ReadDefaultValue(secondStatisticTypeId))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub

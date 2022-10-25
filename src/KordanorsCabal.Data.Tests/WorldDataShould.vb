@@ -10,7 +10,7 @@ Public Class WorldDataShould
         subject.CharacterQuest.ShouldNotBeNull
         subject.CharacterSpell.ShouldNotBeNull
         subject.CharacterStatistic.ShouldNotBeNull
-        subject.CharacterStatisticType.ShouldNotBeNull
+        subject.StatisticType.ShouldNotBeNull
         subject.CharacterType.ShouldNotBeNull
         subject.CharacterTypeAttackType.ShouldNotBeNull
         subject.CharacterTypeBribe.ShouldNotBeNull
