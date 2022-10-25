@@ -1,10 +1,10 @@
-﻿Public Class CharacterStatisticDataTests
+﻿Public Class StatisticDataShould
     Inherits WorldDataSubobjectTests(Of ICharacterStatisticData)
     Public Sub New()
         MyBase.New(Function(x) x.CharacterStatistic)
     End Sub
     <Fact>
-    Sub ShouldRemoveAGivenCharactersStatisticsFromTheStore()
+    Sub RemoveAGivenStatisticsFromTheStore()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
@@ -17,7 +17,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheStoreForAGivenCharactersStatisticValue()
+    Sub QueryTheStoreForAGivenStatisticValue()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
