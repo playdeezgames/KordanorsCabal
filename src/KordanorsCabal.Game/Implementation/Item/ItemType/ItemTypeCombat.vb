@@ -1,5 +1,5 @@
 ﻿Public Class ItemTypeCombat
-    Inherits BaseThingie
+    Inherits BaseItemType
     Implements IItemTypeCombat
 
     Public Sub New(worldData As IWorldData, id As Long)
@@ -20,17 +20,17 @@
     End Property
     ReadOnly Property AttackDice As Long Implements IItemTypeCombat.AttackDice
         Get
-            Return If(ItemType.Statistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeAttackDice)), 0)
+            Return If(Statistic(Id, StatisticType.FromId(WorldData, StatisticTypeAttackDice)), 0)
         End Get
     End Property
     ReadOnly Property MaximumDamage As Long? Implements IItemTypeCombat.MaximumDamage
         Get
-            Return ItemType.Statistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeMaximumDamage))
+            Return Statistic(Id, StatisticType.FromId(WorldData, StatisticTypeMaximumDamage))
         End Get
     End Property
     ReadOnly Property DefendDice As Long Implements IItemTypeCombat.DefendDice
         Get
-            Return If(ItemType.Statistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeDefendDice)), 0)
+            Return If(Statistic(Id, StatisticType.FromId(WorldData, StatisticTypeDefendDice)), 0)
         End Get
     End Property
 End Class
