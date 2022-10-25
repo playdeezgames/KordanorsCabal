@@ -38,7 +38,6 @@ Public Class WorldDataShould
         subject.ItemTypeSpawnCount.ShouldNotBeNull
         subject.ItemTypeSpawnLocationType.ShouldNotBeNull
         subject.ItemTypeStatistic.ShouldNotBeNull
-        subject.ItemTypeStatisticType.ShouldNotBeNull
         subject.Location.ShouldNotBeNull
         subject.LocationDungeonLevel.ShouldNotBeNull
         subject.LocationStatistic.ShouldNotBeNull
