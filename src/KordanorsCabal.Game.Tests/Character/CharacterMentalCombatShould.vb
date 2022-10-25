@@ -10,7 +10,7 @@
                 Const stress = 2L
                 Const statisticTypeId = 13L
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
                 subject.AddStress(stress)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
@@ -110,7 +110,7 @@
                 Const statisticTypeId = 3
 
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
 
                 subject.CanDoIntimidation().ShouldBeFalse
 
@@ -126,7 +126,7 @@
                 Const statisticTypeId = 4L
 
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
 
                 subject.CanIntimidate.ShouldBeFalse
 

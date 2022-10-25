@@ -94,7 +94,7 @@
                 worldData.SetupGet(Function(x) x.InventoryItem).Returns((New Mock(Of IInventoryItemData)).Object)
                 worldData.SetupGet(Function(x) x.Character.EquipSlot).Returns((New Mock(Of ICharacterEquipSlotData)).Object)
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
                 worldData.SetupGet(Function(x) x.Character).Returns((New Mock(Of ICharacterData)).Object)
 
                 stuffToDo(direction.Object, worldData, subject)

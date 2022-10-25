@@ -1,7 +1,7 @@
-﻿Public Class CharacterStatisticTypeData
+﻿Public Class StatisticTypeData
     Inherits NameCacheData
-    Implements ICharacterStatisticTypeData
-    Public Function ReadDefaultValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadDefaultValue
+    Implements IStatisticTypeData
+    Public Function ReadDefaultValue(statisticTypeId As Long) As Long? Implements IStatisticTypeData.ReadDefaultValue
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
             StatisticTypes,
@@ -10,14 +10,14 @@
     End Function
 
 
-    Public Function ReadName(statisticTypeId As Long) As String Implements ICharacterStatisticTypeData.ReadName
+    Public Function ReadName(statisticTypeId As Long) As String Implements IStatisticTypeData.ReadName
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
             StatisticTypes,
             CharacterStatisticTypeNameColumn,
             (StatisticTypeIdColumn, statisticTypeId))
     End Function
-    Public Function ReadMaximumValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadMaximumValue
+    Public Function ReadMaximumValue(statisticTypeId As Long) As Long? Implements IStatisticTypeData.ReadMaximumValue
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
             StatisticTypes,
@@ -25,7 +25,7 @@
             (StatisticTypeIdColumn, statisticTypeId))
     End Function
 
-    Public Function ReadMinimumValue(statisticTypeId As Long) As Long? Implements ICharacterStatisticTypeData.ReadMinimumValue
+    Public Function ReadMinimumValue(statisticTypeId As Long) As Long? Implements IStatisticTypeData.ReadMinimumValue
         Return Store.Column.ReadValue(Of Long, Long)(
             AddressOf NoInitializer,
             StatisticTypes,
@@ -33,7 +33,7 @@
             (StatisticTypeIdColumn, statisticTypeId))
     End Function
 
-    Public Function ReadAbbreviation(statisticTypeId As Long) As String Implements ICharacterStatisticTypeData.ReadAbbreviation
+    Public Function ReadAbbreviation(statisticTypeId As Long) As String Implements IStatisticTypeData.ReadAbbreviation
         Return Store.Column.ReadString(
             AddressOf NoInitializer,
             StatisticTypes,

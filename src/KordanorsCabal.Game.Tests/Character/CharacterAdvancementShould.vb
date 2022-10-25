@@ -11,7 +11,7 @@
                 Const statisticTypeId = 16L
                 Const otherStatisticTypeId = 17L
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
                 subject.AddXP(xp).ShouldBeFalse
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, otherStatisticTypeId))
@@ -28,7 +28,7 @@
 
                 Dim statisticType As New Mock(Of IStatisticType)
                 worldData.Setup(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.Setup(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                worldData.Setup(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
 
                 subject.AssignPoint(statisticType.Object)
 

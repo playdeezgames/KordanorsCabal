@@ -32,7 +32,7 @@
                 Const statisticTypeId = 14L
 
                 worldData.SetupGet(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
-                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
+                worldData.SetupGet(Function(x) x.CharacterStatisticType).Returns((New Mock(Of IStatisticTypeData)).Object)
 
                 subject.CanGamble.ShouldBeFalse
 

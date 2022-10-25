@@ -1,4 +1,4 @@
-﻿Public Interface ICharacterStatisticTypeData
+﻿Public Interface IStatisticTypeData
     Inherits INameCacheData
     Function ReadName(statisticType As Long) As String
     Function ReadMinimumValue(statisticType As Long) As Long?
