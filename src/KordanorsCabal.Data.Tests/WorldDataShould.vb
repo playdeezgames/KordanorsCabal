@@ -29,7 +29,6 @@ Public Class WorldDataShould
         subject.InventoryItem.ShouldNotBeNull
         subject.Item.ShouldNotBeNull
         subject.ItemStatistic.ShouldNotBeNull
-        subject.ItemStatisticType.ShouldNotBeNull
         subject.ItemType.ShouldNotBeNull
         subject.ItemTypeCharacterStatisticBuff.ShouldNotBeNull
         subject.ItemTypeEquipSlot.ShouldNotBeNull

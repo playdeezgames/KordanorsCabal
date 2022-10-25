@@ -134,13 +134,6 @@ If the enum needs metadata, then dont enum.
     1. Move tests from original test class to new test class
     1. Once it builds, it should be good, and tests should still pass
 
-# DB Creation Order
-
-* CharacterTypes
-* CharacterStatisticTypes
-* CharacterTypeInitialStatistics
-* CharacterTypeAttackTypes
-
 # S.T.U.F.F
 
 * S: Stuff
