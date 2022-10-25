@@ -18,7 +18,7 @@
         Get
             Dim result = character.Items.Inventory.TotalEncumbrance
             For Each item In EquippedItems
-                result += item.ItemType.Encumbrance
+                result += item.Encumbrance
             Next
             Return result
         End Get

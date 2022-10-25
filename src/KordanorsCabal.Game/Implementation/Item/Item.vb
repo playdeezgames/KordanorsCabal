@@ -84,4 +84,10 @@
             End If
         End Set
     End Property
+
+    Public ReadOnly Property Encumbrance As Long Implements IItem.Encumbrance
+        Get
+            Return ItemType.Encumbrance
+        End Get
+    End Property
 End Class
