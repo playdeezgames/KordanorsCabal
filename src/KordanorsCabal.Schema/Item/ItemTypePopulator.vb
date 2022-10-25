@@ -23,11 +23,11 @@
         End Using
     End Sub
     Friend Sub PopulateItemTypes(connection As SqliteConnection)
-        PopulateItemTypesRecord(connection, ItemType1, "FE Key", 1, ItemKindKey)
-        PopulateItemTypesRecord(connection, ItemType2, "CU Key", 1, ItemKindKey)
-        PopulateItemTypesRecord(connection, ItemType3, "AG Key", 1, ItemKindKey)
-        PopulateItemTypesRecord(connection, ItemType4, "AU Key", 1, ItemKindKey)
-        PopulateItemTypesRecord(connection, ItemType5, "PT Key", 1, ItemKindKey)
+        PopulateItemTypesRecord(connection, ItemType1, "FE Key", 1, ItemKindTrophy)
+        PopulateItemTypesRecord(connection, ItemType2, "CU Key", 1, ItemKindTrophy)
+        PopulateItemTypesRecord(connection, ItemType3, "AG Key", 1, ItemKindTrophy)
+        PopulateItemTypesRecord(connection, ItemType4, "AU Key", 1, ItemKindTrophy)
+        PopulateItemTypesRecord(connection, ItemType5, "PT Key", 1, ItemKindTrophy)
         PopulateItemTypesRecord(connection, ItemType6, "Elemental Orb", 0, ItemKindTrophy)
         PopulateItemTypesRecord(connection, ItemType7, "Potion", 1, ItemKindTrophy)
         PopulateItemTypesRecord(connection, ItemType8, "Goblin Ear", 1, ItemKindTrophy)
