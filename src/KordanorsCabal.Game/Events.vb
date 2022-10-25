@@ -419,7 +419,7 @@
                         item.Destroy()
                     End If
                 End Sub},
-            {"ReadScroll",
+            {"ReadNote",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim item = Game.Item.FromId(worldData, parms(1))

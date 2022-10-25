@@ -60,7 +60,7 @@
         PopulateItemTypesRecord(connection, ItemType50, "Amulet of POW", 1)
         PopulateItemTypesRecord(connection, ItemType51, "Amulet of Mana", 1)
         PopulateItemTypesRecord(connection, ItemType52, "Amulet of Yendor", 1)
-        PopulateItemTypesRecord(connection, ItemType53, "Scroll", 0)
+        PopulateItemTypesRecord(connection, ItemType53, "Note", 0)
     End Sub
     Private Sub PopulateItemTypeShopTypesRecord(connection As SqliteConnection, ItemTypeId As Long, ShoppeTypeId As Long, TransactionTypeId As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeShopTypes}]([{Columns.ItemTypeIdColumn}], [{Columns.ShoppeTypeIdColumn}], [{Columns.TransactionTypeIdColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.ShoppeTypeIdColumn}, @{Columns.TransactionTypeIdColumn});", connection)
@@ -172,7 +172,7 @@
         PopulateItemTypeEventsRecord(connection, ItemType24, EventTypeDecay, "FoodDecay")
         PopulateItemTypeEventsRecord(connection, ItemType35, EventTypeDecay, "RottenFoodDecay")
         PopulateItemTypeEventsRecord(connection, ItemType53, EventTypeCanUse, "AlwaysTrue")
-        PopulateItemTypeEventsRecord(connection, ItemType53, EventTypeUse, "ReadScroll")
+        PopulateItemTypeEventsRecord(connection, ItemType53, EventTypeUse, "ReadNote")
     End Sub
     Private Sub PopulateItemTypeEquipSlotsRecord(connection As SqliteConnection, ItemTypeId As Long, EquipSlotId As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeEquipSlots}]([{Columns.ItemTypeIdColumn}], [{Columns.EquipSlotIdColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.EquipSlotIdColumn});", connection)
