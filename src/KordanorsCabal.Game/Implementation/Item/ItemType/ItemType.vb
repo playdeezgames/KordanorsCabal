@@ -19,9 +19,9 @@
             Return WorldData.ItemTypeStatistic.Read(Id, statisticType.Id)
         End Get
     End Property
-    ReadOnly Property Encumbrance As Long Implements IItemType.Encumbrance
+    ReadOnly Property Encumbrance As Long? Implements IItemType.Encumbrance
         Get
-            Return If(Statistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeEncumbrance)), 0)
+            Return Statistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeEncumbrance))
         End Get
     End Property
     ReadOnly Property MaximumDurability As Long? Implements IItemType.MaximumDurability

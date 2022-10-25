@@ -33,7 +33,7 @@
         WithSubject(
             Sub(worldData, itemTypeId, subject)
                 worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.Encumbrance.ShouldBe(0L)
+                subject.Encumbrance.ShouldBeNull
                 worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 29))
             End Sub)
     End Sub

@@ -2,7 +2,7 @@
     Inherits IBaseThingie
     ReadOnly Property Name As String
     ReadOnly Property IsConsumed As Boolean
-    ReadOnly Property Encumbrance As Long
+    ReadOnly Property Encumbrance As Long?
     ReadOnly Property Spawn As IItemTypeSpawn
     ReadOnly Property Equip As IItemTypeEquip
     ReadOnly Property Combat As IItemTypeCombat

@@ -35,7 +35,7 @@
     End Property
     ReadOnly Property TotalEncumbrance As Long Implements IInventory.TotalEncumbrance
         Get
-            Return Items.Sum(Function(x) x.ItemType.Encumbrance)
+            Return Items.Sum(Function(x) x.Encumbrance)
         End Get
     End Property
     Public ReadOnly Property Location As ILocation Implements IInventory.Location
