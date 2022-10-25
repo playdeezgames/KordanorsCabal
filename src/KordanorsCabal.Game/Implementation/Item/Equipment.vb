@@ -18,7 +18,7 @@
             Return Item.FromId(WorldData, Id).ItemType.Equip.EquipSlots
         End Get
     End Property
-    Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IEquipment.EquippedBuff
+    Function EquippedBuff(statisticType As IStatisticType) As Long? Implements IEquipment.EquippedBuff
         Return Item.FromId(WorldData, Id).ItemType.Equip.EquippedBuff(statisticType)
     End Function
 End Class

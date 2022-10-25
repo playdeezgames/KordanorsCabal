@@ -35,11 +35,11 @@
         If nextLevel > spellType.MaximumLevel Then
             Return False
         End If
-        Return If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypePower)), 0) >= spellType.RequiredPower(nextLevel)
+        Return If(Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypePower)), 0) >= spellType.RequiredPower(nextLevel)
     End Function
     ReadOnly Property Power As Long
         Get
-            Return Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypePower)).Value
+            Return Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypePower)).Value
         End Get
     End Property
     Function RollSpellDice(spellType As ISpellType) As Long Implements ICharacterSpellbook.RollSpellDice
@@ -59,6 +59,6 @@
         spellType.Cast(character)
     End Sub
     Public Function RollPower() As Long Implements ICharacterSpellbook.RollPower
-        Return RollDice(If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypePower)), 0) + NegativeInfluence())
+        Return RollDice(If(Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypePower)), 0) + NegativeInfluence())
     End Function
 End Class

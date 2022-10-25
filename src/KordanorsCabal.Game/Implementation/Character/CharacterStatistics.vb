@@ -9,16 +9,16 @@
     Public Shared Function FromCharacter(worldData As IWorldData, character As ICharacter) As ICharacterStatistics
         Return If(character IsNot Nothing, New CharacterStatistics(worldData, character), Nothing)
     End Function
-    Public Sub SetStatistic(statisticType As ICharacterStatisticType, statisticValue As Long) Implements ICharacterStatistics.SetStatistic
+    Public Sub SetStatistic(statisticType As IStatisticType, statisticValue As Long) Implements ICharacterStatistics.SetStatistic
         WorldData.CharacterStatistic.Write(Id, statisticType.Id, Math.Min(Math.Max(statisticValue, statisticType.MinimumValue), statisticType.MaximumValue))
     End Sub
-    Sub ChangeStatistic(statisticType As ICharacterStatisticType, delta As Long) Implements ICharacterStatistics.ChangeStatistic
+    Sub ChangeStatistic(statisticType As IStatisticType, delta As Long) Implements ICharacterStatistics.ChangeStatistic
         Dim current = GetStatistic(statisticType)
         If current IsNot Nothing Then
             SetStatistic(statisticType, current.Value + delta)
         End If
     End Sub
-    Public Function GetStatistic(statisticType As ICharacterStatisticType) As Long? Implements ICharacterStatistics.GetStatistic
+    Public Function GetStatistic(statisticType As IStatisticType) As Long? Implements ICharacterStatistics.GetStatistic
         Dim result = If(WorldData.CharacterStatistic.Read(Id,
                                                           statisticType.Id), statisticType.DefaultValue)
         If result.HasValue Then

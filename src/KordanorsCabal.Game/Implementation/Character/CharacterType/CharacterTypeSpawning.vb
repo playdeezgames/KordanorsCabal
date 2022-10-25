@@ -14,14 +14,14 @@
     Function SpawnCount(level As IDungeonLevel) As Long Implements ICharacterTypeSpawning.SpawnCount
         Return If(WorldData.CharacterTypeSpawnCount.ReadSpawnCount(Id, level.Id), 0)
     End Function
-    ReadOnly Property InitialStatistics As IReadOnlyList(Of (ICharacterStatisticType, Long)) Implements ICharacterTypeSpawning.InitialStatistics
+    ReadOnly Property InitialStatistics As IReadOnlyList(Of (IStatisticType, Long)) Implements ICharacterTypeSpawning.InitialStatistics
         Get
             Dim results = WorldData.CharacterTypeInitialStatistic.ReadAllForCharacterType(Id)
             If results Is Nothing Then
                 Return Nothing
             End If
             Return results.
-            Select(Function(x) (CharacterStatisticType.FromId(WorldData, x.Item1), x.Item2)).ToList
+            Select(Function(x) (StatisticType.FromId(WorldData, x.Item1), x.Item2)).ToList
         End Get
     End Property
 End Class

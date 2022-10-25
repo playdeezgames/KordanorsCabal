@@ -20,17 +20,17 @@
     End Property
     ReadOnly Property AttackDice As Long Implements IItemTypeCombat.AttackDice
         Get
-            Return If(ItemType.ItemTypeStatistic(WorldData, Id, CharacterStatisticType.FromId(WorldData, StatisticTypeAttackDice)), 0)
+            Return If(ItemType.ItemTypeStatistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeAttackDice)), 0)
         End Get
     End Property
     ReadOnly Property MaximumDamage As Long? Implements IItemTypeCombat.MaximumDamage
         Get
-            Return ItemType.ItemTypeStatistic(WorldData, Id, CharacterStatisticType.FromId(WorldData, StatisticTypeMaximumDamage))
+            Return ItemType.ItemTypeStatistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeMaximumDamage))
         End Get
     End Property
     ReadOnly Property DefendDice As Long Implements IItemTypeCombat.DefendDice
         Get
-            Return If(ItemType.ItemTypeStatistic(WorldData, Id, CharacterStatisticType.FromId(WorldData, StatisticTypeDefendDice)), 0)
+            Return If(ItemType.ItemTypeStatistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeDefendDice)), 0)
         End Get
     End Property
 End Class

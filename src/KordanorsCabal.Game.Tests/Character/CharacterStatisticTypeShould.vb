@@ -1,7 +1,7 @@
 ﻿Public Class CharacterStatisticTypeShould
-    Inherits ThingieShould(Of ICharacterStatisticType)
+    Inherits ThingieShould(Of IStatisticType)
     Sub New()
-        MyBase.New(AddressOf CharacterStatisticType.FromId)
+        MyBase.New(AddressOf StatisticType.FromId)
     End Sub
     <Fact>
     Sub have_abbreviation()

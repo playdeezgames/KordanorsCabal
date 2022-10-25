@@ -25,11 +25,11 @@ Public Class World
         Return bossLocation
     End Function
     Private Sub SecondRoll()
-        Dim dice = PlayerCharacter().Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, StatisticTypeUnassigned))
-        PlayerCharacter().Statistics.SetStatistic(CharacterStatisticType.FromId(worldData, StatisticTypeUnassigned), 0)
+        Dim dice = PlayerCharacter().Statistics.GetStatistic(StatisticType.FromId(worldData, StatisticTypeUnassigned))
+        PlayerCharacter().Statistics.SetStatistic(StatisticType.FromId(worldData, StatisticTypeUnassigned), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(SecondRollTable)
-            PlayerCharacter().Statistics.ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
+            PlayerCharacter().Statistics.ChangeStatistic(New StatisticType(worldData, statisticType), 1)
             dice -= 1
         End While
     End Sub
@@ -62,11 +62,11 @@ Public Class World
         End Get
     End Property
     Private Sub FirstRoll()
-        Dim dice = PlayerCharacter().Statistics.GetStatistic(CharacterStatisticType.FromId(worldData, StatisticTypeUnassigned))
-        PlayerCharacter().Statistics.SetStatistic(CharacterStatisticType.FromId(worldData, StatisticTypeUnassigned), 0)
+        Dim dice = PlayerCharacter().Statistics.GetStatistic(StatisticType.FromId(worldData, StatisticTypeUnassigned))
+        PlayerCharacter().Statistics.SetStatistic(StatisticType.FromId(worldData, StatisticTypeUnassigned), 0)
         While dice > 0
             Dim statisticType = RNG.FromGenerator(FirstRollTable)
-            PlayerCharacter().Statistics.ChangeStatistic(New CharacterStatisticType(worldData, statisticType), 1)
+            PlayerCharacter().Statistics.ChangeStatistic(New StatisticType(worldData, statisticType), 1)
             dice -= 1
         End While
     End Sub

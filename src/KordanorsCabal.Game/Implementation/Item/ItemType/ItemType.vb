@@ -14,34 +14,34 @@
             Return If(WorldData.ItemType.ReadIsConsumed(Id), 0) > 0
         End Get
     End Property
-    Friend Shared ReadOnly Property ItemTypeStatistic(WorldData As IWorldData, Id As Long, itemTypeStatisticType As ICharacterStatisticType) As Long?
+    Friend Shared ReadOnly Property ItemTypeStatistic(WorldData As IWorldData, Id As Long, itemTypeStatisticType As IStatisticType) As Long?
         Get
             Return WorldData.ItemTypeStatistic.Read(Id, itemTypeStatisticType.Id)
         End Get
     End Property
     ReadOnly Property Encumbrance As Long Implements IItemType.Encumbrance
         Get
-            Return If(ItemTypeStatistic(WorldData, Id, CharacterStatisticType.FromId(WorldData, StatisticTypeEncumbrance)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeEncumbrance)), 0)
         End Get
     End Property
     ReadOnly Property MaximumDurability As Long? Implements IItemType.MaximumDurability
         Get
-            Return ItemTypeStatistic(WorldData, Id, CharacterStatisticType.FromId(WorldData, StatisticTypeMaximumDurability))
+            Return ItemTypeStatistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeMaximumDurability))
         End Get
     End Property
     ReadOnly Property Offer As Long Implements IItemType.Offer
         Get
-            Return If(ItemTypeStatistic(WorldData, Id, CharacterStatisticType.FromId(WorldData, StatisticTypeOffer)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeOffer)), 0)
         End Get
     End Property
     ReadOnly Property Price As Long Implements IItemType.Price
         Get
-            Return If(ItemTypeStatistic(WorldData, Id, CharacterStatisticType.FromId(WorldData, StatisticTypePrice)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypePrice)), 0)
         End Get
     End Property
     ReadOnly Property RepairPrice As Long Implements IItemType.RepairPrice
         Get
-            Return If(ItemTypeStatistic(WorldData, Id, CharacterStatisticType.FromId(WorldData, StatisticTypeRepairPrice)), 0)
+            Return If(ItemTypeStatistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeRepairPrice)), 0)
         End Get
     End Property
     Private Const OfferTransactionTypeId = 1L

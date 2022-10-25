@@ -22,7 +22,7 @@
         End Get
     End Property
     Function RollDefend() As Long Implements ICharacterPhysicalCombat.RollDefend
-        Dim maximumDefend = Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeMaximumDefend)).Value
+        Dim maximumDefend = Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeMaximumDefend)).Value
         Return Math.Min(RollDice(GetDefendDice() + NegativeInfluence()), maximumDefend)
     End Function
     Function RollAttack() As Long Implements ICharacterPhysicalCombat.RollAttack
@@ -34,7 +34,7 @@
         End Get
     End Property
     Sub DoDamage(damage As Long) Implements ICharacterPhysicalCombat.DoDamage
-        Character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeWounds), damage)
+        Character.Statistics.ChangeStatistic(StatisticType.FromId(WorldData, StatisticTypeWounds), damage)
     End Sub
     Function DetermineDamage(value As Long) As Long Implements ICharacterPhysicalCombat.DetermineDamage
         Dim maximumDamage As Long? = Nothing
@@ -44,7 +44,7 @@
                 maximumDamage = If(maximumDamage, 0) + itemMaximumDamage.Value
             End If
         Next
-        maximumDamage = If(maximumDamage, Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeUnarmedMaximumDamage)).Value)
+        maximumDamage = If(maximumDamage, Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeUnarmedMaximumDamage)).Value)
         Return If(value < 0, 0, If(value > maximumDamage.Value, maximumDamage.Value, value))
     End Function
     ReadOnly Property RollMoneyDrop As Long
@@ -71,7 +71,7 @@
         Dim money As Long = RollMoneyDrop
         If money > 0 Then
             lines.Add($"You get {money} money!")
-            killedBy.Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeMoney), money)
+            killedBy.Statistics.ChangeStatistic(StatisticType.FromId(WorldData, StatisticTypeMoney), money)
         End If
         Dim xp As Long = XPValue
         If xp > 0 Then
@@ -144,7 +144,7 @@
         character.EnqueueMessage(sfx, lines.ToArray)
     End Sub
     Private Function IsImmobilized() As Boolean
-        Return If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeImmobilization)), 0) > 0
+        Return If(Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeImmobilization)), 0) > 0
     End Function
     Private Sub DoCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)
         If character.Health.IsDead Then
@@ -162,14 +162,14 @@
         End Select
     End Sub
     Private Function GetAttackDice() As Long
-        Dim dice = Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeStrength)).Value
+        Dim dice = Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeStrength)).Value
         For Each entry In EquippedItems
             dice += entry.Weapon.AttackDice
         Next
         Return dice
     End Function
     Private Function GetDefendDice() As Long
-        Dim dice = Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeDexterity)).Value
+        Dim dice = Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeDexterity)).Value
         For Each entry In EquippedItems
             dice += entry.Armor.DefendDice
         Next
@@ -180,7 +180,7 @@
             $"Counter-attack {enemyIndex}/{enemyCount}:"
         }
         lines.Add($"{enemy.CharacterType.Name} is immobilized!")
-        enemy.Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeImmobilization), -1)
+        enemy.Statistics.ChangeStatistic(StatisticType.FromId(WorldData, StatisticTypeImmobilization), -1)
         Character.EnqueueMessage(Nothing, lines.ToArray)
     End Sub
     Private Sub DoMentalCounterAttack(enemy As ICharacter, enemyIndex As Integer, enemyCount As Integer)

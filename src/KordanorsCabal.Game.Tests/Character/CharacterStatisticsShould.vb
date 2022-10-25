@@ -12,7 +12,7 @@
                 worldData.Setup(Function(x) x.CharacterStatisticType.ReadMinimumValue(It.IsAny(Of Long))).Returns(0)
                 worldData.Setup(Function(x) x.CharacterStatisticType.ReadMaximumValue(It.IsAny(Of Long))).Returns(10)
                 worldData.Setup(Sub(x) x.CharacterStatistic.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.SetStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId), statisticValue)
+                subject.SetStatistic(StatisticType.FromId(worldData.Object, statisticTypeId), statisticValue)
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadMinimumValue(statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadMaximumValue(statisticTypeId))
                 worldData.Verify(Sub(x) x.CharacterStatistic.Write(id, statisticTypeId, statisticValue))
@@ -27,7 +27,7 @@
                 Const delta = 3L
                 worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
-                subject.ChangeStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId), delta)
+                subject.ChangeStatistic(StatisticType.FromId(worldData.Object, statisticTypeId), delta)
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
                 worldData.Verify(Function(x) x.Player.Read())
@@ -40,7 +40,7 @@
                 Const statisticTypeId = 2L
                 worldData.Setup(Function(x) x.CharacterStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.CharacterStatisticType.ReadDefaultValue(It.IsAny(Of Long)))
-                subject.GetStatistic(CharacterStatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBeNull
+                subject.GetStatistic(StatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBeNull
                 worldData.Verify(Function(x) x.CharacterStatistic.Read(id, statisticTypeId))
                 worldData.Verify(Function(x) x.CharacterStatisticType.ReadDefaultValue(statisticTypeId))
                 worldData.Verify(Function(x) x.Player.Read())

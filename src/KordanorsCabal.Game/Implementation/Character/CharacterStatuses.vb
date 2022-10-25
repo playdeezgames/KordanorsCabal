@@ -11,14 +11,14 @@
     End Function
     Property Money As Long Implements ICharacterStatuses.Money
         Get
-            Return If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeMoney)), 0L)
+            Return If(Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeMoney)), 0L)
         End Get
         Set(value As Long)
-            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeMoney), value)
+            Character.Statistics.SetStatistic(StatisticType.FromId(WorldData, StatisticTypeMoney), value)
         End Set
     End Property
     Sub DoImmobilization(delta As Long) Implements ICharacterStatuses.DoImmobilization
-        Character.Statistics.ChangeStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeImmobilization), delta)
+        Character.Statistics.ChangeStatistic(StatisticType.FromId(WorldData, StatisticTypeImmobilization), delta)
     End Sub
     ReadOnly Property IsUndead As Boolean Implements ICharacterStatuses.IsUndead
         Get
@@ -27,42 +27,42 @@
     End Property
     Property Drunkenness As Long Implements ICharacterStatuses.Drunkenness
         Get
-            Return Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeDrunkenness)).Value
+            Return Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeDrunkenness)).Value
         End Get
         Set(value As Long)
-            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeDrunkenness), value)
+            Character.Statistics.SetStatistic(StatisticType.FromId(WorldData, StatisticTypeDrunkenness), value)
         End Set
     End Property
     Property Chafing As Long Implements ICharacterStatuses.Chafing
         Get
-            Return Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeChafing)).Value
+            Return Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeChafing)).Value
         End Get
         Set(value As Long)
-            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeChafing), value)
+            Character.Statistics.SetStatistic(StatisticType.FromId(WorldData, StatisticTypeChafing), value)
         End Set
     End Property
     Property Highness As Long Implements ICharacterStatuses.Highness
         Get
-            Return If(Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeHighness)), 0)
+            Return If(Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeHighness)), 0)
         End Get
         Set(value As Long)
-            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeHighness), value)
+            Character.Statistics.SetStatistic(StatisticType.FromId(WorldData, StatisticTypeHighness), value)
         End Set
     End Property
     Property Hunger As Long Implements ICharacterStatuses.Hunger
         Get
-            Return Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeHunger)).Value
+            Return Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeHunger)).Value
         End Get
         Set(value As Long)
-            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeHunger), value)
+            Character.Statistics.SetStatistic(StatisticType.FromId(WorldData, StatisticTypeHunger), value)
         End Set
     End Property
     Public Property FoodPoisoning As Long Implements ICharacterStatuses.FoodPoisoning
         Get
-            Return Character.Statistics.GetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeFoodPoisoning)).Value
+            Return Character.Statistics.GetStatistic(StatisticType.FromId(WorldData, StatisticTypeFoodPoisoning)).Value
         End Get
         Set(value As Long)
-            Character.Statistics.SetStatistic(CharacterStatisticType.FromId(WorldData, StatisticTypeFoodPoisoning), value)
+            Character.Statistics.SetStatistic(StatisticType.FromId(WorldData, StatisticTypeFoodPoisoning), value)
         End Set
     End Property
 End Class

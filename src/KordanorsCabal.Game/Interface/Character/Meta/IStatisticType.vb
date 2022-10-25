@@ -1,4 +1,4 @@
-﻿Public Interface ICharacterStatisticType
+﻿Public Interface IStatisticType
     Inherits IBaseThingie
     ReadOnly Property Abbreviation As String
     ReadOnly Property DefaultValue As Long?

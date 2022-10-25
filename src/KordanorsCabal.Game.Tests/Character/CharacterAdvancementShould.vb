@@ -26,7 +26,7 @@
             Sub(worldData, id, subject)
                 Const statisticTypeId = 9
 
-                Dim statisticType As New Mock(Of ICharacterStatisticType)
+                Dim statisticType As New Mock(Of IStatisticType)
                 worldData.Setup(Function(x) x.CharacterStatistic).Returns((New Mock(Of ICharacterStatisticData)).Object)
                 worldData.Setup(Function(x) x.CharacterStatisticType).Returns((New Mock(Of ICharacterStatisticTypeData)).Object)
 

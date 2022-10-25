@@ -19,7 +19,7 @@
             Sub(worldData, itemTypeId, subject)
                 Const statisticTypeId = 2L
                 worldData.Setup(Function(x) x.ItemTypeCharacterStatisticBuff.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.EquippedBuff(CharacterStatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBeNull
+                subject.EquippedBuff(StatisticType.FromId(worldData.Object, statisticTypeId)).ShouldBeNull
                 worldData.Verify(Function(x) x.ItemTypeCharacterStatisticBuff.Read(itemTypeId, statisticTypeId))
             End Sub)
     End Sub

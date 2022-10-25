@@ -12,7 +12,7 @@
             Return WorldData.ItemTypeEquipSlot.ReadForItemType(Id).Select(Function(x) EquipSlot.FromId(WorldData, x))
         End Get
     End Property
-    Function EquippedBuff(statisticType As ICharacterStatisticType) As Long? Implements IItemTypeEquip.EquippedBuff
+    Function EquippedBuff(statisticType As IStatisticType) As Long? Implements IItemTypeEquip.EquippedBuff
         Return WorldData.ItemTypeCharacterStatisticBuff.Read(Id, statisticType.Id)
     End Function
 End Class
