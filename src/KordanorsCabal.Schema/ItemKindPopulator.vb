@@ -1,7 +1,9 @@
 ﻿Module ItemKindPopulator
-    Public Const ItemKind1 = 1L
+    Public Const ItemKindTrophy = 1L
+    Public Const ItemKindKey = 2L
     Friend Sub PopulateItemKinds(connection As SqliteConnection)
-        PopulateItemKindsRecord(connection, ItemKind1, "Trophy")
+        PopulateItemKindsRecord(connection, ItemKindTrophy, "Trophy")
+        PopulateItemKindsRecord(connection, ItemKindKey, "Key")
     End Sub
     Private Sub PopulateItemKindsRecord(connection As SqliteConnection, itemKindId As Long, itemKindName As String)
         Using command = New SqliteCommand(
