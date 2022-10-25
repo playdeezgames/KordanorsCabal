@@ -21,4 +21,5 @@
     Sub Decay(item As IItem)
     Sub Use(character As ICharacter, item As IItem)
     Function CanUse(character As ICharacter) As Boolean
+    ReadOnly Property Kind As IItemKind
 End Interface

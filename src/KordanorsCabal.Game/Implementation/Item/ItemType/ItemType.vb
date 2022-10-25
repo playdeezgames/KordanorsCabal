@@ -24,6 +24,7 @@
             Return Statistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeEncumbrance))
         End Get
     End Property
+
     ReadOnly Property MaximumDurability As Long? Implements IItemType.MaximumDurability
         Get
             Return Statistic(WorldData, Id, StatisticType.FromId(WorldData, StatisticTypeMaximumDurability))
@@ -146,6 +147,12 @@
     Public ReadOnly Property Combat As IItemTypeCombat Implements IItemType.Combat
         Get
             Return ItemTypeCombat.FromId(WorldData, Id)
+        End Get
+    End Property
+
+    Public ReadOnly Property Kind As IItemKind Implements IItemType.Kind
+        Get
+            Return Nothing
         End Get
     End Property
 
