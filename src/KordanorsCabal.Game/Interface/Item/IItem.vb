@@ -8,7 +8,6 @@
     ReadOnly Property Armor As IArmor
     ReadOnly Property Equipment As IEquipment
     ReadOnly Property Usage As IUsage
-
     Sub Purify()
     Sub Destroy()
     Sub Decay()
