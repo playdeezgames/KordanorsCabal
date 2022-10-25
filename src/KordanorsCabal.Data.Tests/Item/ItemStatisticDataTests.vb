@@ -33,7 +33,7 @@
                         Tables.ItemStatistics,
                         Columns.StatisticValueColumn,
                         (Columns.ItemIdColumn, itemId),
-                        (Columns.CharacterStatisticTypeIdColumn, statisticTypeId)))
+                        (Columns.StatisticTypeIdColumn, statisticTypeId)))
             End Sub)
     End Sub
     <Fact>
@@ -50,7 +50,7 @@
                         It.IsAny(Of Action),
                         Tables.ItemStatistics,
                         (Columns.ItemIdColumn, itemId),
-                        (Columns.CharacterStatisticTypeIdColumn, statisticTypeId),
+                        (Columns.StatisticTypeIdColumn, statisticTypeId),
                         (Columns.StatisticValueColumn, statisticValue)))
             End Sub)
     End Sub

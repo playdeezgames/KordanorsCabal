@@ -11,6 +11,6 @@
             ItemTypeCharacterStatisticBuffs,
             BuffColumn,
             (ItemTypeIdColumn, itemTypeId),
-            (CharacterStatisticTypeIdColumn, characterStatisticTypeId))
+            (StatisticTypeIdColumn, characterStatisticTypeId))
     End Function
 End Class

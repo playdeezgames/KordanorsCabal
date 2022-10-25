@@ -17,7 +17,7 @@
                     Tables.LocationStatistics,
                     Columns.StatisticValueColumn,
                     (Columns.LocationIdColumn, locationId),
-                    (Columns.CharacterStatisticTypeIdColumn, statisticType)))
+                    (Columns.StatisticTypeIdColumn, statisticType)))
             End Sub)
     End Sub
     <Fact>
@@ -34,7 +34,7 @@
                     It.IsAny(Of Action),
                     Tables.LocationStatistics,
                     (Columns.LocationIdColumn, locationId),
-                    (Columns.CharacterStatisticTypeIdColumn, statisticType),
+                    (Columns.StatisticTypeIdColumn, statisticType),
                     (Columns.StatisticValueColumn, statisticValue)))
             End Sub)
     End Sub

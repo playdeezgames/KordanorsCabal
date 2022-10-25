@@ -29,9 +29,9 @@
     Sub PopulateInventoryItems(connection As SqliteConnection)
     End Sub
     Sub PopulateItemStatisticsRecord(connection As SqliteConnection, ItemId As Long, ItemStatisticTypeId As Long, StatisticValue As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemStatistics}]([{Columns.ItemIdColumn}], [{Columns.CharacterStatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.ItemIdColumn}, @{Columns.CharacterStatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemStatistics}]([{Columns.ItemIdColumn}], [{Columns.StatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.ItemIdColumn}, @{Columns.StatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.ItemIdColumn}", ItemId)
-            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", ItemStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.StatisticTypeIdColumn}", ItemStatisticTypeId)
             command.Parameters.AddWithValue($"@{Columns.StatisticValueColumn}", StatisticValue)
             command.ExecuteNonQuery()
         End Using

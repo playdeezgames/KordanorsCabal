@@ -6,7 +6,7 @@ Public Module Tables
     Public Const Characters = "Characters"
     Public Const CharacterSpells = "CharacterSpells"
     Public Const CharacterStatistics = "CharacterStatistics"
-    Public Const CharacterStatisticTypes = "CharacterStatisticTypes"
+    Public Const StatisticTypes = "StatisticTypes"
     Public Const CharacterTypeAttackTypes = "CharacterTypeAttackTypes"
     Public Const CharacterTypeBribes = "CharacterTypeBribes"
     Public Const CharacterTypeEnemies = "CharacterTypeEnemies"

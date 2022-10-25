@@ -8,7 +8,7 @@
         Return Store.Record.WithValues(Of Long, Long, Long)(
             AddressOf NoInitializer,
             LocationStatistics, LocationIdColumn,
-            (CharacterStatisticTypeIdColumn, statisticType),
+            (StatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue))
     End Function
 
@@ -18,7 +18,7 @@
             LocationStatistics,
             StatisticValueColumn,
             (LocationIdColumn, locationId),
-            (CharacterStatisticTypeIdColumn, statisticType))
+            (StatisticTypeIdColumn, statisticType))
     End Function
 
     Public Sub Write(locationId As Long, statisticType As Long, statisticValue As Long?) Implements ILocationStatisticData.Write
@@ -27,14 +27,14 @@
                 AddressOf NoInitializer,
                 LocationStatistics,
                 (LocationIdColumn, locationId),
-                (CharacterStatisticTypeIdColumn, statisticType))
+                (StatisticTypeIdColumn, statisticType))
             Return
         End If
         Store.Replace.Entry(
             AddressOf NoInitializer,
             LocationStatistics,
             (LocationIdColumn, locationId),
-            (CharacterStatisticTypeIdColumn, statisticType),
+            (StatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue.Value))
     End Sub
 End Class

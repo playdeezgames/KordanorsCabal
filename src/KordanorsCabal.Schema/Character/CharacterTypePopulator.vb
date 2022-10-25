@@ -44,9 +44,9 @@
         PopulateCharacterTypesRecord(connection, CharacterType16, "Zombie", 1, "2d4", 1)
     End Sub
     Private Sub PopulateCharacterTypeInitialStatisticsRecord(connection As SqliteConnection, CharacterTypeId As Long, CharacterStatisticTypeId As Long, InitialValue As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeInitialStatistics}]([{Columns.CharacterTypeIdColumn}], [{Columns.CharacterStatisticTypeIdColumn}], [{Columns.InitialValueColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.CharacterStatisticTypeIdColumn}, @{Columns.InitialValueColumn});", connection)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeInitialStatistics}]([{Columns.CharacterTypeIdColumn}], [{Columns.StatisticTypeIdColumn}], [{Columns.InitialValueColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.StatisticTypeIdColumn}, @{Columns.InitialValueColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
-            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", CharacterStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.StatisticTypeIdColumn}", CharacterStatisticTypeId)
             command.Parameters.AddWithValue($"@{Columns.InitialValueColumn}", InitialValue)
             command.ExecuteNonQuery()
         End Using

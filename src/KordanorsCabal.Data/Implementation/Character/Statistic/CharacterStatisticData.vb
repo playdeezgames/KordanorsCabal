@@ -9,7 +9,7 @@
             AddressOf NoInitializer,
             CharacterStatistics,
             (CharacterIdColumn, characterId),
-            (CharacterStatisticTypeIdColumn, statisticType),
+            (StatisticTypeIdColumn, statisticType),
             (StatisticValueColumn, statisticValue))
     End Sub
 
@@ -19,7 +19,7 @@
             CharacterStatistics,
             StatisticValueColumn,
             (CharacterIdColumn, characterId),
-            (CharacterStatisticTypeIdColumn, statisticType))
+            (StatisticTypeIdColumn, statisticType))
     End Function
 
     Friend Sub ClearForCharacter(characterId As Long) Implements ICharacterStatisticData.ClearForCharacter

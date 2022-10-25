@@ -13,9 +13,9 @@ Public Module Scaffolder
 	[{Columns.MoneyDropDiceColumn}] TEXT NOT NULL,
 	[{Columns.IsUndeadColumn}] INT NOT NULL
 )")
-        ScaffoldTable(connection, $"CREATE TABLE [{Tables.CharacterStatisticTypes}]
+        ScaffoldTable(connection, $"CREATE TABLE [{Tables.StatisticTypes}]
 (
-                    [{Columns.CharacterStatisticTypeIdColumn}] INTEGER PRIMARY KEY,
+                    [{Columns.StatisticTypeIdColumn}] INTEGER PRIMARY KEY,
                     [{Columns.CharacterStatisticTypeNameColumn}] TEXT NOT NULL,
                     [{Columns.AbbreviationColumn}] TEXT NOT NULL,
                     [{Columns.MinimumValueColumn}] INT NOT NULL,
@@ -24,11 +24,11 @@ Public Module Scaffolder
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.CharacterTypeInitialStatistics}]
 (
                     [{Columns.CharacterTypeIdColumn}] INT NOT NULL,
-                    [{Columns.CharacterStatisticTypeIdColumn}] INT NOT NULL,
+                    [{Columns.StatisticTypeIdColumn}] INT NOT NULL,
                     [{Columns.InitialValueColumn}] INT NOT NULL,
-					UNIQUE([{Columns.CharacterTypeIdColumn}],[{Columns.CharacterStatisticTypeIdColumn}]),
+					UNIQUE([{Columns.CharacterTypeIdColumn}],[{Columns.StatisticTypeIdColumn}]),
 					FOREIGN KEY ([{Columns.CharacterTypeIdColumn}]) REFERENCES [{Tables.CharacterTypes}]([{Columns.CharacterTypeIdColumn}]),
-					FOREIGN KEY ([{Columns.CharacterStatisticTypeIdColumn}]) REFERENCES [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}])
+					FOREIGN KEY ([{Columns.StatisticTypeIdColumn}]) REFERENCES [{Tables.StatisticTypes}]([{Columns.StatisticTypeIdColumn}])
 )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.CharacterTypeAttackTypes}]
 (
@@ -173,11 +173,11 @@ Public Module Scaffolder
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemTypeCharacterStatisticBuffs}]
 (
                     [{Columns.ItemTypeIdColumn}] INT NOT NULL,
-                    [{Columns.CharacterStatisticTypeIdColumn}] INT NOT NULL,
+                    [{Columns.StatisticTypeIdColumn}] INT NOT NULL,
                     [{Columns.BuffColumn}] INT NOT NULL,
-					UNIQUE([{Columns.ItemTypeIdColumn}],[{Columns.CharacterStatisticTypeIdColumn}]),
+					UNIQUE([{Columns.ItemTypeIdColumn}],[{Columns.StatisticTypeIdColumn}]),
 					FOREIGN KEY ([{Columns.ItemTypeIdColumn}]) REFERENCES [{Tables.ItemTypes}]([{Columns.ItemTypeIdColumn}]),
-					FOREIGN KEY ([{Columns.CharacterStatisticTypeIdColumn}]) REFERENCES [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}])
+					FOREIGN KEY ([{Columns.StatisticTypeIdColumn}]) REFERENCES [{Tables.StatisticTypes}]([{Columns.StatisticTypeIdColumn}])
 					)")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemTypeStatisticTypes}]
 (
@@ -320,11 +320,11 @@ Public Module Scaffolder
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.CharacterStatistics}]
             (
                 [{Columns.CharacterIdColumn}] INT NOT NULL,
-                [{Columns.CharacterStatisticTypeIdColumn}] INT NOT NULL,
+                [{Columns.StatisticTypeIdColumn}] INT NOT NULL,
                 [{Columns.StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{Columns.CharacterIdColumn}],[{Columns.CharacterStatisticTypeIdColumn}]),
+                UNIQUE([{Columns.CharacterIdColumn}],[{Columns.StatisticTypeIdColumn}]),
                 FOREIGN KEY ([{Columns.CharacterIdColumn}]) REFERENCES [{Tables.Characters}]([{Columns.CharacterIdColumn}]),
-                FOREIGN KEY ([{Columns.CharacterStatisticTypeIdColumn}]) REFERENCES [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}])
+                FOREIGN KEY ([{Columns.StatisticTypeIdColumn}]) REFERENCES [{Tables.StatisticTypes}]([{Columns.StatisticTypeIdColumn}])
             )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.Inventories}]
             (
@@ -348,11 +348,11 @@ Public Module Scaffolder
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemStatistics}]
             (
                 [{Columns.ItemIdColumn}] INT NOT NULL,
-                [{Columns.CharacterStatisticTypeIdColumn}] INT NOT NULL,
+                [{Columns.StatisticTypeIdColumn}] INT NOT NULL,
                 [{Columns.StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{Columns.ItemIdColumn}],[{Columns.CharacterStatisticTypeIdColumn}]),
+                UNIQUE([{Columns.ItemIdColumn}],[{Columns.StatisticTypeIdColumn}]),
                 FOREIGN KEY ([{Columns.ItemIdColumn}]) REFERENCES [{Tables.Items}]([{Columns.ItemIdColumn}]),
-                FOREIGN KEY ([{Columns.CharacterStatisticTypeIdColumn}]) REFERENCES [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}])
+                FOREIGN KEY ([{Columns.StatisticTypeIdColumn}]) REFERENCES [{Tables.StatisticTypes}]([{Columns.StatisticTypeIdColumn}])
             )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.LocationDungeonLevels}]
             (
@@ -372,11 +372,11 @@ Public Module Scaffolder
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.LocationStatistics}]
             (
                 [{Columns.LocationIdColumn}] INT NOT NULL,
-                [{Columns.CharacterStatisticTypeIdColumn}] INT NOT NULL, 
+                [{Columns.StatisticTypeIdColumn}] INT NOT NULL, 
                 [{Columns.StatisticValueColumn}] INT NOT NULL,
-                UNIQUE([{Columns.LocationIdColumn}],[{Columns.CharacterStatisticTypeIdColumn}]),
+                UNIQUE([{Columns.LocationIdColumn}],[{Columns.StatisticTypeIdColumn}]),
                 FOREIGN KEY ([{Columns.LocationIdColumn}]) REFERENCES [{Tables.Locations}]([{Columns.LocationIdColumn}]),
-                FOREIGN KEY ([{Columns.CharacterStatisticTypeIdColumn}]) REFERENCES [{Tables.CharacterStatisticTypes}]([{Columns.CharacterStatisticTypeIdColumn}])
+                FOREIGN KEY ([{Columns.StatisticTypeIdColumn}]) REFERENCES [{Tables.StatisticTypes}]([{Columns.StatisticTypeIdColumn}])
             )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.Routes}]
             (

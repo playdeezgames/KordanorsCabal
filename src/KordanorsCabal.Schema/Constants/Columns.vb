@@ -9,7 +9,7 @@ Public Module Columns
     Public Const CastCheckColumn = "CastCheck"
     Public Const CastColumn = "Cast"
     Public Const CharacterIdColumn = "CharacterId"
-    Public Const CharacterStatisticTypeIdColumn = "CharacterStatisticTypeId"
+    Public Const StatisticTypeIdColumn = "StatisticTypeId"
     Public Const CharacterStatisticTypeNameColumn = "CharacterStatisticTypeName"
     Public Const CharacterTypeIdColumn = "CharacterTypeId"
     Public Const CharacterTypeNameColumn = "CharacterTypeName"

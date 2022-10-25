@@ -5,7 +5,7 @@
         Return Store.Record.WithValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
             CharacterTypeInitialStatistics,
-            (CharacterStatisticTypeIdColumn, InitialValueColumn),
+            (StatisticTypeIdColumn, InitialValueColumn),
             (CharacterTypeIdColumn, characterTypeId))
     End Function
 
@@ -19,14 +19,14 @@
             CharacterTypeInitialStatistics,
             InitialValueColumn,
             (CharacterTypeIdColumn, characterTypeId),
-            (CharacterStatisticTypeIdColumn, statisticTypeId))
+            (StatisticTypeIdColumn, statisticTypeId))
     End Function
 
     Public Function ReadForCharacterType(characterTypeId As Long) As IEnumerable(Of Long)
         Return Store.Record.WithValues(Of Long, Long)(
             AddressOf NoInitializer,
             CharacterTypeInitialStatistics,
-            CharacterStatisticTypeIdColumn,
+            StatisticTypeIdColumn,
             (CharacterTypeIdColumn, characterTypeId))
     End Function
 End Class

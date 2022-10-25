@@ -69,9 +69,9 @@
     Sub PopulateCharacterQuests(connection As SqliteConnection)
     End Sub
     Sub PopulateCharacterStatisticsRecord(connection As SqliteConnection, CharacterId As Long, CharacterStatisticTypeId As Long, StatisticValue As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterStatistics}]([{Columns.CharacterIdColumn}], [{Columns.CharacterStatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.CharacterIdColumn}, @{Columns.CharacterStatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterStatistics}]([{Columns.CharacterIdColumn}], [{Columns.StatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.CharacterIdColumn}, @{Columns.StatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.CharacterIdColumn}", CharacterId)
-            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", CharacterStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.StatisticTypeIdColumn}", CharacterStatisticTypeId)
             command.Parameters.AddWithValue($"@{Columns.StatisticValueColumn}", StatisticValue)
             command.ExecuteNonQuery()
         End Using

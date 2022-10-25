@@ -17,7 +17,7 @@
                         Tables.ItemTypeCharacterStatisticBuffs,
                         Columns.BuffColumn,
                         (Columns.ItemTypeIdColumn, itemTypeId),
-                        (Columns.CharacterStatisticTypeIdColumn, characterStatisticTypeId)))
+                        (Columns.StatisticTypeIdColumn, characterStatisticTypeId)))
             End Sub)
     End Sub
 End Class

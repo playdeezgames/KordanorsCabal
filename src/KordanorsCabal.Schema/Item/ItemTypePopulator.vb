@@ -338,9 +338,9 @@
         PopulateItemTypeSpawnLocationTypesRecord(connection, ItemType53, DungeonLevel5, LocationType4)
     End Sub
     Sub PopulateItemTypeCharacterStatisticBuffsRecord(connection As SqliteConnection, ItemTypeId As Long, CharacterStatisticTypeId As Long, Buff As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeCharacterStatisticBuffs}]([{Columns.ItemTypeIdColumn}], [{Columns.CharacterStatisticTypeIdColumn}], [{Columns.BuffColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.CharacterStatisticTypeIdColumn}, @{Columns.BuffColumn});", connection)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeCharacterStatisticBuffs}]([{Columns.ItemTypeIdColumn}], [{Columns.StatisticTypeIdColumn}], [{Columns.BuffColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.StatisticTypeIdColumn}, @{Columns.BuffColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
-            command.Parameters.AddWithValue($"@{Columns.CharacterStatisticTypeIdColumn}", CharacterStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.StatisticTypeIdColumn}", CharacterStatisticTypeId)
             command.Parameters.AddWithValue($"@{Columns.BuffColumn}", Buff)
             command.ExecuteNonQuery()
         End Using
