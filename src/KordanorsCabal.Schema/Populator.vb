@@ -22,7 +22,6 @@ Public Module Populator
         PopulateItemTypeSpawnCounts(connection)
         PopulateItemTypeSpawnLocationTypes(connection)
         PopulateItemTypeCharacterStatisticBuffs(connection)
-        PopulateItemTypeStatisticTypes(connection)
         PopulateItemTypeStatistics(connection)
         PopulateFeatureTypes(connection)
         PopulateDirections(connection)

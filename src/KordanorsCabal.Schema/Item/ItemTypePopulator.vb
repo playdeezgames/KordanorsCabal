@@ -365,10 +365,10 @@
         PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType51, StatisticTypeMana, 1)
     End Sub
     Private Sub PopulateItemTypeStatisticsRecord(connection As SqliteConnection, ItemTypeId As Long, ItemTypeStatisticTypeId As Long, ItemTypeStatisticValue As Long)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeStatistics}]([{Columns.ItemTypeIdColumn}], [{Columns.ItemTypeStatisticTypeIdColumn}], [{Columns.ItemTypeStatisticValueColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.ItemTypeStatisticTypeIdColumn}, @{Columns.ItemTypeStatisticValueColumn});", connection)
+        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeStatistics}]([{Columns.ItemTypeIdColumn}], [{Columns.StatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.StatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.ItemTypeIdColumn}", ItemTypeId)
-            command.Parameters.AddWithValue($"@{Columns.ItemTypeStatisticTypeIdColumn}", ItemTypeStatisticTypeId)
-            command.Parameters.AddWithValue($"@{Columns.ItemTypeStatisticValueColumn}", ItemTypeStatisticValue)
+            command.Parameters.AddWithValue($"@{Columns.StatisticTypeIdColumn}", ItemTypeStatisticTypeId)
+            command.Parameters.AddWithValue($"@{Columns.StatisticValueColumn}", ItemTypeStatisticValue)
             command.ExecuteNonQuery()
         End Using
     End Sub

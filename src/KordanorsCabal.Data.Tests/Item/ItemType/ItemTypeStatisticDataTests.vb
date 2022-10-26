@@ -14,7 +14,7 @@
                     Function(x) x.Record.WithValue(Of Long, Long, Long)(
                         It.IsAny(Of Action),
                         Tables.ItemTypeStatistics,
-                        (Columns.ItemTypeStatisticTypeIdColumn, Columns.ItemTypeStatisticValueColumn),
+                        (Columns.StatisticTypeIdColumn, Columns.StatisticValueColumn),
                         (Columns.ItemTypeIdColumn, itemTypeId)))
             End Sub)
     End Sub
@@ -30,9 +30,9 @@
                     Function(x) x.Column.ReadValue(Of Long, Long, Long)(
                     It.IsAny(Of Action),
                     Tables.ItemTypeStatistics,
-                    Columns.ItemTypeStatisticValueColumn,
+                    Columns.StatisticValueColumn,
                     (Columns.ItemTypeIdColumn, itemTypeId),
-                    (Columns.ItemTypeStatisticTypeIdColumn, statisticType)))
+                    (Columns.StatisticTypeIdColumn, statisticType)))
             End Sub)
     End Sub
 End Class

@@ -179,19 +179,14 @@ Public Module Scaffolder
 					FOREIGN KEY ([{Columns.ItemTypeIdColumn}]) REFERENCES [{Tables.ItemTypes}]([{Columns.ItemTypeIdColumn}]),
 					FOREIGN KEY ([{Columns.StatisticTypeIdColumn}]) REFERENCES [{Tables.StatisticTypes}]([{Columns.StatisticTypeIdColumn}])
 					)")
-        ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemTypeStatisticTypes}]
-(
-                    [{Columns.ItemTypeStatisticTypeIdColumn}] INTEGER PRIMARY KEY,
-                    [{Columns.ItemTypeStatisticTypeNameColumn}] TEXT NOT NULL
-					)")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemTypeStatistics}]
 (
                     [{Columns.ItemTypeIdColumn}] INT NOT NULL,
-                    [{Columns.ItemTypeStatisticTypeIdColumn}] INT NOT NULL,
-                    [{Columns.ItemTypeStatisticValueColumn}] INT NOT NULL,
-					UNIQUE([{Columns.ItemTypeIdColumn}],[{Columns.ItemTypeStatisticTypeIdColumn}]),
+                    [{Columns.StatisticTypeIdColumn}] INT NOT NULL,
+                    [{Columns.StatisticValueColumn}] INT NOT NULL,
+					UNIQUE([{Columns.ItemTypeIdColumn}],[{Columns.StatisticTypeIdColumn}]),
 					FOREIGN KEY ([{Columns.ItemTypeIdColumn}]) REFERENCES [{Tables.ItemTypes}]([{Columns.ItemTypeIdColumn}]),
-					FOREIGN KEY ([{Columns.ItemTypeStatisticTypeIdColumn}]) REFERENCES [{Tables.ItemTypeStatisticTypes}]([{Columns.ItemTypeStatisticTypeIdColumn}])
+					FOREIGN KEY ([{Columns.StatisticTypeIdColumn}]) REFERENCES [{Tables.StatisticTypes}]([{Columns.StatisticTypeIdColumn}])
 					)")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.FeatureTypes}]
 (

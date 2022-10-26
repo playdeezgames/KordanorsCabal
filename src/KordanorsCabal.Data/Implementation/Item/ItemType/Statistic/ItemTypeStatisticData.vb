@@ -9,16 +9,16 @@
         Return Store.Column.ReadValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
             ItemTypeStatistics,
-            ItemTypeStatisticValueColumn,
+            StatisticValueColumn,
             (ItemTypeIdColumn, itemTypeId),
-            (ItemTypeStatisticTypeIdColumn, itemTypeStatisticTypeId))
+            (StatisticTypeIdColumn, itemTypeStatisticTypeId))
     End Function
 
     Public Function ReadAll(itemType As Long) As List(Of Tuple(Of Long, Long)) Implements IItemTypeStatisticData.ReadAll
         Return Store.Record.WithValue(Of Long, Long, Long)(
             AddressOf NoInitializer,
             ItemTypeStatistics,
-            (ItemTypeStatisticTypeIdColumn, ItemTypeStatisticValueColumn),
+            (StatisticTypeIdColumn, StatisticValueColumn),
             (ItemTypeIdColumn, itemType))
     End Function
 End Class

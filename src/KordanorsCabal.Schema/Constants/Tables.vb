@@ -34,7 +34,6 @@ Public Module Tables
     Public Const ItemTypeSpawnCounts = "ItemTypeSpawnCounts"
     Public Const ItemTypeSpawnLocationTypes = "ItemTypeSpawnLocationTypes"
     Public Const ItemTypeStatistics = "ItemTypeStatistics"
-    Public Const ItemTypeStatisticTypes = "ItemTypeStatisticTypes"
     Public Const LocationDungeonLevels = "LocationDungeonLevels"
     Public Const Locations = "Locations"
     Public Const LocationStatistics = "LocationStatistics"

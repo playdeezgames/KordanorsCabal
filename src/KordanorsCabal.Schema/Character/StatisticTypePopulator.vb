@@ -84,21 +84,4 @@
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypePrice, "Price", "Price", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeRepairPrice, "RepairPrice", "Repair", 0, Nothing, 99999)
     End Sub
-    Private Sub PopulateItemTypeStatisticTypesRecord(connection As SqliteConnection, ItemTypeStatisticTypeId As Long, ItemTypeStatisticTypeName As String)
-        Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeStatisticTypes}]([{Columns.ItemTypeStatisticTypeIdColumn}], [{Columns.ItemTypeStatisticTypeNameColumn}]) VALUES (@{Columns.ItemTypeStatisticTypeIdColumn}, @{Columns.ItemTypeStatisticTypeNameColumn});", connection)
-            command.Parameters.AddWithValue($"@{Columns.ItemTypeStatisticTypeIdColumn}", ItemTypeStatisticTypeId)
-            command.Parameters.AddWithValue($"@{Columns.ItemTypeStatisticTypeNameColumn}", ItemTypeStatisticTypeName)
-            command.ExecuteNonQuery()
-        End Using
-    End Sub
-    Friend Sub PopulateItemTypeStatisticTypes(connection As SqliteConnection)
-        PopulateItemTypeStatisticTypesRecord(connection, StatisticTypeEncumbrance, "Encumbrance")
-        PopulateItemTypeStatisticTypesRecord(connection, StatisticTypeAttackDice, "AttackDice")
-        PopulateItemTypeStatisticTypesRecord(connection, StatisticTypeMaximumDamage, "MaximumDamage")
-        PopulateItemTypeStatisticTypesRecord(connection, StatisticTypeDefendDice, "DefendDice")
-        PopulateItemTypeStatisticTypesRecord(connection, StatisticTypeMaximumDurability, "MaximumDurability")
-        PopulateItemTypeStatisticTypesRecord(connection, StatisticTypeOffer, "Offer")
-        PopulateItemTypeStatisticTypesRecord(connection, StatisticTypePrice, "Price")
-        PopulateItemTypeStatisticTypesRecord(connection, StatisticTypeRepairPrice, "RepairPrice")
-    End Sub
 End Module
