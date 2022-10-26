@@ -37,8 +37,6 @@ Public Module Columns
     Public Const IsSingleUseColumn = "IsSingleUse"
     Public Const IsUndeadColumn = "IsUndead"
     Public Const ItemIdColumn = "ItemId"
-    Public Const ItemKindIdColumn = "ItemKindId"
-    Public Const ItemKindNameColumn = "ItemKindName"
     Public Const ItemNameColumn = "ItemName"
     Public Const ItemTypeIdColumn = "ItemTypeId"
     Public Const ItemTypeNameColumn = "ItemTypeName"

@@ -38,18 +38,11 @@ Public Module Scaffolder
 	UNIQUE([{Columns.CharacterTypeIdColumn}],[{Columns.AttackTypeColumn}]),
 	FOREIGN KEY ([{Columns.CharacterTypeIdColumn}]) REFERENCES [{Tables.CharacterTypes}]([{Columns.CharacterTypeIdColumn}])
 )")
-        ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemKinds}]
-(
-	[{Columns.ItemKindIdColumn}] INTEGER PRIMARY KEY,
-	[{Columns.ItemKindNameColumn}] TEXT NOT NULL
-)")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemTypes}]
 (
 	[{Columns.ItemTypeIdColumn}] INTEGER PRIMARY KEY,
 	[{Columns.ItemTypeNameColumn}] TEXT NOT NULL,
-	[{Columns.IsConsumedColumn}] INT NOT NULL,
-    [{Columns.ItemKindIdColumn}] INT NOT NULL,
-    FOREIGN KEY ([{Columns.ItemKindIdColumn}]) REFERENCES [{Tables.ItemKinds}]([{Columns.ItemKindIdColumn}])
+	[{Columns.IsConsumedColumn}] INT NOT NULL
 )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.CharacterTypeBribes}]
 (

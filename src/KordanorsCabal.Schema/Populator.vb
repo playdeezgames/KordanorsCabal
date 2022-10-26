@@ -4,7 +4,6 @@ Public Module Populator
         PopulateCharacterStatisticTypes(connection)
         PopulateCharacterTypeInitialStatistics(connection)
         PopulateCharacterTypeAttackTypes(connection)
-        PopulateItemKinds(connection)
         PopulateItemTypes(connection)
         PopulateCharacterTypeBribes(connection)
         PopulateCharacterTypeEnemies(connection)

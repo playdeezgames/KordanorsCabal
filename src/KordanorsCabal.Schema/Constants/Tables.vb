@@ -25,7 +25,6 @@ Public Module Tables
     Public Const InventoryItems = "InventoryItems"
     Public Const ItemLores = "ItemLores"
     Public Const Items = "Items"
-    Public Const ItemKinds = "ItemKinds"
     Public Const ItemStatistics = "ItemStatistics"
     Public Const ItemTypeCharacterStatisticBuffs = "ItemTypeCharacterStatisticBuffs"
     Public Const ItemTypeEquipSlots = "ItemTypeEquipSlots"
