@@ -8,7 +8,14 @@
         WithSubobject(
             Sub(store, checker, subject)
                 Dim itemTypeId = 1L
-                subject.ReadAll(itemTypeId).ShouldBeEmpty
+                store.Setup(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
+                subject.ReadAll(itemTypeId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.Record.WithValue(Of Long, Long, Long)(
+                        It.IsAny(Of Action),
+                        Tables.ItemTypeStatistics,
+                        (Columns.ItemTypeStatisticTypeIdColumn, Columns.ItemTypeStatisticValueColumn),
+                        (Columns.ItemTypeIdColumn, itemTypeId)))
             End Sub)
     End Sub
     <Fact>

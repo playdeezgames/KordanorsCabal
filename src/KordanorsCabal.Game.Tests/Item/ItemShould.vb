@@ -10,7 +10,7 @@
         Const statisticValue = 3L
         Dim worldData As New Mock(Of IWorldData)
         worldData.Setup(Function(x) x.Item.Create(It.IsAny(Of Long)))
-        worldData.Setup(Function(x) x.ItemTypeStatistic.ReadAll(It.IsAny(Of Long))).Returns({(statisticTypeId, statisticValue)})
+        worldData.Setup(Function(x) x.ItemTypeStatistic.ReadAll(It.IsAny(Of Long))).Returns({New Tuple(Of Long, Long)(statisticTypeId, statisticValue)}.ToList)
         worldData.Setup(Sub(x) x.ItemStatistic.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of Long)))
         Item.Create(worldData.Object, ItemType.FromId(worldData.Object, itemTypeId))
         worldData.Verify(Function(x) x.Item.Create(itemTypeId))
