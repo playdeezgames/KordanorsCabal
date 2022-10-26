@@ -35,6 +35,7 @@
     Public Const StatisticTypeOffer = 34L
     Public Const StatisticTypePrice = 35L
     Public Const StatisticTypeRepairPrice = 36L
+    Public Const StatisticTypeSingleUse = 37L
     Private Sub PopulateCharacterStatisticTypesRecord(connection As SqliteConnection, CharacterStatisticTypeId As Long, CharacterStatisticTypeName As String, Abbreviation As String, MinimumValue As Long, DefaultValue As Long?, MaximumValue As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.StatisticTypes}]([{Columns.StatisticTypeIdColumn}], [{Columns.CharacterStatisticTypeNameColumn}], [{Columns.AbbreviationColumn}], [{Columns.MinimumValueColumn}], [{Columns.DefaultValueColumn}], [{Columns.MaximumValueColumn}]) VALUES (@{Columns.StatisticTypeIdColumn}, @{Columns.CharacterStatisticTypeNameColumn}, @{Columns.AbbreviationColumn}, @{Columns.MinimumValueColumn}, @{Columns.DefaultValueColumn}, @{Columns.MaximumValueColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.StatisticTypeIdColumn}", CharacterStatisticTypeId)
@@ -83,5 +84,6 @@
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeOffer, "Offer", "Offer", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypePrice, "Price", "Price", 0, Nothing, 99999)
         PopulateCharacterStatisticTypesRecord(connection, StatisticTypeRepairPrice, "RepairPrice", "Repair", 0, Nothing, 99999)
+        PopulateCharacterStatisticTypesRecord(connection, StatisticTypeSingleUse, "SingleUse", "Consumed", 0, 0, 1)
     End Sub
 End Module
