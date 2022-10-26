@@ -10,18 +10,22 @@
         Const statisticValue = 3L
         Const eventId = 4L
         Const eventName = "five"
+        Const itemTypeName = "six"
         Dim worldData As New Mock(Of IWorldData)
         worldData.Setup(Function(x) x.Item.Create(It.IsAny(Of Long)))
         worldData.Setup(Function(x) x.ItemTypeStatistic.ReadAll(It.IsAny(Of Long))).Returns({New Tuple(Of Long, Long)(statisticTypeId, statisticValue)}.ToList)
         worldData.Setup(Sub(x) x.ItemStatistic.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of Long)))
         worldData.Setup(Function(x) x.ItemTypeEvent.ReadAll(It.IsAny(Of Long))).Returns({New Tuple(Of Long, String)(eventId, eventName)}.ToList)
         worldData.Setup(Sub(x) x.ItemEvent.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of String)))
+        worldData.Setup(Function(x) x.ItemType.ReadName(It.IsAny(Of Long))).Returns(itemTypeName)
         Item.Create(worldData.Object, ItemType.FromId(worldData.Object, itemTypeId))
         worldData.Verify(Function(x) x.Item.Create(itemTypeId))
         worldData.Verify(Function(x) x.ItemTypeStatistic.ReadAll(itemTypeId))
         worldData.Verify(Sub(x) x.ItemStatistic.Write(0, statisticTypeId, statisticValue))
         worldData.Verify(Function(x) x.ItemTypeEvent.ReadAll(itemTypeId))
         worldData.Verify(Sub(x) x.ItemEvent.Write(0, eventId, eventName))
+        worldData.Verify(Sub(x) x.Item.WriteName(0, itemTypeName))
+        worldData.Verify(Function(x) x.ItemType.ReadName(itemTypeId))
         worldData.VerifyNoOtherCalls()
     End Sub
     <Fact>
