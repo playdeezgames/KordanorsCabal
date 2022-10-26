@@ -19,21 +19,6 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheStoreForTheIsConsumedFlagOfAGivenItemType()
-        WithSubobject(
-            Sub(store, checker, subject)
-                Dim itemTypeId = 1L
-                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
-                subject.ReadIsConsumed(itemTypeId).ShouldBeNull
-                store.Verify(
-                    Function(x) x.Column.ReadValue(Of Long, Long)(
-                    It.IsAny(Of Action),
-                    Tables.ItemTypes,
-                    Columns.IsConsumedColumn,
-                    (Columns.ItemTypeIdColumn, itemTypeId)))
-            End Sub)
-    End Sub
-    <Fact>
     Sub ShouldReadAllItemTypesFromTheDataStore()
         WithSubobject(
             Sub(store, checker, subject)

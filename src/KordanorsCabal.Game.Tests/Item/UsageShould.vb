@@ -21,12 +21,10 @@
     Sub have_is_consumed_property()
         WithSubject(
             Sub(worldData, id, subject)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemType.ReadIsConsumed(It.IsAny(Of Long)))
+                Const singleUse = 37L
+                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.IsConsumed.ShouldBeFalse
-                worldData.Verify(Function(x) x.Item.ReadItemType(id))
-                worldData.Verify(Function(x) x.ItemType.ReadIsConsumed(itemTypeId))
+                worldData.Verify(Function(x) x.ItemStatistic.Read(id, singleUse))
             End Sub)
     End Sub
     <Fact>

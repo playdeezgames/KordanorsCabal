@@ -16,7 +16,7 @@
     End Property
     ReadOnly Property IsConsumed As Boolean Implements IUsage.IsConsumed
         Get
-            Return Item.FromId(WorldData, Id).ItemType.IsConsumed
+            Return If(WorldData.ItemStatistic.Read(Id, StatisticTypeSingleUse), 0) > 0
         End Get
     End Property
     Friend Sub Use(character As ICharacter) Implements IUsage.Use

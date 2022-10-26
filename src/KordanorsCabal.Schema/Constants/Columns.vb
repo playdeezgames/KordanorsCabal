@@ -32,7 +32,6 @@ Public Module Columns
     Public Const InteractionModeColumn = "InteractionMode"
     Public Const InventoryIdColumn = "InventoryId"
     Public Const IsCardinalColumn = "IsCardinal"
-    Public Const IsConsumedColumn = "IsConsumed"
     Public Const IsDungeonColumn = "IsDungeon"
     Public Const IsSingleUseColumn = "IsSingleUse"
     Public Const IsUndeadColumn = "IsUndead"

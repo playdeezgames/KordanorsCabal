@@ -1,7 +1,6 @@
 ﻿Public Interface IItemType
     Inherits IBaseThingie
     ReadOnly Property Name As String
-    ReadOnly Property IsConsumed As Boolean
     ReadOnly Property Encumbrance As Long?
     ReadOnly Property Spawn As IItemTypeSpawn
     ReadOnly Property Equip As IItemTypeEquip

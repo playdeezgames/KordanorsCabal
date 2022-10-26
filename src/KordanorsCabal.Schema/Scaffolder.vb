@@ -41,8 +41,7 @@ Public Module Scaffolder
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemTypes}]
 (
 	[{Columns.ItemTypeIdColumn}] INTEGER PRIMARY KEY,
-	[{Columns.ItemTypeNameColumn}] TEXT NOT NULL,
-	[{Columns.IsConsumedColumn}] INT NOT NULL
+	[{Columns.ItemTypeNameColumn}] TEXT NOT NULL
 )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.CharacterTypeBribes}]
 (

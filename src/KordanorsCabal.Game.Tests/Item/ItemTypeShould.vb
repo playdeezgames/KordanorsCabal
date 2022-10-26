@@ -20,15 +20,6 @@
             End Sub)
     End Sub
     <Fact>
-    Sub item_types_have_consumption_flags_fetched_from_the_data_store()
-        WithSubject(
-            Sub(worldData, itemTypeId, subject)
-                worldData.SetupGet(Function(x) x.ItemType).Returns((New Mock(Of IItemTypeData)).Object)
-                subject.IsConsumed.ShouldBeFalse
-                worldData.Verify(Function(x) x.ItemType.ReadIsConsumed(itemTypeId))
-            End Sub)
-    End Sub
-    <Fact>
     Sub item_types_have_encumbrance()
         WithSubject(
             Sub(worldData, itemTypeId, subject)

@@ -9,11 +9,6 @@
             Return WorldData.ItemType.ReadName(Id)
         End Get
     End Property
-    ReadOnly Property IsConsumed As Boolean Implements IItemType.IsConsumed
-        Get
-            Return If(WorldData.ItemType.ReadIsConsumed(Id), 0) > 0
-        End Get
-    End Property
     ReadOnly Property Encumbrance As Long? Implements IItemType.Encumbrance
         Get
             Return Statistic(Id, StatisticType.FromId(WorldData, StatisticTypeEncumbrance))
