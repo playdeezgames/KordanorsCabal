@@ -48,10 +48,10 @@ Friend Class ChickenModeProcessor
             Select Case itemType.Id
                 Case 24L
                     player.EnqueueMessage(Nothing, $"{New FeatureType(WorldData, 4).Name} eats the food and then a {Game.ItemType.FromId(WorldData, ItemType25).Name} pops out!")
-                    player.Items.Inventory.Add(Game.Item.Create(WorldData, ItemType25))
+                    player.Items.Inventory.Add(Game.Item.Create(WorldData, Game.ItemType.FromId(WorldData, ItemType25)))
                 Case 35L
                     player.EnqueueMessage(Nothing, $"{New FeatureType(WorldData, 4L).Name} eats the rotten food and then a {Game.ItemType.FromId(WorldData, ItemType37).Name} pops out!")
-                    player.Items.Inventory.Add(Game.Item.Create(WorldData, 37))
+                    player.Items.Inventory.Add(Game.Item.Create(WorldData, Game.ItemType.FromId(WorldData, ItemType37)))
             End Select
         Else
             player.EnqueueMessage(Nothing, $"{New FeatureType(WorldData, 4L).Name} eats the food, and gives a satified ""moo"" in return.")

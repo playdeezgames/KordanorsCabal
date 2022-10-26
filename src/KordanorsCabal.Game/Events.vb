@@ -254,7 +254,7 @@
                         If lotionItem.Durability.Current = 0 Then
                             lines.Add($"You ran out that bottle of {ItemType.FromId(worldData, ItemType39).Name}.")
                             lotionItem.Destroy()
-                            character.Items.Inventory.Add(Item.Create(worldData, 30))
+                            character.Items.Inventory.Add(Item.Create(worldData, ItemType.FromId(worldData, ItemType30)))
                         End If
                     End If
                     character.EnqueueMessage(Nothing, lines.ToArray)
@@ -265,22 +265,22 @@
                     Dim table As IReadOnlyDictionary(Of Long, Integer) =
                         New Dictionary(Of Long, Integer) From
                         {
-                            {26L, 500},
-                            {19L, 8},
-                            {17L, 4},
-                            {10L, 250},
-                            {24L, 1000},
-                            {16L, 125},
-                            {22L, 64},
-                            {29L, 1},
-                            {20L, 2},
-                            {7L, 125},
-                            {15L, 64},
-                            {18L, 16},
-                            {23L, 8},
-                            {27L, 1}
+                            {ItemType26, 500},
+                            {ItemType19, 8},
+                            {ItemType17, 4},
+                            {ItemType10, 250},
+                            {ItemType24, 1000},
+                            {ItemType16, 125},
+                            {ItemType22, 64},
+                            {ItemType29, 1},
+                            {ItemType20, 2},
+                            {ItemType7, 125},
+                            {ItemType15, 64},
+                            {ItemType18, 16},
+                            {ItemType23, 8},
+                            {ItemType27, 1}
                         }
-                    Dim item = Game.Item.Create(worldData, RNG.FromGenerator(table))
+                    Dim item = Game.Item.Create(worldData, ItemType.FromId(worldData, RNG.FromGenerator(table)))
                     character.EnqueueMessage(Nothing, $"You crack open the {ItemType.FromId(worldData, ItemType25).Name} and find {item.Name} inside!")
                     character.Items.Inventory.Add(item)
                 End Sub},
@@ -295,7 +295,7 @@
                     End If
                     character.MentalCombat.CurrentMP = character.Statistics.GetStatistic(StatisticType.FromId(worldData, StatisticTypeMP)).Value
                     character.Statuses.Drunkenness += 10
-                    character.Items.Inventory.Add(Game.Item.Create(worldData, 30))
+                    character.Items.Inventory.Add(Game.Item.Create(worldData, ItemType.FromId(worldData, 30)))
                     character.EnqueueMessage(Nothing, "You drink the beer, and suddenly feel braver!")
                 End Sub},
             {"UseMoonPortal",
@@ -335,7 +335,7 @@
                     Dim character = Game.Character.FromId(worldData, parms(0))
                     Dim healRoll = RNG.RollDice("2d4")
                     character.Statistics.ChangeStatistic(StatisticType.FromId(worldData, StatisticTypeWounds), -healRoll)
-                    character.Items.Inventory.Add(Item.Create(worldData, 30))
+                    character.Items.Inventory.Add(Item.Create(worldData, ItemType.FromId(worldData, 30)))
                     character.EnqueueMessage(Nothing,
                 $"Potion heals up to {healRoll} HP!",
                 $"You now have {character.Health.Current} HP!")

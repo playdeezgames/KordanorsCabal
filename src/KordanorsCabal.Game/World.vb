@@ -13,7 +13,7 @@ Public Class World
         Dim locationTypes = itemType.Spawn.SpawnLocationTypes(dungeonLevel)
         If locationTypes.Any Then
             Dim spawnLocation = RNG.FromEnumerable(locations.Where(Function(x) locationTypes.Select(Function(y) y.Id).Contains(x.LocationType.Id)))
-            spawnLocation.Inventory.Add(Item.Create(worldData, itemType.Id))
+            spawnLocation.Inventory.Add(Item.Create(worldData, itemType))
         End If
     End Sub
     Private Function PlaceBossLocation(deadEnds As IEnumerable(Of ILocation), routeType As IRouteType) As ILocation

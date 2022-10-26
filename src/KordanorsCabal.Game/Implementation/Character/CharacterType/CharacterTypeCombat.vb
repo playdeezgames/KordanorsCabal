@@ -17,7 +17,7 @@
         End If
         Dim itemType = RNG.FromGenerator(lootTable)
         If itemType <> 0L Then
-            location.Inventory.Add(Item.Create(WorldData, itemType))
+            location.Inventory.Add(Item.Create(WorldData, Game.ItemType.FromId(WorldData, itemType)))
         End If
     End Sub
     Function GenerateAttackType() As AttackType Implements ICharacterTypeCombat.GenerateAttackType

@@ -42,7 +42,7 @@ Friend Class TownDrunkModeProcessor
     Private Function GiveBeer(player As ICharacter) As UIState
         player.EnqueueMessage(Nothing, $"You give {ItemType.FromId(WorldData, ItemType26).Name} to {New FeatureType(WorldData, 3L).Name}.", $"{New FeatureType(WorldData, 3L).Name} drinks it all in one swallow, burps, and hands you {ItemType.FromId(WorldData, ItemType30).Name}.")
         player.Items.Inventory.ItemsOfType(ItemType.FromId(WorldData, ItemType26)).First.Destroy()
-        player.Items.Inventory.Add(Item.Create(WorldData, ItemType30))
+        player.Items.Inventory.Add(Item.Create(WorldData, Game.ItemType.FromId(WorldData, ItemType30)))
         PushUIState(UIState.InPlay)
         Return UIState.Message
     End Function

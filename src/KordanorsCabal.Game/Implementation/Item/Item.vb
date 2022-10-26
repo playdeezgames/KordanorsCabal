@@ -7,8 +7,8 @@
     Shared Function FromId(worldData As IWorldData, itemId As Long?) As IItem
         Return If(itemId.HasValue, New Item(worldData, itemId.Value), Nothing)
     End Function
-    Shared Function Create(worldData As IWorldData, itemType As Long) As IItem
-        Return FromId(worldData, worldData.Item.Create(itemType))
+    Shared Function Create(worldData As IWorldData, itemType As IItemType) As IItem
+        Return FromId(worldData, worldData.Item.Create(itemType.Id))
     End Function
     Public ReadOnly Property ItemType As IItemType Implements IItem.ItemType
         Get
