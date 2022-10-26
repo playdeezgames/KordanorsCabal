@@ -13,6 +13,11 @@
         For Each statisticValue In statisticValues
             worldData.ItemStatistic.Write(itemId, statisticValue.Item1, statisticValue.Item2)
         Next
+        Dim eventEntries As List(Of Tuple(Of Long, String)) = worldData.ItemTypeEvent.ReadAll(itemType.Id)
+        For Each eventEntry In eventEntries
+            worldData.ItemEvent.Write(itemId, eventEntry.item1, eventEntry.item2)
+        Next
+        'TODO: run the "on create" event for the item
         Return FromId(worldData, itemId)
     End Function
     Public ReadOnly Property ItemType As IItemType Implements IItem.ItemType

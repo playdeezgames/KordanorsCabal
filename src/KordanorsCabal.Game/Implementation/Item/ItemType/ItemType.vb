@@ -144,13 +144,6 @@
             Return ItemTypeCombat.FromId(WorldData, Id)
         End Get
     End Property
-
-    Public ReadOnly Property Kind As IItemKind Implements IItemType.Kind
-        Get
-            Return Nothing
-        End Get
-    End Property
-
     Public Sub Decay(item As IItem) Implements IItemType.Decay
         Dim result As Action(Of IWorldData, IItem) = Nothing
         Dim eventName = DecayActionName

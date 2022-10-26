@@ -285,6 +285,14 @@ Public Module Scaffolder
                 [{Columns.ItemNameColumn}] TEXT NULL,
 				FOREIGN KEY ([{Columns.ItemTypeIdColumn}]) REFERENCES [{Tables.ItemTypes}]([{Columns.ItemTypeIdColumn}])
             )")
+        ScaffoldTable(connection, $"CREATE TABLE [{Tables.ItemEvents}]
+            (
+                [{Columns.ItemIdColumn}] INT NOT NULL,
+                [{Columns.EventIdColumn}] INT NOT NULL,
+                [{Columns.EventNameColumn}] TEXT NULL,
+                UNIQUE([{Columns.ItemIdColumn}],[{Columns.EventIdColumn}]),
+				FOREIGN KEY ([{Columns.ItemIdColumn}]) REFERENCES [{Tables.Items}]([{Columns.ItemIdColumn}])
+            )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.CharacterEquipSlots}]
             (
                 [{Columns.CharacterIdColumn}] INT NOT NULL,

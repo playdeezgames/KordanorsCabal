@@ -23,6 +23,7 @@
     ReadOnly Property Inventory As IInventoryData
     ReadOnly Property InventoryItem As IInventoryItemData
     ReadOnly Property Item As IItemData
+    ReadOnly Property ItemEvent As IItemEventData
     ReadOnly Property ItemStatistic As IItemStatisticData
     ReadOnly Property ItemType As IItemTypeData
     ReadOnly Property ItemTypeCharacterStatisticBuff As IItemTypeCharacterStatisticBuffData

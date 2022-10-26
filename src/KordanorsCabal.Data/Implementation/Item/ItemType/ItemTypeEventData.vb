@@ -13,4 +13,12 @@
             (ItemTypeIdColumn, itemTypeId),
             (EventIdColumn, eventId))
     End Function
+
+    Public Function ReadAll(itemTypeId As Long) As List(Of Tuple(Of Long, String)) Implements IItemTypeEventData.ReadAll
+        Return Store.Record.WithValue(Of Long, Long, String)(
+            AddressOf NoInitializer,
+            Tables.ItemTypeEvents,
+            (EventIdColumn, EventNameColumn),
+            (ItemTypeIdColumn, itemTypeId))
+    End Function
 End Class

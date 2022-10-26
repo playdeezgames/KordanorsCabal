@@ -1,10 +1,25 @@
-﻿Public Class ItemTypeEventDataTests
+﻿Public Class ItemTypeEventDataShould
     Inherits WorldDataSubobjectTests(Of IItemTypeEventData)
     Sub New()
         MyBase.New(Function(x) x.ItemTypeEvent)
     End Sub
     <Fact>
-    Sub ShouldReadTheNameOfTheEventAssociatedWithAGiveItemTypeAndGivenEventId()
+    Sub read_all_event_ids_and_names_for_a_give_item_type()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const itemTypeId = 1L
+                store.SetupGet(Function(x) x.Record).Returns((New Mock(Of IStoreRecord)).Object)
+                subject.ReadAll(itemTypeId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.Record.WithValue(Of Long, Long, String)(
+                        It.IsAny(Of Action),
+                        ItemTypeEvents,
+                        (EventIdColumn, EventNameColumn),
+                        (ItemTypeIdColumn, itemTypeId)))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub ReadTheNameOfTheEventAssociatedWithAGiveItemTypeAndGivenEventId()
         WithSubobject(
             Sub(store, checker, subject)
                 Const itemTypeId = 1L

@@ -23,6 +23,7 @@ Public Module Tables
     Public Const FeatureTypes = "FeatureTypes"
     Public Const Inventories = "Inventories"
     Public Const InventoryItems = "InventoryItems"
+    Public Const ItemEvents = "ItemEvents"
     Public Const ItemLores = "ItemLores"
     Public Const Items = "Items"
     Public Const ItemStatistics = "ItemStatistics"

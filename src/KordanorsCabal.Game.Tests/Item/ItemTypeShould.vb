@@ -180,11 +180,4 @@
                 subject.Combat.ShouldNotBeNull
             End Sub)
     End Sub
-    <Fact>
-    Sub have_kind()
-        WithSubject(
-            Sub(worldData, id, subject)
-                subject.Kind.ShouldBeNull
-            End Sub)
-    End Sub
 End Class

@@ -49,6 +49,7 @@
     Public ReadOnly Property RouteTypeLock As IRouteTypeLockData Implements IWorldData.RouteTypeLock
     Public ReadOnly Property ItemLore As IItemLoreData Implements IWorldData.ItemLore
     Public ReadOnly Property Lore As ILoreData Implements IWorldData.Lore
+    Public ReadOnly Property ItemEvent As IItemEventData Implements IWorldData.ItemEvent
 
     Public Sub New(store As IStore, events As IEventData)
         Me.Store = store
@@ -77,6 +78,7 @@
         Inventory = New InventoryData(store, Me)
         InventoryItem = New InventoryItemData(store, Me)
         Item = New ItemData(store, Me)
+        ItemEvent = New ItemEventData(store, Me)
         ItemStatistic = New ItemStatisticData(store, Me)
         ItemType = New ItemTypeData(store, Me)
         ItemTypeCharacterStatisticBuff = New ItemTypeCharacterStatisticBuffData(store, Me)
