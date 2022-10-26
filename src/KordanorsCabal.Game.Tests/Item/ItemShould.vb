@@ -6,6 +6,15 @@ Public Class ItemShould
         MyBase.New(AddressOf Item.FromId)
     End Sub
     <Fact>
+    Sub create_from_item_type()
+        Const itemTypeId = 1L
+        Dim worldData As New Mock(Of IWorldData)
+        worldData.Setup(Function(x) x.Item.Create(It.IsAny(Of Long)))
+        Item.Create(worldData.Object, ItemType.FromId(worldData.Object, itemTypeId))
+        worldData.Verify(Function(x) x.Item.Create(itemTypeId))
+        worldData.VerifyNoOtherCalls()
+    End Sub
+    <Fact>
     Sub have_a_name()
         WithSubject(
             Sub(worldData, id, subject)
