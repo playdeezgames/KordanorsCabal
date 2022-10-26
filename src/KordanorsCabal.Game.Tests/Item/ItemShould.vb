@@ -1,6 +1,4 @@
-﻿Imports SQLitePCL
-
-Public Class ItemShould
+﻿Public Class ItemShould
     Inherits ThingieShould(Of IItem)
     Sub New()
         MyBase.New(AddressOf Item.FromId)
@@ -8,10 +6,16 @@ Public Class ItemShould
     <Fact>
     Sub create_from_item_type()
         Const itemTypeId = 1L
+        Const statisticTypeId = 2L
+        Const statisticValue = 3L
         Dim worldData As New Mock(Of IWorldData)
         worldData.Setup(Function(x) x.Item.Create(It.IsAny(Of Long)))
+        worldData.Setup(Function(x) x.ItemTypeStatistic.ReadAll(It.IsAny(Of Long))).Returns({(statisticTypeId, statisticValue)})
+        worldData.Setup(Sub(x) x.ItemStatistic.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of Long)))
         Item.Create(worldData.Object, ItemType.FromId(worldData.Object, itemTypeId))
         worldData.Verify(Function(x) x.Item.Create(itemTypeId))
+        worldData.Verify(Function(x) x.ItemTypeStatistic.ReadAll(itemTypeId))
+        worldData.Verify(Sub(x) x.ItemStatistic.Write(0, statisticTypeId, statisticValue))
         worldData.VerifyNoOtherCalls()
     End Sub
     <Fact>

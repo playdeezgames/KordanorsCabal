@@ -8,7 +8,12 @@
         Return If(itemId.HasValue, New Item(worldData, itemId.Value), Nothing)
     End Function
     Shared Function Create(worldData As IWorldData, itemType As IItemType) As IItem
-        Return FromId(worldData, worldData.Item.Create(itemType.Id))
+        Dim itemId = worldData.Item.Create(itemType.Id)
+        Dim statisticValues = worldData.ItemTypeStatistic.ReadAll(itemType.Id)
+        For Each statisticValue In statisticValues
+            worldData.ItemStatistic.Write(itemId, statisticValue.Item1, statisticValue.Item2)
+        Next
+        Return FromId(worldData, itemId)
     End Function
     Public ReadOnly Property ItemType As IItemType Implements IItem.ItemType
         Get

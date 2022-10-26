@@ -1,10 +1,18 @@
-﻿Public Class ItemTypeStatisticDataTests
+﻿Public Class ItemTypeStatisticDataShould
     Inherits WorldDataSubobjectTests(Of IItemTypeStatisticData)
     Sub New()
         MyBase.New(Function(x) x.ItemTypeStatistic)
     End Sub
     <Fact>
-    Sub ShouldQueryTheStoreForTheStatisticValuesOfAGivenItemType()
+    Sub read_all_statistics_and_values_for_an_item_type()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Dim itemTypeId = 1L
+                subject.ReadAll(itemTypeId).ShouldBeEmpty
+            End Sub)
+    End Sub
+    <Fact>
+    Sub query_the_store_for_the_statistic_values_of_a_given_item_type()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim itemTypeId = 1L

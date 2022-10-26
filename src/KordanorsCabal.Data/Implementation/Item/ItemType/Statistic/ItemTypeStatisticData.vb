@@ -13,4 +13,8 @@
             (ItemTypeIdColumn, itemTypeId),
             (ItemTypeStatisticTypeIdColumn, itemTypeStatisticTypeId))
     End Function
+
+    Public Function ReadAll(itemType As Long) As IEnumerable(Of (Long, Long)) Implements IItemTypeStatisticData.ReadAll
+        Return Array.Empty(Of (Long, Long))
+    End Function
 End Class
