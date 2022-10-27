@@ -1,5 +1,4 @@
-﻿Imports KordanorsCabal.Data
-Imports SPLORR.Game
+﻿Imports SPLORR.Game
 
 Friend Class ChickenModeProcessor
     Inherits ModeProcessor

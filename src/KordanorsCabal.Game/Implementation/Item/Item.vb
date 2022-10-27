@@ -9,22 +9,26 @@
     End Function
     Shared Function Create(worldData As IWorldData, itemType As IItemType) As IItem
         Dim itemId = worldData.Item.Create(itemType.Id)
-        worldData.Item.WriteName(itemId, itemType.Name)
-        Dim statisticValues = worldData.ItemTypeStatistic.ReadAll(itemType.Id)
-        For Each statisticValue In statisticValues
-            worldData.ItemStatistic.Write(itemId, statisticValue.Item1, statisticValue.Item2)
-        Next
-        Dim eventEntries As List(Of Tuple(Of Long, String)) = worldData.ItemTypeEvent.ReadAll(itemType.Id)
-        For Each eventEntry In eventEntries
-            worldData.ItemEvent.Write(itemId, eventEntry.item1, eventEntry.item2)
-        Next
-        'TODO: run the "on create" event for the item
-        Return FromId(worldData, itemId)
+        Dim item = FromId(worldData, itemId)
+        item.ItemType = itemType
+        Return item
     End Function
-    Public ReadOnly Property ItemType As IItemType Implements IItem.ItemType
+    Public Property ItemType As IItemType Implements IItem.ItemType
         Get
             Return Game.ItemType.FromId(WorldData, WorldData.Item.ReadItemType(Id))
         End Get
+        Set(value As IItemType)
+            WorldData.Item.WriteName(Id, value.Name)
+            Dim statisticValues = WorldData.ItemTypeStatistic.ReadAll(value.Id)
+            For Each statisticValue In statisticValues
+                WorldData.ItemStatistic.Write(Id, statisticValue.Item1, statisticValue.Item2)
+            Next
+            Dim eventEntries As List(Of Tuple(Of Long, String)) = WorldData.ItemTypeEvent.ReadAll(value.Id)
+            For Each eventEntry In eventEntries
+                WorldData.ItemEvent.Write(Id, eventEntry.Item1, eventEntry.Item2)
+            Next
+            'TODO: run the "on create" event for the item
+        End Set
     End Property
     Public Property Name As String Implements IItem.Name
         Get

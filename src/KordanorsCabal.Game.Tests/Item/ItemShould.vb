@@ -51,6 +51,22 @@
             End Sub)
     End Sub
     <Fact>
+    Sub set_an_item_type()
+        WithSubject(
+            Sub(worldData, id, subject)
+                Const itemTypeId = 2L
+                worldData.Setup(Function(x) x.ItemType.ReadName(It.IsAny(Of Long)))
+                worldData.Setup(Sub(x) x.Item.WriteName(It.IsAny(Of Long), It.IsAny(Of String)))
+                worldData.Setup(Function(x) x.ItemTypeStatistic.ReadAll(It.IsAny(Of Long))).Returns(New List(Of Tuple(Of Long, Long)))
+                worldData.Setup(Function(x) x.ItemTypeEvent.ReadAll(It.IsAny(Of Long))).Returns(New List(Of Tuple(Of Long, String)))
+                subject.ItemType = ItemType.FromId(worldData.Object, itemTypeId)
+                worldData.Verify(Function(x) x.ItemType.ReadName(itemTypeId))
+                worldData.Verify(Sub(x) x.Item.WriteName(id, Nothing))
+                worldData.Verify(Function(x) x.ItemTypeStatistic.ReadAll(itemTypeId))
+                worldData.Verify(Function(x) x.ItemTypeEvent.ReadAll(itemTypeId))
+            End Sub)
+    End Sub
+    <Fact>
     Sub allow_destruction()
         WithSubject(
             Sub(worldData, id, subject)

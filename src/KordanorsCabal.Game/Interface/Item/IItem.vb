@@ -1,7 +1,7 @@
 ﻿Public Interface IItem
     Inherits IBaseThingie
     Property Name As String
-    ReadOnly Property ItemType As IItemType
+    Property ItemType As IItemType
     ReadOnly Property Weapon As IWeapon
     ReadOnly Property Durability As IDurability
     ReadOnly Property Repair As IRepair

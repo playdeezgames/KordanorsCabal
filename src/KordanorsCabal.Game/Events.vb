@@ -153,7 +153,8 @@
                 End Sub},
             {"PurifyFood",
                 Sub(worldData, parms)
-                    worldData.Item.WriteItemType(parms(0), 24L)
+                    Dim item = Game.Item.FromId(worldData, parms(0))
+                    item.ItemType = Game.ItemType.FromId(worldData, ItemType24)
                 End Sub},
             {"LearnHolyBolt",
                 Sub(worldData, parms)
@@ -178,11 +179,12 @@
             {"UseHolyWater",
                 Sub(worldData, parms)
                     Dim character = Game.Character.FromId(worldData, parms(0))
+                    Dim item = Game.Item.FromId(worldData, parms(1))
                     Dim sfx As Sfx? = Nothing
                     Dim damageRoll = RNG.RollDice("1d4")
                     Dim enemy = character.Movement.Location.Factions.FirstEnemy(character)
                     Dim lines As New List(Of String) From {
-                        $"{ItemType.FromId(worldData, ItemType22).Name} deals {damageRoll} HP to {enemy.CharacterType.Name}!"
+                        $"{item.Name} deals {damageRoll} HP to {enemy.CharacterType.Name}!"
                     }
                     enemy.PhysicalCombat.DoDamage(damageRoll)
                     If enemy.Health.IsDead Then
