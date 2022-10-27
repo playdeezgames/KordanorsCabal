@@ -82,14 +82,6 @@
             WorldData.Events.Perform(WorldData, eventName, character.Id, item.Id)
         End If
     End Sub
-
-    Function CanUse(Character As ICharacter) As Boolean Implements IItemType.CanUse
-        Dim eventName = CanUseFunctionName
-        If eventName IsNot Nothing Then
-            Return WorldData.Events.Test(WorldData, eventName, Character.Id)
-        End If
-        Return False
-    End Function
     ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean Implements IItemType.HasOffer
         Get
             Return boughtAt.Contains(shoppeType.Id)
