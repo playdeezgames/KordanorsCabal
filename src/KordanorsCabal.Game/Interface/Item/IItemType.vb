@@ -1,7 +1,6 @@
 ﻿Public Interface IItemType
     Inherits IBaseThingie
     ReadOnly Property Name As String
-    ReadOnly Property Encumbrance As Long?
     ReadOnly Property Spawn As IItemTypeSpawn
     ReadOnly Property Equip As IItemTypeEquip
     ReadOnly Property Combat As IItemTypeCombat

@@ -98,7 +98,7 @@
 
     Public ReadOnly Property Encumbrance As Long Implements IItem.Encumbrance
         Get
-            Return If(WorldData.ItemStatistic.Read(Id, StatisticTypeEncumbrance), If(ItemType.Encumbrance, 0L))
+            Return If(WorldData.ItemStatistic.Read(Id, StatisticTypeEncumbrance), 0L)
         End Get
     End Property
 End Class

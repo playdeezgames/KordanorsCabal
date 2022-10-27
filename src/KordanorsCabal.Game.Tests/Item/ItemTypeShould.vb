@@ -20,15 +20,6 @@
             End Sub)
     End Sub
     <Fact>
-    Sub item_types_have_encumbrance()
-        WithSubject(
-            Sub(worldData, itemTypeId, subject)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.Encumbrance.ShouldBeNull
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 29))
-            End Sub)
-    End Sub
-    <Fact>
     Sub item_types_have_maximum_durability()
         WithSubject(
             Sub(worldData, itemTypeId, subject)
