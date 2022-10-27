@@ -66,18 +66,6 @@
             End Sub)
     End Sub
     <Fact>
-    Sub item_types_have_use_actions()
-        WithSubject(
-            Sub(worldData, itemTypeId, subject)
-                Const characterId = 2L
-                Const itemId = 3L
-                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.Use(Character.FromId(worldData.Object, characterId), Item.FromId(worldData.Object, itemId))
-                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 3))
-                worldData.Verify(Function(x) x.Player.Read())
-            End Sub)
-    End Sub
-    <Fact>
     Sub item_types_has_offer_determiner()
         WithSubject(
             Sub(worldData, itemTypeId, subject)

@@ -71,12 +71,6 @@
             WorldData.Events.Perform(WorldData, eventName, item.Id)
         End If
     End Sub
-    Sub Use(character As ICharacter, item As IItem) Implements IItemType.Use
-        Dim eventName = UseActionName
-        If eventName IsNot Nothing Then
-            WorldData.Events.Perform(WorldData, eventName, character.Id, item.Id)
-        End If
-    End Sub
     ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean Implements IItemType.HasOffer
         Get
             Return boughtAt.Contains(shoppeType.Id)
