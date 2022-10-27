@@ -35,7 +35,10 @@
         End Set
     End Property
     Public Sub Purify() Implements IItem.Purify
-        ItemType.Purify(Me)
+        Dim eventName = WorldData.ItemEvent.Read(Id, Game.Usage.PurifyEventId)
+        If eventName IsNot Nothing Then
+            WorldData.Events.Perform(WorldData, eventName, Id)
+        End If
     End Sub
 
     Public Sub Destroy() Implements IItem.Destroy

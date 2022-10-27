@@ -15,6 +15,5 @@
     ReadOnly Property CanRepair(shoppeType As IShoppeType) As Boolean
     ReadOnly Property MaximumDurability As Long?
     'events
-    Sub Purify(item As IItem)
     Sub Decay(item As IItem)
 End Interface

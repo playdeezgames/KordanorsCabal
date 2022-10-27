@@ -56,16 +56,6 @@
             End Sub)
     End Sub
     <Fact>
-    Sub item_types_have_purify_actions()
-        WithSubject(
-            Sub(worldData, itemTypeId, subject)
-                Const itemId = 2L
-                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                subject.Purify(Item.FromId(worldData.Object, itemId))
-                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 1))
-            End Sub)
-    End Sub
-    <Fact>
     Sub item_types_has_offer_determiner()
         WithSubject(
             Sub(worldData, itemTypeId, subject)

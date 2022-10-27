@@ -54,12 +54,9 @@
     Sub purify()
         WithSubject(
             Sub(worldData, id, subject)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.ItemEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Purify()
-                worldData.Verify(Function(x) x.Item.ReadItemType(id))
-                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 1L))
+                worldData.Verify(Function(x) x.ItemEvent.Read(id, 1L))
             End Sub)
     End Sub
     <Fact>

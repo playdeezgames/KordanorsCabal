@@ -65,12 +65,6 @@
             Return WorldData.ItemTypeEvent.Read(Id, PurifyEventId)
         End Get
     End Property
-    Sub Purify(item As IItem) Implements IItemType.Purify
-        Dim eventName = PurifyActionName
-        If eventName IsNot Nothing Then
-            WorldData.Events.Perform(WorldData, eventName, item.Id)
-        End If
-    End Sub
     ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean Implements IItemType.HasOffer
         Get
             Return boughtAt.Contains(shoppeType.Id)
