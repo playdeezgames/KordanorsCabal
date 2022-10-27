@@ -11,15 +11,15 @@
     End Function
     Sub PurifyItems() Implements ICharacterItems.PurifyItems
         For Each item In Inventory.Items
-            item.Usage.Purify()
+            item.Events.Purify()
         Next
         For Each item In EquippedItems
-            item.Usage.Purify()
+            item.Events.Purify()
         Next
     End Sub
     ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean Implements ICharacterItems.CanBeBribedWith
         Get
-            Return character.CharacterType.Combat.CanBeBribedWith(itemType)
+            Return Character.CharacterType.Combat.CanBeBribedWith(itemType)
         End Get
     End Property
     ReadOnly Property Inventory As IInventory Implements ICharacterItems.Inventory
@@ -35,9 +35,9 @@
         Return Inventory.ItemsOfType(itemType).Any
     End Function
     Public Sub UseItem(item As IItem) Implements ICharacterItems.UseItem
-        If item.Usage.CanUse(character) Then
-            item.Usage.Use(character)
-            If item.Usage.IsConsumed Then
+        If item.Events.CanUse(Character) Then
+            item.Events.Use(Character)
+            If item.Events.IsConsumed Then
                 item.Destroy()
             End If
         End If

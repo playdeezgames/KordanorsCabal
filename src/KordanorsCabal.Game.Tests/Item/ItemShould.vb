@@ -98,7 +98,7 @@
     Sub have_usage_subobject()
         WithSubject(
             Sub(worldData, id, subject)
-                subject.Usage.ShouldNotBeNull
+                subject.Events.ShouldNotBeNull
             End Sub)
     End Sub
     <Fact>

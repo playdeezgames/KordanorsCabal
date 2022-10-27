@@ -1,7 +1,7 @@
-﻿Public Class UsageShould
-    Inherits ThingieShould(Of IUsage)
+﻿Public Class ItemEventsShould
+    Inherits ThingieShould(Of IItemEvents)
     Sub New()
-        MyBase.New(AddressOf Usage.FromId)
+        MyBase.New(AddressOf ItemEvents.FromId)
     End Sub
     <Fact>
     Sub have_can_use_test()

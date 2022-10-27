@@ -63,9 +63,9 @@
             Return Game.Equipment.FromId(WorldData, Id)
         End Get
     End Property
-    Public ReadOnly Property Usage As IUsage Implements IItem.Usage
+    Public ReadOnly Property Events As IItemEvents Implements IItem.Events
         Get
-            Return Game.Usage.FromId(WorldData, Id)
+            Return Game.ItemEvents.FromId(WorldData, Id)
         End Get
     End Property
 
