@@ -29,7 +29,9 @@
         End Get
     End Property
     Friend Sub Use(character As ICharacter) Implements IUsage.Use
-        Dim item = Game.Item.FromId(WorldData, Id)
-        item.ItemType.Use(character, item)
+        Dim eventName = WorldData.ItemEvent.Read(Id, UseEventId)
+        If eventName IsNot Nothing Then
+            WorldData.Events.Perform(WorldData, eventName, character.Id, Id)
+        End If
     End Sub
 End Class

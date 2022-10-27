@@ -60,11 +60,6 @@
             Return WorldData.ItemTypeEvent.Read(Id, UseEventId)
         End Get
     End Property
-    Private ReadOnly Property CanUseFunctionName As String
-        Get
-            Return WorldData.ItemTypeEvent.Read(Id, CanUseEventId)
-        End Get
-    End Property
     Private ReadOnly Property PurifyActionName As String
         Get
             Return WorldData.ItemTypeEvent.Read(Id, PurifyEventId)
