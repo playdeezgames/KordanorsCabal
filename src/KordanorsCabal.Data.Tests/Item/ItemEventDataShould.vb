@@ -36,4 +36,21 @@ Public Class ItemEventDataShould
                         (Columns.ItemIdColumn, itemId)))
             End Sub)
     End Sub
+    <Fact>
+    Sub have_event_names()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const itemId = 1L
+                Const eventId = 2L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
+                subject.Read(itemId, eventId).ShouldBeNull
+                store.Verify(
+                    Function(x) x.Column.ReadString(
+                        It.IsAny(Of Action),
+                        ItemEvents,
+                        EventNameColumn,
+                        (ItemIdColumn, itemId),
+                        (EventIdColumn, eventId)))
+            End Sub)
+    End Sub
 End Class

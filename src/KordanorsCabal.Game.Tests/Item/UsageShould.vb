@@ -7,13 +7,10 @@
     Sub have_can_use_test()
         WithSubject(
             Sub(worldData, id, subject)
-                Const itemTypeId = 2L
-                Const characterId = 3L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                Const characterId = 2L
+                worldData.Setup(Function(x) x.ItemEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.CanUse(Character.FromId(worldData.Object, characterId)).ShouldBeFalse
-                worldData.Verify(Function(x) x.Item.ReadItemType(id))
-                worldData.Verify(Function(x) x.ItemTypeEvent.Read(itemTypeId, 2L))
+                worldData.Verify(Function(x) x.ItemEvent.Read(id, 2L))
                 worldData.Verify(Function(x) x.Player.Read())
             End Sub)
     End Sub

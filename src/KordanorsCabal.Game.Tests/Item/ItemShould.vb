@@ -176,13 +176,8 @@
     Sub have_encumbrance()
         WithSubject(
             Sub(worldData, id, subject)
-                Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 subject.Encumbrance.ShouldBe(0L)
-                worldData.Verify(Function(x) x.Item.ReadItemType(id))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 29L))
                 worldData.Verify(Function(x) x.ItemStatistic.Read(id, 29L))
             End Sub)
     End Sub

@@ -9,9 +9,18 @@
     Public Shared Function FromId(worldData As IWorldData, id As Long?) As IUsage
         Return If(id.HasValue, New Usage(worldData, id.Value), Nothing)
     End Function
+    Public Const PurifyEventId = 1L
+    Public Const CanUseEventId = 2L
+    Public Const UseEventId = 3L
+    Public Const DecayEventId = 4L
+    Public Const AddToInventoryEventId = 5L
     ReadOnly Property CanUse(character As ICharacter) As Boolean Implements IUsage.CanUse
         Get
-            Return Item.FromId(WorldData, Id).ItemType.CanUse(character)
+            Dim eventName = WorldData.ItemEvent.Read(Id, CanUseEventId)
+            If eventName IsNot Nothing Then
+                Return WorldData.Events.Test(WorldData, eventName, character.Id)
+            End If
+            Return False
         End Get
     End Property
     ReadOnly Property IsConsumed As Boolean Implements IUsage.IsConsumed
