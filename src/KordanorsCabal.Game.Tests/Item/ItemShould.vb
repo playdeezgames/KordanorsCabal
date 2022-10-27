@@ -12,6 +12,8 @@
         Const eventName = "five"
         Const itemTypeName = "six"
         Dim worldData As New Mock(Of IWorldData)
+        worldData.Setup(Sub(x) x.ItemStatistic.ClearForItem(It.IsAny(Of Long)))
+        worldData.Setup(Sub(x) x.ItemEvent.ClearForItem(It.IsAny(Of Long)))
         worldData.Setup(Function(x) x.Item.Create(It.IsAny(Of Long)))
         worldData.Setup(Function(x) x.ItemTypeStatistic.ReadAll(It.IsAny(Of Long))).Returns({New Tuple(Of Long, Long)(statisticTypeId, statisticValue)}.ToList)
         worldData.Setup(Sub(x) x.ItemStatistic.Write(It.IsAny(Of Long), It.IsAny(Of Long), It.IsAny(Of Long)))
@@ -26,6 +28,8 @@
         worldData.Verify(Sub(x) x.ItemEvent.Write(0, eventId, eventName))
         worldData.Verify(Sub(x) x.Item.WriteName(0, itemTypeName))
         worldData.Verify(Function(x) x.ItemType.ReadName(itemTypeId))
+        worldData.Verify(Sub(x) x.ItemStatistic.ClearForItem(0L))
+        worldData.Verify(Sub(x) x.ItemEvent.ClearForItem(0L))
         worldData.VerifyNoOtherCalls()
     End Sub
     <Fact>
@@ -57,6 +61,8 @@
                 Const itemTypeId = 2L
                 worldData.Setup(Function(x) x.ItemType.ReadName(It.IsAny(Of Long)))
                 worldData.Setup(Sub(x) x.Item.WriteName(It.IsAny(Of Long), It.IsAny(Of String)))
+                worldData.Setup(Sub(x) x.ItemStatistic.ClearForItem(It.IsAny(Of Long)))
+                worldData.Setup(Sub(x) x.ItemEvent.ClearForItem(It.IsAny(Of Long)))
                 worldData.Setup(Function(x) x.ItemTypeStatistic.ReadAll(It.IsAny(Of Long))).Returns(New List(Of Tuple(Of Long, Long)))
                 worldData.Setup(Function(x) x.ItemTypeEvent.ReadAll(It.IsAny(Of Long))).Returns(New List(Of Tuple(Of Long, String)))
                 subject.ItemType = ItemType.FromId(worldData.Object, itemTypeId)
@@ -64,6 +70,8 @@
                 worldData.Verify(Sub(x) x.Item.WriteName(id, Nothing))
                 worldData.Verify(Function(x) x.ItemTypeStatistic.ReadAll(itemTypeId))
                 worldData.Verify(Function(x) x.ItemTypeEvent.ReadAll(itemTypeId))
+                worldData.Verify(Sub(x) x.ItemStatistic.ClearForItem(id))
+                worldData.Verify(Sub(x) x.ItemEvent.ClearForItem(id))
             End Sub)
     End Sub
     <Fact>

@@ -18,6 +18,8 @@
             Return Game.ItemType.FromId(WorldData, WorldData.Item.ReadItemType(Id))
         End Get
         Set(value As IItemType)
+            WorldData.ItemStatistic.ClearForItem(Id)
+            WorldData.ItemEvent.ClearForItem(Id)
             WorldData.Item.WriteName(Id, value.Name)
             Dim statisticValues = WorldData.ItemTypeStatistic.ReadAll(value.Id)
             For Each statisticValue In statisticValues
