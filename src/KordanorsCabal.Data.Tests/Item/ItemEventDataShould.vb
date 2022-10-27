@@ -1,4 +1,6 @@
-﻿Public Class ItemEventDataShould
+﻿Imports SQLitePCL
+
+Public Class ItemEventDataShould
     Inherits WorldDataSubobjectTests(Of IItemEventData)
     Sub New()
         MyBase.New(Function(x) x.ItemEvent)
@@ -20,5 +22,18 @@
                                  (EventNameColumn, eventName)))
             End Sub)
     End Sub
-
+    <Fact>
+    Sub clear_events_for_an_item()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const itemId = 1L
+                store.SetupGet(Function(x) x.Clear).Returns((New Mock(Of IStoreClear)).Object)
+                subject.ClearForItem(itemId)
+                store.Verify(
+                    Sub(x) x.Clear.ForValue(
+                        It.IsAny(Of Action),
+                        Tables.ItemEvents,
+                        (Columns.ItemIdColumn, itemId)))
+            End Sub)
+    End Sub
 End Class

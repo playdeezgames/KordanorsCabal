@@ -14,4 +14,11 @@
             (EventIdColumn, eventId),
             (EventNameColumn, eventName))
     End Sub
+
+    Public Sub ClearForItem(itemId As Long) Implements IItemEventData.ClearForItem
+        Store.Clear.ForValue(
+            AddressOf NoInitializer,
+            ItemEvents,
+            (ItemIdColumn, itemId))
+    End Sub
 End Class

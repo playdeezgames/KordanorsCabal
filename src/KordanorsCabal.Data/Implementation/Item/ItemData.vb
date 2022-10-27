@@ -23,6 +23,7 @@
         World.Character.EquipSlot.ClearForItem(itemId)
         World.InventoryItem.ClearForItem(itemId)
         World.ItemStatistic.ClearForItem(itemId)
+        World.ItemEvent.ClearForItem(itemId)
         Store.Clear.ForValue(
             AddressOf NoInitializer,
             Items,

@@ -14,6 +14,11 @@
                 store.Verify(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), Tables.InventoryItems, (Columns.ItemIdColumn, itemId)))
                 store.Verify(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), Tables.ItemStatistics, (Columns.ItemIdColumn, itemId)))
                 store.Verify(Sub(x) x.Clear.ForValue(It.IsAny(Of Action), Tables.Items, (Columns.ItemIdColumn, itemId)))
+                store.Verify(
+                    Sub(x) x.Clear.ForValue(
+                        It.IsAny(Of Action),
+                        Tables.ItemEvents,
+                        (Columns.ItemIdColumn, itemId)))
             End Sub)
     End Sub
     <Fact>
