@@ -108,11 +108,4 @@
             Return ItemTypeCombat.FromId(WorldData, Id)
         End Get
     End Property
-    Public Sub Decay(item As IItem) Implements IItemType.Decay
-        Dim result As Action(Of IWorldData, IItem) = Nothing
-        Dim eventName = DecayActionName
-        If eventName IsNot Nothing Then
-            WorldData.Events.Perform(WorldData, eventName, item.Id)
-        End If
-    End Sub
 End Class

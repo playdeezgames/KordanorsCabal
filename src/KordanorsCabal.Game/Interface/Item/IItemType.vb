@@ -14,6 +14,4 @@
     ReadOnly Property RepairPrice As Long
     ReadOnly Property CanRepair(shoppeType As IShoppeType) As Boolean
     ReadOnly Property MaximumDurability As Long?
-    'events
-    Sub Decay(item As IItem)
 End Interface
