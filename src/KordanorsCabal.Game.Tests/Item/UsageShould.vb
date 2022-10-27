@@ -25,6 +25,24 @@
             End Sub)
     End Sub
     <Fact>
+    Sub decay()
+        WithSubject(
+            Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.ItemEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.Decay()
+                worldData.Verify(Function(x) x.ItemEvent.Read(id, 4L))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub purify()
+        WithSubject(
+            Sub(worldData, id, subject)
+                worldData.Setup(Function(x) x.ItemEvent.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                subject.Purify()
+                worldData.Verify(Function(x) x.ItemEvent.Read(id, 1L))
+            End Sub)
+    End Sub
+    <Fact>
     Sub allow_use_by_a_character()
         WithSubject(
             Sub(worldData, id, subject)

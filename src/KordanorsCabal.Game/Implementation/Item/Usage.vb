@@ -1,11 +1,9 @@
 ﻿Public Class Usage
     Inherits BaseThingie
     Implements IUsage
-
     Public Sub New(worldData As IWorldData, id As Long)
         MyBase.New(worldData, id)
     End Sub
-
     Public Shared Function FromId(worldData As IWorldData, id As Long?) As IUsage
         Return If(id.HasValue, New Usage(worldData, id.Value), Nothing)
     End Function
@@ -32,6 +30,18 @@
         Dim eventName = WorldData.ItemEvent.Read(Id, UseEventId)
         If eventName IsNot Nothing Then
             WorldData.Events.Perform(WorldData, eventName, character.Id, Id)
+        End If
+    End Sub
+    Public Sub Decay() Implements IUsage.Decay
+        Dim eventName = WorldData.ItemEvent.Read(Id, Game.Usage.DecayEventId)
+        If eventName IsNot Nothing Then
+            WorldData.Events.Perform(WorldData, eventName, Id)
+        End If
+    End Sub
+    Public Sub Purify() Implements IUsage.Purify
+        Dim eventName = WorldData.ItemEvent.Read(Id, Game.Usage.PurifyEventId)
+        If eventName IsNot Nothing Then
+            WorldData.Events.Perform(WorldData, eventName, Id)
         End If
     End Sub
 End Class

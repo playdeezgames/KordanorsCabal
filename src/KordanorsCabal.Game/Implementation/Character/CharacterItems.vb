@@ -11,10 +11,10 @@
     End Function
     Sub PurifyItems() Implements ICharacterItems.PurifyItems
         For Each item In Inventory.Items
-            item.Purify()
+            item.Usage.Purify()
         Next
         For Each item In EquippedItems
-            item.Purify()
+            item.Usage.Purify()
         Next
     End Sub
     ReadOnly Property CanBeBribedWith(itemType As IItemType) As Boolean Implements ICharacterItems.CanBeBribedWith

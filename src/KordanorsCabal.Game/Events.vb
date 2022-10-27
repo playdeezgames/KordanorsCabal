@@ -398,7 +398,7 @@
                 Sub(worldData, parms)
                     Dim location = Game.Location.FromId(worldData, parms(0))
                     For Each item In location.Inventory.Items
-                        item.Decay()
+                        item.Usage.Decay()
                     Next
                 End Sub},
             {"FoodDecay",

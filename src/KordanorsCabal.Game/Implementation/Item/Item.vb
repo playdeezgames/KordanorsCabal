@@ -34,22 +34,8 @@
             WorldData.Item.WriteName(Id, value)
         End Set
     End Property
-    Public Sub Purify() Implements IItem.Purify
-        Dim eventName = WorldData.ItemEvent.Read(Id, Game.Usage.PurifyEventId)
-        If eventName IsNot Nothing Then
-            WorldData.Events.Perform(WorldData, eventName, Id)
-        End If
-    End Sub
-
     Public Sub Destroy() Implements IItem.Destroy
         WorldData.Item.Clear(Id)
-    End Sub
-
-    Public Sub Decay() Implements IItem.Decay
-        Dim eventName = WorldData.ItemEvent.Read(Id, Game.Usage.DecayEventId)
-        If eventName IsNot Nothing Then
-            WorldData.Events.Perform(WorldData, eventName, Id)
-        End If
     End Sub
 
     Public ReadOnly Property Weapon As IWeapon Implements IItem.Weapon
