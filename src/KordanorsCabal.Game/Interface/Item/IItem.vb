@@ -9,8 +9,8 @@
     ReadOnly Property Equipment As IEquipment
     ReadOnly Property Usage As IUsage
     Sub Purify()
-    Sub Destroy()
     Sub Decay()
+    Sub Destroy()
     ReadOnly Property Encumbrance As Long
     Property Lore As ILore
     ReadOnly Property Inventory As IInventory
