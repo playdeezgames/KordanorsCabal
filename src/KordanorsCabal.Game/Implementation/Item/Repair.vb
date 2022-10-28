@@ -16,7 +16,7 @@
         End Get
     End Property
     Public Sub Perform() Implements IRepair.Perform
-        SetStatistic(1L, 0)
+        SetStatistic(StatisticTypeDurability, 0)
     End Sub
     Private Sub SetStatistic(statisticType As Long, value As Long)
         WorldData.ItemStatistic.Write(Id, statisticType, value)

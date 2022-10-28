@@ -21,9 +21,9 @@
     Public Overrides Sub Initialize()
 
         currentItemIndex = 0
-        Dim offers = ShoppeType.Offers
+        Dim offers = World.FromWorldData(WorldData).PlayerCharacter.ShoppeType.Offers
         items = World.FromWorldData(WorldData).PlayerCharacter.Items.Inventory.Items.Where(
-            Function(x) ShoppeType.WillBuy(x.ItemType)).ToList
+            Function(x) World.FromWorldData(WorldData).PlayerCharacter.ShoppeType.WillBuy(x.ItemType)).ToList
     End Sub
 
     Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
@@ -49,7 +49,7 @@
             Return UIState.InPlay
         End If
         Dim item = items(currentItemIndex)
-        World.FromWorldData(WorldData).PlayerCharacter.Statuses.Money += If(ShoppeType.BuyPrice(item.ItemType), 0)
+        World.FromWorldData(WorldData).PlayerCharacter.Statuses.Money += If(World.FromWorldData(WorldData).PlayerCharacter.ShoppeType.BuyPrice(item.ItemType), 0)
         item.Destroy()
         Dim oldIndex = currentItemIndex
         Initialize()

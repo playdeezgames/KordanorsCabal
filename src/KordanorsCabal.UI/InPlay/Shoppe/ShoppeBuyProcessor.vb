@@ -24,7 +24,7 @@ Friend Class ShoppeBuyProcessor
 
         currentItemIndex = 0
         Dim money = World.FromWorldData(WorldData).PlayerCharacter.Statuses.Money
-        items = ShoppeType.Prices.Where(Function(x) x.Value <= money).Select(Function(x) (x.Key, x.Value)).ToList
+        items = World.FromWorldData(WorldData).PlayerCharacter.ShoppeType.Prices.Where(Function(x) x.Value <= money).Select(Function(x) (x.Key, x.Value)).ToList
     End Sub
 
     Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState

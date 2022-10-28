@@ -38,20 +38,20 @@
                 PopButtonIndex()
                 player.Mode = Game.Constants.PlayerModes.Neutral
             Case OffersButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(WorldData, 2)
+                World.FromWorldData(WorldData).PlayerCharacter.ShoppeType = ShoppeType.FromId(WorldData, 2)
                 Return UIState.ShoppeOffers
             Case SellButtonIndex
-                ShoppeProcessor(Of IItem).ShoppeType = ShoppeType.FromId(WorldData, 2)
+                World.FromWorldData(WorldData).PlayerCharacter.ShoppeType = ShoppeType.FromId(WorldData, 2)
                 Return UIState.ShoppeSell
             Case PricesButtonIndex
-                ShoppeProcessor(Of String).ShoppeType = ShoppeType.FromId(WorldData, 2)
+                World.FromWorldData(WorldData).PlayerCharacter.ShoppeType = ShoppeType.FromId(WorldData, 2)
                 Return UIState.ShoppePrices
             Case BuyButtonIndex
-                ShoppeProcessor(Of (IItemType, Long)).ShoppeType = ShoppeType.FromId(WorldData, 2)
+                World.FromWorldData(WorldData).PlayerCharacter.ShoppeType = ShoppeType.FromId(WorldData, 2)
                 Return UIState.ShoppeBuy
             Case RepairButtonIndex
                 If player.Repair.HasItemsToRepair(ShoppeType.FromId(WorldData, 2)) Then
-                    ShoppeProcessor(Of Item).ShoppeType = ShoppeType.FromId(WorldData, 2)
+                    World.FromWorldData(WorldData).PlayerCharacter.ShoppeType = ShoppeType.FromId(WorldData, 2)
                     Return UIState.ShoppeRepair
                 End If
         End Select

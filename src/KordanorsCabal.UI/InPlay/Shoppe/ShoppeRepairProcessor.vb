@@ -13,7 +13,7 @@ Friend Class ShoppeRepairProcessor
             Dim itemIndex = row - ListHiliteRow + currentItemIndex
             If itemIndex >= 0 AndAlso itemIndex < items.Count Then
                 buffer.FillCells((0, row), (buffer.Columns, 1), Pattern.Space, itemIndex = currentItemIndex, Hue.Black)
-                Dim text = $"{items(itemIndex).Name}({items(itemIndex).Repair.RepairCost(ShoppeType)})"
+                Dim text = $"{items(itemIndex).Name}({items(itemIndex).Repair.RepairCost(World.FromWorldData(worldData).PlayerCharacter.ShoppeType)})"
                 buffer.WriteTextCentered(row, text, itemIndex = currentItemIndex, Hue.Black)
             End If
         Next
@@ -24,10 +24,10 @@ Friend Class ShoppeRepairProcessor
     Public Overrides Sub Initialize()
 
         currentItemIndex = 0
-        Dim repairs = ShoppeType.Repairs
+        Dim repairs = World.FromWorldData(WorldData).PlayerCharacter.ShoppeType.Repairs
         items = World.FromWorldData(WorldData).PlayerCharacter.
-            Repair.ItemsToRepair(ShoppeType).
-            Where(Function(x) ShoppeType.WillRepair(x.ItemType)).ToList
+            Repair.ItemsToRepair(World.FromWorldData(WorldData).PlayerCharacter.ShoppeType).
+            Where(Function(x) World.FromWorldData(WorldData).PlayerCharacter.ShoppeType.WillRepair(x.ItemType)).ToList
     End Sub
 
     Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState

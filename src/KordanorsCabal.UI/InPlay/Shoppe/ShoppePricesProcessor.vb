@@ -20,7 +20,7 @@
     Public Overrides Sub Initialize()
 
         currentItemIndex = 0
-        items = ShoppeType.Prices.Select(Function(x) $"{x.Key.Name}: {x.Value}").ToList
+        items = World.FromWorldData(WorldData).PlayerCharacter.ShoppeType.Prices.Select(Function(x) $"{x.Key.Name}: {x.Value}").ToList
     End Sub
 
     Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
