@@ -26,7 +26,10 @@
             Return Game.ShoppeType.FromId(WorldData, WorldData.Player.ReadShoppeType)
         End Get
         Set(value As IShoppeType)
-            Dim shoppeTypeId As Long? = If(value IsNot Nothing, value.Id, Nothing)
+            Dim shoppeTypeId As Long? = Nothing
+            If value IsNot Nothing Then
+                shoppeTypeId = value.Id
+            End If
             WorldData.Player.WriteShoppeType(shoppeTypeId)
         End Set
     End Property

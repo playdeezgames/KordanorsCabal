@@ -29,6 +29,7 @@
     Public Overrides Function ProcessCommand(worldData As IWorldData, command As Command) As UIState
         Select Case command
             Case Command.Red
+                World.FromWorldData(worldData).PlayerCharacter.ShoppeType = Nothing
                 Return UIState.InPlay
             Case Command.Down
                 If items.Any Then
