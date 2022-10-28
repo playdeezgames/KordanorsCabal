@@ -1,8 +1,6 @@
 ﻿MustInherit Class ShoppeProcessor(Of TListItem)
     Inherits BaseProcessor
-
     Public Shared Property ShoppeType As IShoppeType
-
     Protected items As List(Of TListItem)
     Protected currentItemIndex As Integer = 0
     Protected Const ListStartRow = 1
