@@ -1,10 +1,10 @@
-﻿Public Class PlayerDataTests
+﻿Public Class PlayerData_should
     Inherits WorldDataSubobjectTests(Of IPlayerData)
     Sub New()
         MyBase.New(Function(x) x.Player)
     End Sub
     <Fact>
-    Sub ShouldClearTheStoreOfPlayerDataAssociatedWithAGivenCharacter()
+    Sub clear_for_character()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
@@ -18,7 +18,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheStoreForTheAssociatedCharacterOfThePlayer()
+    Sub have_character()
         WithSubobject(
             Sub(store, checker, subject)
                 Const playerId = 1L
@@ -33,7 +33,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheStoreForTheAssociatedDirectionOfThePlayer()
+    Sub have_direction()
         WithSubobject(
             Sub(store, checker, subject)
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
@@ -48,7 +48,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldQueryTheStoreForTheAssociatedModeOfThePlayer()
+    Sub have_mode()
         WithSubobject(
             Sub(store, checker, subject)
                 store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
@@ -63,7 +63,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldUpdateTheStoreWithPlayerInformation()
+    Sub set_mode_and_direction()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim characterId = 1L
@@ -83,7 +83,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldUpdateTheStoreWithADirectionForThePlayer()
+    Sub set_direction()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim direction = 2L
@@ -99,7 +99,7 @@
             End Sub)
     End Sub
     <Fact>
-    Sub ShouldUpdateTheStoreWithAModeForThePlayer()
+    Sub set_mode()
         WithSubobject(
             Sub(store, checker, subject)
                 Dim mode = 2L

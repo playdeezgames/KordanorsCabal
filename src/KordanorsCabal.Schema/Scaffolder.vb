@@ -274,8 +274,10 @@ Public Module Scaffolder
                 [{Columns.CharacterIdColumn}] INT NOT NULL,
                 [{Columns.DirectionIdColumn}] INT NOT NULL,
                 [{Columns.PlayerModeIdColumn}] INT NOT NULL,
+                [{Columns.ShoppeTypeIdColumn}] INT NULL,
                 FOREIGN KEY ([{Columns.CharacterIdColumn}]) REFERENCES [{Tables.Characters}]([{Columns.CharacterIdColumn}]),
-                FOREIGN KEY ([{Columns.DirectionIdColumn}]) REFERENCES [{Tables.Directions}]([{Columns.DirectionIdColumn}])
+                FOREIGN KEY ([{Columns.DirectionIdColumn}]) REFERENCES [{Tables.Directions}]([{Columns.DirectionIdColumn}]),
+                FOREIGN KEY ([{Columns.ShoppeTypeIdColumn}]) REFERENCES [{Tables.ShoppeTypes}]([{Columns.ShoppeTypeIdColumn}])
             )")
         ScaffoldTable(connection, $"CREATE TABLE [{Tables.Items}]
             (
