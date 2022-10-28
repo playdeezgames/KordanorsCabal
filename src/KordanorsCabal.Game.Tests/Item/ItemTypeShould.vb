@@ -99,11 +99,4 @@
                 subject.Equip.ShouldNotBeNull
             End Sub)
     End Sub
-    <Fact>
-    Sub have_combat_subobject()
-        WithSubject(
-            Sub(worldData, id, subject)
-                subject.Combat.ShouldNotBeNull
-            End Sub)
-    End Sub
 End Class

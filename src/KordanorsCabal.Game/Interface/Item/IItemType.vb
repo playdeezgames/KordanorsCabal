@@ -3,7 +3,6 @@
     ReadOnly Property Name As String
     ReadOnly Property Spawn As IItemTypeSpawn
     ReadOnly Property Equip As IItemTypeEquip
-    ReadOnly Property Combat As IItemTypeCombat
     'offers
     ReadOnly Property Offer As Long
     ReadOnly Property HasOffer(shoppeType As IShoppeType) As Boolean

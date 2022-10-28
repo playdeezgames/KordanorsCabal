@@ -9,17 +9,17 @@
     End Function
     ReadOnly Property IsWeapon() As Boolean Implements IWeapon.IsWeapon
         Get
-            Return Item.FromId(WorldData, Id).ItemType.Combat.IsWeapon
+            Return AttackDice > 0
         End Get
     End Property
     ReadOnly Property AttackDice As Long Implements IWeapon.AttackDice
         Get
-            Return Item.FromId(WorldData, Id).ItemType.Combat.AttackDice
+            Return If(WorldData.ItemStatistic.Read(Id, StatisticTypeAttackDice), 0)
         End Get
     End Property
     ReadOnly Property MaximumDamage As Long? Implements IWeapon.MaximumDamage
         Get
-            Return Item.FromId(WorldData, Id).ItemType.Combat.MaximumDamage
+            Return WorldData.ItemStatistic.Read(Id, StatisticTypeMaximumDamage)
         End Get
     End Property
 End Class

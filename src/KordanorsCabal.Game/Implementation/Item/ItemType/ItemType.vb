@@ -102,10 +102,4 @@
             Return ItemTypeEquip.FromId(WorldData, Id)
         End Get
     End Property
-
-    Public ReadOnly Property Combat As IItemTypeCombat Implements IItemType.Combat
-        Get
-            Return ItemTypeCombat.FromId(WorldData, Id)
-        End Get
-    End Property
 End Class

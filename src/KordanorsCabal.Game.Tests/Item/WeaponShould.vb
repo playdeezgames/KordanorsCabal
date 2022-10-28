@@ -10,36 +10,27 @@
     Sub have_an_is_weapon_property()
         WithSubject(
             Sub(worldData, itemId, item)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 item.IsWeapon.ShouldBeFalse
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 30L))
+                worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 30L))
             End Sub)
     End Sub
     <Fact>
     Sub have_attack_dice()
         WithSubject(
             Sub(worldData, itemId, item)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 item.AttackDice.ShouldBe(0)
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 30L))
+                worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 30L))
             End Sub)
     End Sub
     <Fact>
     Sub have_maximum_damage()
         WithSubject(
             Sub(worldData, itemId, item)
-                Const itemTypeId = 2L
-                worldData.Setup(Function(x) x.Item.ReadItemType(It.IsAny(Of Long))).Returns(itemTypeId)
-                worldData.Setup(Function(x) x.ItemTypeStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
+                worldData.Setup(Function(x) x.ItemStatistic.Read(It.IsAny(Of Long), It.IsAny(Of Long)))
                 item.MaximumDamage.ShouldBeNull
-                worldData.Verify(Function(x) x.Item.ReadItemType(itemId))
-                worldData.Verify(Function(x) x.ItemTypeStatistic.Read(itemTypeId, 31L))
+                worldData.Verify(Function(x) x.ItemStatistic.Read(itemId, 31L))
             End Sub)
     End Sub
 End Class
