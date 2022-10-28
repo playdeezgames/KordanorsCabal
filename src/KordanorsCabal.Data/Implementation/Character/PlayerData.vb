@@ -61,4 +61,12 @@ Public Class PlayerData
             Players,
             (CharacterIdColumn, characterId))
     End Sub
+
+    Public Function ReadShoppeType() As Long? Implements IPlayerData.ReadShoppeType
+        Return Store.Column.ReadValue(Of Long, Long)(
+            AddressOf NoInitializer,
+            Players,
+            ShoppeTypeIdColumn,
+            (PlayerIdColumn, FixedPlayerId))
+    End Function
 End Class

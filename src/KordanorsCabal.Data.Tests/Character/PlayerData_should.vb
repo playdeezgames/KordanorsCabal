@@ -63,6 +63,21 @@
             End Sub)
     End Sub
     <Fact>
+    Sub have_shoppe_type()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const playerId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
+                subject.ReadShoppeType().ShouldBeNull
+                store.Verify(
+                    Function(x) x.Column.ReadValue(Of Long, Long)(
+                    It.IsAny(Of Action),
+                    Tables.Players,
+                    Columns.ShoppeTypeIdColumn,
+                    (Columns.PlayerIdColumn, playerId)))
+            End Sub)
+    End Sub
+    <Fact>
     Sub set_mode_and_direction()
         WithSubobject(
             Sub(store, checker, subject)

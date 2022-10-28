@@ -6,4 +6,5 @@
     Sub Write(characterId As Long, direction As Long, mode As Long)
     Sub WriteDirection(directionId As Long)
     Sub WritePlayerMode(value As Long)
+    Function ReadShoppeType() As Long?
 End Interface
