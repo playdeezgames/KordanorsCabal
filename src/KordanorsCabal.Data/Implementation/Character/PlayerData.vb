@@ -45,13 +45,14 @@ Public Class PlayerData
             (PlayerIdColumn, FixedPlayerId))
     End Function
 
-    Public Sub Write(characterId As Long, direction As Long, mode As Long) Implements IPlayerData.Write
+    Public Sub Write(characterId As Long, direction As Long, mode As Long, shoppeType As Long?) Implements IPlayerData.Write
         Store.Replace.Entry(
             AddressOf NoInitializer,
             Players,
             (PlayerIdColumn, FixedPlayerId),
             (CharacterIdColumn, characterId),
             (DirectionIdColumn, direction),
+            (ShoppeTypeIdColumn, shoppeType),
             (PlayerModeIdColumn, mode))
     End Sub
 
@@ -69,4 +70,12 @@ Public Class PlayerData
             ShoppeTypeIdColumn,
             (PlayerIdColumn, FixedPlayerId))
     End Function
+
+    Public Sub WriteShoppeType(shoppeTypeId As Long?) Implements IPlayerData.WriteShoppeType
+        Store.Column.Write(
+            AddressOf NoInitializer,
+            Players,
+            (ShoppeTypeIdColumn, shoppeTypeId),
+            (PlayerIdColumn, FixedPlayerId))
+    End Sub
 End Class

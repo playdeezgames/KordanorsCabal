@@ -78,22 +78,24 @@
             End Sub)
     End Sub
     <Fact>
-    Sub set_mode_and_direction()
+    Sub set_mode_and_direction_and_shoppe_type()
         WithSubobject(
             Sub(store, checker, subject)
-                Dim characterId = 1L
-                Dim direction = 2L
-                Dim mode = 3L
+                Const characterId = 1L
+                Const direction = 2L
+                Const mode = 3L
+                Const shoppeType = 4L
                 store.SetupGet(Function(x) x.Replace).Returns((New Mock(Of IStoreReplace)).Object)
-                subject.Write(characterId, direction, mode)
+                subject.Write(characterId, direction, mode, shoppeType)
                 Dim playerId = 1
                 store.Verify(
-                    Sub(x) x.Replace.Entry(Of Long, Long, Long, Long)(
+                    Sub(x) x.Replace.Entry(Of Long, Long, Long, Long?, Long)(
                     It.IsAny(Of Action),
                     Tables.Players,
                     (Columns.PlayerIdColumn, playerId),
                     (Columns.CharacterIdColumn, characterId),
                     (Columns.DirectionIdColumn, direction),
+                    (Columns.ShoppeTypeIdColumn, shoppeType),
                     (Columns.PlayerModeIdColumn, mode)))
             End Sub)
     End Sub
@@ -127,6 +129,22 @@
                     Tables.Players,
                     (Columns.PlayerModeIdColumn, mode),
                     (Columns.PlayerIdColumn, playerId)))
+            End Sub)
+    End Sub
+    <Fact>
+    Sub set_shoppe_type()
+        WithSubobject(
+            Sub(store, checker, subject)
+                Const playerId = 1L
+                store.SetupGet(Function(x) x.Column).Returns((New Mock(Of IStoreColumn)).Object)
+                Dim shoppeType = 2L
+                subject.WriteShoppeType(shoppeType)
+                store.Verify(
+                    Sub(x) x.Column.Write(Of Long, Long?)(
+                        It.IsAny(Of Action),
+                        Tables.Players,
+                        (ShoppeTypeIdColumn, shoppeType),
+                        (PlayerIdColumn, playerId)))
             End Sub)
     End Sub
 End Class

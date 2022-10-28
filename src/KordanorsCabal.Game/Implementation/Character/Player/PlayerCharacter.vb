@@ -20,4 +20,14 @@
             WorldData.Player.WritePlayerMode(value)
         End Set
     End Property
+
+    Public Property ShoppeType As IShoppeType Implements IPlayerCharacter.ShoppeType
+        Get
+            Return Game.ShoppeType.FromId(WorldData, WorldData.Player.ReadShoppeType)
+        End Get
+        Set(value As IShoppeType)
+            Dim shoppeTypeId As Long? = If(value IsNot Nothing, value.Id, Nothing)
+            WorldData.Player.WriteShoppeType(shoppeTypeId)
+        End Set
+    End Property
 End Class
