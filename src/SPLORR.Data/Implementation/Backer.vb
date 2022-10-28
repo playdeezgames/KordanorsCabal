@@ -29,7 +29,8 @@ Public Class Backer
     End Sub
 
     Public Sub Execute(sql As String, ParamArray parameters() As (String, Object)) Implements IBacker.Execute
-        Using command = CreateCommand(sql, parameters.Select(Function(x) New SqliteParameter(x.Item1, x.Item2)).ToArray)
+        Using command = CreateCommand(sql,
+                                      parameters.Select(Function(x) New SqliteParameter(x.Item1, If(x.Item2 Is Nothing, DBNull.Value, x.Item2))).ToArray)
             command.ExecuteNonQuery()
         End Using
     End Sub
