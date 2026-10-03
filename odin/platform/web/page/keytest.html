@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Key tester</title>
+<style>
+	body { font: 16px/1.4 monospace; margin: 16px; background: #fff; color: #111; }
+	@media (prefers-color-scheme: dark) { body { background: #111; color: #eee; } th { border-color: #555; } td { border-color: #333; } }
+	h1 { font-size: 18px; }
+	table { border-collapse: collapse; width: 100%; max-width: 760px; }
+	th, td { text-align: left; padding: 3px 8px; border-bottom: 1px solid #ccc; }
+	.big { font-size: 28px; margin: 12px 0; min-height: 1.4em; }
+	.warn { color: #c00; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Key tester</h1>
+<p>Press the keys you want to test. Each press shows what the browser reports. Press <b>ArrowDown</b>: the <code>code</code> should be <code>ArrowDown</code>. Click the page first so that it has focus.</p>
+<div class="big" id="last">(waiting for a key)</div>
+<div id="verdict"></div>
+<table>
+	<thead><tr><th>#</th><th>event</th><th>code</th><th>key</th><th>repeat</th><th>modifiers</th></tr></thead>
+	<tbody id="log"></tbody>
+</table>
+<script>
+	const last = document.getElementById("last"), log = document.getElementById("log"), verdict = document.getElementById("verdict");
+	let n = 0;
+	function show(e) {
+		n += 1;
+		const mods = ["ctrl", "alt", "shift", "meta"].filter((m) => e[m + "Key"]).join("+") || "-";
+		const row = log.insertRow(0);
+		for (const text of [n, e.type, e.code, JSON.stringify(e.key), e.repeat ? "yes" : "no", mods]) row.insertCell().textContent = text;
+		while (log.rows.length > 30) log.deleteRow(-1);
+		if (e.type === "keydown") {
+			last.textContent = e.code + "   (key " + JSON.stringify(e.key) + ")";
+			if (e.key === "ArrowDown" && e.code !== "ArrowDown" || e.code === "NumpadEnter" && e.key !== "Enter") {
+				verdict.className = "warn";
+				verdict.textContent = "The key and the code disagree: something between the keyboard and the browser is rewriting this key.";
+			}
+		}
+		e.preventDefault();
+	}
+	addEventListener("keydown", show);
+	addEventListener("keyup", show);
+</script>
+</body>
+</html>
