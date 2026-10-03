@@ -49,7 +49,7 @@ menu_of :: proc(core: ^Core, s: UI_State) -> (m: Menu, is_menu: bool) {
 		m.row = 7
 		menu_add(&m, "Cancel")
 		for stat in Stat.Strength ..= Stat.Mana { menu_add(&m, fmt.tprintf("%s: %d", STATS[stat].name, player_character(&core.world).stats[stat])) }
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Notice:
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Message, .Map, .Status, .Dead, .Notice:
 		return {}, false
 	}
 	return m, true
@@ -63,6 +63,7 @@ enter_state :: proc(core: ^Core, s: UI_State) {
 	case .Mux_Volume: core.cursors[s] = int(core.music_volume * 10 + 0.5)
 	case .Game_Menu, .Confirm_Abandon, .Confirm_Quit: core.cursors[s] = 0
 	case .Credits: core.credits_top = 0
+	case .Message: if m := message_head(&core.world); m != nil && m.sfx != .None { play_sfx(core, m.sfx); m.sfx = .None }
 	}
 }
 
@@ -103,11 +104,13 @@ start_game :: proc(core: ^Core, seed: u64) {
 		show_notice(core, .Title, "The world could not be made. That should not happen!")
 		return
 	}
+	reset_buttons(core)
 	play_sfx(core, .Character_Creation)
 	if player_character(&core.world).stats[.Unassigned] > 0 { enter_state(core, .Finalize_Character) } else { enter_state(core, .Prolog) }
 }
 
 abandon_world :: proc(core: ^Core) {
+	reset_buttons(core)
 	if core.has_world { world_destroy(&core.world); core.has_world = false }
 }
 
@@ -132,6 +135,7 @@ load_from_slot :: proc(core: ^Core, i: int) {
 	if core.has_world { world_destroy(&core.world) }
 	core.world = loaded
 	core.has_world = true
+	reset_buttons(core)
 	enter_state(core, .In_Play)
 }
 
@@ -236,7 +240,7 @@ activate :: proc(core: ^Core, s: UI_State, index: int) {
 			stat_add(p, .Unassigned, -1)
 		}
 		if p.stats[.Unassigned] == 0 { enter_state(core, .Prolog) }
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Notice:
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Message, .Map, .Status, .Dead, .Notice:
 	}
 }
 
@@ -290,8 +294,11 @@ handle_command :: proc(core: ^Core, c: Command) {
 		if c == .Confirm || c == .Cancel { enter_state(core, .Title) }
 	case .Prolog:
 		if c == .Confirm { enter_state(core, .In_Play) }
-	case .In_Play:
-		if c == .Confirm { enter_state(core, .Game_Menu) }
+	case .In_Play: play_command(core, c)
+	case .Message: message_command(core, c)
+	case .Map: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
+	case .Status: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
+	case .Dead: if c == .Confirm { abandon_world(core); enter_state(core, .Title) }
 	case .Import_Wait:
 		if c == .Cancel { enter_state(core, .Load_Game) }
 	case .Notice:
@@ -322,6 +329,7 @@ handle_tap :: proc(core: ^Core, col, row: int, precise: bool) {
 		if precise || was == i { activate(core, s, i) }
 		return
 	}
+	if s == .In_Play { play_tap(core, col, row, precise); return }
 	if s == .Seed_Entry {
 		switch {
 		case row == SEED_ROW:
@@ -419,11 +427,11 @@ draw_prompt :: proc(core: ^Core, state: UI_State) {
 		}
 		for l, i in lines { write_text(s, 0, 2 + i, l, false, .Black) }
 		write_text_centered(s, 22, "SPACE to start", true, .Orange)
-	case .In_Play:
-		// Placeholder until the in-play screen is ported (PORT.md, step 3).
-		centered_header(s, "In Play")
-		write_text(s, 0, 2, "The dungeon screen is not ported yet. Select for the game menu.", false, .Black)
-		if core.has_world { write_text(s, 0, 6, fmt.tprintf("Seed %09d", core.world.seed), false, .Purple) }
+	case .In_Play: draw_play(core)
+	case .Message: draw_message(core)
+	case .Map: draw_map(core)
+	case .Status: draw_status(core)
+	case .Dead: draw_dead(core)
 	case .Notice:
 		centered_header(s, "Notice")
 		write_text(s, 0, 2, string(core.notice[:core.notice_len]), false, .Black)

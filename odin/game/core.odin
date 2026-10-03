@@ -29,6 +29,10 @@ UI_State :: enum u8 {
 	Finalize_Character,
 	Prolog,
 	In_Play,
+	Message,
+	Map,
+	Status,
+	Dead,
 	Notice,
 }
 
@@ -61,7 +65,16 @@ Core :: struct {
 	sfx:          [MAX_SFX_PER_STEP]Sfx,
 	sfx_count:    int,
 	quit:         bool,
+	stack:        [UI_STACK_DEPTH]UI_State, // where to return after the messages (task 12: it is only ever used for that)
+	stack_len:    int,
+	button:       int,                       // the selected in-play button
+	button_stack: [BUTTON_STACK_DEPTH]int,
+	button_depth: int,
+	ticks:        u32,                       // counts steps; drives purely decorative effects (the orb's colour)
 }
+
+UI_STACK_DEPTH :: 4
+BUTTON_STACK_DEPTH :: 8
 
 core_init :: proc(core: ^Core, services: Services) {
 	core^ = {}
@@ -86,6 +99,7 @@ play_sfx :: proc(core: ^Core, s: Sfx) {
 
 core_step :: proc(core: ^Core, input: Step_Input, out: ^Step_Output) {
 	core.sfx_count = 0
+	core.ticks += 1
 	for e in input.events {
 		switch e.kind {
 		case .None:
@@ -94,6 +108,10 @@ core_step :: proc(core: ^Core, input: Step_Input, out: ^Step_Output) {
 		case .File_Text: handle_file_text(core, e.text)
 		case .File_Cancelled: handle_file_cancelled(core)
 		}
+	}
+	if core.has_world { // sounds the rules raised during the events
+		for i in 0 ..< core.world.sfx_count { play_sfx(core, core.world.sfx_queue[i]) }
+		core.world.sfx_count = 0
 	}
 	draw_screen(core)
 	rasterize(&core.screen, &core.frame)

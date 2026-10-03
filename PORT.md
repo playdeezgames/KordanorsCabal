@@ -54,13 +54,13 @@ The ones most worth a look, in order of how hard they are to change later:
 - `PORT.md` is long on purpose; each task has "Verified" and "Not verified" lists. The "Not verified" items are the real
   to-do list for testing.
 
-### Suggested order for the actual port (in progress: steps 1 and 2 done, see "Port step 1" in the log)
+### Suggested order for the actual port (in progress: steps 1 to 3 done, see "Port step 1" in the log)
 
 The infrastructure exists (rendering, input, services, content, RNG, tests, builds). Each step below ends with
 `tools/test.sh` passing and, where a screen exists, a bit-exact comparison with `docs/reference/vb`:
 1. ~~World state, save/load (task 14 format), `world_validate`; world generation.~~ **Done** (`uuid.odin`, `world.odin`, `worldgen.odin`, `save.odin`).
 2. ~~UI shell: the boilerplate screens (instructions, about, options, quit, load/save, export/import) on the menu pattern.~~ **Done** (`core.odin`, `ui_screens.odin`, `config.odin`; see "Port step 2").
-3. The in-play screen, movement, turning, the dungeon artwork, sprites and map.
+3. ~~The in-play screen, movement, turning, the dungeon artwork, sprites and map.~~ **Done** (`ui_play.odin`, `rules.odin`, `ui_data.odin`; see "Port step 3").
 4. Items: inventory, equipment, ground, events (task 18 handlers), repair and durability.
 5. Combat, death, XP and level up.
 6. Townsfolk and shoppes; spells and quests.
@@ -1313,3 +1313,24 @@ Decided together with task 24 (see above): `src/` is kept untouched as the refer
 - Time: a full native test run grew from 7 s to 20 s because each UI test generates and loads a 470 KB world under the leak-checking allocator; the game itself does one such load per Continue.
 
 **Findings affecting later tasks:** (1) `Core` still has no message queue or UI stack; the in-play step needs both (a stack of four is enough, per task 12). (2) The tests' `pick` helper bounds its search because a stuck cursor otherwise loops forever; keep that. (3) `build/t_native [name]`-style runs: the native test binary now runs only the cases whose names contain its first argument (the `odin test` run is unchanged). (4) World generation plus parsing dominates test time: prefer one generated world per test.
+
+
+### Port step 3: the in-play screen, movement, map and status (2026-10-03)
+
+**Done:** `ui_play.odin` (the hub: ten buttons, the Neutral, Turn and Move modes, the dungeon view, messages, map, status, death), `rules.odin` (messages and sounds, health, encumbrance, who is where, `can_move` and `move_character`) and `tools/gen/gen_ui.py` -> `ui_data.odin` (the 128 `Glyph` names, 15 character sprites, the portal sprite, and where each of the 53 item types is drawn on the floor; checked for freshness by `tools/test.sh`). The core gained the UI stack (depth 4, "where to go after the messages"; an empty pop falls back to the in-play screen instead of throwing), the button cursor and its stack, and a step counter. The messages queue (16 messages of 768 bytes, D18) and a small queue for sounds the rules raise live in the `World` as runtime-only fields, cleared with the world and never saved.
+- Movement is a faithful port of `CharacterMovement.Move`: hunger rises by 1 (more when high or food poisoned) and drunkenness, highness, food poisoning and chafing fall by 1 with each step; a locked door needs the key in the pack, spends it, opens the door for good and plays the unlock sound; single-use routes (portals) vanish; at 100 hunger the hunger halves and the walker loses a hit point ("You take damage from starvation!" as a message, or the death page if that was the last one). Encumbrance (items carried and worn against 50 + 10 x strength, from the data) stops all movement. The place is marked visited.
+- The buttons show the original titles for every state that exists today, so FIGHT!, RUN!, Enemies(n), Ground..., Inventory, Equipment, Spells, Interact... and Intimidate! already appear when they should, but only Turn, Move, Map, Status and Game Menu do anything. The rest are marked `TODO(step N)` in `handle_button`: items (4), combat and level-up (5), townsfolk and spells (6).
+- Status shows the seed on its last line as decided in review 6 (`Seed nnnnnnnnn`).
+
+**Differences from the original:** (1) the Elemental Orb's colour follows the step counter (it changes about ten times a second) instead of a random colour every frame; (2) Red in Turn or Move now restores the previous button position like the Cancel button does (the original left it on the stack); (3) the recorded dungeon spaces have a black hue and ours blue; they look identical (the tests compare what is visible); (4) route types 7 and 8 show the portal picture for any route, the original threw for other types (none exist).
+
+**Verified (30 cases, 1,358 checks, native and wasm under node):** compared with the recorded VB frames cell for cell: town square in play (`11`), status (`12`, all but the seed line), turn mode (`13`), move mode (`14`) and the dungeon with two goblins, items on the floor, a door ahead and a passage to the right (`40`), which exercises the walls, doors, sprite, item glyphs, the facing letter and all ten button titles. Behaviour: turning and moving update the facing, the location, visited, hunger and the button cursor; walls do nothing; locked door without and with the key; key spent; door opened; unlock sound collected by the core; encumbrance blocks every direction; starvation message, hunger halving, hit point lost, the pop back to the in-play screen; death page and return to the title; the map draws the visited place inverted with its legend; the message queue is first in first out and bounded; popping an empty UI stack is safe. The web build was run in the browser pane: new game, prolog, the Move screen renders like the recording.
+
+**Not verified:**
+- The map against the original (no reference frame was recorded; the code was ported by reading `MapProcessor`). Only one visited place was drawn in the test, so the elbow selection for corridors is untested.
+- `location_decay_items` is a stub (food does not rot yet; step 4).
+- The portal route pictures and the town portal text (no test world has portals).
+- Hunger and the other statuses over a long walk (only single steps were tested).
+- Real-device input for the button bank (taps use the same two-step rule as menus).
+
+**Findings affecting later tasks:** (1) Handlers must not destroy while iterating the world's order lists (my own test did and skipped characters): collect ids first. (2) Interact with `Intimidate!` shows only when the enemy has willpower and is not backed by a crowd, as in the original; with two goblins the button is blank, as the recording shows. (3) The next screens (lists, item interaction) need the same two-step tap rule: factor `tap_to_row` out when the first list screen is written.

@@ -76,6 +76,19 @@ tap :: proc(c: ^game.Core, col, row: int, precise: bool) {
 	step(c, {kind = .Tap, col = i16(col), row = i16(row), precise = precise})
 }
 
+// From the in-play screen to the game menu: select the last button and press it.
+game_menu :: proc(c: ^game.Core) {
+	assert(c.state == .In_Play)
+	for tries := 0; c.button != game.NEUTRAL_MENU && tries < 12; tries += 1 { press(c, .Down) }
+	press(c, .Confirm)
+}
+
+// Cells that look the same are equal: an empty, non-inverted cell shows the paper whatever its hue.
+same_look :: proc(a, b: game.Cell) -> bool {
+	if a.glyph == game.GLYPH_SPACE && !a.inverted && b.glyph == game.GLYPH_SPACE && !b.inverted { return true }
+	return a == b
+}
+
 reference :: proc(name: string) -> ^Reference_Screen {
 	for &r in REFERENCE_SCREENS { if r.name == name { return &r } }
 	return nil
@@ -91,7 +104,13 @@ expect_like_vb :: proc(t: ^T, c: ^game.Core, name: string, skip: ..int, loc := #
 		skipped := false
 		for r in skip { if r == row { skipped = true } }
 		if skipped { continue }
-		if want[row] != c.screen[row] { bad += 1; fmt.printf("    row %d of %s differs\n", row, name) }
+		differs := false
+		for col in 0 ..< game.CELL_COLUMNS { if !same_look(want[row][col], c.screen[row][col]) { differs = true } }
+		if differs {
+			bad += 1
+			fmt.printf("    row %d of %s differs\n", row, name)
+			for col in 0 ..< game.CELL_COLUMNS { if !same_look(want[row][col], c.screen[row][col]) { fmt.printf("      col %d: want %v got %v\n", col, want[row][col], c.screen[row][col]) } }
+		}
 	}
 	expect_eq(t, bad, 0, loc)
 }
@@ -234,7 +253,7 @@ test_ui_new_game :: proc(t: ^T) {
 	expect_like_vb(t, c, "10-prolog")
 	press(c, .Confirm)
 	expect_eq(t, c.state, game.UI_State.In_Play)
-	press(c, .Confirm)
+	game_menu(c)
 	expect_like_vb(t, c, "15-game-menu")
 }
 
@@ -271,7 +290,8 @@ test_ui_save_load :: proc(t: ^T) {
 	step(c)
 	pick(c, 0)
 	for c.state == .Finalize_Character { pick(c, 1) }
-	press(c, .Confirm, .Confirm) // prolog, then the placeholder's game menu
+	press(c, .Confirm) // the prolog
+	game_menu(c)
 	expect_eq(t, c.state, game.UI_State.Game_Menu)
 	seed := c.world.seed
 	pick(c, 1) // Save Game
@@ -281,7 +301,7 @@ test_ui_save_load :: proc(t: ^T) {
 	saved, ok := fake.store["kc:slot3"]
 	expect(t, ok && len(saved) > 100000, "slot 3 holds a save")
 	// abandon
-	press(c, .Confirm)
+	game_menu(c)
 	pick(c, 2)
 	expect_like_vb(t, c, "17-confirm-abandon-game")
 	pick(c, 1)
@@ -301,7 +321,7 @@ test_ui_save_load :: proc(t: ^T) {
 	expect_eq(t, c.world.seed, seed)
 	// a damaged slot is reported, not crashed on
 	fake_set("kc:slot4", `{"format":"kordanors-cabal-save","version":1,"summary":{"place":"Level_I","hp":1,"xp":0},"world":{}}`)
-	press(c, .Confirm)
+	game_menu(c)
 	pick(c, 2); pick(c, 1) // abandon
 	pick(c, 2) // Continue
 	pick(c, 4)
@@ -318,7 +338,8 @@ test_ui_export_import :: proc(t: ^T) {
 	// export slot 2 from the Save screen (reached through a game)
 	pick(c, 0)
 	for c.state == .Finalize_Character { pick(c, 1) }
-	press(c, .Confirm, .Confirm)
+	press(c, .Confirm)
+	game_menu(c)
 	pick(c, 1) // Save Game
 	pick(c, 6) // Export a slot...
 	expect_eq(t, c.state, game.UI_State.Export_Slot)

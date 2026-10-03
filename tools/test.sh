@@ -8,9 +8,9 @@ fail=0
 step() { echo; echo "== $1"; }
 
 step "generated files are up to date"
-GENERATED="odin/game/font_data.odin odin/tests/reference_data.odin odin/game/content_enums.odin odin/game/content_data.odin"
+GENERATED="odin/game/font_data.odin odin/tests/reference_data.odin odin/game/content_enums.odin odin/game/content_data.odin odin/game/ui_data.odin"
 for f in $GENERATED; do cp "$f" "build/$(basename "$f").before"; done
-python3 tools/gen/gen_font.py >/dev/null && python3 tools/gen/gen_reference.py >/dev/null && python3 tools/gen/gen_content.py >/dev/null
+python3 tools/gen/gen_font.py >/dev/null && python3 tools/gen/gen_reference.py >/dev/null && python3 tools/gen/gen_content.py >/dev/null && python3 tools/gen/gen_ui.py >/dev/null
 for f in $GENERATED; do cmp -s "$f" "build/$(basename "$f").before" || { echo "FAIL: $f changed when regenerated; run the generators and commit"; fail=1; }; done
 [ "$fail" = 0 ] && echo "ok"
 

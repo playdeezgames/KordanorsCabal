@@ -54,6 +54,22 @@ Player_State :: struct {
 	spells:            [Spell_Type]i32, // level known; 0 = not known
 }
 
+// Messages shown to the player, in order (decision D18). Runtime only: never saved, cleared by world_init and world_destroy.
+// A message is its lines joined by newlines in a fixed buffer, so nothing is allocated and nothing dangles.
+MESSAGE_CAPACITY :: 768
+MESSAGE_QUEUE_LENGTH :: 16
+Message :: struct {
+	sfx:  Sfx,
+	len:  int,
+	text: [MESSAGE_CAPACITY]u8,
+}
+Message_Queue :: struct {
+	items: [MESSAGE_QUEUE_LENGTH]Message,
+	first: int,
+	count: int,
+}
+SFX_QUEUE_LENGTH :: 8
+
 World :: struct {
 	seed:            u64,
 	rng:             Rng,
@@ -65,6 +81,9 @@ World :: struct {
 	items:           map[Item_ID]Item,
 	item_order:      [dynamic]Item_ID,
 	player:          Player_State,
+	messages:        Message_Queue, // runtime only
+	sfx_queue:       [SFX_QUEUE_LENGTH]Sfx, // sounds the rules raised since the core last collected them; runtime only
+	sfx_count:       int,
 }
 
 // All storage comes from `allocator` (kept inside the maps and lists), so a world can be freed with world_destroy.
