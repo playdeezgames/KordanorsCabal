@@ -55,7 +55,7 @@ menu_of :: proc(core: ^Core, s: UI_State) -> (m: Menu, is_menu: bool) {
 	case .Equipment_Detail:
 		m.row = 14
 		menu_add(&m, "Go Back"); menu_add(&m, "Unequip")
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
 		return {}, false
 	}
 	return m, true
@@ -76,7 +76,7 @@ enter_state :: proc(core: ^Core, wanted: UI_State) {
 	}
 	core.state = s
 	#partial switch s {
-	case .Inventory, .Ground_Inventory, .Equipment: core.list_cursor = 0
+	case .Inventory, .Ground_Inventory, .Equipment, .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List: core.list_cursor = 0
 	case .Interact_Item, .Equipment_Detail: core.cursors[s] = 0
 	case .Load_Game, .Save_Game, .Export_Slot, .Import_Slot: refresh_slots(core)
 	case .Sfx_Volume: core.cursors[s] = int(core.sfx_volume * 10 + 0.5)
@@ -268,7 +268,7 @@ activate :: proc(core: ^Core, s: UI_State, index: int) {
 		if index == 0 { enter_state(core, .Equipment); return }
 		unequip(&core.world, core.world.player.character, core.equip_slot)
 		enter_state(core, .Equipment) // goes back to the in-play screen if nothing is left on
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
 	}
 }
 
@@ -328,7 +328,7 @@ handle_command :: proc(core: ^Core, c: Command) {
 	case .Enemies: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
 	case .In_Play: play_command(core, c)
 	case .Message: message_command(core, c)
-	case .Inventory, .Ground_Inventory, .Equipment: list_command(core, c)
+	case .Inventory, .Ground_Inventory, .Equipment, .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List: list_command(core, c)
 	case .Map: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
 	case .Status: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
 	case .Dead: if c == .Confirm { abandon_world(core); enter_state(core, .Title) }
@@ -363,7 +363,7 @@ handle_tap :: proc(core: ^Core, col, row: int, precise: bool) {
 		return
 	}
 	if s == .In_Play { play_tap(core, col, row, precise); return }
-	if s == .Inventory || s == .Ground_Inventory || s == .Equipment { list_tap(core, row, precise); return }
+	if s == .Inventory || s == .Ground_Inventory || s == .Equipment || is_shoppe_list(s) || s == .Spell_List { list_tap(core, row, precise); return }
 	if s == .Seed_Entry {
 		switch {
 		case row == SEED_ROW:
@@ -463,6 +463,7 @@ draw_prompt :: proc(core: ^Core, state: UI_State) {
 		write_text_centered(s, 22, "SPACE to start", true, .Orange)
 	case .In_Play: draw_play(core)
 	case .Enemies: draw_enemies(core)
+	case .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List: draw_shoppe_list(core)
 	case .Inventory: draw_inventory(core)
 	case .Ground_Inventory: draw_ground(core)
 	case .Equipment: draw_equipment(core)

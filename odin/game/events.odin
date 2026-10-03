@@ -5,8 +5,7 @@ package game
 // message queue in the world. A handler that finds a handle gone does nothing or says "You cannot use that now!"; the original
 // dereferenced a missing enemy in several places.
 //
-// Ported so far: every check, and the actions that do not need combat or the quests (PORT.md steps 5 and 6 add the rest). The
-// unported ones are listed in `action_ported`, and `item_use` says so instead of silently doing nothing.
+// Every check and every action is ported.
 
 import "core:fmt"
 
@@ -97,14 +96,6 @@ check :: proc(name: Check, ctx: Event_Context) -> bool {
 }
 
 // ---- actions --------------------------------------------------------------------------------------------------------
-
-// False for the actions whose systems are not ported yet (they are marked TODO(step N) in `perform`).
-action_ported :: proc(a: Action) -> bool {
-	#partial switch a {
-	case .Character_Cast_Purify, .Character_Accept_Cellar_Rats_Quest, .Character_Complete_Cellar_Rats_Quest: return false // step 6
-	}
-	return true
-}
 
 perform :: proc(name: Action, ctx: Event_Context) {
 	w, who := ctx.world, ctx.character
@@ -260,9 +251,28 @@ perform :: proc(name: Action, ctx: Event_Context) {
 		character_get(w, who).stats[.Fatigue] += 1
 		damage := roll_spell(w, who, .Holy_Bolt)
 		strike(w, who, enemy, damage, fmt.tprintf("You cast %s on %s!", SPELL_TYPES[.Holy_Bolt].name, CHARACTER_TYPES[character_get(w, enemy).type].name), fmt.tprintf("You do %d damage!", damage))
-	// TODO(step 6): the purify spell and the cellar rats quest
-	case .Character_Cast_Purify, .Character_Accept_Cellar_Rats_Quest, .Character_Complete_Cellar_Rats_Quest:
-		say(w, .None, "That does not work yet in this version.")
+	case .Character_Cast_Purify:
+		for id in items_in_pack(w, who) { item_purify(w, id) }
+		for id in items_worn(w, who) { item_purify(w, id) }
+		character_get(w, who).stats[.Fatigue] += 1
+		say(w, .None, "You purify yer inventory!")
+
+	case .Character_Accept_Cellar_Rats_Quest:
+		say(w, .None, "You accept the quest!")
+		w.player.quests_active += {.Cellar_Rats}
+		cellars := locations_of_type(w, .Cellar)
+		if len(cellars) == 0 { return }
+		for _ in 0 ..< w.player.quest_completions[.Cellar_Rats] + 1 { create_character(w, .Rat, cellars[0]) } // one more rat each time
+
+	case .Character_Complete_Cellar_Rats_Quest:
+		say(w, .None, "You complete the quest!")
+		paid := 0
+		for id in items_in_pack(w, who) {
+			if paid == 10 { break }
+			if item_get(w, id).type == .Rat_Tail { stat_add(character_get(w, who), .Money, 1); destroy_item(w, id); paid += 1 }
+		}
+		w.player.quests_active -= {.Cellar_Rats}
+		w.player.quest_completions[.Cellar_Rats] += 1
 	}
 }
 

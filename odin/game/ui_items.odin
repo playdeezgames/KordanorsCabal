@@ -24,17 +24,21 @@ list_count :: proc(core: ^Core) -> int {
 	case .Inventory: return len(item_groups(w, player))
 	case .Ground_Inventory: return len(items_on_ground(w, character_get(w, player).location))
 	case .Equipment: return len(items_worn(w, player)) + 1 // plus "Go Back"
+	case .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List: return len(shoppe_list_rows(core).labels)
 	}
 	return 0
 }
 
 list_command :: proc(core: ^Core, c: Command) {
 	count := list_count(core)
-	if count == 0 { enter_state(core, .In_Play); return }
+	town_list := is_shoppe_list(core.state) || core.state == .Spell_List
+	if count == 0 && !town_list { enter_state(core, .In_Play); return }
 	switch c {
-	case .Up: core.list_cursor = (core.list_cursor + count - 1) % count
-	case .Down: core.list_cursor = (core.list_cursor + 1) % count
-	case .Cancel: enter_state(core, .In_Play)
+	case .Up: if count > 0 { core.list_cursor = (core.list_cursor + count - 1) % count }
+	case .Down: if count > 0 { core.list_cursor = (core.list_cursor + 1) % count }
+	case .Cancel:
+		if is_shoppe_list(core.state) { core.world.player.shoppe = .None }
+		enter_state(core, .In_Play)
 	case .Confirm: list_confirm(core)
 	case .Left, .Right, .None:
 	}
@@ -56,6 +60,7 @@ list_confirm :: proc(core: ^Core) {
 		pick_up(w, player, items[core.list_cursor])
 		remaining := len(items) - 1
 		if remaining > 0 { core.list_cursor %= remaining } else { enter_state(core, .In_Play) }
+	case .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List: shoppe_list_confirm(core)
 	case .Equipment:
 		if core.list_cursor == 0 { enter_state(core, .In_Play); return }
 		worn := items_worn(w, player)
@@ -75,6 +80,7 @@ list_tap :: proc(core: ^Core, row: int, precise: bool) {
 		if index < 0 || index >= count { return }
 	} else {
 		first := core.state == .Inventory ? INVENTORY_FIRST_ROW : GROUND_FIRST_ROW
+		if core.state == .Shoppe_Offers || core.state == .Shoppe_Prices { first = 1 } else if is_shoppe_list(core.state) || core.state == .Spell_List { first = 2 }
 		if row < first || row > LIST_LAST_ROW { return }
 		index = row - LIST_HILITE_ROW + core.list_cursor
 		if index < 0 || index >= count { return }

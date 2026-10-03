@@ -54,7 +54,7 @@ The ones most worth a look, in order of how hard they are to change later:
 - `PORT.md` is long on purpose; each task has "Verified" and "Not verified" lists. The "Not verified" items are the real
   to-do list for testing.
 
-### Suggested order for the actual port (in progress: steps 1 to 5 done, see "Port step 1" in the log)
+### Suggested order for the actual port (in progress: steps 1 to 6 done, see "Port step 1" in the log)
 
 The infrastructure exists (rendering, input, services, content, RNG, tests, builds). Each step below ends with
 `tools/test.sh` passing and, where a screen exists, a bit-exact comparison with `docs/reference/vb`:
@@ -63,7 +63,7 @@ The infrastructure exists (rendering, input, services, content, RNG, tests, buil
 3. ~~The in-play screen, movement, turning, the dungeon artwork, sprites and map.~~ **Done** (`ui_play.odin`, `rules.odin`, `ui_data.odin`; see "Port step 3").
 4. ~~Items: inventory, equipment, ground, events (task 18 handlers), durability.~~ **Done** (`items.odin`, `events.odin`, `ui_items.odin`; repair comes with the blacksmith in step 6).
 5. ~~Combat, death, XP and level up.~~ **Done** (`combat.odin`; see "Port step 5").
-6. Townsfolk and shoppes; spells and quests.
+6. ~~Townsfolk and shoppes; spells and quests.~~ **Done** (`shoppes.odin`, `ui_town.odin`; see "Port step 6").
 7. Polish, the real-device pass, itch.io release.
 
 ## Decisions
@@ -1368,3 +1368,16 @@ Decided together with task 24 (see above): `src/` is kept untouched as the refer
 **Not verified:** the mental counter attack against the player by a real Malcontent (it is covered only by the rules test and the 60-seed fights, where Malcontents do not appear), the death page's "dignity" line (legs slot), the weapon wear of enemies (monsters carry nothing), the level-up sound (the original plays none; the `Level_Up` sound still has no use), and balance over a whole game.
 
 **Findings for step 6:** (1) Townsfolk need `Interact...` (button 1) and the modes; the button currently does nothing unless intimidation applies. (2) The quest's rats are created with `create_character(.Rat, cellar)` using the data's initial statistics. (3) The test seed search takes about 20 seconds of the native run; if it grows, cap the search or fix the seed in a constant.
+
+
+### Port step 6: the townspeople, shoppes, repair, spells and the cellar rats quest (2026-10-03)
+
+**Done:** `shoppes.odin` (what a shoppe offers, sells and repairs, selling, buying, repair costs, the spell list and casting, quest queries), `ui_town.odin` (the nine townspeople as player modes with their dialogue and button banks; the Offers, Prices, Buy, Sell, Repair and Spell List screens) and the last event actions: Cast Purify, Accept and Complete Cellar Rats (`action_ported` is gone: **every one of the 18 checks and 27 actions is ported**). The Interact button works (feature -> mode), Spells opens the list, and Red leaves a conversation restoring the button cursor.
+- People: the Elder (pep talk restores 1 MP), Graham the Innkeeper (the rat quest: Do Quest!/Quest Done!; one more rat each time; up to ten rat tails are paid 1 each; prices and buy), Yermom the Drunk (beer for an empty bottle), Sander the Chicken (feed fresh or rotten food; one time in six an egg: a Magic Egg or a Rotten Egg), "Honest" Dan (two-up gambling for 5, win 15 on two heads; prices and buy), Marcus the Black Mage (offers, sell, restore mana, prices, buy), Samuli the Blacksmith (offers, sell, repair when something needs it, prices, buy), Nihilist Healer Marten (heal when wounded, prices, buy), David the Constable (10 money per Membership Card). What each says depends on the selected button, as in the original.
+- Lists: Buy shows only what you can afford; Sell shows carried items the shoppe buys; Repair costs `wear x full price / max durability` rounded up, carried items first, then worn; Offers and Prices are read-only. A list that empties returns to the game; a spell that cannot be cast says "You cannot cast X now." and comes back to the list.
+
+**Verified (43 cases, 1,951 checks, native and wasm under node):** compared cell for cell with the recorded VB frames: all nine townspeople (`21` to `29`), the black mage's Offers, Prices, Sell (empty) and Buy with 50 money (`30` to `33`), and the Spell List (`67`). Behaviour: buying (affordability list, money, item), selling, repair arithmetic (a half-worn dagger costs 1, a shield worn 7 of 10 costs 5), too poor to repair, healing, restoring mana, the pep talk, bounties, beer to the drunk, the chicken's eggs (60 feedings), two-up odds, the rat quest end to end (rats appear in the cellar, tails are paid, completion counts, the next quest brings two more rats), Purify (rotten food fresh again, one fatigue, refused without mana); every action still runs safely with and without a named actor.
+
+**Not verified:** the Healer's and Blacksmith's repair in a full game with wear from combat; casting Holy Bolt in a fight from the list (the strike itself is tested); Moon travel; touch taps on the shoppe lists (the shared list code applies the two-step rule but no test taps them).
+
+**What is left of the game itself:** nothing known. Every system of the original is now ported. Open content questions for the owner are in `docs/dead-code-audit.md` (Amulet of STR, Lotion; the three unobtainable items from review 5).

@@ -1,8 +1,8 @@
 package game
 
 // The in-play screen and its neighbours: the hub with its ten buttons (InPlayProcessor, ModeProcessor and the Neutral, Turn and
-// Move modes), the message pages, the map, the status page and the death page. Combat, items, spells and the townspeople are
-// ported in later steps; their buttons are drawn as in the original but do nothing yet (marked TODO(step N)).
+// Move modes), the message pages, the map, the status page and the death page. Combat, items, spells and the townspeople are in
+// combat.odin, items.odin, shoppes.odin and ui_town.odin.
 
 import "core:fmt"
 import "core:strings"
@@ -92,14 +92,15 @@ play_buttons :: proc(core: ^Core) -> (titles: [BUTTON_COUNT]string) {
 		if can_move(w, player, .Down) { titles[MOVE_DOWN] = "Down" }
 		if can_move(w, player, .In) { titles[MOVE_IN] = "In" }
 		if can_move(w, player, .Out) { titles[MOVE_OUT] = "Out" }
-	case .Neutral, .None, .Elder, .InnKeeper, .TownDrunk, .Chicken, .BlackMarket, .BlackMage, .Blacksmith, .Constable, .Healer:
-		// The townspeople's modes are ported in step 6; until then they draw the neutral bank.
+	case .Elder, .InnKeeper, .TownDrunk, .Chicken, .BlackMarket, .BlackMage, .Blacksmith, .Constable, .Healer:
+		town_titles(core, &titles)
+	case .Neutral, .None:
 		here := location_get(w, character_get(w, player).location)
 		fight := can_fight(w, player)
 		titles[NEUTRAL_TURN_FIGHT] = fight ? "FIGHT!" : "Turn..."
 		titles[NEUTRAL_MOVE_RUN] = fight ? "RUN!" : "Move..."
 		titles[NEUTRAL_MENU] = "Game Menu"
-		for s in Spell_Type { if w.player.spells[s] != 0 { titles[NEUTRAL_SPELLS] = "Spells" } }
+		if has_spells(w) { titles[NEUTRAL_SPELLS] = "Spells" }
 		if can_map(w, player) { titles[NEUTRAL_MAP] = "Map" }
 		if len(items_worn(w, player)) > 0 { titles[NEUTRAL_EQUIPMENT] = "Equipment" }
 		titles[NEUTRAL_STATUS] = character_get(w, player).stats[.Unassigned] == 0 ? "Status" : "Level up!"
@@ -127,7 +128,7 @@ play_command :: proc(core: ^Core, c: Command) {
 	case .Left, .Right: core.button = (core.button + BUTTON_COUNT / 2) % BUTTON_COUNT
 	case .Confirm: handle_button(core, core.button)
 	case .Cancel: // the original left the pushed button position on its stack here (a leak); the port restores it
-		if core.world.player.mode == .Turn || core.world.player.mode == .Move { pop_button(core) }
+		if core.world.player.mode == .Turn || core.world.player.mode == .Move || is_town_mode(core.world.player.mode) { pop_button(core) }
 		core.world.player.mode = .Neutral
 	case .None:
 	}
@@ -173,7 +174,8 @@ handle_button :: proc(core: ^Core, button: int) {
 		case MOVE_LEFT: do_move(core, DIRECTIONS[f].previous)
 		case MOVE_RIGHT: do_move(core, DIRECTIONS[f].next)
 		}
-	case .Neutral, .None, .Elder, .InnKeeper, .TownDrunk, .Chicken, .BlackMarket, .BlackMage, .Blacksmith, .Constable, .Healer:
+	case .Elder, .InnKeeper, .TownDrunk, .Chicken, .BlackMarket, .BlackMage, .Blacksmith, .Constable, .Healer: town_button(core, button)
+	case .Neutral, .None:
 		fight := can_fight(w, player)
 		switch button {
 		case NEUTRAL_TURN_FIGHT:
@@ -181,7 +183,12 @@ handle_button :: proc(core: ^Core, button: int) {
 		case NEUTRAL_MOVE_RUN:
 			if fight { fight_action(core, .Run) } else { push_button(core, 0); w.player.mode = .Move }
 		case NEUTRAL_INTERACT:
-			if can_do_intimidation(w, player) { fight_action(core, .Intimidate) } /* TODO(step 6): interact */
+			if can_do_intimidation(w, player) {
+				fight_action(core, .Intimidate)
+			} else if feature_here(w) != .None {
+				push_button(core, 0)
+				w.player.mode = Player_Mode(FEATURE_TYPES[feature_here(w)].interaction_mode)
+			}
 		case NEUTRAL_GROUND_ENEMIES:
 			if fight { enter_state(core, .Enemies) } else { enter_state(core, .Ground_Inventory) }
 		case NEUTRAL_MENU: enter_state(core, .Game_Menu)
@@ -190,7 +197,7 @@ handle_button :: proc(core: ^Core, button: int) {
 		case NEUTRAL_EQUIPMENT: enter_state(core, .Equipment)
 		case NEUTRAL_STATUS:
 			if character_get(w, player).stats[.Unassigned] != 0 { enter_state(core, .Level_Up) } else { enter_state(core, .Status) }
-		case NEUTRAL_SPELLS: /* TODO(step 6) */
+		case NEUTRAL_SPELLS: if has_spells(w) { enter_state(core, .Spell_List) }
 		}
 	}
 }
@@ -263,7 +270,9 @@ draw_play :: proc(core: ^Core) {
 	player := w.player.character
 	here := location_get(w, character_get(w, player).location)
 	mode := w.player.mode
-	if LOCATION_TYPES[here.type].is_dungeon {
+	if is_town_mode(mode) {
+		draw_town(core)
+	} else if LOCATION_TYPES[here.type].is_dungeon {
 		draw_dungeon(core, here)
 	} else {
 		show_header(s, LOCATION_TYPES[here.type].name)
