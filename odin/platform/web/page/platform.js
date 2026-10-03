@@ -9,6 +9,8 @@
 	const seedParam = new URLSearchParams(location.search).get("seed");
 	const fixedSeed = seedParam !== null && /^\d{1,9}$/.test(seedParam) ? Number(seedParam) : null;
 	let fixedSeedHalf = 0;
+	const debugLog = new URLSearchParams(location.search).has("log"); // ?log=1 prints every input the page sends to the game
+	const logInput = (...a) => { if (debugLog) console.log("[input]", ...a); };
 
 	const mem = new odin.WasmMemoryInterface();
 	let exports = null;
@@ -126,6 +128,7 @@
 		const name = KEYS[e.code];
 		if (!name || e.repeat) return;
 		e.preventDefault();
+		logInput("key", e.code, "->", name);
 		exports.platform_command(COMMAND[name]);
 	});
 	// A tap on either overlay is the start gesture. Fullscreen needs "transient user activation": pointerdown counts for a
@@ -140,10 +143,11 @@
 		if (!started) return start();
 		const r = canvas.getBoundingClientRect();
 		const col = Math.floor((e.clientX - r.left) / r.width * CELL_COLS), row = Math.floor((e.clientY - r.top) / r.height * CELL_ROWS);
+		logInput("tap", col, row, e.pointerType);
 		exports.platform_tap(col, row, e.pointerType !== "touch"); // a finger is not precise (task 16)
 	});
 	for (const b of controlsEl.children) {
-		b.addEventListener("pointerdown", (e) => { e.preventDefault(); if (!started) return start(); exports.platform_command(COMMAND[b.dataset.cmd]); });
+		b.addEventListener("pointerdown", (e) => { e.preventDefault(); if (!started) return start(); logInput("button", b.dataset.cmd); exports.platform_command(COMMAND[b.dataset.cmd]); });
 	}
 	addEventListener("contextmenu", (e) => e.preventDefault());
 
