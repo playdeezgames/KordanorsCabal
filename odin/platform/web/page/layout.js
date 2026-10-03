@@ -5,8 +5,8 @@
 	if (typeof module === "object" && module.exports) module.exports = factory(); else root.computeLayout = factory().computeLayout;
 })(typeof self !== "undefined" ? self : this, function () {
 	const PAPER_W = 352, PAPER_H = 184, BORDER_W = 32, BORDER_H = 28;
+	const FULL_W = PAPER_W + 2 * BORDER_W, FULL_H = PAPER_H + 2 * BORDER_H; // the whole frame including its border: 416 x 240
 	const MIN_SIDES_SCALE = 1.3;   // below this the side control columns cost too much screen: controls are hidden
-	const VERTICAL_MARGIN = 6;     // minimum space above and below the paper on touch devices
 	const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
 	function computeLayout({ width, height, touch, insets = {} }) {
@@ -22,13 +22,14 @@
 			scale = fit >= 1 ? Math.floor(fit) : fit;
 			mode = "desktop";
 		} else {
+			// The original border is kept (owner decision, review 3): scale is computed for the whole 416 x 240 frame.
 			const c = clamp(Math.round(area.w * 0.13), 96, 128);
-			const sides = Math.min((area.w - 2 * c) / PAPER_W, (area.h - 2 * VERTICAL_MARGIN) / PAPER_H);
+			const sides = Math.min((area.w - 2 * c) / FULL_W, area.h / FULL_H);
 			if (sides >= MIN_SIDES_SCALE) {
 				mode = "touch-sides"; scale = sides;
 				controls = buildControls(area, c, scale);
 			} else {
-				mode = "touch-full"; scale = Math.min(area.w / PAPER_W, (area.h - 2 * VERTICAL_MARGIN) / PAPER_H);
+				mode = "touch-full"; scale = Math.min(area.w / FULL_W, area.h / FULL_H);
 			}
 		}
 		const w = PAPER_W * scale, h = PAPER_H * scale;
