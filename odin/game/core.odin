@@ -29,6 +29,11 @@ UI_State :: enum u8 {
 	Finalize_Character,
 	Prolog,
 	In_Play,
+	Inventory,
+	Interact_Item,
+	Ground_Inventory,
+	Equipment,
+	Equipment_Detail,
 	Message,
 	Map,
 	Status,
@@ -70,6 +75,9 @@ Core :: struct {
 	button:       int,                       // the selected in-play button
 	button_stack: [BUTTON_STACK_DEPTH]int,
 	button_depth: int,
+	list_cursor:  int,                       // the selected row of the list screens (inventory, ground, equipment)
+	interact_item: Item_ID,                  // the item the Interact_Item screen is about
+	equip_slot:   Equip_Slot,                // the slot the Equipment_Detail screen is about
 	ticks:        u32,                       // counts steps; drives purely decorative effects (the orb's colour)
 }
 

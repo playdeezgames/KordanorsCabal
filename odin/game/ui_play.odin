@@ -181,11 +181,12 @@ handle_button :: proc(core: ^Core, button: int) {
 		case NEUTRAL_MOVE_RUN:
 			if fight { /* TODO(step 5): run */ } else { push_button(core, 0); w.player.mode = .Move }
 		case NEUTRAL_INTERACT: /* TODO(step 5): intimidate, step 6: interact */
-		case NEUTRAL_GROUND_ENEMIES: /* TODO(step 5): the enemies list; step 4: the ground list */
+		case NEUTRAL_GROUND_ENEMIES:
+			if fight { /* TODO(step 5): the enemies list */ } else { enter_state(core, .Ground_Inventory) }
 		case NEUTRAL_MENU: enter_state(core, .Game_Menu)
-		case NEUTRAL_INVENTORY: /* TODO(step 4) */
+		case NEUTRAL_INVENTORY: enter_state(core, .Inventory)
 		case NEUTRAL_MAP: if can_map(w, player) { enter_state(core, .Map) }
-		case NEUTRAL_EQUIPMENT: /* TODO(step 4) */
+		case NEUTRAL_EQUIPMENT: enter_state(core, .Equipment)
 		case NEUTRAL_STATUS:
 			if character_get(w, player).stats[.Unassigned] != 0 { /* TODO(step 5): level up */ } else { enter_state(core, .Status) }
 		case NEUTRAL_SPELLS: /* TODO(step 6) */
@@ -201,7 +202,7 @@ do_move :: proc(core: ^Core, d: Direction) {
 	w.player.mode = .Neutral
 	if move_character(w, player, d) {
 		message_add(w, .None, "You take damage from starvation!")
-		if is_dead(character_get(w, player)) { enter_state(core, .Dead); return }
+		if is_dead(w, player) { enter_state(core, .Dead); return }
 		push_state(core, .In_Play)
 		enter_state(core, .Message)
 	}
@@ -212,7 +213,7 @@ message_command :: proc(core: ^Core, c: Command) {
 	w := &core.world
 	message_pop(w)
 	if w.messages.count > 0 { enter_state(core, .Message); return }
-	if is_dead(player_character(w)) { enter_state(core, .Dead); return }
+	if is_dead(w, w.player.character) { enter_state(core, .Dead); return }
 	enter_state(core, pop_state(core))
 }
 
@@ -411,25 +412,26 @@ draw_map_cell :: proc(s: ^Screen, col, row: int, l: ^Location, inverted: bool, h
 draw_status :: proc(core: ^Core) {
 	s := &core.screen
 	w := &core.world
-	p := player_character(w)
+	id := w.player.character
 	centered_header(s, "Status")
 	line :: proc(s: ^Screen, col, row: int, stat: Stat, text: string) {
 		write_text(s, col, row, fmt.tprintf("%s %s", STATS[stat].abbreviation, text), false, .Black)
 	}
-	line(s, 0, 1, .Strength, fmt.tprintf("%d", p.stats[.Strength]))
-	line(s, 0, 2, .Dexterity, fmt.tprintf("%d", p.stats[.Dexterity]))
-	line(s, 0, 3, .HP, fmt.tprintf("%d/%d", health_current(p), p.stats[.HP]))
-	line(s, 11, 1, .Influence, fmt.tprintf("%d", p.stats[.Influence]))
-	line(s, 11, 2, .Willpower, fmt.tprintf("%d", p.stats[.Willpower]))
-	line(s, 11, 3, .MP, fmt.tprintf("%d/%d", mp_current(p), p.stats[.MP]))
-	line(s, 0, 5, .Power, fmt.tprintf("%d", p.stats[.Power]))
-	line(s, 0, 6, .Mana, fmt.tprintf("%d/%d", mana_current(p), p.stats[.Mana]))
-	line(s, 11, 5, .XP, fmt.tprintf("%d/%d", p.stats[.XP], p.stats[.XP_Goal]))
-	line(s, 0, 8, .Money, fmt.tprintf("%d", p.stats[.Money]))
-	line(s, 0, 10, .Hunger, fmt.tprintf("%d", p.stats[.Hunger]))
+	v :: proc(w: ^World, id: Character_ID, stat: Stat) -> string { return fmt.tprintf("%d", stat_of(w, id, stat)) }
+	line(s, 0, 1, .Strength, v(w, id, .Strength))
+	line(s, 0, 2, .Dexterity, v(w, id, .Dexterity))
+	line(s, 0, 3, .HP, fmt.tprintf("%d/%d", health_current(w, id), stat_of(w, id, .HP)))
+	line(s, 11, 1, .Influence, v(w, id, .Influence))
+	line(s, 11, 2, .Willpower, v(w, id, .Willpower))
+	line(s, 11, 3, .MP, fmt.tprintf("%d/%d", mp_current(w, id), stat_of(w, id, .MP)))
+	line(s, 0, 5, .Power, v(w, id, .Power))
+	line(s, 0, 6, .Mana, fmt.tprintf("%d/%d", mana_current(w, id), stat_of(w, id, .Mana)))
+	line(s, 11, 5, .XP, fmt.tprintf("%d/%d", stat_of(w, id, .XP), stat_of(w, id, .XP_Goal)))
+	line(s, 0, 8, .Money, v(w, id, .Money))
+	line(s, 0, 10, .Hunger, v(w, id, .Hunger))
 	row := 11
 	for stat in ([]Stat{.Highness, .Drunkenness, .Food_Poisoning, .Chafing}) {
-		if p.stats[stat] > 0 { line(s, 0, row, stat, fmt.tprintf("%d", p.stats[stat])); row += 1 }
+		if stat_of(w, id, stat) > 0 { line(s, 0, row, stat, v(w, id, stat)); row += 1 }
 	}
 	write_text(s, 0, CELL_ROWS - 1, fmt.tprintf("Seed %09d", w.seed), false, .Purple) // new in the port (decision review 6)
 }

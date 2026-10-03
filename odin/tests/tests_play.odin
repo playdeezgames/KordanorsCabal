@@ -56,29 +56,38 @@ test_play_town_golden :: proc(t: ^T) {
 	expect_eq(t, c.button, 5)
 }
 
-test_play_dungeon_golden :: proc(t: ^T) {
-	defer fake_reset()
-	c := make_core(); defer free_core(c)
+// The world of the recorded dungeon screens (scenes 40 to 49): a place with two goblins, a door ahead (east) and a passage to the
+// right (south), a key and a helmet on the floor, and the player's pack holding what the recording gave it.
+dungeon_core :: proc() -> ^game.Core {
+	c := make_core()
 	step(c)
 	w := &c.world
 	game.world_init(w, 1)
 	c.has_world = true
 	a, b, d := game.create_location(w, .Dungeon), game.create_location(w, .Dungeon), game.create_location(w, .Dungeon)
 	for id in ([]game.Location_ID{a, b, d}) { game.location_get(w, id).level = .Level_I }
+	game.location_get(w, a).column = 4
+	game.location_get(w, a).visited = true
 	game.location_get(w, a).routes[.East] = {b, .Route_2}
 	game.location_get(w, a).routes[.South] = {d, .Route_2}
 	player := game.create_character(w, .N00b, a)
 	w.player = {character = player, mode = .Neutral, facing = .East}
-	game.player_character(w).stats[.Influence] = 1
-	game.player_character(w).stats[.Unassigned] = 0
+	p := game.player_character(w)
+	p.stats[.Influence], p.stats[.Strength], p.stats[.Unassigned] = 1, 7, 0
 	game.create_character(w, .Goblin, a)
 	game.create_character(w, .Goblin, a)
 	game.item_put_on_ground(w, game.create_item(w, .FE_Key), a)
 	game.item_put_on_ground(w, game.create_item(w, .Helmet), a)
-	for type in ([]game.Item_Type{.Potion, .Dagger, .Platemail, .Book_of_Holy_Bolt}) { game.item_put_in_pack(w, game.create_item(w, type), player) }
+	for type in ([]game.Item_Type{.Potion, .Dagger, .Platemail, .Book_of_Holy_Bolt, .Potion, .Book_of_Holy_Bolt}) { game.item_put_in_pack(w, game.create_item(w, type), player) }
 	ok, why := game.world_validate(w)
-	expect(t, ok, why)
+	assert(ok, why)
 	c.state = .In_Play
+	return c
+}
+
+test_play_dungeon_golden :: proc(t: ^T) {
+	defer fake_reset()
+	c := dungeon_core(); defer free_core(c)
 	step(c)
 	expect_like_vb(t, c, "40-dungeon-with-enemy")
 }
@@ -168,7 +177,7 @@ test_play_rules :: proc(t: ^T) {
 	press(c, .Confirm) // Forward
 	expect_eq(t, c.state, game.UI_State.Message)
 	expect_eq(t, game.player_character(w).stats[.Hunger], i32(50))
-	expect_eq(t, game.health_current(game.player_character(w)), i32(4))
+	expect_eq(t, game.health_current(w, player), i32(4))
 	step(c)
 	m := game.message_head(w)
 	expect(t, m != nil && string(m.text[:m.len]) == "You take damage from starvation!", "message text")

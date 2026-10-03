@@ -49,15 +49,35 @@ menu_of :: proc(core: ^Core, s: UI_State) -> (m: Menu, is_menu: bool) {
 		m.row = 7
 		menu_add(&m, "Cancel")
 		for stat in Stat.Strength ..= Stat.Mana { menu_add(&m, fmt.tprintf("%s: %d", STATS[stat].name, player_character(&core.world).stats[stat])) }
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Message, .Map, .Status, .Dead, .Notice:
+	case .Interact_Item:
+		m.row = 5
+		for l in ([]string{"Cancel", "Drop", "Use", "Equip"}) { menu_add(&m, l) }
+	case .Equipment_Detail:
+		m.row = 14
+		menu_add(&m, "Go Back"); menu_add(&m, "Unequip")
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
 		return {}, false
 	}
 	return m, true
 }
 
-enter_state :: proc(core: ^Core, s: UI_State) {
+enter_state :: proc(core: ^Core, wanted: UI_State) {
+	s := wanted
+	// A list screen with nothing to list sends the player back to the in-play screen (the original divided by zero).
+	if core.has_world {
+		w := &core.world
+		player := w.player.character
+		#partial switch s {
+		case .Inventory: if len(items_in_pack(w, player)) == 0 { s = .In_Play }
+		case .Ground_Inventory: if len(items_on_ground(w, character_get(w, player).location)) == 0 { s = .In_Play }
+		case .Equipment: if len(items_worn(w, player)) == 0 { s = .In_Play }
+		case .Interact_Item: if item_get(w, core.interact_item) == nil { s = .Inventory; if len(items_in_pack(w, player)) == 0 { s = .In_Play } }
+		}
+	}
 	core.state = s
 	#partial switch s {
+	case .Inventory, .Ground_Inventory, .Equipment: core.list_cursor = 0
+	case .Interact_Item, .Equipment_Detail: core.cursors[s] = 0
 	case .Load_Game, .Save_Game, .Export_Slot, .Import_Slot: refresh_slots(core)
 	case .Sfx_Volume: core.cursors[s] = int(core.sfx_volume * 10 + 0.5)
 	case .Mux_Volume: core.cursors[s] = int(core.music_volume * 10 + 0.5)
@@ -240,7 +260,12 @@ activate :: proc(core: ^Core, s: UI_State, index: int) {
 			stat_add(p, .Unassigned, -1)
 		}
 		if p.stats[.Unassigned] == 0 { enter_state(core, .Prolog) }
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Message, .Map, .Status, .Dead, .Notice:
+	case .Interact_Item: interact_item_activate(core, index)
+	case .Equipment_Detail:
+		if index == 0 { enter_state(core, .Equipment); return }
+		unequip(&core.world, core.world.player.character, core.equip_slot)
+		enter_state(core, .Equipment) // goes back to the in-play screen if nothing is left on
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
 	}
 }
 
@@ -252,6 +277,8 @@ cancel_menu :: proc(core: ^Core, s: UI_State) {
 	case .Save_Game: enter_state(core, .Game_Menu)
 	case .Game_Menu, .Confirm_Abandon: enter_state(core, .In_Play)
 	case .Export_Slot: enter_state(core, .Save_Game)
+	case .Interact_Item: enter_state(core, .Inventory)
+	case .Equipment_Detail: enter_state(core, .Equipment)
 	case .Import_Slot: activate(core, .Import_Slot, 0)
 	}
 }
@@ -296,6 +323,7 @@ handle_command :: proc(core: ^Core, c: Command) {
 		if c == .Confirm { enter_state(core, .In_Play) }
 	case .In_Play: play_command(core, c)
 	case .Message: message_command(core, c)
+	case .Inventory, .Ground_Inventory, .Equipment: list_command(core, c)
 	case .Map: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
 	case .Status: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
 	case .Dead: if c == .Confirm { abandon_world(core); enter_state(core, .Title) }
@@ -330,6 +358,7 @@ handle_tap :: proc(core: ^Core, col, row: int, precise: bool) {
 		return
 	}
 	if s == .In_Play { play_tap(core, col, row, precise); return }
+	if s == .Inventory || s == .Ground_Inventory || s == .Equipment { list_tap(core, row, precise); return }
 	if s == .Seed_Entry {
 		switch {
 		case row == SEED_ROW:
@@ -428,6 +457,10 @@ draw_prompt :: proc(core: ^Core, state: UI_State) {
 		for l, i in lines { write_text(s, 0, 2 + i, l, false, .Black) }
 		write_text_centered(s, 22, "SPACE to start", true, .Orange)
 	case .In_Play: draw_play(core)
+	case .Inventory: draw_inventory(core)
+	case .Ground_Inventory: draw_ground(core)
+	case .Equipment: draw_equipment(core)
+	case .Interact_Item, .Equipment_Detail: draw_item_menu_prompt(core)
 	case .Message: draw_message(core)
 	case .Map: draw_map(core)
 	case .Status: draw_status(core)

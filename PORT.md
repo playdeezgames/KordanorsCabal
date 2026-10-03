@@ -54,14 +54,14 @@ The ones most worth a look, in order of how hard they are to change later:
 - `PORT.md` is long on purpose; each task has "Verified" and "Not verified" lists. The "Not verified" items are the real
   to-do list for testing.
 
-### Suggested order for the actual port (in progress: steps 1 to 3 done, see "Port step 1" in the log)
+### Suggested order for the actual port (in progress: steps 1 to 4 done, see "Port step 1" in the log)
 
 The infrastructure exists (rendering, input, services, content, RNG, tests, builds). Each step below ends with
 `tools/test.sh` passing and, where a screen exists, a bit-exact comparison with `docs/reference/vb`:
 1. ~~World state, save/load (task 14 format), `world_validate`; world generation.~~ **Done** (`uuid.odin`, `world.odin`, `worldgen.odin`, `save.odin`).
 2. ~~UI shell: the boilerplate screens (instructions, about, options, quit, load/save, export/import) on the menu pattern.~~ **Done** (`core.odin`, `ui_screens.odin`, `config.odin`; see "Port step 2").
 3. ~~The in-play screen, movement, turning, the dungeon artwork, sprites and map.~~ **Done** (`ui_play.odin`, `rules.odin`, `ui_data.odin`; see "Port step 3").
-4. Items: inventory, equipment, ground, events (task 18 handlers), repair and durability.
+4. ~~Items: inventory, equipment, ground, events (task 18 handlers), durability.~~ **Done** (`items.odin`, `events.odin`, `ui_items.odin`; repair comes with the blacksmith in step 6).
 5. Combat, death, XP and level up.
 6. Townsfolk and shoppes; spells and quests.
 7. Polish, the real-device pass, itch.io release.
@@ -1334,3 +1334,20 @@ Decided together with task 24 (see above): `src/` is kept untouched as the refer
 - Real-device input for the button bank (taps use the same two-step rule as menus).
 
 **Findings affecting later tasks:** (1) Handlers must not destroy while iterating the world's order lists (my own test did and skipped characters): collect ids first. (2) Interact with `Intimidate!` shows only when the enemy has willpower and is not backed by a crowd, as in the original; with two goblins the button is blank, as the recording shows. (3) The next screens (lists, item interaction) need the same two-step tap rule: factor `tap_to_row` out when the first list screen is written.
+
+
+### Port step 4: items, equipment, the ground and the item events (2026-10-03)
+
+**Done:** `items.odin` (names, durability and wear, pick up, drop, equip and unequip, the grouped inventory list), `events.odin` (the event dispatch of D18: `check` for all 18 checks, `perform` for the actions that need neither combat nor quests, `item_use` with the single-use rule, `item_decay`, `location_decay_items` which replaces the step 3 stub, so walking now rots food), `ui_items.odin` (Inventory, Interact Item, On the Ground, Equipment, Equipment Detail) and the statistic rules in `rules.odin` rewritten to take `(world, id)`: **a statistic is now read as the character's own value plus the buffs of everything worn** (`stat_of`), which is what `CharacterStatistics.GetStatistic` did; health, mana, MP, encumbrance, intimidation and the Status page all use it. The in-play buttons Inventory, Equipment and Ground... now work. The list screens redirect to the in-play screen when there is nothing to list (the original divided by zero), and "use" and "equip" go through the message page and come back to the inventory. 
+- **Ported event actions:** Drink Potion, Eat Food, Use Rotten Food, Purify Food, Food Decay, Rotten Food Decay, Location Decay Items, Read Note, both Learn books, Town and Moon portals, Air and Water shards, Herb, Magic Egg, Beer, Rotten Egg, Bottle, Pr0n Scroll. **Not yet (7), each says "That does not work yet in this version."**: Holy Water, Fire Shard, Earth Shard and Cast Holy Bolt (need the strike sequence of step 5: damage, kill, loot and XP, counter attacks), and Cast Purify, Accept and Complete Cellar Rats (step 6). `action_ported` lists them and a test pins the count at 7.
+- Fidelity: the Magic Egg table is the original's (the design spike had mismatched weights and kinds; fixed), notes pick a lore no other item shows, with a random fallback after 25.
+
+**Verified (35 cases, 1,495 checks, native and wasm under node):** compared with the recorded VB frames cell for cell: inventory (`42`, grouped, sorted, encumbrance 45/120), the item menu (`43`), the equip message (`44`), the in-play screen with equipment (`45`), the equipment page (`46`), the book's message (`48`), the **map** (`49`: a place with two exits and enemies, drawn inverted in pink, so the elbow selection and the legend are now confirmed) and the ground list (`61`, and the town screen `60` with its changed rows excluded). Behaviour: grouping and ordering, encumbrance and maximum, durability counts down and an item breaks at zero, equipping chooses the first free slot or replaces and returns the old item, two rings fill both hands, buffs add to the statistic and unequipping removes them, unequippable items say so; a potion heals 2d4 and returns a bottle, food empties the stomach, food rots and purifies, rotten food on the floor rots away, the Magic Egg swaps itself for a prize, the Town Portal makes a pair of routes to the square, 26 notes show 25 different texts and then fall back, the book teaches Holy Bolt once and then refuses, the water shard heals and costs mana, the air shard stays on the level, the herb refills mana, beer sends one goblin away; every action runs safely on a world with and without a named actor and the world still validates.
+
+**Differences from the original:** statistic changes no longer fold buffs into the stored value (defect, in the audit); the unported actions show a message instead of acting; `Use_Beer` sets stress to zero for "current MP = maximum" (same effect).
+
+**Questions for you (also in `docs/dead-code-audit.md`):** Amulet of STR has no buff in the data; Lotion never runs out. Neither was changed.
+
+**Not verified:** repair and the shoppes (step 6; the durability arithmetic is ready); the Moon Portal; the Elemental Orb as an item (it has no use event); the position of the cursor after use-then-return (it resets to the top as the original's Initialize does); long inventories (more than the screen shows scroll as in the original, tested only with four groups); touch taps on lists (written, the two-step rule applied, not exercised by a test).
+
+**Findings for later steps:** (1) The strike sequence is the next shared piece: `perform` already has its slots. (2) `Item.lore` stays 0 until read; two notes never share a lore while one is free. (3) `item_groups` is recomputed on every draw and every key press; it is a few dozen items, but if the inventory ever grows to hundreds it needs caching.

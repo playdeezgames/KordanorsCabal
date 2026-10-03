@@ -34,19 +34,32 @@ world_play :: proc(w: ^World, sfx: Sfx) {
 	}
 }
 
-// ---- health and friends ----------------------------------------------------------------------------------------------
+// ---- statistics as the rules see them -----------------------------------------------------------------------------------
+// A character's statistic is its own value plus the buffs of everything it wears (CharacterStatistics.GetStatistic). Changes are
+// written to the own value only: the original wrote the buffed value back, so wearing an amulet while assigning a point made the
+// buff permanent (a defect, recorded in docs/dead-code-audit.md).
 
-health_current :: proc(c: ^Character) -> i32 { return max(0, c.stats[.HP] - c.stats[.Wounds]) }
-is_dead :: proc(c: ^Character) -> bool { return health_current(c) <= 0 }
-mp_current :: proc(c: ^Character) -> i32 { return max(0, c.stats[.MP] - c.stats[.Stress]) }
-mana_current :: proc(c: ^Character) -> i32 { return max(0, c.stats[.Mana] - c.stats[.Fatigue]) }
-// "Has willpower" in the original means the character type has a Willpower statistic at all.
-is_demoralized :: proc(c: ^Character) -> bool { return c.stats[.Willpower] > 0 && mp_current(c) <= 0 }
-
-// Takes one hit point (the original sets Health.Current to current - 1).
-lose_hit_point :: proc(c: ^Character) {
-	c.stats[.Wounds] = stat_clamped(.Wounds, c.stats[.HP] - (health_current(c) - 1))
+buff_total :: proc(w: ^World, id: Character_ID, s: Stat) -> (total: i32) {
+	for item_id in items_worn(w, id) { total += ITEM_TYPES[item_get(w, item_id).type].buffs[s] }
+	return
 }
+stat_of :: proc(w: ^World, id: Character_ID, s: Stat) -> i32 { return character_get(w, id).stats[s] + buff_total(w, id, s) }
+
+health_current :: proc(w: ^World, id: Character_ID) -> i32 { return max(0, stat_of(w, id, .HP) - stat_of(w, id, .Wounds)) }
+is_dead :: proc(w: ^World, id: Character_ID) -> bool { return health_current(w, id) <= 0 }
+mp_current :: proc(w: ^World, id: Character_ID) -> i32 { return max(0, stat_of(w, id, .MP) - stat_of(w, id, .Stress)) }
+mana_current :: proc(w: ^World, id: Character_ID) -> i32 { return max(0, stat_of(w, id, .Mana) - stat_of(w, id, .Fatigue)) }
+// "Has willpower" in the original means the character type has a Willpower statistic at all.
+is_demoralized :: proc(w: ^World, id: Character_ID) -> bool { return stat_of(w, id, .Willpower) > 0 && mp_current(w, id) <= 0 }
+
+// Sets the current hit points (Health.Current = n writes Wounds = HP - n).
+set_health :: proc(w: ^World, id: Character_ID, n: i32) {
+	c := character_get(w, id)
+	c.stats[.Wounds] = stat_clamped(.Wounds, stat_of(w, id, .HP) - n)
+}
+lose_hit_point :: proc(w: ^World, id: Character_ID) { set_health(w, id, health_current(w, id) - 1) }
+// Healing is a negative change of Wounds (never below zero).
+heal :: proc(w: ^World, id: Character_ID, points: i32) { stat_add(character_get(w, id), .Wounds, -points) }
 
 // ---- encumbrance -----------------------------------------------------------------------------------------------------
 
@@ -57,10 +70,8 @@ encumbrance_current :: proc(w: ^World, id: Character_ID) -> (total: i32) {
 	}
 	return
 }
-encumbrance_maximum :: proc(c: ^Character) -> i32 { return c.stats[.Base_Lift] + c.stats[.Bonus_Lift] * c.stats[.Strength] }
-is_encumbered :: proc(w: ^World, id: Character_ID) -> bool {
-	return encumbrance_current(w, id) > encumbrance_maximum(character_get(w, id))
-}
+encumbrance_maximum :: proc(w: ^World, id: Character_ID) -> i32 { return stat_of(w, id, .Base_Lift) + stat_of(w, id, .Bonus_Lift) * stat_of(w, id, .Strength) }
+is_encumbered :: proc(w: ^World, id: Character_ID) -> bool { return encumbrance_current(w, id) > encumbrance_maximum(w, id) }
 
 // ---- who is where --------------------------------------------------------------------------------------------------
 
@@ -83,11 +94,11 @@ can_fight :: proc(w: ^World, who: Character_ID) -> bool { return len(enemies_of(
 
 // Can `who` frighten the first enemy here? Needs influence, and an enemy that has willpower and is not backed by a crowd.
 can_do_intimidation :: proc(w: ^World, who: Character_ID) -> bool {
-	if character_get(w, who).stats[.Influence] <= 0 { return false }
+	if stat_of(w, who, .Influence) <= 0 { return false }
 	enemies := enemies_of(w, who)
 	if len(enemies) == 0 { return false }
 	target := enemies[0]
-	return character_get(w, target).stats[.Willpower] > 0 && len(allies_of(w, target)) <= len(enemies_of(w, target))
+	return stat_of(w, target, .Willpower) > 0 && len(allies_of(w, target)) <= len(enemies_of(w, target))
 }
 
 can_map :: proc(w: ^World, who: Character_ID) -> bool {
@@ -115,13 +126,9 @@ can_move :: proc(w: ^World, who: Character_ID, d: Direction) -> bool {
 	if key := ROUTE_TYPES[r.type].unlock_item; key != .None { // locked: needs the key in the pack
 		if _, has := carried_item_of_type(w, who, key); !has { return false }
 	}
-	if LOCATION_TYPES[location_get(w, r.to).type].requires_mp && is_demoralized(c) { return false }
+	if LOCATION_TYPES[location_get(w, r.to).type].requires_mp && is_demoralized(w, who) { return false }
 	return true
 }
-
-// The raising of `Location.DecayItems` (the Location_Decay_Items action: food rots) belongs to the item events, ported with
-// the items (PORT.md step 4). Until then nothing decays.
-location_decay_items :: proc(w: ^World, l: Location_ID) {}
 
 // Moves one step. Returns true when the walk starved the character of a hit point (the caller tells the player).
 move_character :: proc(w: ^World, who: Character_ID, d: Direction) -> (starved: bool) {
@@ -149,7 +156,7 @@ move_character :: proc(w: ^World, who: Character_ID, d: Direction) -> (starved: 
 
 	if c.stats[.Hunger] == STATS[.Hunger].maximum {
 		c.stats[.Hunger] /= 2
-		lose_hit_point(c)
+		lose_hit_point(w, who)
 		return true
 	}
 	return false
