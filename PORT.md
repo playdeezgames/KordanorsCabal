@@ -54,12 +54,12 @@ The ones most worth a look, in order of how hard they are to change later:
 - `PORT.md` is long on purpose; each task has "Verified" and "Not verified" lists. The "Not verified" items are the real
   to-do list for testing.
 
-### Suggested order for the actual port (in progress: step 1 done, see "Port step 1" in the log)
+### Suggested order for the actual port (in progress: steps 1 and 2 done, see "Port step 1" in the log)
 
 The infrastructure exists (rendering, input, services, content, RNG, tests, builds). Each step below ends with
 `tools/test.sh` passing and, where a screen exists, a bit-exact comparison with `docs/reference/vb`:
 1. ~~World state, save/load (task 14 format), `world_validate`; world generation.~~ **Done** (`uuid.odin`, `world.odin`, `worldgen.odin`, `save.odin`).
-2. UI shell: the boilerplate screens (instructions, about, options, quit, load/save, export/import) on the menu pattern.
+2. ~~UI shell: the boilerplate screens (instructions, about, options, quit, load/save, export/import) on the menu pattern.~~ **Done** (`core.odin`, `ui_screens.odin`, `config.odin`; see "Port step 2").
 3. The in-play screen, movement, turning, the dungeon artwork, sprites and map.
 4. Items: inventory, equipment, ground, events (task 18 handlers), repair and durability.
 5. Combat, death, XP and level up.
@@ -1293,3 +1293,23 @@ Decided together with task 24 (see above): `src/` is kept untouched as the refer
 - u64 seeds and generator words are written as hex text (not numbers) because Odin's JSON reads integers as signed 64-bit; this is not tested with a seed above 2^63 (the tests use small seeds, but the generator words are full-range and round-trip, which covers the same parsing).
 
 **Findings affecting later tasks:** the slot summary (`place`, `hp`, `xp`) is written and `save_peek_summary` reads it, but it still parses the whole file; if slot labels are drawn every frame this must be cached by the Load/Save screens (step 2). The "who is here" queries scan all characters (about 1,100) and the item lists scan all items; fine for a few calls per frame, to be re-checked when the in-play screen exists.
+
+
+### Port step 2: the UI shell (2026-10-03)
+
+**Done:** `core.odin` is now the screen state machine of the original (`UI_State`, one cursor per menu that survives leaving and returning, as in `MenuProcessor`), with `ui_screens.odin` (all screens, input, drawing) and `config.odin` (volumes). Screens: title (7 items), seed entry, instructions, about, credits, options, SFX and MUX volume, confirm quit, Continue (load), Save, Export, Import (wait for the file, choose a slot), game menu, confirm abandon, Finalize Character, prolog, notices, and a placeholder "In Play" (to be replaced in step 3; Confirm opens the game menu so the save/abandon flows work). Taps follow D17: a mouse tap selects and confirms, a finger tap selects first and confirms on the second tap; on pages any tap is Confirm.
+- New game: Start draws the seed from the platform's entropy (0 to 999,999,999) and generates the world; "Start with seed..." edits nine digits (Left/Right choose, Up/Down change, Confirm starts, Cancel goes back; the same cells can be tapped); Finalize Character is shown only when points are left unassigned (the two stat rolls often use them all) and Cancel there throws the new world away.
+- Save writes the world text to `kc:slotN` (failure shows a notice and keeps the game); Continue reads it, loads into a scratch arena (D19) and replaces the live world only if it loads; Export hands the stored text to `download_text` as `kordanors-cabal-slotN.json`; Import asks for a file, checks the size (2 MiB) and the whole save (parse, shape, invariants) before offering the slots, and stores the text only when a slot is chosen, so a bad file never touches a slot. Volumes are stored as `kc:config` and read at start.
+- Slot labels are read from the first 512 bytes of each slot (`save_peek_summary`, no full parse), refreshed whenever a slot screen opens (this also fixes the VB stale-label defect).
+
+**Differences from the original, all deliberate:** the title has the extra "Start with seed..." line; Options has no "Screen Size" (D13); the Load and Save screens have one more item (Import / Export); About's last lines point at Credits; Continue on an empty slot shows a notice instead of silently starting a new game (the VB `ContinueSlot` did that, which looked like a bug; say if you disagree).
+
+**Verified (25 cases, 1,279 checks, native and wasm under node):** screens compared cell for cell with the recorded VB frames: title (all but the menu rows), instructions, about (all but the changed last lines), options (all but the dropped item), SFX and MUX volume, confirm quit, load (all but the extra item), finalize character (with the recorded stat values), prolog, game menu and confirm abandon. Behaviour tests: wrapping cursor, finger and mouse taps, border taps ignored, quit needs Yes, volume stored and restored (and bad config falls back to the defaults), new game to prolog to in play, typed seed reproduces the same world (same player id), save, abandon, continue, empty and damaged slots, export (the download equals the slot text), import (cancel, non-save file, good file into a slot, then continue from it), credits scrolling clamp. The wasm build was started in the browser pane: Start generated a world and showed the prolog.
+
+**Not verified:**
+- The Save screen was not compared with `16-save-game` (it is the Load layout plus one item; `09-load-game` covers the layout).
+- Credits and notice layouts have no reference (they are new); the credits text still lacks the sound effect sources, and the music line says only "generated with Abundant Music" (owner to confirm the wording).
+- Real taps on touch devices; the file picker modal in a browser with the new core (the platform side was tested in task 29, the core side here with fakes).
+- Time: a full native test run grew from 7 s to 20 s because each UI test generates and loads a 470 KB world under the leak-checking allocator; the game itself does one such load per Continue.
+
+**Findings affecting later tasks:** (1) `Core` still has no message queue or UI stack; the in-play step needs both (a stack of four is enough, per task 12). (2) The tests' `pick` helper bounds its search because a stuck cursor otherwise loops forever; keep that. (3) `build/t_native [name]`-style runs: the native test binary now runs only the cases whose names contain its first argument (the `odin test` run is unchanged). (4) World generation plus parsing dominates test time: prefer one generated world per test.

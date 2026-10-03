@@ -17,8 +17,14 @@ ALL_TESTS := []Test_Case{
 	{"save: bad files are rejected with an error and leave nothing behind", test_save_rejections},
 	{"save: mutated saves never crash and accepted ones stay valid", test_save_fuzz},
 	{"render: the rasterizer reproduces every recorded VB screen bit for bit", test_rasterizer_reference},
-	{"title: core_step draws the VB title screen exactly", test_title_screen},
-	{"title: commands and taps move the selection", test_title_selection},
+	{"ui: the original screens match the recorded VB frames", test_ui_golden},
+	{"ui: title menu, finger and mouse taps", test_ui_title_input},
+	{"ui: options volumes are saved and restored", test_ui_config},
+	{"ui: a new game runs from the title to the game menu", test_ui_new_game},
+	{"ui: start with a typed seed", test_ui_seed},
+	{"ui: save, continue, abandon", test_ui_save_load},
+	{"ui: export and import", test_ui_export_import},
+	{"ui: credits and notices", test_ui_credits_notice},
 	{"content: sizes, names and a few facts from the original data", test_content_facts},
 	{"content: nothing was lost when the relation tables were folded", test_content_folding},
 	{"format: temp strings do not leak", test_no_leak},
@@ -72,40 +78,6 @@ test_rasterizer_reference :: proc(t: ^T) {
 		if fnv_frame(frame) != r.hash { expect(t, false, r.name) } else { expect(t, true) }
 	}
 	expect(t, len(REFERENCE_SCREENS) >= 50, "reference corpus")
-}
-
-make_core :: proc() -> ^game.Core {
-	c := new(game.Core)
-	game.core_init(c, {})
-	return c
-}
-step :: proc(c: ^game.Core, events: ..game.Input_Event) -> game.Step_Output {
-	out: game.Step_Output
-	game.core_step(c, {dt = 0.016, events = events}, &out)
-	return out
-}
-
-test_title_screen :: proc(t: ^T) {
-	c := make_core(); defer free(c)
-	out := step(c)
-	title: ^Reference_Screen
-	for &r in REFERENCE_SCREENS { if r.name == "01-title" { title = &r } }
-	expect(t, title != nil, "01-title reference present")
-	if title == nil { return }
-	expect_eq(t, fnv_frame(out.frame), title.hash)
-	want := to_screen(&title.cells)
-	expect(t, want == c.screen, "cells differ from the VB title screen")
-}
-test_title_selection :: proc(t: ^T) {
-	c := make_core(); defer free(c)
-	step(c, {kind = .Command, command = .Down})
-	expect_eq(t, c.selected, game.Title_Item.Continue)
-	step(c, {kind = .Command, command = .Up}, {kind = .Command, command = .Up})
-	expect_eq(t, c.selected, game.Title_Item.Quit) // wraps
-	step(c, {kind = .Tap, col = 5, row = game.TITLE_FIRST_ROW + 3, precise = true})
-	expect_eq(t, c.selected, game.Title_Item.Options)
-	step(c, {kind = .Tap, col = -1, row = game.TITLE_FIRST_ROW}) // border: ignored
-	expect_eq(t, c.selected, game.Title_Item.Options)
 }
 
 test_no_leak :: proc(t: ^T) {

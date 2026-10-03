@@ -133,14 +133,16 @@ Load_Error :: enum { None, Parse, Format, Version, Shape, Invariant }
 
 valid_enum :: proc(v: $T) -> bool { return reflect.enum_value_has_name(v) }
 
-// Parses just enough to label a slot; no world is built. ok is false for anything that is not a save of this version.
-save_peek_summary :: proc(data: []byte, parse_allocator := context.allocator) -> (s: Save_Summary, ok: bool) {
-	// Only the head of the file is needed, but the JSON parser wants a complete document, so parse everything into the
-	// given (disposable) allocator. Slot labels are read rarely.
-	f: Save_File
-	if json.unmarshal(data, &f, .JSON, parse_allocator) != nil { return {}, false }
-	if f.format != SAVE_FORMAT || f.version != SAVE_VERSION || !valid_enum(f.summary.place) { return {}, false }
-	return f.summary, true
+// Reads just the summary near the start of the text, for slot labels; nothing else is parsed or checked, so a slot that
+// passes this can still fail world_load. ok is false for anything that does not start like a save of this version.
+save_peek_summary :: proc(text: string, parse_allocator := context.allocator) -> (s: Save_Summary, ok: bool) {
+	head := text[:min(len(text), 512)]
+	if !strings.has_prefix(head, `{"format":"` + SAVE_FORMAT + `","version":1,"summary":`) { return {}, false }
+	start := strings.index(head, `"summary":`) + len(`"summary":`)
+	end := strings.index_byte(head[start:], '}')
+	if end < 0 { return {}, false }
+	if json.unmarshal(transmute([]byte)head[start:start + end + 1], &s, .JSON, parse_allocator) != nil { return {}, false }
+	return s, valid_enum(s.place)
 }
 
 // Builds `w` (uninitialised, or empty) from the text. On any error `w` is left empty and nothing leaks. `parse_allocator`
@@ -299,4 +301,3 @@ world_validate :: proc(w: ^World) -> (ok: bool, why: string) {
 	return true, ""
 }
 
-_ :: strings

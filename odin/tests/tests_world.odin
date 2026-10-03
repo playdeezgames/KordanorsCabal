@@ -254,7 +254,7 @@ test_save_roundtrip :: proc(t: ^T) {
 	expect_eq(t, game.item_get(&loaded, dagger).slot, game.Equip_Slot.Weapon)
 	expect_eq(t, len(loaded.characters), len(w.characters))
 	expect(t, loaded.character_order[100] == w.character_order[100], "creation order survives")
-	summary, ok := game.save_peek_summary(data, context.temp_allocator)
+	summary, ok := game.save_peek_summary(string(data), context.temp_allocator)
 	expect(t, ok && summary.place == .None, "summary reads without a world")
 }
 
