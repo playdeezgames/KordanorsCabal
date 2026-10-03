@@ -1,0 +1,24 @@
+state InteractItem
+  BOOK OF HOLY BOLT   
+    ENCUMBRANCE: 0    
+                      
+                      
+                      
+        CANCEL        
+         DROP         
+         USE          
+        EQUIP         
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      

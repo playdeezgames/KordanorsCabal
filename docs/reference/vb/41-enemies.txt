@@ -1,0 +1,24 @@
+state Enemies
+       ENEMIES        
+GOBLIN(1/1)           
+GOBLIN(1/1)           
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      

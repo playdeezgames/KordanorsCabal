@@ -1,0 +1,24 @@
+state LevelUp
+  LEVEL UP CHARACTER  
+                      
+    UNASSIGNED: 1     
+                      
+CHOOSE WHERE TO ASSIGN
+POINT(S):             
+                      
+        CANCEL        
+     STRENGTH: 7      
+     DEXTERITY: 2     
+     INFLUENCE: 1     
+     WILLPOWER: 2     
+       POWER: 1       
+        HP: 3         
+        MP: 3         
+       MANA: 1        
+                      
+                      
+                      
+                      
+                      
+                      
+                      

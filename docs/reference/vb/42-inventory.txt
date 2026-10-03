@@ -1,0 +1,24 @@
+state Inventory
+      INVENTORY       
+ ENCUMBRANCE: 45/120  
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+ BOOK OF HOLY BOLT(2) 
+      DAGGER(1)       
+     PLATEMAIL(1)     
+      POTION(2)       
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+  ARROWS, SPACE, ESC  

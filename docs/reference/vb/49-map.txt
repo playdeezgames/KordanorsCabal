@@ -1,0 +1,24 @@
+state Map
+        ┌│            
+        #┌            
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+  STAIR ENEMY ITEMS   

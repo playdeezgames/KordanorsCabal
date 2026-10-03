@@ -1,0 +1,24 @@
+state TitleScreen
+**********************
+*                    *
+*  KORDANOR'S CABAL  *
+*                    *
+**********************
+                      
+A GAME IN VB.NET ABOUT
+LOOKIN' LIKE A DUNGEON
+ CRAWLER WRITTEN  FOR 
+      THE VIC-20      
+                      
+   A PRODUCTION  OF   
+   THEGRUMPYGAMEDEV   
+                      
+        START         
+       CONTINUE       
+     INSTRUCTIONS     
+       OPTIONS        
+        ABOUT         
+         QUIT         
+                      
+                      
+CONTROLS: ARROWS/SPACE

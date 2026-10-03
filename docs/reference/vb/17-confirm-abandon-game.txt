@@ -1,0 +1,24 @@
+state ConfirmAbandonGame
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+ARE YOU SURE YOU WANT 
+TO ABANDON THE GAME?  
+                      
+                      
+          NO          
+         YES          
+                      
+                      
+                      
+                      
+                      
+                      
+                      

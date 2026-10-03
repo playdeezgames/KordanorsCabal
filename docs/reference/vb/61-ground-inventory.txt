@@ -1,0 +1,24 @@
+state GroundInventory
+    ON THE GROUND     
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+        POTION        
+        DAGGER        
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+  ARROWS, SPACE, ESC  

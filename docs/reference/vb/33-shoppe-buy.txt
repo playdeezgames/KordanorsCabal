@@ -1,0 +1,24 @@
+state ShoppeBuy
+         BUY          
+      MONEY: 50       
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+   TOWN PORTAL(50)    
+       BONG(25)       
+      "HERB"(5)       
+  BOOK OF PURIFY(50)  
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+  ARROWS, SPACE, ESC  

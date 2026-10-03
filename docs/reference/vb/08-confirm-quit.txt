@@ -1,0 +1,24 @@
+state ConfirmQuit
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+ARE YOU SURE YOU WANT 
+TO QUIT?              
+                      
+                      
+          NO          
+         YES          
+                      
+                      
+                      
+                      
+                      
+                      
+                      

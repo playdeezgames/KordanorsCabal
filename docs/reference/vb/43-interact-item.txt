@@ -1,0 +1,24 @@
+state InteractItem
+        DAGGER        
+    ENCUMBRANCE: 1    
+                      
+                      
+                      
+        CANCEL        
+         DROP         
+         USE          
+        EQUIP         
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      

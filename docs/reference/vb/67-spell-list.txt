@@ -1,0 +1,24 @@
+state SpellList
+      SPELL LIST      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+   HOLY BOLT(LVL1)    
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+  ARROWS, SPACE, ESC  

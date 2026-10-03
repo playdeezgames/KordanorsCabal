@@ -1,0 +1,24 @@
+state InPlay
+     "HONEST" DAN     
+'ALLO! 'ALLO!         
+WOULD YOU LIKE TO BUY 
+A LOVELY PAIR OF TROUS
+ERS?                  
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+HELLO!                
+           PRICES     
+           BUY        
+                      
+           GOOD-BYE   

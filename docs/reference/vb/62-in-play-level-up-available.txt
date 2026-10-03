@@ -1,0 +1,24 @@
+state InPlay
+     TOWN SQUARE      
+FACING: EAST          
+EXITS: N,E,S,W        
+YOU SEE: ZOOPERDAN THE
+ ELDER                
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+TURN...    MOVE...    
+INTERACT...INVENTORY  
+GROUND...  EQUIPMENT  
+LEVEL UP!  SPELLS     
+           GAME MENU  

@@ -1,0 +1,24 @@
+state AboutScreen
+        ABOUT         
+A PRODUCTION OF       
+THEGRUMPYGAMEDEV      
+WITH "HELP" FROM HIS  
+MALCONTENT AND        
+NEER-DO-WELL TWITCH   
+CHANNEL VIEWERS.      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+SPECIAL THANKS TO:    
+* KORDANOR            
+* ZOOPERDAN           
+* VERMUX              
+* LORC                
+                      
+PLEASE SEE CREDITS.TXT
+FOR LINKS TO THEIR    
+WORK!                 

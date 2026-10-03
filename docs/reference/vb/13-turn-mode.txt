@@ -1,0 +1,24 @@
+state InPlay
+     TOWN SQUARE      
+FACING: EAST          
+EXITS: N,E,S,W        
+                      
+TURN WHICH WAY?       
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+LEFT       RIGHT      
+AROUND     CANCEL     
+                      
+                      
+                      

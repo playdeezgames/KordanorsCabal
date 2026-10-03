@@ -1,0 +1,24 @@
+state Equipment
+      EQUIPMENT       
+GO BACK               
+WEAPON: DAGGER        
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+  ARROWS, SPACE, ESC  

@@ -1,0 +1,24 @@
+state OptionsScreen
+       OPTIONS:       
+                      
+                      
+                      
+                      
+       GO BACK        
+    SCREEN SIZE...    
+    SFX VOLUME...     
+    MUX VOLUME...     
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      

@@ -1,0 +1,24 @@
+state ShoppeSell
+         SELL         
+      MONEY: 50       
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+  ARROWS, SPACE, ESC  

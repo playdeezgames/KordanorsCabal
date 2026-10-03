@@ -1,0 +1,24 @@
+state Status
+        STATUS        
+STR 7      INF 1      
+DEX 2      WIL 2      
+HP 3/3     MP 3/3     
+                      
+POW 1      XP 0/10    
+MANA 1/1              
+                      
+$ 0                   
+                      
+HUNGER 0              
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      

@@ -1,0 +1,24 @@
+state Message
+YOU ROLL AN ATTACK OF 
+2.                    
+GOBLIN ROLLS A DEFEND 
+OF 0.                 
+YOU DO 1 DAMAGE!      
+YOU KILL GOBLIN!      
+YOU GET 6 MONEY!      
+YOU GET 1 XP!         
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      

@@ -1,0 +1,24 @@
+state SaveGameScreen
+      SAVE GAME       
+                      
+                      
+                      
+                      
+       GO BACK        
+        SLOT 1        
+        SLOT 2        
+       (EMPTY)        
+       (EMPTY)        
+       (EMPTY)        
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
