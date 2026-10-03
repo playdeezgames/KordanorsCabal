@@ -7,8 +7,15 @@ ALL_TESTS := []Test_Case{
 	{"rng: published xoshiro256** vector", test_rng_vector},
 	{"rng: same seed same sequence, different seed differs", test_rng_seeds},
 	{"rng: dice stay in range and are unbiased", test_dice},
-	{"pool: create, resolve, destroy, stale handles, reuse", test_pool_handles},
-	{"pool: full pool fails cleanly", test_pool_full},
+	{"uuid: text form, parsing, version bits", test_uuid},
+	{"world: entities, ids, order, containers and destruction", test_world_entities},
+	{"worldgen: a new game has the shape the original builds", test_worldgen_shape},
+	{"worldgen: every level is a spanning tree with locked dead ends and one key each", test_worldgen_levels},
+	{"worldgen: the same seed gives the same world, other seeds differ", test_worldgen_determinism},
+	{"save: round trip is exact and re-saving is byte identical", test_save_roundtrip},
+	{"save: the loaded game continues exactly like the original", test_save_continues},
+	{"save: bad files are rejected with an error and leave nothing behind", test_save_rejections},
+	{"save: mutated saves never crash and accepted ones stay valid", test_save_fuzz},
 	{"render: the rasterizer reproduces every recorded VB screen bit for bit", test_rasterizer_reference},
 	{"title: core_step draws the VB title screen exactly", test_title_screen},
 	{"title: commands and taps move the selection", test_title_selection},
@@ -40,36 +47,6 @@ test_dice :: proc(t: ^T) {
 	for _ in 0 ..< 100000 { v := game.roll(&r, game.Dice{3, 6}); total += v; lo = min(lo, v); hi = max(hi, v) }
 	expect(t, lo == 3 && hi == 18, "3d6 range")
 	expect(t, abs(f64(total) / 100000 - 10.5) < 0.05, "3d6 mean")
-}
-
-test_pool_handles :: proc(t: ^T) {
-	p: ^game.Pool(int, 8) = new(game.Pool(int, 8))
-	defer free(p)
-	game.pool_init(p)
-	a, _ := game.pool_create(p, 10)
-	b, _ := game.pool_create(p, 20)
-	v, ok := game.pool_get(p, b)
-	expect(t, ok && v^ == 20, "resolve")
-	_, zero_ok := game.pool_get(p, 0)
-	expect(t, !zero_ok, "zero handle is none")
-	expect(t, game.pool_destroy(p, b), "destroy")
-	_, stale := game.pool_get(p, b)
-	expect(t, !stale, "stale handle rejected")
-	expect(t, !game.pool_destroy(p, b), "double destroy rejected")
-	c, _ := game.pool_create(p, 30)
-	expect_eq(t, game.handle_index(c), game.handle_index(b))
-	expect_eq(t, game.handle_gen(c), game.handle_gen(b) + 1)
-	_, still_stale := game.pool_get(p, b)
-	expect(t, !still_stale, "old handle stays stale after reuse")
-	_ = a
-}
-test_pool_full :: proc(t: ^T) {
-	p: ^game.Pool(int, 4) = new(game.Pool(int, 4))
-	defer free(p)
-	game.pool_init(p)
-	for _ in 0 ..< 3 { _, ok := game.pool_create(p, 1); expect(t, ok) }
-	_, ok := game.pool_create(p, 1)
-	expect(t, !ok, "fourth create must fail (slot 0 is reserved)")
 }
 
 to_screen :: proc(cells: ^[22 * 23]u32) -> game.Screen {

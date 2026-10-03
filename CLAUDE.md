@@ -49,12 +49,12 @@ Layered projects, each depending only downward:
 
 ## Odin port
 
-A rewrite in Odin (`js_wasm32` + native SDL2) is in progress as planning only. See `PORT.md` for decisions, the prerequisite task list, and the findings log. After every step of the port, log its findings in `PORT.md` before moving on.
+A rewrite in Odin (`js_wasm32` + native SDL2) is in progress: infrastructure and step 1 (world, generation, save/load) are built; the game systems are being ported in the order given in `PORT.md`. See `PORT.md` for decisions, the prerequisite task list, and the findings log. After every step of the port, log its findings in `PORT.md` before moving on.
 
 ### Odin port: layout and commands (task 24)
 
 ```
-odin/game/            package game: the portable core (rendering, input, services interface, RNG, entity pools; later world, rules, UI)
+odin/game/            package game: the portable core (rendering, input, services interface, RNG, UUID-keyed world, generation, save/load; later rules, UI)
 odin/platform/web/    package main for js_wasm32 + page/ (index.html, platform.js, layout.js, storage.js and their node tests)
 odin/platform/native/ package main for the SDL2 development build
 odin/tests/           portable test kit + all test cases; runs natively (odin test) and as wasm under node

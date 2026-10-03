@@ -54,11 +54,11 @@ The ones most worth a look, in order of how hard they are to change later:
 - `PORT.md` is long on purpose; each task has "Verified" and "Not verified" lists. The "Not verified" items are the real
   to-do list for testing.
 
-### Suggested order for the actual port (not started)
+### Suggested order for the actual port (in progress: step 1 done, see "Port step 1" in the log)
 
-The infrastructure exists (rendering, input, services, content, RNG, pools, tests, builds). Each step below ends with
+The infrastructure exists (rendering, input, services, content, RNG, tests, builds). Each step below ends with
 `tools/test.sh` passing and, where a screen exists, a bit-exact comparison with `docs/reference/vb`:
-1. World state, save/load (task 14 format), `world_validate`; world generation (maze is already ported in `spikes/rng`).
+1. ~~World state, save/load (task 14 format), `world_validate`; world generation.~~ **Done** (`uuid.odin`, `world.odin`, `worldgen.odin`, `save.odin`).
 2. UI shell: the boilerplate screens (instructions, about, options, quit, load/save, export/import) on the menu pattern.
 3. The in-play screen, movement, turning, the dungeon artwork, sprites and map.
 4. Items: inventory, equipment, ground, events (task 18 handlers), repair and durability.
@@ -1260,3 +1260,36 @@ Decided together with task 24 (see above): `src/` is kept untouched as the refer
 - Which statistics the Odin game uses as an array index (`[Stat]i32` includes `None` at 0 and 37 more).
 
 **Findings:** the whole static game definition is 490 lines and a few kilobytes of read-only data (the wasm module is still about 48 KB). The generator's pattern (fold in Python, test the fold in Odin) caught two real bugs in its own first version, so it is worth keeping the same pattern for any later generated data.
+
+
+### Port step 1: world state, generation, save and load (2026-10-03)
+
+**Done:** the first real game systems, in `odin/game/`: `uuid.odin` (ids), `world.odin` (the mutable world and its operations), `worldgen.odin` (a port of `World.Start`: town, five mazes with locks, keys and bosses, the moon, features, the player and her two stat rolls), `save.odin` (JSON writer, validating loader, `world_validate`). `pool.odin` and its two tests are deleted (superseded by D9's UUID maps). New tests in `odin/tests/tests_world.odin`; the suite is now 19 cases, 1,203 checks, passing natively and as wasm under node.
+
+**The shape (decision D9 as amended):**
+- `Character_ID`, `Item_ID`, `Location_ID` are distinct `[16]u8`, version 4 UUIDs drawn from the world's seeded generator (so a seed always yields the same ids), never reused. Text form is the canonical 36 lower-case characters; the parser is strict (a hand-edited id with capitals or missing dashes is rejected).
+- `World` holds three maps (id to value) and three order lists (creation order). The order lists exist because map iteration order is not preserved by a save and load, and the game must behave the same after loading. Deleting from an order list is a linear search; deletions happen a few times per fight, not per frame.
+- Items know their holder (`None/Carried/On_Ground/Equipped`), the owner id, the slot and a `placed` counter that orders item lists (the order the original showed). Characters know their location. Locations hold their own eight direction slots (`routes: [Direction]Route`), the feature type and a `visited` flag; no one else records any of it.
+- Item stats, events and names are derived from the type; the only saved per-item values are `type`, `wear`, `lore` and the holder fields (task 14's evaluation). Characters save their non-zero statistics as `[stat id, value]` pairs.
+- Player state: character id, mode, facing, shoppe, `quests_active` (bit set), `quest_completions`, `spells` (level, 0 = unknown).
+- Allocation: **this amends D19 rule 1.** The world owns heap storage (the maps and lists), allocated from the allocator given to `world_init` and released by `world_destroy`. Everything else about D19 holds: per-step scratch is the temporary allocator, loads parse into a disposable allocator (the tests use the temporary allocator, the game will use an arena), and the leak checker covers all of it.
+
+**Generation, compared with the VB code:** same structure and the same counts (737 locations, 1,722 routes, 1,086 monsters plus the player, 25 notes, the right number of keys); the random draws are in a different order and use a different generator, so worlds cannot match the original number for number (decided in task 9). Two deliberate differences: (1) the player's roll tables are arrays of (stat, weight) pairs; (2) if the data asks for monsters where no location allows them, the spawn is skipped instead of throwing (the shape test would catch it: the monster count would be short).
+
+**Verified:**
+- `worldgen: a new game has the shape the original builds` (5 seeds): 737 locations, 1,722 routes, monster count equals the sum of the data's spawn counts plus one, location type counts (1 square, 8 town, 1 church entrance, 1 cellar, 5 bosses, 121 moon), every feature on exactly one location of its type, the cellar below the inn, the player alone in the town square with 13 stat points in total.
+- `worldgen: every level is a spanning tree...` (5 seeds): everything except the moon is reachable from the square through routes; per level: 121 cells, one boss, one boss door, FE doors = dead ends - 1; one FE key on the ground per FE door; the four boss keys exist; 25 notes; 5 x 240 corridor routes.
+- Same seed gives byte-identical saves (ids included); a different seed differs.
+- Save: a fresh game is **471,985 bytes** (the estimate was about 480 KB); load then re-save is byte-identical; creation order and wear, worn slot, spell, quest and shoppe all survive; the loaded game creates the same next id and draws the same random numbers as the original for 50 steps.
+- Rejections: empty, non-JSON, wrong format, future version, no player, bad seed, a character on a nonexistent location; each returns an error and leaves the target world empty (nothing leaks; the leak checker is on).
+- Fuzz: 60 mutated saves (digit flips, random bytes, truncation), 5 accepted and all of those still valid and re-savable, 55 rejected, no crash natively or in wasm.
+
+**Odin facts found:** `&map[key]` returns nil for a missing key (the code relies on it for "gone"); a `proc` taking `$T` with `where size_of(T) == 16` lets one text function serve the three distinct id types; constants cannot be indexed by a variable (use a variable for tables); `for x in 0 ..< roll(...)` evaluates the roll once.
+
+**Not verified:**
+- Whether every spawn count in the data is satisfiable on every seed (the shape test would show a wrong monster count if not, on five seeds; there is no test over the data alone yet).
+- Behaviour beyond fresh worlds (no play exists yet), so churn-heavy saves are untested.
+- Timing: generation plus save took well under the test's seconds natively; wasm timing in a browser has not been measured. The save is 472 KB of JSON and the browser has to write it to `localStorage` synchronously.
+- u64 seeds and generator words are written as hex text (not numbers) because Odin's JSON reads integers as signed 64-bit; this is not tested with a seed above 2^63 (the tests use small seeds, but the generator words are full-range and round-trip, which covers the same parsing).
+
+**Findings affecting later tasks:** the slot summary (`place`, `hp`, `xp`) is written and `save_peek_summary` reads it, but it still parses the whole file; if slot labels are drawn every frame this must be cached by the Load/Save screens (step 2). The "who is here" queries scan all characters (about 1,100) and the item lists scan all items; fine for a few calls per frame, to be re-checked when the in-play screen exists.
