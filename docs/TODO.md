@@ -15,6 +15,13 @@ Open work on Kordanor's Cabal, collected from the port. Newest findings first. (
 - [ ] **Spawn rules with a count but no place:** the Fire Shard (Level III, see the orb item above) and the Amulet of Mana (Level V) never appear; the Amulet of Mana (Level II) has places but no count.
 - [ ] **Credits.** Add the sound-effect sources and the wording for the music ("generated with Abundant Music", seed 2645320710) to the Credits screen.
 
+## Story and ending (design notes from the owner, 2026-10-03; not built)
+
+- **The twist.** When the player gives the **Horns of Kordanor** to the Elder, they learn that the cult was **not keeping Kordanor captive; it was keeping him safe from Zooperdan** (the Elder, the quest giver). Giving the horns to Zooperdan turns him into the **final boss**, and the player must fight him.
+- **Fits the existing text.** Lore #1 says the kin kept vigil "not to keep the captive within, but to keep those that seek his release without". Lore #7 (*Z's Epistle*, signed "-Z": "I have arrived... I cannot enter yer realm for your many wards of protection, but I will find a way to send another to fetch what I need") is Zooperdan, who sent the player. Lore #5 (*Keep him in prison, for the one seeking his death shall overtake all*) and #6 point the same way. The Elder's *The Cabal* speech ("slay this foul fiend and bring to me his horns") is the lie. The 18 missing lore texts are the natural place to unfold the reveal.
+- **How it could use what exists (ideas, not decisions):** the fight uses the ordinary combat system: a new character type *Zooperdan* (enemy: the player, big stats, a sprite, a parting shot), created in the town square when the horns are handed over; the Elder's feature stays, and his *Interact...* turns into the fight while he stands there. Because the Elder is the one place the player must come back to, the whole ending happens in town.
+- **Open questions:** Zooperdan's stats and whether he has several phases; what the player learns in the dialogue and whether there is a choice (hand over or refuse); the victory and defeat screens; what happens to the town afterwards (a credits roll, then back to the title?); whether Kordanor, if spared, should be able to be spoken to; whether the player can still wander the dungeon after the horns are given.
+
 ## Release
 
 - [ ] **itch.io:** create a draft HTML5 page, upload `build/kordanors-cabal-html5.zip` (`tools/ship.sh`, add `--push` for `butler`), and test in the itch iframe: loading, the start key/tap, sound and music, saves surviving a reload, export download and import picker, fullscreen, the rotate prompt.
