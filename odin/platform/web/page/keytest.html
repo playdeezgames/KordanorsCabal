@@ -34,10 +34,10 @@
 		while (log.rows.length > 30) log.deleteRow(-1);
 		if (e.type === "keydown") {
 			last.textContent = e.code + "   (key " + JSON.stringify(e.key) + ")";
-			if (e.key === "ArrowDown" && e.code !== "ArrowDown" || e.code === "NumpadEnter" && e.key !== "Enter") {
-				verdict.className = "warn";
-				verdict.textContent = "The key and the code disagree: something between the keyboard and the browser is rewriting this key.";
-			}
+			const arrows = { ArrowUp: "ArrowUp", ArrowDown: "ArrowDown", ArrowLeft: "ArrowLeft", ArrowRight: "ArrowRight" };
+			const bad = (e.key in arrows && e.code !== arrows[e.key] && !e.code.startsWith("Numpad")) || (e.code === "NumpadEnter" && e.key !== "Enter") || e.code === "Lang3" || e.code === "NonConvert";
+			verdict.className = bad ? "warn" : "";
+			verdict.textContent = bad ? "The key and the code disagree: something between the keyboard and the browser is rewriting this key's physical code (the game reads the logical key)." : "";
 		}
 		e.preventDefault();
 	}

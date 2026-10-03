@@ -123,12 +123,16 @@
 		ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right", Numpad8: "up", Numpad2: "down", Numpad4: "left", Numpad6: "right",
 		Space: "confirm", Enter: "confirm", NumpadEnter: "confirm", Numpad5: "confirm", Escape: "cancel", Backspace: "cancel",
 	};
+	// The logical key (e.key) is read first: remote desktops can send wrong physical codes for the arrow keys (an ArrowDown
+	// arriving as code NumpadEnter, found with keytest.html) while the logical key stays right. The physical code is the
+	// fallback, for the numpad digits and for layouts where e.key is a character.
+	const KEYS_BY_KEY = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right", Enter: "confirm", " ": "confirm", Escape: "cancel", Backspace: "cancel" };
 	addEventListener("keydown", (e) => {
 		if (!started) { start(); e.preventDefault(); return; }
-		const name = KEYS[e.code];
+		const name = KEYS_BY_KEY[e.key] || KEYS[e.code];
 		if (!name || e.repeat) return;
 		e.preventDefault();
-		logInput("key", e.code, "->", name);
+		logInput("key", e.key, e.code, "->", name);
 		exports.platform_command(COMMAND[name]);
 	});
 	// A tap on either overlay is the start gesture. Fullscreen needs "transient user activation": pointerdown counts for a
