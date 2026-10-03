@@ -45,7 +45,7 @@ menu_of :: proc(core: ^Core, s: UI_State) -> (m: Menu, is_menu: bool) {
 	case .Game_Menu:
 		m.row = 5
 		for l in ([]string{"Go Back", "Save Game", "Abandon Game"}) { menu_add(&m, l) }
-	case .Finalize_Character:
+	case .Finalize_Character, .Level_Up:
 		m.row = 7
 		menu_add(&m, "Cancel")
 		for stat in Stat.Strength ..= Stat.Mana { menu_add(&m, fmt.tprintf("%s: %d", STATS[stat].name, player_character(&core.world).stats[stat])) }
@@ -55,7 +55,7 @@ menu_of :: proc(core: ^Core, s: UI_State) -> (m: Menu, is_menu: bool) {
 	case .Equipment_Detail:
 		m.row = 14
 		menu_add(&m, "Go Back"); menu_add(&m, "Unequip")
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
 		return {}, false
 	}
 	return m, true
@@ -252,20 +252,23 @@ activate :: proc(core: ^Core, s: UI_State, index: int) {
 		case 1: enter_state(core, .Save_Game)
 		case 2: enter_state(core, .Confirm_Abandon)
 		}
-	case .Finalize_Character:
-		if index == 0 { abandon_world(core); enter_state(core, .Title); return }
+	case .Finalize_Character, .Level_Up:
+		if index == 0 {
+			if s == .Level_Up { enter_state(core, .In_Play) } else { abandon_world(core); enter_state(core, .Title) }
+			return
+		}
 		p := player_character(&core.world)
 		if p.stats[.Unassigned] > 0 {
 			stat_add(p, Stat(index), 1)
 			stat_add(p, .Unassigned, -1)
 		}
-		if p.stats[.Unassigned] == 0 { enter_state(core, .Prolog) }
+		if p.stats[.Unassigned] == 0 { enter_state(core, s == .Level_Up ? .In_Play : .Prolog) }
 	case .Interact_Item: interact_item_activate(core, index)
 	case .Equipment_Detail:
 		if index == 0 { enter_state(core, .Equipment); return }
 		unequip(&core.world, core.world.player.character, core.equip_slot)
 		enter_state(core, .Equipment) // goes back to the in-play screen if nothing is left on
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
 	}
 }
 
@@ -277,6 +280,7 @@ cancel_menu :: proc(core: ^Core, s: UI_State) {
 	case .Save_Game: enter_state(core, .Game_Menu)
 	case .Game_Menu, .Confirm_Abandon: enter_state(core, .In_Play)
 	case .Export_Slot: enter_state(core, .Save_Game)
+	case .Level_Up: enter_state(core, .In_Play)
 	case .Interact_Item: enter_state(core, .Inventory)
 	case .Equipment_Detail: enter_state(core, .Equipment)
 	case .Import_Slot: activate(core, .Import_Slot, 0)
@@ -321,6 +325,7 @@ handle_command :: proc(core: ^Core, c: Command) {
 		if c == .Confirm || c == .Cancel { enter_state(core, .Title) }
 	case .Prolog:
 		if c == .Confirm { enter_state(core, .In_Play) }
+	case .Enemies: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
 	case .In_Play: play_command(core, c)
 	case .Message: message_command(core, c)
 	case .Inventory, .Ground_Inventory, .Equipment: list_command(core, c)
@@ -442,8 +447,8 @@ draw_prompt :: proc(core: ^Core, state: UI_State) {
 		centered_header(s, "Import")
 		write_text(s, 0, 2, "Choose a saved game file in the box that opened. Cancel to go back.", false, .Black)
 	case .Game_Menu: write_text_centered(s, 0, "Game Menu", false, .Blue)
-	case .Finalize_Character:
-		centered_header(s, "Finalize Character")
+	case .Finalize_Character, .Level_Up:
+		centered_header(s, state == .Level_Up ? "Level Up Character" : "Finalize Character")
 		write_text_centered(s, 2, fmt.tprintf("%s: %d", STATS[.Unassigned].name, player_character(&core.world).stats[.Unassigned]), false, .Purple)
 		write_text(s, 0, 4, "Choose where to assignpoint(s):", false, .Black)
 	case .Prolog:
@@ -457,6 +462,7 @@ draw_prompt :: proc(core: ^Core, state: UI_State) {
 		for l, i in lines { write_text(s, 0, 2 + i, l, false, .Black) }
 		write_text_centered(s, 22, "SPACE to start", true, .Orange)
 	case .In_Play: draw_play(core)
+	case .Enemies: draw_enemies(core)
 	case .Inventory: draw_inventory(core)
 	case .Ground_Inventory: draw_ground(core)
 	case .Equipment: draw_equipment(core)

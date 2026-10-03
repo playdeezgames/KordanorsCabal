@@ -51,6 +51,8 @@ All other item types, character types, statistics, route types, spells and quest
 | Changing a statistic while wearing a buffing item writes the buffed value back, so an amulet's bonus becomes permanent | `CharacterStatistics.ChangeStatistic` reads `GetStatistic` (base plus buffs) and stores the sum | changes apply to the base value only; buffs are added when read (port step 4) |
 | `ChangeStatistic` on a statistic the character has no row for does nothing | same method; every real character has a row (possibly 0) for the statistics that change | the port keeps all statistics in a full array, so no such case exists |
 | Red in Turn or Move mode leaves the saved button position on the stack | `ModeProcessor` push without pop | Red restores it like Cancel (port step 3) |
+| The Earth Shard does nothing: counter attacks test the *player's* immobilization instead of the enemy's, so an immobilized enemy still hits | `CharacterPhysicalCombat.DoCounterAttack` / `IsImmobilized` | the enemy's own immobilization is tested and counted down (port step 5) |
+| Running changes the direction the player faces, even when the run fails | `CharacterPhysicalCombat.Run` assigns `Movement.Direction` before testing the move | kept (the player turns toward where they tried to run) |
 
 ## Content questions for the owner (found while porting items; nothing was changed)
 

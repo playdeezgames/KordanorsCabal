@@ -54,7 +54,7 @@ The ones most worth a look, in order of how hard they are to change later:
 - `PORT.md` is long on purpose; each task has "Verified" and "Not verified" lists. The "Not verified" items are the real
   to-do list for testing.
 
-### Suggested order for the actual port (in progress: steps 1 to 4 done, see "Port step 1" in the log)
+### Suggested order for the actual port (in progress: steps 1 to 5 done, see "Port step 1" in the log)
 
 The infrastructure exists (rendering, input, services, content, RNG, tests, builds). Each step below ends with
 `tools/test.sh` passing and, where a screen exists, a bit-exact comparison with `docs/reference/vb`:
@@ -62,7 +62,7 @@ The infrastructure exists (rendering, input, services, content, RNG, tests, buil
 2. ~~UI shell: the boilerplate screens (instructions, about, options, quit, load/save, export/import) on the menu pattern.~~ **Done** (`core.odin`, `ui_screens.odin`, `config.odin`; see "Port step 2").
 3. ~~The in-play screen, movement, turning, the dungeon artwork, sprites and map.~~ **Done** (`ui_play.odin`, `rules.odin`, `ui_data.odin`; see "Port step 3").
 4. ~~Items: inventory, equipment, ground, events (task 18 handlers), durability.~~ **Done** (`items.odin`, `events.odin`, `ui_items.odin`; repair comes with the blacksmith in step 6).
-5. Combat, death, XP and level up.
+5. ~~Combat, death, XP and level up.~~ **Done** (`combat.odin`; see "Port step 5").
 6. Townsfolk and shoppes; spells and quests.
 7. Polish, the real-device pass, itch.io release.
 
@@ -1351,3 +1351,20 @@ Decided together with task 24 (see above): `src/` is kept untouched as the refer
 **Not verified:** repair and the shoppes (step 6; the durability arithmetic is ready); the Moon Portal; the Elemental Orb as an item (it has no use event); the position of the cursor after use-then-return (it resets to the top as the original's Initialize does); long inventories (more than the screen shows scroll as in the original, tested only with four groups); touch taps on lists (written, the two-step rule applied, not exercised by a test).
 
 **Findings for later steps:** (1) The strike sequence is the next shared piece: `perform` already has its slots. (2) `Item.lore` stays 0 until read; two notes never share a lore while one is free. (3) `item_groups` is recomputed on every draw and every key press; it is a few dozen items, but if the inventory ever grows to hundreds it needs caching.
+
+
+### Port step 5: combat, death, experience and level up (2026-10-03)
+
+**Done:** `combat.odin` (a port of `CharacterPhysicalCombat`, `CharacterMentalCombat`, the wear rules of `CharacterEquipment` and `CharacterAdvancement.AddXP`), the Enemies and Level Up screens, and the in-play buttons FIGHT!, RUN!, Intimidate!, Enemies(n) and Level up! (the last uses the Finalize Character menu with its own title; Cancel and the last point return to the game). The strike family of item and spell actions is now real: Holy Water, Fire Shard, Earth Shard and Cast Holy Bolt (the shared sequence is `strike`: damage, kill, loot, XP, counter attacks). **Only three actions are still unported**: Cast Purify and the two Cellar Rats actions (step 6).
+- Rules as in the original: a die succeeds on a six; attack dice are strength plus worn weapons' attack dice, defence dice dexterity plus worn armour's, one die fewer when drunk, high or chafing; the defence roll is capped by the maximum defend; damage is the attack minus defence, capped by the sum of the worn items' damage limits (or the unarmed limit); weapons wear by the damage dealt and armour by the attack rolled against it, a random worn piece per point, and broken pieces vanish with "Yer X breaks!". Enemies attack physically or mentally by their weights; a demoralizing mental hit makes the player drop everything, lose half the money and wake in the town square. A kill pays money and XP, drops the victim's items and one loot item by weight, and a level doubles the XP goal, adds a point to assign and clears wounds, stress and fatigue. Running turns the player to a random compass direction and goes if that way is open. The parting shot of the killer is quoted when the player dies.
+- Death: after the queued messages the death page shows; Confirm discards the world and returns to the title.
+
+**Verified (39 cases, 1,894 checks, native and wasm under node):**
+- **The recorded fights are reproduced exactly.** The dice cannot be set, so the test searches for a world seed whose first rolls equal the recording and then compares whole screens: the attack/defend/kill/money/XP message (`50`) and the counter-attack message with its hard 22-column breaks (`51`) matched at seed 685; the fight while dying (`70`), the death page (`71`) and the return to the title (`72`) also match. The enemies list (`41`) and the level-up page (`63`) match the recordings.
+- Rules: experience and levels, damage caps with a dagger and chainmail, dice counts, the drunk penalty, dice succeed about one time in six (6,000 dice), a dagger breaks after ten wear points, a kill pays and drops (a potion the goblin carried lies on the floor), panic flight, 60 seeds x up to 40 fights each with the world validating after every fight, running both succeeds and fails, intimidation needs a lone enemy, an immobilized enemy skips its attack and counts down.
+
+**Defects fixed (in the audit):** an immobilized enemy now really skips its turn (the original tested the player's immobilization, so the Earth Shard did nothing).
+
+**Not verified:** the mental counter attack against the player by a real Malcontent (it is covered only by the rules test and the 60-seed fights, where Malcontents do not appear), the death page's "dignity" line (legs slot), the weapon wear of enemies (monsters carry nothing), the level-up sound (the original plays none; the `Level_Up` sound still has no use), and balance over a whole game.
+
+**Findings for step 6:** (1) Townsfolk need `Interact...` (button 1) and the modes; the button currently does nothing unless intimidation applies. (2) The quest's rats are created with `create_character(.Rat, cellar)` using the data's initial statistics. (3) The test seed search takes about 20 seconds of the native run; if it grows, cap the search or fix the seed in a constant.

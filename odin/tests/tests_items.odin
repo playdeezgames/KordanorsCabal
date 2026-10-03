@@ -242,12 +242,17 @@ test_events_unported :: proc(t: ^T) {
 	// the combat and quest actions are still missing: they say so rather than crash
 	pending := 0
 	for a in game.Action { if !game.action_ported(a) { pending += 1 } }
-	expect_eq(t, pending, 7)
+	expect_eq(t, pending, 3)
 	defer fake_reset()
 	c := dungeon_core(); defer free_core(c)
 	w := &c.world
-	text := run_action(w, .Use_Fire_Shard)
+	text := run_action(w, .Character_Cast_Purify)
 	expect_eq(t, text, "That does not work yet in this version.")
+	// the strike family works: holy water on a goblin deals 1 to 4 HP, and the goblins hit back
+	for w.messages.count > 0 { game.message_pop(w) }
+	game.perform(.Use_Holy_Water, {world = w, character = w.player.character})
+	head := game.message_head(w)
+	expect(t, head != nil && len(head.text) > 0 && string(head.text[:11]) == "Holy \"Water", "holy water strikes")
 	// every action is safe on a world, whoever the context names: run them all and validate
 	for a in game.Action {
 		item := game.give_new_item(w, w.player.character, .Note)

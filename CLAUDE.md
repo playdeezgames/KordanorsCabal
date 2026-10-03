@@ -54,7 +54,7 @@ A rewrite in Odin (`js_wasm32` + native SDL2) is in progress: infrastructure and
 ### Odin port: layout and commands (task 24)
 
 ```
-odin/game/            package game: the portable core (rendering, input, services interface, RNG, UUID-keyed world, generation, save/load, UI shell screens, in-play hub, movement, items and events; later combat)
+odin/game/            package game: the portable core (rendering, input, services interface, RNG, UUID-keyed world, generation, save/load, UI shell screens, in-play hub, movement, items, events and combat; later townsfolk and spells)
 odin/platform/web/    package main for js_wasm32 + page/ (index.html, platform.js, layout.js, storage.js and their node tests)
 odin/platform/native/ package main for the SDL2 development build
 odin/tests/           portable test kit + all test cases; runs natively (odin test) and as wasm under node

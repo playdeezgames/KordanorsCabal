@@ -24,6 +24,11 @@ first_enemy :: proc(w: ^World, who: Character_ID) -> (Character_ID, bool) {
 	if len(enemies) == 0 { return {}, false }
 	return enemies[0], true
 }
+// The id of the first enemy, or the zero id (which names no character).
+first_enemy_id :: proc(w: ^World, who: Character_ID) -> Character_ID {
+	id, _ := first_enemy(w, who)
+	return id
+}
 can_be_bribed_with :: proc(w: ^World, enemy: Character_ID, type: Item_Type) -> bool {
 	return type in CHARACTER_TYPES[character_get(w, enemy).type].bribes
 }
@@ -96,7 +101,6 @@ check :: proc(name: Check, ctx: Event_Context) -> bool {
 // False for the actions whose systems are not ported yet (they are marked TODO(step N) in `perform`).
 action_ported :: proc(a: Action) -> bool {
 	#partial switch a {
-	case .Use_Holy_Water, .Use_Fire_Shard, .Use_Earth_Shard, .Character_Cast_Holy_Bolt: return false // step 5: combat
 	case .Character_Cast_Purify, .Character_Accept_Cellar_Rats_Quest, .Character_Complete_Cellar_Rats_Quest: return false // step 6
 	}
 	return true
@@ -230,10 +234,33 @@ perform :: proc(name: Action, ctx: Event_Context) {
 	case .Use_Pr0n:
 		use_pr0n(w, who)
 
-	// TODO(step 5): the strike sequence (damage, kill, loot and XP, counter attacks) these three share
-	case .Use_Holy_Water, .Use_Fire_Shard, .Use_Earth_Shard, .Character_Cast_Holy_Bolt:
-		say(w, .None, "That does not work yet in this version.")
-	// TODO(step 6): spells and quests
+	case .Use_Holy_Water:
+		enemy, has := first_enemy(w, who)
+		if !has { say(w, .None, "You cannot use that now!"); return }
+		damage := i32(roll(&w.rng, Dice{1, 4}))
+		strike(w, who, enemy, damage, fmt.tprintf("%s deals %d HP to %s!", ITEM_TYPES[.Holy_Water].name, damage, CHARACTER_TYPES[character_get(w, enemy).type].name))
+	case .Use_Fire_Shard:
+		enemy, has := first_enemy(w, who)
+		if !has { say(w, .None, "You cannot use that now!"); return }
+		character_get(w, who).stats[.Fatigue] += 1
+		damage := i32(roll(&w.rng, Dice{3, 4}))
+		strike(w, who, enemy, damage, fmt.tprintf("You use %s on %s!", ITEM_TYPES[.Fire_Shard].name, CHARACTER_TYPES[character_get(w, enemy).type].name), fmt.tprintf("You do %d damage!", damage))
+	case .Use_Earth_Shard:
+		enemy, has := first_enemy(w, who)
+		if !has { say(w, .None, "You cannot use that now!"); return }
+		character_get(w, who).stats[.Fatigue] += 1
+		name := CHARACTER_TYPES[character_get(w, enemy).type].name
+		turns := roll_power(w, who)
+		stat_add(character_get(w, enemy), .Immobilization, turns)
+		say(w, .None, fmt.tprintf("You use %s on %s!", ITEM_TYPES[.Earth_Shard].name, name), fmt.tprintf("You immobilize %s for %d turns!", name, turns))
+		counter_attacks(w, who)
+	case .Character_Cast_Holy_Bolt:
+		if !check(.Character_Can_Cast_Holy_Bolt, ctx) { say(w, .None, fmt.tprintf("You cannot cast %s now!", SPELL_TYPES[.Holy_Bolt].name)); return }
+		enemy, _ := first_enemy(w, who)
+		character_get(w, who).stats[.Fatigue] += 1
+		damage := roll_spell(w, who, .Holy_Bolt)
+		strike(w, who, enemy, damage, fmt.tprintf("You cast %s on %s!", SPELL_TYPES[.Holy_Bolt].name, CHARACTER_TYPES[character_get(w, enemy).type].name), fmt.tprintf("You do %d damage!", damage))
+	// TODO(step 6): the purify spell and the cellar rats quest
 	case .Character_Cast_Purify, .Character_Accept_Cellar_Rats_Quest, .Character_Complete_Cellar_Rats_Quest:
 		say(w, .None, "That does not work yet in this version.")
 	}

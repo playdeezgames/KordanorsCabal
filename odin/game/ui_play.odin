@@ -177,21 +177,35 @@ handle_button :: proc(core: ^Core, button: int) {
 		fight := can_fight(w, player)
 		switch button {
 		case NEUTRAL_TURN_FIGHT:
-			if fight { /* TODO(step 5): fight */ } else { push_button(core, 0); w.player.mode = .Turn }
+			if fight { fight_action(core, .Fight) } else { push_button(core, 0); w.player.mode = .Turn }
 		case NEUTRAL_MOVE_RUN:
-			if fight { /* TODO(step 5): run */ } else { push_button(core, 0); w.player.mode = .Move }
-		case NEUTRAL_INTERACT: /* TODO(step 5): intimidate, step 6: interact */
+			if fight { fight_action(core, .Run) } else { push_button(core, 0); w.player.mode = .Move }
+		case NEUTRAL_INTERACT:
+			if can_do_intimidation(w, player) { fight_action(core, .Intimidate) } /* TODO(step 6): interact */
 		case NEUTRAL_GROUND_ENEMIES:
-			if fight { /* TODO(step 5): the enemies list */ } else { enter_state(core, .Ground_Inventory) }
+			if fight { enter_state(core, .Enemies) } else { enter_state(core, .Ground_Inventory) }
 		case NEUTRAL_MENU: enter_state(core, .Game_Menu)
 		case NEUTRAL_INVENTORY: enter_state(core, .Inventory)
 		case NEUTRAL_MAP: if can_map(w, player) { enter_state(core, .Map) }
 		case NEUTRAL_EQUIPMENT: enter_state(core, .Equipment)
 		case NEUTRAL_STATUS:
-			if character_get(w, player).stats[.Unassigned] != 0 { /* TODO(step 5): level up */ } else { enter_state(core, .Status) }
+			if character_get(w, player).stats[.Unassigned] != 0 { enter_state(core, .Level_Up) } else { enter_state(core, .Status) }
 		case NEUTRAL_SPELLS: /* TODO(step 6) */
 		}
 	}
+}
+
+Fight_Action :: enum { Fight, Run, Intimidate }
+
+// The player acts against the enemies here; the messages come first, then the in-play screen again (or the death page).
+fight_action :: proc(core: ^Core, action: Fight_Action) {
+	w := &core.world
+	switch action {
+	case .Fight: fight(w, w.player.character)
+	case .Run: run(w, w.player.character)
+	case .Intimidate: do_intimidation(w, w.player.character)
+	}
+	show_messages_then(core, .In_Play)
 }
 
 do_move :: proc(core: ^Core, d: Direction) {
@@ -440,4 +454,15 @@ draw_dead :: proc(core: ^Core) {
 	s := &core.screen
 	write_text(s, 0, 0, "yer dead!", false, .Red)
 	if _, ok := item_in_slot(&core.world, core.world.player.character, .Legs); ok { write_text(s, 0, 2, "But at least you died with dignity!", false, .Black) }
+}
+
+draw_enemies :: proc(core: ^Core) {
+	s := &core.screen
+	w := &core.world
+	centered_header(s, "Enemies")
+	row := 1
+	for id in enemies_of(w, w.player.character) {
+		write_text(s, 0, row, fmt.tprintf("%s(%d/%d)", CHARACTER_TYPES[character_get(w, id).type].name, health_current(w, id), stat_of(w, id, .HP)), false, .Black)
+		row += 1
+	}
 }
