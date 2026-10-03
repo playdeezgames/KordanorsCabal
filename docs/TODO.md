@@ -1,11 +1,14 @@
 # To do
 
+**Mode: design and plan only.** Nothing below is to be implemented until the owner says so; the items are notes for later.
+
 Open work on Kordanor's Cabal, collected from the port. Newest findings first. (`PORT.md` has the full history and the reasons.)
 
 ## Content that is unfinished
 
 - [ ] **Lore texts.** 25 lore texts exist (they are the contents of the 25 Notes spawned in every game); only #1 to #7 are written. #8 to #25 are placeholders whose title and text both read `Lore #N`. Source: `Lores` table in `src/KordanorsCabal/boilerplate.db`; after editing, run `tools/gen/gen_content.py` (the longest text must stay under 768 bytes, the message buffer).
 - [ ] **The Level V boss room cannot be reached; the Elemental Orb was meant to be crafted.** The door needs the **Elemental Orb**, which nothing creates. Owner's recollection (2026-10-03): it was going to be **crafted from the four shards, probably by the Elder**; the project was abandoned before that was built. The data fits: the Air (Level I), Earth (Level II) and Water (Level IV) Shards spawn in boss rooms, and the **Fire Shard (Level III) has a spawn count but an empty place list, which is very likely the same boss-room rule with the places lost** (Level III's boss room is where a Bishop stands). To finish: give the Fire Shard `Dungeon_Boss` on Level III, add an Elder button (for example *Make the Orb*, shown when the pack holds all four shards) that swaps the four for an Elemental Orb with a message, and decide what the Horns of Kordanor do at the Elder (the ending). Until then Kordanor and the horns are unreachable and there is no ending.
+  - **Plan (not started, owner said to only note it):** (1) data: give the Fire Shard `Dungeon_Boss` on Level III in `boilerplate.db` and regenerate; (2) Elder: a new button *Make the Orb*, shown when the pack holds Air, Earth, Fire and Water Shards, which destroys the four and gives an Elemental Orb with a message (a new `Action` and `Check` in the content enums, handled in `events.odin`, button in `ui_town.odin`); (3) the Level V door already spends the orb (route lock rule); (4) **open design question:** the ending, i.e. what handing the Horns of Kordanor to the Elder does (a message page, a score, a restart?).
 - [ ] **Items that cannot be obtained** (decision review 5, deferred): Membership Card, Ring of HP, Amulet of DEX. Proposal on file in `PORT.md`.
 - [ ] **Amulet of STR** has no buff in the data (the other amulets give +1 to their statistic).
 - [ ] **Lotion never runs out** (it has no durability in the data; the code that would use it up never applies).
