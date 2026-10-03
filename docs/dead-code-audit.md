@@ -29,6 +29,7 @@ ever creates them:
 - **Ring of HP** (id 46) and **Amulet of DEX** (id 49): equipment with a stat buff and a UI glyph, never obtainable.
 
 Default: keep the three rows (they cost nothing) and port the constable check; do not invent a way to obtain them.
+**Deferred by the owner (review 5): decide when finishing the game.** Proposal on file: Amulet of DEX as a 1d1 spawn on Level II (the one level without an amulet), Membership Card at weight 2 in the Malcontent loot table (about 13 cards over a game), Ring of HP as a 1d1 spawn on the Moon.
 All other item types, character types, statistics, route types, spells and quests are reachable.
 
 ## Defects (fixed in the port rather than copied)
