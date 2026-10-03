@@ -98,7 +98,7 @@ Where creatures are placed (per dungeon level) is decided once when the game is 
 
 - **Attacks:** physical (weight 1)
 - **Can be bribed with:** Beer, Pr0n Scroll
-- **Loot (one roll when killed):** nothing 2/8, Goblin Ear 4/8, kottbulle 1/8, kottbulle 1/8
+- **Loot (one roll when killed):** nothing 2/8, Goblin Ear 4/8, kottbulle (fresh) 1/8, kottbulle (rotten) 1/8
 - **Says when it kills you:** "@#$% you!"
 - **Where:** Level I: 30 in Dungeon; Level II: 45 in Dungeon; Level III: 30 in Dungeon; Level IV: 15 in Dungeon
 - **Fights:** N00b
@@ -107,7 +107,7 @@ Where creatures are placed (per dungeon level) is decided once when the game is 
 
 - **Attacks:** physical (weight 1)
 - **Can be bribed with:** Beer
-- **Loot (one roll when killed):** nothing 2/10, Goblin Ear 5/10, kottbulle 2/10, kottbulle 1/10
+- **Loot (one roll when killed):** nothing 2/10, Goblin Ear 5/10, kottbulle (fresh) 2/10, kottbulle (rotten) 1/10
 - **Says when it kills you:** "@#$% you!"
 - **Where:** Level I: 5 in Dungeon Dead End; Level II: 15 in Dungeon, Dungeon Dead End; Level III: 30 in Dungeon, Dungeon Dead End; Level IV: 45 in Dungeon, Dungeon Dead End; Level V: 30 in Dungeon, Dungeon Dead End
 - **Fights:** N00b
@@ -125,7 +125,7 @@ Where creatures are placed (per dungeon level) is decided once when the game is 
 
 - **Attacks:** physical (weight 3), mental (weight 1)
 - **Can be bribed with:** Pr0n Scroll
-- **Loot (one roll when killed):** nothing 2/5, kottbulle 1/5, kottbulle 2/5
+- **Loot (one roll when killed):** nothing 2/5, kottbulle (fresh) 1/5, kottbulle (rotten) 2/5
 - **Says when it kills you:** "Death to ne'er-do-wells!"
 - **Where:** Level I: 30 in Dungeon Dead End; Level II: 15 in Dungeon, Dungeon Dead End
 - **Fights:** N00b
@@ -223,7 +223,7 @@ The player. Starts with 1 in Strength, Dexterity, Influence, Willpower and Power
 | Rat Tail |  |  |  |  |  |  | 1 |  |  | yes |
 | Holy "Water" |  |  |  |  |  |  |  | 10 |  | yes |
 | Town Portal |  |  |  |  |  |  |  | 50 |  | yes |
-| kottbulle |  |  |  |  |  |  |  | 2 |  | yes |
+| kottbulle (fresh) |  |  |  |  |  |  |  | 2 |  | yes |
 | Magic Egg |  |  |  |  |  |  | 100 |  |  | yes |
 | Beer | 2 |  |  |  |  |  |  | 5 |  | yes |
 | Trousers |  | Legs |  |  |  |  |  | 100 |  | yes |
@@ -234,7 +234,7 @@ The player. Starts with 1 in Strength, Dexterity, Influence, Willpower and Power
 | Membership Card |  |  |  |  |  |  | 10 |  |  | yes |
 | Bong |  |  |  |  |  |  |  | 25 |  | yes |
 | "Herb" |  |  |  |  |  |  |  | 5 |  | yes |
-| kottbulle |  |  |  |  |  |  |  |  |  | yes |
+| kottbulle (rotten) |  |  |  |  |  |  |  |  |  | yes |
 | Mushroom |  |  |  |  |  |  | 25 |  |  | yes |
 | Rotten Egg |  |  |  |  |  |  |  |  |  | yes |
 | Zombie Taint |  |  |  |  |  |  | 5 |  |  | yes |
@@ -369,7 +369,7 @@ The player. Starts with 1 in Strength, Dexterity, Influence, Willpower and Power
 - **Use:** Opens a pair of portals between here (Out) and the town square (In). Dungeon only. Consumed. *(can use: IsInDungeon)*
 - **Shops:** Magic sells
 
-### kottbulle
+### kottbulle (fresh)
 
 - **Use:** Heals 1 HP and sets hunger to 0. *(can use: AlwaysTrue)*
 - **Decay:** `FoodDecay` (see how the game works: food rots on the floor)
@@ -422,7 +422,7 @@ The player. Starts with 1 in Strength, Dexterity, Influence, Willpower and Power
 - **Use:** Needs a Bong in the pack. Restores all Mana and adds 10 highness. *(can use: HasBong)*
 - **Shops:** Magic sells
 
-### kottbulle
+### kottbulle (rotten)
 
 - **Use:** Half the time: hunger halves and you get 10 food poisoning (hunger runs faster). Otherwise it works like fresh food. *(can use: AlwaysTrue)*
 - **Decay:** `RottenFoodDecay` (see how the game works: food rots on the floor)
@@ -554,7 +554,7 @@ Each stands in a random free town place chosen when the world is created (the El
 
 - Stands in a random **Town** place. Greeting: "@#$% You!"
 - Buttons: **Do Quest! / Quest Done!** (the cellar rats quest, see section 6), **Prices**, **Buy**. Sells beer and food.
-- **Sells:** kottbulle 2, Beer 5
+- **Sells:** kottbulle (fresh) 2, Beer 5
 
 ### Yermom the Drunk
 

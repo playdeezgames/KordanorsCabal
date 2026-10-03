@@ -8,6 +8,7 @@ db = sqlite3.connect(os.path.join(ROOT, "src", "KordanorsCabal", "boilerplate.db
 q = lambda sql, *a: db.execute(sql, a).fetchall()
 
 item = dict(q("select ItemTypeId, ItemTypeName from ItemTypes"))
+item[24], item[35] = "kottbulle (fresh)", "kottbulle (rotten)"  # two item types share the name "kottbulle"
 char = dict(q("select CharacterTypeId, CharacterTypeName from CharacterTypes"))
 stat = {i: (n, a) for i, n, a in q("select StatisticTypeId, CharacterStatisticTypeName, Abbreviation from StatisticTypes")}
 level = dict(q("select DungeonLevelId, DungeonLevelName from DungeonLevels"))
