@@ -22,6 +22,20 @@ Open work on Kordanor's Cabal, collected from the port. Newest findings first. (
 - **How it could use what exists (ideas, not decisions):** the fight uses the ordinary combat system: a new character type *Zooperdan* (enemy: the player, big stats, a sprite, a parting shot), created in the town square when the horns are handed over; the Elder's feature stays, and his *Interact...* turns into the fight while he stands there. Because the Elder is the one place the player must come back to, the whole ending happens in town.
 - **Open questions:** Zooperdan's stats and whether he has several phases; what the player learns in the dialogue and whether there is a choice (hand over or refuse); the victory and defeat screens; what happens to the town afterwards (a credits roll, then back to the title?); whether Kordanor, if spared, should be able to be spoken to; whether the player can still wander the dungeon after the horns are given.
 
+## Difficulty and balance (ideas from `docs/difficulty-analysis.md`; design only, nothing decided or built)
+
+Finding: the ramp is front-loaded and then flat (a starter is in danger, gear removes the danger by mid level II, monster strength only rises at levels IV and V, the first three bosses are ordinary creatures). Ideas:
+
+- [ ] **Spread the gear across the levels.** Move chainmail and shortswords off level I; keep brodesodes to levels III to IV and platemail to IV to V, so the kit grows with the dungeon.
+- [ ] **Scale the monsters.** Put elites and acolytes on level II, bishops on level III; give levels IV and V the Cabal Leader's mental attacks (high Influence); give strong creatures damage limits above the player's damage reduction.
+- [ ] **Let defence grow.** The player's defence is capped at 1 for the whole game (Base Maximum Defend), so armour dice past about three are wasted; raise the cap with a stat, with armour, or with levels.
+- [ ] **Make bosses different.** The bosses of levels I to III are single ordinary creatures; give them more HP, a guard or an ability. The Cabal Leader and Kordanor already feel like bosses.
+- [ ] **Vary the density per level.** A quiet first level, the busiest in the middle, a few dangerous creatures at the bottom (levels II and III are densest now, level V emptiest).
+- [ ] **Add attrition.** Limit free healing (a cost or a cooldown), fewer potions, or hunger that bites sooner.
+- [ ] **Take the early cliff off.** A better start (a dagger and a few coins), or weaker level I dead-end groups; a starter with a dagger loses a quarter to a half of the rooms.
+- [ ] **Make statistics matter.** Points are scarce (7 level-ups in a whole game) and only Malcontents use mental attacks, so Influence, Willpower and MP rarely decide anything.
+- [ ] **Re-run the analysis** (`python3 tools/analysis/difficulty.py`) after any of the changes above.
+
 ## Release
 
 - [ ] **itch.io:** create a draft HTML5 page, upload `build/kordanors-cabal-html5.zip` (`tools/ship.sh`, add `--push` for `butler`), and test in the itch iframe: loading, the start key/tap, sound and music, saves surviving a reload, export download and import picker, fullscreen, the rotate prompt.
