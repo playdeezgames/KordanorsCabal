@@ -1,0 +1,24 @@
+state InstructionsScreen
+     INSTRUCTIONS     
+                      
+THE GAME IS PRETTY    
+MUCH MENU DRIVEN. USE 
+ARROW KEYS, SPACE,    
+ENTER, AND RARELY ESC.
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      

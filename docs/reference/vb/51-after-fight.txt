@@ -1,0 +1,24 @@
+state Message
+COUNTER-ATTACK 1/1:   
+GOBLIN ROLLS AN ATTACK
+ OF 2.                
+YOU ROLL A DEFEND OF 1
+.                     
+GOBLIN DOES 1 DAMAGE! 
+YOU HAVE 2 HP LEFT.   
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      

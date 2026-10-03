@@ -1,0 +1,181 @@
+!prep
+snap 01-title [TitleScreen]
+pick 2
+snap 02-instructions [InstructionsScreen]
+: X
+pick 4
+snap 03-about [AboutScreen]
+: X
+pick 3
+snap 04-options [OptionsScreen]
+pick 1
+snap 05-options-screen-size [ScreenSizer]
+: X
+pick 2
+snap 06-options-sfx-volume [SfxVolumizer]
+: X
+pick 3
+snap 07-options-mux-volume [MuxVolumizer]
+: X
+pick 0
+pick 5
+snap 08-confirm-quit [ConfirmQuit]
+: X
+pick 1
+snap 09-load-game [LoadGameScreen]
+: X
+pick 0
+snap 09b-finalize-character [FinalizeCharacter]
+finalize
+snap 10-prolog [Prolog]
+: G
+snap 11-in-play-town-square [InPlay]
+button 3
+snap 12-status [Status]
+: X
+button 0
+snap 13-turn-mode [InPlay]
+: X
+button 5
+snap 14-move-mode [InPlay]
+: X
+button 9
+snap 15-game-menu [GameMenuScreen]
+pick 1
+snap 16-save-game [SaveGameScreen]
+: X
+pick 2
+snap 17-confirm-abandon-game [ConfirmAbandonGame]
+: X
+: X
+!reset-ui
+!feature 1
+button 1
+snap 21-elder [InPlay]
+!reset-ui
+!feature 2
+button 1
+snap 22-innkeeper [InPlay]
+!reset-ui
+!feature 3
+button 1
+snap 23-town-drunk [InPlay]
+!reset-ui
+!feature 4
+button 1
+snap 24-chicken [InPlay]
+!reset-ui
+!feature 5
+button 1
+snap 25-black-market [InPlay]
+!reset-ui
+!feature 6
+button 1
+snap 26-black-mage [InPlay]
+!reset-ui
+!feature 7
+button 1
+snap 27-blacksmith [InPlay]
+!reset-ui
+!feature 8
+button 1
+snap 28-healer [InPlay]
+!reset-ui
+!feature 9
+button 1
+snap 29-constable [InPlay]
+!reset-ui
+!feature 6
+!money 50
+!give 7
+!give 31
+button 1
+button 1
+snap 30-shoppe-offers [ShoppeOffers]
+: X
+button 6
+snap 31-shoppe-prices [ShoppePrices]
+: X
+button 2
+snap 32-shoppe-sell [ShoppeSell]
+: X
+button 7
+snap 33-shoppe-buy [ShoppeBuy]
+: X
+: X
+!reset-ui
+!to 4 e
+!give 7
+!give 10
+!give 20
+!give 31
+snap 40-dungeon-with-enemy [InPlay]
+button 2
+snap 41-enemies [Enemies]
+: X
+button 6
+snap 42-inventory [Inventory]
+: D G
+snap 43-interact-item [InteractItem]
+pick 3
+snap 44-equip-message [Message]
+: G
+: X
+snap 45-in-play-with-equipment [InPlay]
+button 7
+snap 46-equipment [Equipment]
+: G
+snap 47-equipment-detail [InPlay]
+: X
+: X
+: X
+button 6
+: D D D G
+pick 2
+snap 48-use-potion-message [Message]
+: G
+: X
+button 4
+snap 49-map [Map]
+: X
+button 0
+snap 50-fight-message [Message]
+: G
+snap 51-after-fight [Message]
+!reset-ui
+!to 1
+!ground 7
+!ground 10
+snap 60-town-with-ground-items [InPlay]
+button 2
+snap 61-ground-inventory [GroundInventory]
+: X
+!xp 10
+snap 62-in-play-level-up-available [InPlay]
+button 3
+snap 63-level-up [LevelUp]
+: X
+!reset-ui
+!to 1
+!give 31
+button 6
+: G
+snap 64-book-interact [InteractItem]
+pick 2
+snap 65-book-message [Message]
+: G
+: X
+: X
+snap 66-in-play-with-spells [InPlay]
+button 8
+snap 67-spell-list [SpellList]
+: X
+!reset-ui
+!to 4 e
+!hurt 99
+button 0
+snap 70-fight-while-dying [Message]
+: G
+snap 71-after-first-message [Dead]
+: G
+snap 72-after-second-message [TitleScreen]

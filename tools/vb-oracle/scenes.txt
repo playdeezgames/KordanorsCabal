@@ -1,0 +1,190 @@
+# Reference scenes for the Odin port (task 23). Each "snap" writes <name>.txt (text view), <name>.cells (exact cells) and <name>.png.
+# Directives: "! meta" sets up state; ": D G ..." sends commands (U D L R arrows, G Green/confirm, B Blue, X Red/cancel);
+# "pick N" moves a menu cursor to item N and confirms; "button N" selects in-play button N (0-4 left column, 5-9 right) and confirms; "snap name" records.
+!prep
+snap 01-title
+pick 2
+snap 02-instructions
+: X
+pick 4
+snap 03-about
+: X
+pick 3
+snap 04-options
+pick 1
+snap 05-options-screen-size
+: X
+pick 2
+snap 06-options-sfx-volume
+: X
+pick 3
+snap 07-options-mux-volume
+: X
+pick 0
+pick 5
+snap 08-confirm-quit
+: X
+pick 1
+snap 09-load-game
+: X
+pick 0
+snap-if FinalizeCharacter 09b-finalize-character
+finalize
+snap 10-prolog
+: G
+snap 11-in-play-town-square
+button 3
+snap 12-status
+: X
+button 0
+snap 13-turn-mode
+: X
+button 5
+snap 14-move-mode
+: X
+button 9
+snap 15-game-menu
+pick 1
+snap 16-save-game
+: X
+pick 2
+snap 17-confirm-abandon-game
+: X
+: X
+# --- town people: each scene starts from a clean in-play state, moves the player to the feature, and presses Interact (button 1)
+!reset-ui
+!feature 1
+button 1
+snap 21-elder
+!reset-ui
+!feature 2
+button 1
+snap 22-innkeeper
+!reset-ui
+!feature 3
+button 1
+snap 23-town-drunk
+!reset-ui
+!feature 4
+button 1
+snap 24-chicken
+!reset-ui
+!feature 5
+button 1
+snap 25-black-market
+!reset-ui
+!feature 6
+button 1
+snap 26-black-mage
+!reset-ui
+!feature 7
+button 1
+snap 27-blacksmith
+!reset-ui
+!feature 8
+button 1
+snap 28-healer
+!reset-ui
+!feature 9
+button 1
+snap 29-constable
+# shoppe screens (black mage: offers 1, prices 6, sell 2, buy 7); money and goods so the lists are not empty
+!reset-ui
+!feature 6
+!money 50
+!give 7
+!give 31
+button 1
+button 1
+snap 30-shoppe-offers
+: X
+button 6
+snap 31-shoppe-prices
+: X
+button 2
+snap 32-shoppe-sell
+: X
+button 7
+snap 33-shoppe-buy
+: X
+: X
+# --- dungeon
+!reset-ui
+!to 4 e
+!give 7
+!give 10
+!give 20
+!give 31
+snap 40-dungeon-with-enemy
+button 2
+snap 41-enemies
+: X
+button 6
+snap 42-inventory
+: D G
+snap 43-interact-item
+pick 3
+snap 44-equip-message
+: G
+: X
+snap 45-in-play-with-equipment
+button 7
+snap 46-equipment
+: G
+snap 47-equipment-detail
+: X
+: X
+: X
+button 6
+: D D D G
+pick 2
+snap 48-use-potion-message
+: G
+: X
+button 4
+snap 49-map
+: X
+button 0
+snap 50-fight-message
+: G
+snap 51-after-fight
+# --- town extras
+!reset-ui
+!to 1
+!ground 7
+!ground 10
+snap 60-town-with-ground-items
+button 2
+snap 61-ground-inventory
+: X
+!xp 10
+snap 62-in-play-level-up-available
+button 3
+snap 63-level-up
+: X
+# learn a spell from a book, then open the spell list
+!reset-ui
+!to 1
+!give 31
+button 6
+: G
+snap 64-book-interact
+pick 2
+snap 65-book-message
+: G
+: X
+: X
+snap 66-in-play-with-spells
+button 8
+snap 67-spell-list
+: X
+# death: wounds beyond HP, then a fight
+!reset-ui
+!to 4 e
+!hurt 99
+button 0
+snap 70-fight-while-dying
+: G
+snap 71-after-first-message
+: G
+snap 72-after-second-message

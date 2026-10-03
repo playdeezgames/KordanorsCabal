@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Headless driver for the original VB game: runs its UI state machine without MonoGame and dumps screens.
+       Used to record reference behaviour for the Odin port (task 23). Not part of the shipped game. -->
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><Nullable>disable</Nullable><RootNamespace>VbOracle</RootNamespace></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/KordanorsCabal.UI/KordanorsCabal.UI.vbproj" />
+    <ProjectReference Include="../../src/KordanorsCabal.Game/KordanorsCabal.Game.vbproj" />
+    <ProjectReference Include="../../src/KordanorsCabal.Data/KordanorsCabal.Data.vbproj" />
+    <ProjectReference Include="../../src/SPLORR.UI/SPLORR.UI.vbproj" />
+    <ProjectReference Include="../../src/SPLORR.Data/SPLORR.Data.vbproj" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.8" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,24 @@
+state ShoppePrices
+        PRICES        
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+   TOWN PORTAL: 50    
+  MOON PORTAL: 5000   
+BOOK OF HOLY BOLT: 100
+       BONG: 25       
+      "HERB": 5       
+  BOOK OF PURIFY: 50  
+                      
+                      
+                      
+                      
+                      
+                      
+     ARROWS, ESC      

@@ -1,0 +1,24 @@
+state GameMenuScreen
+      GAME MENU       
+                      
+                      
+                      
+                      
+       GO BACK        
+      SAVE GAME       
+     ABANDON GAME     
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      

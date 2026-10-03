@@ -1,0 +1,24 @@
+state ShoppeOffers
+        OFFERS        
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+    GOBLIN EAR: 5     
+  SKULL FRAGMENT: 5   
+     RAT TAIL: 1      
+    MAGIC EGG: 100    
+     MUSHROOM: 25     
+   ZOMBIE TAINT: 5    
+     BAT WING: 3      
+    SNAKE FANG: 3     
+                      
+                      
+                      
+                      
+     ARROWS, ESC      
