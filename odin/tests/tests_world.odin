@@ -2,6 +2,7 @@ package main
 
 import "core:fmt"
 import "core:mem"
+import "core:time"
 import "kc:game"
 
 generated :: proc(seed: u64) -> game.World {
@@ -234,12 +235,15 @@ test_save_roundtrip :: proc(t: ^T) {
 	w.player.quest_completions[.Cellar_Rats] = 4
 	w.player.shoppe = .Healer
 
+	t0 := time.tick_now()
 	data, err := game.world_save(&w)
+	t1 := time.tick_now()
 	expect(t, err == nil, "save")
 	defer delete(data)
-	fmt.printf("    (a new game saves as %d bytes)\n", len(data))
 	loaded: game.World
 	lerr, msg := game.world_load(&loaded, data, context.temp_allocator)
+	t2 := time.tick_now()
+	fmt.printf("    (a new game saves as %d bytes: save %.0f ms, load %.0f ms)\n", len(data), time.duration_milliseconds(time.tick_diff(t0, t1)), time.duration_milliseconds(time.tick_diff(t1, t2)))
 	expect_eq(t, lerr, game.Load_Error.None)
 	if lerr != .None { fmt.println("   ", msg); return }
 	defer game.world_destroy(&loaded)

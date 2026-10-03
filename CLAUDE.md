@@ -17,7 +17,7 @@ dotnet test                                                    # all tests (xUni
 dotnet test KordanorsCabal.Game.Tests --filter "FullyQualifiedName~WorldShould"   # one class/test
 ```
 
-`shippit.sh` (repo root) publishes self-contained linux-x64/win-x64 builds to `pub-*`, pushes them to itch.io with `butler`, and commits everything as "shipped it!". That's why many commits have that message and why `pub-*` binaries are tracked.
+The old publish script `shippit.sh` was removed with the port (see `tools/ship.sh`); `pub-*` are the committed output of the old VB publishes, which is why many commits are named "shipped it!".
 
 ## Architecture
 
@@ -60,7 +60,6 @@ odin/platform/native/ package main for the SDL2 development build
 odin/tests/           portable test kit + all test cases; runs natively (odin test) and as wasm under node
 tools/                build.sh, test.sh, serve.sh, run_wasm_node.js; gen/ (generators for font, reference data); vb-oracle/ (headless VB driver)
 docs/reference/vb/    recorded screens of the original game (text, exact cells, PNG, frame hash)
-spikes/               throwaway experiments, kept as history until parity
 src/                  the original VB.NET game: the reference until the port reaches parity
 ```
 

@@ -6,6 +6,10 @@
 	const SFX_FILES = [null, "RollDice.wav", "EnemyDeath.wav", "EnemyHit.wav", "LevelUp.wav", "Miss.wav", "PlayerDeath.wav", "PlayerHit.wav", "UnlockDoor.wav"];
 	const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 
+	const seedParam = new URLSearchParams(location.search).get("seed");
+	const fixedSeed = seedParam !== null && /^\d{1,9}$/.test(seedParam) ? Number(seedParam) : null;
+	let fixedSeedHalf = 0;
+
 	const mem = new odin.WasmMemoryInterface();
 	let exports = null;
 
@@ -13,7 +17,11 @@
 	const platformImports = {
 		js_download_text(np, nl, tp, tn) { offerDownload(mem.loadString(np, nl), mem.loadString(tp, tn)); },
 		js_request_file_pick() { offerFilePick(); },
-		js_entropy_u32() { return crypto.getRandomValues(new Uint32Array(1))[0] | 0; },
+		// ?seed=N fixes the seed of new games (for bug reports and tests): the high word is 0 and the low word is N
+		js_entropy_u32() {
+			if (fixedSeed !== null) { fixedSeedHalf ^= 1; return fixedSeedHalf ? 0 : fixedSeed; }
+			return crypto.getRandomValues(new Uint32Array(1))[0] | 0;
+		},
 		js_log(p, n) { console.log(mem.loadString(p, n)); },
 	};
 

@@ -4,6 +4,7 @@ package main
 // Native platform (development and tests). D6: this is where core:os and SDL2 are allowed.
 import "core:fmt"
 import "core:os"
+import "core:strconv"
 import "core:strings"
 import SDL "vendor:sdl2"
 import "kc:game"
@@ -25,12 +26,16 @@ native_services :: proc() -> game.Services {
 			fmt.println("export ->", path, err == nil ? "ok" : "FAILED")
 		},
 		request_file_pick = proc() { pick_requested = true },
-		entropy = proc() -> u64 { return u64(SDL.GetPerformanceCounter()) * 2862933555777941757 + u64(SDL.GetTicks()) },
+		entropy = proc() -> u64 {
+			if fixed_seed >= 0 { return u64(fixed_seed) } // --seed N
+			return u64(SDL.GetPerformanceCounter()) * 2862933555777941757 + u64(SDL.GetTicks())
+		},
 		log = proc(message: string) { fmt.println(message) },
 	}
 }
 
 pick_requested: bool
+fixed_seed := -1 // set by --seed N
 
 // Stand-in for a file picker: reads ./import.json, or reports "cancelled" when it does not exist.
 deliver_pick :: proc(events: ^[dynamic]game.Input_Event) {
@@ -44,6 +49,7 @@ deliver_pick :: proc(events: ^[dynamic]game.Input_Event) {
 }
 
 main :: proc() {
+	for arg, i in os.args { if arg == "--seed" && i + 1 < len(os.args) { if n, ok := strconv.parse_int(os.args[i + 1]); ok && n >= 0 && n < 1_000_000_000 { fixed_seed = n } } }
 	if SDL.Init({.VIDEO, .EVENTS, .AUDIO}) != 0 { fmt.eprintln(SDL.GetError()); os.exit(1) }
 	defer SDL.Quit()
 	LOGICAL_W :: game.FRAME_WIDTH * game.FRAME_STRETCH_X

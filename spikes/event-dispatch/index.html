@@ -1,9 +1,0 @@
-<!doctype html><meta charset="utf-8"><title>events</title>
-<pre id="out"></pre>
-<script type="text/javascript" src="odin.js"></script>
-<script>
-if (document.hidden) window.requestAnimationFrame = f => setTimeout(()=>f(performance.now()), 16);
-const out = document.getElementById("out");
-const log = console.log; console.log = (...a)=>{ log(...a); out.textContent += a.join(" ")+"\n"; };
-odin.runWasm("events.wasm", null, null, null).then(async () => {}).catch(e=>{ out.textContent += "ERR "+e+"\n"; });
-</script>

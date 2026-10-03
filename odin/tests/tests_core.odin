@@ -34,6 +34,7 @@ ALL_TESTS := []Test_Case{
 	{"town: the spell list", test_town_spells_golden},
 	{"town: buying, selling, repair, healing and the other favours", test_town_shops},
 	{"town: the cellar rats quest and the purify spell", test_town_quest_spells},
+	{"soak: random play never breaks the world", test_soak},
 	{"render: the rasterizer reproduces every recorded VB screen bit for bit", test_rasterizer_reference},
 	{"ui: the original screens match the recorded VB frames", test_ui_golden},
 	{"ui: title menu, finger and mouse taps", test_ui_title_input},

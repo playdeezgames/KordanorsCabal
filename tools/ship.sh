@@ -2,7 +2,7 @@
 # Packages the web build for itch.io (HTML5). Usage:
 #   tools/ship.sh            build the release web build and write build/kordanors-cabal-html5.zip
 #   tools/ship.sh --push     also upload it with butler (channel "html5" of thegrumpygamedev/kordanors-cabal); needs `butler login`
-# Pushing is never done unless --push is given. The old shippit.sh (VB builds) is untouched.
+# Pushing is never done unless --push is given.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ./tools/test.sh

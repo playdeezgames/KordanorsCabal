@@ -1,13 +1,12 @@
 # Odin Port: Decisions and Prerequisites
 
-Goal: rewrite Kordanor's Cabal (currently VB.NET + MonoGame + SQLite, under `src/`) in Odin, shipping as `js_wasm32` for the browser. Status: all prerequisite tasks are done except task 28, which needs the user; the repository skeleton exists (`odin/`, `tools/`) and runs the title screen on web and native. See "Needs your attention" below for what is waiting on a person.
+Goal: rewrite Kordanor's Cabal (currently VB.NET + MonoGame + SQLite, under `src/`) in Odin, shipping as `js_wasm32` for the browser. Status: **the game is fully ported** (steps 1 to 7 below; every system of the VB game, checked against recorded VB frames) and builds for web and native. What is left needs a person: the itch.io test, real-device testing, the theme in mp3/m4a, and the credits text. See "Needs your attention". See "Needs your attention" below for what is waiting on a person.
 
 
 ## Needs your attention
 
-Written at the end of an unattended session (tasks 19 to 30). Nothing was committed, pushed, uploaded or published; everything
-is in the working tree (`git status` shows the new files: `PORT.md`, `CLAUDE.md`, `docs/`, `odin/`, `spikes/`, `tools/`, and an
-edited `.gitignore`).
+Updated at the end of port step 7. Everything is committed on the branch `odin-port`; nothing has been pushed, uploaded or
+published (`tools/ship.sh` builds `build/kordanors-cabal-html5.zip`; `--push` would upload it with `butler`).
 
 ### Blocked on you
 
@@ -25,6 +24,10 @@ edited `.gitignore`).
    and this machine has no encoder. Please provide `MinorTheme.mp3` or `.m4a` (or tell me to install `ffmpeg` here), and then
    listen to whether the 2-minute theme loops without an audible gap in the browser (task 20).
 4. ~~**Commit policy.**~~ Resolved: work is committed on the branch `odin-port` in logical commits.
+5. **Credits text.** The Credits screen still lacks the sound-effect sources; the music line says only "generated with Abundant Music". Tell me the wording.
+6. **Content questions** (`docs/dead-code-audit.md`): Amulet of STR has no buff in the data; Lotion never runs out; the three unobtainable items (review 5).
+7. **Merge.** The port lives on `odin-port`; `main` still holds the VB game. Say when to merge (or open a pull request).
+8. **Continue loads slowly on a phone-class CPU.** On this machine a 470 KB save takes about 300 ms to load and 100 ms to save in wasm; a phone may take several times longer. If that feels bad on a device, the loader can be sped up (a hand-written reader instead of Odin's JSON unmarshal).
 
 ### Decisions for you: all ten reviewed on 2026-10-03
 
@@ -54,7 +57,7 @@ The ones most worth a look, in order of how hard they are to change later:
 - `PORT.md` is long on purpose; each task has "Verified" and "Not verified" lists. The "Not verified" items are the real
   to-do list for testing.
 
-### Suggested order for the actual port (in progress: steps 1 to 6 done, see "Port step 1" in the log)
+### The order the port was done in (all seven steps are done; see "Port step N" in the log)
 
 The infrastructure exists (rendering, input, services, content, RNG, tests, builds). Each step below ends with
 `tools/test.sh` passing and, where a screen exists, a bit-exact comparison with `docs/reference/vb`:
@@ -64,7 +67,7 @@ The infrastructure exists (rendering, input, services, content, RNG, tests, buil
 4. ~~Items: inventory, equipment, ground, events (task 18 handlers), durability.~~ **Done** (`items.odin`, `events.odin`, `ui_items.odin`; repair comes with the blacksmith in step 6).
 5. ~~Combat, death, XP and level up.~~ **Done** (`combat.odin`; see "Port step 5").
 6. ~~Townsfolk and shoppes; spells and quests.~~ **Done** (`shoppes.odin`, `ui_town.odin`; see "Port step 6").
-7. Polish, the real-device pass, itch.io release.
+7. ~~Polish~~ **Done as far as one machine allows** (soak test, timing, `?seed=`/`--seed`, cleanup, release zip); the real-device pass and the itch.io release wait for you.
 
 ## Decisions
 
@@ -1381,3 +1384,15 @@ Decided together with task 24 (see above): `src/` is kept untouched as the refer
 **Not verified:** the Healer's and Blacksmith's repair in a full game with wear from combat; casting Holy Bolt in a fight from the list (the strike itself is tested); Moon travel; touch taps on the shoppe lists (the shared list code applies the two-step rule but no test taps them).
 
 **What is left of the game itself:** nothing known. Every system of the original is now ported. Open content questions for the owner are in `docs/dead-code-audit.md` (Amulet of STR, Lotion; the three unobtainable items from review 5).
+
+
+### Port step 7: soak test, timing, seeds, cleanup and the release build (2026-10-03)
+
+**Done:**
+- **Soak test** (`tests_soak.odin`, in the suite): a random player (random commands and taps, mostly pressing random in-play buttons, helped every 40 steps with healing, money, a random item and a known spell, and every 120 steps with a teleport to a random place, so it reaches the dungeon, the moon, the cellar, the shops and the fights) plays 2 x 1,500 steps from the title screen; the world is validated every 25 steps and after every in-play step; no crash, assert, leak or invalid world. It reaches 19 to 28 of the 37 screens (the menus and import/export are covered by their own tests).
+- **Timing**, measured with the real `-o:size` build in the browser pane and in the wasm tests under node: generating a world 74 to 85 ms; saving 100 to 111 ms for 472 KB; loading about 300 ms (node, with the leak checker on); ordinary frames 0.1 to 8 ms; the heaviest ordinary frame seen 38 ms (a first-use frame). Hitches happen only at Start, Save and Continue.
+- **Seeds:** the browser takes `?seed=N` (up to nine digits) and the native build `--seed N`, as decided in D21; the Status page shows `Seed nnnnnnnnn`, which was verified in the browser (`?seed=11` gave `SEED 000000011`).
+- **Cleanup (decision 10):** `spikes/` and the old `shippit.sh` are deleted (they remain in git history); `src/` and `tools/vb-oracle` stay until you say.
+- **Release build:** `tools/ship.sh` runs the whole test suite, builds the `-o:size` web build and zips it for itch.io (not pushed).
+
+**Not verified:** anything on a real phone or in itch.io's iframe (task 28 and review 3's device list); long real play sessions by a person (the soak test is random); whether 300 ms for Continue is acceptable on a phone; the audio in a real browser session of the whole game.
