@@ -348,3 +348,25 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Odin spike build outputs
+spikes/**/*.wasm
+spikes/*/sdl2spike
+spikes/*/mixspike
+spikes/*/native
+spikes/*/dualtest
+spikes/*/odin.js
+spikes/*/saves
+spikes/*/assets
+spikes/*/coretest
+spikes/*/exports
+spikes/*/events.wasm
+spikes/*/memory.wasm
+spikes/*/rng.wasm
+spikes/*/native.out
+spikes/*/tests.wasm
+spikes/*/tests_native
+tools/vb-oracle/bin
+tools/vb-oracle/obj
+build/
+odin/platform/web/page/assets
