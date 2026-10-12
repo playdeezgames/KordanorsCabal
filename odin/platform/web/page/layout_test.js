@@ -20,7 +20,7 @@ for (const [name, width, height, touch, insets] of devices) {
 	const ins = { left: 0, right: 0, top: 0, bottom: 0, ...insets };
 	const p = L.paper;
 	check(p.x >= ins.left - 0.01 && p.x + p.w <= width - ins.right + 0.01 && p.y >= ins.top - 0.01 && p.y + p.h <= height - ins.bottom + 0.01, "paper inside the safe area");
-	if (!touch) { check(L.scale < 1 || Number.isInteger(L.scale), "integer scale on desktop"); check(!L.controls, "no controls on desktop"); }
+	if (!touch) { check(!L.controls, "no controls on desktop"); }
 	if (L.controls) {
 		const rects = Object.entries(L.controls);
 		for (const [n, r] of rects) {

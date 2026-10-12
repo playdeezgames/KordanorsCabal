@@ -5,7 +5,6 @@
 	if (typeof module === "object" && module.exports) module.exports = factory(); else root.computeLayout = factory().computeLayout;
 })(typeof self !== "undefined" ? self : this, function () {
 	const PAPER_W = 352, PAPER_H = 184, BORDER_W = 32, BORDER_H = 28;
-	const FULL_W = PAPER_W + 2 * BORDER_W, FULL_H = PAPER_H + 2 * BORDER_H; // the whole frame including its border: 416 x 240
 	const MIN_SIDES_SCALE = 1.3;   // below this the side control columns cost too much screen: controls are hidden
 	const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -17,19 +16,18 @@
 
 		let mode, scale, paper, controls = null;
 		if (!touch) {
-			// Desktop: the whole original frame (paper plus border), integer scale when it fits, no on-screen controls.
-			const fit = Math.min(area.w / (PAPER_W + 2 * BORDER_W), area.h / (PAPER_H + 2 * BORDER_H));
-			scale = fit >= 1 ? Math.floor(fit) : fit;
+			// Desktop: the paper alone, as large as the page allows (letterbox or column box), no on-screen controls.
+			scale = Math.min(area.w / PAPER_W, area.h / PAPER_H);
 			mode = "desktop";
 		} else {
-			// The original border is kept (owner decision, review 3): scale is computed for the whole 416 x 240 frame.
+			// No border: the paper alone fills as much of the area as it can.
 			const c = clamp(Math.round(area.w * 0.13), 96, 128);
-			const sides = Math.min((area.w - 2 * c) / FULL_W, area.h / FULL_H);
+			const sides = Math.min((area.w - 2 * c) / PAPER_W, area.h / PAPER_H);
 			if (sides >= MIN_SIDES_SCALE) {
 				mode = "touch-sides"; scale = sides;
 				controls = buildControls(area, c, scale);
 			} else {
-				mode = "touch-full"; scale = Math.min(area.w / FULL_W, area.h / FULL_H);
+				mode = "touch-full"; scale = Math.min(area.w / PAPER_W, area.h / PAPER_H);
 			}
 		}
 		const w = PAPER_W * scale, h = PAPER_H * scale;

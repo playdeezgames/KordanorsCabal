@@ -119,6 +119,7 @@
 	}
 
 	// ---- input ----------------------------------------------------------------------------------------
+	let stepNow = () => {}; // set by the frame loop below: runs one core step and presents it at once
 	const KEYS = {
 		ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right", Numpad8: "up", Numpad2: "down", Numpad4: "left", Numpad6: "right",
 		Space: "confirm", Enter: "confirm", NumpadEnter: "confirm", Numpad5: "confirm", Escape: "cancel", Backspace: "cancel",
@@ -130,10 +131,12 @@
 	addEventListener("keydown", (e) => {
 		if (!started) { start(); e.preventDefault(); return; }
 		const name = KEYS_BY_KEY[e.key] || KEYS[e.code];
-		if (!name || e.repeat) return;
+		if (!name) return;
 		e.preventDefault();
+		if (e.repeat && name !== "up" && name !== "down" && name !== "left" && name !== "right") return; // held arrows repeat; confirm and cancel do not
 		logInput("key", e.key, e.code, "->", name);
 		exports.platform_command(COMMAND[name]);
+		stepNow();
 	});
 	// A tap on either overlay is the start gesture. Fullscreen needs "transient user activation": pointerdown counts for a
 	// mouse, but for touch only pointerup does (HTML spec, activation-triggering input events).
@@ -149,9 +152,10 @@
 		const col = Math.floor((e.clientX - r.left) / r.width * CELL_COLS), row = Math.floor((e.clientY - r.top) / r.height * CELL_ROWS);
 		logInput("tap", col, row, e.pointerType);
 		exports.platform_tap(col, row, e.pointerType !== "touch"); // a finger is not precise (task 16)
+		stepNow();
 	});
 	for (const b of controlsEl.children) {
-		b.addEventListener("pointerdown", (e) => { e.preventDefault(); if (!started) return start(); logInput("button", b.dataset.cmd); exports.platform_command(COMMAND[b.dataset.cmd]); });
+		b.addEventListener("pointerdown", (e) => { e.preventDefault(); if (!started) return start(); logInput("button", b.dataset.cmd); exports.platform_command(COMMAND[b.dataset.cmd]); stepNow(); });
 	}
 	addEventListener("contextmenu", (e) => e.preventDefault());
 
@@ -201,20 +205,24 @@
 	}
 
 	// ---- the frame loop -----------------------------------------------------------------------------------------
-	let prev = performance.now(), lastBorder = "";
-	function frame(now) {
-		exports.platform_frame(Math.min((now - prev) / 1000, 0.25)); prev = now;
+	let prev = performance.now();
+	// step() runs the core and presents its frame. Input handlers call it straight away instead of waiting for the next
+	// animation frame, so a key press shows its result without a frame of latency.
+	function step(dt) {
+		exports.platform_frame(dt);
 		const ptr = exports.platform_frame_ptr();
 		if (ptr && layout.mode !== "rotate") {
 			const bytes = new Uint8ClampedArray(mem.memory.buffer, ptr, FRAME_W * FRAME_H * 4);
 			stagingCtx.putImageData(new ImageData(bytes, FRAME_W, FRAME_H), 0, 0);
 			ctx.imageSmoothingEnabled = false;
-			ctx.drawImage(staging, BORDER_X, BORDER_Y, 176, 184, 0, 0, canvas.width, canvas.height); // the paper only; the border becomes the page background
-			const border = `rgb(${bytes[0]},${bytes[1]},${bytes[2]})`; // pixel (0,0) is always border
-			if (border !== lastBorder) { document.body.style.background = document.documentElement.style.background = border; lastBorder = border; }
+			ctx.drawImage(staging, BORDER_X, BORDER_Y, 176, 184, 0, 0, canvas.width, canvas.height); // the paper only; the page behind it is the letterbox
 		}
 		if (audioState.ctx) { audioState.sfxGain.gain.value = exports.platform_sfx_volume(); audioState.musicGain.gain.value = exports.platform_music_volume(); }
 		for (let i = 0, n = exports.platform_sfx_count(); i < n; i++) playSfx(exports.platform_sfx_at(i));
+	}
+	stepNow = () => { const now = performance.now(); step(Math.min((now - prev) / 1000, 0.25)); prev = now; };
+	function frame(now) {
+		step(Math.min((now - prev) / 1000, 0.25)); prev = now;
 		requestAnimationFrame(frame);
 	}
 	if (document.hidden) window.requestAnimationFrame = (f) => setTimeout(() => f(performance.now()), 16); // testing aid for hidden panes
