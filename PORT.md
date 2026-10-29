@@ -1426,3 +1426,12 @@ Design decided with the owner 2026-10-28 (see `docs/FINISH-PLAN.md`). Code in `o
 **Findings:** `kill()` is the right hook for victory because both spells and the fight call it. Stat numbers are first guesses, not tuned (task for the simulator). The Elder keeps his feature after the fight, but the world is discarded, so it never matters.
 
 **Not verified:** how the Elder and ending screens look on screen; the fight's balance against real kits; whether the 10-notes threshold is reachable (25 notes spawn in every game, but a player must open dead ends to find them); no flag for a completed slot or title-screen mark yet.
+
+
+### Finish phase 1: lore #8 to #25 (2026-10-29)
+
+**Done:** the 18 placeholder lores are written (`Lores` table and the VB seed; regenerated). Notes pick their text at random on first read, so the texts cannot be ordered by level; instead the clues are redundant: #14 (the town's Elders are always called Zooperdan), #15, #8, #10, #12, #13, #17, #20, #21, #22 point at the old man in the village; #11 explains the Orb and why the shards were scattered; #16 says the horns hold Kordanor's power; #25 tells the reader to give them to nobody. Others are colour (the malcontents #9, the Moon #18, the gods #19, goblins #21, a roster #23, a herb garden #24) with two gameplay hints (#20 holy bolt and undead; #24 Magic Egg). With 10 of 25 read, the refusal ending needs a player to have seen the pattern; only nine notes (#1 to #4, #9, #18, #19, #23, #24) carry no pointer, so any 10 contain at least one, but an unlucky player may see only one or two: raise or lower `LORES_FOR_REFUSAL` after playtests, or add pointers.
+
+**Changed:** reading a Note now word-wraps the text at spaces (`wrap22`) instead of cutting words at column 22. This departs from decision review 7 (fidelity), for lore only; revert the one line in `events.odin` (`Read_Note`) to restore the old cut. The longest text is 384 bytes (limit 768).
+
+**Not verified:** how the pages look on screen.

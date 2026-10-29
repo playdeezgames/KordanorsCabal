@@ -150,7 +150,7 @@ perform :: proc(name: Action, ctx: Event_Context) {
 		if it == nil { return }
 		if it.lore == 0 { it.lore = u8(unassigned_lore(w)) }
 		w.player.lores_read |= u32(1) << (it.lore - 1)
-		say(w, .None, LORES[it.lore].text)
+		say(w, .None, wrap22(LORES[it.lore].text)) // wrapped at spaces: the original cut words at column 22, hard to read in long lore
 
 	case .Learn_Holy_Bolt: learn_spell(w, who, .Holy_Bolt)
 	case .Learn_Purify: learn_spell(w, who, .Purify)
