@@ -35,6 +35,7 @@ SMITH_PRICES :: 6
 SMITH_BUY :: 7
 CONSTABLE_BOUNTIES :: 1
 HEALER_HEAL :: 1
+HEAL_COOLDOWN :: 40 // steps between two free heals; the campaign simulator (tools/analysis/campaign.py) sets how tense this is
 HEALER_PRICES :: 6
 HEALER_BUY :: 7
 
@@ -277,7 +278,14 @@ town_button :: proc(core: ^Core, button: int) {
 		}
 	case .Healer:
 		switch button {
-		case HEALER_HEAL: character_get(w, who).stats[.Wounds] = 0
+		case HEALER_HEAL:
+			if w.player.heal_wait > 0 {
+				message_add(w, .None, wrap22(fmt.tprintf("Marten is spent. Come back in %d steps.", w.player.heal_wait)))
+				show_messages_then(core, .In_Play)
+			} else {
+				character_get(w, who).stats[.Wounds] = 0
+				w.player.heal_wait = HEAL_COOLDOWN
+			}
 		case HEALER_PRICES: open_shoppe(core, shoppe, .Shoppe_Prices)
 		case HEALER_BUY: open_shoppe(core, shoppe, .Shoppe_Buy)
 		}

@@ -131,6 +131,18 @@ test_town_shops :: proc(t: ^T) {
 	talk_to(c, .Nihilist_Healer_Marten)
 	button(c, game.HEALER_HEAL)
 	expect_eq(t, me.stats[.Wounds], i32(0))
+	expect_eq(t, w.player.heal_wait, game.HEAL_COOLDOWN)
+	// and rests: a second heal straight away is refused until enough steps are walked
+	me.stats[.Wounds] = 2
+	talk_to(c, .Nihilist_Healer_Marten)
+	button(c, game.HEALER_HEAL)
+	expect_eq(t, me.stats[.Wounds], i32(2))
+	expect_eq(t, c.state, game.UI_State.Message)
+	press(c, .Confirm)
+	w.player.heal_wait = 0
+	talk_to(c, .Nihilist_Healer_Marten)
+	button(c, game.HEALER_HEAL)
+	expect_eq(t, me.stats[.Wounds], i32(0))
 
 	// the black mage restores mana
 	me.stats[.Mana], me.stats[.Fatigue] = 3, 2

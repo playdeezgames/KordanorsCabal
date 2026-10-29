@@ -1450,3 +1450,7 @@ Dumped the Elder, message and lore screens as text (a scratch test, not kept) an
 ### Finish phase 2: gear spread (2026-10-29, task #313)
 
 New spawn table for the seven gear items (database and VB seed; see `docs/difficulty-analysis.md`, "Experiment: spreading the gear"). **Finding:** the model player buys its kit with level I money, and neither the spread nor higher shop prices changed its safety beyond noise, so gear is not the difficulty lever; monsters (#314) and attrition (#316) are. `campaign.py` now accepts `price_Name=N` overrides for such experiments.
+
+## Marten's heal cooldown (#316, first part)
+
+`Player_State.heal_wait` (saved) is set to `HEAL_COOLDOWN` (40) when Marten heals and falls by one per step the player walks (`move_character`). Pressing Heal while it is above zero says how many steps are left and heals nothing. Chosen by the owner (cooldown, not money). The campaign simulator says 40 steps moves levels I to III into their death targets; see docs/difficulty-analysis.md. Not done in #316: fewer potions, faster hunger, repair costs.

@@ -137,6 +137,7 @@ move_character :: proc(w: ^World, who: Character_ID, d: Direction) -> (starved: 
 	from := location_get(w, c.location)
 	route := from.routes[d]
 
+	if who == w.player.character { w.player.heal_wait = max(w.player.heal_wait - 1, 0) }
 	stat_add(c, .Hunger, max(c.stats[.Highness] / 2 + c.stats[.Food_Poisoning] / 2, 1))
 	stat_add(c, .Drunkenness, -1)
 	stat_add(c, .Highness, -1)

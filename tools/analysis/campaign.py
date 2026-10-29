@@ -36,6 +36,9 @@ def roll_dice(s):
 RULES = dict(
     maxdef=1,                       # the player's defence cap (Base Maximum Defend)
     heal_cost=lambda level, wounds: 0,   # what the healer charges for a full heal
+    heal_cooldown=0,                # steps the player must walk between two free heals (the game: HEAL_COOLDOWN in ui_town.odin)
+    steps_per_room=6,               # steps walked to reach and clear one room
+    steps_per_trip=24,              # steps for the walk to town and back
     potions_found=0.6,              # share of the spawned potions the player finds and keeps
     potion_dice='2d4',
     retreat_below=0.5,              # go home when hurt below this share of HP with no potion
@@ -177,7 +180,9 @@ def town(p, level, st_):
     """Heal, repair, buy upgrades with what money allows (the smith's order of need)."""
     wounds = p.wounds
     cost = RULES['heal_cost'](level, wounds)
-    if wounds > 0 and p.money >= cost: p.money -= cost; p.wounds = 0
+    p.cool = max(getattr(p, 'cool', 0) - RULES['steps_per_trip'], 0)   # the walk itself counts
+    if wounds > 0 and p.cool > 0: st_['unhealed'] += 1
+    elif wounds > 0 and p.money >= cost: p.money -= cost; p.wounds = 0; p.cool = RULES['heal_cooldown']
     elif wounds > 0 and cost > 0: st_['unhealed'] += 1
     for k, g in p.gear.items():   # repair
         d = GEAR[g[0]]
@@ -231,6 +236,7 @@ def campaign():
                 elif random.random() < RULES['items_found']:
                     name = [g['name'] for g in GEAR.values() if g['id'] == iid][0]; p.equip(name, True)
             items[k] = []
+            p.cool = max(getattr(p, 'cool', 0) - RULES['steps_per_room'], 0)
             if R[k]:
                 s['rooms'] += 1; hp0 = p.hp()
                 r, left = room_fight(p, R[k], level, s)

@@ -54,6 +54,7 @@ Player_State :: struct {
 	spells:            [Spell_Type]i32, // level known; 0 = not known
 	lores_read:        u32,             // bit n-1 is set once the note with lore n has been read (the refusal ending needs enough of them)
 	finale:            Finale,          // which fight with Zooperdan is on, if any
+	heal_wait:         i32,             // steps the player must still walk before Marten heals again (see HEAL_COOLDOWN)
 	ending:            Finale,          // set when Zooperdan dies; runtime only, the game then moves to the ending screens
 }
 

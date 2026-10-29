@@ -148,3 +148,15 @@ Changed the spawn table so the kit is found over the levels instead of on levels
 | + prices 150 / 300 / 600 | 5 / 8 / 3 / 2 / 5 % | chainmail 96%, brodesode 3% | 80% |
 
 **Finding: gear is not the lever.** The player buys the kit with the money of level I (706 gold of kills), not from the floor, and even when the shop is made much dearer the careful player is no safer or less safe than before: differences are within noise (80 to 150 runs, a few percent). A careful player skips what is dangerous, so what he wears matters little. Gear spread is kept because it makes the dungeon feel less front-loaded and replaces broken pieces, but difficulty has to come from the monsters (#314) and from attrition (#316), the two things a careful player cannot walk around. The prices were not changed.
+
+## Experiment: a cooldown on the healer (2026-10-29)
+
+`heal_cooldown` in `tools/analysis/campaign.py` (steps between two free heals; a room costs 6 steps, a town trip 24). 150 runs each, share of runs that die on the level:
+
+| Cooldown | I | II | III | IV | V | Finish alive |
+|---|---|---|---|---|---|---|
+| 0 (before) | 6% | 6% | 11% | 5% | 2% | 73% |
+| 40 steps | 10% | 9% | 16% | 12% | 8% | 56% |
+| 80 steps | 15% | 18% | 14% | 5% | 4% | 55% |
+
+Targets: I 10-20, II 8-15, III 10-18, IV 12-22, V 20-30. A cooldown of 40 puts levels I to III inside the targets and IV nearly; V is still low until the monsters scale (#314). 80 overshoots II and the extra pressure just sends the player home sooner. The game uses 40 (`HEAL_COOLDOWN`).
