@@ -15,7 +15,7 @@ Open work on Kordanor's Cabal, collected from the port. Newest findings first. (
 - [x] (fixed 2026-10-28: Fire Shard on III boss room, Amulet of Mana moved to II, Amulet of DEX placed on V) **Spawn rules with a count but no place:** the Fire Shard (Level III, see the orb item above) and the Amulet of Mana (Level V) never appear; the Amulet of Mana (Level II) has places but no count.
 - [ ] **Credits.** Add the sound-effect sources and the wording for the music ("generated with Abundant Music", seed 2645320710) to the Credits screen.
 
-## Story and ending (design notes from the owner, 2026-10-03; not built)
+## Story and ending (design notes from the owner, 2026-10-03; BUILT 2026-10-29 as two endings, see `docs/FINISH-PLAN.md`; stats untuned, no completed-slot flag yet)
 
 - **The twist.** When the player gives the **Horns of Kordanor** to the Elder, they learn that the cult was **not keeping Kordanor captive; it was keeping him safe from Zooperdan** (the Elder, the quest giver). Giving the horns to Zooperdan turns him into the **final boss**, and the player must fight him.
 - **Fits the existing text.** Lore #1 says the kin kept vigil "not to keep the captive within, but to keep those that seek his release without". Lore #7 (*Z's Epistle*, signed "-Z": "I have arrived... I cannot enter yer realm for your many wards of protection, but I will find a way to send another to fetch what I need") is Zooperdan, who sent the player. Lore #5 (*Keep him in prison, for the one seeking his death shall overtake all*) and #6 point the same way. The Elder's *The Cabal* speech ("slay this foul fiend and bring to me his horns") is the lie. The 18 missing lore texts are the natural place to unfold the reveal.

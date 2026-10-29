@@ -52,6 +52,8 @@ Save_Player :: struct {
 	quests:      []Quest_Type, // accepted and not yet completed
 	completions: [][2]i32,     // [quest id, times completed]
 	spells:      [][2]i32,     // [spell id, level]
+	lores_read:  u32,
+	finale:      Finale,
 }
 Save_World :: struct {
 	seed:       string, // 16 hex digits
@@ -82,7 +84,7 @@ world_save :: proc(w: ^World, pretty := false, allocator := context.allocator) -
 	sw.placed = w.placed
 
 	p := &w.player
-	sp := Save_Player{character = uuid_string(p.character, ta), mode = p.mode, facing = p.facing, shoppe = p.shoppe}
+	sp := Save_Player{character = uuid_string(p.character, ta), mode = p.mode, facing = p.facing, shoppe = p.shoppe, lores_read = p.lores_read, finale = p.finale}
 	quests := make([dynamic]Quest_Type, ta)
 	completions := make([dynamic][2]i32, ta)
 	for q in Quest_Type {
@@ -236,8 +238,8 @@ world_load :: proc(w: ^World, data: []byte, parse_allocator := context.allocator
 	sp := &sw.player
 	pid, pid_ok := uuid_parse(sp.character)
 	if !pid_ok || Character_ID(pid) not_in w.characters { return fail(w, .Invariant, "the save has no live player") }
-	if !valid_enum(sp.mode) || !valid_enum(sp.facing) || !valid_enum(sp.shoppe) { return fail(w, .Shape, "player enum") }
-	w.player = {character = Character_ID(pid), mode = sp.mode, facing = sp.facing, shoppe = sp.shoppe}
+	if !valid_enum(sp.mode) || !valid_enum(sp.facing) || !valid_enum(sp.shoppe) || !valid_enum(sp.finale) { return fail(w, .Shape, "player enum") }
+	w.player = {character = Character_ID(pid), mode = sp.mode, facing = sp.facing, shoppe = sp.shoppe, lores_read = sp.lores_read, finale = sp.finale}
 	for q in sp.quests {
 		if !valid_enum(q) || q == .None { return fail(w, .Shape, "quest") }
 		w.player.quests_active += {q}

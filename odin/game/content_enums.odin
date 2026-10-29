@@ -77,6 +77,8 @@ Character_Type :: enum u8 {
 	Skeleton = 14,
 	Snake = 15,
 	Zombie = 16,
+	Zooperdan = 17,
+	Zooperdan_Unbound = 18,
 }
 
 Location_Type :: enum u8 {

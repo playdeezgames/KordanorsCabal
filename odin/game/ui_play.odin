@@ -106,7 +106,7 @@ play_buttons :: proc(core: ^Core) -> (titles: [BUTTON_COUNT]string) {
 		titles[NEUTRAL_STATUS] = character_get(w, player).stats[.Unassigned] == 0 ? "Status" : "Level up!"
 		if can_do_intimidation(w, player) {
 			titles[NEUTRAL_INTERACT] = "Intimidate!"
-		} else if here.feature != .None {
+		} else if here.feature != .None && !finale_boss_here(w, player) {
 			titles[NEUTRAL_INTERACT] = "Interact..."
 		}
 		if fight {
@@ -185,7 +185,7 @@ handle_button :: proc(core: ^Core, button: int) {
 		case NEUTRAL_INTERACT:
 			if can_do_intimidation(w, player) {
 				fight_action(core, .Intimidate)
-			} else if feature_here(w) != .None {
+			} else if feature_here(w) != .None && !finale_boss_here(w, player) {
 				push_button(core, 0)
 				w.player.mode = Player_Mode(FEATURE_TYPES[feature_here(w)].interaction_mode)
 			}
@@ -235,6 +235,7 @@ message_command :: proc(core: ^Core, c: Command) {
 	message_pop(w)
 	if w.messages.count > 0 { enter_state(core, .Message); return }
 	if is_dead(w, w.player.character) { enter_state(core, .Dead); return }
+	if w.player.ending != .None { start_ending(core); return }
 	enter_state(core, pop_state(core))
 }
 

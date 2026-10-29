@@ -47,6 +47,7 @@ UI_State :: enum u8 {
 	Status,
 	Dead,
 	Notice,
+	The_End,
 }
 
 SLOT_COUNT :: 5
@@ -86,6 +87,8 @@ Core :: struct {
 	list_cursor:  int,                       // the selected row of the list screens (inventory, ground, equipment)
 	interact_item: Item_ID,                  // the item the Interact_Item screen is about
 	equip_slot:   Equip_Slot,                // the slot the Equipment_Detail screen is about
+	ending:       Finale,                    // which ending the The_End screens tell
+	ending_page:  int,
 	ticks:        u32,                       // counts steps; drives purely decorative effects (the orb's colour)
 }
 

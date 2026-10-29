@@ -149,6 +149,7 @@ perform :: proc(name: Action, ctx: Event_Context) {
 		it := item_get(w, ctx.item)
 		if it == nil { return }
 		if it.lore == 0 { it.lore = u8(unassigned_lore(w)) }
+		w.player.lores_read |= u32(1) << (it.lore - 1)
 		say(w, .None, LORES[it.lore].text)
 
 	case .Learn_Holy_Bolt: learn_spell(w, who, .Holy_Bolt)

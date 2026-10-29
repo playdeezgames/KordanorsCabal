@@ -1411,3 +1411,18 @@ Plan in `docs/FINISH-PLAN.md`; coxswain project `kordanors-cabal`.
 **Findings:** the Cabal Leader has Base Maximum Defend 4, so the defence cap is per creature and raising the player's is a data change (relevant to the "let defence grow" task). Moving the Amulet counts changes world generation for the same seed (new items), so saved games from before are unaffected but seeds differ from the VB oracle.
 
 **Not verified:** how the new Elder texts look on screen (width and row use of the speech area); reaching Level V with an Orb in a real run.
+
+
+### Finish phase 1: the ending (2026-10-29)
+
+Design decided with the owner 2026-10-28 (see `docs/FINISH-PLAN.md`). Code in `odin/game/ending.odin`; tests in `tests_ending.odin`.
+
+**Done:**
+- With the Horns of Kordanor in the pack the Elder shows *Give Horns*; after `LORES_FOR_REFUSAL` (10) distinct Notes have been read he also shows *Keep Horns*. `Player_State.lores_read` (bitmask, saved) is set when a Note is read.
+- Either button plays the twist as message pages and creates **Zooperdan** (new character types 17 *Zooperdan* and 18 *Zooperdan Unbound*, in the database and the VB seed) in the Town Square. Handing over: HP 14, STR 9, DEX 5, INF 6, damage limit 4, defence cap 5. Keeping: HP 10, STR 7, DEX 4, INF 4, limit 3, cap 4. Willpower 0, so he cannot be intimidated. `Player_State.finale` (saved) remembers the answer, so a save in mid-fight resumes.
+- During the fight: *Run* fails and costs a counter-attack, and *Interact* is hidden (no shops, no Elder). At half HP `finale_phase` turns him into *Unbound*, who adds mental attacks (weights 1:1). A demoralized player dies to him instead of waking in town (`mental_counter_attack`).
+- Killing him sets `Player_State.ending`; when the messages end `start_ending` frees the world and opens the new `The_End` screen (epilogue pages per answer, SPACE through them, back to the title).
+
+**Findings:** `kill()` is the right hook for victory because both spells and the fight call it. Stat numbers are first guesses, not tuned (task for the simulator). The Elder keeps his feature after the fight, but the world is discarded, so it never matters.
+
+**Not verified:** how the Elder and ending screens look on screen; the fight's balance against real kits; whether the 10-notes threshold is reachable (25 notes spawn in every game, but a player must open dead ends to find them); no flag for a completed slot or title-screen mark yet.

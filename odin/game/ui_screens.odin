@@ -55,7 +55,7 @@ menu_of :: proc(core: ^Core, s: UI_State) -> (m: Menu, is_menu: bool) {
 	case .Equipment_Detail:
 		m.row = 14
 		menu_add(&m, "Go Back"); menu_add(&m, "Unequip")
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice, .The_End:
 		return {}, false
 	}
 	return m, true
@@ -268,7 +268,7 @@ activate :: proc(core: ^Core, s: UI_State, index: int) {
 		if index == 0 { enter_state(core, .Equipment); return }
 		unequip(&core.world, core.world.player.character, core.equip_slot)
 		enter_state(core, .Equipment) // goes back to the in-play screen if nothing is left on
-	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice:
+	case .Seed_Entry, .Instructions, .About, .Credits, .Import_Wait, .Prolog, .In_Play, .Enemies, .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List, .Inventory, .Ground_Inventory, .Equipment, .Message, .Map, .Status, .Dead, .Notice, .The_End:
 	}
 }
 
@@ -328,6 +328,7 @@ handle_command :: proc(core: ^Core, c: Command) {
 	case .Enemies: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
 	case .In_Play: play_command(core, c)
 	case .Message: message_command(core, c)
+	case .The_End: end_command(core, c)
 	case .Inventory, .Ground_Inventory, .Equipment, .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List: list_command(core, c)
 	case .Map: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
 	case .Status: if c == .Confirm || c == .Cancel { enter_state(core, .In_Play) }
@@ -462,6 +463,7 @@ draw_prompt :: proc(core: ^Core, state: UI_State) {
 		for l, i in lines { write_text(s, 0, 2 + i, l, false, .Black) }
 		write_text_centered(s, 22, "SPACE to start", true, .Orange)
 	case .In_Play: draw_play(core)
+	case .The_End: draw_end(core)
 	case .Enemies: draw_enemies(core)
 	case .Shoppe_Offers, .Shoppe_Prices, .Shoppe_Buy, .Shoppe_Sell, .Shoppe_Repair, .Spell_List: draw_shoppe_list(core)
 	case .Inventory: draw_inventory(core)

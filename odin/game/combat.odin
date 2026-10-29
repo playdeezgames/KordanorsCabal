@@ -116,6 +116,7 @@ drop_loot :: proc(w: ^World, victim: Character_ID) {
 kill :: proc(w: ^World, killer, victim: Character_ID, lines: ^[dynamic]string) -> Sfx {
 	def := &CHARACTER_TYPES[character_get(w, victim).type]
 	append(lines, fmt.tprintf("You kill %s!", def.name))
+	if is_finale_boss(character_get(w, victim).type) && killer == w.player.character { w.player.ending = w.player.finale }
 	if money := i32(roll(&w.rng, def.money_dice)); money > 0 {
 		append(lines, fmt.tprintf("You get %d money!", money))
 		stat_add(character_get(w, killer), .Money, money)
@@ -164,6 +165,7 @@ fight :: proc(w: ^World, who: Character_ID) {
 // Running picks a random compass direction (and turns the player that way, as the original did); it works if that way is open.
 run :: proc(w: ^World, who: Character_ID) {
 	if !can_fight(w, who) { return }
+	if finale_boss_here(w, who) { say(w, .None, "Zooperdan bars the way. There is no running from this!"); counter_attacks(w, who); return }
 	cardinal := [4]Direction{.North, .East, .South, .West}
 	w.player.facing = cardinal[pick_index(&w.rng, 4)]
 	if can_move(w, who, w.player.facing) {
@@ -201,6 +203,7 @@ do_intimidation :: proc(w: ^World, who: Character_ID) {
 // ---- the enemies hit back ---------------------------------------------------------------------------------------------
 
 counter_attacks :: proc(w: ^World, who: Character_ID) {
+	finale_phase(w, who)
 	enemies := enemies_of(w, who)
 	for enemy, i in enemies {
 		if character_get(w, enemy) == nil || character_get(w, who) == nil { continue } // gone since the list was made
@@ -276,7 +279,11 @@ mental_counter_attack :: proc(w: ^World, who, enemy: Character_ID, header: strin
 	} else {
 		append(&lines, fmt.tprintf("%s adds 1 stress!", name))
 		stat_add(character_get(w, who), .Stress, 1)
-		if is_demoralized(w, who) {
+		if is_demoralized(w, who) && is_finale_boss(character_get(w, enemy).type) {
+			append(&lines, fmt.tprintf("%s breaks your will. Your mind goes dark and you fall.", name))
+			set_health(w, who, 0) // no running from the last fight: there is nowhere to wake up
+			sfx = .Player_Death
+		} else if is_demoralized(w, who) {
 			append(&lines, fmt.tprintf("%s completely demoralizes you and you drop everything and run away!", name))
 			panic_flight(w, who)
 		} else {

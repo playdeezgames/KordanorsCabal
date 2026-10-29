@@ -93,6 +93,8 @@ town_titles :: proc(core: ^Core, titles: ^[BUTTON_COUNT]string) {
 	case .Elder:
 		titles[ELDER_PEP], titles[ELDER_CABAL], titles[ELDER_SHARDS] = "Pep talk", "The Cabal", "The Shards"
 		if can_make_orb(w, who) { titles[ELDER_ORB] = "Make the Orb" }
+		if can_hand_over_horns(w, who) { titles[ELDER_HORNS] = "Give Horns" }
+		if can_refuse_horns(w, who) { titles[ELDER_REFUSE] = "Keep Horns" }
 	case .InnKeeper:
 		titles[INN_PRICES], titles[INN_BUY] = "Prices", "Buy"
 		if quest_active(w, .Cellar_Rats) { titles[INN_QUEST] = "Quest Done!" } else if quest_can_accept(w, who, .Cellar_Rats) { titles[INN_QUEST] = "Do Quest!" }
@@ -130,6 +132,7 @@ draw_town :: proc(core: ^Core) {
 		case TOWN_GOODBYE: say_line(s, "Fare well!")
 		case ELDER_PEP: say_line(s, "If you find yerself disheartened, I'm always here to help!")
 		case ELDER_SHARDS: say_line(s, wrap22(elder_shards_speech(w, who)))
+		case ELDER_HORNS, ELDER_REFUSE: say_line(s, wrap22(elder_horns_speech(b)))
 		case ELDER_ORB: say_line(s, wrap22("Four shards and the Orb is made! Hand them over."))
 		case ELDER_CABAL: say_line(s, "Deep within the cata- combs beneath the ab- andoned church there  is a demon named Kord-anor! Slay this foul  fiend and bring to me his horns, so that    there can be a lastingpeace!")
 		case: say_line(s, "Hello, my friend! Staya while, and listen!")
@@ -197,6 +200,10 @@ town_button :: proc(core: ^Core, button: int) {
 			message_add(w, .None, "Sometimes in our life we all have pain. We all have sorrow. But, if we are wise, we know that there's always tomorrow!")
 			if mp_current(w, who) < 1 { character_get(w, who).stats[.Stress] = stat_of(w, who, .MP) - 1 }
 			show_messages_then(core, .In_Play)
+		} else if button == ELDER_HORNS && can_hand_over_horns(w, who) {
+			begin_finale(core, .Handed)
+		} else if button == ELDER_REFUSE && can_refuse_horns(w, who) {
+			begin_finale(core, .Refused)
 		} else if button == ELDER_ORB && can_make_orb(w, who) {
 			for t in ELEMENT_SHARDS { if shard, has := carried_item_of_type(w, who, t); has { destroy_item(w, shard) } }
 			give_new_item(w, who, .Elemental_Orb)

@@ -34,6 +34,8 @@ ALL_TESTS := []Test_Case{
 	{"town: the spell list", test_town_spells_golden},
 	{"town: buying, selling, repair, healing and the other favours", test_town_shops},
 	{"town: the cellar rats quest and the purify spell", test_town_quest_spells},
+	{"ending: the finale, the two answers, the screens and saves", test_ending_handed},
+	{"ending: refusing the horns after reading the notes", test_ending_refused},
 	{"soak: random play never breaks the world", test_soak},
 	{"render: the rasterizer reproduces every recorded VB screen bit for bit", test_rasterizer_reference},
 	{"ui: the original screens match the recorded VB frames", test_ui_golden},
@@ -108,7 +110,7 @@ test_int_size :: proc(t: ^T) {
 
 test_content_facts :: proc(t: ^T) {
 	expect_eq(t, len(game.Item_Type) - 1, 53)
-	expect_eq(t, len(game.Character_Type) - 1, 16)
+	expect_eq(t, len(game.Character_Type) - 1, 18)
 	expect_eq(t, len(game.Stat) - 1, 37)
 	expect_eq(t, int(game.Item_Type.Potion), 7)          // enum values are the original database ids
 	expect_eq(t, int(game.Direction.Up), 5)

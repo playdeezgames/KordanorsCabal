@@ -52,7 +52,13 @@ Player_State :: struct {
 	quests_active:     bit_set[Quest_Type],
 	quest_completions: [Quest_Type]i32,
 	spells:            [Spell_Type]i32, // level known; 0 = not known
+	lores_read:        u32,             // bit n-1 is set once the note with lore n has been read (the refusal ending needs enough of them)
+	finale:            Finale,          // which fight with Zooperdan is on, if any
+	ending:            Finale,          // set when Zooperdan dies; runtime only, the game then moves to the ending screens
 }
+
+// How the player answered the Elder when handing in the Horns of Kordanor (see ending.odin).
+Finale :: enum u8 { None, Handed, Refused }
 
 // Messages shown to the player, in order (decision D18). Runtime only: never saved, cleared by world_init and world_destroy.
 // A message is its lines joined by newlines in a fixed buffer, so nothing is allocated and nothing dangles.

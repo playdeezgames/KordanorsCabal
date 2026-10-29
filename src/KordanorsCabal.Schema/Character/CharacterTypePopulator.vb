@@ -15,6 +15,8 @@
     Friend Const CharacterType14 = 14L
     Friend Const CharacterType15 = 15L
     Friend Const CharacterType16 = 16L
+    Friend Const CharacterType17 = 17L
+    Friend Const CharacterType18 = 18L
     Private Sub PopulateCharacterTypesRecord(connection As SqliteConnection, CharacterTypeId As Long, CharacterTypeName As String, XPValue As Long, MoneyDropDice As String, IsUndead As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypes}]([{Columns.CharacterTypeIdColumn}], [{Columns.CharacterTypeNameColumn}], [{Columns.XPValueColumn}], [{Columns.MoneyDropDiceColumn}], [{Columns.IsUndeadColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.CharacterTypeNameColumn}, @{Columns.XPValueColumn}, @{Columns.MoneyDropDiceColumn}, @{Columns.IsUndeadColumn});", connection)
             command.Parameters.AddWithValue($"@{Columns.CharacterTypeIdColumn}", CharacterTypeId)
@@ -42,6 +44,8 @@
         PopulateCharacterTypesRecord(connection, CharacterType14, "Skeleton", 1, "2d3", 1)
         PopulateCharacterTypesRecord(connection, CharacterType15, "Snake", 1, "0d1", 0)
         PopulateCharacterTypesRecord(connection, CharacterType16, "Zombie", 1, "2d4", 1)
+        PopulateCharacterTypesRecord(connection, CharacterType17, "Zooperdan", 0, "0d1", 0)
+        PopulateCharacterTypesRecord(connection, CharacterType18, "Zooperdan Unbound", 0, "0d1", 0)
     End Sub
     Private Sub PopulateCharacterTypeInitialStatisticsRecord(connection As SqliteConnection, CharacterTypeId As Long, CharacterStatisticTypeId As Long, InitialValue As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeInitialStatistics}]([{Columns.CharacterTypeIdColumn}], [{Columns.StatisticTypeIdColumn}], [{Columns.InitialValueColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.StatisticTypeIdColumn}, @{Columns.InitialValueColumn});", connection)
@@ -234,6 +238,28 @@
         PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType16, 23, 0)
         PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType16, 10, 2)
         PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType16, 12, 0)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 1, 9)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 2, 5)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 3, 6)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 4, 0)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 6, 14)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 7, 4)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 10, 4)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 11, 5)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 12, 0)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 13, 0)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType17, 23, 0)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 1, 9)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 2, 5)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 3, 6)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 4, 0)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 6, 14)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 7, 4)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 10, 4)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 11, 5)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 12, 0)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 13, 0)
+        PopulateCharacterTypeInitialStatisticsRecord(connection, CharacterType18, 23, 0)
     End Sub
     Private Sub PopulateCharacterTypeAttackTypesRecord(connection As SqliteConnection, CharacterTypeId As Long, AttackType As Long, Weight As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeAttackTypes}]([{Columns.CharacterTypeIdColumn}], [{Columns.AttackTypeColumn}], [{Columns.WeightColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.AttackTypeColumn}, @{Columns.WeightColumn});", connection)
@@ -261,6 +287,9 @@
         PopulateCharacterTypeAttackTypesRecord(connection, CharacterType14, 1, 1)
         PopulateCharacterTypeAttackTypesRecord(connection, CharacterType15, 1, 1)
         PopulateCharacterTypeAttackTypesRecord(connection, CharacterType16, 1, 1)
+        PopulateCharacterTypeAttackTypesRecord(connection, CharacterType17, 1, 1)
+        PopulateCharacterTypeAttackTypesRecord(connection, CharacterType18, 1, 1)
+        PopulateCharacterTypeAttackTypesRecord(connection, CharacterType18, 2, 1)
     End Sub
     Sub PopulateCharacterTypeBribesRecord(connection As SqliteConnection, CharacterTypeId As Long, ItemTypeId As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeBribes}]([{Columns.CharacterTypeIdColumn}], [{Columns.ItemTypeIdColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.ItemTypeIdColumn});", connection)
@@ -315,6 +344,8 @@
         PopulateCharacterTypeEnemiesRecord(connection, CharacterType11, CharacterType14)
         PopulateCharacterTypeEnemiesRecord(connection, CharacterType11, CharacterType15)
         PopulateCharacterTypeEnemiesRecord(connection, CharacterType11, CharacterType16)
+        PopulateCharacterTypeEnemiesRecord(connection, CharacterType17, CharacterType11)
+        PopulateCharacterTypeEnemiesRecord(connection, CharacterType18, CharacterType11)
     End Sub
     Private Sub PopulateCharacterTypeLootsRecord(connection As SqliteConnection, CharacterTypeId As Long, ItemTypeId As Long?, Weight As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeLoots}]([{Columns.CharacterTypeIdColumn}], [{Columns.ItemTypeIdColumn}], [{Columns.WeightColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.ItemTypeIdColumn}, @{Columns.WeightColumn});", connection)
@@ -380,6 +411,10 @@
         PopulateCharacterTypePartingShotsRecord(connection, CharacterType13, "Squeek! *NOM*", 1)
         PopulateCharacterTypePartingShotsRecord(connection, CharacterType15, "Hiss!", 1)
         PopulateCharacterTypePartingShotsRecord(connection, CharacterType16, "Breains!", 1)
+        PopulateCharacterTypePartingShotsRecord(connection, CharacterType17, "Fool! I told you to be careful.", 1)
+        PopulateCharacterTypePartingShotsRecord(connection, CharacterType17, "You should have stayed in the dungeon.", 1)
+        PopulateCharacterTypePartingShotsRecord(connection, CharacterType18, "Kordanor's power is mine!", 1)
+        PopulateCharacterTypePartingShotsRecord(connection, CharacterType18, "Fool! I told you to be careful.", 1)
     End Sub
     Sub PopulateCharacterTypeSpawnCountsRecord(connection As SqliteConnection, CharacterTypeId As Long, DungeonLevelId As Long, SpawnCount As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.CharacterTypeSpawnCounts}]([{Columns.CharacterTypeIdColumn}], [{Columns.DungeonLevelIdColumn}], [{Columns.SpawnCountColumn}]) VALUES (@{Columns.CharacterTypeIdColumn}, @{Columns.DungeonLevelIdColumn}, @{Columns.SpawnCountColumn});", connection)
