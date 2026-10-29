@@ -1396,3 +1396,18 @@ Decided together with task 24 (see above): `src/` is kept untouched as the refer
 - **Release build:** `tools/ship.sh` runs the whole test suite, builds the `-o:size` web build and zips it for itch.io (not pushed).
 
 **Not verified:** anything on a real phone or in itch.io's iframe (task 28 and review 3's device list); long real play sessions by a person (the soak test is random); whether 300 ms for Continue is acceptable on a phone; the audio in a real browser session of the whole game.
+
+
+### Finish phase 1, first steps: Fire Shard, spawn fixes, the Elder's Orb (2026-10-28)
+
+Plan in `docs/FINISH-PLAN.md`; coxswain project `kordanors-cabal`.
+
+**Done:**
+- **Fire Shard** now spawns in the Level III boss room (`ItemTypeSpawnLocationTypes` 13/3/6), like the other three shards.
+- **Amulets.** The data had Amulet of Mana with a count on Level V but places on Level II; the amulets otherwise go one per level (HP I, POW III, STR IV), so the count moved to **Level II** and the unobtainable **Amulet of DEX** took the free **Level V** slot (dead end or boss room, count 1d1). Both the database and the VB seed (`ItemTypePopulator.vb`) were changed, and the content regenerated.
+- **Elder:** new buttons *The Shards* (always shown; explains the quest and counts the shards carried) and *Make the Orb* (shown with all four shards and no Orb; destroys the four and gives the Elemental Orb with a message). *The Cabal* is unchanged. Helpers `shards_held`, `can_make_orb`, `wrap22` in `ui_town.odin`.
+- Test added for the Orb; the recorded VB frame `21-elder` now skips row 21 (the button row), since the port adds buttons the original lacked. 44 cases, 1,968 checks pass.
+
+**Findings:** the Cabal Leader has Base Maximum Defend 4, so the defence cap is per creature and raising the player's is a data change (relevant to the "let defence grow" task). Moving the Amulet counts changes world generation for the same seed (new items), so saved games from before are unaffected but seeds differ from the VB oracle.
+
+**Not verified:** how the new Elder texts look on screen (width and row use of the speech area); reaching Level V with an Orb in a real run.

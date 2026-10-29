@@ -30,7 +30,8 @@ test_town_golden :: proc(t: ^T) {
 	}
 	for s in scenes {
 		talk_to(c, s.f)
-		expect_like_vb(t, c, s.name)
+		// the elder's button row is not the original's: the port adds The Shards (and Make the Orb), see docs/FINISH-PLAN.md
+		if s.f == .Zooperdan_the_Elder { expect_like_vb(t, c, s.name, 21) } else { expect_like_vb(t, c, s.name) }
 		press(c, .Cancel) // Red leaves the conversation
 	}
 	// the shoppe screens of the black mage with 50 money, a potion and a book in the pack
@@ -146,6 +147,22 @@ test_town_shops :: proc(t: ^T) {
 	button(c, game.ELDER_PEP)
 	expect_eq(t, game.mp_current(w, who), i32(1))
 	press(c, .Confirm)
+
+	// the elder makes the Elemental Orb from the four shards, and only then
+	shards := game.ELEMENT_SHARDS
+	for shard in shards[:3] { game.give_new_item(w, who, shard) }
+	talk_to(c, .Zooperdan_the_Elder)
+	button(c, game.ELDER_ORB)
+	expect_eq(t, c.state, game.UI_State.In_Play)
+	expect(t, !game.has_item_type(w, who, .Elemental_Orb), "three shards make no orb")
+	game.give_new_item(w, who, shards[3])
+	expect(t, game.can_make_orb(w, who), "four shards allow the orb")
+	button(c, game.ELDER_ORB)
+	expect_eq(t, c.state, game.UI_State.Message)
+	press(c, .Confirm)
+	expect(t, game.has_item_type(w, who, .Elemental_Orb), "the orb is in the pack")
+	expect_eq(t, game.shards_held(w, who), 0)
+	expect(t, !game.can_make_orb(w, who), "the orb is made once")
 
 	// the constable pays 10 per membership card
 	for _ in 0 ..< 3 { game.give_new_item(w, who, .Membership_Card) }

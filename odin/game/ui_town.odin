@@ -5,6 +5,7 @@ package game
 // of their own. Texts and positions are those of the original.
 
 import "core:fmt"
+import "core:strings"
 
 TOWN_HELLO :: 0
 TOWN_GOODBYE :: 9
@@ -12,6 +13,8 @@ TOWN_GOODBYE :: 9
 // Button numbers in the town banks.
 ELDER_PEP :: 1
 ELDER_CABAL :: 2
+ELDER_SHARDS :: 3
+ELDER_ORB :: 4
 INN_QUEST :: 1
 INN_PRICES :: 6
 INN_BUY :: 7
@@ -53,6 +56,31 @@ shoppe_of_mode :: proc(m: Player_Mode) -> Shoppe_Type {
 	return .None
 }
 
+ELEMENT_SHARDS :: [4]Item_Type{.Air_Shard, .Earth_Shard, .Fire_Shard, .Water_Shard}
+
+// How many of the four element shards the pack holds.
+shards_held :: proc(w: ^World, who: Character_ID) -> (n: int) {
+	for t in ELEMENT_SHARDS { if has_item_type(w, who, t) { n += 1 } }
+	return
+}
+
+// The Elder makes the Orb from the four shards once, and not while the pack already holds one.
+can_make_orb :: proc(w: ^World, who: Character_ID) -> bool { return shards_held(w, who) == len(ELEMENT_SHARDS) && !has_item_type(w, who, .Elemental_Orb) }
+
+// Breaks text at spaces into lines of 22 columns, padded, which is how speech fills the screen (the screen itself cuts at column 22).
+wrap22 :: proc(text: string) -> string {
+	b := strings.builder_make(context.temp_allocator)
+	col := 0
+	pad :: proc(b: ^strings.Builder, col: ^int) { for ; col^ < 22; col^ += 1 { strings.write_byte(b, ' ') }; col^ = 0 }
+	for word in strings.split(text, " ", context.temp_allocator) {
+		if col > 0 && col + 1 + len(word) > 22 { pad(&b, &col) }
+		if col > 0 { strings.write_byte(&b, ' '); col += 1 }
+		strings.write_string(&b, word)
+		col += len(word)
+	}
+	return strings.to_string(b)
+}
+
 can_gamble :: proc(w: ^World, who: Character_ID) -> bool { return stat_of(w, who, .Money) >= 5 }
 
 // ---- the button banks -------------------------------------------------------------------------------------------------
@@ -62,7 +90,9 @@ town_titles :: proc(core: ^Core, titles: ^[BUTTON_COUNT]string) {
 	who := w.player.character
 	titles[TOWN_HELLO], titles[TOWN_GOODBYE] = "Hello!", "Good-bye"
 	switch w.player.mode {
-	case .Elder: titles[ELDER_PEP], titles[ELDER_CABAL] = "Pep talk", "The Cabal"
+	case .Elder:
+		titles[ELDER_PEP], titles[ELDER_CABAL], titles[ELDER_SHARDS] = "Pep talk", "The Cabal", "The Shards"
+		if can_make_orb(w, who) { titles[ELDER_ORB] = "Make the Orb" }
 	case .InnKeeper:
 		titles[INN_PRICES], titles[INN_BUY] = "Prices", "Buy"
 		if quest_active(w, .Cellar_Rats) { titles[INN_QUEST] = "Quest Done!" } else if quest_can_accept(w, who, .Cellar_Rats) { titles[INN_QUEST] = "Do Quest!" }
@@ -99,6 +129,8 @@ draw_town :: proc(core: ^Core) {
 		switch b {
 		case TOWN_GOODBYE: say_line(s, "Fare well!")
 		case ELDER_PEP: say_line(s, "If you find yerself disheartened, I'm always here to help!")
+		case ELDER_SHARDS: say_line(s, wrap22(elder_shards_speech(w, who)))
+		case ELDER_ORB: say_line(s, wrap22("Four shards and the Orb is made! Hand them over."))
 		case ELDER_CABAL: say_line(s, "Deep within the cata- combs beneath the ab- andoned church there  is a demon named Kord-anor! Slay this foul  fiend and bring to me his horns, so that    there can be a lastingpeace!")
 		case: say_line(s, "Hello, my friend! Staya while, and listen!")
 		}
@@ -138,6 +170,15 @@ draw_town :: proc(core: ^Core) {
 	}
 }
 
+elder_shards_speech :: proc(w: ^World, who: Character_ID) -> string {
+	if has_item_type(w, who, .Elemental_Orb) { return "You hold the Orb! Go to the fifth level, and the way to Kord-anor will open." }
+	switch n := shards_held(w, who); n {
+	case 0: return "Kord-anor lies behind a door that only an Orb of the four elements opens. Find the Air, Earth, Fire and Water shards in the lairs of the bosses, and bring them to me."
+	case 4: return "All four shards! Let me make the Orb."
+	case: return fmt.tprintf("You carry %d of the four shards: Air, Earth, Fire and Water. Bring me the rest and I shall make the Orb.", n)
+	}
+}
+
 // ---- what the buttons do ------------------------------------------------------------------------------------------------
 
 town_button :: proc(core: ^Core, button: int) {
@@ -155,6 +196,11 @@ town_button :: proc(core: ^Core, button: int) {
 		if button == ELDER_PEP {
 			message_add(w, .None, "Sometimes in our life we all have pain. We all have sorrow. But, if we are wise, we know that there's always tomorrow!")
 			if mp_current(w, who) < 1 { character_get(w, who).stats[.Stress] = stat_of(w, who, .MP) - 1 }
+			show_messages_then(core, .In_Play)
+		} else if button == ELDER_ORB && can_make_orb(w, who) {
+			for t in ELEMENT_SHARDS { if shard, has := carried_item_of_type(w, who, t); has { destroy_item(w, shard) } }
+			give_new_item(w, who, .Elemental_Orb)
+			message_add(w, .None, "The Elder takes the four shards. They hum, melt together, and he hands you the Elemental Orb. \"Go! Open the way to Kord-anor!\"")
 			show_messages_then(core, .In_Play)
 		}
 	case .InnKeeper:
