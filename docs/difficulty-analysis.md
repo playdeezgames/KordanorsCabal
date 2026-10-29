@@ -135,3 +135,16 @@ The owner reported: almost no deaths after level I; tactics are running to come 
 | V | 3% | 17 | 1.1 | 1,271 |
 
 75% finish level V alive. Reading it: the mid game is a walk because **the careful player simply skips what is dangerous and heals for free (17 to 30 trips a level)**, so attrition and tension are absent, and money (up to 1,271 unspent) has no use. Level I is too kind in the model (3%), since the model's starting HP is 6 and the real start is HP 3 plus whatever is left to assign: treat the opening as untested here. The plan's per-level targets (I 10-20%, II 8-15%, III 10-18%, IV 12-22%, V 20-30%) apply to this player.
+
+### Experiment: spreading the gear (2026-10-29, task #313)
+
+Changed the spawn table so the kit is found over the levels instead of on levels I and II (daggers I-II, shields and helmets I-III, shortswords II-III, chainmail II-III, brodesodes III-IV, platemail IV-V; total gear found rises a little so broken pieces can be replaced). Then tried higher smith prices (chainmail 120 or 150, brodesode 220 or 300, platemail 500 or 600) in the simulator only.
+
+| Run | Dies on level I / II / III / IV / V | Kit at entry to level II | Finish alive |
+|---|---|---|---|
+| Before (baseline) | 3 / 3 / 10 / 7 / 3 % | chainmail 99%, brodesode 96% | 75% |
+| New spawn table | 6 / 6 / 11 / 5 / 2 % | chainmail 99%, brodesode 97% | 73% |
+| + prices 120 / 220 / 500 | 4 / 1 / 5 / 1 / 3 % | chainmail 99%, brodesode 52% | 86% |
+| + prices 150 / 300 / 600 | 5 / 8 / 3 / 2 / 5 % | chainmail 96%, brodesode 3% | 80% |
+
+**Finding: gear is not the lever.** The player buys the kit with the money of level I (706 gold of kills), not from the floor, and even when the shop is made much dearer the careful player is no safer or less safe than before: differences are within noise (80 to 150 runs, a few percent). A careful player skips what is dangerous, so what he wears matters little. Gear spread is kept because it makes the dungeon feel less front-loaded and replaces broken pieces, but difficulty has to come from the monsters (#314) and from attrition (#316), the two things a careful player cannot walk around. The prices were not changed.

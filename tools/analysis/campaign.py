@@ -280,5 +280,7 @@ def report(runs=300):
 if __name__ == "__main__":
     # optional overrides: key=value pairs, e.g. avoid_above=0.02 push_above=0.06 risk_trials=40
     for a in sys.argv[2:]:
-        k, v = a.split('='); RULES[k] = float(v) if '.' in v else int(v)
+        k, v = a.split('=')
+        if k.startswith('price_'): GEAR[k[6:]]['price'] = int(v); continue   # e.g. price_Chainmail=120 tries a shop price
+        RULES[k] = float(v) if '.' in v else int(v)
     report(int(sys.argv[1]) if len(sys.argv) > 1 else 300)

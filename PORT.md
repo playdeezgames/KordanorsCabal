@@ -1445,3 +1445,8 @@ Design decided with the owner 2026-10-28 (see `docs/FINISH-PLAN.md`). Code in `o
 ### Finish phase 1 closing: looking at the finale (2026-10-29, task #328)
 
 Dumped the Elder, message and lore screens as text (a scratch test, not kept) and found: *Make the Orb* (12 characters) overran its button column into *Good-bye* (now *Make Orb*); the new message pages cut words at column 22 (now wrapped); the Elder's *You see:* line still names him during the fight. Added a test that every lore page fits 23 rows (the longest uses 22) and every Elder label fits 11 cells. Tuned Zooperdan with `tools/analysis/finale.py`: hand over HP 18, STR 10, DEX 5, INF 6 (a typical late player, HP 10 with brodesode and chainmail, wins 67%; a weak one 18%; a strong one 94%); keep HP 12, STR 8, DEX 4, INF 5 (93% / 67% / 99%). **Not done:** a mark on the title or slot for a completed game; a playthrough in a real browser (the screens were checked as text, not pixels).
+
+
+### Finish phase 2: gear spread (2026-10-29, task #313)
+
+New spawn table for the seven gear items (database and VB seed; see `docs/difficulty-analysis.md`, "Experiment: spreading the gear"). **Finding:** the model player buys its kit with level I money, and neither the spread nor higher shop prices changed its safety beyond noise, so gear is not the difficulty lever; monsters (#314) and attrition (#316) are. `campaign.py` now accepts `price_Name=N` overrides for such experiments.
