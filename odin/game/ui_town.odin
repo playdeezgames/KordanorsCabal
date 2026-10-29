@@ -92,7 +92,7 @@ town_titles :: proc(core: ^Core, titles: ^[BUTTON_COUNT]string) {
 	switch w.player.mode {
 	case .Elder:
 		titles[ELDER_PEP], titles[ELDER_CABAL], titles[ELDER_SHARDS] = "Pep talk", "The Cabal", "The Shards"
-		if can_make_orb(w, who) { titles[ELDER_ORB] = "Make the Orb" }
+		if can_make_orb(w, who) { titles[ELDER_ORB] = "Make Orb" }
 		if can_hand_over_horns(w, who) { titles[ELDER_HORNS] = "Give Horns" }
 		if can_refuse_horns(w, who) { titles[ELDER_REFUSE] = "Keep Horns" }
 	case .InnKeeper:
@@ -207,7 +207,7 @@ town_button :: proc(core: ^Core, button: int) {
 		} else if button == ELDER_ORB && can_make_orb(w, who) {
 			for t in ELEMENT_SHARDS { if shard, has := carried_item_of_type(w, who, t); has { destroy_item(w, shard) } }
 			give_new_item(w, who, .Elemental_Orb)
-			message_add(w, .None, "The Elder takes the four shards. They hum, melt together, and he hands you the Elemental Orb. \"Go! Open the way to Kord-anor!\"")
+			message_add(w, .None, wrap22("The Elder takes the four shards. They hum, melt together, and he hands you the Elemental Orb. \"Go! Open the way to Kord-anor!\""))
 			show_messages_then(core, .In_Play)
 		}
 	case .InnKeeper:

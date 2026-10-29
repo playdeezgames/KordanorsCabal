@@ -1440,3 +1440,8 @@ Design decided with the owner 2026-10-28 (see `docs/FINISH-PLAN.md`). Code in `o
 ### Finish phase 2, first step: the campaign simulator (2026-10-29)
 
 `tools/analysis/campaign.py` (task #312): a whole-run Monte Carlo with carried HP, stress, wear, money, potions, healing cost and a cautious player policy; baseline and caveats in `docs/difficulty-analysis.md` ("Campaign model"). **Finding:** my first target table (death per room 5-15%) was wrong, since a level has 60-100 fights; targets are now per level and marked uncalibrated in `docs/FINISH-PLAN.md`. **Finding:** free healing is used 22-35 times per level and money piles up unused. **Not done:** hunger/food, spells, intimidation and the Moon are not modelled, and the player policy is not calibrated to real play.
+
+
+### Finish phase 1 closing: looking at the finale (2026-10-29, task #328)
+
+Dumped the Elder, message and lore screens as text (a scratch test, not kept) and found: *Make the Orb* (12 characters) overran its button column into *Good-bye* (now *Make Orb*); the new message pages cut words at column 22 (now wrapped); the Elder's *You see:* line still names him during the fight. Added a test that every lore page fits 23 rows (the longest uses 22) and every Elder label fits 11 cells. Tuned Zooperdan with `tools/analysis/finale.py`: hand over HP 18, STR 10, DEX 5, INF 6 (a typical late player, HP 10 with brodesode and chainmail, wins 67%; a weak one 18%; a strong one 94%); keep HP 12, STR 8, DEX 4, INF 5 (93% / 67% / 99%). **Not done:** a mark on the title or slot for a completed game; a playthrough in a real browser (the screens were checked as text, not pixels).

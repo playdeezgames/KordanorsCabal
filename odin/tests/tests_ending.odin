@@ -34,7 +34,7 @@ test_ending_handed :: proc(t: ^T) {
 	expect_eq(t, len(enemies), 1)
 	boss := enemies[0]
 	expect_eq(t, game.character_get(w, boss).type, game.Character_Type.Zooperdan)
-	expect_eq(t, game.stat_of(w, boss, .HP), i32(14))
+	expect_eq(t, game.stat_of(w, boss, .HP), i32(18))
 
 	// no shops, no running
 	titles := game.play_buttons(c)
@@ -48,7 +48,7 @@ test_ending_handed :: proc(t: ^T) {
 	expect_eq(t, game.character_get(w, who).location, game.character_get(w, boss).location)
 
 	// at half HP he changes and gains mental attacks
-	game.character_get(w, boss).stats[.Wounds] = 7
+	game.character_get(w, boss).stats[.Wounds] = 9
 	game.counter_attacks(w, who)
 	expect_eq(t, game.character_get(w, boss).type, game.Character_Type.Zooperdan_Unbound)
 	for game.message_head(w) != nil { game.message_pop(w) }
@@ -62,7 +62,7 @@ test_ending_handed :: proc(t: ^T) {
 
 	// killing him ends the game with the ending for the answer given
 	game.player_character(w).stats[.Wounds] = 0
-	game.character_get(w, boss).stats[.Wounds] = 13
+	game.character_get(w, boss).stats[.Wounds] = 17
 	pc.stats[.Strength] = 40
 	for c.state != .The_End && !game.is_dead(w, who) {
 		c.state = .In_Play
@@ -89,8 +89,8 @@ test_ending_refused :: proc(t: ^T) {
 	expect_eq(t, w.player.finale, game.Finale.Refused)
 	expect(t, game.has_item_type(w, who, .Horns_of_Kordanor), "the player keeps the horns")
 	boss := game.enemies_of(w, who)[0]
-	expect_eq(t, game.stat_of(w, boss, .HP), i32(10))
-	expect_eq(t, game.stat_of(w, boss, .Strength), i32(7))
+	expect_eq(t, game.stat_of(w, boss, .HP), i32(12))
+	expect_eq(t, game.stat_of(w, boss, .Strength), i32(8))
 
 	// the fight survives a save and load
 	data, ok := game.world_save(w)
@@ -102,4 +102,17 @@ test_ending_refused :: proc(t: ^T) {
 	expect_eq(t, var.player.finale, game.Finale.Refused)
 	expect_eq(t, var.player.lores_read, w.player.lores_read)
 	game.world_destroy(&var)
+}
+
+// Every lore text fits one page (23 rows) once wrapped, and the Elder's button labels fit their column (11 cells).
+test_ending_texts_fit :: proc(t: ^T) {
+	defer fake_reset()
+	for n in 1 ..= game.LORE_COUNT {
+		rows := (len(game.wrap22(game.LORES[n].text)) + 21) / 22
+		expect(t, rows <= game.CELL_ROWS, "a lore text fits the screen")
+	}
+	c := finale_setup(33, game.LORES_FOR_REFUSAL); defer free_core(c)
+	for shard in game.ELEMENT_SHARDS { game.give_new_item(&c.world, c.world.player.character, shard) }
+	talk_to(c, .Zooperdan_the_Elder)
+	for title in game.play_buttons(c) { expect(t, len(title) <= 11, "a button label fits its column") }
 }

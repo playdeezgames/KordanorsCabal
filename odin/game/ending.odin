@@ -44,17 +44,17 @@ begin_finale :: proc(core: ^Core, how: Finale) {
 	case .None: return
 	case .Handed:
 		if horns, has := carried_item_of_type(w, who, .Horns_of_Kordanor); has { destroy_item(w, horns) }
-		message_add(w, .None, "Zooperdan takes the horns in trembling hands. \"At last! Centuries I searched, and the kin hid them well.\"")
-		message_add(w, .None, "\"Did you never wonder why the Cabal sat in that church? They did not keep Kordanor captive. They kept him SAFE. From me.\"")
-		message_add(w, .None, "The old man's face splits and he is gone. \"And you, errand-runner, know too much. Let us finish this.\"")
+		message_add(w, .None, wrap22("Zooperdan takes the horns in trembling hands. \"At last! Centuries I searched, and the kin hid them well.\""))
+		message_add(w, .None, wrap22("\"Did you never wonder why the Cabal sat in that church? They did not keep Kordanor captive. They kept him SAFE. From me.\""))
+		message_add(w, .None, wrap22("The old man's face splits and he is gone. \"And you, errand-runner, know too much. Let us finish this.\""))
 	case .Refused:
-		message_add(w, .None, "You close your hand around the horns. \"I have read the notes, Zooperdan. The Cabal kept Kordanor safe from YOU.\"")
-		message_add(w, .None, "The old man's smile slips. \"Clever. Then I will take them from your corpse.\"")
+		message_add(w, .None, wrap22("You close your hand around the horns. \"I have read the notes, Zooperdan. The Cabal kept Kordanor safe from YOU.\""))
+		message_add(w, .None, wrap22("The old man's smile slips. \"Clever. Then I will take them from your corpse.\""))
 	}
 	boss := create_character(w, .Zooperdan, character_get(w, who).location)
 	if how == .Refused { // without the horns' power he is weaker
 		c := character_get(w, boss)
-		c.stats[.HP], c.stats[.Strength], c.stats[.Dexterity], c.stats[.Influence] = 10, 7, 4, 4
+		c.stats[.HP], c.stats[.Strength], c.stats[.Dexterity], c.stats[.Influence] = 12, 8, 4, 5
 		c.stats[.Unarmed_Maximum_Damage], c.stats[.Base_Maximum_Defend] = 3, 4
 	}
 	show_messages_then(core, .In_Play)
@@ -66,7 +66,7 @@ finale_phase :: proc(w: ^World, who: Character_ID) {
 		c := character_get(w, e)
 		if c.type == .Zooperdan && health_current(w, e) * 2 <= stat_of(w, e, .HP) && !is_dead(w, e) {
 			c.type = .Zooperdan_Unbound
-			say(w, .None, "Zooperdan tears off the last of his disguise.", "\"I do not need a body to break you!\"")
+			say(w, .None, wrap22("Zooperdan tears off the last of his disguise. \"I do not need a body to break you!\""))
 		}
 	}
 }

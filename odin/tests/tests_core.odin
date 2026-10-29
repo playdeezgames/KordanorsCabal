@@ -36,6 +36,7 @@ ALL_TESTS := []Test_Case{
 	{"town: the cellar rats quest and the purify spell", test_town_quest_spells},
 	{"ending: the finale, the two answers, the screens and saves", test_ending_handed},
 	{"ending: refusing the horns after reading the notes", test_ending_refused},
+	{"ending: lore pages and Elder buttons fit the screen", test_ending_texts_fit},
 	{"soak: random play never breaks the world", test_soak},
 	{"render: the rasterizer reproduces every recorded VB screen bit for bit", test_rasterizer_reference},
 	{"ui: the original screens match the recorded VB frames", test_ui_golden},

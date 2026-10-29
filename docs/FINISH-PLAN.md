@@ -35,7 +35,7 @@ A tension curve to tune against. Death chance per occupied room for a player car
 
 Today the equipped numbers are 0 to 5% at every level, so the middle is 3 to 10 times too safe. The simulators are the gate: `tools/analysis/difficulty.py` (single fights) and `tools/analysis/campaign.py` (whole levels with carried HP, wear, money, potions, healing).
 
-**Correction (2026-10-29).** A per-room death chance of 5 to 15% cannot be a target: a level holds 60 to 100 fights, so it would kill every run. The campaign model measures *the chance that a level kills the player*, and its targets are I 10-20%, II 8-15%, III 10-18%, IV 12-22%, V 20-30%. **These are not calibrated to real play.** The model player is mechanical (no spells, no intimidation, imperfect judgement), and its baseline says the opposite of the owner's experience for levels II to V (see `docs/difficulty-analysis.md`, "Campaign model"). The live playtest (#325) must calibrate it before the targets are trusted; until then the model is for comparing changes, not for absolute numbers.
+**Correction (2026-10-29).** A per-room death chance of 5 to 15% cannot be a target: a level holds 60 to 100 fights, so it would kill every run. The campaign model measures *the chance that a level kills the player*, and its targets are I 10-20%, II 8-15%, III 10-18%, IV 12-22%, V 20-30%. The model's player was calibrated to the owner's report (almost no deaths after level I) the same day; its baseline is in `docs/difficulty-analysis.md`: 3%, 3%, 10%, 7%, 3%, so levels II to V need roughly 3 to 8 times more danger, and level I is probably tested too kindly by the model.
 
 ## Phases
 

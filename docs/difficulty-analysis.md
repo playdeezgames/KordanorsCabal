@@ -121,3 +121,17 @@ What it shows, and what it does not:
 - **Money has no use**: 700 to 1,700 unspent by levels III to V, with the full kit bought by the start of level II (platemail is never worth it because the defence cap makes it useless).
 - **The kit is complete at level II and stats stay flat** (HP 8 to 10), so everything from III on is the same fight against bigger groups. That is the sag.
 - **It disagrees with the owner on the mid game.** The model player dies on levels II to V far more than the target, while the owner finds those levels easy. The reason is probably the player: the model uses no spells (Holy Bolt against the many undead), no intimidation, and flees by the game's random direction rule (half the time it fails and costs a counter-attack). Treat the absolute numbers as a pessimistic bound and use the model for *comparisons* (does gear spreading, attrition, scaling move the table the right way?). Calibrating it against a real playthrough is task #325.
+
+### Calibration (2026-10-29)
+
+The owner reported: almost no deaths after level I; tactics are running to come back healed, Holy Bolt on the undead, and fighting on with potions; the character at the start of level III is character level 4 to 5 with HP 8 to 10 (the model matches that). The first model player was far too reckless (it accepted fights with up to 30% risk and had 25 trials of judgement); a careful, accurate player (`avoid_above` 2%, `push_above` 4%, 100 risk trials, heals below 80% HP) matches the report. Baseline of that player (150 runs, the game as it is):
+
+| Level | Dies on the level | Town trips | Potions | Money at entry |
+|---|---|---|---|---|
+| I | 3% | 19 | 2.0 | 0 |
+| II | 3% | 27 | 3.3 | 211 |
+| III | 10% | 30 | 3.7 | 596 |
+| IV | 7% | 25 | 1.9 | 885 |
+| V | 3% | 17 | 1.1 | 1,271 |
+
+75% finish level V alive. Reading it: the mid game is a walk because **the careful player simply skips what is dangerous and heals for free (17 to 30 trips a level)**, so attrition and tension are absent, and money (up to 1,271 unspent) has no use. Level I is too kind in the model (3%), since the model's starting HP is 6 and the real start is HP 3 plus whatever is left to assign: treat the opening as untested here. The plan's per-level targets (I 10-20%, II 8-15%, III 10-18%, IV 12-22%, V 20-30%) apply to this player.
