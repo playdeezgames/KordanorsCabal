@@ -44,14 +44,15 @@ RULES = dict(
     items_found=0.8,                # share of the placed gear the player finds
     hunger_hp_per_level=0.0,        # HP lost to hunger per level (the game: about 100 steps per HP; a level takes a few hundred steps)
     wear=True,
-    avoid_above=0.08,
-    push_above=0.30,                # when only risky rooms are left the player takes the least bad up to this risk, then goes to the boss
+    avoid_above=0.02,
+    push_above=0.04,                # when only risky rooms are left the player takes the least bad up to this risk, then goes to the boss
     heal_before=0.8,                # a careful player heals (a trip to town) below this share of HP before the next room               # a careful player leaves a room alone while its risk of death or panic is above this
-    risk_trials=25,
+    risk_trials=100,
     flee_below=0.34,                # drink a potion (or try to run) when hurt below this share of HP during a fight
 )
 # Targets from docs/FINISH-PLAN.md: the chance that a level kills the model player (low, high), given the player entered it. A level has
-# 60 to 100 fights, so a per-room chance of even 1% is a big number per level. NOT YET CALIBRATED to real play (see the plan).
+# 60 to 100 fights, so a per-room chance of even 1% is a big number per level. The player policy is calibrated (2026-10-29) to the owner's
+# report: a skilled player who almost never dies after level I; the targets are what the finished game should do to that player.
 TARGET = {1: (0.10, 0.20), 2: (0.08, 0.15), 3: (0.10, 0.18), 4: (0.12, 0.22), 5: (0.20, 0.30)}
 
 class Player:
@@ -150,12 +151,20 @@ def room_fight(p, group, level, stats=None):
         if r != 'ok': return r, en
     return 'ok', en
 
+_risk_cache = {}
 def risk(p, group, level, full=False):
-    """Share of trials in which this room kills or breaks the player from the present state."""
+    """Share of trials in which this room kills or breaks the player from the present state (full HP if `full`). Cached by the
+    room's group and the player's fighting numbers, since the kit changes rarely."""
+    key = (tuple(sorted(c['type'] if isinstance(c, dict) else c for c in group)), p.atk(), p.dfn(), p.maxdmg(), p.maxhp(), p.stat['WIL'],
+           p.stat['MP'] - p.stress, p.potions > 0, full, RULES['maxdef'])
+    if key in _risk_cache: return _risk_cache[key]
     bad = 0
     for _ in range(RULES['risk_trials']):
-        c = copy.deepcopy(p); c.wounds = 0 if full else c.wounds; bad += room_fight(c, list(group), level)[0] in ('dead', 'panic')
-    return bad / RULES['risk_trials']
+        c = copy.copy(p); c.gear = {k: list(v) for k, v in p.gear.items()}
+        if full: c.wounds = 0
+        bad += room_fight(c, list(group), level)[0] in ('dead', 'panic')
+    _risk_cache[key] = bad / RULES['risk_trials']
+    return _risk_cache[key]
 
 def needs_town(p):
     """No weapon but money for a dagger, or the weapon is nearly worn out and can be repaired."""
@@ -269,4 +278,7 @@ def report(runs=300):
     print("finished level V alive: %.0f%%" % (100 * len(agg[5]) and 100 * sum(1 for s in agg[5] if not s['deaths']) / runs))
 
 if __name__ == "__main__":
+    # optional overrides: key=value pairs, e.g. avoid_above=0.02 push_above=0.06 risk_trials=40
+    for a in sys.argv[2:]:
+        k, v = a.split('='); RULES[k] = float(v) if '.' in v else int(v)
     report(int(sys.argv[1]) if len(sys.argv) > 1 else 300)
