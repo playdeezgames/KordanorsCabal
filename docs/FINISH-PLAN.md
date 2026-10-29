@@ -33,7 +33,9 @@ A tension curve to tune against. Death chance per occupied room for a player car
 | Moon | D | 10 to 20% | 3 to 4 | optional, lethal |
 | Bosses | | each stands out: 15 to 30% at the right kit | | set pieces |
 
-Today the equipped numbers are 0 to 5% at every level, so the middle is 3 to 10 times too safe. The simulator (`tools/analysis/difficulty.py`) is the gate: a change is done when its table lands near this one.
+Today the equipped numbers are 0 to 5% at every level, so the middle is 3 to 10 times too safe. The simulators are the gate: `tools/analysis/difficulty.py` (single fights) and `tools/analysis/campaign.py` (whole levels with carried HP, wear, money, potions, healing).
+
+**Correction (2026-10-29).** A per-room death chance of 5 to 15% cannot be a target: a level holds 60 to 100 fights, so it would kill every run. The campaign model measures *the chance that a level kills the player*, and its targets are I 10-20%, II 8-15%, III 10-18%, IV 12-22%, V 20-30%. **These are not calibrated to real play.** The model player is mechanical (no spells, no intimidation, imperfect judgement), and its baseline says the opposite of the owner's experience for levels II to V (see `docs/difficulty-analysis.md`, "Campaign model"). The live playtest (#325) must calibrate it before the targets are trusted; until then the model is for comparing changes, not for absolute numbers.
 
 ## Phases
 

@@ -1435,3 +1435,8 @@ Design decided with the owner 2026-10-28 (see `docs/FINISH-PLAN.md`). Code in `o
 **Changed:** reading a Note now word-wraps the text at spaces (`wrap22`) instead of cutting words at column 22. This departs from decision review 7 (fidelity), for lore only; revert the one line in `events.odin` (`Read_Note`) to restore the old cut. The longest text is 384 bytes (limit 768).
 
 **Not verified:** how the pages look on screen.
+
+
+### Finish phase 2, first step: the campaign simulator (2026-10-29)
+
+`tools/analysis/campaign.py` (task #312): a whole-run Monte Carlo with carried HP, stress, wear, money, potions, healing cost and a cautious player policy; baseline and caveats in `docs/difficulty-analysis.md` ("Campaign model"). **Finding:** my first target table (death per room 5-15%) was wrong, since a level has 60-100 fights; targets are now per level and marked uncalibrated in `docs/FINISH-PLAN.md`. **Finding:** free healing is used 22-35 times per level and money piles up unused. **Not done:** hunger/food, spells, intimidation and the Moon are not modelled, and the player policy is not calibrated to real play.

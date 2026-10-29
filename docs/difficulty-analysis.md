@@ -100,3 +100,24 @@ or brodesode appears after level III, and there are 10 potions per level plus a 
 - Make the levels differ in density (a quiet first level, busiest in the middle, a few dangerous creatures at the bottom).
 - Add attrition: a limit on free healing (a cost or a cooldown), fewer potions, or hunger that bites sooner.
 - Take the early cliff off: a better start (a dagger and a few coins), or weaker level I dead-end groups.
+
+
+## Campaign model (2026-10-29; `tools/analysis/campaign.py`)
+
+The first model (above) fights each room from full HP. This one plays the dungeon: HP, stress, wear, money, potions and level-ups carry from room to room; gear is placed by the spawn rules and sold or worn; the smith's prices buy upgrades and repairs; the healer is a free full heal; the player retreats to town when hurt, drinks potions and runs when a fight turns, and skips rooms that look too dangerous (leaving them, and their XP and money, behind). Rules under test are in `RULES`; run `python3 tools/analysis/campaign.py [runs]`.
+
+Baseline (120 runs, the game as it is):
+
+| Level | Reached | Dies on the level | Town trips per level | Potions drunk | Money at entry | Kit at entry |
+|---|---|---|---|---|---|---|
+| I | 100% | 19% | 22 | 3.8 | 0 | none |
+| II | 81% | 34% | 31 | 7.8 | 213 | shield, helmet, chainmail, brodesode |
+| III | 53% | 67% | 35 | 6.7 | 742 | full kit |
+| IV | 18% | 67% | 31 | 6.4 | 1,148 | full kit |
+| V | 6% | 57% | 26 | 7.4 | 1,735 | full kit |
+
+What it shows, and what it does not:
+- **The free heal is the engine of the game**: 22 to 35 trips to town per level, i.e. the player heals every two or three fights. Attrition does not exist.
+- **Money has no use**: 700 to 1,700 unspent by levels III to V, with the full kit bought by the start of level II (platemail is never worth it because the defence cap makes it useless).
+- **The kit is complete at level II and stats stay flat** (HP 8 to 10), so everything from III on is the same fight against bigger groups. That is the sag.
+- **It disagrees with the owner on the mid game.** The model player dies on levels II to V far more than the target, while the owner finds those levels easy. The reason is probably the player: the model uses no spells (Holy Bolt against the many undead), no intimidation, and flees by the game's random direction rule (half the time it fails and costs a counter-attack). Treat the absolute numbers as a pessimistic bound and use the model for *comparisons* (does gear spreading, attrition, scaling move the table the right way?). Calibrating it against a real playthrough is task #325.
