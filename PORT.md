@@ -1478,3 +1478,7 @@ The Elder gets a Train button (slot 7): a point to assign for 150 money, 225, 30
 ## Shard powers (#319)
 
 The four shards already worked as powers in the original (Air teleports, Earth immobilises, Fire does 3d4, Water heals everything, each for 1 mana, reusable; the Elder takes them for the Orb). Findings: with the player starting at 1 mana, restored for free by the Black Mage, the Water Shard bypassed the healer's cooldown and the Fire Shard (about 7 damage a shot) would flatten bosses with 5 to 8 HP. Changes: the Water Shard shares the healer's 40-step rest (`heal_wait`), and the Fire Shard costs 2 mana (`FIRE_SHARD_MANA`), so it needs the Amulet of Mana from the level II boss. Tests cover both. There is no spend-or-keep dilemma because the shards stay in the pack when used; the choices left are which of the one or two mana to spend, and where. Not modelled in the campaign simulator.
+
+## New music
+
+MinorTheme.ogg (Abundant Music, 2 minutes) is replaced by a somber 7 minute 23 second theme in A minor, written in the Anvil sound editor (melody and bass voices, mixed and encoded by the scripts in tools/music/, see its README). Same file name, so nothing in the platform layers changed; decoded in the browser it is 443 s long at the old theme's loudness. The Credits screen's music line now reads "The music was composed in the Anvil sound editor." The file is 2.7 MB (the old one 1.9 MB). I could not listen to it; the shape of the tune comes from the notes alone.

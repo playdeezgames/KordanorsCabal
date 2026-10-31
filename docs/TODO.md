@@ -13,7 +13,7 @@ Open work on Kordanor's Cabal, collected from the port. Newest findings first. (
 - [ ] **Amulet of STR** has no buff in the data (the other amulets give +1 to their statistic).
 - [ ] **Lotion never runs out** (it has no durability in the data; the code that would use it up never applies).
 - [x] (fixed 2026-10-28: Fire Shard on III boss room, Amulet of Mana moved to II, Amulet of DEX placed on V) **Spawn rules with a count but no place:** the Fire Shard (Level III, see the orb item above) and the Amulet of Mana (Level V) never appear; the Amulet of Mana (Level II) has places but no count.
-- [ ] **Credits.** Add the sound-effect sources and the wording for the music ("generated with Abundant Music", seed 2645320710) to the Credits screen.
+- [ ] **Credits.** Add the sound-effect sources to the Credits screen (the music line now says it was composed in the Anvil sound editor, 2026-10-31; the old Abundant Music theme is gone).
 
 ## Story and ending (design notes from the owner, 2026-10-03; BUILT 2026-10-29 as two endings, see `docs/FINISH-PLAN.md`; stats untuned, no completed-slot flag yet)
 

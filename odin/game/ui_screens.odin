@@ -488,7 +488,7 @@ CREDITS_TEXT :: []string{
 	"Zooperdan:", "https://zooperdan.itch.io/", "",
 	"Vermux:", "https://vurmux.itch.io/urizen-onebit-tilesets", "",
 	"Lorc:", "https://game-icons.net/1x1/lorc/cultist.html", "",
-	"The music was generated with Abundant Music.",
+	"The music was composed in the Anvil sound editor.",
 }
 
 // Greedy word wrap to the screen width; a word longer than a row (an address) is cut at the row's end.
