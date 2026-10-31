@@ -111,7 +111,7 @@ test_int_size :: proc(t: ^T) {
 
 test_content_facts :: proc(t: ^T) {
 	expect_eq(t, len(game.Item_Type) - 1, 53)
-	expect_eq(t, len(game.Character_Type) - 1, 18)
+	expect_eq(t, len(game.Character_Type) - 1, 22)
 	expect_eq(t, len(game.Stat) - 1, 37)
 	expect_eq(t, int(game.Item_Type.Potion), 7)          // enum values are the original database ids
 	expect_eq(t, int(game.Direction.Up), 5)

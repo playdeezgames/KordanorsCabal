@@ -1458,3 +1458,7 @@ New spawn table for the seven gear items (database and VB seed; see `docs/diffic
 ## Monster scaling (#314)
 
 Spawn counts moved from goblins and skeletons to elites, acolytes, bishops and priests on levels II to V; bishops and priests hit for up to 4; bishops attack mentally half the time. Numbers and the experiments are in docs/difficulty-analysis.md. Levels II and III land in their death targets; IV and V stay low because a careful player skips danger, so the rest of the work is in bosses (#320) and level identities (#321). No Odin code changed: the content is generated from boilerplate.db. Tests pass.
+
+## Boss variety (#320)
+
+Four new character types (ids 19 to 22: Acolyte Warden, Bone Priest, Flame Bishop, Cult Guard) in boilerplate.db and the VB seed. The old single-creature boss spawns for Acolyte (I), Priest (II) and Bishop (III) are removed; the Cabal Leader (IV) and Kordanor (V) are strengthened and attack mentally in part (leader). Sprites for the new types borrow their kin's shape in another colour, derived in `tools/gen/gen_ui.py` (the VB game has no sprites for them, so the VB reference build would show nothing: it is a reference for rules, not for content). Test count of character types is now 22. Numbers and the experiment: docs/difficulty-analysis.md.

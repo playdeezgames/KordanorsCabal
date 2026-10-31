@@ -40,6 +40,10 @@ def sprites(text, key_names):
     return found
 
 cs = sprites(rd(os.path.join(ui, "CharacterSprites.vb")), character_names)
+# Types added by the port (the boss variants, see docs/FINISH-PLAN.md) borrow the shape of their kin in another colour:
+# new id -> (id whose shape is used, hue). The VB game has no sprites for them.
+for new, (src, hue) in {19: (1, "Orange"), 20: (12, "Light_Cyan"), 21: (4, "Orange"), 22: (1, "Pink")}.items():
+    cs[new] = (hue, cs[src][1])
 out.append("CHARACTER_SPRITES := #partial [Character_Type]Sprite{")
 for i in sorted(cs):
     hue, rows = cs[i]

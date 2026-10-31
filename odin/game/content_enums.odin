@@ -79,6 +79,10 @@ Character_Type :: enum u8 {
 	Zombie = 16,
 	Zooperdan = 17,
 	Zooperdan_Unbound = 18,
+	Acolyte_Warden = 19,
+	Bone_Priest = 20,
+	Flame_Bishop = 21,
+	Cult_Guard = 22,
 }
 
 Location_Type :: enum u8 {

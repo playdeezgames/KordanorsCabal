@@ -179,3 +179,23 @@ Runs of 100 (60 for the first), 40-step heal cooldown. Share of runs that die on
 Findings: levels II and III respond to the monster mix and are now on target. IV and V do not: a careful player leaves dangerous rooms alone and goes to the boss, so more elites and bishops barely change his odds, and level V deaths do not happen at the boss either (Kordanor's room). Mental attacks barely register for a policy that avoids panic rooms but are lethal when forced (66% dead on III with every high-INF type mental). The lever for IV and V is the bosses and what stands between the key and the boss (#320, #321), not more trash. Also fixed: a panic loop in campaign.py (run counts as dead after 4 panics on one level).
 
 Applied: spawn counts for goblin, elite, acolyte, bishop, priest on II to V; Bishop and Priest damage limit 3 to 4; Bishop gains a mental attack (weight 1 of 2).
+
+## Experiment: boss variety (#320, 2026-10-31)
+
+Each boss room is now its own type, so a boss can differ from the trash that fills the level, and has guards (new type Cult Guard, spawned only in boss rooms):
+
+| Level | Boss | Guards | Trick |
+|---|---|---|---|
+| I | Acolyte Warden: STR 7, DEX 3, HP 5 | 1 | tougher than any acolyte |
+| II | Bone Priest: STR 6, INF 4, HP 4 | 2 | mental attack one time in four |
+| III | Flame Bishop: INF 6, HP 5, damage limit 4 | 2 | mental attack half the time |
+| IV | Cabal Leader: STR 9, HP 8 | 4 | mental attack one time in four |
+| V | Kordanor: STR 10, HP 14, damage limit 5 | 6 | the hardest fight of the dungeon |
+
+250 runs of the campaign model, share dying on each level (last full run, with one more guard on I and a Bone Priest of HP 5, II and I slightly easier now):
+
+| I | II | III | IV | V | Finish alive |
+|---|---|---|---|---|---|
+| 20% | 20% | 19% | 18% | 10% | 38% |
+
+Targets: I 10-20, II 8-15, III 10-18, IV 12-22, V 20-30; the finish rate they imply is about 41%. 53% of level I deaths and 70 to 90% of IV and V deaths now happen at the boss, which is the point: the bosses are the set pieces. Noise between runs of the same settings is several points. Level V is still under its target; level identities (#321) are the next lever. Applied after that run: one guard on level I instead of two, Bone Priest HP 5 to 4. Not re-simulated.
