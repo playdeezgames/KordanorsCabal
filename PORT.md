@@ -1466,3 +1466,7 @@ Four new character types (ids 19 to 22: Acolyte Warden, Bone Priest, Flame Bisho
 ## Defence growth (#315)
 
 Data only: Chainmail gets a +1 buff on Base Maximum Defend and Platemail +2 (item buffs already feed `stat_of`), so the player's defence cap is 1 with no armour, 2 in chainmail, 3 in platemail. A test checks the cap with and without the chainmail. The campaign simulator models it (`def_Chainmail`, `def_Platemail`); results in docs/difficulty-analysis.md. The model player finishes more runs now (55% against 41% implied by the targets), to be recovered by #321/#322 and a live playtest.
+
+## Retune after defence growth
+
+Acolyte Warden HP 6; Kordanor HP 18, STR 12; Cult Guards on level V 8; bishops 55 and priests 60 on V. Numbers in docs/difficulty-analysis.md. The model player finishes 47% of runs, levels I to V die 14, 9, 15, 11, 20%.

@@ -212,3 +212,16 @@ The cap on the player's defence hits (Base Maximum Defend) was 1 for the whole g
 | Platemail +2 only | identical to the line above: the model player never wears platemail | | | | | |
 
 Findings: chainmail is the item that matters (it arrives on level II); the model player rarely buys platemail, so its cap bonus cannot be judged here. Levels I and II differ between rows by noise alone (the cap does not touch them before chainmail). With the growth the model player finishes 55% of runs against about 41% implied by the targets, so the late game is somewhat easier again; the levers left are the level identities and the wandering threat (#321, #322) and a live playtest.
+
+## Retune after defence growth (2026-10-31)
+
+150 runs each, with chainmail +1 and platemail +2, share dying on each level:
+
+| Candidate | I | II | III | IV | V | Finish alive |
+|---|---|---|---|---|---|---|
+| Before retune | 7% | 8% | 11% | 19% | 11% | 55% |
+| Warden HP 6, Kordanor HP 16 STR 11, 8 guards on V | 11% | 5% | 12% | 17% | 7% | 57% |
+| Warden HP 6, Kordanor HP 18 STR 12, 8 guards, 55 bishops and 60 priests on V (**applied**) | 14% | 9% | 15% | 11% | 20% | 47% |
+| Warden with 2 guards, Kordanor HP 16 STR 11, 8 guards | 15% | 9% | 14% | 19% | 15% | 46% |
+
+The applied set puts every level inside its target except IV, one point under; the model player finishes 47% of runs against about 41% implied by the targets, and level V now kills 20%. Remaining difference is within the noise of the runs; a live playtest is the next judge.
