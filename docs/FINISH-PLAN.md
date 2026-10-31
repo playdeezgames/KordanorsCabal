@@ -120,3 +120,17 @@ Stay within what exists. No new screens until the first four are in.
 2. Is a wandering threat acceptable (it breaks the "cleared room stays clear" assumption)?
 3. How hard should free healing be limited: money, cooldown, or both?
 4. Do you want the early game left exactly as it is?
+
+## Playtest pass, 2026-10-31 (cabalist, after Phase 2 and the shard rules)
+
+Done in the browser (build/web served by tools/serve.sh, built-in browser, no console errors): title, start with a seed, character creation, prolog, Town Square, the Elder's screen with the new Train button, his *The Shards* speech (fits the screen) and Train with too little money (message fits). Done natively: 14 random-play seeds of 6,000 steps each against the new content (bosses, guards, shard rules, training) without a crash or a broken-world check (the run was cut by its 15 minute limit at seed 14).
+
+Not done, and why: walking the dungeon by hand. Each move costs several browser calls and the keys queue, so a tension judgement (does level I stay tense, does III hurt, is there a run-ending moment on V) is not something I can give fairly; the simulator is the stand-in and says the model player dies 14, 9, 15, 11, 20% on levels I to V. The ending screens, the Orb and the finale have not been looked at in the browser either (only in tests).
+
+Things noticed:
+- The button bank can land the cursor on a blank cell (right column under Train); harmless, but a first-time player may think the game stalled.
+- The native SDL build does not link in this environment (no libSDL2_mixer); web and tests are unaffected.
+- "You see: Zooperdan the Elder" still shows during the finale, and Zooperdan has no sprite (blank).
+- The VB reference build has no sprites for the four new boss types.
+
+What a human should do next: play one run with a fixed seed from level I to the Elder, with the checklist in "Playtest loop" above, and note where it is too easy or too hard.
