@@ -36,7 +36,7 @@ def roll_dice(s):
 RULES = dict(
     maxdef=1,                       # the player's defence cap (Base Maximum Defend)
     heal_cost=lambda level, wounds: 0,   # what the healer charges for a full heal
-    heal_cooldown=0,                # steps the player must walk between two free heals (the game: HEAL_COOLDOWN in ui_town.odin)
+    heal_cooldown=40,               # steps the player must walk between two free heals (the game: HEAL_COOLDOWN in ui_town.odin)
     steps_per_room=6,               # steps walked to reach and clear one room
     steps_per_trip=24,              # steps for the walk to town and back
     potions_found=0.6,              # share of the spawned potions the player finds and keeps
@@ -50,6 +50,7 @@ RULES = dict(
     avoid_above=0.02,
     push_above=0.04,                # when only risky rooms are left the player takes the least bad up to this risk, then goes to the boss
     heal_before=0.8,                # a careful player heals (a trip to town) below this share of HP before the next room               # a careful player leaves a room alone while its risk of death or panic is above this
+    max_panics=4,                   # panics on one level after which the run counts as dead
     risk_trials=100,
     flee_below=0.34,                # drink a potion (or try to run) when hurt below this share of HP during a fight
 )
@@ -243,7 +244,10 @@ def campaign():
                 s['lost'] += max(hp0 - p.hp(), 0) / p.maxhp()
                 if r == 'dead': s['deaths'] = 1; s['boss_death'] = k == ('b', 0); s['room_size'] = len(left); res[level] = s; return res
                 if r == 'panic':      # drop everything, lose half the money, wake in town
-                    s['panics'] += 1; p.gear = {}; p.money //= 2; p.stress = 0; p.wounds = 0; town(p, level, s)
+                    s['panics'] += 1
+                    if s['panics'] > RULES['max_panics']:   # a player who keeps breaking down on one level is finished (also stops endless retries)
+                        s['deaths'] = 1; s['boss_death'] = k == ('b', 0); s['room_size'] = len(R[k]); res[level] = s; return res
+                    p.gear = {}; p.money //= 2; p.stress = 0; p.wounds = 0; town(p, level, s)
                     todo.append(k); R[k] = [c for c in R[k]]   # the room is still occupied; the enemies keep their wounds in the real game (ignored here)
                     continue
                 if r == 'fled': R[k] = left; todo.insert(0, k) if k != ('b', 0) else None   # the survivors keep their wounds
@@ -288,5 +292,8 @@ if __name__ == "__main__":
     for a in sys.argv[2:]:
         k, v = a.split('=')
         if k.startswith('price_'): GEAR[k[6:]]['price'] = int(v); continue   # e.g. price_Chainmail=120 tries a shop price
+        if k.startswith('cnt_'): _, t, l = k.split('_'); D.cnt.setdefault(int(l), {})[int(t)] = int(v); continue   # cnt_<type>_<level>=N: spawn count
+        if k.startswith('atk_'): _, t, kind = k.split('_'); D.atkw.setdefault(int(t), {})[int(kind)] = int(v); continue   # atk_<type>_<kind>=weight
+        if k.startswith('stat_'): _, t, name = k.split('_'); D.MON[int(t)][name] = int(v); continue   # stat_<type>_<STR|DEX|INF|WIL|HP|MP|MAXDMG|MAXDEF>=N
         RULES[k] = float(v) if '.' in v else int(v)
     report(int(sys.argv[1]) if len(sys.argv) > 1 else 300)

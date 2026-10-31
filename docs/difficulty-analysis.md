@@ -160,3 +160,22 @@ Changed the spawn table so the kit is found over the levels instead of on levels
 | 80 steps | 15% | 18% | 14% | 5% | 4% | 55% |
 
 Targets: I 10-20, II 8-15, III 10-18, IV 12-22, V 20-30. A cooldown of 40 puts levels I to III inside the targets and IV nearly; V is still low until the monsters scale (#314). 80 overshoots II and the extra pressure just sends the player home sooner. The game uses 40 (`HEAL_COOLDOWN`).
+
+## Experiment: scaling the monsters (#314, 2026-10-30)
+
+Runs of 100 (60 for the first), 40-step heal cooldown. Share of runs that die on the level:
+
+| Scenario | I | II | III | IV | V | Finish alive |
+|---|---|---|---|---|---|---|
+| Cooldown only (before) | 10% | 9% | 16% | 12% | 8% | 56% |
+| Heavy shift to elites/acolytes/bishops/priests (II to V) | 9% | 29% | 22% | 0%* | 0%* | 50% |
+| Same plus mental attacks on bishops, priests, leaders | 7% | 46% | 67% | -* | -* | 17% |
+| Milder shift | 8% | 14% | 10% | 10% | 3% | 62% |
+| Milder shift, more IV and V | 6% | 9% | 8% | 10% | 3% | 69% |
+| Same, bishop and priest damage limit 4, bishop attacks mentally half the time (**applied**) | 3% | 12% | 15% | 8% | 3% | 64% |
+
+\* Too few runs got there, or the careful player skipped to the boss.
+
+Findings: levels II and III respond to the monster mix and are now on target. IV and V do not: a careful player leaves dangerous rooms alone and goes to the boss, so more elites and bishops barely change his odds, and level V deaths do not happen at the boss either (Kordanor's room). Mental attacks barely register for a policy that avoids panic rooms but are lethal when forced (66% dead on III with every high-INF type mental). The lever for IV and V is the bosses and what stands between the key and the boss (#320, #321), not more trash. Also fixed: a panic loop in campaign.py (run counts as dead after 4 panics on one level).
+
+Applied: spawn counts for goblin, elite, acolyte, bishop, priest on II to V; Bishop and Priest damage limit 3 to 4; Bishop gains a mental attack (weight 1 of 2).
