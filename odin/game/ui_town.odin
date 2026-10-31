@@ -15,6 +15,7 @@ ELDER_PEP :: 1
 ELDER_CABAL :: 2
 ELDER_SHARDS :: 3
 ELDER_ORB :: 4
+ELDER_TRAIN :: 7
 INN_QUEST :: 1
 INN_PRICES :: 6
 INN_BUY :: 7
@@ -65,6 +66,12 @@ shards_held :: proc(w: ^World, who: Character_ID) -> (n: int) {
 	return
 }
 
+// The Elder trains the hero: a point to assign for money, dearer with every point bought (the campaign simulator,
+// tools/analysis/campaign.py train_base and train_step, says this absorbs the late money without changing the odds).
+TRAIN_BASE :: 150
+TRAIN_STEP :: 75
+train_cost :: proc(w: ^World) -> i32 { return TRAIN_BASE + TRAIN_STEP * w.player.trained }
+
 // The Elder makes the Orb from the four shards once, and not while the pack already holds one.
 can_make_orb :: proc(w: ^World, who: Character_ID) -> bool { return shards_held(w, who) == len(ELEMENT_SHARDS) && !has_item_type(w, who, .Elemental_Orb) }
 
@@ -93,6 +100,7 @@ town_titles :: proc(core: ^Core, titles: ^[BUTTON_COUNT]string) {
 	switch w.player.mode {
 	case .Elder:
 		titles[ELDER_PEP], titles[ELDER_CABAL], titles[ELDER_SHARDS] = "Pep talk", "The Cabal", "The Shards"
+		titles[ELDER_TRAIN] = "Train"
 		if can_make_orb(w, who) { titles[ELDER_ORB] = "Make Orb" }
 		if can_hand_over_horns(w, who) { titles[ELDER_HORNS] = "Give Horns" }
 		if can_refuse_horns(w, who) { titles[ELDER_REFUSE] = "Keep Horns" }
@@ -134,6 +142,7 @@ draw_town :: proc(core: ^Core) {
 		case ELDER_PEP: say_line(s, "If you find yerself disheartened, I'm always here to help!")
 		case ELDER_SHARDS: say_line(s, wrap22(elder_shards_speech(w, who)))
 		case ELDER_HORNS, ELDER_REFUSE: say_line(s, wrap22(elder_horns_speech(b)))
+		case ELDER_TRAIN: say_line(s, wrap22(fmt.tprintf("I can train you, for money. The next point costs %d. You have %d.", train_cost(w), stat_of(w, who, .Money))))
 		case ELDER_ORB: say_line(s, wrap22("Four shards and the Orb is made! Hand them over."))
 		case ELDER_CABAL: say_line(s, "Deep within the cata- combs beneath the ab- andoned church there  is a demon named Kord-anor! Slay this foul  fiend and bring to me his horns, so that    there can be a lastingpeace!")
 		case: say_line(s, "Hello, my friend! Staya while, and listen!")
@@ -201,6 +210,18 @@ town_button :: proc(core: ^Core, button: int) {
 			message_add(w, .None, "Sometimes in our life we all have pain. We all have sorrow. But, if we are wise, we know that there's always tomorrow!")
 			if mp_current(w, who) < 1 { character_get(w, who).stats[.Stress] = stat_of(w, who, .MP) - 1 }
 			show_messages_then(core, .In_Play)
+		} else if button == ELDER_TRAIN {
+			cost := train_cost(w)
+			if stat_of(w, who, .Money) < cost {
+				message_add(w, .None, wrap22(fmt.tprintf("Training costs %d money. Come back when you can pay.", cost)))
+				show_messages_then(core, .In_Play)
+			} else {
+				c := character_get(w, who)
+				stat_add(c, .Money, -cost)
+				stat_add(c, .Unassigned, 1)
+				w.player.trained += 1
+				enter_state(core, .Level_Up)
+			}
 		} else if button == ELDER_HORNS && can_hand_over_horns(w, who) {
 			begin_finale(core, .Handed)
 		} else if button == ELDER_REFUSE && can_refuse_horns(w, who) {

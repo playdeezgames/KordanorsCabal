@@ -30,8 +30,8 @@ test_town_golden :: proc(t: ^T) {
 	}
 	for s in scenes {
 		talk_to(c, s.f)
-		// the elder's button row is not the original's: the port adds The Shards (and Make the Orb), see docs/FINISH-PLAN.md
-		if s.f == .Zooperdan_the_Elder { expect_like_vb(t, c, s.name, 21) } else { expect_like_vb(t, c, s.name) }
+		// the elder's button rows are not the original's: the port adds The Shards, Make the Orb, the horns and Train, see docs/FINISH-PLAN.md
+		if s.f == .Zooperdan_the_Elder { expect_like_vb(t, c, s.name, 20, 21) } else { expect_like_vb(t, c, s.name) }
 		press(c, .Cancel) // Red leaves the conversation
 	}
 	// the shoppe screens of the black mage with 50 money, a potion and a book in the pack
@@ -159,6 +159,25 @@ test_town_shops :: proc(t: ^T) {
 	button(c, game.ELDER_PEP)
 	expect_eq(t, game.mp_current(w, who), i32(1))
 	press(c, .Confirm)
+
+	// the elder trains for money, a point dearer each time
+	me.stats[.Money] = 100
+	me.stats[.Unassigned] = 0
+	talk_to(c, .Zooperdan_the_Elder)
+	button(c, game.ELDER_TRAIN)
+	expect_eq(t, c.state, game.UI_State.Message) // 150 money are needed
+	press(c, .Confirm)
+	expect_eq(t, me.stats[.Unassigned], i32(0))
+	me.stats[.Money] = 400
+	talk_to(c, .Zooperdan_the_Elder)
+	button(c, game.ELDER_TRAIN)
+	expect_eq(t, c.state, game.UI_State.Level_Up)
+	expect_eq(t, me.stats[.Money], i32(250))
+	expect_eq(t, me.stats[.Unassigned], i32(1))
+	expect_eq(t, game.train_cost(w), i32(225))
+	press(c, .Down)
+	press(c, .Confirm) // assigns the point (the first entry, Back, leaves it)
+	expect_eq(t, me.stats[.Unassigned], i32(0))
 
 	// the elder makes the Elemental Orb from the four shards, and only then
 	shards := game.ELEMENT_SHARDS

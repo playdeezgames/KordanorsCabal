@@ -1470,3 +1470,7 @@ Data only: Chainmail gets a +1 buff on Base Maximum Defend and Platemail +2 (ite
 ## Retune after defence growth
 
 Acolyte Warden HP 6; Kordanor HP 18, STR 12; Cult Guards on level V 8; bishops 55 and priests 60 on V. Numbers in docs/difficulty-analysis.md. The model player finishes 47% of runs, levels I to V die 14, 9, 15, 11, 20%.
+
+## Money sinks and stats (#317)
+
+The Elder gets a Train button (slot 7): a point to assign for 150 money, 225, 300, ... (`TRAIN_BASE`, `TRAIN_STEP`, `train_cost`); `Player_State.trained` is saved. The pressed button opens the Level Up screen. The XP curve stays doubling: the simulator says flattening it makes the game trivial (docs/difficulty-analysis.md). The golden check of the elder's frame now skips rows 20 and 21 (his button rows are not the original's). Tests for refusal, payment, assigning and the rising price. Gated shop stock is not done.

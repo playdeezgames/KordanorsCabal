@@ -34,7 +34,7 @@ def roll_dice(s):
 
 # ---- rules under test; change these (or the database) and compare ------------------------------------------------------------
 RULES = dict(
-    def_Chainmail=0, def_Platemail=0,   # cap raised by wearing the armour (an item buff on Base Maximum Defend)
+    def_Chainmail=1, def_Platemail=2,   # cap raised by wearing the armour (an item buff on Base Maximum Defend)
     maxdef=1,                       # the player's defence cap (Base Maximum Defend)
     heal_cost=lambda level, wounds: 0,   # what the healer charges for a full heal
     heal_cooldown=40,               # steps the player must walk between two free heals (the game: HEAL_COOLDOWN in ui_town.odin)
@@ -51,6 +51,9 @@ RULES = dict(
     avoid_above=0.02,
     push_above=0.04,                # when only risky rooms are left the player takes the least bad up to this risk, then goes to the boss
     heal_before=0.8,                # a careful player heals (a trip to town) below this share of HP before the next room               # a careful player leaves a room alone while its risk of death or panic is above this
+    goal_growth=2.0,                # the XP goal is multiplied by this at every level (the game doubles it)
+    train_base=0, train_step=0,     # the Elder's training: a point for train_base + train_step * (points bought so far); 0 = not offered
+    train_reserve=60,               # money the player keeps back when training
     max_panics=4,                   # panics on one level after which the run counts as dead
     risk_trials=100,
     flee_below=0.34,                # drink a potion (or try to run) when hurt below this share of HP during a fight
@@ -70,6 +73,9 @@ class Player:
     def maxhp(s): return s.stat['HP']
     def hp(s): return s.maxhp() - s.wounds
     def atk(s): return s.stat['STR'] + sum(GEAR[g[0]]['atk'] for g in s.gear.values())
+    trained = 0
+    def train(s):   # a bought point: placed like a level-up point but heals nothing
+        k = RULES['level_points'][s.lv % len(RULES['level_points'])]; s.lv += 1; s.stat[k] += 1; s.trained += 1
     def maxdef(s): return RULES['maxdef'] + sum(RULES.get('def_' + g[0], 0) for g in s.gear.values())   # armour can raise the cap (item buffs)
     def dfn(s): return s.stat['DEX'] + sum(GEAR[g[0]]['def'] for g in s.gear.values())
     def maxdmg(s):
@@ -77,7 +83,7 @@ class Player:
         return t if t > 0 else 1
     def level_up(s):
         k = RULES['level_points'][s.lv % len(RULES['level_points'])]; s.lv += 1
-        s.stat[k] += 1; s.wounds = 0; s.stress = 0; s.goal *= 2
+        s.stat[k] += 1; s.wounds = 0; s.stress = 0; s.goal = int(s.goal * RULES['goal_growth'])
     def gain(s, xp):
         s.xp += xp
         while s.xp >= s.goal: s.xp -= s.goal; s.level_up()
@@ -195,6 +201,8 @@ def town(p, level, st_):
     for name in ('Dagger', 'Shield', 'Helmet', 'Shortsword', 'Chainmail', 'Brodesode', 'Platemail'):
         if p.worth(name) and p.money >= GEAR[name]['price'] + 5:
             p.money -= GEAR[name]['price']; p.equip(name, False)
+    while RULES['train_base'] and p.money >= RULES['train_base'] + RULES['train_step'] * p.trained + RULES['train_reserve']:
+        p.money -= RULES['train_base'] + RULES['train_step'] * p.trained; p.train()
 
 def place_items(level, rooms):
     """Puts gear and potions into rooms by the spawn rules; returns room -> list of item ids (only a share is ever found)."""

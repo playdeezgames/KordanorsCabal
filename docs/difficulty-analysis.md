@@ -225,3 +225,16 @@ Findings: chainmail is the item that matters (it arrives on level II); the model
 | Warden with 2 guards, Kordanor HP 16 STR 11, 8 guards | 15% | 9% | 14% | 19% | 15% | 46% |
 
 The applied set puts every level inside its target except IV, one point under; the model player finishes 47% of runs against about 41% implied by the targets, and level V now kills 20%. Remaining difference is within the noise of the runs; a live playtest is the next judge.
+
+## Experiment: money sinks and level-up points (#317, 2026-10-31)
+
+150 runs, share dying on each level, and the money the model player carries into levels II to V:
+
+| Setting | I | II | III | IV | V | Finish alive | Money in II / III / IV / V |
+|---|---|---|---|---|---|---|---|
+| Today | 14% | 9% | 15% | 11% | 20% | 47% | 128 / 379 / 712 / 1,067 |
+| XP goal x1.5 per level instead of x2 | 3% | 2% | 0% | 1% | 1% | 93% | 137 / 450 / 850 / 1,132 |
+| Elder trains: a point for 150, then 225, 300, ... (**applied**) | 7% | 12% | 16% | 8% | 24% | 48% | 120 / 136 / 181 / 209 |
+| Both | 5% | 1% | 1% | 0% | 4% | 91% | 111 / 82 / 83 / 133 |
+
+Findings: the XP curve is a huge difficulty lever, not a small one. A flatter goal gives the player several more levels, each heals fully and adds a point, and the game becomes trivial, so the doubling stays. Buying points for money absorbs the late money (about 1,000 unspent at V becomes about 200) and leaves the odds where they were: the player ends with three or four extra points, which is what makes builds diverge. The Elder is the seller; the price rises by 75 per point bought. Not done: gated high-end shop stock (platemail after the Fire Shard); the model player does not use it, and training already removes the money glut.
