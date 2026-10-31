@@ -65,6 +65,9 @@ learn_spell :: proc(w: ^World, who: Character_ID, spell: Spell_Type) {
 	w.player.spells[spell] = next
 }
 
+// The Fire Shard's burst (3d4 on the first enemy) costs this much mana: with the base mana of 1 it needs the Amulet of Mana.
+FIRE_SHARD_MANA :: 2
+
 // ---- checks (pure reads) --------------------------------------------------------------------------------------------
 
 check :: proc(name: Check, ctx: Event_Context) -> bool {
@@ -83,8 +86,10 @@ check :: proc(name: Check, ctx: Event_Context) -> bool {
 	case .Can_Use_Rotten_Egg: return has_enemy && can_be_bribed_with(w, enemy, .Rotten_Egg)
 	case .Can_Use_Pr0n: return !has_enemy || can_be_bribed_with(w, enemy, .Pr0n_Scroll)
 	case .Can_Use_Bottle: return has_enemy && can_be_bribed_with(w, enemy, .Empty_Bottle)
-	case .Can_Use_Air_Shard, .Can_Use_Water_Shard: return dungeon && mana > 0
-	case .Can_Use_Earth_Shard, .Can_Use_Fire_Shard: return dungeon && has_enemy && mana > 0
+	case .Can_Use_Air_Shard: return dungeon && mana > 0
+	case .Can_Use_Water_Shard: return dungeon && mana > 0 && w.player.heal_wait == 0 // the shard rests like Marten: one heal per HEAL_COOLDOWN steps, from either
+	case .Can_Use_Earth_Shard: return dungeon && has_enemy && mana > 0
+	case .Can_Use_Fire_Shard: return dungeon && has_enemy && mana >= FIRE_SHARD_MANA
 	case .Can_Learn_Holy_Bolt: return can_learn_spell(w, who, .Holy_Bolt)
 	case .Can_Learn_Purify: return can_learn_spell(w, who, .Purify)
 	case .Character_Can_Cast_Holy_Bolt: return has_enemy && CHARACTER_TYPES[character_get(w, enemy).type].is_undead && mana > 0
@@ -178,6 +183,7 @@ perform :: proc(name: Action, ctx: Event_Context) {
 	case .Use_Water_Shard:
 		set_mana(w, who, mana_current(w, who) - 1)
 		character_get(w, who).stats[.Wounds] = 0
+		w.player.heal_wait = HEAL_COOLDOWN
 		say(w, .None, fmt.tprintf("You use %s to heal yer wounds!", ITEM_TYPES[.Water_Shard].name))
 
 	case .Use_Herb:
@@ -234,7 +240,7 @@ perform :: proc(name: Action, ctx: Event_Context) {
 	case .Use_Fire_Shard:
 		enemy, has := first_enemy(w, who)
 		if !has { say(w, .None, "You cannot use that now!"); return }
-		character_get(w, who).stats[.Fatigue] += 1
+		character_get(w, who).stats[.Fatigue] += FIRE_SHARD_MANA
 		damage := i32(roll(&w.rng, Dice{3, 4}))
 		strike(w, who, enemy, damage, fmt.tprintf("You use %s on %s!", ITEM_TYPES[.Fire_Shard].name, CHARACTER_TYPES[character_get(w, enemy).type].name), fmt.tprintf("You do %d damage!", damage))
 	case .Use_Earth_Shard:

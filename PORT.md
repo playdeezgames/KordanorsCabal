@@ -1474,3 +1474,7 @@ Acolyte Warden HP 6; Kordanor HP 18, STR 12; Cult Guards on level V 8; bishops 5
 ## Money sinks and stats (#317)
 
 The Elder gets a Train button (slot 7): a point to assign for 150 money, 225, 300, ... (`TRAIN_BASE`, `TRAIN_STEP`, `train_cost`); `Player_State.trained` is saved. The pressed button opens the Level Up screen. The XP curve stays doubling: the simulator says flattening it makes the game trivial (docs/difficulty-analysis.md). The golden check of the elder's frame now skips rows 20 and 21 (his button rows are not the original's). Tests for refusal, payment, assigning and the rising price. Gated shop stock is not done.
+
+## Shard powers (#319)
+
+The four shards already worked as powers in the original (Air teleports, Earth immobilises, Fire does 3d4, Water heals everything, each for 1 mana, reusable; the Elder takes them for the Orb). Findings: with the player starting at 1 mana, restored for free by the Black Mage, the Water Shard bypassed the healer's cooldown and the Fire Shard (about 7 damage a shot) would flatten bosses with 5 to 8 HP. Changes: the Water Shard shares the healer's 40-step rest (`heal_wait`), and the Fire Shard costs 2 mana (`FIRE_SHARD_MANA`), so it needs the Amulet of Mana from the level II boss. Tests cover both. There is no spend-or-keep dilemma because the shards stay in the pack when used; the choices left are which of the one or two mana to spend, and where. Not modelled in the campaign simulator.

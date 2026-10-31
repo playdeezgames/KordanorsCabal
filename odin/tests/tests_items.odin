@@ -217,6 +217,18 @@ test_events_items :: proc(t: ^T) {
 	text = run_action(w, .Use_Water_Shard)
 	expect_eq(t, me.stats[.Wounds], i32(0))
 	expect_eq(t, game.mana_current(w, player), i32(2))
+	expect_eq(t, w.player.heal_wait, game.HEAL_COOLDOWN) // the shard now rests, and so does Marten
+	me.stats[.Wounds] = 3
+	expect(t, !game.check(.Can_Use_Water_Shard, {world = w, character = player}), "the water shard rests")
+	w.player.heal_wait = 0
+	expect(t, game.check(.Can_Use_Water_Shard, {world = w, character = player}), "rested")
+	me.stats[.Wounds] = 0
+	// the fire shard needs two mana
+	me.stats[.Mana], me.stats[.Fatigue] = 1, 0
+	expect(t, !game.check(.Can_Use_Fire_Shard, {world = w, character = player}), "one mana is not enough for fire")
+	me.stats[.Mana] = 3
+	expect(t, game.check(.Can_Use_Fire_Shard, {world = w, character = player}), "three mana are")
+	me.stats[.Mana], me.stats[.Fatigue] = 3, 0
 	here := me.location
 	text = run_action(w, .Use_Air_Shard)
 	expect_eq(t, game.location_get(w, me.location).level, game.Dungeon_Level.Level_I) // somewhere on the same level

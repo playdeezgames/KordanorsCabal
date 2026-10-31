@@ -307,11 +307,13 @@ The player. Starts with 1 in Strength, Dexterity, Influence, Willpower and Power
 ### Water Shard
 
 - **Use:** Dungeon only, costs 1 mana (reusable): heals all wounds. *(can use: CanUseWaterShard)*
+- **Port change (2026-10-31):** the shard rests like Marten: after a heal from it (or from him) neither heals again for 40 steps.
 - **Found:** Level IV: 1d1 in Dungeon Boss
 
 ### Fire Shard
 
 - **Use:** Dungeon fight only, costs 1 mana (reusable): 3d4 damage to the first enemy, then counter-attacks. *(can use: CanUseFireShard)*
+- **Port change (2026-10-31):** costs 2 mana, so the Amulet of Mana is needed (the player starts with 1).
 - **Found:** Level III: 1d1 in nowhere
 
 ### Air Shard
