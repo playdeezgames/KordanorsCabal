@@ -34,6 +34,7 @@ def roll_dice(s):
 
 # ---- rules under test; change these (or the database) and compare ------------------------------------------------------------
 RULES = dict(
+    def_Chainmail=0, def_Platemail=0,   # cap raised by wearing the armour (an item buff on Base Maximum Defend)
     maxdef=1,                       # the player's defence cap (Base Maximum Defend)
     heal_cost=lambda level, wounds: 0,   # what the healer charges for a full heal
     heal_cooldown=40,               # steps the player must walk between two free heals (the game: HEAL_COOLDOWN in ui_town.odin)
@@ -69,6 +70,7 @@ class Player:
     def maxhp(s): return s.stat['HP']
     def hp(s): return s.maxhp() - s.wounds
     def atk(s): return s.stat['STR'] + sum(GEAR[g[0]]['atk'] for g in s.gear.values())
+    def maxdef(s): return RULES['maxdef'] + sum(RULES.get('def_' + g[0], 0) for g in s.gear.values())   # armour can raise the cap (item buffs)
     def dfn(s): return s.stat['DEX'] + sum(GEAR[g[0]]['def'] for g in s.gear.values())
     def maxdmg(s):
         t = sum(GEAR[g[0]]['maxdmg'] for g in s.gear.values())
@@ -106,7 +108,7 @@ def threat(p, en):
     t = 0
     for x in en:
         w = D.atkw[x['type']]; share = w.get(1, 0) / sum(w.values())
-        t += share * min(max(-(-x['STR'] * 2 // 6) - RULES['maxdef'], 0), x['MAXDMG'])
+        t += share * min(max(-(-x['STR'] * 2 // 6) - p.maxdef(), 0), x['MAXDMG'])
     return int(t + 0.999) if t > 0.6 else 0
 
 def enemy_turn(p, en):
@@ -115,7 +117,7 @@ def enemy_turn(p, en):
         w = D.atkw[x['type']]; tot = sum(w.values())
         if random.random() * tot < w.get(1, 0):
             a = D.hits(x['STR']); wear(p, 'SHT', a)
-            dd = min(D.hits(p.dfn()), RULES['maxdef'])
+            dd = min(D.hits(p.dfn()), p.maxdef())
             if a - dd > 0: p.wounds += min(a - dd, x['MAXDMG'])
         else:
             i = D.hits(x['INF']); wv = D.hits(p.stat['WIL'])
@@ -160,7 +162,7 @@ def risk(p, group, level, full=False):
     """Share of trials in which this room kills or breaks the player from the present state (full HP if `full`). Cached by the
     room's group and the player's fighting numbers, since the kit changes rarely."""
     key = (tuple(sorted(c['type'] if isinstance(c, dict) else c for c in group)), p.atk(), p.dfn(), p.maxdmg(), p.maxhp(), p.stat['WIL'],
-           p.stat['MP'] - p.stress, p.potions > 0, full, RULES['maxdef'])
+           p.stat['MP'] - p.stress, p.potions > 0, full, p.maxdef())
     if key in _risk_cache: return _risk_cache[key]
     bad = 0
     for _ in range(RULES['risk_trials']):

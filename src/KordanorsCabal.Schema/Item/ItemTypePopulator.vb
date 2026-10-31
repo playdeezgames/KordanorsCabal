@@ -343,6 +343,8 @@
         PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType49, StatisticTypeDexterity, 1)
         PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType50, StatisticTypePower, 1)
         PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType51, StatisticTypeMana, 1)
+        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType17, StatisticTypeMaximumDefend, 1)
+        PopulateItemTypeCharacterStatisticBuffsRecord(connection, ItemType20, StatisticTypeMaximumDefend, 2)
     End Sub
     Private Sub PopulateItemTypeStatisticsRecord(connection As SqliteConnection, ItemTypeId As Long, ItemTypeStatisticTypeId As Long, ItemTypeStatisticValue As Long)
         Using command = New SqliteCommand($"INSERT INTO [{Tables.ItemTypeStatistics}]([{Columns.ItemTypeIdColumn}], [{Columns.StatisticTypeIdColumn}], [{Columns.StatisticValueColumn}]) VALUES (@{Columns.ItemTypeIdColumn}, @{Columns.StatisticTypeIdColumn}, @{Columns.StatisticValueColumn});", connection)

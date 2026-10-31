@@ -120,6 +120,10 @@ test_combat_rules :: proc(t: ^T) {
 	expect_eq(t, game.determine_damage(w, player, -4), i32(0))
 	expect_eq(t, game.attack_dice(w, player), i32(7 + 2)) // strength plus the dagger
 	expect_eq(t, game.defend_dice(w, player), i32(2 + 2)) // dexterity plus the chainmail
+	expect_eq(t, game.stat_of(w, player, .Base_Maximum_Defend), i32(2)) // chainmail lifts the defence cap from 1 to 2
+	game.unequip(w, player, .Torso)
+	expect_eq(t, game.stat_of(w, player, .Base_Maximum_Defend), i32(1))
+	game.equip_item(w, player, mail)
 	expect_eq(t, game.negative_influence(w, player), i32(0))
 	me.stats[.Drunkenness] = 1
 	expect_eq(t, game.negative_influence(w, player), i32(-1))

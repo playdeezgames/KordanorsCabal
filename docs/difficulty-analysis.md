@@ -199,3 +199,16 @@ Each boss room is now its own type, so a boss can differ from the trash that fil
 | 20% | 20% | 19% | 18% | 10% | 38% |
 
 Targets: I 10-20, II 8-15, III 10-18, IV 12-22, V 20-30; the finish rate they imply is about 41%. 53% of level I deaths and 70 to 90% of IV and V deaths now happen at the boss, which is the point: the bosses are the set pieces. Noise between runs of the same settings is several points. Level V is still under its target; level identities (#321) are the next lever. Applied after that run: one guard on level I instead of two, Bone Priest HP 5 to 4. Not re-simulated.
+
+## Experiment: armour raises the defence cap (#315, 2026-10-31)
+
+The cap on the player's defence hits (Base Maximum Defend) was 1 for the whole game, so every armour die past about three was wasted. Armour can now raise it through an item buff (data only, no engine change): Chainmail +1, Platemail +2. `def_Chainmail` and `def_Platemail` in `campaign.py` model it. 150 runs, share dying on each level:
+
+| Setting | I | II | III | IV | V | Finish alive |
+|---|---|---|---|---|---|---|
+| No growth (250 runs, boss run) | 20% | 20% | 19% | 18% | 10% | 38% |
+| Chainmail +1, Platemail +2 (**applied**) | 7% | 8% | 11% | 19% | 11% | 55% |
+| Platemail +1 only | 11% | 14% | 19% | 13% | 6% | 50% |
+| Platemail +2 only | identical to the line above: the model player never wears platemail | | | | | |
+
+Findings: chainmail is the item that matters (it arrives on level II); the model player rarely buys platemail, so its cap bonus cannot be judged here. Levels I and II differ between rows by noise alone (the cap does not touch them before chainmail). With the growth the model player finishes 55% of runs against about 41% implied by the targets, so the late game is somewhat easier again; the levers left are the level identities and the wandering threat (#321, #322) and a live playtest.

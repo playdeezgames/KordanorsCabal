@@ -1462,3 +1462,7 @@ Spawn counts moved from goblins and skeletons to elites, acolytes, bishops and p
 ## Boss variety (#320)
 
 Four new character types (ids 19 to 22: Acolyte Warden, Bone Priest, Flame Bishop, Cult Guard) in boilerplate.db and the VB seed. The old single-creature boss spawns for Acolyte (I), Priest (II) and Bishop (III) are removed; the Cabal Leader (IV) and Kordanor (V) are strengthened and attack mentally in part (leader). Sprites for the new types borrow their kin's shape in another colour, derived in `tools/gen/gen_ui.py` (the VB game has no sprites for them, so the VB reference build would show nothing: it is a reference for rules, not for content). Test count of character types is now 22. Numbers and the experiment: docs/difficulty-analysis.md.
+
+## Defence growth (#315)
+
+Data only: Chainmail gets a +1 buff on Base Maximum Defend and Platemail +2 (item buffs already feed `stat_of`), so the player's defence cap is 1 with no armour, 2 in chainmail, 3 in platemail. A test checks the cap with and without the chainmail. The campaign simulator models it (`def_Chainmail`, `def_Platemail`); results in docs/difficulty-analysis.md. The model player finishes more runs now (55% against 41% implied by the targets), to be recovered by #321/#322 and a live playtest.
