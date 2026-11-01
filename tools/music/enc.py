@@ -1,6 +1,6 @@
 import ctypes, array, sys
 RATE = 22050
-pcm = array.array("h"); pcm.frombytes(open("theme.raw", "rb").read()); pcm = array.array("h", (int(v * 0.45) for v in pcm))   # the old theme sits at about 0.17 rms
+pcm = array.array("h"); pcm.frombytes(open("theme.raw", "rb").read()); pcm = array.array("h", (int(v * 0.225) for v in pcm))   # 0.45 matched the old theme (0.17 rms); halved on request
 sf = ctypes.CDLL("libsndfile.so.1")
 class Info(ctypes.Structure): _fields_ = [("frames", ctypes.c_int64), ("samplerate", ctypes.c_int), ("channels", ctypes.c_int), ("format", ctypes.c_int), ("sections", ctypes.c_int), ("seekable", ctypes.c_int)]
 sf.sf_open.restype = ctypes.c_void_p; sf.sf_open.argtypes = [ctypes.c_char_p, ctypes.c_int, ctypes.POINTER(Info)]
