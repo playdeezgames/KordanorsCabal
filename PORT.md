@@ -5,8 +5,10 @@ Goal: rewrite Kordanor's Cabal (currently VB.NET + MonoGame + SQLite, under `src
 
 ## Needs your attention
 
-Updated at the end of port step 7. Everything is committed on the branch `odin-port`; nothing has been pushed, uploaded or
-published (`tools/ship.sh` builds `build/kordanors-cabal-html5.zip`; `--push` would upload it with `butler`).
+Updated 2026-11-01. The game is on `main` and published to GitHub Pages at https://playdeezgames.github.io/KordanorsCabal/ (`tools/pages.sh`
+builds the release into `site/`; commit it and push, and `.github/workflows/pages.yml` publishes it). Not uploaded to itch.io
+(`tools/ship.sh` builds `build/kordanors-cabal-html5.zip`; `--push` would upload it with `butler`). iPhone support is deferred
+to the coxswain milestone "When pigs fly".
 
 ### Blocked on you
 
