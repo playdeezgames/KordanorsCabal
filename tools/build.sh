@@ -10,7 +10,7 @@ CONTENT=src/KordanorsCabal/Content
 build_web() {
 	mkdir -p build/web/assets
 	odin build odin/platform/web -target:js_wasm32 -out:build/web/platform.wasm -collection:kc=odin ${ODIN_FLAGS:-}
-	cp odin/platform/web/page/index.html odin/platform/web/page/platform.js odin/platform/web/page/layout.js odin/platform/web/page/storage.js build/web/
+	cp odin/platform/web/page/index.html odin/platform/web/page/platform.js odin/platform/web/page/layout.js odin/platform/web/page/storage.js odin/platform/web/page/lootlocker.js build/web/
 	cp "$ODIN_JS" build/web/odin.js
 	cp "$CONTENT"/*.wav "$CONTENT"/*.ogg build/web/assets/
 	echo "web build: build/web (serve with tools/serve.sh)"

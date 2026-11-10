@@ -80,7 +80,11 @@
 	const stagingCtx = staging.getContext("2d");
 	const controlsEl = document.getElementById("controls"), probe = document.getElementById("probe");
 	let layout = null;
-	function insets() { const s = getComputedStyle(probe); return { top: parseFloat(s.paddingTop) || 0, right: parseFloat(s.paddingRight) || 0, bottom: parseFloat(s.paddingBottom) || 0, left: parseFloat(s.paddingLeft) || 0 }; }
+	const footerEl = document.getElementById("footer");
+	// The footer (credits and back links) is fixed to the bottom of the window; its height (which already includes the bottom
+	// safe area) is kept free so the paper and the pad never sit under it.
+	function insets() { const s = getComputedStyle(probe), bottom = parseFloat(s.paddingBottom) || 0;
+		return { top: parseFloat(s.paddingTop) || 0, right: parseFloat(s.paddingRight) || 0, bottom: Math.max(bottom, footerEl ? footerEl.offsetHeight : 0), left: parseFloat(s.paddingLeft) || 0 }; }
 	function applyLayout() {
 		const vv = window.visualViewport;
 		layout = computeLayout({ width: vv ? vv.width : innerWidth, height: vv ? vv.height : innerHeight, touch, insets: insets() });

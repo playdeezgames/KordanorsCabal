@@ -22,6 +22,11 @@
 	#transfer label.big { position: relative; overflow: hidden; }
 	#transfer button { font: 18px monospace; padding: 10px 24px; }
 	.overlay small { font-size: 14px; opacity: .8; }
+	/* Footer (Release standard): back links first (so a narrow screen cuts the credits, not the links), then credits and the AI line.
+	   Fixed to the bottom; platform.js reserves its height. */
+	#footer { position: fixed; left: 0; right: 0; bottom: 0; padding: 2px 8px calc(2px + env(safe-area-inset-bottom)); text-align: center;
+		color: #777; font: 11px/1.4 monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; -webkit-user-select: text; user-select: text; }
+	#footer a { color: #aaa; }
 </style>
 <div id="probe"></div>
 <canvas id="screen"></canvas>
@@ -32,7 +37,25 @@
 <div id="rotate" class="overlay hidden">PLEASE ROTATE<br>YOUR DEVICE<br><small>this game is played in landscape</small></div>
 <div id="transfer" class="overlay hidden"><div id="transfer-title"></div><div id="transfer-body"></div><button id="transfer-close">CLOSE</button></div>
 <div id="start" class="overlay">KORDANOR'S CABAL<br>TAP OR PRESS A KEY TO START<br><small id="startnote"></small></div>
+<footer id="footer"><span class="ll-only" hidden><a href="#" id="feedback-link">Send feedback</a> · </span><a href="https://thegrumpygamedev.itch.io/">itch.io</a> · <a href="https://playdeezgames.github.io/oeuvre-of-splorr/">more games</a> ·
+	Kordanor's Cabal by TheGrumpyGameDev. Odin port written by an AI agent (Claude Code) at the author's direction.<span class="ll-only" hidden> Feedback by LootLocker.</span></footer>
 <script src="odin.js"></script>
+<script src="lootlocker.js"></script>
+<script>
+// Feedback (the shared SPLORR!! LootLocker kit's form, splorr/Tech/LootLocker.md in the vault): reports go to the
+// LootLocker console under Feedback, Game. The link stays hidden until LL_KEY is filled in.
+// TODO before turning feedback on (the user's call: which LootLocker game): the API domain and public Game API key
+// (not a secret), with Guest Login on, the CORS Allowlist (https://playdeezgames.github.io,
+// https://html-classic.itch.zone, http://localhost:8000) and Game feedback categories (Bug, Idea, Other).
+const LL_DOMAIN = "";
+const LL_KEY = "";
+const feedback = LL_KEY ? LootLocker({ domain: LL_DOMAIN, key: LL_KEY, version: "1.0.0", idKey: "kordanors-cabal-player" })
+	.feedbackDialog({ game: "Kordanor's Cabal" }) : null;
+if (feedback) {
+	for (const el of document.querySelectorAll(".ll-only")) el.hidden = false;
+	document.getElementById("feedback-link").addEventListener("click", (e) => { e.preventDefault(); feedback.open(); });
+}
+</script>
 <script src="storage.js"></script>
 <script src="layout.js"></script>
 <script src="platform.js"></script>
