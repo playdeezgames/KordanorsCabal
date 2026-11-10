@@ -1,11 +1,11 @@
 # Kordanor's Cabal
 
+Play it in the browser: https://playdeezgames.github.io/KordanorsCabal/ (GitHub Pages, the latest version) or on itch.io: https://thegrumpygamedev.itch.io/kordanors-cabal
+
 TODO: IItem subobjectification
 
 ## Music
-https://pernyblom.github.io/abundant-music/index.html
-
-Seed: 2645320710
+The Odin version's theme was composed in the Anvil of SPLORR!! (October 31, 2026; see `tools/music`). The original VB version's theme was generated with Abundant Music (https://pernyblom.github.io/abundant-music/index.html), seed 2645320710.
 
 ## Stream Log
 

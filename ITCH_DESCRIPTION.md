@@ -1,12 +1,13 @@
 # Kordanor's Cabal: itch.io page copy
 
-Paste by hand (or through the user's Chrome on request, with an AI-agent line at the end). Leave a blank line after each bold heading.
+Page: https://thegrumpygamedev.itch.io/kordanors-cabal (no jam)
+Pasted in by hand (or through the user's Chrome on request, with an AI-agent line at the end); nothing here is published by the repo. Leave a blank line after each bold heading.
 
 Latest version: https://playdeezgames.github.io/KordanorsCabal/ (put this at the top of the page and as an external link)
 
 ## Short description (the one-line field)
 
-A turn-based dungeon crawler that looks like a VIC-20: five maze levels, a town of weirdos, and dice that only count sixes.
+A turn-based dungeon crawler that looks like a VIC-20: five mazes, a town of weirdos, and dice that only count sixes.
 
 ## Page text
 
